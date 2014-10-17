@@ -24,6 +24,7 @@ void delay(unsigned int count);
 ADC001_ResultHandleType Result;
 #define DELAY	20000000
 
+
 int main(void) {
 // Configure message data length
 	I2C001_DataType data1, data2, data3, data4, data5, data6; // Data type to compose USIC I2C TDF code and I2C data in one 16 bit word to be written to the USIC FIFO
