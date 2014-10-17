@@ -1,0 +1,11 @@
+RoomModel hexagon {
+	LogicalSystem hexagon {
+		SubSystemRef main: MainSubSystem
+	}
+	SubSystemClass MainSubSystem {
+		ActorRef appl: Application
+		LogicalThread defaultThread
+	}
+	ActorClass Application {
+	}
+}

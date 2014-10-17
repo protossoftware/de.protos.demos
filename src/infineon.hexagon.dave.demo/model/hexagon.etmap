@@ -1,0 +1,9 @@
+MappingModel hexagon {
+	import hexagon.* from "hexagon.room"
+	import hexagon.* from "hexagon.etphys"
+	Mapping hexagon -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

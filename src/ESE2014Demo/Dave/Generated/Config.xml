@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project MotherSystem_Version="" Name="ESE2014Demo" Path="C:\entw\projects\InfineonDemos\DaveWS\ESE2014Demo">
+    <COMPILER>
+        <Name>ARM-GCC</Name>
+        <Version/>
+        <Memory_Model/>
+    </COMPILER>
+    <DEVICE>
+        <Sales_Code>XMC4500-F144x1024-AC</Sales_Code>
+        <Description/>
+    </DEVICE>
+    <Generated_Files>
+        <Source_Files>
+            <Source_File>
+                <File_Name>ADC001.c</File_Name>
+                <Path>\Dave\Generated\src\ADC001\ADC001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ADC001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\ADC001\ADC001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ADCGlob001.c</File_Name>
+                <Path>\Dave\Generated\src\ADCGLOB001\ADCGlob001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ADCGlob001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\ADCGLOB001\ADCGlob001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ADCGroup001.c</File_Name>
+                <Path>\Dave\Generated\src\ADCGROUP001\ADCGroup001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ADCGroup001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\ADCGROUP001\ADCGroup001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>CLK001.c</File_Name>
+                <Path>\Dave\Generated\src\CLK001\CLK001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>DAVE3.c</File_Name>
+                <Path>\Dave\Generated\src\DAVESupport\DAVE3.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>MULTIPLEXER.c</File_Name>
+                <Path>\Dave\Generated\src\DAVESupport\MULTIPLEXER.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>GUILC001.c</File_Name>
+                <Path>\Dave\Generated\src\GUILC001\GUILC001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>GUILC001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\GUILC001\GUILC001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>LCDConf.c</File_Name>
+                <Path>\Dave\Generated\src\GUILC001\LCDConf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>GUIConf.c</File_Name>
+                <Path>\Dave\Generated\src\GUISL001\Config\GUIConf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>GUI_X.c</File_Name>
+                <Path>\Dave\Generated\src\GUISL001\Config\GUI_X.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>GUISL001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\GUISL001\GUISL001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>I2C001.c</File_Name>
+                <Path>\Dave\Generated\src\I2C001\I2C001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>I2C001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\I2C001\I2C001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>IO001.c</File_Name>
+                <Path>\Dave\Generated\src\IO001\IO001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>IO001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\IO001\IO001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>IO004.c</File_Name>
+                <Path>\Dave\Generated\src\IO004\IO004.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>IO004_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\IO004\IO004_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>CCU8PWMLIB.c</File_Name>
+                <Path>\Dave\Generated\src\LIBS\CCU8PWMLIB.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>MOTORLIB.c</File_Name>
+                <Path>\Dave\Generated\src\LIBS\MOTORLIB.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>RESET001.c</File_Name>
+                <Path>\Dave\Generated\src\RESET001\RESET001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>SPI001.c</File_Name>
+                <Path>\Dave\Generated\src\SPI001\SPI001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>SPI001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\SPI001\SPI001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>SYSTM001.c</File_Name>
+                <Path>\Dave\Generated\src\SYSTM001\SYSTM001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>UART001.c</File_Name>
+                <Path>\Dave\Generated\src\UART001\UART001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>UART001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\UART001\UART001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+        </Source_Files>
+        <Header_Files>
+            <Header_File>
+                <File_Name>ADC001.h</File_Name>
+                <Path>\Dave\Generated\inc\ADC001\ADC001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ADC001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\ADC001\ADC001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ADCGlob001.h</File_Name>
+                <Path>\Dave\Generated\inc\ADCGLOB001\ADCGlob001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ADCGlob001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\ADCGLOB001\ADCGlob001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ADCGroup001.h</File_Name>
+                <Path>\Dave\Generated\inc\ADCGROUP001\ADCGroup001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ADCGroup001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\ADCGROUP001\ADCGroup001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CLK001.h</File_Name>
+                <Path>\Dave\Generated\inc\CLK001\CLK001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CLK001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\CLK001\CLK001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CLK001_Const.h</File_Name>
+                <Path>\Dave\Generated\inc\CLK001\CLK001_Const.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DAVE3.h</File_Name>
+                <Path>\Dave\Generated\inc\DAVESupport\DAVE3.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>MULTIPLEXER.h</File_Name>
+                <Path>\Dave\Generated\inc\DAVESupport\MULTIPLEXER.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DBG001.h</File_Name>
+                <Path>\Dave\Generated\inc\DBG001\DBG001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>GUILC001.h</File_Name>
+                <Path>\Dave\Generated\inc\GUILC001\GUILC001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>GUILC001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\GUILC001\GUILC001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>LCDConf.h</File_Name>
+                <Path>\Dave\Generated\inc\GUILC001\LCDConf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>GUISL001.h</File_Name>
+                <Path>\Dave\Generated\inc\GUISL001\GUISL001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>GUISL001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\GUISL001\GUISL001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>I2C001.h</File_Name>
+                <Path>\Dave\Generated\inc\I2C001\I2C001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>I2C001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\I2C001\I2C001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Usic.h</File_Name>
+                <Path>\Dave\Generated\inc\I2C001\Usic.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO001.h</File_Name>
+                <Path>\Dave\Generated\inc\IO001\IO001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\IO001\IO001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO004.h</File_Name>
+                <Path>\Dave\Generated\inc\IO004\IO004.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO004_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\IO004\IO004_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CCU8PWMLIB.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\CCU8PWMLIB.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>LIBS.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\LIBS.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>MOTORLIB.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\MOTORLIB.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>types.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\types.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>MOTORLIBS.h</File_Name>
+                <Path>\Dave\Generated\inc\MOTORLIBS\MOTORLIBS.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>RESET001.h</File_Name>
+                <Path>\Dave\Generated\inc\RESET001\RESET001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>SPI001.h</File_Name>
+                <Path>\Dave\Generated\inc\SPI001\SPI001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>SPI001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\SPI001\SPI001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Usic.h</File_Name>
+                <Path>\Dave\Generated\inc\SPI001\Usic.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>SYSTM001.h</File_Name>
+                <Path>\Dave\Generated\inc\SYSTM001\SYSTM001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>UART001.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\UART001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>UART001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\UART001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>UART001_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\UART001_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Usic.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\Usic.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>GUIConf.h</File_Name>
+                <Path>\Dave\Generated\src\GUISL001\Config\GUIConf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+        </Header_Files>
+        <Library_Files/>
+        <Assembly_Files/>
+    </Generated_Files>
+    <Include_Path>
+        <Path>\eTriceRuntime\src\common</Path>
+        <Path>\Dave\Generated\inc\GUILC001</Path>
+        <Path>\Dave\Generated\inc\DAVESupport</Path>
+        <Path>\Dave\Generated\src\GUISL001\Config</Path>
+        <Path>\Dave\Generated\inc\MOTORLIBS</Path>
+        <Path>\Dave\Generated\inc\LIBS</Path>
+        <Path>\eTriceRuntime\src\config</Path>
+        <Path>\eTriceRuntime\src\platforms\ST_XMC4500_Dave3_Hexagon</Path>
+    </Include_Path>
+    <Preprocessor_Symbols>
+        <Assembler_Symbol>DAVE_CE=</Assembler_Symbol>
+        <Assembler_Symbol>UC_ID=4503002</Assembler_Symbol>
+        <Compiler_Symbol>DAVE_CE=</Compiler_Symbol>
+        <Compiler_Symbol>UC_ID=4503002</Compiler_Symbol>
+    </Preprocessor_Symbols>
+</Project>
