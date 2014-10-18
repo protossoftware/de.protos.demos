@@ -31,7 +31,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/ESE2014Demo/Release}</value>
+					<value>${workspace_loc:/ESE2014Demo/Debug}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
@@ -82,11 +82,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>com.ifx.davex.daveExpertNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src-gen</name>
-			<type>2</type>
-			<location>../infineon.hexagon.dave.demo/src-gen</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="ESE2014Demo" Path="C:\entw\projects\InfineonDemos\DaveWS\ESE2014Demo">
+<Project MotherSystem_Version="" Name="ESE2014Demo" Path="C:\DAVE3_workspace\ws3.1.10\ESE2014Demo">
     <COMPILER>
         <Name>ARM-GCC</Name>
         <Version/>
@@ -383,14 +383,11 @@
         <Assembly_Files/>
     </Generated_Files>
     <Include_Path>
-        <Path>\eTriceRuntime\src\common</Path>
         <Path>\Dave\Generated\inc\GUILC001</Path>
         <Path>\Dave\Generated\inc\DAVESupport</Path>
         <Path>\Dave\Generated\src\GUISL001\Config</Path>
         <Path>\Dave\Generated\inc\MOTORLIBS</Path>
         <Path>\Dave\Generated\inc\LIBS</Path>
-        <Path>\eTriceRuntime\src\config</Path>
-        <Path>\eTriceRuntime\src\platforms\ST_XMC4500_Dave3_Hexagon</Path>
     </Include_Path>
     <Preprocessor_Symbols>
         <Assembler_Symbol>DAVE_CE=</Assembler_Symbol>
