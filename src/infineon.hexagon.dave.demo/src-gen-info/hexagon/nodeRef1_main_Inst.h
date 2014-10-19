@@ -9,9 +9,9 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
+#include "hexagon/ABlinky.h"
 #include "room/basic/service/timing/ATimingService.h"
 #include "hexagon/Application.h"
-#include "hexagon/ABlinky.h"
 
 /* include all referenced ProtcolClasses */
 
