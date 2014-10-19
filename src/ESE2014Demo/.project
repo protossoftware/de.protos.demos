@@ -82,4 +82,16 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>com.ifx.davex.daveExpertNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>etRuntime</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/org.eclipse.etrice.runtime.c/src</locationURI>
+		</link>
+		<link>
+			<name>src-gen</name>
+			<type>2</type>
+			<location>C:/data/workspaces/github/de.protos.demos/src/infineon.hexagon.dave.demo/src-gen</location>
+		</link>
+	</linkedResources>
 </projectDescription>

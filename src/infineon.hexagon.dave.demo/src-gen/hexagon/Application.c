@@ -13,6 +13,8 @@
 #include "etUnit/etUnit.h"
 #include "base/etMemory.h"
 
+#include "hexagon/PBlinkyControl.h"
+#include "room/basic/service/timing/PTimer.h"
 
 #include "Application_Utils.h"
 

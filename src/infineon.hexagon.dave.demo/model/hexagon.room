@@ -1,11 +1,94 @@
 RoomModel hexagon {
+
+	import room.basic.types.* from "Types.room"
+
+	import room.basic.service.timing.* from "TimingService.room"
+
 	LogicalSystem hexagon {
 		SubSystemRef main: MainSubSystem
 	}
+
 	SubSystemClass MainSubSystem {
 		ActorRef appl: Application
+		ActorRef timingService: ATimingService
+		LayerConnection ref appl satisfied_by timingService.timer
 		LogicalThread defaultThread
 	}
+
 	ActorClass Application {
+		Structure {
+			ActorRef blinky: ABlinky
+		}
+		Behavior { }
 	}
+
+	ActorClass ABlinky {
+		Interface {
+			Port controlPort: PBlinkyControl
+		}
+		Structure {
+			external Port controlPort
+			SAP timer: PTimer
+			Attribute counter:int32="0"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> tp1 of blinking
+				Transition tr0: blinking -> stop {
+					triggers {
+						<stop: controlPort>
+					}
+				}
+				Transition tr1: stop -> tp0 of blinking {
+					triggers {
+						<start: controlPort>
+					}
+				}
+				State stop
+				State blinking {
+					subgraph {
+						Transition tr0: my tp0 -> on
+						Transition tr1: on -> off {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"counter++;"
+							}
+						}
+						
+						Transition tr2: off -> on {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"counter++;"
+							}
+						}
+						Transition tr3: my tp1 -> on
+						EntryPoint tp0
+						EntryPoint tp1
+						State on {
+							entry {
+								"timer.startTimeout(500);"
+							}
+						}
+						State off {
+							entry {
+								"timer.startTimeout(500);"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PBlinkyControl {
+		incoming {
+			Message start()
+			Message stop()
+		}
+	}
+
 }

@@ -9,7 +9,9 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
+#include "room/basic/service/timing/ATimingService.h"
 #include "hexagon/Application.h"
+#include "hexagon/ABlinky.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -24,9 +26,14 @@ static etMessageService msgService_PhysicalThread1;
 
 /* forward declaration of variable actor structs */
 static Application _hexagon_main_appl;
+static ABlinky _hexagon_main_appl_blinky;
+static ATimingService _hexagon_main_timingService;
 
 /* forward declaration of variable port structs */
 /* nothing to do */
+static PTimerConjPort_var _hexagon_main_appl_blinky_timer_var={
+	0		/* status */
+							};
 
 
 /* instance _hexagon_main_appl */
@@ -46,6 +53,77 @@ static /*const*/ Application_const _hexagon_main_appl_const = {
 };
 static Application _hexagon_main_appl = {
 	&_hexagon_main_appl_const,
+	
+	/* data send ports */
+	
+	/* attributes */
+	
+	/* state and history are initialized in init function */
+};
+
+/* instance _hexagon_main_appl_blinky */
+static /*const*/ ABlinky_const _hexagon_main_appl_blinky_const = {
+	"/hexagon/main/appl/blinky"
+	
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	,{NULL, NULL, 0+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/blinky",
+	#endif
+	} /* Port controlPort */
+	
+	/* data receive ports */
+	
+	/* saps */
+	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 6+BASE_ADDRESS, 2
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/blinky","/hexagon/main/timingService"
+	#endif
+	} /* Port timer */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static ABlinky _hexagon_main_appl_blinky = {
+	&_hexagon_main_appl_blinky_const,
+	
+	/* data send ports */
+	
+	/* attributes */
+	0		/* counter */
+	
+	/* state and history are initialized in init function */
+};
+
+/* instance _hexagon_main_timingService */
+static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[1] = {
+	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
+	{{NULL,&msgService_PhysicalThread1, 4+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/timingService"
+	,"/hexagon/main/appl/blinky"
+	#endif
+	},0} /* Repl Sub Port timer idx +0*/
+};
+static /*const*/ ATimingService_const _hexagon_main_timingService_const = {
+	"/hexagon/main/timingService"
+	
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	
+	/* data receive ports */
+	
+	/* saps */
+	
+	/* replicated ports */
+	
+	/* services */
+	,{1, _hexagon_main_timingService_repl_sub_ports+0}
+};
+static ATimingService _hexagon_main_timingService = {
+	&_hexagon_main_timingService_const,
 	
 	/* data send ports */
 	

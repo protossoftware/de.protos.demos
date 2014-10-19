@@ -512,18 +512,18 @@ status_t  I2C001_Configure(const I2C001Handle_type* I2CHandle,uint32_t BitRate)
  */
 bool I2C001_ReadData(const I2C001Handle_type* I2CHandle, uint16_t* buffer)
 { 
-  bool Result = (bool)FALSE;
+  bool Result = (bool)0;//FALSE;
   USIC_CH_TypeDef* I2CRegs = I2CHandle->I2CRegs;
   
   /* <<<DD_I2C001_API_4>>>*/
   if(USIC_ubIsRxFIFOempty(I2CRegs))
   {
-    Result = (bool)FALSE;
+    Result = (bool)0;//FALSE;
   }
   else
   {
     *buffer = (uint8_t)I2CRegs->OUTR;
-    Result = (bool)TRUE;
+    Result = (bool)1;//TRUE;
   }
   
   return Result;
@@ -536,7 +536,7 @@ bool I2C001_ReadData(const I2C001Handle_type* I2CHandle, uint16_t* buffer)
 bool I2C001_WriteData \
                    (const I2C001Handle_type* I2CHandle,const I2C001_DataType* Data)
 {
-  bool Result = (bool)FALSE;
+  bool Result = (bool)0;//FALSE;
   USIC_CH_TypeDef* I2CRegs = I2CHandle->I2CRegs;
   
   /* <<<DD_I2C001_API_5>>>*/
@@ -544,20 +544,20 @@ bool I2C001_WriteData \
   {
      if(I2CRegs->PSR_IICMode & USIC_CH_PSR_IICMode_WTDF_Msk)
      {
-	     Result = (bool)FALSE;
+	     Result = (bool)0;//FALSE;
        break;
      }
 
      if(USIC_IsTxFIFOfull(I2CRegs))
      {
-       Result = (bool)FALSE;
+       Result = (bool)0;//FALSE;
      }
 
      else
      {
        I2CRegs->IN[0] = \
                     (((uint32_t)Data->Data1.TDF_Type << 8) | Data->Data1.Data);
-       Result = (bool)TRUE;     
+       Result = (bool)1;//TRUE;
      }
   
   }while(0);

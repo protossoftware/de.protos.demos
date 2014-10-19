@@ -11,6 +11,8 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
+#include "hexagon/PBlinkyControl.h"
+#include "room/basic/service/timing/PTimer.h"
 
 
 typedef struct Application Application;

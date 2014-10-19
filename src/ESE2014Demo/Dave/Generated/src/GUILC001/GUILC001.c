@@ -159,7 +159,7 @@ void LCD_X_Send1(uint8_t Data)
   uint16_t Shadow_Data = Data;
   SPI001_ClearFlag(GUILC001_SPIHandle,SPI001_TRANS_SHIFT_IND_FLAG);
   Status = SPI001_WriteData(GUILC001_SPIHandle, &Shadow_Data, SPI001_STANDARD_FULLDUPLEX);
-  if (Status != TRUE)
+  if (Status != 1/*TRUE*/)
   {
     DBG002_ERROR(DBG002_GID_GUILC001,DBG002_MESSAGEID_LITERAL,1,&Status);
   } /* End of "if (Status != TRUE)" */

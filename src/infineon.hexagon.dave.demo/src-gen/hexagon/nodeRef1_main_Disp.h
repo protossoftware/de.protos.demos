@@ -10,6 +10,14 @@
 #include "debugging/etMSCLogger.h"
 
 
+/**
+ * generated execute function for all cyclic execute calls for the async or datadriven actor instances of thread "PhysicalThread1"
+ */
+static void MsgDispatcher_PhysicalThread1_poll(void){
+	ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_PhysicalThread1", "execute")
+	ATimingService_execute((void*)&_hexagon_main_timingService);
+	ET_MSC_LOGGER_SYNC_EXIT
+}
 
 /**
  * generated dispatch function for all messages for the thread "PhysicalThread1"
@@ -19,11 +27,44 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 	switch(msg->address){
 	
 		case MESSAGESERVICE_ADDRESS:
+			if (msg->evtID == etSystemProtocol_IN_poll) {
+				MsgDispatcher_PhysicalThread1_poll();
+			}
+			else
 			if (msg->evtID == etSystemProtocol_IN_terminate)
 				return FALSE;
 			break;
 		
 		/* interface items of /hexagon/main/appl */
+		
+		/* interface items of /hexagon/main/appl/blinky */
+		case 3+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_blinky_const.controlPort)->peerInstName,
+				PBlinkyControl_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_blinky_const.controlPort)->myInstName
+				)
+			ABlinky_receiveMessage((void*)&_hexagon_main_appl_blinky,(etPort*)&_hexagon_main_appl_blinky_const.controlPort, msg);
+			break;
+		case 4+BASE_ADDRESS:
+			switch (msg->evtID){
+				case PTimer_OUT_timeout:
+					PTimerConjPort_timeout_receiveHandler((etPort *)&_hexagon_main_appl_blinky_const.timer,msg,(void*)&_hexagon_main_appl_blinky,ABlinky_receiveMessage);
+					break;
+				default: ABlinky_receiveMessage((void*)&_hexagon_main_appl_blinky,(etPort*)&_hexagon_main_appl_blinky_const.timer, msg);
+					break;
+			}
+			break;
+		
+		/* interface items of /hexagon/main/timingService */
+		case 6+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				_hexagon_main_timingService_const.timer.ports[0].port.peerInstName,
+				PTimer_getMessageString(msg->evtID),
+				_hexagon_main_timingService_const.timer.ports[0].port.myInstName
+				)
+			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[0].port, msg);
+		break;
 		
 		default:
 			etLogger_logErrorF("MessageService_PhysicalThread1_receiveMessage: address %d does not exist ", msg->address);

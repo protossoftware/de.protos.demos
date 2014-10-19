@@ -90,7 +90,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="eTriceRuntime|eTriceRuntime/src/platforms/XX_MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|eTriceRuntime/src/platforms/XX_ST_LM4F120H5Q_CCS5_EK-LM4F120XL|eTriceRuntime/src/platforms/ST_XMC1100_Dave3_XMC2Go|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Main.c|etRuntime/common/etUnit|etRuntime/common/debugging|etRuntime/platforms/XX_ST_LM4F120H5Q_CCS5_EK-LM4F120XL|etRuntime/platforms/ST_XMC1100_Dave3_XMC2Go|etRuntime/platforms/ST_MSP430_G2553_CCS5_LaunchPad|etRuntime/platforms/ST_MSP430_F5438_CCS5_HWElevator|etRuntime/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|etRuntime/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|etRuntime/platforms/MT_WIN_MinGW|etRuntime/platforms/MT_POSIX_GENERIC_GCC|etRuntime/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|etRuntime/util|eTriceRuntime|eTriceRuntime/src/platforms/XX_MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|eTriceRuntime/src/platforms/XX_ST_LM4F120H5Q_CCS5_EK-LM4F120XL|eTriceRuntime/src/platforms/ST_XMC1100_Dave3_XMC2Go|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -124,9 +124,10 @@
 								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level.642700310" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level" value="org.eclipse.cdt.cross.arm.gnu.base.option.optimization.level.none" valueType="enumerated"/>
 								<option id="com.ifx.xmc4000.compiler.option.include.paths.487624274" name="Include paths (-I)" superClass="com.ifx.xmc4000.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${eclipse_home}/../CMSIS/Include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/eTriceRuntime/src/common}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/eTriceRuntime/src/config}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/eTriceRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src-gen}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/etRuntime/common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/etRuntime/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/etRuntime/platforms/ST_XMC4500_Dave3_Hexagon}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${eclipse_home}/../CMSIS/Infineon/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ARM_GCC_HOME}/arm-none-eabi/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${eclipse_home}/../emWin/Start/GUI/inc&quot;"/>
@@ -186,7 +187,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="eTriceRuntime|eTriceRuntime/src/platforms/XX_MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|eTriceRuntime/src/platforms/XX_ST_LM4F120H5Q_CCS5_EK-LM4F120XL|eTriceRuntime/src/platforms/ST_XMC1100_Dave3_XMC2Go|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Main.c|etRuntime/common/etUnit|etRuntime/common/debugging|etRuntime/platforms/XX_ST_LM4F120H5Q_CCS5_EK-LM4F120XL|etRuntime/platforms/ST_XMC1100_Dave3_XMC2Go|etRuntime/platforms/ST_MSP430_G2553_CCS5_LaunchPad|etRuntime/platforms/ST_MSP430_F5438_CCS5_HWElevator|etRuntime/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|etRuntime/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|etRuntime/platforms/MT_WIN_MinGW|etRuntime/platforms/MT_POSIX_GENERIC_GCC|etRuntime/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|etRuntime/util|eTriceRuntime|eTriceRuntime/src/platforms/XX_MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|eTriceRuntime/src/platforms/XX_ST_LM4F120H5Q_CCS5_EK-LM4F120XL|eTriceRuntime/src/platforms/ST_XMC1100_Dave3_XMC2Go|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -211,7 +212,9 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="1">
+		<resource resourceType="PROJECT" workspacePath="/ESE2014Demo"/>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.language.mapping">
 		<project-mappings/>
 	</storageModule>

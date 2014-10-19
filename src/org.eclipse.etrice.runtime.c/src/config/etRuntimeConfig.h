@@ -29,20 +29,20 @@
 /* MSC logger */
 
 /** switches the logger on */
-#define ET_LOGGER_ACTIVATE
+//#define ET_LOGGER_ACTIVATE
 
 /** switches the MSC logger on, needs \ref ET_LOGGER_ACTIVATE */
-#define ET_MSC_LOGGER_ACTIVATE
+//#define ET_MSC_LOGGER_ACTIVATE
 
 /** switches the logging of asynchronous messages on,  needs \ref ET_MSC_LOGGER_ACTIVATE */
 #undef ET_SYNC_MSC_LOGGER_ACTIVATE
 /** switches the logging of synchronous messages on,  needs \ref ET_MSC_LOGGER_ACTIVATE */
-#define ET_ASYNC_MSC_LOGGER_ACTIVATE
+//#define ET_ASYNC_MSC_LOGGER_ACTIVATE
 
 /* data logger */
 
 /** switches the data logger on */
-#define ET_DATA_LOGGER_ACTIVATE
+//#define ET_DATA_LOGGER_ACTIVATE
 
 /* timing and scheduling */
 //#define FREQUENCY 10L

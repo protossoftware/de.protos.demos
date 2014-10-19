@@ -29,8 +29,21 @@ void etUserEntry(void){
 //	initHw();
 }
 
+void etTick_Handler(void);
+
+void timerCallback(void * arg){
+	etTick_Handler();
+}
+
+typedef void (*SYSTM001_TimerCallBackPtr)(void* ParamToCallBack);
+
 void etUserPreRun(void){
+handle_t timer;
 	__enable_irq();
+
+	timer = SYSTM001_CreateTimer(1,SYSTM001_PERIODIC,(SYSTM001_TimerCallBackPtr*) timerCallback,(void*) 0);
+	SYSTM001_StartTimer(timer);
+
 	etThread_execute(noThread);
 }
 

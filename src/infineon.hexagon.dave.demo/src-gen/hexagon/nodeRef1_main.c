@@ -43,7 +43,7 @@ static void nodeRef1_main_initMessageServices(void) {
 		
 		/* initialization of all message services */
 		interval.sec = 0;
-		interval.nSec = 100000000;
+		interval.nSec = 10000000;
 		etMessageService_init(
 			&msgService_PhysicalThread1,
 			msgBuffer_PhysicalThread1,
@@ -171,6 +171,8 @@ static void nodeRef1_main_initActorInstances(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "initActorInstances")
 	
 	Application_init(&_hexagon_main_appl);
+	ABlinky_init(&_hexagon_main_appl_blinky);
+	ATimingService_init(&_hexagon_main_timingService);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }

@@ -42,11 +42,11 @@ typedef float float32;
 //typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
 //typedef bool boolean;
 typedef char boolean;
-#ifndef ET_TRUE
-	#define ET_TRUE 1
+#ifndef TRUE
+	#define TRUE 1
 #endif
-#ifndef ET_FALSE
-	#define ET_FALSE 0
+#ifndef FALSE
+	#define FALSE 0
 #endif
 
 /*
