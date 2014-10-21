@@ -779,17 +779,17 @@ status_t SPI001_Configure
  */                                                                      
 bool SPI001_ReadData(const SPI001_HandleType* Handle, uint16_t* DataPtr)
 {                                                                        
-  bool Result = (bool)0;//FALSE;
+  bool Result = (bool)FALSE;                                               
   USIC_CH_TypeDef* USICRegs = Handle->USICRegs;                                                  
   /* <<<DD_SPI_API_4>>>*/                                                
   if(USIC_ubIsRxFIFOempty(USICRegs))                                     
   {                                                                      
-    Result = (bool)0;//FALSE;
+    Result = (bool)FALSE;                                                      
   }                                                                      
   else                                                                   
   {                                                                      
      *DataPtr = (uint16_t)USICRegs->OUTR;                                
-     Result = (bool)1;//TRUE;
+     Result = (bool)TRUE;                                                
   }                                                                                            
                                                                          
   return Result;                                                         
@@ -805,7 +805,7 @@ bool SPI001_WriteData
   SPI001_TransmitMode TrMode                                             
 )                                                                        
 {                                                                        
-  bool Result = (bool)0;//FALSE;
+  bool Result = (bool)FALSE;                                               
   uint32_t HpcenNew = 0x00U;                                                     
   uint8_t TbufIndex = 0x00U;                                                 
   USIC_CH_TypeDef* USICRegs = Handle->USICRegs;                                                
@@ -814,7 +814,7 @@ bool SPI001_WriteData
                                                                    
   if(USIC_IsTxFIFOfull(USICRegs))                                       
   {                                                                    
-     Result = (bool)0;//FALSE;
+     Result = (bool)FALSE;                                                    
   }                                                                    
   else                                                                 
   { 
@@ -823,7 +823,7 @@ bool SPI001_WriteData
 	                                                 USIC_CH_CCR_HPCEN_Msk);
      TbufIndex = (uint8_t)((uint8_t)TrMode & (uint8_t)SPI001_TBUFINDEX_Msk); 
      USICRegs->IN[TbufIndex] = *DataPtr;                                
-     Result = (bool)1;//TRUE;
+     Result = (bool)TRUE;                                                     
   }                                                                                                                                          
                                                                                             
   return Result;                                                         

@@ -385,7 +385,6 @@ static void  SYSTM001_lTimerHandler (void)
 /*
  *  SysTick Event Handler 
  */
-
 void  SysTick_Handler(void)
 { 
   SYSTM001_TimerObject* TmrObjPtr;

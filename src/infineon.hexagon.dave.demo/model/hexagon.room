@@ -30,6 +30,7 @@ RoomModel hexagon {
 			external Port controlPort
 			SAP timer: PTimer
 			Attribute counter:int32="0"
+			Attribute test:boolean="ET_TRUE"
 		}
 		Behavior {
 			StateMachine {
@@ -53,7 +54,7 @@ RoomModel hexagon {
 								<timeout: timer>
 							}
 							action {
-								"counter++;"
+								"counter++;test=ET_TRUE;"
 							}
 						}
 						

@@ -135,7 +135,7 @@ const ADC001_HandleType ADC001_Handle0 =
   
   .kAsenEnable = (uint8_t)ADC001_ARBITRATION_SLOT_ENABLE,
   .kPriority = (uint8_t)ADC001_PRIORITY0,  
-  .kResultReadMode = (uint8_t)ADC001_RESULT_OVERWRITE_MODE,  //ADC001_WAIT_FOR_READ,
+  .kResultReadMode = (uint8_t)ADC001_WAIT_FOR_READ,
   .kStartmode = (uint8_t)ADC001_WAIT_FOR_START,
   .kTriggerMode = (uint8_t)ADC001_NOTRIGGER,
   .kGatingMode = (uint8_t)ADC001_GATING_ENABLED_ALWAYS,

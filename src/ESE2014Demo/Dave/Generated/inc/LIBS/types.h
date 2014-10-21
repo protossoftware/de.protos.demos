@@ -83,12 +83,11 @@ typedef enum SetResetType{
   SET
 }SetResetType;
 
-/*
 typedef enum BOOLType{
   FALSE,
   TRUE
 }BOOLType;
-*/
+
 
 #if (!defined(__cplusplus) && !defined(_STDBOOL_H))
 typedef unsigned char bool;

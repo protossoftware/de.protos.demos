@@ -9,9 +9,9 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
-#include "hexagon/ABlinky.h"
-#include "room/basic/service/timing/ATimingService.h"
 #include "hexagon/Application.h"
+#include "room/basic/service/timing/ATimingService.h"
+#include "hexagon/ABlinky.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -92,7 +92,8 @@ static ABlinky _hexagon_main_appl_blinky = {
 	/* data send ports */
 	
 	/* attributes */
-	0		/* counter */
+	0		/* counter */,
+	ET_TRUE		/* test */
 	
 	/* state and history are initialized in init function */
 };

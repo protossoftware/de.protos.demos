@@ -118,7 +118,7 @@ void nodeRef1_main_run(etBool runAsTest) {
 	else {
 		printf("type quit to exit\n");
 		fflush(stdout);
-		while (TRUE) {
+		while (ET_TRUE) {
 			char line[64];
 
 			if (fgets(line, 64, stdin) != NULL) {

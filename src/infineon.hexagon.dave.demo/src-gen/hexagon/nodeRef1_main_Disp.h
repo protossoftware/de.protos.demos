@@ -32,7 +32,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			}
 			else
 			if (msg->evtID == etSystemProtocol_IN_terminate)
-				return FALSE;
+				return ET_FALSE;
 			break;
 		
 		/* interface items of /hexagon/main/appl */
@@ -71,5 +71,5 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			break;
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
-	return TRUE;
+	return ET_TRUE;
 }

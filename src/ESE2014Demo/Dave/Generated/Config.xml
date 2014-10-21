@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="ESE2014Demo" Path="C:\DAVE3_workspace\ws3.1.10\ESE2014Demo">
+<Project MotherSystem_Version="" Name="ESE2014Demo" Path="C:\data\workspaces\github\de.protos.demos\src\ESE2014Demo">
     <COMPILER>
         <Name>ARM-GCC</Name>
         <Version/>
@@ -388,6 +388,10 @@
         <Path>\Dave\Generated\src\GUISL001\Config</Path>
         <Path>\Dave\Generated\inc\MOTORLIBS</Path>
         <Path>\Dave\Generated\inc\LIBS</Path>
+        <Path>\src-gen</Path>
+        <Path>\etRuntime\common</Path>
+        <Path>\etRuntime\config</Path>
+        <Path>\etRuntime\platforms\ST_XMC4500_Dave3_Hexagon</Path>
     </Include_Path>
     <Preprocessor_Symbols>
         <Assembler_Symbol>DAVE_CE=</Assembler_Symbol>
