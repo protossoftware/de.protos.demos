@@ -4,6 +4,8 @@ RoomModel hexagon {
 
 	import room.basic.service.timing.* from "TimingService.room"
 
+	import DaveInterface.* from "DaveInterface.room"
+
 	LogicalSystem hexagon {
 		SubSystemRef main: MainSubSystem
 	}
@@ -22,22 +24,91 @@ RoomModel hexagon {
 		Behavior { }
 	}
 
+	ActorClass AButtonController {
+		Interface {
+			Port controlPort: PButtonProtocoll
+		}
+		Structure {
+			external Port controlPort
+			conjugated Port hwPin: PIO004
+			SAP timer: PTimer
+			Attribute pinState:uint8
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> waitForInstance
+				Transition tr0: waitForInstance -> polling {
+					triggers {
+						<setInsatnce: controlPort>
+					}
+					action {
+						"hwPin.setInstance(data);"
+						"timer.startTimer(50);"
+					}
+				}
+				State waitForInstance
+				State polling {
+					subgraph {
+						Transition init: initial -> notPressed
+						Transition tr0: notPressed -> cp cp1 {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr1: pressed -> cp cp0 {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"hwPin.readPin(&pinState);"
+							}
+						}
+						Transition tr2: cp cp0 -> notPressed
+						Transition tr3: cp cp0 -> pressed {
+							cond {
+								"pinState == 0;"
+							}
+						}
+						Transition tr4: cp cp1 -> pressed
+						Transition tr5: cp cp1 -> notPressed {
+							cond {
+								"pinState == 1;"
+							}
+						}
+						ChoicePoint cp0
+						ChoicePoint cp1
+						State notPressed
+						State pressed
+					}
+				}
+			}
+		}
+	}
+
 	ActorClass ABlinky {
 		Interface {
 			Port controlPort: PBlinkyControl
 		}
 		Structure {
 			external Port controlPort
+			conjugated Port LED1: PIO004
 			SAP timer: PTimer
-			Attribute counter:int32="0"
-			Attribute test:boolean="ET_TRUE"
+			Attribute counter: int32 = "0"
+			Attribute test: boolean = "ET_TRUE"
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> tp1 of blinking
+				Transition init: initial -> tp1 of blinking {
+					action {
+						"LED1.setInstance(1);"
+					}
+				}
 				Transition tr0: blinking -> stop {
 					triggers {
 						<stop: controlPort>
+					}
+					action {
+						"LED1.resetPin();"
 					}
 				}
 				Transition tr1: stop -> tp0 of blinking {
@@ -57,7 +128,6 @@ RoomModel hexagon {
 								"counter++;test=ET_TRUE;"
 							}
 						}
-						
 						Transition tr2: off -> on {
 							triggers {
 								<timeout: timer>
@@ -72,16 +142,29 @@ RoomModel hexagon {
 						State on {
 							entry {
 								"timer.startTimeout(500);"
+								"LED1.setPin();"
 							}
 						}
 						State off {
 							entry {
 								"timer.startTimeout(500);"
+								"LED1.resetPin();"
 							}
 						}
 					}
 				}
 			}
+		}
+	}
+
+	ProtocolClass PButtonProtocoll {
+		incoming {
+			Message setInsatnce(data: int32)
+		}
+		outgoing {
+			Message pressed()
+			Message released()
+			Message longPressed()
 		}
 	}
 

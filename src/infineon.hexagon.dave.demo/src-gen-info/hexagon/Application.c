@@ -14,6 +14,7 @@
 #include "base/etMemory.h"
 
 #include "hexagon/PBlinkyControl.h"
+#include "DaveInterface/PIO004.h"
 #include "room/basic/service/timing/PTimer.h"
 
 #include "Application_Utils.h"

@@ -12,6 +12,7 @@
 #include "messaging/etMessage.h"
 
 #include "hexagon/PBlinkyControl.h"
+#include "DaveInterface/PIO004.h"
 #include "room/basic/service/timing/PTimer.h"
 
 

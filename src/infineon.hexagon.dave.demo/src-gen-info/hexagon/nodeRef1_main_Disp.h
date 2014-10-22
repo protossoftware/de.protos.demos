@@ -47,6 +47,14 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			ABlinky_receiveMessage((void*)&_hexagon_main_appl_blinky,(etPort*)&_hexagon_main_appl_blinky_const.controlPort, msg);
 			break;
 		case 4+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_blinky_const.LED1)->peerInstName,
+				PIO004_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_blinky_const.LED1)->myInstName
+				)
+			ABlinky_receiveMessage((void*)&_hexagon_main_appl_blinky,(etPort*)&_hexagon_main_appl_blinky_const.LED1, msg);
+			break;
+		case 5+BASE_ADDRESS:
 			switch (msg->evtID){
 				case PTimer_OUT_timeout:
 					PTimerConjPort_timeout_receiveHandler((etPort *)&_hexagon_main_appl_blinky_const.timer,msg,(void*)&_hexagon_main_appl_blinky,ABlinky_receiveMessage);
@@ -57,7 +65,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			break;
 		
 		/* interface items of /hexagon/main/timingService */
-		case 6+BASE_ADDRESS:
+		case 7+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[0].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),

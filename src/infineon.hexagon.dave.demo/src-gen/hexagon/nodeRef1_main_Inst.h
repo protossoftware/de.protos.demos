@@ -10,8 +10,8 @@
 
 /* include all referenced ActorClasses */
 #include "hexagon/Application.h"
-#include "room/basic/service/timing/ATimingService.h"
 #include "hexagon/ABlinky.h"
+#include "room/basic/service/timing/ATimingService.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -31,6 +31,9 @@ static ATimingService _hexagon_main_timingService;
 
 /* forward declaration of variable port structs */
 /* nothing to do */
+static PIO004ConjPort_var _hexagon_main_appl_blinky_LED1_var={
+	0		/* Handle */
+							};
 static PTimerConjPort_var _hexagon_main_appl_blinky_timer_var={
 	0		/* status */
 							};
@@ -67,16 +70,21 @@ static /*const*/ ABlinky_const _hexagon_main_appl_blinky_const = {
 	
 	/* Ports: {varData, msgService, peerAddress, localId} */
 	/* simple ports */
-	,{NULL, NULL, 0+BASE_ADDRESS, 1
+	,{NULL, NULL, 0+BASE_ADDRESS, 2
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/blinky",
 	#endif
 	} /* Port controlPort */
+	,{&_hexagon_main_appl_blinky_LED1_var, NULL, 0+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/blinky",
+	#endif
+	} /* Port LED1 */
 	
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 6+BASE_ADDRESS, 2
+	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 7+BASE_ADDRESS, 3
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/blinky","/hexagon/main/timingService"
 	#endif
@@ -101,7 +109,7 @@ static ABlinky _hexagon_main_appl_blinky = {
 /* instance _hexagon_main_timingService */
 static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[1] = {
 	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
-	{{NULL,&msgService_PhysicalThread1, 4+BASE_ADDRESS, 1
+	{{NULL,&msgService_PhysicalThread1, 5+BASE_ADDRESS, 1
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/timingService"
 	,"/hexagon/main/appl/blinky"

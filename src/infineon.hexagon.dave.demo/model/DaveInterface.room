@@ -1,10 +1,8 @@
 RoomModel DaveInterface {
 
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "Types.room"
 
-	ExternalType PWMSP001_HandleType -> "PWMSP001_HandleType"
-
- 	ProtocolClass PWMSP001 {
+	ProtocolClass PWMSP001 {
 		usercode1 {
 			"#include <DAVE3.h>"
 		}
@@ -16,12 +14,11 @@ RoomModel DaveInterface {
 			Operation setInstance(data: uint32) {
 				"Handle=&PWMSP001_Handle0;"
 			}
-			Operation setDutyCycle(dc:uint8){
+			Operation setDutyCycle(dc: uint8) {
 				"PWMSP001_SetDutyCycle(Handle, dc);"
 			}
 			Attribute Handle: PWMSP001_HandleType ref = "0"
 		}
-		
 	}
 
 	ProtocolClass PUART001 {
@@ -50,9 +47,7 @@ RoomModel DaveInterface {
 		}
 	}
 
-	ExternalType UART001_HandleType -> "UART001_HandleType"
-
-	ProtocolClass PIO004 {
+	/*  	ProtocolClass PIO004 {
 		usercode1 {
 			"#include <DAVE3.h>"
 		}
@@ -94,7 +89,81 @@ RoomModel DaveInterface {
 			Attribute Handle: IO004_HandleType = "0"
 		}
 	}
+*/
+	ProtocolClass PIO004 {
+		usercode1 {
+			"#include <DAVE3.h>"
+		}
+		incoming {
+			Message dummy()
+			Message setInstance(data: uint32)
+			Message setPin()
+			Message resetPin()
+			Message readPin(data: uint8 ref)
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming setInstance {
+				"switch(data__et){"
+				"    case 0: Handle=IO004_Handle0;"
+				"		break;"
+				"    case 1: Handle=IO004_Handle1;"
+				"		break;"
+				"    default: break;"
+				"    }"
+			}
+			handle
+			incoming setPin {
+				"IO004_SetPin(Handle);"
+			}
+			handle
+			incoming resetPin {
+				"IO004_ResetPin(Handle);"
+			}
+			handle
+			incoming readPin {
+				"*data__et = IO004_ReadPin(Handle);"
+			}
 
+			/*					
+			Operation setInstance(data: uint32) {
+				"switch(data){"
+				"    case 0: Handle=IO004_Handle0;"
+				"		break;"
+				"    case 1: Handle=IO004_Handle1;"
+				"		break;"
+				"    default: break;"
+				"    }"
+			}
+			Operation readPin(): uint32 {
+				"return IO004_ReadPin(Handle);"
+			}
+			Operation setPin() {
+				"IO004_SetPin(Handle);"
+			}
+			Operation setOutputValue(Value: boolean) {
+				"IO004_SetOutputValue(Handle,Value);"
+			}
+			Operation resetPin() {
+				"IO004_ResetPin(Handle);"
+			}
+			Operation togglePin() {
+				"IO004_TogglePin(Handle);"
+			}
+			Operation disableOutputBuffer(mode: IO004_InputModeType) {
+				"IO004_DisableOutputDriver(&Handle,mode);"
+			}
+			Operation enableOutputBuffer(mode: IO004_InputModeType) {
+				"IO004_EnableOutputDriver(&Handle,mode);"
+			}
+			*/
+			Attribute Handle: IO004_HandleType = "0"
+		}
+	}
+
+	ExternalType PWMSP001_HandleType -> "PWMSP001_HandleType"
+	ExternalType UART001_HandleType -> "UART001_HandleType"
 	ExternalType IO004_HandleType -> "IO004_HandleType"
 	ExternalType IO004_InputModeType -> "IO004_InputModeType"
 }
