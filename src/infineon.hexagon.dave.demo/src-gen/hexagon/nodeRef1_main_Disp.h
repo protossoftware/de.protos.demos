@@ -36,9 +36,33 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			break;
 		
 		/* interface items of /hexagon/main/appl */
+		case 2+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_const.blinkyPort)->peerInstName,
+				PBlinkyControl_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_const.blinkyPort)->myInstName
+				)
+			Application_receiveMessage((void*)&_hexagon_main_appl,(etPort*)&_hexagon_main_appl_const.blinkyPort, msg);
+			break;
+		case 3+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_const.buttonControlPort)->peerInstName,
+				PButtonControlProtocoll_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_const.buttonControlPort)->myInstName
+				)
+			Application_receiveMessage((void*)&_hexagon_main_appl,(etPort*)&_hexagon_main_appl_const.buttonControlPort, msg);
+			break;
+		case 4+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_const.buttonPort)->peerInstName,
+				PButtonProtocoll_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_const.buttonPort)->myInstName
+				)
+			Application_receiveMessage((void*)&_hexagon_main_appl,(etPort*)&_hexagon_main_appl_const.buttonPort, msg);
+			break;
 		
 		/* interface items of /hexagon/main/appl/blinky */
-		case 3+BASE_ADDRESS:
+		case 6+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				((etPort*)&_hexagon_main_appl_blinky_const.controlPort)->peerInstName,
 				PBlinkyControl_getMessageString(msg->evtID),
@@ -46,7 +70,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			ABlinky_receiveMessage((void*)&_hexagon_main_appl_blinky,(etPort*)&_hexagon_main_appl_blinky_const.controlPort, msg);
 			break;
-		case 4+BASE_ADDRESS:
+		case 7+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				((etPort*)&_hexagon_main_appl_blinky_const.LED1)->peerInstName,
 				PIO004_getMessageString(msg->evtID),
@@ -54,7 +78,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			ABlinky_receiveMessage((void*)&_hexagon_main_appl_blinky,(etPort*)&_hexagon_main_appl_blinky_const.LED1, msg);
 			break;
-		case 5+BASE_ADDRESS:
+		case 8+BASE_ADDRESS:
 			switch (msg->evtID){
 				case PTimer_OUT_timeout:
 					PTimerConjPort_timeout_receiveHandler((etPort *)&_hexagon_main_appl_blinky_const.timer,msg,(void*)&_hexagon_main_appl_blinky,ABlinky_receiveMessage);
@@ -64,14 +88,57 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			}
 			break;
 		
+		/* interface items of /hexagon/main/appl/button */
+		case 10+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_button_const.ioPort)->peerInstName,
+				PButtonProtocoll_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_button_const.ioPort)->myInstName
+				)
+			AButtonController_receiveMessage((void*)&_hexagon_main_appl_button,(etPort*)&_hexagon_main_appl_button_const.ioPort, msg);
+			break;
+		case 11+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_button_const.controlPort)->peerInstName,
+				PButtonControlProtocoll_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_button_const.controlPort)->myInstName
+				)
+			AButtonController_receiveMessage((void*)&_hexagon_main_appl_button,(etPort*)&_hexagon_main_appl_button_const.controlPort, msg);
+			break;
+		case 12+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_button_const.hwPin)->peerInstName,
+				PIO004_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_button_const.hwPin)->myInstName
+				)
+			AButtonController_receiveMessage((void*)&_hexagon_main_appl_button,(etPort*)&_hexagon_main_appl_button_const.hwPin, msg);
+			break;
+		case 13+BASE_ADDRESS:
+			switch (msg->evtID){
+				case PTimer_OUT_timeout:
+					PTimerConjPort_timeout_receiveHandler((etPort *)&_hexagon_main_appl_button_const.timer,msg,(void*)&_hexagon_main_appl_button,AButtonController_receiveMessage);
+					break;
+				default: AButtonController_receiveMessage((void*)&_hexagon_main_appl_button,(etPort*)&_hexagon_main_appl_button_const.timer, msg);
+					break;
+			}
+			break;
+		
 		/* interface items of /hexagon/main/timingService */
-		case 7+BASE_ADDRESS:
+		case 15+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[0].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
 				_hexagon_main_timingService_const.timer.ports[0].port.myInstName
 				)
 			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[0].port, msg);
+		break;
+		case 16+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				_hexagon_main_timingService_const.timer.ports[1].port.peerInstName,
+				PTimer_getMessageString(msg->evtID),
+				_hexagon_main_timingService_const.timer.ports[1].port.myInstName
+				)
+			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[1].port, msg);
 		break;
 		
 		default:

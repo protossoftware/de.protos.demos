@@ -10,8 +10,9 @@
 
 /* include all referenced ActorClasses */
 #include "hexagon/Application.h"
-#include "hexagon/ABlinky.h"
 #include "room/basic/service/timing/ATimingService.h"
+#include "hexagon/AButtonController.h"
+#include "hexagon/ABlinky.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -27,14 +28,20 @@ static etMessageService msgService_PhysicalThread1;
 /* forward declaration of variable actor structs */
 static Application _hexagon_main_appl;
 static ABlinky _hexagon_main_appl_blinky;
+static AButtonController _hexagon_main_appl_button;
 static ATimingService _hexagon_main_timingService;
 
 /* forward declaration of variable port structs */
-/* nothing to do */
 static PIO004ConjPort_var _hexagon_main_appl_blinky_LED1_var={
 	0		/* Handle */
 							};
 static PTimerConjPort_var _hexagon_main_appl_blinky_timer_var={
+	0		/* status */
+							};
+static PIO004ConjPort_var _hexagon_main_appl_button_hwPin_var={
+	0		/* Handle */
+							};
+static PTimerConjPort_var _hexagon_main_appl_button_timer_var={
 	0		/* status */
 							};
 
@@ -45,6 +52,21 @@ static /*const*/ Application_const _hexagon_main_appl_const = {
 	
 	/* Ports: {varData, msgService, peerAddress, localId} */
 	/* simple ports */
+	,{NULL, &msgService_PhysicalThread1, 6+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl","/hexagon/main/appl/blinky"
+	#endif
+	} /* Port blinkyPort */
+	,{NULL, &msgService_PhysicalThread1, 11+BASE_ADDRESS, 2
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl","/hexagon/main/appl/button"
+	#endif
+	} /* Port buttonControlPort */
+	,{NULL, &msgService_PhysicalThread1, 10+BASE_ADDRESS, 3
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl","/hexagon/main/appl/button"
+	#endif
+	} /* Port buttonPort */
 	
 	/* data receive ports */
 	
@@ -70,9 +92,9 @@ static /*const*/ ABlinky_const _hexagon_main_appl_blinky_const = {
 	
 	/* Ports: {varData, msgService, peerAddress, localId} */
 	/* simple ports */
-	,{NULL, NULL, 0+BASE_ADDRESS, 2
+	,{NULL, &msgService_PhysicalThread1, 2+BASE_ADDRESS, 2
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
-	,"/hexagon/main/appl/blinky",
+	,"/hexagon/main/appl/blinky","/hexagon/main/appl"
 	#endif
 	} /* Port controlPort */
 	,{&_hexagon_main_appl_blinky_LED1_var, NULL, 0+BASE_ADDRESS, 1
@@ -84,7 +106,7 @@ static /*const*/ ABlinky_const _hexagon_main_appl_blinky_const = {
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 7+BASE_ADDRESS, 3
+	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 15+BASE_ADDRESS, 3
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/blinky","/hexagon/main/timingService"
 	#endif
@@ -106,15 +128,67 @@ static ABlinky _hexagon_main_appl_blinky = {
 	/* state and history are initialized in init function */
 };
 
+/* instance _hexagon_main_appl_button */
+static /*const*/ AButtonController_const _hexagon_main_appl_button_const = {
+	"/hexagon/main/appl/button"
+	
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	,{NULL, &msgService_PhysicalThread1, 4+BASE_ADDRESS, 2
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/button","/hexagon/main/appl"
+	#endif
+	} /* Port ioPort */
+	,{NULL, &msgService_PhysicalThread1, 3+BASE_ADDRESS, 3
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/button","/hexagon/main/appl"
+	#endif
+	} /* Port controlPort */
+	,{&_hexagon_main_appl_button_hwPin_var, NULL, 0+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/button",
+	#endif
+	} /* Port hwPin */
+	
+	/* data receive ports */
+	
+	/* saps */
+	,{&_hexagon_main_appl_button_timer_var, &msgService_PhysicalThread1, 16+BASE_ADDRESS, 4
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/button","/hexagon/main/timingService"
+	#endif
+	} /* Port timer */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static AButtonController _hexagon_main_appl_button = {
+	&_hexagon_main_appl_button_const,
+	
+	/* data send ports */
+	
+	/* attributes */
+	0		/* pinState */
+	
+	/* state and history are initialized in init function */
+};
+
 /* instance _hexagon_main_timingService */
-static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[1] = {
+static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[2] = {
 	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
-	{{NULL,&msgService_PhysicalThread1, 5+BASE_ADDRESS, 1
+	{{NULL,&msgService_PhysicalThread1, 8+BASE_ADDRESS, 1
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/timingService"
 	,"/hexagon/main/appl/blinky"
 	#endif
-	},0} /* Repl Sub Port timer idx +0*/
+	},0}, /* Repl Sub Port timer idx +0*/
+	{{NULL,&msgService_PhysicalThread1, 13+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/timingService"
+	,"/hexagon/main/appl/button"
+	#endif
+	},1} /* Repl Sub Port timer idx +1*/
 };
 static /*const*/ ATimingService_const _hexagon_main_timingService_const = {
 	"/hexagon/main/timingService"
@@ -129,7 +203,7 @@ static /*const*/ ATimingService_const _hexagon_main_timingService_const = {
 	/* replicated ports */
 	
 	/* services */
-	,{1, _hexagon_main_timingService_repl_sub_ports+0}
+	,{2, _hexagon_main_timingService_repl_sub_ports+0}
 };
 static ATimingService _hexagon_main_timingService = {
 	&_hexagon_main_timingService_const,

@@ -19,16 +19,51 @@ RoomModel hexagon {
 
 	ActorClass Application {
 		Structure {
+			conjugated Port blinkyPort: PBlinkyControl
+			conjugated Port buttonControlPort: PButtonControlProtocoll
+			conjugated Port buttonPort: PButtonProtocoll
 			ActorRef blinky: ABlinky
+			ActorRef button: AButtonController
+			Binding blinkyPort and blinky.controlPort
+			Binding buttonControlPort and button.controlPort
+			Binding buttonPort and button.ioPort
 		}
-		Behavior { }
+		Behavior {
+			StateMachine {
+				Transition init: initial -> running {
+					action {
+						"buttonControlPort.setInstance(2);"
+					}
+				}
+				Transition tr1: running -> halted {
+					triggers {
+						<pressed: buttonPort>
+					}
+					action {
+						"blinkyPort.start();"
+					}
+				}
+				Transition tr0: halted -> running {
+					triggers {
+						<pressed: buttonPort>
+					}
+					action {
+						"blinkyPort.stop();"
+					}
+				}
+				State running
+				State halted
+			}
+		}
 	}
 
 	ActorClass AButtonController {
 		Interface {
-			Port controlPort: PButtonProtocoll
+			Port ioPort: PButtonProtocoll
+			Port controlPort: PButtonControlProtocoll
 		}
 		Structure {
+			external Port ioPort
 			external Port controlPort
 			conjugated Port hwPin: PIO004
 			SAP timer: PTimer
@@ -39,7 +74,7 @@ RoomModel hexagon {
 				Transition init: initial -> waitForInstance
 				Transition tr0: waitForInstance -> polling {
 					triggers {
-						<setInsatnce: controlPort>
+						<setInstance: controlPort>
 					}
 					action {
 						"hwPin.setInstance(data);"
@@ -54,6 +89,9 @@ RoomModel hexagon {
 							triggers {
 								<timeout: timer>
 							}
+							action {
+								"hwPin.readPin(&pinState);"
+							}
 						}
 						Transition tr1: pressed -> cp cp0 {
 							triggers {
@@ -63,16 +101,24 @@ RoomModel hexagon {
 								"hwPin.readPin(&pinState);"
 							}
 						}
-						Transition tr2: cp cp0 -> notPressed
-						Transition tr3: cp cp0 -> pressed {
-							cond {
-								"pinState == 0;"
+						Transition tr2: cp cp0 -> notPressed {
+							action {
+								"ioPort.released();"
 							}
 						}
-						Transition tr4: cp cp1 -> pressed
+						Transition tr3: cp cp0 -> pressed {
+							cond {
+								"pinState == 0"
+							}
+						}
+						Transition tr4: cp cp1 -> pressed {
+							action {
+								"ioPort.pressed();"
+							}
+						}
 						Transition tr5: cp cp1 -> notPressed {
 							cond {
-								"pinState == 1;"
+								"pinState == 1"
 							}
 						}
 						ChoicePoint cp0
@@ -108,7 +154,7 @@ RoomModel hexagon {
 						<stop: controlPort>
 					}
 					action {
-						"LED1.resetPin();"
+						"LED1.setPin();"
 					}
 				}
 				Transition tr1: stop -> tp0 of blinking {
@@ -142,13 +188,13 @@ RoomModel hexagon {
 						State on {
 							entry {
 								"timer.startTimeout(500);"
-								"LED1.setPin();"
+								"LED1.resetPin();"
 							}
 						}
 						State off {
 							entry {
 								"timer.startTimeout(500);"
-								"LED1.resetPin();"
+								"LED1.setPin();"
 							}
 						}
 					}
@@ -157,9 +203,15 @@ RoomModel hexagon {
 		}
 	}
 
+	ProtocolClass PButtonControlProtocoll {
+		incoming {
+			Message setInstance(data: int32)
+		}
+	}
+
 	ProtocolClass PButtonProtocoll {
 		incoming {
-			Message setInsatnce(data: int32)
+			Message setInstance(data: int32)
 		}
 		outgoing {
 			Message pressed()

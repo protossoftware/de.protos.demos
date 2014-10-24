@@ -110,6 +110,8 @@ RoomModel DaveInterface {
 				"		break;"
 				"    case 1: Handle=IO004_Handle1;"
 				"		break;"
+				"    case 2: Handle=IO004_Handle2;"
+				"		break;"				
 				"    default: break;"
 				"    }"
 			}
