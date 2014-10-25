@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.behavior" name="Behavior of AButtonController" pictogramLinks="//@link //@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@connections.0/@link //@children.0/@children.3/@link //@connections.1/@link //@children.1/@link //@children.1/@children.1/@link //@children.1/@children.2/@link //@connections.2/@link //@children.1/@children.3/@link //@children.1/@children.4/@link //@children.1/@children.5/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link" verticalGridUnit="10" version="0.10.0">
+  <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+  <link>
+    <businessObjects href="../hexagon.room#ActorClass:AButtonController"/>
+  </link>
+  <children xsi:type="pi:ContainerShape" active="true">
+    <properties key="obj-type" value="sg"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="../hexagon.room#StateGraph:AButtonController$sg"/>
+    </link>
+    <children>
+      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="trp"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="113" y="89">
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="10" y="10"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#StateGraph:AButtonController$sg"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="40" height="20" y="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="I"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="174" height="162" x="192" y="121">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="114" height="102" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="89" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="96">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="96">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="96">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#SimpleState:AButtonController$waitForInstance"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="114" height="102" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="waitForInstance"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="172" height="147" x="460" y="128">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="112" height="87" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" width="15" height="8" x="87" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="56" y="81">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="56" y="81">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="56" y="81">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#SimpleState:AButtonController$polling"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1"/>
+      <children>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="112" height="87" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="polling"/>
+      </children>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="obj-type" value="sg"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="../hexagon.room#StateGraph:AButtonController$polling$sg"/>
+    </link>
+    <children visible="true">
+      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/polling"/>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="trp"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="130" y="118">
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="10" y="10"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#StateGraph:AButtonController$polling$sg"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.1/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="40" height="20" y="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="I"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="164" height="142" x="213" y="207">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="104" height="82" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="79" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="52" y="76">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="52" y="76">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="52" y="76">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#SimpleState:AButtonController$polling$notPressed"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3" incomingConnections="//@connections.2 //@connections.5 //@connections.8" referencedGraphicsAlgorithm="//@children.1/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="104" height="82" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="notPressed"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="state"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="174" height="136" x="532" y="207">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="114" height="76" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="89" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="70">
+            <points x="-3" y="-3"/>
+            <points x="-3" y="3"/>
+            <points x="-11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="70">
+            <points x="3" y="-3"/>
+            <points x="3" y="3"/>
+            <points x="11" y="3"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="70">
+            <points x="-2" y="-3"/>
+            <points x="-2" y="3"/>
+            <points x="2" y="3"/>
+            <points x="2" y="-3"/>
+          </graphicsAlgorithmChildren>
+        </graphicsAlgorithmChildren>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#SimpleState:AButtonController$polling$pressed"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.4" incomingConnections="//@connections.6 //@connections.7" referencedGraphicsAlgorithm="//@children.1/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="114" height="76" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="pressed"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="trp"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="50" height="50" x="434" y="288">
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="25" height="25" x="12" y="12"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#ChoicePoint:AButtonController$polling$cp0"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.5 //@connections.6" incomingConnections="//@connections.4"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="50" height="25" y="12" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="C"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="obj-type" value="trp"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="50" height="50" x="434" y="168">
+        <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="25" height="25" x="12" y="12"/>
+      </graphicsAlgorithm>
+      <link>
+        <businessObjects href="../hexagon.room#ChoicePoint:AButtonController$polling$cp1"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.7 //@connections.8" incomingConnections="//@connections.3"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="50" height="25" y="12" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="C"/>
+      </children>
+    </children>
+  </children>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.1/@anchors.0" end="//@children.0/@children.2/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#InitialTransition:AButtonController$initial"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="init"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.2/@anchors.0" end="//@children.0/@children.3/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#TriggeredTransition:AButtonController$tr0"/>
+    </link>
+    <connectionDecorators locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-58" y="-28" font="//@fonts.0" value="tr0: &lt;setInstance:co..."/>
+    </connectionDecorators>
+    <bendpoints x="450" y="242"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.1/@anchors.0" end="//@children.1/@children.2/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#InitialTransition:AButtonController$polling$initial"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="init"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.2/@anchors.0" end="//@children.1/@children.5/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#TriggeredTransition:AButtonController$polling$tr0"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-38" y="16" font="//@fonts.0" value="tr0: &lt;timeout:timer>"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.3/@anchors.0" end="//@children.1/@children.4/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#TriggeredTransition:AButtonController$polling$tr1"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-62" y="-17" font="//@fonts.0" value="tr1: &lt;timeout:timer>"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.4/@anchors.0" end="//@children.1/@children.2/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#ContinuationTransition:AButtonController$polling$tr2"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-30" y="4" font="//@fonts.0" value="tr2: [else]"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.4/@anchors.0" end="//@children.1/@children.3/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#CPBranchTransition:AButtonController$polling$tr3"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr3: [pinState == 0]"/>
+    </connectionDecorators>
+    <bendpoints x="498" y="398"/>
+    <bendpoints x="658" y="398"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.5/@anchors.0" end="//@children.1/@children.3/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#ContinuationTransition:AButtonController$polling$tr4"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr4: [else]"/>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.5/@anchors.0" end="//@children.1/@children.2/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../hexagon.room#CPBranchTransition:AButtonController$polling$tr5"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-31" y="-17" font="//@fonts.0" value="tr5: [pinState == 1]"/>
+    </connectionDecorators>
+    <bendpoints x="498" y="204"/>
+    <bendpoints x="334" y="204"/>
+  </connections>
+  <colors red="227" green="238" blue="249"/>
+  <colors red="255" green="255" blue="255"/>
+  <colors/>
+  <colors red="200" green="200" blue="200"/>
+  <fonts name="Arial" size="8"/>
+  <fonts name="Arial" size="9" bold="true"/>
+</pi:Diagram>
