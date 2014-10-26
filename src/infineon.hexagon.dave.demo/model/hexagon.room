@@ -24,6 +24,7 @@ RoomModel hexagon {
 			conjugated Port buttonPort: PButtonProtocoll
 			ActorRef blinky: ABlinky
 			ActorRef button: AButtonController
+			ActorRef display: ADisplay
 			Binding blinkyPort and blinky.controlPort
 			Binding buttonControlPort and button.controlPort
 			Binding buttonPort and button.ioPort
@@ -67,7 +68,7 @@ RoomModel hexagon {
 			external Port controlPort
 			conjugated Port hwPin: PIO004
 			SAP timer: PTimer
-			Attribute pinState:uint8
+			Attribute pinState: uint8
 		}
 		Behavior {
 			StateMachine {
@@ -127,6 +128,38 @@ RoomModel hexagon {
 						State pressed
 					}
 				}
+			}
+		}
+	}
+
+	ActorClass ADisplay {
+		Structure {
+			usercode1 {
+				"#include <GUI.h>"
+			}
+			conjugated Port gui: PGUI
+			SAP timer: PTimer
+			Attribute str: DGuiString
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"str.s=\"Test\";"
+						"str.xPos=80;"
+						"str.yPos=50;"
+						""
+						"gui.init();"
+						"gui.setBkColor(GUI_WHITE);"
+						"gui.clear();"
+						""
+						"gui.setColor(GUI_BLUE);"
+						"gui.setFont(&GUI_Font24B_1);"
+						""
+						"gui.dispStringHCenterAt(&str);"
+					}
+				}
+				State state0
 			}
 		}
 	}

@@ -9,10 +9,11 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
-#include "hexagon/Application.h"
 #include "room/basic/service/timing/ATimingService.h"
 #include "hexagon/AButtonController.h"
+#include "hexagon/ADisplay.h"
 #include "hexagon/ABlinky.h"
+#include "hexagon/Application.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -29,6 +30,7 @@ static etMessageService msgService_PhysicalThread1;
 static Application _hexagon_main_appl;
 static ABlinky _hexagon_main_appl_blinky;
 static AButtonController _hexagon_main_appl_button;
+static ADisplay _hexagon_main_appl_display;
 static ATimingService _hexagon_main_timingService;
 
 /* forward declaration of variable port structs */
@@ -42,6 +44,9 @@ static PIO004ConjPort_var _hexagon_main_appl_button_hwPin_var={
 	0		/* Handle */
 							};
 static PTimerConjPort_var _hexagon_main_appl_button_timer_var={
+	0		/* status */
+							};
+static PTimerConjPort_var _hexagon_main_appl_display_timer_var={
 	0		/* status */
 							};
 
@@ -106,7 +111,7 @@ static /*const*/ ABlinky_const _hexagon_main_appl_blinky_const = {
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 15+BASE_ADDRESS, 3
+	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 18+BASE_ADDRESS, 3
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/blinky","/hexagon/main/timingService"
 	#endif
@@ -153,7 +158,7 @@ static /*const*/ AButtonController_const _hexagon_main_appl_button_const = {
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_button_timer_var, &msgService_PhysicalThread1, 16+BASE_ADDRESS, 4
+	,{&_hexagon_main_appl_button_timer_var, &msgService_PhysicalThread1, 19+BASE_ADDRESS, 4
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/button","/hexagon/main/timingService"
 	#endif
@@ -174,8 +179,48 @@ static AButtonController _hexagon_main_appl_button = {
 	/* state and history are initialized in init function */
 };
 
+/* instance _hexagon_main_appl_display */
+static /*const*/ ADisplay_const _hexagon_main_appl_display_const = {
+	"/hexagon/main/appl/display"
+	
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	,{NULL, NULL, 0+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/display",
+	#endif
+	} /* Port gui */
+	
+	/* data receive ports */
+	
+	/* saps */
+	,{&_hexagon_main_appl_display_timer_var, &msgService_PhysicalThread1, 20+BASE_ADDRESS, 2
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/display","/hexagon/main/timingService"
+	#endif
+	} /* Port timer */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static ADisplay _hexagon_main_appl_display = {
+	&_hexagon_main_appl_display_const,
+	
+	/* data send ports */
+	
+	/* attributes */
+	{
+		NULL		/* s */,
+		0		/* xPos */,
+		0		/* yPos */
+	}		/* str */
+	
+	/* state and history are initialized in init function */
+};
+
 /* instance _hexagon_main_timingService */
-static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[2] = {
+static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[3] = {
 	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
 	{{NULL,&msgService_PhysicalThread1, 8+BASE_ADDRESS, 1
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
@@ -188,7 +233,13 @@ static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[2] = {
 	,"/hexagon/main/timingService"
 	,"/hexagon/main/appl/button"
 	#endif
-	},1} /* Repl Sub Port timer idx +1*/
+	},1}, /* Repl Sub Port timer idx +1*/
+	{{NULL,&msgService_PhysicalThread1, 16+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/timingService"
+	,"/hexagon/main/appl/display"
+	#endif
+	},2} /* Repl Sub Port timer idx +2*/
 };
 static /*const*/ ATimingService_const _hexagon_main_timingService_const = {
 	"/hexagon/main/timingService"
@@ -203,7 +254,7 @@ static /*const*/ ATimingService_const _hexagon_main_timingService_const = {
 	/* replicated ports */
 	
 	/* services */
-	,{2, _hexagon_main_timingService_repl_sub_ports+0}
+	,{3, _hexagon_main_timingService_repl_sub_ports+0}
 };
 static ATimingService _hexagon_main_timingService = {
 	&_hexagon_main_timingService_const,

@@ -123,8 +123,27 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			}
 			break;
 		
-		/* interface items of /hexagon/main/timingService */
+		/* interface items of /hexagon/main/appl/display */
 		case 15+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_display_const.gui)->peerInstName,
+				PGUI_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_display_const.gui)->myInstName
+				)
+			ADisplay_receiveMessage((void*)&_hexagon_main_appl_display,(etPort*)&_hexagon_main_appl_display_const.gui, msg);
+			break;
+		case 16+BASE_ADDRESS:
+			switch (msg->evtID){
+				case PTimer_OUT_timeout:
+					PTimerConjPort_timeout_receiveHandler((etPort *)&_hexagon_main_appl_display_const.timer,msg,(void*)&_hexagon_main_appl_display,ADisplay_receiveMessage);
+					break;
+				default: ADisplay_receiveMessage((void*)&_hexagon_main_appl_display,(etPort*)&_hexagon_main_appl_display_const.timer, msg);
+					break;
+			}
+			break;
+		
+		/* interface items of /hexagon/main/timingService */
+		case 18+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[0].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
@@ -132,13 +151,21 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[0].port, msg);
 		break;
-		case 16+BASE_ADDRESS:
+		case 19+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[1].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
 				_hexagon_main_timingService_const.timer.ports[1].port.myInstName
 				)
 			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[1].port, msg);
+		break;
+		case 20+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				_hexagon_main_timingService_const.timer.ports[2].port.peerInstName,
+				PTimer_getMessageString(msg->evtID),
+				_hexagon_main_timingService_const.timer.ports[2].port.myInstName
+				)
+			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[2].port, msg);
 		break;
 		
 		default:

@@ -47,110 +47,46 @@ RoomModel DaveInterface {
 		}
 	}
 
-	ProtocolClass PGUI {
-		usercode1 {
-			"#include <DAVE3.h>"
-			"#include <GUI.h>"
-		}
-		incoming {
-			Message init()
-			Message clear()
-			Message drawBitmap(data: DGuiBitmap)
-			Message dispStringHCenterAt(data: DGuiString)
-			Message setFont(data: GUI_CONST_STORAGE ref)
-			Message setColor(data: int32)
-			Message setBkColor(data: uint32)
-		}
-		conjugated PortClass
-		{
-			handle
-			incoming init {
-				"/* Initialize GUI Library */"
-				"GUI_Init();"
-			}
-			handle
-			incoming clear {
-				"/* Clear screen */"
-				"GUI_Clear();"
-			}
-			handle
-			incoming drawBitmap {
-				"/* Clear screen */"
-				"GUI_Clear();"
-			}
-			handle
-			incoming dispStringHCenterAt {
-				"GUI_DispStringHCenterAt(data__et->s,data__et->xPos,data__et->yPos);"
-			}
-			handle
-			incoming setFont {
-				"GUI_SetFont(data__et);"
-			}
-			handle
-			incoming setColor {
-				"GUI_SetColor(data__et);"
-			}
-			handle
-			incoming setBkColor {
-				"GUI_SetBkColor(data__et);"
-			}
-		}
-	}
-
-	DataClass DGuiBitmap {
-		usercode1 {
-			"#include <GUI.h>"
-		}
-		Attribute bitmap: GUI_BITMAP ref
-		Attribute xpos: uint32
-		Attribute ypos: uint32
-	}
-
-	DataClass DGuiString {
-		usercode1 {
-			"#include <GUI.h>"
-		}
-		Attribute s: char ref
-		Attribute xPos: uint32
-		Attribute yPos: uint32
-	}
-
-	ProtocolClass PIO004 {
+  	ProtocolClass PIO004 {
 		usercode1 {
 			"#include <DAVE3.h>"
 		}
 		incoming {
 			Message dummy()
-			Message setInstance(data: uint32)
-			Message setPin()
-			Message resetPin()
-			Message readPin(data: uint8 ref)
 		}
 		conjugated PortClass
 		{
-			handle
-			incoming setInstance {
-				"switch(data__et){"
+			Operation setInstance(data: uint32) {
+				"switch(data){"
 				"    case 0: Handle=IO004_Handle0;"
 				"		break;"
 				"    case 1: Handle=IO004_Handle1;"
 				"		break;"
 				"    case 2: Handle=IO004_Handle2;"
-				"		break;"
+				"		break;"				
 				"    default: break;"
 				"    }"
 			}
-			handle
-			incoming setPin {
+			Operation readPin(): uint32 {
+				"return IO004_ReadPin(Handle);"
+			}
+			Operation setPin() {
 				"IO004_SetPin(Handle);"
 			}
-			handle
-			incoming resetPin {
+			Operation setOutputValue(Value: boolean) {
+				"IO004_SetOutputValue(Handle,Value);"
+			}
+			Operation resetPin() {
 				"IO004_ResetPin(Handle);"
 			}
-			handle
-			incoming readPin {
-				"*data__et = IO004_ReadPin(Handle);"
+			Operation togglePin() {
+				"IO004_TogglePin(Handle);"
+			}
+			Operation disableOutputBuffer(mode: IO004_InputModeType) {
+				"IO004_DisableOutputDriver(&Handle,mode);"
+			}
+			Operation enableOutputBuffer(mode: IO004_InputModeType) {
+				"IO004_EnableOutputDriver(&Handle,mode);"
 			}
 			Attribute Handle: IO004_HandleType = "0"
 		}

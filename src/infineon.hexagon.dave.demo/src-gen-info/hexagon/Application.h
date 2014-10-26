@@ -14,6 +14,7 @@
 #include "hexagon/PBlinkyControl.h"
 #include "hexagon/PButtonControlProtocoll.h"
 #include "hexagon/PButtonProtocoll.h"
+#include "DaveInterface/PGUI.h"
 #include "DaveInterface/PIO004.h"
 #include "room/basic/service/timing/PTimer.h"
 
