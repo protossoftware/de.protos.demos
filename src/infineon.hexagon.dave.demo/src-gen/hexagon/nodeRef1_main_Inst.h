@@ -9,11 +9,11 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
-#include "room/basic/service/timing/ATimingService.h"
-#include "hexagon/AButtonController.h"
-#include "hexagon/ADisplay.h"
-#include "hexagon/ABlinky.h"
 #include "hexagon/Application.h"
+#include "room/basic/service/timing/ATimingService.h"
+#include "hexagon/ABlinky.h"
+#include "hexagon/ADisplay.h"
+#include "hexagon/AButtonController.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -214,7 +214,13 @@ static ADisplay _hexagon_main_appl_display = {
 		NULL		/* s */,
 		0		/* xPos */,
 		0		/* yPos */
-	}		/* str */
+	}		/* str */,
+	{
+		NULL		/* bitmap */,
+		0		/* xPos */,
+		0		/* yPos */
+	}		/* bmp */,
+	0		/* showTime */
 	
 	/* state and history are initialized in init function */
 };

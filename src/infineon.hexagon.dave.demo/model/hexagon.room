@@ -136,30 +136,180 @@ RoomModel hexagon {
 		Structure {
 			usercode1 {
 				"#include <GUI.h>"
+			} usercode3 {
+				"/*******************************************************************************"
+				"** EXTERN Declarations                                                       **"
+				"******************************************************************************/"
+				"extern const GUI_BITMAP bmIFX_LOGO;"
+				"extern const GUI_BITMAP bmXMC_test;"
+				"extern const GUI_BITMAP bmeTriceLogo;"
+				"extern const GUI_BITMAP bmprotosLogo;"
 			}
 			conjugated Port gui: PGUI
 			SAP timer: PTimer
 			Attribute str: DGuiString
+			Attribute bmp: DGuiBitmap
+			Attribute showTime: int32
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> state0 {
+				Transition init: initial -> tp0 of playShow {
 					action {
-						"str.s=\"Test\";"
-						"str.xPos=80;"
-						"str.yPos=50;"
-						""
 						"gui.init();"
 						"gui.setBkColor(GUI_WHITE);"
 						"gui.clear();"
 						""
 						"gui.setColor(GUI_BLUE);"
 						"gui.setFont(&GUI_Font24B_1);"
-						""
-						"gui.dispStringHCenterAt(&str);"
 					}
 				}
-				State state0
+				State playShow {
+					subgraph {
+						Transition tr0: my tp0 -> dispProtos {
+							action {
+								"showTime=1000;"
+								"timer.startTimeout(showTime);"
+							}
+						}
+						Transition tr1: dispProtos -> dispAnd {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"timer.startTimeout(showTime);"
+							}
+						}
+						Transition tr2: dispAnd -> dispInfi {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"timer.startTimeout(showTime);"
+							}
+						}
+						Transition tr3: dispInfi -> dispPresents {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"timer.startTimeout(showTime);"
+							}
+						}
+						Transition tr4: dispPresents -> dispEtrice {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"timer.startTimeout(showTime);"
+							}
+						}
+						Transition tr5: dispEtrice -> dispOn {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"timer.startTimeout(showTime);"
+							}
+						}
+						Transition tr6: dispOn -> dispXMC {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"timer.startTimeout(showTime);"
+							}
+						}
+						Transition tr7: dispXMC -> dispProtos {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"timer.startTimeout(showTime);"
+							}
+						}
+						EntryPoint tp0
+						State dispProtos {
+							entry {
+								"gui.clear();"
+								"bmp.bitmap = &bmprotosLogo;"
+								"bmp.xPos = 5;"
+								"bmp.yPos = 20;"
+								""
+								"gui.drawBitmap(&bmp);"
+							}
+						}
+						State dispAnd {
+							entry {
+								"gui.clear();"
+								"str.s=\"and\";"
+								"str.xPos=80;"
+								"str.yPos=50;"
+								""
+								"gui.dispStringHCenterAt(&str);"
+							}
+						}
+						State dispInfi {
+							entry {
+								"gui.clear();"
+								"bmp.bitmap = &bmIFX_LOGO;"
+								"bmp.xPos = 5;"
+								"bmp.yPos = 32;"
+								""
+								"gui.drawBitmap(&bmp);"
+							}
+						}
+						State dispPresents {
+							entry {
+								"gui.clear();"
+								"str.s=\"proudly\";"
+								"str.xPos=80;"
+								"str.yPos=30;"
+								"gui.dispStringHCenterAt(&str);"
+								""
+								"str.s=\"presents...\";"
+								"str.xPos=80;"
+								"str.yPos=60;"
+								"gui.dispStringHCenterAt(&str);"
+							}
+						}
+						State dispEtrice {
+							entry {
+								"gui.clear();"
+								"bmp.bitmap = &bmeTriceLogo;"
+								"bmp.xPos = 25;"
+								"bmp.yPos = 10;"
+								""
+								"gui.drawBitmap(&bmp);"
+							}
+						}
+						State dispOn {
+							entry {
+								"gui.clear();"
+								"str.s=\"on\";"
+								"str.xPos=80;"
+								"str.yPos=50;"
+								""
+								"gui.dispStringHCenterAt(&str);"
+							}
+						}
+						State dispXMC {
+							entry {
+								"gui.clear();"
+								"bmp.bitmap = &bmXMC_test;"
+								"bmp.xPos = 0;"
+								"bmp.yPos = 0;"
+								""
+								"gui.drawBitmap(&bmp);"
+							}
+						}
+					}
+				}
+				State showADCVals {
+					subgraph {
+						Transition init: initial -> state0
+						State state0
+					}
+				}
 			}
 		}
 	}

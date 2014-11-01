@@ -76,7 +76,7 @@ RoomModel DaveInterface {
 			handle
 			incoming drawBitmap {
 				"/* Clear screen */"
-				"GUI_Clear();"
+				"GUI_DrawBitmap(data__et->bitmap,data__et->xPos, data__et->yPos);"
 			}
 			handle
 			incoming dispStringHCenterAt {
@@ -102,8 +102,8 @@ RoomModel DaveInterface {
 			"#include <GUI.h>"
 		}
 		Attribute bitmap: GUI_BITMAP ref
-		Attribute xpos: uint32
-		Attribute ypos: uint32
+		Attribute xPos: uint32
+		Attribute yPos: uint32
 	}
 
 	DataClass DGuiString {
