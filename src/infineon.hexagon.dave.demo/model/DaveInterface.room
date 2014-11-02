@@ -156,10 +156,118 @@ RoomModel DaveInterface {
 		}
 	}
 
-	ExternalType GUI_CONST_STORAGE -> "GUI_CONST_STORAGE"
-	ExternalType GUI_BITMAP -> "GUI_BITMAP"
-	ExternalType PWMSP001_HandleType -> "PWMSP001_HandleType"
-	ExternalType UART001_HandleType -> "UART001_HandleType"
-	ExternalType IO004_HandleType -> "IO004_HandleType"
-	ExternalType IO004_InputModeType -> "IO004_InputModeType"
+	ProtocolClass PI2C001 {
+		usercode1 {
+			"#include <DAVE3.h>"
+		}
+		incoming {
+			Message setInstance(data: uint32)
+			Message setI2CAddr(data: int32)
+			Message init()
+			Message writeData(data: int32)
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming setInstance {
+				"switch(data__et){"
+				"    case 0: Handle=&I2C001_Handle0;"
+				"		break;"
+				"    default: break;"
+				"    }"
+			}
+			handle
+			incoming init {
+				"I2C001_DataType d;"
+				"d.Data1.TDF_Type = I2C_TDF_MStart;"
+				"d.Data1.Data = (i2cAddr | I2C_WRITE);"
+				"while(!I2C001_WriteData(Handle,&d));"
+								
+				"// Write data to address the Direction register"
+				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
+				"d.Data1.Data = 0x50;  // address of  direction register in the GPI expander"
+				"while(!I2C001_WriteData(Handle,&d));"
+				
+				"// Write data to the Direction register"
+				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
+				"d.Data1.Data = 0xFF; //  all GPIOs are set as output"
+				"while(!I2C001_WriteData(Handle,&d));"
+				
+				"// Transmit repeated start condition and slave address"
+				"d.Data1.TDF_Type = I2C_TDF_MRStart;"
+				"d.Data1.Data = i2cAddr | I2C_WRITE;  // address of the GPI expander PCA 9502"
+				"while(!I2C001_WriteData(Handle,&d));"
+				
+				"// Write data to address the State register"
+				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
+				"d.Data1.Data = 0x58; // address of  state register in the GPI expander"
+				"while(!I2C001_WriteData(Handle,&d));"
+				
+				"// Write data to the sate register to turn some other LED on"
+				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
+				"d.Data1.Data = 0xFF; //  turn any other LED on, LED is on when writing 0"
+				"while(!I2C001_WriteData(Handle,&d));"
+			}
+			handle
+			incoming setI2CAddr {
+				" i2cAddr = data__et ; "
+			}
+			handle
+			incoming writeData {	
+				"I2C001_DataType d;"			
+				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
+				"d.Data1.Data = (uint8) data__et;"
+				"while(!I2C001_WriteData(Handle,&d));"
+				
+				"// * data__et = IO004_ReadPin ( Handle ) ; "
+			}
+			Attribute Handle: I2C001_HandleType ref
+			Attribute i2cData: I2C001_DataType
+			Attribute i2cAddr: int32
+		}
+	}
+
+	ProtocolClass PADC001 {
+		usercode1 {
+			"#include <DAVE3.h> "
+		}
+		incoming {
+			Message dummy()
+			Message setInstance(data: uint32)
+			Message getResult(data: int32 ref)
+			Message generateLoadEvent()
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming setInstance {
+				" switch ( data__et ) { "
+				" case 0 : Handle = & ADC001_Handle0 ; "
+				" break ; "
+				" default : break ; "
+				"} "
+			}
+			handle
+			incoming getResult {
+				" ADC001_ResultHandleType Result ; "
+				" ADC001_GetResult ( Handle , & Result ) ; "
+				" * data__et = Result . Result ; "
+			}
+			handle
+			incoming generateLoadEvent {
+				" ADC001_GenerateLoadEvent ( Handle ) ; "
+			}
+			Attribute Handle: ADC001_HandleType ref = " 0 "
+		}
+	}
+
+	ExternalType I2C001_DataType -> " I2C001_DataType " default "0"
+	ExternalType I2C001_HandleType -> " I2C001Handle_type "
+	ExternalType ADC001_HandleType -> " ADC001_HandleType "
+	ExternalType GUI_CONST_STORAGE -> " GUI_CONST_STORAGE "
+	ExternalType GUI_BITMAP -> " GUI_BITMAP "
+	ExternalType PWMSP001_HandleType -> " PWMSP001_HandleType "
+	ExternalType UART001_HandleType -> " UART001_HandleType "
+	ExternalType IO004_HandleType -> " IO004_HandleType "
+	ExternalType IO004_InputModeType -> " IO004_InputModeType "
 }

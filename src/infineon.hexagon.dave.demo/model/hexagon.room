@@ -22,18 +22,25 @@ RoomModel hexagon {
 			conjugated Port blinkyPort: PBlinkyControl
 			conjugated Port buttonControlPort: PButtonControlProtocoll
 			conjugated Port buttonPort: PButtonProtocoll
+			conjugated Port adcControlPort: PAdcControlProtocoll
 			ActorRef blinky: ABlinky
 			ActorRef button: AButtonController
 			ActorRef display: ADisplay
+			ActorRef adc: AAdc
+			ActorRef i2c: AI2CController
 			Binding blinkyPort and blinky.controlPort
 			Binding buttonControlPort and button.controlPort
 			Binding buttonPort and button.ioPort
+			Binding adcControlPort and adc.control
+			Binding i2c.payload and adc.payload
+			Binding display.control and adc.payload
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> running {
 					action {
 						"buttonControlPort.setInstance(2);"
+						"adcControlPort.setInstance(0);"
 					}
 				}
 				Transition tr1: running -> halted {
@@ -133,6 +140,9 @@ RoomModel hexagon {
 	}
 
 	ActorClass ADisplay {
+		Interface {
+			conjugated Port control: PAdcProtocoll
+		}
 		Structure {
 			usercode1 {
 				"#include <GUI.h>"
@@ -145,11 +155,14 @@ RoomModel hexagon {
 				"extern const GUI_BITMAP bmeTriceLogo;"
 				"extern const GUI_BITMAP bmprotosLogo;"
 			}
+			external Port control
 			conjugated Port gui: PGUI
 			SAP timer: PTimer
+			SAP timerAdc: PTimer
 			Attribute str: DGuiString
 			Attribute bmp: DGuiBitmap
 			Attribute showTime: int32
+			Attribute adcVal: uint32
 		}
 		Behavior {
 			StateMachine {
@@ -161,6 +174,25 @@ RoomModel hexagon {
 						""
 						"gui.setColor(GUI_BLUE);"
 						"gui.setFont(&GUI_Font24B_1);"
+					}
+				}
+				Transition tr0: playShow -> tp0 of showADCVals {
+					triggers {
+						<newVal: control>
+					}
+					action {
+						"timer.kill();"
+						"gui.clear();"
+						"timerAdc.startTimeout(1000);"
+						"adcVal=data;"
+					}
+				}
+				Transition tr1: showADCVals -> playShow {
+					triggers {
+						<timeout: timerAdc>
+					}
+					action {
+						"timer.startTimer(showTime);"
 					}
 				}
 				State playShow {
@@ -227,6 +259,7 @@ RoomModel hexagon {
 								"timer.startTimeout(showTime);"
 							}
 						}
+						Transition init: initial -> dispProtos
 						EntryPoint tp0
 						State dispProtos {
 							entry {
@@ -306,10 +339,93 @@ RoomModel hexagon {
 				}
 				State showADCVals {
 					subgraph {
-						Transition init: initial -> state0
-						State state0
+						Transition tr0: my tp0 -> state0
+						Transition tr1: state0 -> state0 {
+							triggers {
+								<newVal: control>
+							}
+							action {
+								"adcVal=data;"
+								"timerAdc.kill();"
+								"timerAdc.startTimeout(1000);"
+							}
+						}
+						EntryPoint tp0
+						State state0 {
+							entry {
+								"uint8 buffer[20];"
+								""
+								"sprintf(&buffer,\"%04i\",adcVal/10);"
+								"str.s=&buffer;"
+								"str.xPos=70;"
+								"str.yPos=60;"
+								""
+								"gui.dispStringHCenterAt(&str);"
+							}
+						}
 					}
 				}
+			}
+		}
+	}
+
+	ActorClass AI2CController {
+		Interface {
+			conjugated Port payload: PAdcProtocoll
+		}
+		Structure {
+			external Port payload
+			conjugated Port i2c:PI2C001 }
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"i2c.setInstance(0);"
+						"i2c.setI2CAddr(0x9A );"
+						"i2c.init();"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<newVal: payload>
+					}
+					action {
+						"uint32 h;"
+						""
+						""
+						"h=(data+256)/512;"
+						"switch(h){"
+						"case 0:"
+						"\ti2c.writeData(0xff);"
+						"\tbreak;"
+						"case 1:"
+						"\ti2c.writeData(0xfe);"
+						"\tbreak;"
+						"case 2:"
+						"\ti2c.writeData(0xfc);"
+						"\tbreak;"
+						"case 3:"
+						"\ti2c.writeData(0xf8);"
+						"\tbreak;"
+						"case 4:"
+						"\ti2c.writeData(0xf0);"
+						"\tbreak;"
+						"case 5:"
+						"\ti2c.writeData(0xe0);"
+						"\tbreak;"
+						"case 6:"
+						"\ti2c.writeData(0xc0);"
+						"\tbreak;"
+						"case 7:"
+						"\ti2c.writeData(0x80);"
+						"\tbreak;"
+						"case 8:"
+						"\ti2c.writeData(0x00);"
+						"\tbreak;"
+						"}"
+					}
+				}
+				State state0
 			}
 		}
 	}
@@ -386,6 +502,58 @@ RoomModel hexagon {
 		}
 	}
 
+	ActorClass AAdc {
+		Interface {
+			Port control: PAdcControlProtocoll
+			Port payload [2]: PAdcProtocoll
+		}
+		Structure {
+			external Port control
+			external Port payload
+			conjugated Port adc: PADC001
+			SAP timer: PTimer
+			Attribute lastVal: int32
+			Attribute currentVal: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> waitForInstance
+				Transition tr1: state0 -> cp cp0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(50);"
+						"adc.getResult(&currentVal);"
+					}
+				}
+				Transition tr2: cp cp0 -> state0
+				Transition changed: cp cp0 -> state0 {
+					cond {
+						"((currentVal > (lastVal + 10)) || (currentVal < (lastVal- 10)))"
+					}
+					action {
+						"lastVal=currentVal;"
+						"payload.newVal(currentVal);"
+					}
+				}
+				Transition tr4: waitForInstance -> state0 {
+					triggers {
+						<setInstance: control>
+					}
+					action {
+						"adc.setInstance(data);"
+						"adc.generateLoadEvent();"
+						"timer.startTimeout(50);"
+					}
+				}
+				ChoicePoint cp0
+				State state0
+				State waitForInstance
+			}
+		}
+	}
+
 	ProtocolClass PButtonControlProtocoll {
 		incoming {
 			Message setInstance(data: int32)
@@ -407,6 +575,20 @@ RoomModel hexagon {
 		incoming {
 			Message start()
 			Message stop()
+		}
+	}
+
+	ProtocolClass PAdcControlProtocoll {
+		incoming {
+			Message setInstance(data: int32)
+			Message start()
+			Message stop()
+		}
+	}
+
+	ProtocolClass PAdcProtocoll {
+		outgoing {
+			Message newVal(data: int32)
 		}
 	}
 

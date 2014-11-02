@@ -11,10 +11,14 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
+#include "DaveInterface/PADC001.h"
+#include "hexagon/PAdcControlProtocoll.h"
+#include "hexagon/PAdcProtocoll.h"
 #include "hexagon/PBlinkyControl.h"
 #include "hexagon/PButtonControlProtocoll.h"
 #include "hexagon/PButtonProtocoll.h"
 #include "DaveInterface/PGUI.h"
+#include "DaveInterface/PI2C001.h"
 #include "DaveInterface/PIO004.h"
 #include "room/basic/service/timing/PTimer.h"
 
@@ -29,6 +33,7 @@ typedef struct Application_const {
 	const PBlinkyControlConjPort blinkyPort;
 	const PButtonControlProtocollConjPort buttonControlPort;
 	const PButtonProtocollConjPort buttonPort;
+	const PAdcControlProtocollConjPort adcControlPort;
 	
 	/* data receive ports */
 

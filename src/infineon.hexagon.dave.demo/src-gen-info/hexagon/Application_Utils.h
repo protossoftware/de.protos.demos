@@ -19,6 +19,9 @@
 #define blinkyPort_stop() PBlinkyControlConjPort_stop(&self->constData->blinkyPort)
 #define buttonControlPort_setInstance(data) PButtonControlProtocollConjPort_setInstance(&self->constData->buttonControlPort, data)
 #define buttonPort_setInstance(data) PButtonProtocollConjPort_setInstance(&self->constData->buttonPort, data)
+#define adcControlPort_setInstance(data) PAdcControlProtocollConjPort_setInstance(&self->constData->adcControlPort, data)
+#define adcControlPort_start() PAdcControlProtocollConjPort_start(&self->constData->adcControlPort)
+#define adcControlPort_stop() PAdcControlProtocollConjPort_stop(&self->constData->adcControlPort)
 
 /* data receive ports */
 

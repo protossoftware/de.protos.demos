@@ -13,10 +13,14 @@
 #include "etUnit/etUnit.h"
 #include "base/etMemory.h"
 
+#include "DaveInterface/PADC001.h"
+#include "hexagon/PAdcControlProtocoll.h"
+#include "hexagon/PAdcProtocoll.h"
 #include "hexagon/PBlinkyControl.h"
 #include "hexagon/PButtonControlProtocoll.h"
 #include "hexagon/PButtonProtocoll.h"
 #include "DaveInterface/PGUI.h"
+#include "DaveInterface/PI2C001.h"
 #include "DaveInterface/PIO004.h"
 #include "room/basic/service/timing/PTimer.h"
 
@@ -27,7 +31,8 @@
 enum interface_items {
 	IFITEM_blinkyPort = 1,
 	IFITEM_buttonControlPort = 2,
-	IFITEM_buttonPort = 3
+	IFITEM_buttonPort = 3,
+	IFITEM_adcControlPort = 4
 };
 
 /* state IDs */
@@ -73,6 +78,7 @@ static etInt16 getState(Application* self) {
 /* Action Codes */
 static void action_TRANS_INITIAL_TO__running(Application* self) {
 	buttonControlPort_setInstance(2);
+	adcControlPort_setInstance(0);
 }
 static void action_TRANS_tr1_FROM_running_TO_halted_BY_pressedbuttonPort(Application* self, const InterfaceItemBase* ifitem) {
 	blinkyPort_start();

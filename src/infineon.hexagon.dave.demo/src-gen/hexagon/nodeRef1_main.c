@@ -174,6 +174,8 @@ static void nodeRef1_main_initActorInstances(void){
 	ABlinky_init(&_hexagon_main_appl_blinky);
 	AButtonController_init(&_hexagon_main_appl_button);
 	ADisplay_init(&_hexagon_main_appl_display);
+	AAdc_init(&_hexagon_main_appl_adc);
+	AI2CController_init(&_hexagon_main_appl_i2c);
 	ATimingService_init(&_hexagon_main_timingService);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
