@@ -23,6 +23,7 @@
 #include "DaveInterface/PI2C001.h"
 #include "DaveInterface/PIO004.h"
 #include "room/basic/service/timing/PTimer.h"
+#include "DaveInterface/PUART001.h"
 
 #include "Application_Utils.h"
 

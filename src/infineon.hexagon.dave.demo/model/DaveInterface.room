@@ -53,46 +53,32 @@ RoomModel DaveInterface {
 			"#include <GUI.h>"
 		}
 		incoming {
-			Message init()
-			Message clear()
-			Message drawBitmap(data: DGuiBitmap)
-			Message dispStringHCenterAt(data: DGuiString)
-			Message setFont(data: GUI_CONST_STORAGE ref)
-			Message setColor(data: int32)
-			Message setBkColor(data: uint32)
+			Message dummy()
 		}
 		conjugated PortClass
 		{
-			handle
-			incoming init {
+			Operation init() {
 				"/* Initialize GUI Library */"
 				"GUI_Init();"
 			}
-			handle
-			incoming clear {
+			Operation clear() {
 				"/* Clear screen */"
 				"GUI_Clear();"
 			}
-			handle
-			incoming drawBitmap {
-				"/* Clear screen */"
-				"GUI_DrawBitmap(data__et->bitmap,data__et->xPos, data__et->yPos);"
+			Operation drawBitmap(data: DGuiBitmap ref) {
+				"GUI_DrawBitmap(data->bitmap,data->xPos, data->yPos);"
 			}
-			handle
-			incoming dispStringHCenterAt {
-				"GUI_DispStringHCenterAt(data__et->s,data__et->xPos,data__et->yPos);"
+			Operation dispStringHCenterAt(data: DGuiString ref) {
+				"GUI_DispStringHCenterAt(data->s,data->xPos,data->yPos);"
 			}
-			handle
-			incoming setFont {
-				"GUI_SetFont(data__et);"
+			Operation setFont(data: GUI_CONST_STORAGE ref) {
+				"GUI_SetFont(data);"
 			}
-			handle
-			incoming setColor {
-				"GUI_SetColor(data__et);"
+			Operation setColor(data: int32) {
+				"GUI_SetColor(data);"
 			}
-			handle
-			incoming setBkColor {
-				"GUI_SetBkColor(data__et);"
+			Operation setBkColor(data: uint32) {
+				"GUI_SetBkColor(data);"
 			}
 		}
 	}
@@ -121,16 +107,11 @@ RoomModel DaveInterface {
 		}
 		incoming {
 			Message dummy()
-			Message setInstance(data: uint32)
-			Message setPin()
-			Message resetPin()
-			Message readPin(data: uint8 ref)
 		}
 		conjugated PortClass
 		{
-			handle
-			incoming setInstance {
-				"switch(data__et){"
+			Operation setInstance(data: uint32) {
+				"switch(data){"
 				"    case 0: Handle=IO004_Handle0;"
 				"		break;"
 				"    case 1: Handle=IO004_Handle1;"
@@ -140,17 +121,14 @@ RoomModel DaveInterface {
 				"    default: break;"
 				"    }"
 			}
-			handle
-			incoming setPin {
+			Operation setPin() {
 				"IO004_SetPin(Handle);"
 			}
-			handle
-			incoming resetPin {
+			Operation resetPin() {
 				"IO004_ResetPin(Handle);"
 			}
-			handle
-			incoming readPin {
-				"*data__et = IO004_ReadPin(Handle);"
+			Operation readPin(data: uint8 ref) {
+				"*data = IO004_ReadPin(Handle);"
 			}
 			Attribute Handle: IO004_HandleType = "0"
 		}
@@ -160,66 +138,50 @@ RoomModel DaveInterface {
 		usercode1 {
 			"#include <DAVE3.h>"
 		}
-		incoming {
-			Message setInstance(data: uint32)
-			Message setI2CAddr(data: int32)
-			Message init()
-			Message writeData(data: int32)
-		}
+		incoming { }
 		conjugated PortClass
 		{
-			handle
-			incoming setInstance {
-				"switch(data__et){"
+			Operation setInstance(data: uint32) {
+				"switch(data){"
 				"    case 0: Handle=&I2C001_Handle0;"
 				"		break;"
 				"    default: break;"
 				"    }"
 			}
-			handle
-			incoming init {
+			Operation init() {
 				"I2C001_DataType d;"
 				"d.Data1.TDF_Type = I2C_TDF_MStart;"
 				"d.Data1.Data = (i2cAddr | I2C_WRITE);"
 				"while(!I2C001_WriteData(Handle,&d));"
-								
 				"// Write data to address the Direction register"
 				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
 				"d.Data1.Data = 0x50;  // address of  direction register in the GPI expander"
 				"while(!I2C001_WriteData(Handle,&d));"
-				
 				"// Write data to the Direction register"
 				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
 				"d.Data1.Data = 0xFF; //  all GPIOs are set as output"
 				"while(!I2C001_WriteData(Handle,&d));"
-				
 				"// Transmit repeated start condition and slave address"
 				"d.Data1.TDF_Type = I2C_TDF_MRStart;"
 				"d.Data1.Data = i2cAddr | I2C_WRITE;  // address of the GPI expander PCA 9502"
 				"while(!I2C001_WriteData(Handle,&d));"
-				
 				"// Write data to address the State register"
 				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
 				"d.Data1.Data = 0x58; // address of  state register in the GPI expander"
 				"while(!I2C001_WriteData(Handle,&d));"
-				
 				"// Write data to the sate register to turn some other LED on"
 				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
 				"d.Data1.Data = 0xFF; //  turn any other LED on, LED is on when writing 0"
 				"while(!I2C001_WriteData(Handle,&d));"
 			}
-			handle
-			incoming setI2CAddr {
-				" i2cAddr = data__et ; "
+			Operation setI2CAddr(data: int32) {
+				" i2cAddr = data; "
 			}
-			handle
-			incoming writeData {	
-				"I2C001_DataType d;"			
+			Operation writeData(data: int32) {
+				"I2C001_DataType d;"
 				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
-				"d.Data1.Data = (uint8) data__et;"
+				"d.Data1.Data = (uint8) data;"
 				"while(!I2C001_WriteData(Handle,&d));"
-				
-				"// * data__et = IO004_ReadPin ( Handle ) ; "
 			}
 			Attribute Handle: I2C001_HandleType ref
 			Attribute i2cData: I2C001_DataType
@@ -233,28 +195,22 @@ RoomModel DaveInterface {
 		}
 		incoming {
 			Message dummy()
-			Message setInstance(data: uint32)
-			Message getResult(data: int32 ref)
-			Message generateLoadEvent()
 		}
 		conjugated PortClass
 		{
-			handle
-			incoming setInstance {
-				" switch ( data__et ) { "
+			Operation setInstance(data: uint32) {
+				" switch ( data ) { "
 				" case 0 : Handle = & ADC001_Handle0 ; "
 				" break ; "
 				" default : break ; "
 				"} "
 			}
-			handle
-			incoming getResult {
-				" ADC001_ResultHandleType Result ; "
-				" ADC001_GetResult ( Handle , & Result ) ; "
-				" * data__et = Result . Result ; "
+			Operation getResult(data: int32 ref) {
+				" ADC001_ResultHandleType Result; "
+				" ADC001_GetResult (Handle, &Result); "
+				" *data = Result.Result ; "
 			}
-			handle
-			incoming generateLoadEvent {
+			Operation generateLoadEvent() {
 				" ADC001_GenerateLoadEvent ( Handle ) ; "
 			}
 			Attribute Handle: ADC001_HandleType ref = " 0 "

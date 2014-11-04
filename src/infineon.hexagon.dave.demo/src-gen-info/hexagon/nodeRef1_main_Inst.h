@@ -9,13 +9,14 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
+#include "hexagon/AButtonController.h"
+#include "hexagon/Application.h"
+#include "hexagon/AAdc.h"
+#include "hexagon/ABlinky.h"
+#include "hexagon/ADisplay.h"
+#include "hexagon/AUartController.h"
 #include "room/basic/service/timing/ATimingService.h"
 #include "hexagon/AI2CController.h"
-#include "hexagon/AAdc.h"
-#include "hexagon/ADisplay.h"
-#include "hexagon/Application.h"
-#include "hexagon/ABlinky.h"
-#include "hexagon/AButtonController.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -35,6 +36,7 @@ static AButtonController _hexagon_main_appl_button;
 static ADisplay _hexagon_main_appl_display;
 static AAdc _hexagon_main_appl_adc;
 static AI2CController _hexagon_main_appl_i2c;
+static AUartController _hexagon_main_appl_uart;
 static ATimingService _hexagon_main_timingService;
 
 /* forward declaration of variable port structs */
@@ -66,6 +68,9 @@ static PI2C001ConjPort_var _hexagon_main_appl_i2c_i2c_var={
 	NULL		/* Handle */,
 	0		/* i2cData */,
 	0		/* i2cAddr */
+							};
+static PUART001ConjPort_var _hexagon_main_appl_uart_uart_var={
+	0		/* Handle */
 							};
 
 
@@ -134,7 +139,7 @@ static /*const*/ ABlinky_const _hexagon_main_appl_blinky_const = {
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 30+BASE_ADDRESS, 3
+	,{&_hexagon_main_appl_blinky_timer_var, &msgService_PhysicalThread1, 34+BASE_ADDRESS, 3
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/blinky","/hexagon/main/timingService"
 	#endif
@@ -151,7 +156,7 @@ static ABlinky _hexagon_main_appl_blinky = {
 	
 	/* attributes */
 	0		/* counter */,
-	ET_TRUE		/* test */
+	ET_FALSE		/* test */
 	
 	/* state and history are initialized in init function */
 };
@@ -181,7 +186,7 @@ static /*const*/ AButtonController_const _hexagon_main_appl_button_const = {
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_button_timer_var, &msgService_PhysicalThread1, 31+BASE_ADDRESS, 4
+	,{&_hexagon_main_appl_button_timer_var, &msgService_PhysicalThread1, 35+BASE_ADDRESS, 4
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/button","/hexagon/main/timingService"
 	#endif
@@ -222,12 +227,12 @@ static /*const*/ ADisplay_const _hexagon_main_appl_display_const = {
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_display_timer_var, &msgService_PhysicalThread1, 32+BASE_ADDRESS, 3
+	,{&_hexagon_main_appl_display_timer_var, &msgService_PhysicalThread1, 36+BASE_ADDRESS, 3
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/display","/hexagon/main/timingService"
 	#endif
 	} /* Port timer */
-	,{&_hexagon_main_appl_display_timerAdc_var, &msgService_PhysicalThread1, 33+BASE_ADDRESS, 4
+	,{&_hexagon_main_appl_display_timerAdc_var, &msgService_PhysicalThread1, 37+BASE_ADDRESS, 4
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/display","/hexagon/main/timingService"
 	#endif
@@ -260,9 +265,9 @@ static ADisplay _hexagon_main_appl_display = {
 };
 
 /* instance _hexagon_main_appl_adc */
-static const etReplSubPort _hexagon_main_appl_adc_repl_sub_ports[2] = {
+static const etReplSubPort _hexagon_main_appl_adc_repl_sub_ports[3] = {
 	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
-	{{NULL,&msgService_PhysicalThread1, 27+BASE_ADDRESS, 3
+	{{NULL,&msgService_PhysicalThread1, 28+BASE_ADDRESS, 3
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/adc"
 	,"/hexagon/main/appl/i2c"
@@ -273,7 +278,13 @@ static const etReplSubPort _hexagon_main_appl_adc_repl_sub_ports[2] = {
 	,"/hexagon/main/appl/adc"
 	,"/hexagon/main/appl/display"
 	#endif
-	},1} /* Repl Sub Port payload idx +1*/
+	},1}, /* Repl Sub Port payload idx +1*/
+	{{NULL,&msgService_PhysicalThread1, 31+BASE_ADDRESS, 3
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/adc"
+	,"/hexagon/main/appl/uart"
+	#endif
+	},2} /* Repl Sub Port payload idx +2*/
 };
 static /*const*/ AAdc_const _hexagon_main_appl_adc_const = {
 	"/hexagon/main/appl/adc"
@@ -294,14 +305,14 @@ static /*const*/ AAdc_const _hexagon_main_appl_adc_const = {
 	/* data receive ports */
 	
 	/* saps */
-	,{&_hexagon_main_appl_adc_timer_var, &msgService_PhysicalThread1, 34+BASE_ADDRESS, 4
+	,{&_hexagon_main_appl_adc_timer_var, &msgService_PhysicalThread1, 38+BASE_ADDRESS, 4
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/appl/adc","/hexagon/main/timingService"
 	#endif
 	} /* Port timer */
 	
 	/* replicated ports */
-	,{2, _hexagon_main_appl_adc_repl_sub_ports+0}
+	,{3, _hexagon_main_appl_adc_repl_sub_ports+0}
 	
 	/* services */
 };
@@ -352,6 +363,41 @@ static AI2CController _hexagon_main_appl_i2c = {
 	/* state and history are initialized in init function */
 };
 
+/* instance _hexagon_main_appl_uart */
+static /*const*/ AUartController_const _hexagon_main_appl_uart_const = {
+	"/hexagon/main/appl/uart"
+	
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	,{NULL, &msgService_PhysicalThread1, 24+BASE_ADDRESS, 2
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/uart","/hexagon/main/appl/adc"
+	#endif
+	} /* Port p0 */
+	,{&_hexagon_main_appl_uart_uart_var, NULL, 0+BASE_ADDRESS, 1
+	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+	,"/hexagon/main/appl/uart",
+	#endif
+	} /* Port uart */
+	
+	/* data receive ports */
+	
+	/* saps */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static AUartController _hexagon_main_appl_uart = {
+	&_hexagon_main_appl_uart_const,
+	
+	/* data send ports */
+	
+	/* attributes */
+	
+	/* state and history are initialized in init function */
+};
+
 /* instance _hexagon_main_timingService */
 static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[5] = {
 	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
@@ -379,7 +425,7 @@ static const etReplSubPort _hexagon_main_timingService_repl_sub_ports[5] = {
 	,"/hexagon/main/appl/display"
 	#endif
 	},3}, /* Repl Sub Port timer idx +3*/
-	{{NULL,&msgService_PhysicalThread1, 25+BASE_ADDRESS, 1
+	{{NULL,&msgService_PhysicalThread1, 26+BASE_ADDRESS, 1
 	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 	,"/hexagon/main/timingService"
 	,"/hexagon/main/appl/adc"

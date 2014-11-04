@@ -28,12 +28,14 @@ RoomModel hexagon {
 			ActorRef display: ADisplay
 			ActorRef adc: AAdc
 			ActorRef i2c: AI2CController
+			ActorRef uart: AUartController
 			Binding blinkyPort and blinky.controlPort
 			Binding buttonControlPort and button.controlPort
 			Binding buttonPort and button.ioPort
 			Binding adcControlPort and adc.control
-			Binding i2c.payload and adc.payload
-			Binding display.control and adc.payload
+			Binding adc.payload and i2c.payload
+			Binding adc.payload and display.control
+			Binding adc.payload and uart.p0
 		}
 		Behavior {
 			StateMachine {
@@ -169,6 +171,9 @@ RoomModel hexagon {
 				Transition init: initial -> tp0 of playShow {
 					action {
 						"gui.init();"
+						""
+						"gui.init();"
+						""
 						"gui.setBkColor(GUI_WHITE);"
 						"gui.clear();"
 						""
@@ -375,7 +380,8 @@ RoomModel hexagon {
 		}
 		Structure {
 			external Port payload
-			conjugated Port i2c:PI2C001 }
+			conjugated Port i2c: PI2C001
+		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> state0 {
@@ -505,7 +511,7 @@ RoomModel hexagon {
 	ActorClass AAdc {
 		Interface {
 			Port control: PAdcControlProtocoll
-			Port payload [2]: PAdcProtocoll
+			Port payload [3]: PAdcProtocoll
 		}
 		Structure {
 			external Port control
@@ -550,6 +556,37 @@ RoomModel hexagon {
 				ChoicePoint cp0
 				State state0
 				State waitForInstance
+			}
+		}
+	}
+
+	ActorClass AUartController {
+		Interface {
+			conjugated Port p0: PAdcProtocoll
+		}
+		Structure {
+			external Port p0
+			conjugated Port uart: PUART001
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"uart.setInstance(0);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<newVal: p0>
+					}
+					action {
+						"uint8 buffer[20];"
+						"sprintf(&buffer,\"%04i\\n\",data/10);\t\t\t\t\t\t\t"
+						""
+						"uart.writeDataBytes(buffer, 5);"
+					}
+				}
+				State state0
 			}
 		}
 	}

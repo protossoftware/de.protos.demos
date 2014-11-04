@@ -37,5 +37,7 @@
 
 /* attributes */
 
+/* port operations */
+
 #endif /* _HEXAGON_APPLICATION_UTILS_H_ */
 

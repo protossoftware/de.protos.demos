@@ -194,13 +194,21 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 		break;
 		case 24+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
+				_hexagon_main_appl_adc_const.payload.ports[2].port.peerInstName,
+				PAdcProtocoll_getMessageString(msg->evtID),
+				_hexagon_main_appl_adc_const.payload.ports[2].port.myInstName
+				)
+			AAdc_receiveMessage((void*)&_hexagon_main_appl_adc,&_hexagon_main_appl_adc_const.payload.ports[2].port, msg);
+		break;
+		case 25+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
 				((etPort*)&_hexagon_main_appl_adc_const.adc)->peerInstName,
 				PADC001_getMessageString(msg->evtID),
 				((etPort*)&_hexagon_main_appl_adc_const.adc)->myInstName
 				)
 			AAdc_receiveMessage((void*)&_hexagon_main_appl_adc,(etPort*)&_hexagon_main_appl_adc_const.adc, msg);
 			break;
-		case 25+BASE_ADDRESS:
+		case 26+BASE_ADDRESS:
 			switch (msg->evtID){
 				case PTimer_OUT_timeout:
 					PTimerConjPort_timeout_receiveHandler((etPort *)&_hexagon_main_appl_adc_const.timer,msg,(void*)&_hexagon_main_appl_adc,AAdc_receiveMessage);
@@ -211,7 +219,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			break;
 		
 		/* interface items of /hexagon/main/appl/i2c */
-		case 27+BASE_ADDRESS:
+		case 28+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				((etPort*)&_hexagon_main_appl_i2c_const.payload)->peerInstName,
 				PAdcProtocoll_getMessageString(msg->evtID),
@@ -219,7 +227,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			AI2CController_receiveMessage((void*)&_hexagon_main_appl_i2c,(etPort*)&_hexagon_main_appl_i2c_const.payload, msg);
 			break;
-		case 28+BASE_ADDRESS:
+		case 29+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				((etPort*)&_hexagon_main_appl_i2c_const.i2c)->peerInstName,
 				PI2C001_getMessageString(msg->evtID),
@@ -228,8 +236,26 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 			AI2CController_receiveMessage((void*)&_hexagon_main_appl_i2c,(etPort*)&_hexagon_main_appl_i2c_const.i2c, msg);
 			break;
 		
+		/* interface items of /hexagon/main/appl/uart */
+		case 31+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_uart_const.p0)->peerInstName,
+				PAdcProtocoll_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_uart_const.p0)->myInstName
+				)
+			AUartController_receiveMessage((void*)&_hexagon_main_appl_uart,(etPort*)&_hexagon_main_appl_uart_const.p0, msg);
+			break;
+		case 32+BASE_ADDRESS:
+			ET_MSC_LOGGER_ASYNC_IN(
+				((etPort*)&_hexagon_main_appl_uart_const.uart)->peerInstName,
+				PUART001_getMessageString(msg->evtID),
+				((etPort*)&_hexagon_main_appl_uart_const.uart)->myInstName
+				)
+			AUartController_receiveMessage((void*)&_hexagon_main_appl_uart,(etPort*)&_hexagon_main_appl_uart_const.uart, msg);
+			break;
+		
 		/* interface items of /hexagon/main/timingService */
-		case 30+BASE_ADDRESS:
+		case 34+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[0].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
@@ -237,7 +263,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[0].port, msg);
 		break;
-		case 31+BASE_ADDRESS:
+		case 35+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[1].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
@@ -245,7 +271,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[1].port, msg);
 		break;
-		case 32+BASE_ADDRESS:
+		case 36+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[2].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
@@ -253,7 +279,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[2].port, msg);
 		break;
-		case 33+BASE_ADDRESS:
+		case 37+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[3].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
@@ -261,7 +287,7 @@ static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg)
 				)
 			ATimingService_receiveMessage((void*)&_hexagon_main_timingService,&_hexagon_main_timingService_const.timer.ports[3].port, msg);
 		break;
-		case 34+BASE_ADDRESS:
+		case 38+BASE_ADDRESS:
 			ET_MSC_LOGGER_ASYNC_IN(
 				_hexagon_main_timingService_const.timer.ports[4].port.peerInstName,
 				PTimer_getMessageString(msg->evtID),
