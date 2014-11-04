@@ -1,0 +1,178 @@
+RoomModel RoomModel1 {
+
+	import room.basic.types.* from "Types.room"
+
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1: SubSysClass1
+	}
+
+	SubSystemClass SubSysClass1 {
+		ActorRef motorController: MotorController
+		ActorRef ioDrivers: IODrivers
+		ActorRef applicationComponent: SomeApplicationComponent
+		Binding motorController.voltage and ioDrivers.voltage
+		Binding motorController.speed and ioDrivers.speed
+		Binding applicationComponent.targetSpeed and motorController.targetSppeed
+		LogicalThread defaultThread
+	}
+
+	async ActorClass MotorController {
+		Interface {
+			conjugated Port voltage: AnalogValue
+			Port speed: AnalogValue
+			Port targetSppeed: AnalogValue
+		}
+		Structure {
+			external Port voltage
+			external Port speed
+			external Port targetSppeed
+		}
+		Behavior { }
+	}
+
+	async ActorClass Driver {
+		Interface {
+			conjugated Port targetSpeed: AnalogValue
+		}
+		Structure {
+			external Port targetSpeed
+		}
+		Behavior { }
+	}
+
+	async ActorClass PWMMP001 extends AnalogOutputDriver {
+		Structure { }
+		Behavior { }
+	}
+
+	async ActorClass ADC001 extends AnalogInputDriver {
+		Structure { }
+		Behavior { }
+	}
+
+	ActorClass CruiseControlApplication {
+		Structure {
+			ActorRef cruiseControl: CruiseControl
+			ActorRef ADC001_0: ADC001
+			ActorRef PWMMP001_0: PWMMP001
+			ActorRef driver: Driver
+			ActorRef UART001_0: UART001
+			Binding ADC001_0.input and cruiseControl.speed
+			Binding cruiseControl.voltage and PWMMP001_0.output
+			Binding driver.targetSpeed and cruiseControl.targetSppeed
+			Binding cruiseControl.logging and UART001_0.com
+		}
+		Behavior { }
+	}
+
+	async ActorClass CruiseControl {
+		Interface {
+			conjugated Port voltage: AnalogValue
+			Port speed: AnalogValue
+			Port targetSppeed: AnalogValue
+			conjugated Port logging: PackageProtocol
+		}
+		Structure {
+			external Port voltage
+			external Port speed
+			external Port targetSppeed
+			external Port logging
+		}
+		Behavior { }
+	}
+
+	async ActorClass UART001 {
+		Interface {
+			Port com: PackageProtocol
+		}
+		Structure {
+			external Port com
+		}
+		Behavior { }
+	}
+
+	async ActorClass IODrivers {
+		Interface {
+			conjugated Port speed: AnalogValue
+			Port voltage: AnalogValue
+		}
+		Structure {
+			external Port speed
+			external Port voltage
+		}
+		Behavior { }
+	}
+
+	async ActorClass AnalogInputDriver {
+		Interface {
+			conjugated Port input: AnalogValue
+		}
+		Structure {
+			external Port input
+		}
+		Behavior { }
+	}
+
+	async ActorClass AnalogOutputDriver {
+		Interface {
+			Port output: AnalogValue
+		}
+		Structure {
+			external Port output
+		}
+		Behavior { }
+	}
+
+	async ActorClass SomeApplicationComponent {
+		Interface {
+			conjugated Port targetSpeed: AnalogValue
+		}
+		Structure {
+			external Port targetSpeed
+		}
+		Behavior { }
+	}
+
+	ActorClass ComponentBasedSystem {
+		Structure {
+			ActorRef motorController: MotorController
+			ActorRef inputADC1: AnalogInputDriver
+			ActorRef outputDAC1: AnalogOutputDriver
+			ActorRef applicationComponent: SomeApplicationComponent
+			Binding inputADC1.input and motorController.speed
+			Binding motorController.voltage and outputDAC1.output
+			Binding applicationComponent.targetSpeed and motorController.targetSppeed
+		}
+		Behavior { }
+	}
+
+	ActorClass PortBasedSystem {
+		Structure {
+			ActorRef motorController: MotorController
+			ActorRef applicationComponent: SomeApplicationComponent
+			Binding motorController.targetSppeed and applicationComponent.targetSpeed
+		}
+		Behavior { }
+	}
+
+	ProtocolClass PackageProtocol {
+		incoming {
+			Message sendData(data: SizedPackage)
+		}
+		outgoing {
+			Message receiveData(data: SizedPackage)
+		}
+	}
+
+	datadriven ProtocolClass AnalogValue {
+		incoming {
+			Message value(value: int16)
+		}
+	}
+
+	DataClass SizedPackage {
+		Attribute size: uint16
+		Attribute buffer [ 16 ]: char
+	}
+
+}
