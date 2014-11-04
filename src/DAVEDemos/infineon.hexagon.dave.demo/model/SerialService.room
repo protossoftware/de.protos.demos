@@ -1,6 +1,6 @@
 RoomModel room.basic.service.serial {
 	
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "Types.room"
 
 	async ActorClass ASerialService {
 		Interface {
@@ -9,22 +9,22 @@ RoomModel room.basic.service.serial {
 		Structure {
 			usercode1{"//uc1"}
 			usercode2{"//uc2"}			
-			usercode3{"//uc3
-				#include \"etPlatform.h\"
-			"}
+			usercode3{"//uc3"
+			"	#include \"etPlatform.h\""
+			""}
 			ServiceImplementation of com
 			Attribute sData:DSerialData
 			Attribute chnls[20]:uint8["array to map channel to port index"]
 			}
 			Behavior {
 			Operation getChnlFromPortindex(idx:uint8):uint8{
-					"
-					uint8 i;
-					for (i=0;i<20;i++){
-						if (chnls[i]==idx) break;
-						}
-					return i;
-					"
+					""
+					"uint8 i;"
+					"for (i=0;i<20;i++){"
+					"	if (chnls[i]==idx) break;"
+					"	}"
+					"return i;"
+					""
 				}
 			StateMachine {
 				Transition init: initial -> state0 {

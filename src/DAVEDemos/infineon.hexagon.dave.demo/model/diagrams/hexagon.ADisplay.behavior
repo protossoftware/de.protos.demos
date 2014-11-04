@@ -647,7 +647,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-65" y="-21" font="//@fonts.0" value="tr0: &lt;newVal:control..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-65" y="-21" font="//@fonts.0" value="tr0: &lt;newVal:control>"/>
     </connectionDecorators>
     <bendpoints x="537" y="221"/>
   </connections>
@@ -665,7 +665,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr1: &lt;timeout:timerA..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr1: &lt;timeout:timerAdc>"/>
     </connectionDecorators>
     <bendpoints x="538" y="356"/>
   </connections>
@@ -700,7 +700,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-88" y="7" font="//@fonts.0" value="tr1: &lt;newVal:control..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-88" y="7" font="//@fonts.0" value="tr1: &lt;newVal:control>"/>
     </connectionDecorators>
     <bendpoints x="353" y="393"/>
     <bendpoints x="302" y="393"/>

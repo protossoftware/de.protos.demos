@@ -386,8 +386,6 @@ RoomModel hexagon {
 			StateMachine {
 				Transition init: initial -> state0 {
 					action {
-						"i2c.setInstance(0);"
-						"i2c.setI2CAddr(0x9A );"
 						"i2c.init();"
 					}
 				}

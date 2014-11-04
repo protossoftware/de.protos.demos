@@ -149,6 +149,7 @@ RoomModel DaveInterface {
 				"    }"
 			}
 			Operation init() {
+				"setInstance(instanceId);"
 				"I2C001_DataType d;"
 				"d.Data1.TDF_Type = I2C_TDF_MStart;"
 				"d.Data1.Data = (i2cAddr | I2C_WRITE);"
@@ -174,18 +175,16 @@ RoomModel DaveInterface {
 				"d.Data1.Data = 0xFF; //  turn any other LED on, LED is on when writing 0"
 				"while(!I2C001_WriteData(Handle,&d));"
 			}
-			Operation setI2CAddr(data: int32) {
-				" i2cAddr = data; "
-			}
 			Operation writeData(data: int32) {
 				"I2C001_DataType d;"
 				"d.Data1.TDF_Type = I2C_TDF_MTxData;"
 				"d.Data1.Data = (uint8) data;"
 				"while(!I2C001_WriteData(Handle,&d));"
 			}
-			Attribute Handle: I2C001_HandleType ref
-			Attribute i2cData: I2C001_DataType
-			Attribute i2cAddr: int32
+			Attribute i2cAddr: int32 	// configuration
+			Attribute instanceId: int16 // configuration
+			Attribute Handle: I2C001_HandleType ref // internal
+			Attribute i2cData: I2C001_DataType 		// internal
 		}
 	}
 
