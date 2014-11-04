@@ -91,7 +91,7 @@
 		<link>
 			<name>src-gen</name>
 			<type>2</type>
-			<location>C:/data/workspaces/github/de.protos.demos/src/infineon.hexagon.dave.demo/src-gen</location>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/infineon.hexagon.dave.demo/src-gen</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
