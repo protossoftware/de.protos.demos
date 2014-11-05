@@ -1,0 +1,12 @@
+MappingModel ElevatorMapping_Model {
+	import Elevator_Model.* from "Elevator.room"
+	import ElevatorDemoBoard_PhysicalModel.* from "ElevatorST.etphys"
+
+	Mapping Elevator_LogSys -> ElevatorDemoBoard_PhysSys {
+		SubSystemMapping elevator_subSysRef -> msp430FreeRTOS {
+			ThreadMapping defaultThread -> PhysicalThreadLowPrio
+			ThreadMapping timingThread -> PhysicalThreadLowPrio
+		}
+	}
+
+}

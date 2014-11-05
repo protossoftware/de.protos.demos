@@ -1,0 +1,207 @@
+RoomModel FreeRTOSTestModel_Model {
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+
+	import room.basic.service.timing.* from "TimingService.room"
+
+	//	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+	LogicalSystem ElevatorFreeRTOS_LogSys {
+		SubSystemRef elevator_subSysRef: Elevator_LogSubSys
+	}
+
+	SubSystemClass Elevator_LogSubSys {
+		ActorRef elevator: ElevatorTop
+		ActorRef timingService: ATimingService
+		LayerConnection ref elevator satisfied_by timingService.timer
+		LogicalThread defaultThread
+		LogicalThread timingThread
+		ActorInstanceMapping timingService -> timingThread
+	}
+
+	ActorClass ElevatorTop {
+		Structure {
+			ActorRef ref0: MrPing
+			ActorRef ref1: MrPong
+			ActorRef ref2: BlinkyTimingService
+			Binding ref1.p0 and ref0.p0
+		}
+		Behavior {
+			StateMachine { }
+		}
+	}
+
+	async ActorClass BlinkyTimingService {
+		Structure {
+			usercode1 {
+				"#include <etPlatform.h>"
+			}
+			SAP timer: PTimer
+			Attribute counter: uint16
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> blinky {
+					action {
+						"timer.startTimeout(50);"
+					}
+				}
+				Transition tr0: blinky -> blinky {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(50);"
+						"toggleTestLed();"
+					}
+				}
+				State blinky
+			}
+		}
+	}
+
+	async ActorClass Blinky {
+		Structure {
+			usercode1 {
+				"#include <etPlatform.h>"
+			}
+			Attribute counter: uint16
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> blinky { }
+				State blinky {
+					do {
+					"counter++;
+						toggleTestLed();"
+					}
+				}
+			}
+		}
+	}
+
+	async ActorClass TaskModel {
+		Interface {
+			Port sys: TaskModelProtocol
+		}
+		Structure {
+			external Port sys
+			Attribute counter: uint16
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: ready -> running {
+					triggers {
+						<run: sys>
+					}
+				}
+				Transition tr1: running -> ready {
+					triggers {
+						<preempt: sys>
+					}
+				}
+				Transition tr2: running -> blocked {
+					triggers {
+						<block: sys>
+					}
+				}
+				Transition tr3: blocked -> ready {
+					triggers {
+						<unblock: sys>
+					}
+				}
+				Transition tr4: running -> waiting {
+					triggers {
+						<wait: sys>
+					}
+				}
+				Transition tr5: waiting -> ready {
+					triggers {
+						<run: sys>
+					}
+				}
+				Transition init: initial -> waiting { }
+				State waiting
+				State running
+				State blocked
+				State ready
+			}
+		}
+	}
+
+	ActorClass MrPing {
+		Interface {
+			conjugated Port p0: ElevatorTestProtocol
+		}
+		Structure {
+			external Port p0
+			Attribute count: uint32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> waitForStop {
+					action {
+						"count = 0;"
+						"p0.start(count);\n"
+					}
+				}
+				Transition tr0: waitForStop -> waitForStop {
+					triggers {
+						<stop: p0>
+					}
+					action {
+						"count=data;"
+						"p0.start(data);\n"
+					}
+				}
+				State waitForStop
+			}
+		}
+	}
+
+	ActorClass MrPong {
+		Interface {
+			Port p0: ElevatorTestProtocol
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init0: initial -> init { }
+				Transition tr0: init -> init {
+					triggers {
+						<start: p0>
+					}
+					action {
+						"data++;"
+						"p0.stop(data);"
+					}
+				}
+				State init
+			}
+		}
+	}
+
+	ProtocolClass ElevatorTestProtocol {
+		incoming {
+			Message start(data: uint8)
+		}
+		outgoing {
+			Message stop(data: uint8)
+		}
+	}
+	ProtocolClass TaskModelProtocol {
+		incoming {
+			Message instantiate()
+			Message run()
+			Message block()
+			Message unblock()
+			Message preempt()
+			Message wait()
+		}
+		outgoing {
+			Message stop(data: uint8)
+		}
+	}
+
+}
