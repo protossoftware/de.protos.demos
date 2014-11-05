@@ -1,5 +1,5 @@
 MappingModel ElevatorMapping_Model {
-	import Elevator_Model.* from "Elevator.room"
+	import Elevator_Model.* from "../../etrice.elevator.demo.st/models/Elevator.room"
 	import ElevatorDemoBoard_PhysicalModel.* from "ElevatorMT.etphys"
 
 	Mapping Elevator_LogSys -> ElevatorDemoBoard_PhysSys {
