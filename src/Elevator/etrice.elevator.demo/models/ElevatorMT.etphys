@@ -19,20 +19,20 @@ PhysicalModel ElevatorDemoBoard_PhysicalModel {
 			msgpoolsize = 100
 		}
 		
-//		Thread PhysicalThreadHighPrio {
-//			execmode = mixed 
-//			interval = 10 ms
-//			prio = 4
-//			stacksize = 200
-//			msgblocksize = 32
-//			msgpoolsize = 100
-//		}
+		Thread PhysicalThreadHighPrio {
+			execmode = mixed 
+			interval = 10 ms
+			prio = 4
+			stacksize = 200
+			msgblocksize = 32
+			msgpoolsize = 100
+		}
 		
 	}
 
 	RuntimeClass RuntimeClass1 {
-//		model = multiThreaded
-		model = singleThreaded
+		model = multiThreaded
+		//model = singleThreaded
 	} 
 	
 }

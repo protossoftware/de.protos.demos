@@ -81,6 +81,18 @@ typedef int8 etAddressId;
  * typedefs for OS-specific types
  */
 
+/*
+ * typedefs for OS-specific types
+ */
+typedef uint16 etOSMutexData;
+typedef uint16 etOSSemaData;
+
+typedef uint16 etOSThreadData;
+typedef uint16 etOSThreadId;
+
+typedef uint16 etOSTimerData;
+typedef uint16 etOSTimerId;
+
 typedef uint16 etOSThreadId;
 
 typedef uint16 etOSTimerId;

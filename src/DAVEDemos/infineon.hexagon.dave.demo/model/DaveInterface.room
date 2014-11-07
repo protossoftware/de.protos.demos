@@ -25,9 +25,6 @@ RoomModel DaveInterface {
 		usercode1 {
 			"#include <DAVE3.h>"
 		}
-		incoming {
-			Message dummy()
-		}
 		conjugated PortClass
 		{
 			Operation setInstance(data: uint32) {

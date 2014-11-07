@@ -18,7 +18,7 @@
 
 etTimer * singleThreadedTimer;
 
-void etTimer_callback(xTimerHandle timer);
+//void etTimer_callback(xTimerHandle timer);
 
 void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction, void* timerFunctionData){
 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "construct")
@@ -56,9 +56,9 @@ void etTimer_destruct(etTimer* self){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void etTimer_callback(xTimerHandle timer){
-	{
-	// the do actiosn will be called directly from the semaphore wakeup function
-	}
-}
+//void etTimer_callback(xTimerHandle timer){
+//	{
+//	// the do actiosn will be called directly from the semaphore wakeup function
+//	}
+//}
 
