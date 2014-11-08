@@ -2,7 +2,7 @@
 <pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of ACabineController" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.2/@children.2/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.4/@link //@children.0/@children.5/@link //@children.0/@children.6/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link" verticalGridUnit="10" version="0.10.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
-    <businessObjects href="../ElevatorFreeRTOS.room#ActorClass:ACabineController"/>
+    <businessObjects href="../Elevator.room#ActorClass:ACabineController"/>
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="obj-type" value="cls"/>
@@ -11,12 +11,12 @@
       <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40"/>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#ActorClass:ACabineController"/>
+      <businessObjects href="../Elevator.room#ActorClass:ACabineController"/>
     </link>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="75" y="160">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="67" y="341">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -119,7 +119,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ACabineController$door"/>
+        <businessObjects href="../Elevator.room#ActorRef:ACabineController$door"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -139,7 +139,7 @@
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:ADoorController$ControlPort"/>
+          <businessObjects href="../Elevator.room#Port:ADoorController$ControlPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
@@ -150,7 +150,7 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="320" y="160">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="317" y="344">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="true" lineVisible="true" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -253,7 +253,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ACabineController$buttons"/>
+        <businessObjects href="../Elevator.room#ActorRef:ACabineController$buttons"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -273,7 +273,7 @@
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AButtonController$ControlPort"/>
+          <businessObjects href="../Elevator.room#Port:AButtonController$ControlPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.1/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
@@ -284,7 +284,7 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="565" y="160">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="567" y="347">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -387,7 +387,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ACabineController$doorButton"/>
+        <businessObjects href="../Elevator.room#ActorRef:ACabineController$doorButton"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -407,7 +407,7 @@
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AButtonController$ControlPort"/>
+          <businessObjects href="../Elevator.room#Port:AButtonController$ControlPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.0/@children.2/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
@@ -423,7 +423,7 @@
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.1" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#Port:ACabineController$ControlPort"/>
+        <businessObjects href="../Elevator.room#Port:ACabineController$ControlPort"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
@@ -433,47 +433,47 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="port"/>
       <properties key="item-kind" value="C"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="200" y="60">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="147" y="202">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#Port:ACabineController$DoorPort"/>
+        <businessObjects href="../Elevator.room#Port:ACabineController$DoorPort"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.4/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" font="//@fonts.0" value="DoorPort"/>
+        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="DoorPort"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="port"/>
       <properties key="item-kind" value="CM"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="400" y="60">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="388" y="207">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="25" y="15"/>
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#Port:ACabineController$ButtonPort"/>
+        <businessObjects href="../Elevator.room#Port:ACabineController$ButtonPort"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.5/@graphicsAlgorithm/@graphicsAlgorithmChildren.1"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" font="//@fonts.0" value="ButtonPort"/>
+        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ButtonPort"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="port"/>
       <properties key="item-kind" value="C"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="600" y="60">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="647" y="183">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#Port:ACabineController$DoorButtonPort"/>
+        <businessObjects href="../Elevator.room#Port:ACabineController$DoorButtonPort"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.0/@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" font="//@fonts.0" value="DoorButtonPort"/>
+        <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="DoorButtonPort"/>
       </children>
     </children>
   </children>
@@ -481,21 +481,21 @@
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#Binding:ACabineController$DoorPort!.-ControlPort!door"/>
+      <businessObjects href="../Elevator.room#Binding:ACabineController$DoorPort!.-ControlPort!door"/>
     </link>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.5/@anchors.0" end="//@children.0/@children.1/@children.2/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#Binding:ACabineController$ButtonPort!.-ControlPort!buttons"/>
+      <businessObjects href="../Elevator.room#Binding:ACabineController$ButtonPort!.-ControlPort!buttons"/>
     </link>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.2/@children.2/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#Binding:ACabineController$DoorButtonPort!.-ControlPort!doorButton"/>
+      <businessObjects href="../Elevator.room#Binding:ACabineController$DoorButtonPort!.-ControlPort!doorButton"/>
     </link>
   </connections>
   <colors red="227" green="238" blue="249"/>

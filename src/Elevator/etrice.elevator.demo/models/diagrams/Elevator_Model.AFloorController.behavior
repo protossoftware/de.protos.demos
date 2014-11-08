@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.behavior" name="Behavior of ACabineController" pictogramLinks="//@link //@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.4/@link //@children.0/@children.5/@link //@children.0/@children.6/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link" verticalGridUnit="10" version="0.10.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.behavior" name="Behavior of AFloorController" pictogramLinks="//@link //@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.4/@link //@children.0/@children.5/@link //@children.0/@children.6/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link" verticalGridUnit="10" version="0.10.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
-    <businessObjects href="../ElevatorFreeRTOS.room#ActorClass:ACabineController"/>
+    <businessObjects href="../Elevator.room#ActorClass:AFloorController"/>
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="obj-type" value="sg"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="50" y="14">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#StateGraph:ACabineController$sg"/>
+      <businessObjects href="../Elevator.room#StateGraph:AFloorController$sg"/>
     </link>
     <children visible="true">
       <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="trp"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="103" y="251">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="100" y="100">
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="10" y="10"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#StateGraph:ACabineController$sg"/>
+        <businessObjects href="../Elevator.room#StateGraph:AFloorController$sg"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
@@ -32,11 +32,11 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="trp"/>
       <properties key="item-kind" value="htp"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="160">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="237">
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#TransitionPoint:ACabineController$tp0"/>
+        <businessObjects href="../Elevator.room#TransitionPoint:AFloorController$tp0"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" incomingConnections="//@connections.1"/>
       <children visible="true">
@@ -46,15 +46,15 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="trp"/>
       <properties key="item-kind" value="htp"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="360">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="800" y="248">
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#TransitionPoint:ACabineController$tp2"/>
+        <businessObjects href="../Elevator.room#TransitionPoint:AFloorController$tp1"/>
       </link>
-      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.4 //@connections.5 //@connections.6" incomingConnections="//@connections.4 //@connections.5 //@connections.6"/>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.4 //@connections.5 //@connections.8" incomingConnections="//@connections.4 //@connections.5 //@connections.8"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp2"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="30" y="50" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="tp1"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
@@ -64,29 +64,29 @@
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#TransitionPoint:ACabineController$tp1"/>
+        <businessObjects href="../Elevator.room#TransitionPoint:AFloorController$tp2"/>
       </link>
-      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.8" incomingConnections="//@connections.8"/>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.6 //@connections.7" incomingConnections="//@connections.6 //@connections.7"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp1"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp2"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="151" height="125" x="179" y="296">
-        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="91" height="65" x="30" y="30" cornerHeight="20" cornerWidth="20">
-          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="66" y="3" cornerHeight="5" cornerWidth="5"/>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="45" y="59">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="175" height="144" x="151" y="216">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="115" height="84" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="90" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="78">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>
             <points x="-11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="45" y="59">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="78">
             <points x="3" y="-3"/>
             <points x="3" y="3"/>
             <points x="11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="45" y="59">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="57" y="78">
             <points x="-2" y="-3"/>
             <points x="-2" y="3"/>
             <points x="2" y="3"/>
@@ -95,29 +95,29 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#SimpleState:ACabineController$doorClosed"/>
+        <businessObjects href="../Elevator.room#SimpleState:AFloorController$doorClosed"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2" incomingConnections="//@connections.0 //@connections.3" referencedGraphicsAlgorithm="//@children.0/@children.5/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="91" height="65" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="doorClosed"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="115" height="84" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="doorClosed"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="159" height="141" x="520" y="296">
-        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="99" height="81" x="30" y="30" cornerHeight="20" cornerWidth="20">
-          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="74" y="3" cornerHeight="5" cornerWidth="5"/>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="49" y="75">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="230" height="173" x="467" y="195">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="170" height="113" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="145" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="85" y="107">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>
             <points x="-11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="49" y="75">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="85" y="107">
             <points x="3" y="-3"/>
             <points x="3" y="3"/>
             <points x="11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="49" y="75">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="85" y="107">
             <points x="-2" y="-3"/>
             <points x="-2" y="3"/>
             <points x="2" y="3"/>
@@ -126,11 +126,11 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#SimpleState:ACabineController$doorMoving"/>
+        <businessObjects href="../Elevator.room#SimpleState:AFloorController$doorMoving"/>
       </link>
-      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3 //@connections.7" incomingConnections="//@connections.2 //@connections.7" referencedGraphicsAlgorithm="//@children.0/@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3 //@connections.9" incomingConnections="//@connections.2 //@connections.9" referencedGraphicsAlgorithm="//@children.0/@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="99" height="81" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="doorMoving"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="170" height="113" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="doorMoving"/>
       </children>
     </children>
   </children>
@@ -138,10 +138,10 @@
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#InitialTransition:ACabineController$initial"/>
+      <businessObjects href="../Elevator.room#InitialTransition:AFloorController$initial"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
         <points x="-15" y="5"/>
         <points/>
         <points x="-15" y="-5"/>
@@ -155,7 +155,7 @@
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr0"/>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr0"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
@@ -165,16 +165,16 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-38" y="28" font="//@fonts.0" value="tr0: &lt;set7seg:Contro..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-63" y="8" font="//@fonts.0" value="tr0: &lt;setFloor:Contr..."/>
     </connectionDecorators>
-    <bendpoints x="250" y="103"/>
-    <bendpoints x="175" y="103"/>
+    <bendpoints x="337" y="144"/>
+    <bendpoints x="291" y="144"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.5/@anchors.0" end="//@children.0/@children.6/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr1"/>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr1"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
@@ -184,15 +184,15 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-118" y="-24" font="//@fonts.0" value="tr1: &lt;openDoor:Contr..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-74" y="8" font="//@fonts.0" value="tr1: &lt;openDoor:Contr..."/>
     </connectionDecorators>
-    <bendpoints x="475" y="337"/>
+    <bendpoints x="420" y="364"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.5/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr2"/>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr2"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
@@ -202,15 +202,15 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-63" y="16" font="//@fonts.0" value="tr2: &lt;done:DoorPort>"/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-73" y="-31" font="//@fonts.0" value="tr2: &lt;done:DoorPort>"/>
     </connectionDecorators>
-    <bendpoints x="477" y="428"/>
+    <bendpoints x="430" y="295"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.3/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr7"/>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr5"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
@@ -220,16 +220,16 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-51" y="9" font="//@fonts.0" value="tr7: &lt;floorRequestAc..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-100" y="5" font="//@fonts.0" value="tr5: &lt;requestUpAck:C..."/>
     </connectionDecorators>
-    <bendpoints x="485" y="142"/>
-    <bendpoints x="432" y="142"/>
+    <bendpoints x="861" y="395"/>
+    <bendpoints x="840" y="377"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.3/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr5"/>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr6"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
@@ -239,54 +239,16 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-109" y="-21" font="//@fonts.0" value="tr5: &lt;pressed:Button..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-114" y="-15" font="//@fonts.0" value="tr6: &lt;requestDownAck..."/>
     </connectionDecorators>
-    <bendpoints x="377" y="101"/>
-    <bendpoints x="410" y="136"/>
-  </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.3/@anchors.0">
-    <properties key="obj-type" value="trans"/>
-    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
-    <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr6"/>
-    </link>
-    <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
-        <points x="-15" y="5"/>
-        <points/>
-        <points x="-15" y="-5"/>
-      </graphicsAlgorithm>
-    </connectionDecorators>
-    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-46" y="-8" font="//@fonts.0" value="tr6: &lt;floorRequestCl..."/>
-    </connectionDecorators>
-    <bendpoints x="502" y="124"/>
-    <bendpoints x="551" y="84"/>
-  </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.6/@anchors.0">
-    <properties key="obj-type" value="trans"/>
-    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
-    <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr3"/>
-    </link>
-    <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
-        <points x="-15" y="5"/>
-        <points/>
-        <points x="-15" y="-5"/>
-      </graphicsAlgorithm>
-    </connectionDecorators>
-    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-69" y="12" font="//@fonts.0" value="tr3: &lt;openDoor:Contr..."/>
-    </connectionDecorators>
-    <bendpoints x="618" y="456"/>
-    <bendpoints x="719" y="456"/>
+    <bendpoints x="827" y="360"/>
+    <bendpoints x="827" y="313"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.4/@anchors.0" end="//@children.0/@children.4/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#TriggeredTransition:ACabineController$tr4"/>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr7"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
@@ -296,10 +258,67 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-41" y="19" font="//@fonts.0" value="tr4: &lt;pressed:DoorBu..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-80" y="-1" font="//@fonts.0" value="tr7: &lt;pressed:UpButt..."/>
     </connectionDecorators>
-    <bendpoints x="728" y="107"/>
-    <bendpoints x="672" y="107"/>
+    <bendpoints x="616" y="126"/>
+    <bendpoints x="581" y="102"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.4/@anchors.0" end="//@children.0/@children.4/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr8"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-19" y="-17" font="//@fonts.0" value="tr8: &lt;pressed:DownBu..."/>
+    </connectionDecorators>
+    <bendpoints x="710" y="121"/>
+    <bendpoints x="663" y="121"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.3/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr9"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-98" y="-20" font="//@fonts.0" value="tr9: &lt;requestsClear:..."/>
+    </connectionDecorators>
+    <bendpoints x="879" y="270"/>
+    <bendpoints x="826" y="270"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.6/@anchors.0" end="//@children.0/@children.6/@anchors.0">
+    <properties key="obj-type" value="trans"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="../Elevator.room#TriggeredTransition:AFloorController$tr3"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
+        <points x="-15" y="5"/>
+        <points/>
+        <points x="-15" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-61" y="14" font="//@fonts.0" value="tr3: &lt;openDoor:Contr..."/>
+    </connectionDecorators>
+    <bendpoints x="632" y="442"/>
+    <bendpoints x="568" y="442"/>
   </connections>
   <colors red="227" green="238" blue="249"/>
   <colors red="255" green="255" blue="255"/>

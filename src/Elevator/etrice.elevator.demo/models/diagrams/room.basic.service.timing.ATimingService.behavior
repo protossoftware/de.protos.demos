@@ -6,15 +6,15 @@
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="obj-type" value="sg"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
-      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
-      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="769" height="486" x="40" y="40">
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="689" height="406" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
+      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="689" height="406" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
     </graphicsAlgorithm>
     <link>
       <businessObjects href="../TimingService.room#StateGraph:ATimingService$sg"/>
     </link>
     <children visible="true">
-      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
+      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="689" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="trp"/>
@@ -34,7 +34,7 @@
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="232" height="167" x="236" y="120">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="172" height="107" x="30" y="30" cornerHeight="20" cornerWidth="20">
           <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="147" y="3" cornerHeight="5" cornerWidth="5"/>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="86" y="101">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="86" y="101">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>
             <points x="-11" y="3"/>
@@ -44,7 +44,7 @@
             <points x="3" y="3"/>
             <points x="11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="86" y="101">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="86" y="101">
             <points x="-2" y="-3"/>
             <points x="-2" y="3"/>
             <points x="2" y="3"/>

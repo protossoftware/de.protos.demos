@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of ElevatorTop" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.3/@children.2/@link //@children.0/@children.3/@children.3/@link //@children.0/@children.3/@children.4/@link //@children.0/@children.3/@children.5/@link //@children.0/@children.2/@children.2/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.0/@children.2/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@children.0/@children.4/@link" verticalGridUnit="10" version="0.10.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of ElevatorTop" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.4/@link //@children.0/@children.3/@children.2/@link //@children.0/@children.3/@children.3/@link //@children.0/@children.3/@children.4/@link //@children.0/@children.3/@children.5/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.2/@children.2/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link" verticalGridUnit="10" version="0.10.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
-    <businessObjects href="../ElevatorFreeRTOS.room#ActorClass:ElevatorTop"/>
+    <businessObjects href="../Elevator.room#ActorClass:ElevatorTop"/>
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="obj-type" value="cls"/>
@@ -11,12 +11,12 @@
       <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40"/>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#ActorClass:ElevatorTop"/>
+      <businessObjects href="../Elevator.room#ActorClass:ElevatorTop"/>
     </link>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="191" y="391">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="95" y="320">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="true" lineVisible="true" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -119,7 +119,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ElevatorTop$floors"/>
+        <businessObjects href="../Elevator.room#ActorRef:ElevatorTop$floors"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -139,7 +139,7 @@
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AFloorController$ControlPort"/>
+          <businessObjects href="../Elevator.room#Port:AFloorController$ControlPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.0/@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
@@ -150,7 +150,7 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="355" y="50">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="345" y="317">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -253,7 +253,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ElevatorTop$motor"/>
+        <businessObjects href="../Elevator.room#ActorRef:ElevatorTop$motor"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -269,22 +269,22 @@
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="port"/>
         <properties key="item-kind" value=""/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="70" y="80">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="90">
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AMotorController$ControlPort"/>
+          <businessObjects href="../Elevator.room#Port:AMotorController$ControlPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ControlPort"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="ControlPort"/>
         </children>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="511" y="388">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="597" y="317">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -387,7 +387,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ElevatorTop$cabine"/>
+        <businessObjects href="../Elevator.room#ActorRef:ElevatorTop$cabine"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -407,7 +407,7 @@
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:ACabineController$ControlPort"/>
+          <businessObjects href="../Elevator.room#Port:ACabineController$ControlPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.2/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
@@ -418,7 +418,7 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="349" y="229">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="352" y="89">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -521,7 +521,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ElevatorTop$top"/>
+        <businessObjects href="../Elevator.room#ActorRef:ElevatorTop$top"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -537,11 +537,11 @@
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="port"/>
         <properties key="item-kind" value="C"/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="127" y="80">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="144" y="80">
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AElevatorMainController$CabinePort"/>
+          <businessObjects href="../Elevator.room#Port:AElevatorMainController$CabinePort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.3/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
@@ -551,60 +551,60 @@
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="port"/>
         <properties key="item-kind" value="C"/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="72">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="82" y="80">
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AElevatorMainController$MotorPort"/>
+          <businessObjects href="../Elevator.room#Port:AElevatorMainController$MotorPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.3/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="MotorPort"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="MotorPort"/>
         </children>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="port"/>
         <properties key="item-kind" value="CM"/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="34" y="80">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="25" y="80">
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="23" y="19"/>
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AElevatorMainController$FloorPort"/>
+          <businessObjects href="../Elevator.room#Port:AElevatorMainController$FloorPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.0/@children.3/@children.4/@graphicsAlgorithm/@graphicsAlgorithmChildren.1"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="FloorPort"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" value="FloorPort"/>
         </children>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="port"/>
         <properties key="item-kind" value=""/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" y="39">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="90">
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../ElevatorFreeRTOS.room#Port:AElevatorMainController$controlPort"/>
+          <businessObjects href="../Elevator.room#Port:AElevatorMainController$controlPort"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.3/@children.5/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" value="controlPort"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="controlPort"/>
         </children>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="225" height="143" x="120" y="48">
-        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="165" height="83" x="33" y="27">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="606" y="89">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
-        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="165" height="83" x="30" y="30">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="180" height="80" x="30" y="30">
           <properties key="actorref_graphic_element" value="mainborder"/>
-          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="135" y="53">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="150" y="50">
             <properties key="actorref_graphic_element" value="substructure"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="130" y="68">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="145" y="65">
             <properties key="actorref_graphic_element" value="substructure"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
@@ -634,77 +634,82 @@
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="7" y="83"/>
+            <points x="10" y="80"/>
             <points x="90"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="22" y="83"/>
+            <points x="25" y="80"/>
             <points x="105"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="37" y="83"/>
+            <points x="40" y="80"/>
             <points x="120"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="52" y="83"/>
+            <points x="55" y="80"/>
             <points x="135"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="67" y="83"/>
+            <points x="70" y="80"/>
             <points x="150"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="82" y="83"/>
+            <points x="85" y="80"/>
             <points x="165"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="97" y="83"/>
-            <points x="165" y="15"/>
+            <points x="100" y="80"/>
+            <points x="180"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="112" y="83"/>
-            <points x="165" y="30"/>
+            <points x="115" y="80"/>
+            <points x="180" y="15"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="127" y="83"/>
-            <points x="165" y="45"/>
+            <points x="130" y="80"/>
+            <points x="180" y="30"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="142" y="83"/>
-            <points x="165" y="60"/>
+            <points x="145" y="80"/>
+            <points x="180" y="45"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
             <properties key="actorref_graphic_element" value="hatched_line"/>
-            <points x="157" y="83"/>
-            <points x="165" y="75"/>
+            <points x="160" y="80"/>
+            <points x="180" y="60"/>
+          </graphicsAlgorithmChildren>
+          <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
+            <properties key="actorref_graphic_element" value="hatched_line"/>
+            <points x="175" y="80"/>
+            <points x="180" y="75"/>
           </graphicsAlgorithmChildren>
         </graphicsAlgorithmChildren>
-        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="25" height="25" x="170" y="30">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="25" height="25" x="185" y="30">
           <properties key="actorref_graphic_element" value="sizeframe"/>
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ElevatorFreeRTOS.room#ActorRef:ElevatorTop$ref0"/>
+        <businessObjects href="../Elevator.room#ActorRef:ElevatorTop$ref0"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
       </anchors>
       <children visible="true">
         <properties key="actorref_graphic_element" value="name_shape"/>
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="165" height="83" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ref0&#xA;(Test)"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="180" height="80" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ref0&#xA;(Test)"/>
       </children>
       <children>
         <properties key="actorref_graphic_element" value="size_shape"/>
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="25" height="25" x="170" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="1"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="25" height="25" x="185" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="1"/>
       </children>
     </children>
   </children>
@@ -712,21 +717,21 @@
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#Binding:ElevatorTop$ControlPort!motor-MotorPort!top"/>
+      <businessObjects href="../Elevator.room#Binding:ElevatorTop$ControlPort!motor-MotorPort!top"/>
     </link>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@children.2/@anchors.0" end="//@children.0/@children.2/@children.2/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#Binding:ElevatorTop$CabinePort!top-ControlPort!cabine"/>
+      <businessObjects href="../Elevator.room#Binding:ElevatorTop$CabinePort!top-ControlPort!cabine"/>
     </link>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@children.4/@anchors.0" end="//@children.0/@children.0/@children.2/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ElevatorFreeRTOS.room#Binding:ElevatorTop$FloorPort!top-ControlPort!floors"/>
+      <businessObjects href="../Elevator.room#Binding:ElevatorTop$FloorPort!top-ControlPort!floors"/>
     </link>
   </connections>
   <colors red="227" green="238" blue="249"/>

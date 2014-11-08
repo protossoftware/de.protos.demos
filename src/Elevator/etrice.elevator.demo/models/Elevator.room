@@ -302,7 +302,7 @@ The instance diagram provides an overview of the generated instances."
 						}
 						Transition tr6: my tp2 -> doorClosed
 						Transition tr7: my tp3 -> doorClosed
-						Transition init: initial -> doorClosed { }
+						Transition init: initial -> doorClosed
 						Transition tr8: doorOpen -> doorOpen {
 							triggers {
 								<check: HelperPort>
@@ -732,7 +732,7 @@ The instance diagram provides an overview of the generated instances."
 						"serialCommandhandlerPort.status(data);"
 					}
 				}
-				Transition init: initial -> tp0 of secureMode { }
+				Transition init: initial -> tp0 of secureMode
 				handler TransitionPoint tp2
 				handler TransitionPoint tp3
 				handler TransitionPoint tp5
@@ -833,7 +833,7 @@ The instance diagram provides an overview of the generated instances."
 								"cabinePort.stopIndicateFloors();"
 							}
 						}
-						Transition init: initial -> idle { }
+						Transition init: initial -> idle
 						Transition tr9: floorRequested -> idle {
 							triggers {
 								<floor: iMainControllerPort>
@@ -1197,7 +1197,7 @@ The instance diagram provides an overview of the generated instances."
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> waitForId { }
+				Transition init: initial -> waitForId
 				Transition setFloor: waitForId -> close {
 					triggers {
 						<setFloor: ControlPort>
@@ -1317,7 +1317,7 @@ The instance diagram provides an overview of the generated instances."
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> doorClosed { }
+				Transition init: initial -> doorClosed
 				Transition tr0: my tp0 -> my tp0 {
 					triggers {
 						<setFloor: ControlPort>
@@ -1422,7 +1422,7 @@ The instance diagram provides an overview of the generated instances."
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> idle { }
+				Transition init: initial -> idle
 				Transition tr0: idle -> goinigUp {
 					triggers {
 						<goUpOneFloor: ControlPort>
@@ -1502,7 +1502,7 @@ The instance diagram provides an overview of the generated instances."
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> running { }
+				Transition init: initial -> running
 				Transition tr0: running -> running {
 					triggers {
 						<requestCheck: ControlPort>
@@ -1641,7 +1641,24 @@ The instance diagram provides an overview of the generated instances."
 		}
 		Behavior {
 			StateMachine {
-				Transition tr8: my tp3 -> my tp3 {
+				Transition tr11: my tp4 -> my tp4 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"uint8 i,mask;"
+						"mask = 1;"
+						""
+						"timer.startTimer(200);"
+						"for (i=0;i<8;i++){"
+						"\tif (indicatorPattern & mask){"
+						"\t\tButtonPort[i].ledToggle();"
+						"\t\t}\t"
+						"\tmask<<=1;"
+						"\t}"
+					}
+				}
+				Transition tr12: my tp4 -> my tp4 {
 					triggers {
 						<startIndicateFloors: ControlPort>
 					}
@@ -1659,24 +1676,7 @@ The instance diagram provides an overview of the generated instances."
 						"\t}"
 					}
 				}
-				Transition tr9: my tp3 -> my tp3 {
-					triggers {
-						<timeout: timer>
-					}
-					action {
-						"uint8 i,mask;"
-						"mask = 1;"
-						""
-						"timer.startTimer(200);"
-						"for (i=0;i<8;i++){"
-						"\tif (indicatorPattern & mask){"
-						"\t\tButtonPort[i].ledToggle();"
-						"\t\t}\t"
-						"\tmask<<=1;"
-						"\t}"
-					}
-				}
-				Transition tr10: my tp3 -> my tp3 {
+				Transition tr8: my tp4 -> my tp4 {
 					triggers {
 						<stopIndicateFloors: ControlPort>
 					}
@@ -1693,7 +1693,7 @@ The instance diagram provides an overview of the generated instances."
 						"\t}"
 					}
 				}
-				handler TransitionPoint tp3
+				handler TransitionPoint tp4
 			}
 		}
 	}
