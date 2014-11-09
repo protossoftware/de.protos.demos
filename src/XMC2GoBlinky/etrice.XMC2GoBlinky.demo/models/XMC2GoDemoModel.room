@@ -1,0 +1,233 @@
+RoomModel XMC2GoDemoModel {
+
+	import room.basic.types.* from "Types.room"
+
+	import room.basic.service.timing.* from "TimingService.room"
+
+	import DaveInterface.* from "DaveInterface.room"
+
+	LogicalSystem PingPong_LogSys {
+		SubSystemRef PingPong_subSysRef: PingPong_LogSubSys
+	}
+
+	SubSystemClass PingPong_LogSubSys {
+		ActorRef pingPong: PingPongTop
+		ActorRef timingService: ATimingService
+		LayerConnection ref pingPong satisfied_by timingService.timer
+		LogicalThread defaultThread
+		LogicalThread timingThread
+		ActorInstanceMapping timingService -> timingThread
+		ActorInstanceMapping pingPong/dimmer -> timingThread
+		ActorInstanceMapping pingPong/ref1 -> timingThread
+		
+
+	}
+
+	ActorClass PingPongTop {
+		Structure {
+			ActorRef ref0: MrPing
+			ActorRef ref1: MrPong
+			ActorRef dimmer: ADimmer
+			ActorRef dimmer2: ADimmer
+			Binding ref1.p0 and ref0.p0
+		}
+		Behavior {
+			StateMachine { }
+		}
+	}
+
+	ActorClass ADimmer {
+		Structure {
+			conjugated Port pwm: PWMSP001
+			SAP timer:PTimer
+			Attribute counter:uint8
+			Attribute instance:uint32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> goingOn {
+					action {
+						"pwm.setInstance(instance);"
+						"//PWMSP001ConjPort_setInstance(&self->constData->pwm,0);"
+						"timer.startTimer(10);"
+						"counter=0;"
+					}
+				}
+				Transition tr1: goingOn -> cp cp0 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr0: cp cp0 -> goingOff
+				Transition tr2: cp cp0 -> goingOn {
+					cond {
+						"++counter<100"
+					}
+					action {
+						"pwm.setDutyCycle(counter);"
+						"//PWMSP001ConjPort_setDutyCycle(&self->constData->pwm,counter);"
+					}
+				}
+				Transition tr3: goingOff -> cp cp1 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr4: cp cp1 -> off {
+					action {
+						"pwm.setDutyCycle(counter);"
+						"//PWMSP001ConjPort_setDutyCycle(&self->constData->pwm,0);"
+						""
+						"counter = 200;"
+					}
+				}
+				Transition tr5: cp cp1 -> goingOff {
+					cond {
+						"--counter>0"
+					}
+					action {
+						"pwm.setDutyCycle(counter);"
+						"//PWMSP001ConjPort_setDutyCycle(&self->constData->pwm,counter);"
+					}
+				}
+				Transition tr7: off -> cp cp2 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr6: cp cp2 -> goingOn
+				Transition tr8: cp cp2 -> off {
+					cond {
+						"--counter > 0"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				ChoicePoint cp2
+				State goingOn
+				State goingOff
+				State off
+			}
+		}
+	}
+
+	ActorClass MrPing {
+		Interface {
+			conjugated Port p0: PingPongProtocol
+		}
+		Structure {
+			usercode1 {
+				"#include <etPlatform.h>"
+			}
+			external Port p0
+			conjugated Port Led0: PIO004
+			conjugated Port Led1: PIO004
+			conjugated Port uart: PUART001
+			SAP timer: PTimer
+			Attribute counter: uint32
+			Attribute myData: PingPongData
+			Attribute sendTime: uint64
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> running {
+					action {
+						"counter=0;"
+						"PingPongData_initData(&myData);"
+						""
+						"timer.startTimeout(500);"
+						""
+						"//uart.setInstance(0);"
+						"PUART001ConjPort_setInstance(&self->constData->uart,0);"
+						""
+						"// Led0.setInstance(0);"
+						"PIO004ConjPort_setInstance(&self->constData->Led0,0);  "
+						""
+						"// Led1.setInstance(1);"
+						"PIO004ConjPort_setInstance(&self->constData->Led1,1);  "
+						""
+						"// Led0.setPin();"
+						"PIO004ConjPort_setPin(&self->constData->Led0);  "
+						""
+						"// Led1.resetPin();"
+						"PIO004ConjPort_resetPin(&self->constData->Led1);  "
+					}
+				}
+				Transition tr0: running -> running {
+					triggers {
+						<pong: p0>
+					}
+					action {
+						"timer.startTimeout(200);"
+						""
+						"counter++;"
+						"//toggleLED0();"
+						""
+						"// Led1.togglePin();"
+						"PIO004ConjPort_togglePin(&self->constData->Led1);"
+						""
+						"// Led0.togglePin();"
+						"PIO004ConjPort_togglePin(&self->constData->Led0);   "
+						""
+						"//uart.writeDataBytes(\"Das ist ein Test\\n\", 17);"
+						"PUART001ConjPort_writeDataBytes(&self->constData->uart,\"Das ist ein Test!\\n\",18);"
+					}
+				}
+				Transition tr1: running -> running {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"p0.ping(&myData);"
+					}
+				}
+				State running
+			}
+		}
+	}
+
+	ActorClass MrPong {
+		Interface {
+			Port p0: PingPongProtocol
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init0: initial -> running
+				Transition tr0: running -> running {
+					triggers {
+						<ping: p0>
+					}
+					action {
+						"p0.pong(data);"
+					}
+				}
+				State running
+			}
+		}
+	}
+
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping(data: PingPongData)
+		}
+		outgoing {
+			Message pong(data: PingPongData)
+		}
+	}
+
+	DataClass PingPongData {
+		Attribute data [ 10 ]: uint8
+		Operation getData(p: uint8 ref) {
+			"uint8 i;"
+			"for(i=0;i<10;i++){*p++=data[i];};"
+		}
+		Operation initData() {
+			"int i;"
+			"for(i=0;i<10;i++){data[i]=i;};"
+		}
+	}
+
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.etrice.generator.launch.c.launchConfigurationType">
+<booleanAttribute key="Debug" value="false"/>
+<stringAttribute key="DocPath" value="doc-gen"/>
+<booleanAttribute key="GenDocumentation" value="false"/>
+<booleanAttribute key="GenInstanceDiagram" value="false"/>
+<stringAttribute key="GenModelPath" value=""/>
+<stringAttribute key="InfoPath" value="src-gen-info-mt"/>
+<booleanAttribute key="Lib" value="false"/>
+<booleanAttribute key="MSC" value="false"/>
+<listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/etrice.XMC2GoBlinky.demo/models/DemoModel_XMC2Go_MT.etmap}"/>
+<listEntry value="${workspace_loc:/etrice.XMC2GoBlinky.demo/models/XMC2GoDemoModel.config}"/>
+</listAttribute>
+<booleanAttribute key="OverrideDirectories" value="true"/>
+<booleanAttribute key="SaveGenModel" value="false"/>
+<stringAttribute key="SrcgenPath" value="src-gen-mt"/>
+<booleanAttribute key="UseTranslation" value="true"/>
+<booleanAttribute key="Verbose" value="false"/>
+<stringAttribute key="bad_container_name" value="\XMC2GoDemo"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+</launchConfiguration>

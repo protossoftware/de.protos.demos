@@ -1,0 +1,34 @@
+PhysicalModel XMC2Go_PhysicalModel {
+
+	PhysicalSystem XMC2Go_PhysSys {
+		NodeRef XMC2Go : XMC2Go_NodeClass
+	}
+
+	NodeClass XMC2Go_NodeClass {
+		runtime = RuntimeClass1
+		priomin = -3
+		priomax = 3
+		DefaultThread LowPrioThread {
+			execmode = mixed
+			interval = 50ms
+			prio = 1
+			stacksize = 150
+			msgblocksize = 32
+			msgpoolsize = 10
+		}
+		
+		Thread HighPrioThread {
+			execmode = mixed
+			interval = 5ms
+			prio = 2
+			stacksize = 150
+			msgblocksize = 32
+			msgpoolsize = 10
+		}
+	}
+
+	RuntimeClass RuntimeClass1 {
+		model = multiThreaded
+	}
+
+}

@@ -1,0 +1,98 @@
+RoomModel DaveInterface {
+
+	import room.basic.types.* from "Types.room"
+
+	ExternalType PWMSP001_HandleType -> "PWMSP001_HandleType"
+
+	ProtocolClass PWMSP001 {
+		usercode1 {
+			"#include <DAVE3.h>"
+		}
+		conjugated PortClass
+		{
+			Operation setInstance(data: uint32) {
+				"switch(data){"
+				"    case 0: Handle=&PWMSP001_Handle0;"
+				"		break;"
+				"    case 1: Handle=&PWMSP001_Handle1;"
+				"		break;"
+				"    default: break;"
+				"    }"
+			}
+			Operation setDutyCycle(dc: uint8) {
+				"PWMSP001_SetDutyCycle(Handle, dc);"
+			}
+			Attribute Handle: PWMSP001_HandleType ref = "0"
+		}
+	}
+
+	ProtocolClass PUART001 {
+		usercode1 {
+			"#include <DAVE3.h>"
+		}
+		incoming {
+			Message dummy()
+		}
+		conjugated PortClass
+		{
+			Operation setInstance(data: uint32) {
+				"Handle=UART001_HandleArray[data];"
+			}
+			Operation readDataBytes(buffer: uint8 ref, count: uint32): uint32 {
+				"if (Handle != 0){"
+				"	return UART001_ReadDataBytes(Handle,buffer,count);}"
+				"return 0;"
+			}
+			Operation writeDataBytes(buffer: uint8 ref, count: uint32): uint32 {
+				"if (Handle != 0){"
+				"   return UART001_WriteDataBytes(Handle,buffer,count);}"
+				"return 0;"
+			}
+			Attribute Handle: UART001_HandleType ref = "0"
+		}
+	}
+
+	ProtocolClass PIO004 {
+		usercode1 {
+			"#include <DAVE3.h>"
+		}
+		conjugated PortClass
+		{
+			Operation setInstance(data: uint32) {
+				"switch(data){"
+				"    case 0: Handle=IO004_Handle0;"
+				"		break;"
+				"    case 1: Handle=IO004_Handle1;"
+				"		break;"
+				"    default: break;"
+				"    }"
+			}
+			Operation readPin(): uint32 {
+				"return IO004_ReadPin(Handle);"
+			}
+			Operation setPin() {
+				"IO004_SetPin(Handle);"
+			}
+			Operation setOutputValue(Value: boolean) {
+				"IO004_SetOutputValue(Handle,Value);"
+			}
+			Operation resetPin() {
+				"IO004_ResetPin(Handle);"
+			}
+			Operation togglePin() {
+				"IO004_TogglePin(Handle);"
+			}
+			Operation disableOutputBuffer(mode: IO004_InputModeType) {
+				"IO004_DisableOutputDriver(&Handle,mode);"
+			}
+			Operation enableOutputBuffer(mode: IO004_InputModeType) {
+				"IO004_EnableOutputDriver(&Handle,mode);"
+			}
+			Attribute Handle: IO004_HandleType = "0"
+		}
+	}
+
+	ExternalType IO004_HandleType -> "IO004_HandleType"
+	ExternalType IO004_InputModeType -> "IO004_InputModeType"
+	ExternalType UART001_HandleType -> "UART001_HandleType"
+}

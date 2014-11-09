@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.tasking.cdt.launch.localCLaunch">
+<stringAttribute key="com.tasking.debug.cdt.core.COMMUNICATION" value="J-Link over USB (SWD)"/>
+<stringAttribute key="com.tasking.debug.cdt.core.CONFIGURATION" value="Default"/>
+<stringAttribute key="com.tasking.debug.cdt.core.FSS_ROOT" value="${project_loc}\${build_config}"/>
+<stringAttribute key="com.tasking.debug.cdt.core.MSGLOG_FILE_NAME" value=""/>
+<stringAttribute key="com.tasking.debug.cdt.core.TARGET" value="Infineon XMC 2Go for XMC1100"/>
+<stringAttribute key="debugger_configuration.debug_instrument_module" value="dijlinkarm"/>
+<stringAttribute key="debugger_configuration.gdi.flash.flash_monitor" value="fxmc1xxx.sre"/>
+<stringAttribute key="debugger_configuration.gdi.flash.flash_workspace" value="0x20000000"/>
+<stringAttribute key="debugger_configuration.gdi.resource.hwdiarm.protocol" value="SWD"/>
+<stringAttribute key="debugger_configuration.register_file" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="com.tasking.debug.cdt.core.CDebugger"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_REGISTER_GROUPS" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="run"/>
+<booleanAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_MAIN" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.FORMAT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;contentList/&gt;"/>
+<stringAttribute key="org.eclipse.cdt.launch.GLOBAL_VARIABLES" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;globalVariableList/&gt;&#13;&#10;"/>
+<stringAttribute key="org.eclipse.cdt.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList/&gt;&#13;&#10;"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="${project_loc}\${build_config}\XMC2GOBlinkyMT.elf"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="XMC2GOBlinkyMT"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/XMC2GOBlinkyMT"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+</launchConfiguration>

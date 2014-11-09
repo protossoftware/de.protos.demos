@@ -1,0 +1,11 @@
+MappingModel OSSchulungMapping_Model {
+	import XMC2GoDemoModel.* from "XMC2GoDemoModel.room"
+	import XMC2Go_PhysicalModel.* from "XMC2Go_ST.etphys"
+
+	Mapping PingPong_LogSys -> XMC2Go_PhysSys {
+		SubSystemMapping PingPong_subSysRef -> XMC2Go {
+			ThreadMapping defaultThread -> SimpleMainLoop
+			ThreadMapping timingThread -> SimpleMainLoop
+		}
+	}
+}

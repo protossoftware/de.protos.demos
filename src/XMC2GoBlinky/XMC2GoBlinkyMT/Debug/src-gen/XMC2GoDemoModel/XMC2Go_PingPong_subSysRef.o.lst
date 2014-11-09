@@ -1,0 +1,1820 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"XMC2Go_PingPong_subSysRef.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata
+  18              		.align	2
+  19              	.LC0:
+  20 0000 584D4332 		.ascii	"XMC2Go_PingPong_subSysRef\000"
+  20      476F5F50 
+  20      696E6750 
+  20      6F6E675F 
+  20      73756253 
+  21              		.data
+  22              		.align	2
+  25              	XMC2Go_PingPong_subSysRefInst:
+  26 0000 00000000 		.word	.LC0
+  27 0004 00000000 		.word	0
+  28              		.bss
+  29              		.align	2
+  30              	msgBuffer_LowPrioThread:
+  31 0000 00000000 		.space	320
+  31      00000000 
+  31      00000000 
+  31      00000000 
+  31      00000000 
+  32              		.align	2
+  33              	msgService_LowPrioThread:
+  34 0140 00000000 		.space	108
+  34      00000000 
+  34      00000000 
+  34      00000000 
+  34      00000000 
+  35              		.align	2
+  36              	msgBuffer_HighPrioThread:
+  37 01ac 00000000 		.space	320
+  37      00000000 
+  37      00000000 
+  37      00000000 
+  37      00000000 
+  38              		.align	2
+  39              	msgService_HighPrioThread:
+  40 02ec 00000000 		.space	108
+  40      00000000 
+  40      00000000 
+  40      00000000 
+  40      00000000 
+  41              		.align	2
+  42              	_PingPong_LogSys_PingPong_subSysRef_pingPong:
+  43 0358 00000000 		.space	4
+  44              		.data
+  45              		.align	3
+  48              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0:
+  49 0008 1C000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const
+  50 000c 00000000 		.word	0
+  51 0010 00       		.byte	0
+  52 0011 00       		.byte	0
+  53 0012 00       		.byte	0
+  54 0013 00       		.byte	0
+  55 0014 00       		.byte	0
+  56 0015 00       		.byte	0
+  57 0016 00       		.byte	0
+  58 0017 00       		.byte	0
+  59 0018 00       		.byte	0
+  60 0019 00       		.byte	0
+  61 001a 00000000 		.space	6
+  61      0000
+  62 0020 00000000 		.word	0
+  63 0024 00000000 		.word	0
+  64 0028 00000000 		.space	8
+  64      00000000 
+  65              		.align	2
+  68              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1:
+  69 0030 58000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1_const
+  70 0034 00000000 		.space	8
+  70      00000000 
+  71              		.align	2
+  74              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer:
+  75 003c 64000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_const
+  76 0040 00       		.byte	0
+  77 0041 000000   		.space	3
+  78 0044 00000000 		.word	0
+  79 0048 00000000 		.space	8
+  79      00000000 
+  80              		.align	2
+  83              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2:
+  84 0050 7C000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_const
+  85 0054 00       		.byte	0
+  86 0055 000000   		.space	3
+  87 0058 01000000 		.word	1
+  88 005c 00000000 		.space	8
+  88      00000000 
+  89              		.align	2
+  92              	_PingPong_LogSys_PingPong_subSysRef_timingService:
+  93 0064 C4000000 		.word	_PingPong_LogSys_PingPong_subSysRef_timingService_const
+  94 0068 00000000 		.space	8
+  94      00000000 
+  95              		.bss
+  96              		.align	2
+  97              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_Led0_var:
+  98 035c 00000000 		.space	8
+  98      00000000 
+  99              		.align	2
+ 100              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_Led1_var:
+ 101 0364 00000000 		.space	8
+ 101      00000000 
+ 102              		.align	2
+ 103              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_uart_var:
+ 104 036c 00000000 		.space	4
+ 105              		.align	2
+ 106              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_timer_var:
+ 107 0370 00       		.space	1
+ 108 0371 000000   		.align	2
+ 109              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_pwm_var:
+ 110 0374 00000000 		.space	4
+ 111              		.align	2
+ 112              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_timer_var:
+ 113 0378 00       		.space	1
+ 114 0379 000000   		.align	2
+ 115              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_pwm_var:
+ 116 037c 00000000 		.space	4
+ 117              		.align	2
+ 118              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_timer_var:
+ 119 0380 00       		.space	1
+ 120 0381 000000   		.section	.rodata
+ 121 001a 0000     		.align	2
+ 124              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const:
+ 125 001c 00000000 		.word	0
+ 126 0020 EC020000 		.word	msgService_HighPrioThread
+ 127 0024 29       		.byte	41
+ 128 0025 04       		.byte	4
+ 129 0026 0000     		.space	2
+ 130 0028 5C030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_Led0_var
+ 131 002c 00000000 		.word	0
+ 132 0030 20       		.byte	32
+ 133 0031 01       		.byte	1
+ 134 0032 0000     		.space	2
+ 135 0034 64030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_Led1_var
+ 136 0038 00000000 		.word	0
+ 137 003c 20       		.byte	32
+ 138 003d 02       		.byte	2
+ 139 003e 0000     		.space	2
+ 140 0040 6C030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_uart_var
+ 141 0044 00000000 		.word	0
+ 142 0048 20       		.byte	32
+ 143 0049 03       		.byte	3
+ 144 004a 0000     		.space	2
+ 145 004c 70030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_timer_var
+ 146 0050 EC020000 		.word	msgService_HighPrioThread
+ 147 0054 31       		.byte	49
+ 148 0055 05       		.byte	5
+ 149 0056 0000     		.space	2
+ 150              		.align	2
+ 153              	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1_const:
+ 154 0058 00000000 		.word	0
+ 155 005c 40010000 		.word	msgService_LowPrioThread
+ 156 0060 23       		.byte	35
+ 157 0061 01       		.byte	1
+ 158 0062 0000     		.space	2
+ 159              		.align	2
+ 162              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_const:
+ 163 0064 74030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_pwm_var
+ 164 0068 00000000 		.word	0
+ 165 006c 20       		.byte	32
+ 166 006d 01       		.byte	1
+ 167 006e 0000     		.space	2
+ 168 0070 78030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_timer_var
+ 169 0074 EC020000 		.word	msgService_HighPrioThread
+ 170 0078 32       		.byte	50
+ 171 0079 02       		.byte	2
+ 172 007a 0000     		.space	2
+ 173              		.align	2
+ 176              	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_const:
+ 177 007c 7C030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_pwm_var
+ 178 0080 00000000 		.word	0
+ 179 0084 20       		.byte	32
+ 180 0085 01       		.byte	1
+ 181 0086 0000     		.space	2
+ 182 0088 80030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_timer_var
+ 183 008c EC020000 		.word	msgService_HighPrioThread
+ 184 0090 33       		.byte	51
+ 185 0091 02       		.byte	2
+ 186 0092 0000     		.space	2
+ 187              		.align	2
+ 190              	_PingPong_LogSys_PingPong_subSysRef_timingService_repl_sub_ports:
+ 191 0094 00000000 		.word	0
+ 192 0098 40010000 		.word	msgService_LowPrioThread
+ 193 009c 27       		.byte	39
+ 194 009d 01       		.byte	1
+ 195 009e 0000     		.space	2
+ 196 00a0 00       		.byte	0
+ 197 00a1 000000   		.space	3
+ 198 00a4 00000000 		.word	0
+ 199 00a8 EC020000 		.word	msgService_HighPrioThread
+ 200 00ac 2C       		.byte	44
+ 201 00ad 01       		.byte	1
+ 202 00ae 0000     		.space	2
+ 203 00b0 01       		.byte	1
+ 204 00b1 000000   		.space	3
+ 205 00b4 00000000 		.word	0
+ 206 00b8 40010000 		.word	msgService_LowPrioThread
+ 207 00bc 2F       		.byte	47
+ 208 00bd 01       		.byte	1
+ 209 00be 0000     		.space	2
+ 210 00c0 02       		.byte	2
+ 211 00c1 000000   		.space	3
+ 212              		.align	2
+ 215              	_PingPong_LogSys_PingPong_subSysRef_timingService_const:
+ 216 00c4 0300     		.short	3
+ 217 00c6 0000     		.space	2
+ 218 00c8 94000000 		.word	_PingPong_LogSys_PingPong_subSysRef_timingService_repl_sub_ports
+ 219              		.align	2
+ 220              	.LC13:
+ 221 00cc 4D657373 		.ascii	"MessageService_LowPrioThread_receiveMessage: addres"
+ 221      61676553 
+ 221      65727669 
+ 221      63655F4C 
+ 221      6F775072 
+ 222 00ff 73202564 		.ascii	"s %d does not exist \000"
+ 222      20646F65 
+ 222      73206E6F 
+ 222      74206578 
+ 222      69737420 
+ 223              		.section	.text.MsgDispatcher_LowPrioThread_receiveMessage,"ax",%progbits
+ 224              		.align	2
+ 225              		.code	16
+ 226              		.thumb_func
+ 228              	MsgDispatcher_LowPrioThread_receiveMessage:
+ 229              	.LFB33:
+ 230              		.file 1 "C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-g
+   1:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** /**
+   2:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  * @author generated by eTrice
+   3:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  *
+   4:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  * Dispatcher File of Node XMC2Go with SubSystem PingPong_subSysRef
+   5:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  * contains a generated message dispatcher (receiveMessage) for each MessageService (Thread)
+   6:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  */
+   7:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 
+   8:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** #include "messaging/etMessageReceiver.h"
+   9:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** #include "debugging/etLogger.h"
+  10:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** #include "debugging/etMSCLogger.h"
+  11:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 
+  12:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 
+  13:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 
+  14:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** /**
+  15:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  * generated dispatch function for all messages for the thread "LowPrioThread"
+  16:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  */
+  17:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** static etBool MsgDispatcher_LowPrioThread_receiveMessage(const etMessage* msg){
+ 231              		.loc 1 17 0
+ 232              		.cfi_startproc
+ 233 0000 80B5     		push	{r7, lr}
+ 234              	.LCFI0:
+ 235              		.cfi_def_cfa_offset 8
+ 236              		.cfi_offset 7, -8
+ 237              		.cfi_offset 14, -4
+ 238 0002 82B0     		sub	sp, sp, #8
+ 239              	.LCFI1:
+ 240              		.cfi_def_cfa_offset 16
+ 241 0004 00AF     		add	r7, sp, #0
+ 242              	.LCFI2:
+ 243              		.cfi_def_cfa_register 7
+ 244 0006 7860     		str	r0, [r7, #4]
+  18:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_LowPrioThread", "receiveMessage")
+  19:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	switch(msg->address){
+ 245              		.loc 1 19 0
+ 246 0008 7B68     		ldr	r3, [r7, #4]
+ 247 000a 9B88     		ldrh	r3, [r3, #4]
+ 248 000c 1BB2     		sxth	r3, r3
+ 249 000e 2F2B     		cmp	r3, #47
+ 250 0010 64D8     		bhi	.L2
+ 251 0012 9A00     		lsl	r2, r3, #2
+ 252 0014 394B     		ldr	r3, .L24
+ 253 0016 D318     		add	r3, r2, r3
+ 254 0018 1B68     		ldr	r3, [r3]
+ 255 001a 9F46     		mov	pc, r3
+ 256              		.section	.rodata
+ 257              		.align	2
+ 258              	.L11:
+ 259 0114 DC000000 		.word	.L2
+ 260 0118 1C000000 		.word	.L3
+ 261 011c DC000000 		.word	.L2
+ 262 0120 DC000000 		.word	.L2
+ 263 0124 DC000000 		.word	.L2
+ 264 0128 DC000000 		.word	.L2
+ 265 012c DC000000 		.word	.L2
+ 266 0130 DC000000 		.word	.L2
+ 267 0134 DC000000 		.word	.L2
+ 268 0138 DC000000 		.word	.L2
+ 269 013c DC000000 		.word	.L2
+ 270 0140 DC000000 		.word	.L2
+ 271 0144 DC000000 		.word	.L2
+ 272 0148 DC000000 		.word	.L2
+ 273 014c DC000000 		.word	.L2
+ 274 0150 DC000000 		.word	.L2
+ 275 0154 DC000000 		.word	.L2
+ 276 0158 DC000000 		.word	.L2
+ 277 015c DC000000 		.word	.L2
+ 278 0160 DC000000 		.word	.L2
+ 279 0164 DC000000 		.word	.L2
+ 280 0168 DC000000 		.word	.L2
+ 281 016c DC000000 		.word	.L2
+ 282 0170 DC000000 		.word	.L2
+ 283 0174 DC000000 		.word	.L2
+ 284 0178 DC000000 		.word	.L2
+ 285 017c DC000000 		.word	.L2
+ 286 0180 DC000000 		.word	.L2
+ 287 0184 DC000000 		.word	.L2
+ 288 0188 DC000000 		.word	.L2
+ 289 018c DC000000 		.word	.L2
+ 290 0190 DC000000 		.word	.L2
+ 291 0194 DC000000 		.word	.L2
+ 292 0198 DC000000 		.word	.L2
+ 293 019c DC000000 		.word	.L2
+ 294 01a0 2A000000 		.word	.L4
+ 295 01a4 3C000000 		.word	.L5
+ 296 01a8 4E000000 		.word	.L6
+ 297 01ac 60000000 		.word	.L7
+ 298 01b0 72000000 		.word	.L8
+ 299 01b4 DC000000 		.word	.L2
+ 300 01b8 DC000000 		.word	.L2
+ 301 01bc DC000000 		.word	.L2
+ 302 01c0 DC000000 		.word	.L2
+ 303 01c4 DC000000 		.word	.L2
+ 304 01c8 DC000000 		.word	.L2
+ 305 01cc 9E000000 		.word	.L9
+ 306 01d0 B0000000 		.word	.L10
+ 307              		.section	.text.MsgDispatcher_LowPrioThread_receiveMessage
+ 308              	.L3:
+  20:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	
+  21:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case MESSAGESERVICE_ADDRESS:
+  22:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			if (msg->evtID == etSystemProtocol_IN_terminate)
+ 309              		.loc 1 22 0
+ 310 001c 7B68     		ldr	r3, [r7, #4]
+ 311 001e DB88     		ldrh	r3, [r3, #6]
+ 312 0020 1BB2     		sxth	r3, r3
+ 313 0022 022B     		cmp	r3, #2
+ 314 0024 63D1     		bne	.L23
+  23:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				return ET_FALSE;
+ 315              		.loc 1 23 0
+ 316 0026 0023     		mov	r3, #0
+ 317 0028 63E0     		b	.L13
+ 318              	.L4:
+  24:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+  25:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+  26:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		/* interface items of /PingPong_LogSys/PingPong_subSysRef/pingPong */
+  27:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+  28:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		/* interface items of /PingPong_LogSys/PingPong_subSysRef/pingPong/ref0 */
+  29:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 3+BASE_ADDRESS:
+  30:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			MrPing_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0,(etPort*)&_PingP
+ 319              		.loc 1 30 0
+ 320 002a 3549     		ldr	r1, .L24+4
+ 321 002c 354A     		ldr	r2, .L24+8
+ 322 002e 7B68     		ldr	r3, [r7, #4]
+ 323 0030 081C     		mov	r0, r1
+ 324 0032 111C     		mov	r1, r2
+ 325 0034 1A1C     		mov	r2, r3
+ 326 0036 FFF7FEFF 		bl	MrPing_receiveMessage
+  31:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 327              		.loc 1 31 0
+ 328 003a 59E0     		b	.L14
+ 329              	.L5:
+  32:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 4+BASE_ADDRESS:
+  33:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			MrPing_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0,(etPort*)&_PingP
+ 330              		.loc 1 33 0
+ 331 003c 3049     		ldr	r1, .L24+4
+ 332 003e 324A     		ldr	r2, .L24+12
+ 333 0040 7B68     		ldr	r3, [r7, #4]
+ 334 0042 081C     		mov	r0, r1
+ 335 0044 111C     		mov	r1, r2
+ 336 0046 1A1C     		mov	r2, r3
+ 337 0048 FFF7FEFF 		bl	MrPing_receiveMessage
+  34:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 338              		.loc 1 34 0
+ 339 004c 50E0     		b	.L14
+ 340              	.L6:
+  35:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 5+BASE_ADDRESS:
+  36:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			MrPing_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0,(etPort*)&_PingP
+ 341              		.loc 1 36 0
+ 342 004e 2C49     		ldr	r1, .L24+4
+ 343 0050 2E4A     		ldr	r2, .L24+16
+ 344 0052 7B68     		ldr	r3, [r7, #4]
+ 345 0054 081C     		mov	r0, r1
+ 346 0056 111C     		mov	r1, r2
+ 347 0058 1A1C     		mov	r2, r3
+ 348 005a FFF7FEFF 		bl	MrPing_receiveMessage
+  37:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 349              		.loc 1 37 0
+ 350 005e 47E0     		b	.L14
+ 351              	.L7:
+  38:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 6+BASE_ADDRESS:
+  39:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			MrPing_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0,(etPort*)&_PingP
+ 352              		.loc 1 39 0
+ 353 0060 2749     		ldr	r1, .L24+4
+ 354 0062 2B4A     		ldr	r2, .L24+20
+ 355 0064 7B68     		ldr	r3, [r7, #4]
+ 356 0066 081C     		mov	r0, r1
+ 357 0068 111C     		mov	r1, r2
+ 358 006a 1A1C     		mov	r2, r3
+ 359 006c FFF7FEFF 		bl	MrPing_receiveMessage
+  40:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 360              		.loc 1 40 0
+ 361 0070 3EE0     		b	.L14
+ 362              	.L8:
+  41:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 7+BASE_ADDRESS:
+  42:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			switch (msg->evtID){
+ 363              		.loc 1 42 0
+ 364 0072 7B68     		ldr	r3, [r7, #4]
+ 365 0074 DB88     		ldrh	r3, [r3, #6]
+ 366 0076 1BB2     		sxth	r3, r3
+ 367 0078 012B     		cmp	r3, #1
+ 368 007a 06D1     		bne	.L21
+ 369              	.L16:
+  43:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				case PTimer_OUT_timeout:
+  44:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					PTimerConjPort_timeout_receiveHandler((etPort *)&_PingPong_LogSys_PingPong_subSysRef_pingPong_
+ 370              		.loc 1 44 0
+ 371 007c 2548     		ldr	r0, .L24+24
+ 372 007e 7968     		ldr	r1, [r7, #4]
+ 373 0080 1F4A     		ldr	r2, .L24+4
+ 374 0082 254B     		ldr	r3, .L24+28
+ 375 0084 FFF7FEFF 		bl	PTimerConjPort_timeout_receiveHandler
+  45:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					break;
+ 376              		.loc 1 45 0
+ 377 0088 08E0     		b	.L17
+ 378              	.L21:
+  46:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				default: MrPing_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0,(etPor
+ 379              		.loc 1 46 0
+ 380 008a 1D49     		ldr	r1, .L24+4
+ 381 008c 214A     		ldr	r2, .L24+24
+ 382 008e 7B68     		ldr	r3, [r7, #4]
+ 383 0090 081C     		mov	r0, r1
+ 384 0092 111C     		mov	r1, r2
+ 385 0094 1A1C     		mov	r2, r3
+ 386 0096 FFF7FEFF 		bl	MrPing_receiveMessage
+  47:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					break;
+ 387              		.loc 1 47 0
+ 388 009a C046     		mov	r8, r8
+ 389              	.L17:
+  48:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			}
+  49:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 390              		.loc 1 49 0
+ 391 009c 28E0     		b	.L14
+ 392              	.L9:
+  50:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+  51:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		/* interface items of /PingPong_LogSys/PingPong_subSysRef/pingPong/dimmer2 */
+  52:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 14+BASE_ADDRESS:
+  53:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			ADimmer_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2,(etPort*)&_P
+ 393              		.loc 1 53 0
+ 394 009e 1F49     		ldr	r1, .L24+32
+ 395 00a0 1F4A     		ldr	r2, .L24+36
+ 396 00a2 7B68     		ldr	r3, [r7, #4]
+ 397 00a4 081C     		mov	r0, r1
+ 398 00a6 111C     		mov	r1, r2
+ 399 00a8 1A1C     		mov	r2, r3
+ 400 00aa FFF7FEFF 		bl	ADimmer_receiveMessage
+  54:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 401              		.loc 1 54 0
+ 402 00ae 1FE0     		b	.L14
+ 403              	.L10:
+  55:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 15+BASE_ADDRESS:
+  56:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			switch (msg->evtID){
+ 404              		.loc 1 56 0
+ 405 00b0 7B68     		ldr	r3, [r7, #4]
+ 406 00b2 DB88     		ldrh	r3, [r3, #6]
+ 407 00b4 1BB2     		sxth	r3, r3
+ 408 00b6 012B     		cmp	r3, #1
+ 409 00b8 06D1     		bne	.L22
+ 410              	.L19:
+  57:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				case PTimer_OUT_timeout:
+  58:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					PTimerConjPort_timeout_receiveHandler((etPort *)&_PingPong_LogSys_PingPong_subSysRef_pingPong_
+ 411              		.loc 1 58 0
+ 412 00ba 1A48     		ldr	r0, .L24+40
+ 413 00bc 7968     		ldr	r1, [r7, #4]
+ 414 00be 174A     		ldr	r2, .L24+32
+ 415 00c0 194B     		ldr	r3, .L24+44
+ 416 00c2 FFF7FEFF 		bl	PTimerConjPort_timeout_receiveHandler
+  59:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					break;
+ 417              		.loc 1 59 0
+ 418 00c6 08E0     		b	.L20
+ 419              	.L22:
+  60:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				default: ADimmer_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2,(e
+ 420              		.loc 1 60 0
+ 421 00c8 1449     		ldr	r1, .L24+32
+ 422 00ca 164A     		ldr	r2, .L24+40
+ 423 00cc 7B68     		ldr	r3, [r7, #4]
+ 424 00ce 081C     		mov	r0, r1
+ 425 00d0 111C     		mov	r1, r2
+ 426 00d2 1A1C     		mov	r2, r3
+ 427 00d4 FFF7FEFF 		bl	ADimmer_receiveMessage
+  61:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					break;
+ 428              		.loc 1 61 0
+ 429 00d8 C046     		mov	r8, r8
+ 430              	.L20:
+  62:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			}
+  63:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 431              		.loc 1 63 0
+ 432 00da 09E0     		b	.L14
+ 433              	.L2:
+  64:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+  65:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		default:
+  66:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			etLogger_logErrorF("MessageService_LowPrioThread_receiveMessage: address %d does not exist ", ms
+ 434              		.loc 1 66 0
+ 435 00dc 7B68     		ldr	r3, [r7, #4]
+ 436 00de 9B88     		ldrh	r3, [r3, #4]
+ 437 00e0 1BB2     		sxth	r3, r3
+ 438 00e2 124A     		ldr	r2, .L24+48
+ 439 00e4 101C     		mov	r0, r2
+ 440 00e6 191C     		mov	r1, r3
+ 441 00e8 FFF7FEFF 		bl	etLogger_logErrorF
+  67:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 442              		.loc 1 67 0
+ 443 00ec 00E0     		b	.L14
+ 444              	.L23:
+  24:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 445              		.loc 1 24 0
+ 446 00ee C046     		mov	r8, r8
+ 447              	.L14:
+  68:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	}
+  69:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	ET_MSC_LOGGER_SYNC_EXIT
+  70:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	return ET_TRUE;
+ 448              		.loc 1 70 0
+ 449 00f0 0123     		mov	r3, #1
+ 450              	.L13:
+  71:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** }
+ 451              		.loc 1 71 0
+ 452 00f2 181C     		mov	r0, r3
+ 453 00f4 BD46     		mov	sp, r7
+ 454 00f6 02B0     		add	sp, sp, #8
+ 455              		@ sp needed for prologue
+ 456 00f8 80BD     		pop	{r7, pc}
+ 457              	.L25:
+ 458 00fa C046     		.align	2
+ 459              	.L24:
+ 460 00fc 14010000 		.word	.L11
+ 461 0100 08000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0
+ 462 0104 1C000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const
+ 463 0108 28000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const+12
+ 464 010c 34000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const+24
+ 465 0110 40000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const+36
+ 466 0114 4C000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const+48
+ 467 0118 00000000 		.word	MrPing_receiveMessage
+ 468 011c 50000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2
+ 469 0120 7C000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_const
+ 470 0124 88000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_const+12
+ 471 0128 00000000 		.word	ADimmer_receiveMessage
+ 472 012c CC000000 		.word	.LC13
+ 473              		.cfi_endproc
+ 474              	.LFE33:
+ 476              		.section	.text.MsgDispatcher_HighPrioThread_poll,"ax",%progbits
+ 477              		.align	2
+ 478              		.code	16
+ 479              		.thumb_func
+ 481              	MsgDispatcher_HighPrioThread_poll:
+ 482              	.LFB34:
+  72:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 
+  73:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 
+  74:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** /**
+  75:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  * generated execute function for all cyclic execute calls for the async or datadriven actor instan
+  76:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  */
+  77:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** static void MsgDispatcher_HighPrioThread_poll(void){
+ 483              		.loc 1 77 0
+ 484              		.cfi_startproc
+ 485 0000 80B5     		push	{r7, lr}
+ 486              	.LCFI3:
+ 487              		.cfi_def_cfa_offset 8
+ 488              		.cfi_offset 7, -8
+ 489              		.cfi_offset 14, -4
+ 490 0002 00AF     		add	r7, sp, #0
+ 491              	.LCFI4:
+ 492              		.cfi_def_cfa_register 7
+  78:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_HighPrioThread", "execute")
+  79:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	ATimingService_execute((void*)&_PingPong_LogSys_PingPong_subSysRef_timingService);
+ 493              		.loc 1 79 0
+ 494 0004 024B     		ldr	r3, .L27
+ 495 0006 181C     		mov	r0, r3
+ 496 0008 FFF7FEFF 		bl	ATimingService_execute
+  80:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	ET_MSC_LOGGER_SYNC_EXIT
+  81:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** }
+ 497              		.loc 1 81 0
+ 498 000c BD46     		mov	sp, r7
+ 499              		@ sp needed for prologue
+ 500 000e 80BD     		pop	{r7, pc}
+ 501              	.L28:
+ 502              		.align	2
+ 503              	.L27:
+ 504 0010 64000000 		.word	_PingPong_LogSys_PingPong_subSysRef_timingService
+ 505              		.cfi_endproc
+ 506              	.LFE34:
+ 508              		.section	.rodata
+ 509              		.align	2
+ 510              	.LC25:
+ 511 01d4 4D657373 		.ascii	"MessageService_HighPrioThread_receiveMessage: addre"
+ 511      61676553 
+ 511      65727669 
+ 511      63655F48 
+ 511      69676850 
+ 512 0207 73732025 		.ascii	"ss %d does not exist \000"
+ 512      6420646F 
+ 512      6573206E 
+ 512      6F742065 
+ 512      78697374 
+ 513              		.section	.text.MsgDispatcher_HighPrioThread_receiveMessage,"ax",%progbits
+ 514              		.align	2
+ 515              		.code	16
+ 516              		.thumb_func
+ 518              	MsgDispatcher_HighPrioThread_receiveMessage:
+ 519              	.LFB35:
+  82:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 
+  83:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** /**
+  84:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  * generated dispatch function for all messages for the thread "HighPrioThread"
+  85:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h ****  */
+  86:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** static etBool MsgDispatcher_HighPrioThread_receiveMessage(const etMessage* msg){
+ 520              		.loc 1 86 0
+ 521              		.cfi_startproc
+ 522 0000 80B5     		push	{r7, lr}
+ 523              	.LCFI5:
+ 524              		.cfi_def_cfa_offset 8
+ 525              		.cfi_offset 7, -8
+ 526              		.cfi_offset 14, -4
+ 527 0002 82B0     		sub	sp, sp, #8
+ 528              	.LCFI6:
+ 529              		.cfi_def_cfa_offset 16
+ 530 0004 00AF     		add	r7, sp, #0
+ 531              	.LCFI7:
+ 532              		.cfi_def_cfa_register 7
+ 533 0006 7860     		str	r0, [r7, #4]
+  87:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_HighPrioThread", "receiveMessage")
+  88:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	switch(msg->address){
+ 534              		.loc 1 88 0
+ 535 0008 7B68     		ldr	r3, [r7, #4]
+ 536 000a 9B88     		ldrh	r3, [r3, #4]
+ 537 000c 1BB2     		sxth	r3, r3
+ 538 000e 332B     		cmp	r3, #51
+ 539 0010 5ED8     		bhi	.L30
+ 540 0012 9A00     		lsl	r2, r3, #2
+ 541 0014 364B     		ldr	r3, .L48
+ 542 0016 D318     		add	r3, r2, r3
+ 543 0018 1B68     		ldr	r3, [r3]
+ 544 001a 9F46     		mov	pc, r3
+ 545              		.section	.rodata
+ 546 021d 000000   		.align	2
+ 547              	.L38:
+ 548 0220 D0000000 		.word	.L30
+ 549 0224 1C000000 		.word	.L31
+ 550 0228 D0000000 		.word	.L30
+ 551 022c D0000000 		.word	.L30
+ 552 0230 D0000000 		.word	.L30
+ 553 0234 D0000000 		.word	.L30
+ 554 0238 D0000000 		.word	.L30
+ 555 023c D0000000 		.word	.L30
+ 556 0240 D0000000 		.word	.L30
+ 557 0244 D0000000 		.word	.L30
+ 558 0248 D0000000 		.word	.L30
+ 559 024c D0000000 		.word	.L30
+ 560 0250 D0000000 		.word	.L30
+ 561 0254 D0000000 		.word	.L30
+ 562 0258 D0000000 		.word	.L30
+ 563 025c D0000000 		.word	.L30
+ 564 0260 D0000000 		.word	.L30
+ 565 0264 D0000000 		.word	.L30
+ 566 0268 D0000000 		.word	.L30
+ 567 026c D0000000 		.word	.L30
+ 568 0270 D0000000 		.word	.L30
+ 569 0274 D0000000 		.word	.L30
+ 570 0278 D0000000 		.word	.L30
+ 571 027c D0000000 		.word	.L30
+ 572 0280 D0000000 		.word	.L30
+ 573 0284 D0000000 		.word	.L30
+ 574 0288 D0000000 		.word	.L30
+ 575 028c D0000000 		.word	.L30
+ 576 0290 D0000000 		.word	.L30
+ 577 0294 D0000000 		.word	.L30
+ 578 0298 D0000000 		.word	.L30
+ 579 029c D0000000 		.word	.L30
+ 580 02a0 D0000000 		.word	.L30
+ 581 02a4 D0000000 		.word	.L30
+ 582 02a8 D0000000 		.word	.L30
+ 583 02ac D0000000 		.word	.L30
+ 584 02b0 D0000000 		.word	.L30
+ 585 02b4 D0000000 		.word	.L30
+ 586 02b8 D0000000 		.word	.L30
+ 587 02bc D0000000 		.word	.L30
+ 588 02c0 D0000000 		.word	.L30
+ 589 02c4 3A000000 		.word	.L32
+ 590 02c8 D0000000 		.word	.L30
+ 591 02cc 4C000000 		.word	.L33
+ 592 02d0 5E000000 		.word	.L34
+ 593 02d4 D0000000 		.word	.L30
+ 594 02d8 D0000000 		.word	.L30
+ 595 02dc D0000000 		.word	.L30
+ 596 02e0 D0000000 		.word	.L30
+ 597 02e4 8A000000 		.word	.L35
+ 598 02e8 A0000000 		.word	.L36
+ 599 02ec B8000000 		.word	.L37
+ 600              		.section	.text.MsgDispatcher_HighPrioThread_receiveMessage
+ 601              	.L31:
+  89:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	
+  90:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case MESSAGESERVICE_ADDRESS:
+  91:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			if (msg->evtID == etSystemProtocol_IN_poll) {
+ 602              		.loc 1 91 0
+ 603 001c 7B68     		ldr	r3, [r7, #4]
+ 604 001e DB88     		ldrh	r3, [r3, #6]
+ 605 0020 1BB2     		sxth	r3, r3
+ 606 0022 012B     		cmp	r3, #1
+ 607 0024 02D1     		bne	.L39
+  92:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				MsgDispatcher_HighPrioThread_poll();
+ 608              		.loc 1 92 0
+ 609 0026 FFF7FEFF 		bl	MsgDispatcher_HighPrioThread_poll
+  93:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			}
+  94:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			else
+  95:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			if (msg->evtID == etSystemProtocol_IN_terminate)
+  96:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				return ET_FALSE;
+  97:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 610              		.loc 1 97 0
+ 611 002a 5AE0     		b	.L47
+ 612              	.L39:
+  95:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			if (msg->evtID == etSystemProtocol_IN_terminate)
+ 613              		.loc 1 95 0
+ 614 002c 7B68     		ldr	r3, [r7, #4]
+ 615 002e DB88     		ldrh	r3, [r3, #6]
+ 616 0030 1BB2     		sxth	r3, r3
+ 617 0032 022B     		cmp	r3, #2
+ 618 0034 55D1     		bne	.L47
+  96:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				return ET_FALSE;
+ 619              		.loc 1 96 0
+ 620 0036 0023     		mov	r3, #0
+ 621 0038 55E0     		b	.L41
+ 622              	.L32:
+  98:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+  99:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		/* interface items of /PingPong_LogSys/PingPong_subSysRef/pingPong/ref1 */
+ 100:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 9+BASE_ADDRESS:
+ 101:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			MrPong_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1,(etPort*)&_PingP
+ 623              		.loc 1 101 0
+ 624 003a 2E49     		ldr	r1, .L48+4
+ 625 003c 2E4A     		ldr	r2, .L48+8
+ 626 003e 7B68     		ldr	r3, [r7, #4]
+ 627 0040 081C     		mov	r0, r1
+ 628 0042 111C     		mov	r1, r2
+ 629 0044 1A1C     		mov	r2, r3
+ 630 0046 FFF7FEFF 		bl	MrPong_receiveMessage
+ 102:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 631              		.loc 1 102 0
+ 632 004a 4BE0     		b	.L42
+ 633              	.L33:
+ 103:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+ 104:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		/* interface items of /PingPong_LogSys/PingPong_subSysRef/pingPong/dimmer */
+ 105:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 11+BASE_ADDRESS:
+ 106:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			ADimmer_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer,(etPort*)&_Pi
+ 634              		.loc 1 106 0
+ 635 004c 2B49     		ldr	r1, .L48+12
+ 636 004e 2C4A     		ldr	r2, .L48+16
+ 637 0050 7B68     		ldr	r3, [r7, #4]
+ 638 0052 081C     		mov	r0, r1
+ 639 0054 111C     		mov	r1, r2
+ 640 0056 1A1C     		mov	r2, r3
+ 641 0058 FFF7FEFF 		bl	ADimmer_receiveMessage
+ 107:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 642              		.loc 1 107 0
+ 643 005c 42E0     		b	.L42
+ 644              	.L34:
+ 108:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 12+BASE_ADDRESS:
+ 109:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			switch (msg->evtID){
+ 645              		.loc 1 109 0
+ 646 005e 7B68     		ldr	r3, [r7, #4]
+ 647 0060 DB88     		ldrh	r3, [r3, #6]
+ 648 0062 1BB2     		sxth	r3, r3
+ 649 0064 012B     		cmp	r3, #1
+ 650 0066 06D1     		bne	.L46
+ 651              	.L44:
+ 110:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				case PTimer_OUT_timeout:
+ 111:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					PTimerConjPort_timeout_receiveHandler((etPort *)&_PingPong_LogSys_PingPong_subSysRef_pingPong_
+ 652              		.loc 1 111 0
+ 653 0068 2648     		ldr	r0, .L48+20
+ 654 006a 7968     		ldr	r1, [r7, #4]
+ 655 006c 234A     		ldr	r2, .L48+12
+ 656 006e 264B     		ldr	r3, .L48+24
+ 657 0070 FFF7FEFF 		bl	PTimerConjPort_timeout_receiveHandler
+ 112:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					break;
+ 658              		.loc 1 112 0
+ 659 0074 08E0     		b	.L45
+ 660              	.L46:
+ 113:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 				default: ADimmer_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer,(et
+ 661              		.loc 1 113 0
+ 662 0076 2149     		ldr	r1, .L48+12
+ 663 0078 224A     		ldr	r2, .L48+20
+ 664 007a 7B68     		ldr	r3, [r7, #4]
+ 665 007c 081C     		mov	r0, r1
+ 666 007e 111C     		mov	r1, r2
+ 667 0080 1A1C     		mov	r2, r3
+ 668 0082 FFF7FEFF 		bl	ADimmer_receiveMessage
+ 114:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 					break;
+ 669              		.loc 1 114 0
+ 670 0086 C046     		mov	r8, r8
+ 671              	.L45:
+ 115:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			}
+ 116:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 672              		.loc 1 116 0
+ 673 0088 2CE0     		b	.L42
+ 674              	.L35:
+ 117:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+ 118:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		/* interface items of /PingPong_LogSys/PingPong_subSysRef/timingService */
+ 119:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 17+BASE_ADDRESS:
+ 120:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			ATimingService_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_timingService,&_PingPo
+ 675              		.loc 1 120 0
+ 676 008a 204B     		ldr	r3, .L48+28
+ 677 008c 5B68     		ldr	r3, [r3, #4]
+ 678 008e 1A1C     		mov	r2, r3
+ 679 0090 1F49     		ldr	r1, .L48+32
+ 680 0092 7B68     		ldr	r3, [r7, #4]
+ 681 0094 081C     		mov	r0, r1
+ 682 0096 111C     		mov	r1, r2
+ 683 0098 1A1C     		mov	r2, r3
+ 684 009a FFF7FEFF 		bl	ATimingService_receiveMessage
+ 121:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		break;
+ 685              		.loc 1 121 0
+ 686 009e 21E0     		b	.L42
+ 687              	.L36:
+ 122:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 18+BASE_ADDRESS:
+ 123:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			ATimingService_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_timingService,&_PingPo
+ 688              		.loc 1 123 0
+ 689 00a0 1A4B     		ldr	r3, .L48+28
+ 690 00a2 5B68     		ldr	r3, [r3, #4]
+ 691 00a4 1033     		add	r3, r3, #16
+ 692 00a6 1A1C     		mov	r2, r3
+ 693 00a8 1949     		ldr	r1, .L48+32
+ 694 00aa 7B68     		ldr	r3, [r7, #4]
+ 695 00ac 081C     		mov	r0, r1
+ 696 00ae 111C     		mov	r1, r2
+ 697 00b0 1A1C     		mov	r2, r3
+ 698 00b2 FFF7FEFF 		bl	ATimingService_receiveMessage
+ 124:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		break;
+ 699              		.loc 1 124 0
+ 700 00b6 15E0     		b	.L42
+ 701              	.L37:
+ 125:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		case 19+BASE_ADDRESS:
+ 126:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			ATimingService_receiveMessage((void*)&_PingPong_LogSys_PingPong_subSysRef_timingService,&_PingPo
+ 702              		.loc 1 126 0
+ 703 00b8 144B     		ldr	r3, .L48+28
+ 704 00ba 5B68     		ldr	r3, [r3, #4]
+ 705 00bc 2033     		add	r3, r3, #32
+ 706 00be 1A1C     		mov	r2, r3
+ 707 00c0 1349     		ldr	r1, .L48+32
+ 708 00c2 7B68     		ldr	r3, [r7, #4]
+ 709 00c4 081C     		mov	r0, r1
+ 710 00c6 111C     		mov	r1, r2
+ 711 00c8 1A1C     		mov	r2, r3
+ 712 00ca FFF7FEFF 		bl	ATimingService_receiveMessage
+ 127:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		break;
+ 713              		.loc 1 127 0
+ 714 00ce 09E0     		b	.L42
+ 715              	.L30:
+ 128:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		
+ 129:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 		default:
+ 130:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			etLogger_logErrorF("MessageService_HighPrioThread_receiveMessage: address %d does not exist ", m
+ 716              		.loc 1 130 0
+ 717 00d0 7B68     		ldr	r3, [r7, #4]
+ 718 00d2 9B88     		ldrh	r3, [r3, #4]
+ 719 00d4 1BB2     		sxth	r3, r3
+ 720 00d6 0F4A     		ldr	r2, .L48+36
+ 721 00d8 101C     		mov	r0, r2
+ 722 00da 191C     		mov	r1, r3
+ 723 00dc FFF7FEFF 		bl	etLogger_logErrorF
+ 131:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 724              		.loc 1 131 0
+ 725 00e0 00E0     		b	.L42
+ 726              	.L47:
+  97:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 			break;
+ 727              		.loc 1 97 0
+ 728 00e2 C046     		mov	r8, r8
+ 729              	.L42:
+ 132:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	}
+ 133:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 134:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** 	return ET_TRUE;
+ 730              		.loc 1 134 0
+ 731 00e4 0123     		mov	r3, #1
+ 732              	.L41:
+ 135:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef_Disp.h **** }
+ 733              		.loc 1 135 0
+ 734 00e6 181C     		mov	r0, r3
+ 735 00e8 BD46     		mov	sp, r7
+ 736 00ea 02B0     		add	sp, sp, #8
+ 737              		@ sp needed for prologue
+ 738 00ec 80BD     		pop	{r7, pc}
+ 739              	.L49:
+ 740 00ee C046     		.align	2
+ 741              	.L48:
+ 742 00f0 20020000 		.word	.L38
+ 743 00f4 30000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1
+ 744 00f8 58000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1_const
+ 745 00fc 3C000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer
+ 746 0100 64000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_const
+ 747 0104 70000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_const+12
+ 748 0108 00000000 		.word	ADimmer_receiveMessage
+ 749 010c C4000000 		.word	_PingPong_LogSys_PingPong_subSysRef_timingService_const
+ 750 0110 64000000 		.word	_PingPong_LogSys_PingPong_subSysRef_timingService
+ 751 0114 D4010000 		.word	.LC25
+ 752              		.cfi_endproc
+ 753              	.LFE35:
+ 755              		.section	.text.XMC2Go_PingPong_subSysRef_initMessageServices,"ax",%progbits
+ 756              		.align	2
+ 757              		.code	16
+ 758              		.thumb_func
+ 760              	XMC2Go_PingPong_subSysRef_initMessageServices:
+ 761              	.LFB36:
+ 762              		.file 2 "C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-g
+   1:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** /**
+   2:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c ****  * @author generated by eTrice
+   3:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c ****  *
+   4:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c ****  * Source File of Node XMC2Go with SubSystem PingPong_subSysRef
+   5:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c ****  * 
+   6:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c ****  */
+   7:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+   8:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include <stdio.h>
+   9:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include <string.h>
+  10:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  11:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  12:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "XMC2Go_PingPong_subSysRef.h"
+  13:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  14:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "debugging/etLogger.h"
+  15:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "debugging/etMSCLogger.h"
+  16:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "debugging/etDataLogger.h"
+  17:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "messaging/etSystemProtocol.h"
+  18:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "osal/etTimer.h"
+  19:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "osal/etSema.h"
+  20:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "runtime/etRuntime.h"
+  21:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "etRuntimeConfig.h"
+  22:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  23:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  24:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** /* data for Node XMC2Go with SubSystem PingPong_subSysRef */
+  25:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** typedef struct XMC2Go_PingPong_subSysRef {
+  26:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	char *name;
+  27:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	volatile int shutdownRequest;
+  28:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** } XMC2Go_PingPong_subSysRef;
+  29:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  30:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static XMC2Go_PingPong_subSysRef XMC2Go_PingPong_subSysRefInst = {"XMC2Go_PingPong_subSysRef", 0};
+  31:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  32:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_initActorInstances(void);
+  33:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_constructActorInstances(void);
+  34:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  35:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** /* include instances for all classes */
+  36:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "XMC2Go_PingPong_subSysRef_Inst.h"
+  37:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #include "XMC2Go_PingPong_subSysRef_Disp.h"
+  38:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  39:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_initMessageServices(void) {
+ 763              		.loc 2 39 0
+ 764              		.cfi_startproc
+ 765 0000 B0B5     		push	{r4, r5, r7, lr}
+ 766              	.LCFI8:
+ 767              		.cfi_def_cfa_offset 16
+ 768              		.cfi_offset 4, -16
+ 769              		.cfi_offset 5, -12
+ 770              		.cfi_offset 7, -8
+ 771              		.cfi_offset 14, -4
+ 772 0002 88B0     		sub	sp, sp, #32
+ 773              	.LCFI9:
+ 774              		.cfi_def_cfa_offset 48
+ 775 0004 06AF     		add	r7, sp, #24
+ 776              	.LCFI10:
+ 777              		.cfi_def_cfa 7, 24
+ 778              	.LBB2:
+  40:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "initMessageServices")
+  41:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	{
+  42:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		etTime interval;
+  43:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		
+  44:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		/* initialization of all message services */
+  45:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		interval.sec = 0;
+ 779              		.loc 2 45 0
+ 780 0006 3B1C     		mov	r3, r7
+ 781 0008 0022     		mov	r2, #0
+ 782 000a 1A60     		str	r2, [r3]
+  46:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		interval.nSec = 50000000;
+ 783              		.loc 2 46 0
+ 784 000c 3B1C     		mov	r3, r7
+ 785 000e 194A     		ldr	r2, .L51
+ 786 0010 5A60     		str	r2, [r3, #4]
+  47:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		etMessageService_init(
+ 787              		.loc 2 47 0
+ 788 0012 1948     		ldr	r0, .L51+4
+ 789 0014 1949     		ldr	r1, .L51+8
+ 790 0016 9623     		mov	r3, #150
+ 791 0018 0093     		str	r3, [sp]
+ 792 001a 0123     		mov	r3, #1
+ 793 001c 0193     		str	r3, [sp, #4]
+ 794 001e 3A1C     		mov	r2, r7
+ 795 0020 0823     		mov	r3, #8
+ 796 0022 6C46     		mov	r4, sp
+ 797 0024 E318     		add	r3, r4, r3
+ 798 0026 30CA     		ldmia	r2!, {r4, r5}
+ 799 0028 30C3     		stmia	r3!, {r4, r5}
+ 800 002a 154B     		ldr	r3, .L51+12
+ 801 002c 0493     		str	r3, [sp, #16]
+ 802 002e 0223     		mov	r3, #2
+ 803 0030 0593     		str	r3, [sp, #20]
+ 804 0032 0A22     		mov	r2, #10
+ 805 0034 2023     		mov	r3, #32
+ 806 0036 FFF7FEFF 		bl	etMessageService_init
+  48:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			&msgService_LowPrioThread,
+  49:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			msgBuffer_LowPrioThread,
+  50:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			LOWPRIOTHREAD_POOL_SIZE,
+  51:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			LOWPRIOTHREAD_BLOCK_SIZE,
+  52:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			150,
+  53:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			1,
+  54:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			interval,
+  55:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			MsgDispatcher_LowPrioThread_receiveMessage,
+  56:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			EXECMODE_MIXED);
+  57:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			
+  58:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		interval.sec = 0;
+ 807              		.loc 2 58 0
+ 808 003a 3B1C     		mov	r3, r7
+ 809 003c 0022     		mov	r2, #0
+ 810 003e 1A60     		str	r2, [r3]
+  59:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		interval.nSec = 5000000;
+ 811              		.loc 2 59 0
+ 812 0040 3B1C     		mov	r3, r7
+ 813 0042 104A     		ldr	r2, .L51+16
+ 814 0044 5A60     		str	r2, [r3, #4]
+  60:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		etMessageService_init(
+ 815              		.loc 2 60 0
+ 816 0046 1048     		ldr	r0, .L51+20
+ 817 0048 1049     		ldr	r1, .L51+24
+ 818 004a 9623     		mov	r3, #150
+ 819 004c 0093     		str	r3, [sp]
+ 820 004e 0223     		mov	r3, #2
+ 821 0050 0193     		str	r3, [sp, #4]
+ 822 0052 3A1C     		mov	r2, r7
+ 823 0054 0823     		mov	r3, #8
+ 824 0056 6D46     		mov	r5, sp
+ 825 0058 EB18     		add	r3, r5, r3
+ 826 005a 30CA     		ldmia	r2!, {r4, r5}
+ 827 005c 30C3     		stmia	r3!, {r4, r5}
+ 828 005e 0C4B     		ldr	r3, .L51+28
+ 829 0060 0493     		str	r3, [sp, #16]
+ 830 0062 0223     		mov	r3, #2
+ 831 0064 0593     		str	r3, [sp, #20]
+ 832 0066 0A22     		mov	r2, #10
+ 833 0068 2023     		mov	r3, #32
+ 834 006a FFF7FEFF 		bl	etMessageService_init
+ 835              	.LBE2:
+  61:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			&msgService_HighPrioThread,
+  62:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			msgBuffer_HighPrioThread,
+  63:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			HIGHPRIOTHREAD_POOL_SIZE,
+  64:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			HIGHPRIOTHREAD_BLOCK_SIZE,
+  65:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			150,
+  66:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			2,
+  67:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			interval,
+  68:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			MsgDispatcher_HighPrioThread_receiveMessage,
+  69:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			EXECMODE_MIXED);
+  70:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			
+  71:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	}
+  72:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+  73:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  74:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 836              		.loc 2 74 0
+ 837 006e BD46     		mov	sp, r7
+ 838 0070 02B0     		add	sp, sp, #8
+ 839              		@ sp needed for prologue
+ 840 0072 B0BD     		pop	{r4, r5, r7, pc}
+ 841              	.L52:
+ 842              		.align	2
+ 843              	.L51:
+ 844 0074 80F0FA02 		.word	50000000
+ 845 0078 40010000 		.word	msgService_LowPrioThread
+ 846 007c 00000000 		.word	msgBuffer_LowPrioThread
+ 847 0080 00000000 		.word	MsgDispatcher_LowPrioThread_receiveMessage
+ 848 0084 404B4C00 		.word	5000000
+ 849 0088 EC020000 		.word	msgService_HighPrioThread
+ 850 008c AC010000 		.word	msgBuffer_HighPrioThread
+ 851 0090 00000000 		.word	MsgDispatcher_HighPrioThread_receiveMessage
+ 852              		.cfi_endproc
+ 853              	.LFE36:
+ 855              		.section	.text.XMC2Go_PingPong_subSysRef_startMessageServices,"ax",%progbits
+ 856              		.align	2
+ 857              		.code	16
+ 858              		.thumb_func
+ 860              	XMC2Go_PingPong_subSysRef_startMessageServices:
+ 861              	.LFB37:
+  75:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  76:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_startMessageServices(void) {
+ 862              		.loc 2 76 0
+ 863              		.cfi_startproc
+ 864 0000 80B5     		push	{r7, lr}
+ 865              	.LCFI11:
+ 866              		.cfi_def_cfa_offset 8
+ 867              		.cfi_offset 7, -8
+ 868              		.cfi_offset 14, -4
+ 869 0002 00AF     		add	r7, sp, #0
+ 870              	.LCFI12:
+ 871              		.cfi_def_cfa_register 7
+  77:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "startMessageServices")
+  78:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+  79:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etMessageService_start(&msgService_HighPrioThread);
+ 872              		.loc 2 79 0
+ 873 0004 044B     		ldr	r3, .L54
+ 874 0006 181C     		mov	r0, r3
+ 875 0008 FFF7FEFF 		bl	etMessageService_start
+  80:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etMessageService_start(&msgService_LowPrioThread);
+ 876              		.loc 2 80 0
+ 877 000c 034B     		ldr	r3, .L54+4
+ 878 000e 181C     		mov	r0, r3
+ 879 0010 FFF7FEFF 		bl	etMessageService_start
+  81:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+  82:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  83:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 880              		.loc 2 83 0
+ 881 0014 BD46     		mov	sp, r7
+ 882              		@ sp needed for prologue
+ 883 0016 80BD     		pop	{r7, pc}
+ 884              	.L55:
+ 885              		.align	2
+ 886              	.L54:
+ 887 0018 EC020000 		.word	msgService_HighPrioThread
+ 888 001c 40010000 		.word	msgService_LowPrioThread
+ 889              		.cfi_endproc
+ 890              	.LFE37:
+ 892              		.section	.text.XMC2Go_PingPong_subSysRef_stopMessageServices,"ax",%progbits
+ 893              		.align	2
+ 894              		.code	16
+ 895              		.thumb_func
+ 897              	XMC2Go_PingPong_subSysRef_stopMessageServices:
+ 898              	.LFB38:
+  84:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  85:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_stopMessageServices(void) {
+ 899              		.loc 2 85 0
+ 900              		.cfi_startproc
+ 901 0000 80B5     		push	{r7, lr}
+ 902              	.LCFI13:
+ 903              		.cfi_def_cfa_offset 8
+ 904              		.cfi_offset 7, -8
+ 905              		.cfi_offset 14, -4
+ 906 0002 00AF     		add	r7, sp, #0
+ 907              	.LCFI14:
+ 908              		.cfi_def_cfa_register 7
+  86:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "stopMessageServices")
+  87:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+  88:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etMessageService_stop(&msgService_LowPrioThread);
+ 909              		.loc 2 88 0
+ 910 0004 044B     		ldr	r3, .L57
+ 911 0006 181C     		mov	r0, r3
+ 912 0008 FFF7FEFF 		bl	etMessageService_stop
+  89:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etMessageService_stop(&msgService_HighPrioThread);
+ 913              		.loc 2 89 0
+ 914 000c 034B     		ldr	r3, .L57+4
+ 915 000e 181C     		mov	r0, r3
+ 916 0010 FFF7FEFF 		bl	etMessageService_stop
+  90:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+  91:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  92:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 917              		.loc 2 92 0
+ 918 0014 BD46     		mov	sp, r7
+ 919              		@ sp needed for prologue
+ 920 0016 80BD     		pop	{r7, pc}
+ 921              	.L58:
+ 922              		.align	2
+ 923              	.L57:
+ 924 0018 40010000 		.word	msgService_LowPrioThread
+ 925 001c EC020000 		.word	msgService_HighPrioThread
+ 926              		.cfi_endproc
+ 927              	.LFE38:
+ 929              		.section	.text.XMC2Go_PingPong_subSysRef_destroyMessageServices,"ax",%progbits
+ 930              		.align	2
+ 931              		.code	16
+ 932              		.thumb_func
+ 934              	XMC2Go_PingPong_subSysRef_destroyMessageServices:
+ 935              	.LFB39:
+  93:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+  94:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_destroyMessageServices(void) {
+ 936              		.loc 2 94 0
+ 937              		.cfi_startproc
+ 938 0000 80B5     		push	{r7, lr}
+ 939              	.LCFI15:
+ 940              		.cfi_def_cfa_offset 8
+ 941              		.cfi_offset 7, -8
+ 942              		.cfi_offset 14, -4
+ 943 0002 00AF     		add	r7, sp, #0
+ 944              	.LCFI16:
+ 945              		.cfi_def_cfa_register 7
+  95:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "destroyMessageServices")
+  96:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+  97:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etMessageService_destroy(&msgService_LowPrioThread);
+ 946              		.loc 2 97 0
+ 947 0004 044B     		ldr	r3, .L60
+ 948 0006 181C     		mov	r0, r3
+ 949 0008 FFF7FEFF 		bl	etMessageService_destroy
+  98:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etMessageService_destroy(&msgService_HighPrioThread);
+ 950              		.loc 2 98 0
+ 951 000c 034B     		ldr	r3, .L60+4
+ 952 000e 181C     		mov	r0, r3
+ 953 0010 FFF7FEFF 		bl	etMessageService_destroy
+  99:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 100:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 101:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 954              		.loc 2 101 0
+ 955 0014 BD46     		mov	sp, r7
+ 956              		@ sp needed for prologue
+ 957 0016 80BD     		pop	{r7, pc}
+ 958              	.L61:
+ 959              		.align	2
+ 960              	.L60:
+ 961 0018 40010000 		.word	msgService_LowPrioThread
+ 962 001c EC020000 		.word	msgService_HighPrioThread
+ 963              		.cfi_endproc
+ 964              	.LFE39:
+ 966              		.section	.rodata
+ 967              		.align	2
+ 968              	.LC40:
+ 969 02f0 25735F69 		.ascii	"%s_init\000"
+ 969      6E697400 
+ 970              		.section	.text.XMC2Go_PingPong_subSysRef_init,"ax",%progbits
+ 971              		.align	2
+ 972              		.global	XMC2Go_PingPong_subSysRef_init
+ 973              		.code	16
+ 974              		.thumb_func
+ 976              	XMC2Go_PingPong_subSysRef_init:
+ 977              	.LFB40:
+ 102:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 103:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** void XMC2Go_PingPong_subSysRef_init(void) {
+ 978              		.loc 2 103 0
+ 979              		.cfi_startproc
+ 980 0000 80B5     		push	{r7, lr}
+ 981              	.LCFI17:
+ 982              		.cfi_def_cfa_offset 8
+ 983              		.cfi_offset 7, -8
+ 984              		.cfi_offset 14, -4
+ 985 0002 00AF     		add	r7, sp, #0
+ 986              	.LCFI18:
+ 987              		.cfi_def_cfa_register 7
+ 104:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "init")
+ 105:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etLogger_logInfoF("%s_init", XMC2Go_PingPong_subSysRefInst.name);
+ 988              		.loc 2 105 0
+ 989 0004 074B     		ldr	r3, .L63
+ 990 0006 1B68     		ldr	r3, [r3]
+ 991 0008 074A     		ldr	r2, .L63+4
+ 992 000a 101C     		mov	r0, r2
+ 993 000c 191C     		mov	r1, r3
+ 994 000e FFF7FEFF 		bl	etLogger_logInfoF
+ 106:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 107:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	/* construct all actors */
+ 108:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	XMC2Go_PingPong_subSysRef_constructActorInstances();
+ 995              		.loc 2 108 0
+ 996 0012 FFF7FEFF 		bl	XMC2Go_PingPong_subSysRef_constructActorInstances
+ 109:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 110:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	/* initialization of all message services */
+ 111:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	XMC2Go_PingPong_subSysRef_initMessageServices();
+ 997              		.loc 2 111 0
+ 998 0016 FFF7FEFF 		bl	XMC2Go_PingPong_subSysRef_initMessageServices
+ 112:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 113:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	/* init all actors */
+ 114:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	XMC2Go_PingPong_subSysRef_initActorInstances();
+ 999              		.loc 2 114 0
+ 1000 001a FFF7FEFF 		bl	XMC2Go_PingPong_subSysRef_initActorInstances
+ 115:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 116:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 117:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 118:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1001              		.loc 2 118 0
+ 1002 001e BD46     		mov	sp, r7
+ 1003              		@ sp needed for prologue
+ 1004 0020 80BD     		pop	{r7, pc}
+ 1005              	.L64:
+ 1006 0022 C046     		.align	2
+ 1007              	.L63:
+ 1008 0024 00000000 		.word	XMC2Go_PingPong_subSysRefInst
+ 1009 0028 F0020000 		.word	.LC40
+ 1010              		.cfi_endproc
+ 1011              	.LFE40:
+ 1013              		.section	.rodata
+ 1014              		.align	2
+ 1015              	.LC43:
+ 1016 02f8 25735F73 		.ascii	"%s_start\000"
+ 1016      74617274 
+ 1016      00
+ 1017              		.section	.text.XMC2Go_PingPong_subSysRef_start,"ax",%progbits
+ 1018              		.align	2
+ 1019              		.global	XMC2Go_PingPong_subSysRef_start
+ 1020              		.code	16
+ 1021              		.thumb_func
+ 1023              	XMC2Go_PingPong_subSysRef_start:
+ 1024              	.LFB41:
+ 119:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 120:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** void XMC2Go_PingPong_subSysRef_start(void) {
+ 1025              		.loc 2 120 0
+ 1026              		.cfi_startproc
+ 1027 0000 80B5     		push	{r7, lr}
+ 1028              	.LCFI19:
+ 1029              		.cfi_def_cfa_offset 8
+ 1030              		.cfi_offset 7, -8
+ 1031              		.cfi_offset 14, -4
+ 1032 0002 00AF     		add	r7, sp, #0
+ 1033              	.LCFI20:
+ 1034              		.cfi_def_cfa_register 7
+ 121:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "start")
+ 122:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etLogger_logInfoF("%s_start", XMC2Go_PingPong_subSysRefInst.name);
+ 1035              		.loc 2 122 0
+ 1036 0004 054B     		ldr	r3, .L66
+ 1037 0006 1B68     		ldr	r3, [r3]
+ 1038 0008 054A     		ldr	r2, .L66+4
+ 1039 000a 101C     		mov	r0, r2
+ 1040 000c 191C     		mov	r1, r3
+ 1041 000e FFF7FEFF 		bl	etLogger_logInfoF
+ 123:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	XMC2Go_PingPong_subSysRef_startMessageServices();
+ 1042              		.loc 2 123 0
+ 1043 0012 FFF7FEFF 		bl	XMC2Go_PingPong_subSysRef_startMessageServices
+ 124:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 125:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1044              		.loc 2 125 0
+ 1045 0016 BD46     		mov	sp, r7
+ 1046              		@ sp needed for prologue
+ 1047 0018 80BD     		pop	{r7, pc}
+ 1048              	.L67:
+ 1049 001a C046     		.align	2
+ 1050              	.L66:
+ 1051 001c 00000000 		.word	XMC2Go_PingPong_subSysRefInst
+ 1052 0020 F8020000 		.word	.LC43
+ 1053              		.cfi_endproc
+ 1054              	.LFE41:
+ 1056              		.section	.text.XMC2Go_PingPong_subSysRef_run,"ax",%progbits
+ 1057              		.align	2
+ 1058              		.global	XMC2Go_PingPong_subSysRef_run
+ 1059              		.code	16
+ 1060              		.thumb_func
+ 1062              	XMC2Go_PingPong_subSysRef_run:
+ 1063              	.LFB42:
+ 126:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 127:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** void XMC2Go_PingPong_subSysRef_run(etBool runAsTest) {
+ 1064              		.loc 2 127 0
+ 1065              		.cfi_startproc
+ 1066 0000 80B5     		push	{r7, lr}
+ 1067              	.LCFI21:
+ 1068              		.cfi_def_cfa_offset 8
+ 1069              		.cfi_offset 7, -8
+ 1070              		.cfi_offset 14, -4
+ 1071 0002 82B0     		sub	sp, sp, #8
+ 1072              	.LCFI22:
+ 1073              		.cfi_def_cfa_offset 16
+ 1074 0004 00AF     		add	r7, sp, #0
+ 1075              	.LCFI23:
+ 1076              		.cfi_def_cfa_register 7
+ 1077 0006 021C     		mov	r2, r0
+ 1078 0008 FB1D     		add	r3, r7, #7
+ 1079 000a 1A70     		strb	r2, [r3]
+ 128:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #ifdef ET_RUNNER_ACTIVATE 
+ 129:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "run")
+ 130:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 131:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	if (runAsTest) {
+ 132:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		etSema_waitForWakeup(etRuntime_getTerminateSemaphore());
+ 133:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	}
+ 134:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	else {
+ 135:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		printf("type quit to exit\n");
+ 136:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		fflush(stdout);
+ 137:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		while (ET_TRUE) {
+ 138:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			char line[64];
+ 139:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 140:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			if (fgets(line, 64, stdin) != NULL) {
+ 141:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 				if (strncmp(line, "quit", 4)==0)
+ 142:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 					break;
+ 143:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 			}
+ 144:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 		}
+ 145:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	}
+ 146:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 147:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 148:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** #endif	
+ 149:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1080              		.loc 2 149 0
+ 1081 000c BD46     		mov	sp, r7
+ 1082 000e 02B0     		add	sp, sp, #8
+ 1083              		@ sp needed for prologue
+ 1084 0010 80BD     		pop	{r7, pc}
+ 1085              		.cfi_endproc
+ 1086              	.LFE42:
+ 1088 0012 C046     		.section	.rodata
+ 1089 0301 000000   		.align	2
+ 1090              	.LC46:
+ 1091 0304 25735F73 		.ascii	"%s_stop\000"
+ 1091      746F7000 
+ 1092              		.section	.text.XMC2Go_PingPong_subSysRef_stop,"ax",%progbits
+ 1093              		.align	2
+ 1094              		.global	XMC2Go_PingPong_subSysRef_stop
+ 1095              		.code	16
+ 1096              		.thumb_func
+ 1098              	XMC2Go_PingPong_subSysRef_stop:
+ 1099              	.LFB43:
+ 150:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 151:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** void XMC2Go_PingPong_subSysRef_stop(void){
+ 1100              		.loc 2 151 0
+ 1101              		.cfi_startproc
+ 1102 0000 80B5     		push	{r7, lr}
+ 1103              	.LCFI24:
+ 1104              		.cfi_def_cfa_offset 8
+ 1105              		.cfi_offset 7, -8
+ 1106              		.cfi_offset 14, -4
+ 1107 0002 00AF     		add	r7, sp, #0
+ 1108              	.LCFI25:
+ 1109              		.cfi_def_cfa_register 7
+ 152:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "stop")
+ 153:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etLogger_logInfoF("%s_stop", XMC2Go_PingPong_subSysRefInst.name);
+ 1110              		.loc 2 153 0
+ 1111 0004 054B     		ldr	r3, .L70
+ 1112 0006 1B68     		ldr	r3, [r3]
+ 1113 0008 054A     		ldr	r2, .L70+4
+ 1114 000a 101C     		mov	r0, r2
+ 1115 000c 191C     		mov	r1, r3
+ 1116 000e FFF7FEFF 		bl	etLogger_logInfoF
+ 154:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 155:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	XMC2Go_PingPong_subSysRef_stopMessageServices();
+ 1117              		.loc 2 155 0
+ 1118 0012 FFF7FEFF 		bl	XMC2Go_PingPong_subSysRef_stopMessageServices
+ 156:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 157:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 158:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1119              		.loc 2 158 0
+ 1120 0016 BD46     		mov	sp, r7
+ 1121              		@ sp needed for prologue
+ 1122 0018 80BD     		pop	{r7, pc}
+ 1123              	.L71:
+ 1124 001a C046     		.align	2
+ 1125              	.L70:
+ 1126 001c 00000000 		.word	XMC2Go_PingPong_subSysRefInst
+ 1127 0020 04030000 		.word	.LC46
+ 1128              		.cfi_endproc
+ 1129              	.LFE43:
+ 1131              		.section	.rodata
+ 1132              		.align	2
+ 1133              	.LC49:
+ 1134 030c 25735F64 		.ascii	"%s_destroy\000"
+ 1134      65737472 
+ 1134      6F7900
+ 1135              		.section	.text.XMC2Go_PingPong_subSysRef_destroy,"ax",%progbits
+ 1136              		.align	2
+ 1137              		.global	XMC2Go_PingPong_subSysRef_destroy
+ 1138              		.code	16
+ 1139              		.thumb_func
+ 1141              	XMC2Go_PingPong_subSysRef_destroy:
+ 1142              	.LFB44:
+ 159:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 160:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** void XMC2Go_PingPong_subSysRef_destroy(void){
+ 1143              		.loc 2 160 0
+ 1144              		.cfi_startproc
+ 1145 0000 80B5     		push	{r7, lr}
+ 1146              	.LCFI26:
+ 1147              		.cfi_def_cfa_offset 8
+ 1148              		.cfi_offset 7, -8
+ 1149              		.cfi_offset 14, -4
+ 1150 0002 00AF     		add	r7, sp, #0
+ 1151              	.LCFI27:
+ 1152              		.cfi_def_cfa_register 7
+ 161:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "destroy")
+ 162:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etLogger_logInfoF("%s_destroy", XMC2Go_PingPong_subSysRefInst.name);
+ 1153              		.loc 2 162 0
+ 1154 0004 054B     		ldr	r3, .L73
+ 1155 0006 1B68     		ldr	r3, [r3]
+ 1156 0008 054A     		ldr	r2, .L73+4
+ 1157 000a 101C     		mov	r0, r2
+ 1158 000c 191C     		mov	r1, r3
+ 1159 000e FFF7FEFF 		bl	etLogger_logInfoF
+ 163:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 164:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	XMC2Go_PingPong_subSysRef_destroyMessageServices();
+ 1160              		.loc 2 164 0
+ 1161 0012 FFF7FEFF 		bl	XMC2Go_PingPong_subSysRef_destroyMessageServices
+ 165:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 166:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 167:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1162              		.loc 2 167 0
+ 1163 0016 BD46     		mov	sp, r7
+ 1164              		@ sp needed for prologue
+ 1165 0018 80BD     		pop	{r7, pc}
+ 1166              	.L74:
+ 1167 001a C046     		.align	2
+ 1168              	.L73:
+ 1169 001c 00000000 		.word	XMC2Go_PingPong_subSysRefInst
+ 1170 0020 0C030000 		.word	.LC49
+ 1171              		.cfi_endproc
+ 1172              	.LFE44:
+ 1174              		.section	.rodata
+ 1175 0317 00       		.align	2
+ 1176              	.LC52:
+ 1177 0318 25735F73 		.ascii	"%s_shutdown\000"
+ 1177      68757464 
+ 1177      6F776E00 
+ 1178              		.section	.text.XMC2Go_PingPong_subSysRef_shutdown,"ax",%progbits
+ 1179              		.align	2
+ 1180              		.global	XMC2Go_PingPong_subSysRef_shutdown
+ 1181              		.code	16
+ 1182              		.thumb_func
+ 1184              	XMC2Go_PingPong_subSysRef_shutdown:
+ 1185              	.LFB45:
+ 168:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 169:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** void XMC2Go_PingPong_subSysRef_shutdown(void){
+ 1186              		.loc 2 169 0
+ 1187              		.cfi_startproc
+ 1188 0000 80B5     		push	{r7, lr}
+ 1189              	.LCFI28:
+ 1190              		.cfi_def_cfa_offset 8
+ 1191              		.cfi_offset 7, -8
+ 1192              		.cfi_offset 14, -4
+ 1193 0002 00AF     		add	r7, sp, #0
+ 1194              	.LCFI29:
+ 1195              		.cfi_def_cfa_register 7
+ 170:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "shutdown")
+ 171:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	etLogger_logInfoF("%s_shutdown", XMC2Go_PingPong_subSysRefInst.name);
+ 1196              		.loc 2 171 0
+ 1197 0004 054B     		ldr	r3, .L76
+ 1198 0006 1B68     		ldr	r3, [r3]
+ 1199 0008 054A     		ldr	r2, .L76+4
+ 1200 000a 101C     		mov	r0, r2
+ 1201 000c 191C     		mov	r1, r3
+ 1202 000e FFF7FEFF 		bl	etLogger_logInfoF
+ 172:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 173:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	XMC2Go_PingPong_subSysRefInst.shutdownRequest = 1;
+ 1203              		.loc 2 173 0
+ 1204 0012 024B     		ldr	r3, .L76
+ 1205 0014 0122     		mov	r2, #1
+ 1206 0016 5A60     		str	r2, [r3, #4]
+ 174:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 175:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 176:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1207              		.loc 2 176 0
+ 1208 0018 BD46     		mov	sp, r7
+ 1209              		@ sp needed for prologue
+ 1210 001a 80BD     		pop	{r7, pc}
+ 1211              	.L77:
+ 1212              		.align	2
+ 1213              	.L76:
+ 1214 001c 00000000 		.word	XMC2Go_PingPong_subSysRefInst
+ 1215 0020 18030000 		.word	.LC52
+ 1216              		.cfi_endproc
+ 1217              	.LFE45:
+ 1219              		.section	.text.XMC2Go_PingPong_subSysRef_constructActorInstances,"ax",%progbits
+ 1220              		.align	2
+ 1221              		.code	16
+ 1222              		.thumb_func
+ 1224              	XMC2Go_PingPong_subSysRef_constructActorInstances:
+ 1225              	.LFB46:
+ 177:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 178:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 179:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_constructActorInstances(void){
+ 1226              		.loc 2 179 0
+ 1227              		.cfi_startproc
+ 1228 0000 80B5     		push	{r7, lr}
+ 1229              	.LCFI30:
+ 1230              		.cfi_def_cfa_offset 8
+ 1231              		.cfi_offset 7, -8
+ 1232              		.cfi_offset 14, -4
+ 1233 0002 00AF     		add	r7, sp, #0
+ 1234              	.LCFI31:
+ 1235              		.cfi_def_cfa_register 7
+ 180:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "constructActorInstances")
+ 181:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 182:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 183:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 184:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1236              		.loc 2 184 0
+ 1237 0004 BD46     		mov	sp, r7
+ 1238              		@ sp needed for prologue
+ 1239 0006 80BD     		pop	{r7, pc}
+ 1240              		.cfi_endproc
+ 1241              	.LFE46:
+ 1243              		.section	.text.XMC2Go_PingPong_subSysRef_initActorInstances,"ax",%progbits
+ 1244              		.align	2
+ 1245              		.code	16
+ 1246              		.thumb_func
+ 1248              	XMC2Go_PingPong_subSysRef_initActorInstances:
+ 1249              	.LFB47:
+ 185:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 
+ 186:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** static void XMC2Go_PingPong_subSysRef_initActorInstances(void){
+ 1250              		.loc 2 186 0
+ 1251              		.cfi_startproc
+ 1252 0000 80B5     		push	{r7, lr}
+ 1253              	.LCFI32:
+ 1254              		.cfi_def_cfa_offset 8
+ 1255              		.cfi_offset 7, -8
+ 1256              		.cfi_offset 14, -4
+ 1257 0002 00AF     		add	r7, sp, #0
+ 1258              	.LCFI33:
+ 1259              		.cfi_def_cfa_register 7
+ 187:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("XMC2Go_PingPong_subSysRef", "initActorInstances")
+ 188:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 189:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	PingPongTop_init(&_PingPong_LogSys_PingPong_subSysRef_pingPong);
+ 1260              		.loc 2 189 0
+ 1261 0004 0C4B     		ldr	r3, .L80
+ 1262 0006 181C     		mov	r0, r3
+ 1263 0008 FFF7FEFF 		bl	PingPongTop_init
+ 190:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	MrPing_init(&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0);
+ 1264              		.loc 2 190 0
+ 1265 000c 0B4B     		ldr	r3, .L80+4
+ 1266 000e 181C     		mov	r0, r3
+ 1267 0010 FFF7FEFF 		bl	MrPing_init
+ 191:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	MrPong_init(&_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1);
+ 1268              		.loc 2 191 0
+ 1269 0014 0A4B     		ldr	r3, .L80+8
+ 1270 0016 181C     		mov	r0, r3
+ 1271 0018 FFF7FEFF 		bl	MrPong_init
+ 192:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ADimmer_init(&_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer);
+ 1272              		.loc 2 192 0
+ 1273 001c 094B     		ldr	r3, .L80+12
+ 1274 001e 181C     		mov	r0, r3
+ 1275 0020 FFF7FEFF 		bl	ADimmer_init
+ 193:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ADimmer_init(&_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2);
+ 1276              		.loc 2 193 0
+ 1277 0024 084B     		ldr	r3, .L80+16
+ 1278 0026 181C     		mov	r0, r3
+ 1279 0028 FFF7FEFF 		bl	ADimmer_init
+ 194:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ATimingService_init(&_PingPong_LogSys_PingPong_subSysRef_timingService);
+ 1280              		.loc 2 194 0
+ 1281 002c 074B     		ldr	r3, .L80+20
+ 1282 002e 181C     		mov	r0, r3
+ 1283 0030 FFF7FEFF 		bl	ATimingService_init
+ 195:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	
+ 196:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 197:C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-gen-mt/XMC2GoDemoModel\XMC2Go_PingPong_subSysRef.c **** }
+ 1284              		.loc 2 197 0
+ 1285 0034 BD46     		mov	sp, r7
+ 1286              		@ sp needed for prologue
+ 1287 0036 80BD     		pop	{r7, pc}
+ 1288              	.L81:
+ 1289              		.align	2
+ 1290              	.L80:
+ 1291 0038 58030000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong
+ 1292 003c 08000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref0
+ 1293 0040 30000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_ref1
+ 1294 0044 3C000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer
+ 1295 0048 50000000 		.word	_PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2
+ 1296 004c 64000000 		.word	_PingPong_LogSys_PingPong_subSysRef_timingService
+ 1297              		.cfi_endproc
+ 1298              	.LFE47:
+ 1300              		.text
+ 1301              	.Letext0:
+ 1302              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1303              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeRT
+ 1304              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeRT
+ 1305              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeRT
+ 1306              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeRT
+ 1307              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeRT
+ 1308              		.file 9 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeRT
+ 1309              		.file 10 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1310              		.file 11 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1311              		.file 12 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1312              		.file 13 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1313              		.file 14 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1314              		.file 15 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1315              		.file 16 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1316              		.file 17 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1317              		.file 18 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1318              		.file 19 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.runtime.c.FreeR
+ 1319              		.file 20 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1320              		.file 21 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC1100_series/Include/XMC1100.h"
+ 1321              		.file 22 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\XMC2GoBlinkyMT\\Dave\\
+ 1322              		.file 23 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\XMC2GoBlinkyMT\\Dave\\
+ 1323              		.file 24 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\XMC2GoBlinkyMT\\Dave\\
+ 1324              		.file 25 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\XMC2GoBlinkyMT\\Dave\\
+ 1325              		.file 26 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\XMC2GoBlinkyMT\\Dave\\
+ 1326              		.file 27 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1327              		.file 28 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1328              		.file 29 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1329              		.file 30 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1330              		.file 31 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1331              		.file 32 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1332              		.file 33 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1333              		.file 34 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1334              		.file 35 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1335              		.file 36 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\XMC2GoBlinky\\etrice.XMC2GoBlinky.de
+ 1336              		.file 37 "C:/data/workspaces/github/de.protos.demos/src/XMC2GoBlinky/etrice.XMC2GoBlinky.demo/src-
+DEFINED SYMBOLS
+                            *ABS*:00000000 XMC2Go_PingPong_subSysRef.c
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:18     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:22     .data:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:25     .data:00000000 XMC2Go_PingPong_subSysRefInst
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:29     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:30     .bss:00000000 msgBuffer_LowPrioThread
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:33     .bss:00000140 msgService_LowPrioThread
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:36     .bss:000001ac msgBuffer_HighPrioThread
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:39     .bss:000002ec msgService_HighPrioThread
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:42     .bss:00000358 _PingPong_LogSys_PingPong_subSysRef_pingPong
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:48     .data:00000008 _PingPong_LogSys_PingPong_subSysRef_pingPong_ref0
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:124    .rodata:0000001c _PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_const
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:68     .data:00000030 _PingPong_LogSys_PingPong_subSysRef_pingPong_ref1
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:153    .rodata:00000058 _PingPong_LogSys_PingPong_subSysRef_pingPong_ref1_const
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:74     .data:0000003c _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:162    .rodata:00000064 _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_const
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:83     .data:00000050 _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:176    .rodata:0000007c _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_const
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:92     .data:00000064 _PingPong_LogSys_PingPong_subSysRef_timingService
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:215    .rodata:000000c4 _PingPong_LogSys_PingPong_subSysRef_timingService_const
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:97     .bss:0000035c _PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_Led0_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:100    .bss:00000364 _PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_Led1_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:103    .bss:0000036c _PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_uart_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:106    .bss:00000370 _PingPong_LogSys_PingPong_subSysRef_pingPong_ref0_timer_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:109    .bss:00000374 _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_pwm_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:112    .bss:00000378 _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer_timer_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:115    .bss:0000037c _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_pwm_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:118    .bss:00000380 _PingPong_LogSys_PingPong_subSysRef_pingPong_dimmer2_timer_var
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:190    .rodata:00000094 _PingPong_LogSys_PingPong_subSysRef_timingService_repl_sub_ports
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:224    .text.MsgDispatcher_LowPrioThread_receiveMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:228    .text.MsgDispatcher_LowPrioThread_receiveMessage:00000000 MsgDispatcher_LowPrioThread_receiveMessage
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:460    .text.MsgDispatcher_LowPrioThread_receiveMessage:000000fc $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:477    .text.MsgDispatcher_HighPrioThread_poll:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:481    .text.MsgDispatcher_HighPrioThread_poll:00000000 MsgDispatcher_HighPrioThread_poll
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:504    .text.MsgDispatcher_HighPrioThread_poll:00000010 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:514    .text.MsgDispatcher_HighPrioThread_receiveMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:518    .text.MsgDispatcher_HighPrioThread_receiveMessage:00000000 MsgDispatcher_HighPrioThread_receiveMessage
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:742    .text.MsgDispatcher_HighPrioThread_receiveMessage:000000f0 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:756    .text.XMC2Go_PingPong_subSysRef_initMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:760    .text.XMC2Go_PingPong_subSysRef_initMessageServices:00000000 XMC2Go_PingPong_subSysRef_initMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:844    .text.XMC2Go_PingPong_subSysRef_initMessageServices:00000074 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:856    .text.XMC2Go_PingPong_subSysRef_startMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:860    .text.XMC2Go_PingPong_subSysRef_startMessageServices:00000000 XMC2Go_PingPong_subSysRef_startMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:887    .text.XMC2Go_PingPong_subSysRef_startMessageServices:00000018 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:893    .text.XMC2Go_PingPong_subSysRef_stopMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:897    .text.XMC2Go_PingPong_subSysRef_stopMessageServices:00000000 XMC2Go_PingPong_subSysRef_stopMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:924    .text.XMC2Go_PingPong_subSysRef_stopMessageServices:00000018 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:930    .text.XMC2Go_PingPong_subSysRef_destroyMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:934    .text.XMC2Go_PingPong_subSysRef_destroyMessageServices:00000000 XMC2Go_PingPong_subSysRef_destroyMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:961    .text.XMC2Go_PingPong_subSysRef_destroyMessageServices:00000018 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:971    .text.XMC2Go_PingPong_subSysRef_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:976    .text.XMC2Go_PingPong_subSysRef_init:00000000 XMC2Go_PingPong_subSysRef_init
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1224   .text.XMC2Go_PingPong_subSysRef_constructActorInstances:00000000 XMC2Go_PingPong_subSysRef_constructActorInstances
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1248   .text.XMC2Go_PingPong_subSysRef_initActorInstances:00000000 XMC2Go_PingPong_subSysRef_initActorInstances
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1008   .text.XMC2Go_PingPong_subSysRef_init:00000024 $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1018   .text.XMC2Go_PingPong_subSysRef_start:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1023   .text.XMC2Go_PingPong_subSysRef_start:00000000 XMC2Go_PingPong_subSysRef_start
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1051   .text.XMC2Go_PingPong_subSysRef_start:0000001c $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1057   .text.XMC2Go_PingPong_subSysRef_run:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1062   .text.XMC2Go_PingPong_subSysRef_run:00000000 XMC2Go_PingPong_subSysRef_run
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1093   .text.XMC2Go_PingPong_subSysRef_stop:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1098   .text.XMC2Go_PingPong_subSysRef_stop:00000000 XMC2Go_PingPong_subSysRef_stop
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1126   .text.XMC2Go_PingPong_subSysRef_stop:0000001c $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1136   .text.XMC2Go_PingPong_subSysRef_destroy:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1141   .text.XMC2Go_PingPong_subSysRef_destroy:00000000 XMC2Go_PingPong_subSysRef_destroy
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1169   .text.XMC2Go_PingPong_subSysRef_destroy:0000001c $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1179   .text.XMC2Go_PingPong_subSysRef_shutdown:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1184   .text.XMC2Go_PingPong_subSysRef_shutdown:00000000 XMC2Go_PingPong_subSysRef_shutdown
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1214   .text.XMC2Go_PingPong_subSysRef_shutdown:0000001c $d
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1220   .text.XMC2Go_PingPong_subSysRef_constructActorInstances:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1244   .text.XMC2Go_PingPong_subSysRef_initActorInstances:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTZ3Ovf.s:1291   .text.XMC2Go_PingPong_subSysRef_initActorInstances:00000038 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.4f34ab06ae2725aaf04d3230f4ec23a7
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.projdefs.h.67.1891ed3aab788f154f6e7a8ff42f2cfd
+                           .group:00000000 wm4.FreeRTOSConfig.h.68.68069ebd1511300aee6a0902a3190dd9
+                           .group:00000000 wm4.portmacro.h.68.1103cd8abdfa15961989a6c9d96bac02
+                           .group:00000000 wm4.portable.h.325.a31e8973a246cd28421ddb595e37fd13
+                           .group:00000000 wm4.mpu_wrappers.h.67.4bcfd12ce15e5313ce3efd77400f8168
+                           .group:00000000 wm4.FreeRTOS.h.177.d3bfaf06585c5400f89c867433e2b84d
+                           .group:00000000 wm4.list.h.96.eaa3d29743bd681933f9f5e726c756a1
+                           .group:00000000 wm4.task.h.84.ff846741c7bdac87bd4a7636d5320d68
+                           .group:00000000 wm4.timers.h.92.7e7e1a9bf65701faf3dfc9cf90e720c0
+                           .group:00000000 wm4.queue.h.68.1266563298ebacb4a83c08ead1e4111f
+                           .group:00000000 wm4.semphr.h.77.cfc41285e8d228b828c00c3fce52801f
+                           .group:00000000 wm4.etDatatypes.h.51.3bbea7db1cc9da3a5e28a729d320f817
+                           .group:00000000 wm4.etRuntimeConfig.h.14.b2bde6fc1d2ab5ddcde20eb67dcec2c1
+                           .group:00000000 wm4.etMSCLogger.h.70.b50a4dd89ee2c1552942ae656a6fb8e6
+                           .group:00000000 wm4.etDataLogger.h.14.e9a7f1636ffd712321ec95bbba2588ca
+                           .group:00000000 wm4.etMessageService.h.26.c4e8a1353ad385fd30ddcda194df0956
+                           .group:00000000 wm4.PTimer.h.9.65e88e755dca19735e4c8a0328a94685
+                           .group:00000000 wm4.XMC1100.h.45.7a7cd799d7738130fcda8b83b0aa37d4
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.core_cm0.h.135.ca70469f87e143609670bb393bfa6518
+                           .group:00000000 wm4.XMC1000_RomFunctionTable.h.31.6d9a94465618f31b040dc9cea9a47ad7
+                           .group:00000000 wm4.XMC1100.h.114.be3711f71ee045884346be801053f4c0
+                           .group:00000000 wm4.types.h.60.43223fdca13f7a32c3450deb52d058eb
+                           .group:00000000 wm4.MULTIPLEXER.h.46.383e3edbb9cbf6e538f7c1532ef623c1
+                           .group:00000000 wm4.uc_id.h.35.eaf9b374d895319eacbb56387e04af18
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.UART001_Conf.h.53.6438e3dd8d9ee3b4523f36dc76bba15b
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.IO004.h.53.442ea5eb47ad9eedc675253aa35f3107
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.MrPong.h.9.2f84361f18b9d44191061f87130aa9f9
+                           .group:00000000 wm4.ATimingService.h.19.b4f97124ee616b2e103f5e3cc5d4fcd5
+                           .group:00000000 wm4.XMC2Go_PingPong_subSysRef_Inst.h.22.b95f743dec066fd98ca789baa34f1670
+
+UNDEFINED SYMBOLS
+MrPing_receiveMessage
+PTimerConjPort_timeout_receiveHandler
+ADimmer_receiveMessage
+etLogger_logErrorF
+ATimingService_execute
+MrPong_receiveMessage
+ATimingService_receiveMessage
+etMessageService_init
+etMessageService_start
+etMessageService_stop
+etMessageService_destroy
+etLogger_logInfoF
+PingPongTop_init
+MrPing_init
+MrPong_init
+ADimmer_init
+ATimingService_init
