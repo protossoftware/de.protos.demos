@@ -21,5 +21,8 @@
         <File genName="IO004_Conf.c" genPath="Dave\Generated\src\IO004\IO004_Conf.c" jetPath="IO004/1.0.22/Templates/IO004_Confc.jet" location="bin\CodeGenerator\io004_confc_template.class"/>
         <File genName="CLKVAL_SSW.h" genPath="Dave\Generated\inc\CLK002\CLKVAL_SSW.h" jetPath="CLK002/1.0.8/Templates/CLKVAL_SSWh.jet" location="bin\CodeGenerator\clkval_sswh_template.class"/>
         <File genName="DAVE3.h" genPath="Dave\Generated\inc\DAVESupport\DAVE3.h" jetPath="DAVESUPPORT/1.0.44/Templates/DAVE3_H.jet" location="bin\CodeGenerator\dave3_h_template.class"/>
+    <File genName="NVIC001.c" genPath="Dave\Generated\src\NVIC001\NVIC001.c" jetPath="NVIC001/1.0.14/Templates/NVIC001c.jet" location="bin\CodeGenerator\nvic001c_template.class"/>
+        <File genName="NVIC001_Conf.c" genPath="Dave\Generated\src\NVIC001\NVIC001_Conf.c" jetPath="NVIC001/1.0.14/Templates/NVIC001_Confc.jet" location="bin\CodeGenerator\nvic001_confc_template.class"/>
+        <File genName="NVIC001_Conf.h" genPath="Dave\Generated\inc\NVIC001\NVIC001_Conf.h" jetPath="NVIC001/1.0.14/Templates/NVIC001_Confh.jet" location="bin\CodeGenerator\nvic001_confh_template.class"/>
     </TemplateCaches>
 </Cache>

@@ -86,12 +86,12 @@
 #include "../../inc/UART001/UART001.h"
 const UART001_HandleType UART001_Handle0  = 
 {
-   .UartRegs = USIC0_CH1, /* Usic Channel offset value */
+   .UartRegs = USIC0_CH0, /* Usic Channel offset value */
    .PinHandle = {   
                  /* Tx port pin base address & pin no.*/
-                 (UART001_PORTS_TypeDef *) PORT2_BASE, (uint8_t) 10,   
+                 (UART001_PORTS_TypeDef *) PORT2_BASE, (uint8_t) 1,   
                  /* Rx port pin base address & pin no.*/
-                 (UART001_PORTS_TypeDef *) PORT2_BASE, (uint8_t) 1
+                 (UART001_PORTS_TypeDef *) PORT2_BASE, (uint8_t) 2
    				},  			
    .Mode = UART_FULLDUPLEX, /* Mode */
    .StopBit = UART_ONE_STOPBIT,/* StopBit */

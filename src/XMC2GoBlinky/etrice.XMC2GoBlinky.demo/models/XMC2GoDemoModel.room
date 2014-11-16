@@ -19,29 +19,42 @@ RoomModel XMC2GoDemoModel {
 		ActorInstanceMapping timingService -> timingThread
 		ActorInstanceMapping pingPong/dimmer -> timingThread
 		ActorInstanceMapping pingPong/ref1 -> timingThread
-		
-
 	}
 
 	ActorClass PingPongTop {
 		Structure {
+			usercode1 {
+				"extern PInterruptConjPort* uart_isr_port;"
+			}
+			conjugated Port interruptSender: PInterrupt
 			ActorRef ref0: MrPing
 			ActorRef ref1: MrPong
 			ActorRef dimmer: ADimmer
 			ActorRef dimmer2: ADimmer
 			Binding ref1.p0 and ref0.p0
+			Binding interruptSender and ref0.interruptReceiver
+			
 		}
 		Behavior {
-			StateMachine { }
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"//interruptSender.export();"
+						"uart_isr_port=interruptSender.export();"
+						"//interruptSender.fire();"
+					}
+				}
+				State state0
+			}
 		}
 	}
 
 	ActorClass ADimmer {
 		Structure {
 			conjugated Port pwm: PWMSP001
-			SAP timer:PTimer
-			Attribute counter:uint8
-			Attribute instance:uint32
+			SAP timer: PTimer
+			Attribute counter: uint8
+			Attribute instance: uint32
 		}
 		Behavior {
 			StateMachine {
@@ -114,17 +127,20 @@ RoomModel XMC2GoDemoModel {
 	ActorClass MrPing {
 		Interface {
 			conjugated Port p0: PingPongProtocol
+			Port interruptReceiver: PInterrupt
 		}
 		Structure {
 			usercode1 {
 				"#include <etPlatform.h>"
 			}
 			external Port p0
+			external Port interruptReceiver
 			conjugated Port Led0: PIO004
 			conjugated Port Led1: PIO004
 			conjugated Port uart: PUART001
 			SAP timer: PTimer
 			Attribute counter: uint32
+			Attribute test:uint32
 			Attribute myData: PingPongData
 			Attribute sendTime: uint64
 		}
@@ -137,20 +153,20 @@ RoomModel XMC2GoDemoModel {
 						""
 						"timer.startTimeout(500);"
 						""
-						"//uart.setInstance(0);"
-						"PUART001ConjPort_setInstance(&self->constData->uart,0);"
+						"uart.setInstance(0);"
+						"//PUART001ConjPort_setInstance(&self->constData->uart,0);"
 						""
-						"// Led0.setInstance(0);"
-						"PIO004ConjPort_setInstance(&self->constData->Led0,0);  "
+						"Led0.setInstance(0);"
+						"//PIO004ConjPort_setInstance(&self->constData->Led0,0);  "
 						""
-						"// Led1.setInstance(1);"
-						"PIO004ConjPort_setInstance(&self->constData->Led1,1);  "
+						"Led1.setInstance(1);"
+						"//PIO004ConjPort_setInstance(&self->constData->Led1,1);  "
 						""
-						"// Led0.setPin();"
-						"PIO004ConjPort_setPin(&self->constData->Led0);  "
+						"Led0.setPin();"
+						"//PIO004ConjPort_setPin(&self->constData->Led0);  "
 						""
-						"// Led1.resetPin();"
-						"PIO004ConjPort_resetPin(&self->constData->Led1);  "
+						"Led1.resetPin();"
+						"//PIO004ConjPort_resetPin(&self->constData->Led1);  "
 					}
 				}
 				Transition tr0: running -> running {
@@ -163,14 +179,14 @@ RoomModel XMC2GoDemoModel {
 						"counter++;"
 						"//toggleLED0();"
 						""
-						"// Led1.togglePin();"
-						"PIO004ConjPort_togglePin(&self->constData->Led1);"
+						"Led1.togglePin();"
+						"//PIO004ConjPort_togglePin(&self->constData->Led1);"
 						""
-						"// Led0.togglePin();"
-						"PIO004ConjPort_togglePin(&self->constData->Led0);   "
+						"Led0.togglePin();"
+						"//PIO004ConjPort_togglePin(&self->constData->Led0);   "
 						""
-						"//uart.writeDataBytes(\"Das ist ein Test\\n\", 17);"
-						"PUART001ConjPort_writeDataBytes(&self->constData->uart,\"Das ist ein Test!\\n\",18);"
+						"uart.writeDataBytes(\"Das ist ein Test\\n\", 17);"
+						"//PUART001ConjPort_writeDataBytes(&self->constData->uart,\"Das ist ein Test!\\n\",18);"
 					}
 				}
 				Transition tr1: running -> running {
@@ -181,6 +197,15 @@ RoomModel XMC2GoDemoModel {
 						"p0.ping(&myData);"
 					}
 				}
+				Transition tr2: my tp0 -> my tp0 {
+					triggers {
+						<event: interruptReceiver>
+					}
+					action {
+						"test++;"
+					}
+				}
+				handler TransitionPoint tp0
 				State running
 			}
 		}
@@ -218,6 +243,39 @@ RoomModel XMC2GoDemoModel {
 		}
 	}
 
+	ProtocolClass PInterrupt {
+		incoming {
+			Message event()
+		}
+		conjugated PortClass
+		{
+			usercode {
+				"#include \"messaging/etMessageService.h\""
+			}
+			Operation export(): PInterruptConjPort ref {
+				"msg.address = self->peerAddress;"
+				"msg.evtID = PInterrupt_IN_event;"
+				"callback.func=(void (*)(void*))PInterruptConjPort_dispatch;"
+				"callback.param=(void *)self;"
+				"etMessageService_registerHighPrioFunc(self->msgService,&callback);"
+				"return self;"
+			}
+			Operation dispatch(){
+				"if (enable){"
+				"	enable=0;"
+				"	self->msgService->msgDispatcher(&msg);"
+				"}"
+			}
+			Operation fire(){
+			"enable=1;"
+			"etSema_wakeupFromISR(&self->msgService->executionSemaphore);"
+			}
+			Attribute msg: etMessage = "0"
+			Attribute callback: etHighPrioFunc = "{0,0}"
+			Attribute enable:uint8 = "0"
+		}
+	}
+
 	DataClass PingPongData {
 		Attribute data [ 10 ]: uint8
 		Operation getData(p: uint8 ref) {
@@ -230,4 +288,7 @@ RoomModel XMC2GoDemoModel {
 		}
 	}
 
+	ExternalType PInterruptConjPort -> "PInterruptConjPort"
+	ExternalType etMessage -> "etMessage"
+	ExternalType etHighPrioFunc -> "etHighPrioFunc"
 }
