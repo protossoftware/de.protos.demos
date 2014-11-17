@@ -95,5 +95,24 @@
       <toolTipHelpDescription>Reference Clock</toolTipHelpDescription>
     </bitFields>
   </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="&#x9;USIC0_0_IRQHandler" URI="http://www.infineon.com/0.11.20/peripheral/cpu/0/nvic/interrupt/9">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC001/1.0.14/nvic001_0.app#//@consumed.0"/>
+    <resourcesList name="iser_setena" requiredResourceUri="http://www.infineon.com/0.11.20/peripheral/cpu/0/iser/setena8" isResolved="true"/>
+    <resourcesList name="icer_clrena" requiredResourceUri="http://www.infineon.com/0.11.20/peripheral/cpu/0/icer/clrena8" isResolved="true"/>
+    <resourcesList name="ispr_setpend" requiredResourceUri="http://www.infineon.com/0.11.20/peripheral/cpu/0/ispr/setpend8" isResolved="true"/>
+    <resourcesList name="icpr_clrpend" requiredResourceUri="http://www.infineon.com/0.11.20/peripheral/cpu/0/icpr/clrpend8" isResolved="true"/>
+    <resourcesList name="ipr_pri" requiredResourceUri="http://www.infineon.com/0.11.20/peripheral/cpu/0/ipr2/pri_1" isResolved="true"/>
+    <resourcesList name="signal_in" requiredResourceUri="http://www.infineon.com/0.11.20/peripheral/cpu/0/usic0_0_irqhandler" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="USIC0_0_IRQ" description="USIC0_0_IRQ" URI="http://www.infineon.com/0.11.20/peripheral/cpu/0/nvic/interrupt/9/signal_in" signalType="INTERRUPT" interruptVectorAddress="23" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC001/1.0.14/nvic001_0.app#//@consumed.1"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PRI_1" URI="http://www.infineon.com/0.11.20/peripheral/cpu/0/nvic/interrupt/9/ipr_pri" maxValue="255" minValue="0" startPos="8" stopPos="15" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC001/1.0.14/nvic001_0.app#//@consumed.2"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <toolTipHelpDescription>Priority, Byte Offset 1</toolTipHelpDescription>
+  </provided>
   <categoryDescription description="Central Processing Unit (CPU)" name="cpu"/>
 </ResourceModel:Peripheral>

@@ -36,6 +36,13 @@ typedef struct etBuffer{
 	etUInt16 blockSize;		/** size of blocks for the message pool */
 } etBuffer;
 
+typedef struct etHighPrioFunc etHighPrioFunc;
+struct etHighPrioFunc{
+	void (*func)(void *);
+	void * param;
+	etHighPrioFunc *next;
+};
+
 typedef struct etMessageService {
 	etMessageQueue messageQueue;				/** message queue that holds all used messages */
 	etMessageQueue messagePool;					/** message pool that holds all free messages */
@@ -47,6 +54,7 @@ typedef struct etMessageService {
 	etSema executionSemaphore; 					/** semaphore for waiting and waking up the execution */
 	etTimer timer;								/** timer for cyclic calls */
 	etMessageService_execmode execmode;			/** execution mode*/
+	etHighPrioFunc *highPrioFuncRoot;
 } etMessageService;
 
 /* lifecycle functions to startup, execute and shutdown the message service */
@@ -79,5 +87,8 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 /* functions for debug and service information  */
 etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self);
 
+/* functions to register and unregister high prio functions */
+void etMessageService_registerHighPrioFunc(etMessageService* self, etHighPrioFunc* func);
+void etMessageService_unregisterHighPrioFunc(etMessageService* self, etHighPrioFunc*  func);
 
 #endif /* RMESSAGESERVICE_H_ */

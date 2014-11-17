@@ -170,14 +170,26 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 
 void etMessageService_registerHighPrioFunc(etMessageService* self,etHighPrioFunc *func){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "registerHighPrioFunc")
-	func->next=NULL;
+	func->next=self->highPrioFuncRoot;
 	self->highPrioFuncRoot=func;
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 void etMessageService_unregisterHighPrioFunc(etMessageService* self,etHighPrioFunc *func){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "unregisterHighPrioFunc")
-	self->highPrioFuncRoot=NULL;
+	etHighPrioFunc *highPrioFunc;
+	if (self->highPrioFuncRoot==func){
+		self->highPrioFuncRoot=self->highPrioFuncRoot->next;
+	}else{
+		highPrioFunc = self->highPrioFuncRoot;
+		while(highPrioFunc != NULL){
+			if (highPrioFunc->next==func){
+				highPrioFunc->next=highPrioFunc->next->next;
+				break;
+			}
+			highPrioFunc=highPrioFunc->next;
+		}
+	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
@@ -196,7 +208,6 @@ static void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
 	{
 		etBool cont = ET_TRUE;
-		etHighPrioFunc *highPrioFunc;
 		while (cont){
 			etMessageService_callHighPrioFunc(self);
 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){

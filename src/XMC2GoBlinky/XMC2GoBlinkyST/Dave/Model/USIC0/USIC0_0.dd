@@ -432,8 +432,8 @@
   </provided>
   <provided xsi:type="ResourceModel:BitField" name="SRBIEN" URI="http://www.infineon.com/0.11.20/peripheral/usic/0/channel/0/rbctr_srbien" maxValue="1" minValue="0" startPos="30" stopPos="30" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
     <toolTipHelpDescription>Standard Receive Buffer Interrupt Enable</toolTipHelpDescription>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The standard receive buffer interrupt generation is disabled."/>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The standard receive buffer interrupt generation is enabled."/>

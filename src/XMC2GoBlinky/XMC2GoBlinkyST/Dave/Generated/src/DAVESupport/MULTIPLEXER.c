@@ -107,7 +107,10 @@ void DAVE_MUX_Init(void)
     						
    /*USIC 0 Channel 0 Mux Related SFR/Bitfields Configurations*/ 						         
  WR_REG(USIC0_CH0->DX0CR, USIC_CH_DX0CR_DSEL_Msk, USIC_CH_DX0CR_DSEL_Pos,6); 
-  			  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
+  			  					 				 				 		       				              				  					    					 					   				  					 				 				       				  					    
+ //Standard receive buffer event is enabled.                 
+ WR_REG(USIC0_CH0->RBCTR, USIC_CH_RBCTR_SRBIEN_Msk, USIC_CH_RBCTR_SRBIEN_Pos,1);  
+ 					 									 					 					  									      					              					  						    					      
                  
    // Data Pointer & Buffer Size for Transmitter Buffer Control  
  WR_REG(USIC0_CH0->TBCTR, USIC_CH_TBCTR_DPTRSIZE_Msk, USIC_CH_TBCTR_DPTRSIZE_Pos,0x04000010);		/*    DPTR = 16,  SIZE = 4 */ 

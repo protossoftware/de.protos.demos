@@ -48,6 +48,9 @@
   <nodes xsi:type="DaveExpert:AppNode">
     <resource xsi:type="ResourceModel:App" href="PWMSP001/1.0.34/pwmsp001_1.app#/"/>
   </nodes>
+  <nodes xsi:type="DaveExpert:AppNode">
+    <resource xsi:type="ResourceModel:App" href="NVIC001/1.0.14/nvic001_0.app#/"/>
+  </nodes>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.2" target="//@nodes.3"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.4" target="//@nodes.5"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.5" target="//@nodes.3"/>
@@ -64,4 +67,5 @@
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.15" target="//@nodes.5"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.15" target="//@nodes.8"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.15" target="//@nodes.10"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.16" target="//@nodes.14"/>
 </DaveExpert:ApplicationModelData>

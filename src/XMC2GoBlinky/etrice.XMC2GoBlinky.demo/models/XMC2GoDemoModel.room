@@ -5,6 +5,8 @@ RoomModel XMC2GoDemoModel {
 	import room.basic.service.timing.* from "TimingService.room"
 
 	import DaveInterface.* from "DaveInterface.room"
+	
+	import room.basic.service.pinterrupt.* from "PInterrupt.room"
 
 	LogicalSystem PingPong_LogSys {
 		SubSystemRef PingPong_subSysRef: PingPong_LogSubSys
@@ -202,7 +204,10 @@ RoomModel XMC2GoDemoModel {
 						<event: interruptReceiver>
 					}
 					action {
+						"uint8 buf[50];"
+						""
 						"test++;"
+						"uart.readDataBytes(buf, 50);"
 					}
 				}
 				handler TransitionPoint tp0
@@ -243,38 +248,6 @@ RoomModel XMC2GoDemoModel {
 		}
 	}
 
-	ProtocolClass PInterrupt {
-		incoming {
-			Message event()
-		}
-		conjugated PortClass
-		{
-			usercode {
-				"#include \"messaging/etMessageService.h\""
-			}
-			Operation export(): PInterruptConjPort ref {
-				"msg.address = self->peerAddress;"
-				"msg.evtID = PInterrupt_IN_event;"
-				"callback.func=(void (*)(void*))PInterruptConjPort_dispatch;"
-				"callback.param=(void *)self;"
-				"etMessageService_registerHighPrioFunc(self->msgService,&callback);"
-				"return self;"
-			}
-			Operation dispatch(){
-				"if (enable){"
-				"	enable=0;"
-				"	self->msgService->msgDispatcher(&msg);"
-				"}"
-			}
-			Operation fire(){
-			"enable=1;"
-			"etSema_wakeupFromISR(&self->msgService->executionSemaphore);"
-			}
-			Attribute msg: etMessage = "0"
-			Attribute callback: etHighPrioFunc = "{0,0}"
-			Attribute enable:uint8 = "0"
-		}
-	}
 
 	DataClass PingPongData {
 		Attribute data [ 10 ]: uint8
@@ -288,7 +261,5 @@ RoomModel XMC2GoDemoModel {
 		}
 	}
 
-	ExternalType PInterruptConjPort -> "PInterruptConjPort"
-	ExternalType etMessage -> "etMessage"
-	ExternalType etHighPrioFunc -> "etHighPrioFunc"
+	
 }

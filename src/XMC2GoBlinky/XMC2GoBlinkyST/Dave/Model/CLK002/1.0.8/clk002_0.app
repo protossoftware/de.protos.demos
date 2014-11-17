@@ -330,6 +330,7 @@ This frequency will used during BootROM Firmware Execution.</toolTipHelpDescript
     <requiredResource uriString="peripheral/scu/0/ccu/clkgating/rtc" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" evalFunction="function resourceCondition() {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var rtcres = Solver.getResource(&quot;rtc_clockseldummy&quot;);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var val = Solver.getIntValue(rtcres);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(val  == 0) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  return true;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return false;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}" URI="http://www.infineon.com/1.0.8/app/clk002/0/dco_uri">
+    <downWardmappedList xsi:type="ResourceModel:ResourceGroup" href="../../SCU/SCU_0.dd#//@provided.16"/>
     <requiredResource uriString="peripheral/scu/0/dco/*" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" evalFunction="function resourceCondition() {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var rtcres = Solver.getResource(&quot;rtc_clockseldummy&quot;);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var val = Solver.getIntValue(rtcres);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(val  == 1) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  return true;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return false;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}" URI="http://www.infineon.com/1.0.8/app/clk002/0/eruapp" upWardMappingList="//@provided.7 //@provided.7/@item.0 //@provided.7/@item.1 //@provided.7/@item.2">

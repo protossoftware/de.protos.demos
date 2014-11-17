@@ -24,6 +24,7 @@
             <BindMap MUri="port/p/1/pad/0" Proxy="app/pwmsp001/0/pin_directoutput"/>
             <BindMap MUri="port/p/1/pad/1" Proxy="app/pwmsp001/1/pin_directoutput"/>
             <BindMap MUri="port/p/1/pad/2" Proxy="app/io004/0/pin"/>
+            <BindMap MUri="peripheral/cpu/0/nvic/interrupt/9" Proxy="app/nvic001/0/nvicnode"/>
         </SolverBndMap>
     </Solver>
 </ProjectConfig>
