@@ -5,7 +5,7 @@ RoomModel XMC2GoDemoModel {
 	import room.basic.service.timing.* from "TimingService.room"
 
 	import DaveInterface.* from "DaveInterface.room"
-	
+
 	import room.basic.service.pinterrupt.* from "PInterrupt.room"
 
 	LogicalSystem PingPong_LogSys {
@@ -18,9 +18,44 @@ RoomModel XMC2GoDemoModel {
 		LayerConnection ref pingPong satisfied_by timingService.timer
 		LogicalThread defaultThread
 		LogicalThread timingThread
+		LogicalThread interruptThread
 		ActorInstanceMapping timingService -> timingThread
 		ActorInstanceMapping pingPong/dimmer -> timingThread
 		ActorInstanceMapping pingPong/ref1 -> timingThread
+		ActorInstanceMapping pingPong/uartMirror -> interruptThread
+	}
+
+	ActorClass AUartMirror {
+		Interface {
+			Port uartIsrPort: PInterrupt
+		}
+		Structure {
+			external Port uartIsrPort
+			conjugated Port uart: PUART001
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"uart.setInstance(0);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<event: uartIsrPort>
+					}
+					action {
+						"uint8 buf[50];"
+						"uint32 count;"
+						""
+						"count = uart.readDataBytes(buf, 50);"
+						""
+						"uart.writeDataBytes(buf, count);"
+					}
+				}
+				State state0
+			}
+		}
 	}
 
 	ActorClass PingPongTop {
@@ -33,9 +68,9 @@ RoomModel XMC2GoDemoModel {
 			ActorRef ref1: MrPong
 			ActorRef dimmer: ADimmer
 			ActorRef dimmer2: ADimmer
+			ActorRef uartMirror: AUartMirror
 			Binding ref1.p0 and ref0.p0
-			Binding interruptSender and ref0.interruptReceiver
-			
+			Binding uartMirror.uartIsrPort and interruptSender
 		}
 		Behavior {
 			StateMachine {
@@ -129,20 +164,17 @@ RoomModel XMC2GoDemoModel {
 	ActorClass MrPing {
 		Interface {
 			conjugated Port p0: PingPongProtocol
-			Port interruptReceiver: PInterrupt
 		}
 		Structure {
 			usercode1 {
 				"#include <etPlatform.h>"
 			}
 			external Port p0
-			external Port interruptReceiver
 			conjugated Port Led0: PIO004
 			conjugated Port Led1: PIO004
-			conjugated Port uart: PUART001
 			SAP timer: PTimer
 			Attribute counter: uint32
-			Attribute test:uint32
+			Attribute test: uint32
 			Attribute myData: PingPongData
 			Attribute sendTime: uint64
 		}
@@ -154,9 +186,6 @@ RoomModel XMC2GoDemoModel {
 						"PingPongData_initData(&myData);"
 						""
 						"timer.startTimeout(500);"
-						""
-						"uart.setInstance(0);"
-						"//PUART001ConjPort_setInstance(&self->constData->uart,0);"
 						""
 						"Led0.setInstance(0);"
 						"//PIO004ConjPort_setInstance(&self->constData->Led0,0);  "
@@ -186,9 +215,6 @@ RoomModel XMC2GoDemoModel {
 						""
 						"Led0.togglePin();"
 						"//PIO004ConjPort_togglePin(&self->constData->Led0);   "
-						""
-						"uart.writeDataBytes(\"Das ist ein Test\\n\", 17);"
-						"//PUART001ConjPort_writeDataBytes(&self->constData->uart,\"Das ist ein Test!\\n\",18);"
 					}
 				}
 				Transition tr1: running -> running {
@@ -199,18 +225,6 @@ RoomModel XMC2GoDemoModel {
 						"p0.ping(&myData);"
 					}
 				}
-				Transition tr2: my tp0 -> my tp0 {
-					triggers {
-						<event: interruptReceiver>
-					}
-					action {
-						"uint8 buf[50];"
-						""
-						"test++;"
-						"uart.readDataBytes(buf, 50);"
-					}
-				}
-				handler TransitionPoint tp0
 				State running
 			}
 		}
@@ -248,7 +262,6 @@ RoomModel XMC2GoDemoModel {
 		}
 	}
 
-
 	DataClass PingPongData {
 		Attribute data [ 10 ]: uint8
 		Operation getData(p: uint8 ref) {
@@ -261,5 +274,4 @@ RoomModel XMC2GoDemoModel {
 		}
 	}
 
-	
 }

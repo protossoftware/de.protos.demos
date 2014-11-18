@@ -6,6 +6,7 @@ MappingModel OSSchulungMapping_Model {
 		SubSystemMapping PingPong_subSysRef -> XMC2Go {
 			ThreadMapping defaultThread -> SimpleMainLoop
 			ThreadMapping timingThread -> SimpleMainLoop
+			ThreadMapping interruptThread -> SimpleMainLoop
 		}
 	}
 }

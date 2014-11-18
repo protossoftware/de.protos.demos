@@ -16,7 +16,6 @@ PhysicalModel XMC2Go_PhysicalModel {
 			msgblocksize = 32
 			msgpoolsize = 10
 		}
-		
 		Thread HighPrioThread {
 			execmode = mixed
 			interval = 5ms
@@ -24,6 +23,14 @@ PhysicalModel XMC2Go_PhysicalModel {
 			stacksize = 150
 			msgblocksize = 32
 			msgpoolsize = 10
+		}
+		Thread InterruptThread {
+			execmode = mixed
+			interval = 100ms
+			prio = 3
+			stacksize = 150
+			msgblocksize = 32
+			msgpoolsize = 5
 		}
 	}
 
