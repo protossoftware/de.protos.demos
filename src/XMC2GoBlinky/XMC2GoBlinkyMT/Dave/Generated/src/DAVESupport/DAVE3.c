@@ -102,6 +102,9 @@ void DAVE_Init(void)
 	 
 	//  Initialization of app 'PWMSP001'		     
 	PWMSP001_Init();
+	 
+	//  Initialization of app 'NVIC001'		     
+	NVIC001_Init();
 	
       
 	//  MUX configurations

@@ -33,14 +33,20 @@
   <nodes xsi:type="DaveExpert:PeripheralNode">
     <resource xsi:type="ResourceModel:Peripheral" href="P1/P1_1.dd#/"/>
   </nodes>
+  <nodes xsi:type="DaveExpert:AppNode">
+    <resource xsi:type="ResourceModel:App" href="PWMSP001/1.0.34/pwmsp001_1.app#/"/>
+  </nodes>
+  <nodes xsi:type="DaveExpert:AppNode">
+    <resource xsi:type="ResourceModel:App" href="NVIC001/1.0.14/nvic001_0.app#/"/>
+  </nodes>
+  <nodes xsi:type="DaveExpert:PeripheralNode">
+    <resource xsi:type="ResourceModel:Peripheral" href="CPU/CPU_0.dd#/"/>
+  </nodes>
   <nodes xsi:type="DaveExpert:PeripheralNode">
     <resource xsi:type="ResourceModel:Peripheral" href="P2/P2_2.dd#/"/>
   </nodes>
   <nodes xsi:type="DaveExpert:PeripheralNode">
     <resource xsi:type="ResourceModel:Peripheral" href="USIC0/USIC0_0.dd#/"/>
-  </nodes>
-  <nodes xsi:type="DaveExpert:AppNode">
-    <resource xsi:type="ResourceModel:App" href="PWMSP001/1.0.34/pwmsp001_1.app#/"/>
   </nodes>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.2" target="//@nodes.3"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.6" target="//@nodes.7"/>
@@ -51,9 +57,10 @@
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.5" target="//@nodes.10"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.6" target="//@nodes.8"/>
   <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.6" target="//@nodes.10"/>
-  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.2" target="//@nodes.11"/>
-  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.2" target="//@nodes.12"/>
-  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.13" target="//@nodes.7"/>
-  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.13" target="//@nodes.8"/>
-  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.13" target="//@nodes.10"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.11" target="//@nodes.7"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.11" target="//@nodes.8"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.11" target="//@nodes.10"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.12" target="//@nodes.13"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.2" target="//@nodes.14"/>
+  <connections xsi:type="DaveExpert:NodeConnection" source="//@nodes.2" target="//@nodes.15"/>
 </DaveExpert:ApplicationModelData>

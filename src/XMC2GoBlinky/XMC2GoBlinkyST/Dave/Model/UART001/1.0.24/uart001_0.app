@@ -738,6 +738,10 @@ specific interrupt signal otherwise there
     <downWardmappedList xsi:type="ResourceModel:BitField" href="../../P2/P2_2.dd#//@provided.4"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
   </consumed>
+  <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.24/app/uart001/0/SignalConfigurator_1535457074" bindingMode="READ" isSystemDefined="true">
+    <downWardmappedList xsi:type="ResourceModel:App" href="../../NVIC001/1.0.14/nvic001_0.app#/"/>
+    <requiredResource uriString="app/nvic001/0" uriType="LOCALTYPE"/>
+  </consumed>
   <alias name="alias_channel" URI="alias_channel" fromURI="peripheral/usic/*/channel/*"/>
   <propertyConstants name="uridevice" value="device/">
     <propertyConstants name="uriperi_uart001" value="peripheral/usic/">
@@ -777,6 +781,7 @@ specific interrupt signal otherwise there
   <connections sourceSignal="app/uart001/0/uart001_tx_vs" targetSignal="app/uart001/0/uart001_txpin_vs"/>
   <connections sourceSignal="app/uart001/0/uart001_txpin_vs" targetSignal="app/uart001/0/uart001_rx_vs" constraintFunction="&#xD;&#xA;          function resourceCondition(){&#xD;&#xA;              var Res = Solver.getResource(&quot;uart001_OprModeTemp&quot;);&#xD;&#xA;              var value = Solver.getIntValue(Res);&#xD;&#xA;              if (value == 1 ) {&#xD;&#xA;              return true;&#xD;&#xA;              }&#xD;&#xA;              return false;&#xD;&#xA;          }&#xD;&#xA;        "/>
   <connections sourceSignal="app/uart001/0/uart001_tx_vs" targetSignal="app/uart001/0/uart001_rx_vs" constraintFunction="&#xD;&#xA;          function resourceCondition(){&#xD;&#xA;              var Res = Solver.getResource(&quot;uart001_OprModeTemp&quot;);&#xD;&#xA;              var value = Solver.getIntValue(Res);&#xD;&#xA;              if (value == 2 ) {&#xD;&#xA;              return true;&#xD;&#xA;              }&#xD;&#xA;              return false;&#xD;&#xA;          }&#xD;&#xA;        "/>
+  <connections sourceSignal="app/uart001/0/uart001_srbi_vs" targetSignal="SignalConfigurator_1535457074/nvic001_vs" isSystemDefined="false"/>
   <softwareIdList>45.0.1</softwareIdList>
   <softwareIdList>45.0.2</softwareIdList>
   <softwareIdList>45.0.3</softwareIdList>

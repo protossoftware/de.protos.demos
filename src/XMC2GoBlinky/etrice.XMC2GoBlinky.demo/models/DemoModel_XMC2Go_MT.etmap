@@ -6,6 +6,7 @@ MappingModel XMCDemoMapping_Model {
 		SubSystemMapping PingPong_subSysRef -> XMC2Go {
 			ThreadMapping defaultThread -> LowPrioThread
 			ThreadMapping timingThread -> HighPrioThread
+			ThreadMapping interruptThread -> LowPrioThread
 		}
 	}
 }
