@@ -1,0 +1,350 @@
+RoomModel Actuators {
+
+	import protos.automation.service.provider.* from "../../../de.protos.automation.io/models/ServiceProvider.room"
+	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+
+	import AutomationProtocols.* from "AutomationProtocols.room"
+
+	ActorClass DriveLR {
+		Interface {
+			Port fct: AutomationProtocols.PDriveLR
+		}
+		Structure {
+			usercode1 {
+				"import de.protos.automation.demos.fischertechnik.config.*;"
+			}
+			external Port fct
+			SAP lr: protos.automation.service.io.PDigOut
+			SAP start: protos.automation.service.io.PDigOut
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: Ready -> Moving {
+					triggers {
+						<start: fct>
+					}
+				}
+				Transition tr1: Moving -> Ready {
+					triggers {
+						<stop: fct>
+					}
+				}
+				Transition tr2: Ready -> Ready {
+					triggers {
+						<changeDirection: fct>
+					}
+					action {
+						"if(x) lr.setOn();"
+						"else lr.setOff();"
+					}
+				}
+				Transition tr3: initial -> Ready {
+					action {
+						"FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();"
+						"lr.registerChannel(config.getIntValue(getInstancePath(), \"lr\"));"
+						"start.registerChannel(config.getIntValue(getInstancePath(), \"start\"));"
+					}
+				}
+				State Ready
+				State Moving {
+					entry {
+						"start.setOn();"
+					}
+					exit {
+						"start.setOff();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass LinearUnit {
+		Interface {
+			Port fct: AutomationProtocols.PLinearUnit
+		}
+		Structure {
+			usercode1 {
+				"import de.protos.automation.demos.fischertechnik.config.*;"
+			}
+			external Port fct
+			conjugated Port drive: AutomationProtocols.PDriveLR
+			SAP sensorFront: protos.automation.service.io.PDigIn
+			SAP sensorBack: protos.automation.service.io.PDigIn
+			SAP timeout: PTimer
+			ActorRef Drive: DriveLR
+			Binding drive and Drive.fct
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> Undefined {
+					action {
+						"FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();"
+						"sensorFront.registerChannel(config.getIntValue(getInstancePath(), \"sensorFront\"));"
+						"sensorBack.registerChannel(config.getIntValue(getInstancePath(), \"sensorBack\"));"
+					}
+				}
+				Transition tr1: LinearUnitBackwards -> LinearUnitInPosBack {
+					triggers {
+						<inputChanged: sensorBack guard {
+							"x==0"
+						}>
+					}
+				}
+				Transition tr2: LinearUnitBackwards -> Error {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"System.out.println(\"ERROR : timeout sensorBack \");"
+					}
+				}
+				Transition tr3: LinearUnitInPosBack -> LinearUnitForwards {
+					triggers {
+						<moveForward: fct>
+					}
+				}
+				Transition tr4: LinearUnitForwards -> LinearUnitInPosFront {
+					triggers {
+						<inputChanged: sensorFront guard {
+							"x==0"
+						}>
+					}
+				}
+				Transition tr5: LinearUnitInPosFront -> LinearUnitBackwards {
+					triggers {
+						<moveBackward: fct>
+					}
+				}
+				Transition tr6: LinearUnitForwards -> Error {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"System.out.println(\"ERROR : timeout sensorFront \");"
+					}
+				}
+				Transition tr7: Undefined -> LinearUnitBackwards {
+					triggers {
+						<moveBackward: fct>
+					}
+				}
+				Transition tr8: Undefined -> LinearUnitForwards {
+					triggers {
+						<moveForward: fct>
+					}
+				}
+				State Undefined
+				State LinearUnitBackwards {
+					entry {
+						"drive.changeDirection(true);"
+						"drive.start();"
+						"timeout.startTimeout(3000);"
+						"sensorBack.getStatus();"
+					}
+					exit {
+						"drive.stop();"
+						"timeout.kill();"
+						"drive.changeDirection(false);"
+					}
+				}
+				State LinearUnitInPosBack {
+					entry {
+						"fct.doneMoveBackward();"
+					}
+				}
+				State Error
+				State LinearUnitForwards {
+					entry {
+						"drive.changeDirection(false);"
+						"drive.start();"
+						"timeout.startTimeout(3000);"
+						"sensorFront.getStatus();"
+					}
+					exit {
+						"drive.stop();"
+						"timeout.kill();"
+					}
+				}
+				State LinearUnitInPosFront {
+					entry {
+						"fct.doneMoveForward();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ProcessingStation {
+		Interface {
+			Port fct: AutomationProtocols.PProcessing
+		}
+		Structure {
+			external Port fct
+			conjugated Port drive: AutomationProtocols.PDriveLR
+			SAP timeout: PTimer
+			ActorRef StationDrive: DriveLR
+			Binding drive and StationDrive.fct
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> Idle { }
+				Transition tr1: Idle -> Working1 {
+					triggers {
+						<startProcessing: fct>
+					}
+				}
+				Transition tr2: Working2 -> Idle {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"fct.doneProcessing();"
+					}
+				}
+				Transition tr3: Working1 -> ChangeDirection {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr4: ChangeDirection -> Working2 {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				State Idle
+				State Working1 {
+					entry {
+						"drive.changeDirection(false);"
+						"drive.start();"
+						"timeout.startTimeout(1000);"
+					}
+					exit {
+						"drive.stop();"
+					}
+				}
+				State Working2 {
+					entry {
+						"drive.start();"
+						"timeout.startTimeout(1000);"
+					}
+					exit {
+						"drive.stop();"
+					}
+				}
+				State ChangeDirection {
+					entry {
+						"drive.changeDirection(true);"
+						"timeout.startTimeout(100);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Pusher {
+		Interface {
+			Port fct: AutomationProtocols.PTransport
+		}
+		Structure {
+			external Port fct
+			conjugated Port pusher: AutomationProtocols.PLinearUnit
+			ActorRef PusherHW: LinearUnit
+			Binding pusher and PusherHW.fct
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> init of Initializing { }
+				Transition tr0: running of Initializing -> enter of Running
+				State Initializing {
+					subgraph {
+						Transition tr5: Forewards -> Backwards {
+							triggers {
+								<doneMoveForward: pusher>
+							}
+						}
+						Transition tr8: Backwards -> my running {
+							triggers {
+								<doneMoveBackward: pusher>
+							}
+						}
+						Transition tr0: my init -> Forewards
+						EntryPoint init
+						ExitPoint running
+						State Forewards {
+							entry {
+								"pusher.moveForward();"
+							}
+						}
+						State Backwards {
+							entry {
+								"pusher.moveBackward();"
+							}
+						}
+					}
+				}
+				State Running {
+					subgraph {
+						Transition tr0: Forewards -> Backwards {
+							triggers {
+								<doneMoveForward: pusher>
+							}
+						}
+						Transition tr1: Backwards -> Empty {
+							triggers {
+								<doneMoveBackward: pusher>
+							}
+						}
+						Transition tr2: Empty -> Full {
+							triggers {
+								<takePart: fct>
+							}
+						}
+						Transition tr3: Full -> Forewards {
+							triggers {
+								<releasePart: fct>
+							}
+							action {
+								"fct.releasePartDone();"
+							}
+						}
+						Transition tr6: Empty -> Empty {
+							triggers {
+								<getStatus: fct>
+							}
+						}
+						Transition tr7: Full -> Full {
+							triggers {
+								<getStatus: fct>
+							}
+						}
+						Transition tr4: my enter -> Empty
+						EntryPoint enter
+						State Empty {
+							entry {
+								"fct.isEmpty();"
+							}
+						}
+						State Forewards {
+							entry {
+								"pusher.moveForward();"
+							}
+						}
+						State Backwards {
+							entry {
+								"pusher.moveBackward();"
+							}
+						}
+						State Full {
+							entry {
+								"fct.takePartDone();"
+								"fct.isFull();"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

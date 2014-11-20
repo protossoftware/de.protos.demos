@@ -1,0 +1,82 @@
+RoomModel Fischertechnik {
+ 
+	
+	import protos.automation.service.provider.* from "../../../de.protos.automation.io/models/ServiceProvider.room"
+	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+
+	import AutomationProtocols.* from "AutomationProtocols.room"
+	import Actuators.* from "Actuators.room"
+	import GenericLineElements.* from "GenericLineElements.room"
+	LogicalSystem MachineSystem{
+		SubSystemRef subSystem : MachineSubSystem
+	}
+
+
+	SubSystemClass MachineSubSystem {
+
+		ActorRef Controller : MachineController
+		ActorRef services : ServiceProvider
+
+		LayerConnection ref Controller satisfied_by services.dig_in
+		LayerConnection ref Controller satisfied_by services.dig_out
+		LayerConnection ref Controller satisfied_by services.timer
+		
+		LogicalThread dflt_thread	
+	}
+
+	ActorClass MachineController {
+		
+		Structure {
+			usercode1 {
+				"import java.util.Date;"
+			}
+			SAP timeout: PTimer
+			Attribute onlineTime : int32
+			Attribute startTimestamp: string
+			
+			ActorRef SourceSensor1 : SourceSensor
+			ActorRef BeltStation2 : BeltStation
+			ActorRef PusherStation3 : PusherStation	
+			ActorRef ProductionStation4 : ProductionStation
+			ActorRef ProductionStation5 : ProductionStation 
+			ActorRef PusherStation6 : PusherStation 
+			ActorRef BeltStation7 : BeltStation
+			ActorRef SinkSensor8 : SinkSensor
+			Binding BeltStation2.prev and SourceSensor1.next
+			Binding PusherStation3.prev and BeltStation2.next
+			Binding ProductionStation4.prev and PusherStation3.next
+			Binding ProductionStation4.next and ProductionStation5.prev
+			Binding ProductionStation5.next and PusherStation6.prev
+			Binding PusherStation6.next and BeltStation7.prev
+			Binding BeltStation7.next and SinkSensor8.prev
+		}
+		Behavior { 
+			StateMachine{
+				Transition t0:initial -> running{
+					action{
+						"this.setAndWriteStartTimestamp(new Date().toString());"
+						"this.setAndWriteOnlineTime(getOnlineTime());"
+					}
+				}
+				Transition t1:running -> running{
+					triggers {
+						<timeout: timeout>
+					}
+					action{
+						"int temp = getOnlineTime();"
+						"this.setAndWriteOnlineTime(temp+1);"
+					}
+				}
+				State running{
+					entry{
+						"timeout.startTimeout(60000);"
+					}
+				}
+			}
+			
+		}
+	}
+
+}

@@ -1,0 +1,39 @@
+RoomModel MachineModel {
+
+	import model "../../../de.protos.automation.io/models/ServiceProvider.room"
+	import model "GenericLineElements.room"
+
+	LogicalSystem MachineSystem{
+		SubSystemRef SubSystem : MachineSubSystem
+	}
+	SubSystemClass MachineSubSystem {
+		ActorRef Controller : MachineController
+		ActorRef Services: protos.automation.service.provider.ServiceProvider
+		LayerConnection ref Controller satisfied_by Services.dig_in
+		LayerConnection ref Controller satisfied_by Services.dig_out
+		LayerConnection ref Controller satisfied_by Services.timer
+	
+		LogicalThread dflt_thread
+	}
+	
+	ActorClass MachineController {
+		Structure {
+			ActorRef SourceSensor1: GenericLineElements.SourceSensor
+			ActorRef BeltStation2: GenericLineElements.BeltStation
+			ActorRef PusherStation3: GenericLineElements.PusherStation
+			ActorRef ProductionStation4: GenericLineElements.ProductionStation
+			ActorRef ProductionStation5: GenericLineElements.ProductionStation
+			ActorRef PusherStation6: GenericLineElements.PusherStation
+			ActorRef BeltStation7: GenericLineElements.BeltStation
+			ActorRef SinkSensor8: GenericLineElements.SinkSensor
+			Binding SourceSensor1.next and BeltStation2.prev
+			Binding BeltStation2.next and PusherStation3.prev
+			Binding PusherStation3.next and ProductionStation4.prev
+			Binding ProductionStation4.next and ProductionStation5.prev
+			Binding ProductionStation5.next and PusherStation6.prev
+			Binding PusherStation6.next and BeltStation7.prev
+			Binding BeltStation7.next and SinkSensor8.prev
+		}
+		Behavior { }
+	}
+}

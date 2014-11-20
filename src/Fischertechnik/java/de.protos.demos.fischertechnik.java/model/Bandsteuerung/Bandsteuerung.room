@@ -1,0 +1,653 @@
+RoomModel Bandsteuerung {
+
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+
+	ProtocolClass PUebergabe {
+		incoming {
+			Message holeZustand()
+			Message uebergeben()
+		}
+		outgoing {
+			Message leer()
+			Message uebernommen()
+		}
+	}
+
+	ProtocolClass PTransport {
+		incoming {
+			Message holeZustand()
+			Message freigabe()
+			Message uebernehmen()
+		}
+		outgoing {
+			Message voll()
+			Message leer()
+			Message freigegeben()
+			Message uebernommen()
+		}
+	}
+
+	ProtocolClass PBearbeitung {
+		incoming {
+			Message startBearbeitung()
+		}
+		outgoing {
+			Message fertigBearbeitung()
+		}
+	}
+
+	ProtocolClass PMotor {
+		incoming {
+			Message start()
+		}
+		outgoing {
+			Message stop()
+		}
+	}
+
+	ProtocolClass PStopper {
+		incoming {
+			Message holeZustand()
+			Message freigeben()
+		}
+		outgoing {
+			Message voll()
+			Message leer()
+			Message freigegeben()
+		}
+	}
+
+	ProtocolClass PZylinder {
+		incoming {
+			Message ausfahren()
+			Message einfahren()
+			Message holeZustand()
+		}
+		outgoing {
+			Message ausgefahren()
+			Message eingefahren()
+			Message undefiniert()
+		}
+	}
+
+	ProtocolClass PBand {
+		incoming {
+			Message holeZustand()
+			Message freigeben()
+		}
+		outgoing {
+			Message voll()
+			Message leer()
+		}
+	}
+
+	ProtocolClass PPruefung {
+		incoming {
+			Message startPruefung()
+		}
+		outgoing {
+			Message pruefungGut()
+			Message pruefungSchlecht()
+		}
+	}
+
+	ProtocolClass PServo {
+		incoming {
+			Message start(x: float64)
+			Message stop()
+		}
+		outgoing {
+			Message fertig()
+			Message gestoppt()
+		}
+	}
+
+	ActorClass ModulPruefung {
+		Interface {
+			Port ein: PUebergabe
+			conjugated Port aus: PUebergabe
+		}
+		Structure {
+			ActorRef EinlaufAP: Weiche1_2
+			ActorRef Band1: StopperBand
+			ActorRef Arbeitsplatz: StopperBand
+			ActorRef Band2: StopperBand
+			ActorRef AuslaufAP: Weiche2_1
+			ActorRef DruckPruefung: Pruefstation
+			Binding Band1.aus and EinlaufAP.ein
+			Binding EinlaufAP.aus2 and Arbeitsplatz.ein
+			Binding Band2.ein and EinlaufAP.aus1
+			Binding Band2.aus and AuslaufAP.ein1
+			Binding Arbeitsplatz.aus and AuslaufAP.ein2
+			Binding AuslaufAP.aus and DruckPruefung.ein
+			Binding ein and Band1.ein
+			Binding aus and DruckPruefung.aus
+		}
+		Behavior { }
+	}
+
+	ActorClass Weiche2_1 {
+		Interface {
+			Port ein1: PUebergabe
+			Port ein2: PUebergabe
+			conjugated Port aus: PUebergabe
+		}
+		Structure {
+			ActorRef HQE2: HubQuerKurve
+			ActorRef HQE1: HubQuer2nach1
+			Binding ein2 and HQE2.ein
+			Binding HQE2.aus and HQE1.ein2
+			Binding ein1 and HQE1.ein1
+			Binding HQE1.aus and aus
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass Weiche1_2 {
+		Interface {
+			Port ein: PUebergabe
+			conjugated Port aus1: PUebergabe
+			conjugated Port aus2: PUebergabe
+		}
+		Structure {
+			ActorRef HQE1: HubQuer1nach2
+			ActorRef HQE2: HubQuerKurve
+			Binding ein and HQE1.ein
+			Binding HQE1.aus2 and HQE2.ein
+			Binding HQE2.aus and aus2
+			Binding HQE1.aus1 and aus1
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass StopperBand {
+		Interface {
+			conjugated Port aus: PUebergabe
+			Port ein: PUebergabe
+		}
+		Structure {
+			external Port aus
+			external Port ein
+			conjugated Port bandmotor: PMotor
+			conjugated Port stopper: PStopper
+			ActorRef BandMotor: Motor
+			ActorRef Stopper: StopperEA
+			Binding bandmotor and BandMotor.fkt
+			Binding stopper and Stopper.fkt
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass Pruefstation {
+		Interface {
+			Port ein: PUebergabe
+			conjugated Port aus: PUebergabe
+		}
+		Structure {
+			ActorRef Ablauf: Pruefablauf
+			ActorRef Band: BandMitStopperBearbeitung
+			Binding Band.fkt and Ablauf.band
+			Binding ein and Band.ein
+			Binding Band.aus and aus
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass Motor {
+		Interface {
+			Port fkt: PMotor
+		}
+		Structure {
+			external Port fkt
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass StopperEA {
+		Interface {
+			Port fkt: PStopper
+		}
+		Structure {
+			external Port fkt
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass HubQuer1nach2 {
+		Interface {
+			Port ein: PUebergabe
+			conjugated Port aus1: PUebergabe
+			conjugated Port aus2: PUebergabe
+		}
+		Structure {
+			external Port ein
+			external Port aus1
+			external Port aus2
+			conjugated Port hubzylinder: PZylinder
+			ActorRef Hubzylinder: Zylinder
+			Binding hubzylinder and Hubzylinder.fkt
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass HubQuerKurve {
+		Interface {
+			Port ein: PUebergabe
+			conjugated Port aus: PUebergabe
+		}
+		Structure {
+			external Port ein
+			external Port aus
+			conjugated Port hubzylinder: PZylinder
+			ActorRef Hubzylinder: Zylinder
+			Binding hubzylinder and Hubzylinder.fkt
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass HubQuer2nach1 {
+		Interface {
+			Port ein2: PUebergabe
+			Port ein1: PUebergabe
+			conjugated Port aus: PUebergabe
+		}
+		Structure {
+			external Port ein2
+			external Port ein1
+			external Port aus
+			conjugated Port hubzylinder: PZylinder
+			ActorRef Hubzylinder: Zylinder
+			Binding hubzylinder and Hubzylinder.fkt
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				Transition tr0: initial -> Bereit { }
+			}
+		}
+	}
+
+	ActorClass Zylinder {
+		Interface {
+			Port fkt: PZylinder
+		}
+		Structure {
+			external Port fkt
+		}
+		Behavior {
+			StateMachine {
+				State Eingefahren {
+					entry {
+						"fkt.eingefahren();"
+					}
+				}
+				State Ausgefahren {
+					entry {
+						"fkt.ausgefahren();"
+					}
+				}
+				Transition tr0: initial -> Eingefahren { }
+				Transition tr1: Eingefahren -> Ausgefahren {
+					triggers {
+						<ausfahren: fkt>
+					}
+				}
+				Transition tr2: Ausgefahren -> Eingefahren {
+					triggers {
+						<einfahren: fkt>
+					}
+				}
+				Transition tr3: Eingefahren -> Eingefahren {
+					triggers {
+						<einfahren: fkt>
+					}
+				}
+				Transition tr4: Ausgefahren -> Ausgefahren {
+					triggers {
+						<ausfahren: fkt>
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Pruefablauf {
+		Interface {
+			conjugated Port band: PBand
+		}
+		Structure {
+			external Port band
+			conjugated Port querachse: PServo
+			conjugated Port hubzylinder: PZylinder
+			conjugated Port greifer: PZylinder
+			conjugated Port pruefung: PPruefung
+			Attribute BearbeitungsPosition: float64
+			Attribute BandPosition: float64
+			ActorRef Querachse: ServoIndraDrive
+			ActorRef Hubzylinder: Zylinder
+			ActorRef Greifer: Zylinder
+			ActorRef Pruefung: Funktionspruefung
+			Binding querachse and Querachse.fkt
+			Binding hubzylinder and Hubzylinder.fkt
+			Binding Greifer.fkt and greifer
+			Binding pruefung and Pruefung.fkt
+		}
+		Behavior {
+			StateMachine {
+				State Betrieb {
+					subgraph {
+						State Bereit {
+							entry {
+								"BandPosition = 437.33;"
+								"BearbeitungsPosition = 1097.54;"
+							}
+						}
+						State HubzylinderSenken1 { }
+						State Greifen { }
+						State HubzylinderHeben { }
+						State AchseAufBearbeitungsPos { }
+						State Pruefen { }
+						State AchseAufBandposition {
+							entry {
+								"querachse.start(BandPosition);"
+							}
+						}
+						State HubzylinderSenken2 { }
+						State Loslassen { }
+						State HubzylinderHeben2 { }
+						State BandFreigeben { }
+						ExitPoint tp1
+						Transition tr0: initial -> Bereit { }
+						Transition tr1: Bereit -> HubzylinderSenken1 {
+							triggers {
+								<voll: band>
+							}
+							action {
+								"hubzylinder.ausfahren();"
+							}
+						}
+						Transition tr2: HubzylinderSenken1 -> Greifen {
+							triggers {
+								<ausgefahren: hubzylinder>
+							}
+							action {
+								"greifer.einfahren();"
+							}
+						}
+						Transition tr3: Greifen -> HubzylinderHeben {
+							triggers {
+								<eingefahren: greifer>
+							}
+							action {
+								"hubzylinder.einfahren();"
+							}
+						}
+						Transition tr4: HubzylinderHeben -> AchseAufBearbeitungsPos {
+							triggers {
+								<eingefahren: hubzylinder>
+							}
+							action {
+								"querachse.start(BearbeitungsPosition);"
+							}
+						}
+						Transition tr5: AchseAufBearbeitungsPos -> Pruefen {
+							triggers {
+								<fertig: querachse>
+							}
+							action {
+								"pruefung.startPruefung();"
+							}
+						}
+						Transition tr6: Pruefen -> AchseAufBandposition {
+							triggers {
+								<pruefungGut: pruefung>
+							}
+						}
+						Transition tr7: Pruefen -> my tp1 {
+							triggers {
+								<pruefungSchlecht: pruefung>
+							}
+						}
+						Transition tr8: AchseAufBandposition -> HubzylinderSenken2 {
+							triggers {
+								<fertig: querachse>
+							}
+							action {
+								"hubzylinder.ausfahren();"
+							}
+						}
+						Transition tr9: HubzylinderSenken2 -> Loslassen {
+							triggers {
+								<ausgefahren: hubzylinder>
+							}
+							action {
+								"greifer.ausfahren();"
+							}
+						}
+						Transition tr10: Loslassen -> HubzylinderHeben2 {
+							triggers {
+								<ausgefahren: greifer>
+							}
+							action {
+								"hubzylinder.einfahren();"
+							}
+						}
+						Transition tr11: HubzylinderHeben2 -> BandFreigeben {
+							triggers {
+								<eingefahren: hubzylinder>
+							}
+							action {
+								"band.freigeben();"
+							}
+						}
+						Transition tr12: BandFreigeben -> Bereit {
+							triggers {
+								<leer: band>
+							}
+						}
+					}
+				}
+				State Fehler { }
+				Transition tr0: initial -> Betrieb { }
+				Transition tr1: tp1 of Betrieb -> Fehler { }
+			}
+		}
+	}
+
+	ActorClass ServoIndraDrive {
+		Interface {
+			Port fkt: PServo
+		}
+		Structure {
+			external Port fkt
+			SAP timeout: PTimer
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				State MotorLaeuft {
+					entry {
+						"timeout.startTimeout(100);"
+					}
+					exit {
+						"timeout.kill();"
+					}
+				}
+				Transition tr0: initial -> Bereit { }
+				Transition tr1: Bereit -> MotorLaeuft {
+					triggers {
+						<start: fkt>
+					}
+				}
+				Transition tr2: MotorLaeuft -> Bereit {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"fkt.fertig();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Funktionspruefung {
+		Interface {
+			Port fkt: PPruefung
+		}
+		Structure {
+			external Port fkt
+			SAP timeout: PTimer
+		}
+		Behavior {
+			StateMachine {
+				State Bereit { }
+				State PruefungLaeuft {
+					entry {
+						"timeout.startTimeout(100);"
+					}
+				}
+				Transition tr0: initial -> Bereit { }
+				Transition tr1: Bereit -> PruefungLaeuft {
+					triggers {
+						<startPruefung: fkt>
+					}
+				}
+				Transition tr2: PruefungLaeuft -> Bereit {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"fkt.pruefungGut();"
+					}
+				}
+			}
+		}
+	}
+
+	LogicalSystem SystemPruefung {
+		SubSystemRef subsystem: SubSystemPruefung
+	}
+
+	SubSystemClass SubSystemPruefung {
+		ActorRef application: App_SubSystemPruefung
+		ActorRef services: ATimingService
+		LayerConnection ref application satisfied_by services.timer
+	
+		LogicalThread dflt_thread
+	}
+
+	// automatically inserted App_SubSystemPruefung
+	ActorClass App_SubSystemPruefung {
+		Structure {
+			usercode1 {
+			"	
+				import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+				import org.eclipse.etrice.runtime.java.debugging.MSCFilter;
+				"
+			}
+			usercode2 {
+			"	
+				@Override
+				public void initUser()
+				{
+					MSCFilter filter = DebuggingService.getInstance().getAsyncLogger().getMSCFilter();
+					filter.addFilter(new MSCFilter.FilterItem(\"/SubSystemPruefung/application\", false));
+				}
+				"
+			}
+			ActorRef ModulPruefung: ModulPruefung
+		}
+	}
+
+	ActorClass BandMitStopperBearbeitung {
+		Interface {
+			Port fkt: PBand
+			Port ein: PUebergabe
+			conjugated Port aus: PUebergabe
+		}
+		Structure {
+			external Port fkt
+			external Port ein
+			external Port aus
+			conjugated Port bandmotor: PMotor
+			conjugated Port stopper: PStopper
+			SAP timeout: PTimer
+			ActorRef BandMotor: Motor
+			ActorRef Stopper: StopperEA
+			Binding bandmotor and BandMotor.fkt
+			Binding stopper and Stopper.fkt
+		}
+		Behavior {
+			StateMachine {
+				State Leer {
+					entry {
+						"fkt.leer();"
+					}
+				}
+				State Voll {
+					entry {
+						"fkt.voll();"
+					}
+				}
+				Transition tr0: initial -> Leer {
+					action {
+						"timeout.startTimeout(1000);"
+					}
+				}
+				Transition tr1: Leer -> Voll {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr2: Voll -> Leer {
+					triggers {
+						<freigeben: fkt>
+					}
+				}
+			}
+		}
+	}
+
+}
