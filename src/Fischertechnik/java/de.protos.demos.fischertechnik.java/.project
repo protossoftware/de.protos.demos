@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>de.protos.automation.demos.fischertechnik</name>
+	<name>de.protos.demos.fischertechnik.java</name>
 	<comment></comment>
 	<projects>
 		<project>de.protos.automation.io</project>

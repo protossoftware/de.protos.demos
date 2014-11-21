@@ -1,0 +1,40 @@
+; generated MSC for Trace2UML
+# begin sub system initialization
+	/MachineSystem/subSystem (!) /MachineSystem/subSystem/Controller 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/SourceSensor1 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/BeltStation2 
+	/MachineSystem/subSystem/Controller/BeltStation2 (!) /MachineSystem/subSystem/Controller/BeltStation2/InlineStation 
+	/MachineSystem/subSystem/Controller/BeltStation2 (!) /MachineSystem/subSystem/Controller/BeltStation2/Belt 
+	/MachineSystem/subSystem/Controller/BeltStation2/Belt (!) /MachineSystem/subSystem/Controller/BeltStation2/Belt/BeltDrive 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/PusherStation3 
+	/MachineSystem/subSystem/Controller/PusherStation3 (!) /MachineSystem/subSystem/Controller/PusherStation3/InlineStation 
+	/MachineSystem/subSystem/Controller/PusherStation3 (!) /MachineSystem/subSystem/Controller/PusherStation3/Pusher 
+	/MachineSystem/subSystem/Controller/PusherStation3/Pusher (!) /MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW 
+	/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW (!) /MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW/Drive 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/ProductionStation4 
+	/MachineSystem/subSystem/Controller/ProductionStation4 (!) /MachineSystem/subSystem/Controller/ProductionStation4/InlineStation 
+	/MachineSystem/subSystem/Controller/ProductionStation4 (!) /MachineSystem/subSystem/Controller/ProductionStation4/Belt 
+	/MachineSystem/subSystem/Controller/ProductionStation4/Belt (!) /MachineSystem/subSystem/Controller/ProductionStation4/Belt/BeltDrive 
+	/MachineSystem/subSystem/Controller/ProductionStation4 (!) /MachineSystem/subSystem/Controller/ProductionStation4/ProductionUnit 
+	/MachineSystem/subSystem/Controller/ProductionStation4/ProductionUnit (!) /MachineSystem/subSystem/Controller/ProductionStation4/ProductionUnit/StationDrive 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/ProductionStation5 
+	/MachineSystem/subSystem/Controller/ProductionStation5 (!) /MachineSystem/subSystem/Controller/ProductionStation5/InlineStation 
+	/MachineSystem/subSystem/Controller/ProductionStation5 (!) /MachineSystem/subSystem/Controller/ProductionStation5/Belt 
+	/MachineSystem/subSystem/Controller/ProductionStation5/Belt (!) /MachineSystem/subSystem/Controller/ProductionStation5/Belt/BeltDrive 
+	/MachineSystem/subSystem/Controller/ProductionStation5 (!) /MachineSystem/subSystem/Controller/ProductionStation5/ProductionUnit 
+	/MachineSystem/subSystem/Controller/ProductionStation5/ProductionUnit (!) /MachineSystem/subSystem/Controller/ProductionStation5/ProductionUnit/StationDrive 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/PusherStation6 
+	/MachineSystem/subSystem/Controller/PusherStation6 (!) /MachineSystem/subSystem/Controller/PusherStation6/InlineStation 
+	/MachineSystem/subSystem/Controller/PusherStation6 (!) /MachineSystem/subSystem/Controller/PusherStation6/Pusher 
+	/MachineSystem/subSystem/Controller/PusherStation6/Pusher (!) /MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW 
+	/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW (!) /MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW/Drive 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/BeltStation7 
+	/MachineSystem/subSystem/Controller/BeltStation7 (!) /MachineSystem/subSystem/Controller/BeltStation7/InlineStation 
+	/MachineSystem/subSystem/Controller/BeltStation7 (!) /MachineSystem/subSystem/Controller/BeltStation7/Belt 
+	/MachineSystem/subSystem/Controller/BeltStation7/Belt (!) /MachineSystem/subSystem/Controller/BeltStation7/Belt/BeltDrive 
+	/MachineSystem/subSystem/Controller (!) /MachineSystem/subSystem/Controller/SinkSensor8 
+	/MachineSystem/subSystem (!) /MachineSystem/subSystem/services 
+	/MachineSystem/subSystem/services (!) /MachineSystem/subSystem/services/timingService 
+	/MachineSystem/subSystem/services (!) /MachineSystem/subSystem/services/ioService 
+# done sub system initialization
+# begin sub system destruction

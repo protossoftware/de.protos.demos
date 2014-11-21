@@ -1,0 +1,438 @@
+RoomModel protos.automation.service.io {
+
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+
+	ActorClass AIOService {
+		Interface {
+			conjugated Port io_driver : PIOEvent
+			Port dig_in_sim [10] : PDigInSim
+			Port dig_out_sim [10] : PDigOutSim
+			SPP dig_in: PDigIn
+			SPP dig_out: PDigOut
+		}
+		Structure {
+			usercode1 {
+				"import de.protos.automation.io.modbus.jamod.ModbusIODriver;"
+				"import java.net.InetAddress;"
+				"import java.net.UnknownHostException;"
+				"import java.util.HashMap;"
+			}
+			usercode2 {
+				"
+				private HashMap<Integer, InterfaceItemBase> input2Port = new HashMap<Integer, InterfaceItemBase>();
+				private HashMap<Integer, InterfaceItemBase> outputSim2Port = new HashMap<Integer, InterfaceItemBase>();
+				// TODOTS: configurable initialization of IP and Port 
+				ModbusIODriver driver = null;
+				int inputRange, outputRange;
+				boolean listsInitialized = false;
+				"
+			}
+			
+			external Port io_driver
+			external Port dig_in_sim
+			external Port dig_out_sim
+			ServiceImplementation of dig_in
+			ServiceImplementation of dig_out
+			SAP polling_timer: PTimer
+		}
+		Behavior {
+			Operation initializeDriverAndData(){
+				"
+				inputRange = 32;
+				outputRange = 32;
+		
+				// TODOTS: this has to be made much more efficient on a lower level
+				try {
+					driver = new ModbusIODriver(InetAddress.getByName(\"192.168.1.140\"),502, inputRange, outputRange);
+					driver.connect();
+					executeIO();
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
+				"
+			}
+
+			Operation checkHWInputs(){
+				"
+				if (listsInitialized) {
+					driver.readInputBufferFromHW();
+					for (int channel = 0; channel < inputRange; channel++) {
+						if (driver.hasInputChanged(channel)) {
+							//System.out.print(\"Channel \" + channel + \"changed: \"+ (driver.getInput(channel)? \"1\" : \"0\"));
+							// only if value changed an event is triggered
+							PDigInPort port = (PDigInPort) input2Port.get(channel);
+							boolean value = driver.getInput(channel);
+							if (port!=null){
+								port.inputChanged(value ? 1 : 0);
+							}
+						} else {
+							// no changes -> no events
+						}
+					}
+					driver.invalidateInputs();
+				} else {
+					// the first time the list is only filled without change events
+					driver.readInputBufferFromHW();
+					driver.invalidateInputs();
+					listsInitialized = true;
+				}
+				"
+			}
+			Operation setHWOutputs(){
+				"
+				// write all outputs from list to hardware 
+				driver.writeOutputBufferToHW();
+				"
+			}
+		
+			Operation executeIO(){
+				"
+				setHWOutputs();
+				checkHWInputs();
+				"
+			}
+			
+			StateMachine {
+				Transition tr0: initial -> Idle {
+					action {
+						"
+						initializeDriverAndData();
+						polling_timer.startTimer(100);  // Timer for polling IOs;
+						"
+					}
+				}
+				Transition tr1: Idle -> Idle {
+					triggers {
+						<registerChannel:dig_in>
+					}
+					action {
+						"input2Port.put(x, ifitem);"
+						"((PDigInPort)ifitem).setChannel(x);"
+					}
+				}
+				
+				Transition tr11: Idle -> Idle {
+					triggers {
+						<getStatus:dig_in>
+					}
+					action {
+						"
+						PDigInPort port = ((PDigInPort) ifitem);
+						int channel = port.getChannel();
+						boolean value = driver.getInput(channel);
+						port.inputChanged(value ? 1 : 0);
+						"
+					}
+				}
+				
+				Transition tr2: Idle -> Idle {
+					triggers {
+						<registerChannel:dig_out>
+					}
+					action {
+						"((PDigOutPort)ifitem).setChannel(x);"
+					}
+				}
+				Transition tr3: Idle -> Idle {
+					triggers {
+						<ioEvent:io_driver>
+					}
+					action {
+						"// TODOTS: delete unused transition and port"
+					}
+				}
+				Transition tr4: Idle -> Idle {
+					triggers {
+						<setOn:dig_out>
+					}
+					action {
+						"
+						driver.setOutput(((PDigOutPort) ifitem).getChannel(), true);
+						"
+					}
+				}
+				Transition tr5: Idle -> Idle {
+					triggers {
+						<setOff:dig_out>
+					}
+					action {
+						"
+						driver.setOutput(((PDigOutPort) ifitem).getChannel(), false);
+						"
+					}
+				}
+				Transition tr6: Idle -> Idle {
+					triggers {
+						<set:dig_out>
+					}
+					action {
+						"
+						driver.setOutput(((PDigOutPort) ifitem).getChannel(), x!=0);
+						"
+					}
+				}
+				Transition tr7: Idle -> Idle {
+					triggers {
+						<timeout:polling_timer>
+					}
+					action {
+						"executeIO();"
+					}
+				}
+				State Idle
+			}
+		}
+	}
+
+	ActorClass AIOServiceSim {
+		Interface {
+			conjugated Port io_driver : PIOEvent
+			Port dig_in_sim [10] : PDigInSim
+			Port dig_out_sim [10] : PDigOutSim
+			SPP dig_in: PDigIn
+			SPP dig_out: PDigOut
+		}
+		Structure {
+			usercode1 {
+				"import java.util.HashMap;"
+			}
+			usercode2 {
+				"
+				private HashMap<Integer, InterfaceItemBase> input2Port = new HashMap<Integer, InterfaceItemBase>();
+				private HashMap<Integer, InterfaceItemBase> outputSim2Port = new HashMap<Integer, InterfaceItemBase>();
+				// TODOTS: configurable initialization of IP and Port 
+				int inputRange, outputRange;
+				boolean listsInitialized = false;
+				"
+			}
+			
+			external Port io_driver
+			external Port dig_in_sim
+			external Port dig_out_sim
+			ServiceImplementation of dig_in
+			ServiceImplementation of dig_out
+			SAP polling_timer: PTimer
+		}
+		Behavior {
+			Operation initializeDriverAndData(){
+				"
+				inputRange = 32;
+				outputRange = 32;
+				// TODOTS: this has to be made much more efficient on a lower level
+				// connect
+				// executeIO();
+				"
+			}
+
+			Operation checkHWInputs(){
+				/*"
+				if (listsInitialized) {
+					driver.readInputBufferFromHW();
+					for (int channel = 0; channel < inputRange; channel++) {
+						if (driver.hasInputChanged(channel)) {
+							//System.out.print(\"Channel \" + channel + \"changed: \"+ (driver.getInput(channel)? \"1\" : \"0\"));
+							// only if value changed an event is triggered
+							PDigInPort port = (PDigInPort) input2Port.get(channel);
+							boolean value = driver.getInput(channel);
+							if (port!=null){
+								port.inputChanged(value ? 1 : 0);
+							}
+						} else {
+							// no changes -> no events
+						}
+					}
+					driver.invalidateInputs();
+				} else {
+					// the first time the list is only filled without change events
+					driver.readInputBufferFromHW();
+					driver.invalidateInputs();
+					listsInitialized = true;
+				}
+				"*/
+				""
+			}
+			Operation setHWOutputs(){
+				"
+				// write all outputs from list to hardware 
+				// driver.writeOutputBufferToHW();
+				"
+			}
+		
+			Operation executeIO(){
+				"
+				setHWOutputs();
+				checkHWInputs();
+				"
+			}
+			
+			StateMachine {
+				Transition tr0: initial -> Idle {
+					action {
+						"
+						initializeDriverAndData();
+						//polling_timer.startTimer(100);  // Timer for polling IOs;
+						"
+					}
+				}
+				Transition tr1: Idle -> Idle {
+					triggers {
+						<registerChannel:dig_in>
+					}
+					action {
+						"input2Port.put(x, ifitem);"
+						"((PDigInPort)ifitem).setChannel(x);"
+					}
+				}
+				
+				Transition tr11: Idle -> Idle {
+					triggers {
+						<getStatus:dig_in>
+					}
+					action {
+						"
+						PDigInPort port = ((PDigInPort) ifitem);
+						int channel = port.getChannel();
+						//boolean value = driver.getInput(channel);
+						//port.inputChanged(value ? 1 : 0);
+						"
+					}
+				}
+				
+				Transition tr2: Idle -> Idle {
+					triggers {
+						<registerChannel:dig_out>
+					}
+					action {
+						"((PDigOutPort)ifitem).setChannel(x);"
+					}
+				}
+				Transition tr3: Idle -> Idle {
+					triggers {
+						<ioEvent:io_driver>
+					}
+					action {
+						"// TODOTS: delete unused transition and port"
+					}
+				}
+				Transition tr4: Idle -> Idle {
+					triggers {
+						<setOn:dig_out>
+					}
+					action {
+						"
+						//driver.setOutput(((PDigOutPort) ifitem).getChannel(), true);
+						"
+					}
+				}
+				Transition tr5: Idle -> Idle {
+					triggers {
+						<setOff:dig_out>
+					}
+					action {
+						"
+						//driver.setOutput(((PDigOutPort) ifitem).getChannel(), false);
+						"
+					}
+				}
+				Transition tr6: Idle -> Idle {
+					triggers {
+						<set:dig_out>
+					}
+					action {
+						"
+						//driver.setOutput(((PDigOutPort) ifitem).getChannel(), x!=0);
+						"
+					}
+				}
+				Transition tr7: Idle -> Idle {
+					triggers {
+						<timeout:polling_timer>
+					}
+					action {
+						"executeIO();"
+					}
+				}
+				State Idle
+			}
+		}
+	}
+
+	ProtocolClass PDigIn {
+		incoming {
+			Message getStatus ()
+			Message registerChannel (x : int32)
+		}
+		outgoing {
+			Message inputChanged (x : int32)
+			Message registerChannelDone ()
+			Message error ()
+		}
+		regular PortClass {
+//			Operation getChannel(): int32 { "return channel;" }
+//			Operation setChannel(c: int32) { "channel = c;" }
+			Attribute channel: int32
+		}
+		conjugated PortClass {
+			Attribute value: int32
+			Operation isOn(): boolean { "return value!=0;" }
+			Operation isOff(): boolean { "return value==0;" }
+			handle outgoing inputChanged {
+				"value = (Integer)((EventWithDataMessage) msg).getData();
+				getActor().receiveEvent(this, msg.getEvtId(),((EventWithDataMessage) msg).getData());"
+			}
+		}
+	}
+
+	ProtocolClass PDigOut {
+		incoming {
+			Message set (x : int32)
+			Message setOn ()
+			Message setOff ()
+			Message registerChannel (x : int32)
+		}
+		outgoing {
+			Message registerChannelDone ()
+			Message error ()
+		}
+		regular PortClass {
+//			Operation getChannel(): int32 { "return channel;" }
+//			Operation setChannel(c: int32) { "channel = c;" }
+			Attribute channel: int32
+		}
+	}
+
+	ProtocolClass PDigInSim {
+		incoming {
+			Message registerChannel (x : int32)
+			Message set (x : int32)
+			Message setOn ()
+			Message setOff ()
+		}
+		outgoing {
+			Message registerChannelDone ()
+			Message error ()
+		}
+	}
+
+	ProtocolClass PDigOutSim {
+		incoming {
+			Message registerChannel (x : int32)
+			Message getStatus ()
+		}
+		outgoing {
+			Message registerChannelDone ()
+			Message error ()
+			Message outputChanged ()
+		}
+	}
+
+	ProtocolClass PIOEvent {
+		incoming {
+		}
+		outgoing {
+			Message ioEvent ()
+		}
+	}
+
+}

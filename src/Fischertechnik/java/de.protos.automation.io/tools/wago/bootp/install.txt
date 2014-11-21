@@ -1,0 +1,23 @@
+Installation:
+
+Documentation 
+
+1. Unpack BootPSer.zip
+2. Install with disk1/setup.exe 
+3. start BootpServer
+4. Button <Edit Bootptab>
+
+Format:    NoProxy:ht=1:ha=<MAC-Address>:ip=<IP-Address>:
+Example:   NoProxy:ht=1:ha=0030DE012926:ip=192.168.1.140:
+
+5. Button <Start> 
+6. Connect Wago Ethernet Coupler to Ethernet and switch on
+7. Wago Ethernet Coupler is getting IP-Address from BootpServer
+8. Access to Wago Module via Webserver 
+logins: 
+User/Password
+admin wago
+user user
+guest guest 
+
+Additional Information can be found in m0841qs1d.pdf (Wago 750-841). 

@@ -8,10 +8,12 @@
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/de.protos.automation.demos.fischertechnik/model/fischertechnik/Fischertechnik.etmap}"/>
+<listEntry value="${workspace_loc:/de.protos.demos.fischertechnik.java/model/fischertechnik/Fischertechnik.etmap}"/>
 </listAttribute>
+<booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="Persist" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
+<booleanAttribute key="UseTranslation" value="true"/>
 <booleanAttribute key="Verbose" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 </launchConfiguration>

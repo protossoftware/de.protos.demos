@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Fischertechnik
-Bundle-SymbolicName: de.protos.automation.demos.fischertechnik
+Bundle-SymbolicName: de.protos.demos.fischertechnik.java
 Bundle-Version: 1.0.0
 Export-Package: workflow
 Require-Bundle: org.eclipse.etrice.generator;bundle-version="0.1.0",

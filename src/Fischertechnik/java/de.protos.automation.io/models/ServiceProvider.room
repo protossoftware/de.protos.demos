@@ -1,0 +1,49 @@
+RoomModel protos.automation.service.provider {
+
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import protos.automation.service.io.* from "IOService.room"
+	
+	// the ServiceProvider is forwarding the SPPs to the corresponding implementations
+	// the IOService is using the TimingService
+	ActorClass ServiceProvider {
+		Interface {
+			SPP dig_in: protos.automation.service.io.PDigIn
+			SPP dig_out: protos.automation.service.io.PDigOut
+			
+			SPP timer: room.basic.service.timing.PTimer
+		}
+		
+		Structure{
+			ActorRef timingService : room.basic.service.timing.ATimingService
+			ActorRef ioService : protos.automation.service.io.AIOService
+			LayerConnection relay_sap  dig_in satisfied_by ioService.dig_in
+			LayerConnection relay_sap  dig_out satisfied_by ioService.dig_out
+			LayerConnection relay_sap  timer satisfied_by timingService.timer
+			
+			LayerConnection ref ioService satisfied_by timingService.timer
+		}
+		Behavior { }
+	}
+
+	ActorClass ServiceProviderSim {
+		Interface {
+			SPP dig_in: protos.automation.service.io.PDigIn
+			SPP dig_out: protos.automation.service.io.PDigOut
+			
+			SPP timer: PTimer
+		}
+		
+		Structure{
+			ActorRef timingService : room.basic.service.timing.ATimingService
+			ActorRef ioService : protos.automation.service.io.AIOServiceSim
+			LayerConnection relay_sap  dig_in satisfied_by ioService.dig_in
+			LayerConnection relay_sap  dig_out satisfied_by ioService.dig_out
+			LayerConnection relay_sap  timer satisfied_by timingService.timer
+			
+			LayerConnection ref ioService satisfied_by timingService.timer
+		}
+		Behavior { }
+	}
+
+	
+}
