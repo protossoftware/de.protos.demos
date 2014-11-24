@@ -21,9 +21,40 @@ RoomModel XMC2GoDemoModel {
 		LogicalThread interruptThread
 		ActorInstanceMapping timingService -> timingThread
 		ActorInstanceMapping pingPong/dimmer -> timingThread
-		ActorInstanceMapping pingPong/ref1 -> timingThread
+		ActorInstanceMapping pingPong/dimmer2 -> timingThread
+		ActorInstanceMapping pingPong/ping -> timingThread
 		ActorInstanceMapping pingPong/uartMirror -> interruptThread
 	}
+
+
+  ActorClass ABusyWaitingSimu {
+		Structure {
+			SAP timer:PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> running {
+					action {
+						"timer.startTimer(100);"
+					}
+				}
+				Transition tr0: running -> running {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"volatile unsigned int test=0;"
+						"unsigned int i;"
+						""
+						"for (i=0;i<100000;i++){"
+						"test++;"
+						"}"
+					}
+				}
+				State running
+			}
+		}
+	}	
 
 	ActorClass AUartMirror {
 		Interface {
@@ -64,12 +95,13 @@ RoomModel XMC2GoDemoModel {
 				"extern PInterruptConjPort* uart_isr_port;"
 			}
 			conjugated Port interruptSender: PInterrupt
-			ActorRef ref0: MrPing
-			ActorRef ref1: MrPong
+			ActorRef ping: MrPing
+			ActorRef pong: MrPong
 			ActorRef dimmer: ADimmer
 			ActorRef dimmer2: ADimmer
 			ActorRef uartMirror: AUartMirror
-			Binding ref1.p0 and ref0.p0
+			ActorRef busyWating: ABusyWaitingSimu
+			Binding ping.p0 and pong.p0
 			Binding uartMirror.uartIsrPort and interruptSender
 		}
 		Behavior {
