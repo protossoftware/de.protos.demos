@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project de.protos.automation.io with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="C:/entw/projects/eTrice/repo/de.protos.demos/src/Fischertechnik/java/de.protos.automation.io/release/ModbusGui.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="de.protos.automation.io.modbus.jamod.ModbusGui"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ jamod-1.2-SNAPSHOT.jar junit.jar org.hamcrest.core_1.3.0.v201303031735.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="C:/entw/projects/eTrice/repo/de.protos.demos/src/Fischertechnik/java/de.protos.automation.io/bin"/>
+            <zipfileset dir="C:\entw\projects\eTrice\repo\de.protos.demos\src\Fischertechnik\java\de.protos.automation.io\libs\modbus\jamod" includes="jamod-1.2-SNAPSHOT.jar"/>
+            <fileset dir="C:/entw/projects/eTrice/repo/de.protos.demos/src/Fischertechnik/java/org.eclipse.etrice.runtime.java/target/classes"/>
+            <zipfileset dir="C:\entw\tools\Eclipse\kepler-R-win32-eTrice-dev\eclipse\plugins\org.junit_4.11.0.v201303080030" includes="junit.jar"/>
+            <zipfileset dir="C:\entw\tools\Eclipse\kepler-R-win32-eTrice-dev\eclipse\plugins" includes="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+            <fileset dir="C:/entw/projects/eTrice/repo/de.protos.demos/src/Fischertechnik/java/org.eclipse.etrice.modellib.java/target/classes"/>
+        </jar>
+    </target>
+</project>

@@ -1,0 +1,5 @@
+/MachineSubSystem/Controller/ProductionStation4/ProductionUnit/processedUnits=1
+/MachineSubSystem/Controller/ProductionStation5/ProductionUnit/processedUnits=1
+/MachineSubSystem/Controller/onlineTime=3
+/MachineSubSystem/Controller/startTimestamp="Sat Sep 22 19:05:23 CEST 2012"
+polling_timer[ms]=2000

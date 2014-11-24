@@ -1,0 +1,9 @@
+MappingModel MappingModel1 {
+	import Fischertechnik.* from "Fischertechnik.room"
+	import PhysicalModel1.* from "../Fischertechnik.etphys"
+	Mapping MachineSystem -> PhysSys1 {
+		SubSystemMapping subSystem -> nodeRef1 {
+			ThreadMapping dflt_thread -> PhysicalThread1
+		}
+	}
+}
