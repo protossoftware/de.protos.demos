@@ -54,7 +54,7 @@ static void* etMemory_getHeapMem(etFreeListMemory* self, etUInt16 size) {
 	etUInt8* obj = NULL;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getHeapListMem")
 
-	if (self->current < ((etUInt8*)self)+self->base.size)
+	if ((self->current + size) <= ((etUInt8*)self)+self->base.size)
 	{
 		obj = self->current;
 		self->current += size;
