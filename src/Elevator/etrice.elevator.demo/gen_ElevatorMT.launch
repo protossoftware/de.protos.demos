@@ -5,7 +5,7 @@
 <booleanAttribute key="GenDocumentation" value="true"/>
 <booleanAttribute key="GenInstanceDiagram" value="true"/>
 <stringAttribute key="GenModelPath" value=""/>
-<stringAttribute key="InfoPath" value="src-gen-info-st"/>
+<stringAttribute key="InfoPath" value="src-gen-info-mt"/>
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="false"/>
 <listAttribute key="ModelFiles">
@@ -13,7 +13,7 @@
 </listAttribute>
 <booleanAttribute key="OverrideDirectories" value="true"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
-<stringAttribute key="SrcgenPath" value="src-gen-st"/>
+<stringAttribute key="SrcgenPath" value="src-gen-mt"/>
 <booleanAttribute key="UseTranslation" value="true"/>
 <booleanAttribute key="Verbose" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${project}"/>
