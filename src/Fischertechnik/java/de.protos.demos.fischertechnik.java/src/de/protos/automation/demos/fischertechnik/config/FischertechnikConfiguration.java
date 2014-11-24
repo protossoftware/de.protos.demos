@@ -55,9 +55,11 @@ public class FischertechnikConfiguration {
 	
 	private void initValuesForSetupControl(){
 		valueMap = new HashMap<String, Integer>();
-
+		
+		final int inputOffset = 2; // offset for additional WAGO Module (750-610) -> 2 additional inputs
+		
 		// LineSource
-		valueMap.put("/MachineSystem/subSystem/Controller/SourceSensor1->sensor", 0);
+		valueMap.put("/MachineSystem/subSystem/Controller/SourceSensor1->sensor", 0+inputOffset);
 		
 		//****************
 		//LEBand1
@@ -67,7 +69,7 @@ public class FischertechnikConfiguration {
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation2/Belt/BeltDrive->lr", 0);
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation2/Belt/BeltDrive->start", 1);
 
-		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation2/Belt->sensor", 1);
+		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation2/Belt->sensor", 1+inputOffset);
 
 		//****************
 		//PusherStation1
@@ -76,8 +78,8 @@ public class FischertechnikConfiguration {
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW/Drive->lr", 2);
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW/Drive->start", 3);
 		//Schieber1/PusherHW
-		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW->sensorFront", 2);
-		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW->sensorBack", 3);
+		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW->sensorFront", 2+inputOffset);
+		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW->sensorBack", 3+inputOffset);
 		
 		//****************
 		// ProductionStation1
@@ -86,7 +88,7 @@ public class FischertechnikConfiguration {
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/Belt/BeltDrive->lr", 4);
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/Belt/BeltDrive->start", 5);
 		//Band2/
-		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/Belt->sensor", 4);
+		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/Belt->sensor", 4+inputOffset);
 
 		//ProductionStation1/Drive
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/ProductionUnit/StationDrive->lr", 6);
@@ -100,7 +102,7 @@ public class FischertechnikConfiguration {
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation5/Belt/BeltDrive->lr", 8);
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation5/Belt/BeltDrive->start", 9);
 		//Band2/
-		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation5/Belt->sensor", 5);
+		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation5/Belt->sensor", 5+inputOffset);
 
 		//ProductionStation1/Drive
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation5/ProductionUnit/StationDrive->lr", 10);
@@ -113,8 +115,8 @@ public class FischertechnikConfiguration {
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW/Drive->lr", 12);
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW/Drive->start", 13);
 		//Schieber1/PusherHW
-		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW->sensorFront", 6);
-		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW->sensorBack", 7);
+		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW->sensorFront", 6+inputOffset);
+		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW->sensorBack", 7+inputOffset);
 		
 		
 		//****************
@@ -124,7 +126,7 @@ public class FischertechnikConfiguration {
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation7/Belt/BeltDrive->lr", 14);
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation7/Belt/BeltDrive->start", 15);
 		//Band4/
-		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation7/Belt->sensor", 8);
+		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation7/Belt->sensor", 8+inputOffset);
 		
 		
 	}

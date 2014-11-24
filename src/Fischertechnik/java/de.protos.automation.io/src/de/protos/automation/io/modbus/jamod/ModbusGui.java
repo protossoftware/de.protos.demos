@@ -125,16 +125,22 @@ public class ModbusGui extends JFrame implements ActionListener {
 	}
 
 	private void initInputList(){
+
+		final int inputOffset = 2; // offset for additional WAGO Module (750-610) -> 2 additional inputs
 		
-		addInputTextField(new String("SensorEinlegestation"),0);
-		addInputTextField(new String("SensorBand1"),1);
-		addInputTextField(new String("Schieber1Vorne"),2);
-		addInputTextField(new String("Schieber1Hinten"),3);
-		addInputTextField(new String("SensorBand2"),4);
-		addInputTextField(new String("SensorBand3"),5);
-		addInputTextField(new String("Schieber2Vorne"),6);
-		addInputTextField(new String("Schieber2Hinten"),7);
-		addInputTextField(new String("SensorBand4"),8);
+		addInputTextField(new String("--- not used ---"),0);
+		addInputTextField(new String("--- not used ---"),1);
+
+		addInputTextField(new String("SensorEinlegestation"),0+inputOffset);
+		addInputTextField(new String("SensorBand1"),1+inputOffset);
+		addInputTextField(new String("Schieber1Vorne"),2+inputOffset);
+		addInputTextField(new String("Schieber1Hinten"),3+inputOffset);
+		addInputTextField(new String("SensorBand2"),4+inputOffset);
+		addInputTextField(new String("SensorBand3"),5+inputOffset);
+		addInputTextField(new String("Schieber2Vorne"),6+inputOffset);
+		addInputTextField(new String("Schieber2Hinten"),7+inputOffset);
+		addInputTextField(new String("SensorBand4"),8+inputOffset);
+
 		for (int i=inputTexts.size();i<inputRange; i++){
 			addInputTextField(new String("--- not used ---"),i);
 		}
