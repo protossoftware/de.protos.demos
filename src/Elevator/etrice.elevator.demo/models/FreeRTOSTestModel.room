@@ -1,6 +1,6 @@
 RoomModel FreeRTOSTestModel_Model {
 
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "Types.room"
 
 	import room.basic.service.timing.* from "TimingService.room"
 
