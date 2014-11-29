@@ -20,9 +20,9 @@
     </path>
     <path id="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.modellib.java]].libraryclasspath"/>
     <path id="org.eclipse.etrice.modellib.java.classpath">
+        <path refid="org.eclipse.etrice.runtime.java.classpath"/>
         <pathelement location="target/classes"/>
         <path refid="Plug-in Dependencies.libraryclasspath"/>
-        <path refid="org.eclipse.etrice.runtime.java.classpath"/>
         <path refid="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.modellib.java]].libraryclasspath"/>
     </path>
     <target name="init">
@@ -31,12 +31,6 @@
             <fileset dir="src-gen">
                 <include name="**/*.java"/>
                 <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-        <copy includeemptydirs="false" todir="target/classes">
-            <fileset dir="model">
-                <exclude name="**/*.java"/>
-                <exclude name="**"/>
             </fileset>
         </copy>
     </target>
@@ -54,9 +48,7 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" includeantruntime="false" source="${source}" target="${target}">
             <src path="src-gen"/>
-            <src path="model"/>
             <include name="**/*.java"/>
-            <exclude name="**"/>
             <classpath refid="org.eclipse.etrice.modellib.java.classpath"/>
         </javac>
     </target>

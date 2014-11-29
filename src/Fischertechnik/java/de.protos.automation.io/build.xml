@@ -21,9 +21,9 @@
     </path>
     <path id="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.modellib.java]].libraryclasspath"/>
     <path id="org.eclipse.etrice.modellib.java.classpath">
+        <path refid="org.eclipse.etrice.runtime.java.classpath"/>
         <pathelement location="${org.eclipse.etrice.modellib.java.location}/target/classes"/>
         <path refid="Plug-in Dependencies.libraryclasspath"/>
-        <path refid="org.eclipse.etrice.runtime.java.classpath"/>
         <path refid="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.modellib.java]].libraryclasspath"/>
     </path>
     <path id="JUnit 4.libraryclasspath">
