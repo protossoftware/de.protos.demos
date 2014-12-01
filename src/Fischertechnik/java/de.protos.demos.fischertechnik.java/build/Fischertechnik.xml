@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project de.protos.demos.fischertechnik.java with Jar-in-Jar Loader and deploy">
+<project default="deploy" name="Create Runnable Jar for Project de.protos.demos.fischertechnik.java with Jar-in-Jar Loader and deploy">
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <target name="create_run_jar">
@@ -20,7 +20,7 @@
             <fileset dir="../../org.eclipse.etrice.modellib.java/target/classes"/>
         </jar>
     </target>
-    <target name="deploy">
+    <target name="deploy" depends="create_run_jar">
     	<copy file="../release/Fischertechnik.jar" tofile="C:\entw\demos\FischertechnikReleases\Fischertechnik.jar"/>
 	</target>
 	
