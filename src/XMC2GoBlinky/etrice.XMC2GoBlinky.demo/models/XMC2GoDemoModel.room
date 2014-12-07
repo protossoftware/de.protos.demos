@@ -147,7 +147,6 @@ RoomModel XMC2GoDemoModel {
 					}
 					action {
 						"pwm.setDutyCycle(counter);"
-						"//PWMSP001ConjPort_setDutyCycle(&self->constData->pwm,counter);"
 					}
 				}
 				Transition tr3: goingOff -> cp cp1 {

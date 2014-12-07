@@ -1,0 +1,314 @@
+<%@ jet package="CodeGenerator" class="nvic001c_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[NVIC001.c]*/
+<% String AppBaseuri = "app/nvic001/";%>
+<% String MappedUri = null; %>
+<% String NodeID = null; %>
+
+/*******************************************************************************
+ Copyright (c) 2012, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without** 
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series   			                  **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : February 18, 2013                                      **
+**                                                                            **
+*******************************************************************************/
+/**
+ * @file   NVIC001.c
+ *
+ * @brief  NVIC_SRGeneral_NVIC001 App
+ *         
+ *         A Dave App can have the  one of the following implementations
+ *         to handle interrupts.
+ *
+ *		   i) App provides a interrupt handler.
+ *		   ii) App provides a event handler.
+ *		   iii) App doesn't provide any event or interrupt handler.
+ *
+ *		   NVIC_SRGeneral_NVIC001 App is used when an App provides a event
+ *		   handler.  This App provides a GUI for configuration of NVIC
+ *		   parameters ( priority etc).
+ *			
+ *		   In case module specific handling of interrupts is required,
+ *		   then a new module specific App needs to be designed. (module specific
+ *		   NVIC App: such as NVIC_SCU_NVIC003 & NVIC_DMA_NVIC004 App )
+ *
+ */
+
+/*******************************************************************************
+**                      Author(s) Identity                                    **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** SSS       App Developer                                                    **
+*******************************************************************************/
+
+/* Revision History															  
+ * 18-Feb-13 V1.0.6  1. Porting to XMC1000 Devices.
+ *                   2. Conditional Codes are added to support both XMC1000 and 
+ *                   XMC4000 devices.
+ *                   3. Debug related dummy Macros are added. 				   
+ */
+/*******************************************************************************
+ ** INCLUDE FILES                                                             **
+ ******************************************************************************/
+/* Inclusion of header file */
+#include <DAVE3.h>
+
+<% String TempApps = null;
+   String MyAppName = null;
+   ArrayList<String> apps;
+   String TempLowerApps = null; 
+   boolean DBGApp = false;   
+   apps=(ArrayList<String>)(app.getApps());
+   for (int k = 0; k < apps.size(); k++) {
+   TempApps = apps.get(k);
+// if(app.isAppInitProvider(apps.get(k)) == true) {
+   MyAppName = TempApps.substring(TempApps.indexOf("/app/") + 5, TempApps.lastIndexOf("/"));
+  TempLowerApps = MyAppName.toLowerCase();
+   if (TempLowerApps.equalsIgnoreCase("dbg002")) {DBGApp = true;}   
+ //  }  
+  } %>
+
+<% if (!DBGApp) { %>  
+/*****************************************************************************
+              DUMMY DEFINTIONS OF DEBUG LOG MACROS
+*****************************************************************************/
+/*These definitions are included here to avoid compilation errors,
+ since the DBG002 app is not part of the project. All the macros are defined
+ as empty*/ 
+#ifndef _DBG002_H_
+
+#define DBG002_RegisterCallBack(A,B,C)
+#define DBG002_I(e) 
+#define DBG002_IG(e,g) 
+#define DBG002_IH(e,h) 
+#define DBG002_IP(e,p) 
+#define DBG002_IGH(e,g,h) 
+#define DBG002_IGP(e,g,p) 
+#define DBG002_IHP(e,h,p) 
+#define DBG002_IGHP(e,g,h,p) 
+#define DBG002_N(e) 
+#define DBG002_NG(e,g) 
+#define DBG002_NH(e,h) 
+#define DBG002_NP(e,p) 
+#define DBG002_NGH(e,g,h) 
+#define DBG002_NGP(e,g,p) 
+#define DBG002_NHP(e,h,p) 
+#define DBG002_NGHP(e,g,h,p) 
+#define DBG002_ID(e) 
+#define DBG002_IS(e) 
+#define DBG002_ISG(e,g) 
+#define DBG002_SAFETY_CRITICAL(groupid,messageid,length,value)
+#define DBG002_CRITICAL(groupid,messageid,length,value)
+#define DBG002_ERROR(groupid,messageid,length,value)
+#define DBG002_WARNING(groupid,messageid,length,value)
+#define DBG002_INFO(groupid,messageid,length,value)
+#define DBG002_TRACE(groupid,messageid,length,value)
+#define DBG002_FUNCTION_ENTRY(GID, Status) 
+#define DBG002_FUNCTION_EXIT(GID, Status) 
+
+#endif/* End of definitions of dummy Debug Log macros*/
+<% } %>                  
+
+/*******************************************************************************
+**                      Private Macro Definitions                             **
+*******************************************************************************/
+#undef APP_GID
+#define APP_GID DBG002_GID_NVIC001
+<% int IsTIMM1Device = -1; %>
+<% IsTIMM1Device = ((app.getSoftwareId().substring(0,1).compareTo("1")==0)?1:0); %>
+/*******************************************************************************
+**                      Private Type Definitions                              **
+*******************************************************************************/
+
+/*******************************************************************************
+**                 Private Function Declarations:
+*******************************************************************************/
+
+/*******************************************************************************
+**                      Global Constant Definitions                           **
+*******************************************************************************/
+
+/*******************************************************************************
+**                      Global Variable Definitions                           **
+*******************************************************************************/
+
+/*******************************************************************************
+**                      Private Constant Definitions                          **
+*******************************************************************************/
+
+/*******************************************************************************
+**                 Function like macro definitions                            **
+*******************************************************************************/
+/*******************************************************************************
+**                      Private Function Definitions                          **
+*******************************************************************************/
+
+/*******************************************************************************
+**                      Public Function Definitions                           **
+*******************************************************************************/
+
+/*  Function to initialise the NVIC node parameters based on 
+ *  UI configuration.
+ */
+void NVIC001_Init(void)
+{
+  /*<<<DD_NVIC001_API_1>>>*/			
+   DBG002_FUNCTION_ENTRY(APP_GID,NVIC001_FUNC_ENTRY);	
+ <% String appInst  = null; %>
+ <% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/nvic001/"));
+ for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+  <% MappedUri = app.getMappedUri(AppBaseuri + appInst + "/nvicnode"); %>
+  <% if((MappedUri != null) && (MappedUri != "")) { %>
+  <% NodeID = MappedUri.substring(MappedUri.lastIndexOf('/')+ 1 );
+  int Offset = Integer.parseInt(NodeID); 
+  int Priority = 0;
+  int SubPriority=0;
+  if(IsTIMM1Device ==1)
+  {
+  Priority = app.getIntegerValue(AppBaseuri + appInst +"/NVIC001_TIMMirwInterruptPriority");
+  }
+  else
+  {
+  Priority = app.getIntegerValue(AppBaseuri + appInst +"/NVIC001_irwInterruptPriority");
+  SubPriority = app.getIntegerValue(AppBaseuri + appInst +"/NVIC001_irwInterruptSubPriority");
+  }
+ 
+  int IntEnable = app.getIntegerValue(AppBaseuri + appInst +"/NVIC001_erwEnableInt/0");%>
+  /* Set Interrupt Priority for NVIC <%=NodeID%> Node App Instance <%=appInst%>  */
+  <% if(IsTIMM1Device ==1) %>
+  <%{ %>
+  NVIC_SetPriority((IRQn_Type)<%=NodeID%>, <%=Priority%>);
+  <%} %>
+<% else %>
+  <%{ %>
+  NVIC_SetPriority((IRQn_Type)<%=NodeID%>, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),<%=Priority%>,<%=SubPriority%>));
+  <%} %>
+  <%   if(IntEnable ==1) { %>   
+  /* Enable Interrupt */
+  NVIC_EnableIRQ((IRQn_Type)<%=NodeID%>);
+  <% }}} %>
+   DBG002_FUNCTION_EXIT(APP_GID,NVIC001_FUNC_EXIT);
+}
+
+/**  Function to get the mapped node ID.  
+ *  
+ */
+uint8_t  NVIC001_GetInterruptID(const NVIC001_HandleType* Handle)
+{
+  /*<<<DD_NVIC001_API_2>>>*/
+    DBG002_FUNCTION_ENTRY(APP_GID,NVIC001_FUNC_ENTRY);
+  return Handle->NodeID;
+  DBG002_FUNCTION_EXIT(APP_GID,NVIC001_FUNC_EXIT);
+}
+
+<% for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+<% MappedUri = app.getMappedUri(AppBaseuri + appInst + "/nvicnode"); %>
+<% if((MappedUri != null) && (MappedUri != "")) { %>
+<% NodeID = MappedUri.substring(MappedUri.lastIndexOf('/')+ 1 );
+   int Offset = Integer.parseInt(NodeID); %>
+/**
+ * @brief Interrupt Handler for NVIC Node <%=NodeID%>.The 
+ * 		  Event handlers registered by top level App is executed
+ *        within the Interrupt Handler
+ * 
+ */
+void IRQ_Hdlr_<%=Offset%>(void)
+{
+<% String MpiApps = null;
+   String MpiAppName = null;
+   int MPA01AppExist = 0;
+   ArrayList<String> appss;
+   appss=(ArrayList<String>)(app.getApps());%>
+ 	 <%for (int k = 0; k < apps.size(); k++) {
+ 		MpiApps = appss.get(k);
+ 		MpiAppName =  MpiApps.substring( MpiApps.indexOf("/app/") + 5,  MpiApps.lastIndexOf("/"));%>
+		 <%if((MpiAppName.compareTo("mpa01") == 0) && (IsTIMM1Device == 1)) {
+		   MPA01AppExist =1;%>
+  int PerId = MPA01_GetPeripheralId(IRQ_Hdlr_<%=Offset%>Id);
+  
+  if(-1 != PerId)
+    MPA01_Enable(PerId);
+		 <%}%>
+	 <%}%> 
+
+  /* <<<DD_NVIC001_non_API_1>>>*/
+  DBG002_FUNCTION_ENTRY(APP_GID,NVIC001_FUNC_ENTRY);	   
+  <%String EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction1");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+  /* Calling user defined Event handler <%=EventHandler%> */
+  <%=EventHandler%>();
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction2");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+  /* Calling user defined Event handler <%=EventHandler%> */
+  <%=EventHandler%>();
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction3");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+  /* Calling user defined Event handler <%=EventHandler%> */
+  <%=EventHandler%>();
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction4");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+  /* Calling user defined Event handler <%=EventHandler%> */
+  <%=EventHandler%>();
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction5");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+  /* Calling user defined Event handler <%=EventHandler%> */
+  <%=EventHandler%>();
+  <% } %>
+   <% if(MPA01AppExist==1) {%>
+  if(-1 != PerId)
+    MPA01_Disable(PerId);
+  <%}%> 
+  DBG002_FUNCTION_EXIT(APP_GID,NVIC001_FUNC_EXIT);
+}
+<% }} %>
+
+/*CODE_BLOCK_END*/

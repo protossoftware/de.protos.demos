@@ -1,0 +1,113 @@
+<%@ jet package="CodeGenerator" class="nvic001_confh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+<% String AppBaseuri = "app/nvic001/";%>
+/*CODE_BLOCK_BEGIN[NVIC001_Conf.h]*/
+/*******************************************************************************
+ *
+ * Copyright (C) 2014 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with 
+ * Infineon's microcontrollers.  
+ * This file can be freely distributed within development tools that are 
+ * supporting such microcontrollers. 
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : Jan 17, 2014                                           **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** SNR          App Developer                                                 **
+*******************************************************************************/
+/**
+ * @file   NVIC001_Conf.h
+ *
+ * @brief  Configuration file generated based on UI settings 
+ *         of NVIC001 App
+ *
+ */
+/* Revision History															  
+ * 18  Feb 2013   v1.0.6   Ported To XMC1000. 			
+   17  Jan 2014   v1.0.12  C++ support added.		   
+ */
+#ifndef _CONF_NVIC001_H_
+#define _CONF_NVIC001_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+//****************************************************************************
+// @Defines
+//****************************************************************************
+
+#include <DAVE3.h>
+
+
+<% String MappedUri = null; %>
+<% String appInst  = null; %>
+
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/nvic001/"));
+ for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+<% MappedUri = app.getMappedUri(AppBaseuri + appInst + "/nvicnode"); %>
+<% if((MappedUri != null) && (MappedUri != "")) { %>
+extern const NVIC001_HandleType NVIC001_Handle<%=appInst%>;
+  <%String EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction1");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+/*User defined Event Handler function */  
+extern void <%=EventHandler%>(void);
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction2");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+/*User defined Event Handler function */ 
+extern void <%=EventHandler%>(void);
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction3");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+/*User defined Event Handler function */ 
+extern void <%=EventHandler%>(void);
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction4");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+/*User defined Event Handler function */ 
+extern void <%=EventHandler%>(void);
+  <% } %>
+  <% EventHandler = app.getStringValue(AppBaseuri + appInst +"/NVIC001_srwUserFunction5");
+  if((EventHandler != null) && (EventHandler != "")) { %>
+/*User defined Event Handler function */ 
+extern void <%=EventHandler%>(void);
+  <% } %>
+<% } %>
+<% else { %>
+// NVIC NODE NOT MAPPED FOR APP INSTANCE <%=appInst%>
+<% } %>
+<%} %> 
+
+#ifdef __cplusplus
+}
+#endif
+#endif  // ifndef _CONF_NVIC001_H_
+
+/*CODE_BLOCK_END*/

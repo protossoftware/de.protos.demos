@@ -5,6 +5,7 @@ MappingModel ElevatorMapping_Model {
 	Mapping Elevator_LogSys -> ElevatorDemoBoard_PhysSys {
 		SubSystemMapping elevator_subSysRef -> msp430FreeRTOS {
 			ThreadMapping defaultThread -> PhysicalThreadLowPrio
+			ThreadMapping midPrioThread -> PhysicalThreadLowPrio
 			ThreadMapping timingThread -> PhysicalThreadLowPrio
 		}
 	}

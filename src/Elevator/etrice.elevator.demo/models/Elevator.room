@@ -9,6 +9,7 @@ for embedded realtime systems. It provides a run to completion semantics. ETrice
 	import room.basic.service.timing.* from "TimingService.room"
 
 	import room.basic.service.serial.* from "SerialService.room"
+	import room.basic.annotations.* from "Annotations.room"
 
 	LogicalSystem Elevator_LogSys {
 		SubSystemRef elevator_subSysRef: Elevator_LogSubSys
@@ -23,7 +24,9 @@ The instance diagram provides an overview of the generated instances."
 		ActorRef timingService: ATimingService
 		LayerConnection ref elevator satisfied_by timingService.timer
 		LogicalThread defaultThread
+		LogicalThread midPrioThread
 		LogicalThread timingThread
+		ActorInstanceMapping elevator/top -> midPrioThread
 		ActorInstanceMapping timingService -> timingThread
 	}
 
@@ -103,18 +106,7 @@ The instance diagram provides an overview of the generated instances."
 			StateMachine {
 				Transition init: initial -> idle {
 					action {
-						"unsigned char i;"
-						"for(i=0;i<5;i++){"
-						"\tFloorPort[i].setFloor(i);"
-						"\tupRequests[i]=0;"
-						"\tdownRequests[i]=0;"
-						"}"
-						"floor=0;"
-						"MotorPort.goUpOneFloor();"
-						"idleRequest=0;"
-						"reportState=0;"
-						"idleFloor=2;"
-						"idleTime=10;"
+						"unsigned char i;\nfor(i=0;i<5;i++){\n\tFloorPort[i].setFloor(i);\n\tupRequests[i]=0;\n\tdownRequests[i]=0;\n}\nfloor=0;\nMotorPort.goUpOneFloor();\nidleRequest=0;\nreportState=0;\n//idleFloor=2;\nidleTime=10;"
 					}
 				}
 				Transition tr0: my tp0 -> my tp0 {
@@ -366,17 +358,7 @@ The instance diagram provides an overview of the generated instances."
 						}
 						State doorClosed {
 							entry {
-								"reportState=3;"
-								""
-								"if ( (floor!=idleFloor) && (idleTime > 0) ) {"
-								"\ttimer.startTimeout(idleTime * 1000);\t"
-								"}"
-								""
-								"//if ( (floor!=idleFloor) && (idleTime > 0) ) {"
-								"//\ttimer.startTimeout(idleTime * 1000);\t"
-								"//}"
-								"//transitioncode:"
-								"//upRequests[idleFloor]=1;"
+								"reportState=3;\n\nif ( (floor!=idleFloor) && (idleTime > 0) ) {\n\ttimer.startTimeout(idleTime * 1000);\t\n}\n\n\n//if ( (floor!=idleFloor) && (idleTime > 0) ) {\n//\ttimer.startTimeout(idleTime * 1000);\t\n//}\n//transitioncode:\n//upRequests[idleFloor]=1;"
 							}
 						}
 					}
@@ -917,7 +899,6 @@ The instance diagram provides an overview of the generated instances."
 			ActorRef motor: AMotorController
 			ActorRef cabine: ACabineControllerWithIndication
 			ActorRef top: AElevatorMainController
-			ActorRef ref0: Test
 			Binding motor.ControlPort and top.MotorPort
 			Binding top.CabinePort and cabine.ControlPort
 			Binding top.FloorPort and floors.ControlPort
@@ -1850,6 +1831,130 @@ The instance diagram provides an overview of the generated instances."
 		}
 	}
 
+	ActorClass AGuDManualCode {
+		Interface {
+			Port p0: PCabineControl
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+		@BehaviorManual
+		}
+	}
+
+	ActorClass AGuDXYControler {
+		Interface {
+			conjugated Port x: PGuDTestMotor
+			conjugated Port y: PGuDTestMotor
+		}
+		Structure {
+			external Port x
+			external Port y
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"x.startPositionierung();"
+						"y.startPositionierung();"
+					}
+				}
+				Transition tr1: state0 -> xFertig {
+					triggers {
+						<fertigPositionierung: x>
+					}
+				}
+				Transition tr3: xFertig -> fertigPositionierung {
+					triggers {
+						<fertigPositionierung: y>
+					}
+				}
+				Transition tr0: state0 -> yFertig {
+					triggers {
+						<fertigPositionierung: y>
+					}
+				}
+				Transition tr2: state0 -> error {
+					triggers {
+						<error: x>
+					}
+				}
+				Transition tr4: state0 -> error {
+					triggers {
+						<error: y>
+					}
+				}
+				Transition tr5: yFertig -> fertigPositionierung {
+					triggers {
+						<fertigPositionierung: x>
+					}
+				}
+				Transition tr6: xFertig -> xFertig {
+					triggers {
+						<error: y>
+					}
+				}
+				Transition tr7: yFertig -> yFertig {
+					triggers {
+						<error: x>
+					}
+				}
+				Transition tr8: error -> error {
+					triggers {
+						<fertigPositionierung: x>
+					}
+				}
+				Transition tr9: error -> error {
+					triggers {
+						<fertigPositionierung: y>
+					}
+				}
+				Transition tr10: error -> error {
+					triggers {
+						<error: x>
+					}
+				}
+				Transition tr11: error -> error {
+					triggers {
+						<error: y>
+					}
+				}
+				State state0
+				State xFertig
+				State fertigPositionierung
+				State yFertig
+				State error
+			}
+		}
+	}
+
+	async ActorClass AGuDDataDrivenTest {
+		Interface {
+			Port dataPort: PDataPort
+			conjugated Port dataPortOut: PDataPort
+		}
+		Structure {
+			external Port dataPort
+			external Port dataPortOut
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				Transition tr0: state0 -> state1 {
+					guard {
+						"dataPort.in1==7"
+					}
+					action {
+						"dataPortOut.in2(4);"
+					}
+				}
+				State state0
+				State state1
+			}
+		}
+	}
+
 	ProtocolClass PButtonControl {
 		incoming {
 			Message setButtonId(data: uint8)
@@ -1945,6 +2050,28 @@ The instance diagram provides an overview of the generated instances."
 			Message status(data: uint32) [ "the actual status" ]
 			Message idle() [ "idle state reached" ]
 			Message floor(data: uint8) [ "floor is reached" ]
+		}
+	}
+
+	ProtocolClass PGuDTestMotor {
+		incoming {
+			Message startPositionierung()
+		}
+		outgoing {
+			Message fertigPositionierung()
+			Message error()
+		}
+		semantics {
+			in: startPositionierung ->(out: fertigPositionierung,
+			out: error)
+		}
+	}
+
+	datadriven ProtocolClass PDataPort {
+		incoming {
+			Message in1(data: uint32)
+			Message in2(data: uint32)
+			Message in3(data: uint32)
 		}
 	}
 

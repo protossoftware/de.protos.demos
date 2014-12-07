@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="Config" className="IfxGroupBox" controlId="1318854765531">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic001/0/NVIC001_erwEnableInt" displayName="Enable Interrupt" className="EnumerationType" paramName="app/nvic001/0/NVIC001_erwEnableInt:Enable Interrupt" controlId="1325072175350">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group35" displayName="Interrupt Priority " className="IfxGroupBox" controlId="1318855408828">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/NVIC001/0/NVIC001_irwInterruptPriority" displayName="Preemption Priority" description="" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;}" paramName="app/NVIC001/0/NVIC001_irwInterruptPriority:Interrupt priority" controlId="1318855412500">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+        <conversionType>hex</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic001/0/NVIC001_TIMMirwInterruptPriority" displayName=" Preemption Priority" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;}&#xD;&#xA;else{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}" paramName="app/nvic001/0/NVIC001_TIMMirwInterruptPriority: TIMM Preemption Priority" controlId="1358919743609">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/NVIC001/0/NVIC001_irwInterruptSubPriority" displayName="Subpriority" image="" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;}" paramName="app/NVIC001/0/NVIC001_irwInterruptSubPriority:Interrupt subpriority" controlId="1318855416828">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+        <conversionType>hex</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group92" displayName="Event Handler Functions" className="IfxGroupBox" controlId="1325074082586">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic001/0/NVIC001_srwUserFunction1" displayName="User defined event handler 1" className="StringType" paramName="app/nvic001/0/NVIC001_srwUserFunction1:User defined interrupt handler 1" controlId="1325074091774">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic001/0/NVIC001_srwUserFunction2" displayName="User defined event handler 2" className="StringType" paramName="app/nvic001/0/NVIC001_srwUserFunction2:User defined event handler 2" controlId="1325074095893">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic001/0/NVIC001_srwUserFunction3" displayName="User defined event handler 3" className="StringType" paramName="app/nvic001/0/NVIC001_srwUserFunction3:User defined event handler 3" controlId="1325074099184">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic001/0/NVIC001_srwUserFunction4" displayName="User defined event handler 4" className="StringType" paramName="app/nvic001/0/NVIC001_srwUserFunction4:User defined event handler 4" controlId="1325074101727">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic001/0/NVIC001_srwUserFunction5" displayName="User defined event handler 5" className="StringType" paramName="app/nvic001/0/NVIC001_srwUserFunction5:User defined event handler 5" controlId="1325074104286">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

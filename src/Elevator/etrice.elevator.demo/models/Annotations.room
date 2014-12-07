@@ -1,0 +1,12 @@
+RoomModel room.basic.annotations {
+	
+	AnnotationType BehaviorManual {
+		target = ActorBehavior
+	}
+	
+	AnnotationType DataLogging {
+		target = SubSystemClass
+		mandatory attribute pathlist: ptCharacter
+	}
+	
+}

@@ -1,0 +1,203 @@
+/*******************************************************************************
+ *
+ * Copyright (C) 2014 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with 
+ * Infineon's microcontrollers.  
+ * This file can be freely distributed within development tools that are 
+ * supporting such microcontrollers. 
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/Yes]: Yes                                      **
+**                                                                            **
+** MODIFICATION DATE : Jan 17, 2014                                           **
+**                                                                            **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** SNR        App Developer                                                   **
+*******************************************************************************/
+/**
+ * @file NVIC001.h
+ *
+ * @brief  Header file for NVIC SRGeneral (NVIC001) App.
+ *
+ */
+/* Revision History	
+ * 
+ * 18 Feb 2013   v1.0.6  Comments are added.
+ * 17 Jan 2014   v1.0.12 C++ support added.
+ * 
+ */
+
+#ifndef NVIC001_H_
+#define NVIC001_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/******************************************************************************
+**                      Include Files                                        **
+******************************************************************************/
+#include <DAVE3.h>
+
+/******************************************************************************
+**                      Global Macro Definitions                             **
+******************************************************************************/
+
+/******************************************************************************
+**                      Global Type Definitions                              **
+******************************************************************************/
+/**
+ * @ingroup NVIC001_publicparam
+ * @{
+ */
+
+
+/**
+ * @brief Structure which holds the UI configuration mapped for the App
+ *        instance.
+ *  Note: Sub-Priority is not available for TIMM Devices
+ */
+
+typedef struct NVIC001_HandleType
+{
+  /** Mapped NVIC Node */
+  uint8_t NodeID;     
+  /**  Node Interrupt Priority */
+  uint8_t Priority;    
+  /**  Node Interrupt SubPriority */
+  uint8_t SubPriority;  
+}NVIC001_HandleType;
+
+/**
+ * @brief Structure which holds NVIC001 Status Codes
+ */
+typedef enum NVIC001_StatusType {
+  /*	
+	MODULENAME = NVIC001
+  */
+
+  /*
+	ERRCODESTRING = NVIC001_FUNC_ENTRY
+	STRCODESTRING = Entered Function %s
+  */
+  NVIC001_FUNC_ENTRY = 1,
+  /**
+   * Exit specific function
+   */
+
+    /*
+	ERRCODESTRING = NVIC001_FUNC_EXIT
+	STRCODESTRING = Exited Function %s
+  */
+  NVIC001_FUNC_EXIT
+  /*
+	ERRORCODEEND
+  */
+}NVIC001_StatusType;
+
+/**
+ * @}
+ */
+/*******************************************************************************
+**                      Global Constant Declarations                          **
+*******************************************************************************/
+
+
+/*******************************************************************************
+**                      Extern Variables                                      **
+*******************************************************************************/
+
+
+/*******************************************************************************
+** FUNCTION PROTOTYPES                                                        **
+*******************************************************************************/
+
+/**
+ * @ingroup NVIC001_apidoc
+ * @{
+ */
+
+/**
+ * @brief      Function to configure and initialize  the NVIC001 App instances
+ *
+ *
+ * @param[in]  None
+ *
+ * @return     void
+ *
+ * <b>Reentrant: NO </b><BR>
+ * 
+ * <BR><P ALIGN="LEFT"><B>Example:</B>
+ * @code
+ *  #include <DAVE3.h>
+ *  int main(void)
+ *  {
+ *    DAVE_Init(); // NVIC001_Init() is called within DAVE_Init()
+ *    return 0;
+ *  }
+ * @endcode<BR> </p>
+ *
+ */
+void  NVIC001_Init(void);
+
+/**
+ * @brief      Function to get the mapped node ID.
+ *
+ *
+ * @param[in]  App Instance Handle
+ *
+ * @return     uint8_t
+ *             Mapped Node ID
+ *
+ * <b>Reentrant: NO </b><BR>
+ *
+ * <BR><P ALIGN="LEFT"><B>Example:</B>
+ * @code
+ *  #include <DAVE3.h>
+ *  int main(void)
+ *  {
+ *    uint8_t NodeID;
+ *    DAVE_Init(); // NVIC001_Init() is called within DAVE_Init()
+ *    // Get the mapped interrupt ID
+ *    NodeID = NVIC001_GetInterruptID(&NVIC001_Handle0);
+ *    return 0;
+ *  }
+ * @endcode<BR> </p>
+ *
+ */
+
+
+uint8_t  NVIC001_GetInterruptID(const NVIC001_HandleType* Handle);
+
+/**
+ *@}
+ */
+
+/* Inclusion of App config file */
+#include "NVIC001_Conf.h"
+#ifdef __cplusplus
+}
+#endif
+#endif /* NVIC001_H_ */
