@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="de.protos.demos.fischertechnik.java">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="C:/entw/tools/Eclipse/kepler-R-win32-eTrice-dev/eclipse"/>
+    <property name="org.eclipse.etrice.runtime.java.location" value="../org.eclipse.etrice.runtime.java"/>
+    <property name="org.eclipse.etrice.modellib.java.location" value="../org.eclipse.etrice.modellib.java"/>
+    <property name="de.protos.automation.io.location" value="../de.protos.automation.io"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Plug-in Dependencies.libraryclasspath"/>
+    <path id="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.runtime.java]].libraryclasspath"/>
+    <path id="org.eclipse.etrice.runtime.java.classpath">
+        <pathelement location="${org.eclipse.etrice.runtime.java.location}/target/classes"/>
+        <path refid="Plug-in Dependencies.libraryclasspath"/>
+        <path refid="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.runtime.java]].libraryclasspath"/>
+    </path>
+    <path id="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.modellib.java]].libraryclasspath"/>
+    <path id="org.eclipse.etrice.modellib.java.classpath">
+        <path refid="org.eclipse.etrice.runtime.java.classpath"/>
+        <pathelement location="${org.eclipse.etrice.modellib.java.location}/target/classes"/>
+        <path refid="Plug-in Dependencies.libraryclasspath"/>
+        <path refid="Persisted container [org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER for project [org.eclipse.etrice.modellib.java]].libraryclasspath"/>
+    </path>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.11.0.v201303080030/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
+    <path id="de.protos.automation.io.classpath">
+        <path refid="org.eclipse.etrice.modellib.java.classpath"/>
+        <path refid="org.eclipse.etrice.runtime.java.classpath"/>
+        <pathelement location="${de.protos.automation.io.location}/bin"/>
+        <pathelement location="${de.protos.automation.io.location}/libs/modbus/jamod/jamod-1.2-SNAPSHOT.jar"/>
+        <path refid="Plug-in Dependencies.libraryclasspath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    </path>
+    <path id="de.protos.demos.fischertechnik.java.classpath">
+        <pathelement location="bin"/>
+        <path refid="org.eclipse.etrice.runtime.java.classpath"/>
+        <path refid="de.protos.automation.io.classpath"/>
+        <path refid="org.eclipse.etrice.modellib.java.classpath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src-gen">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall">
+        <ant antfile="build.xml" dir="${org.eclipse.etrice.runtime.java.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${org.eclipse.etrice.modellib.java.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${de.protos.automation.io.location}" inheritAll="false" target="clean"/>
+    </target>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects">
+        <ant antfile="build.xml" dir="${org.eclipse.etrice.runtime.java.location}" inheritAll="false" target="build-project"/>
+        <ant antfile="build.xml" dir="${org.eclipse.etrice.modellib.java.location}" inheritAll="false" target="build-project"/>
+        <ant antfile="build.xml" dir="${de.protos.automation.io.location}" inheritAll="false" target="build-project"/>
+    </target>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <src path="src-gen"/>
+            <classpath refid="de.protos.demos.fischertechnik.java.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="Node_nodeRef1_subSystemRunner">
+        <java classname="Fischertechnik.Node_nodeRef1_subSystemRunner" failonerror="true" fork="yes">
+            <classpath refid="de.protos.demos.fischertechnik.java.classpath"/>
+        </java>
+    </target>
+</project>

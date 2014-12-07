@@ -16,6 +16,7 @@ RoomModel GenericLineElements {
 			conjugated Port next: AutomationProtocols.PInlineElement
 			conjugated Port transport: AutomationProtocols.PTransport
 			conjugated Port job: AutomationProtocols.PProcessing
+			Port ctrl: PInlineElementControl
 		}
 		Structure {
 			usercode1 {
@@ -25,6 +26,7 @@ RoomModel GenericLineElements {
 			external Port next
 			external Port transport
 			external Port job
+			external Port ctrl
 			Attribute processingActive: boolean
 		}
 		Behavior {
@@ -104,7 +106,16 @@ RoomModel GenericLineElements {
 						<isEmpty: transport>
 					}
 				}
+				Transition tr15: my ctrl -> my ctrl {
+					triggers {
+						<setProcessingActive: ctrl>
+					}
+					action {
+						"processingActive = state;"
+					}
+				}
 				ChoicePoint CP1
+				handler TransitionPoint ctrl
 				State GetStatusTransport {
 					entry {
 						"transport.getStatus();"
@@ -210,7 +221,7 @@ RoomModel GenericLineElements {
 						<getStatus: prev>
 					}
 				}
-				Transition tr1: initial -> Full { }
+				Transition tr1: initial -> Full
 				State Full
 			}
 		}
@@ -226,9 +237,9 @@ RoomModel GenericLineElements {
 			}
 			external Port fkt
 			conjugated Port motor: AutomationProtocols.PDriveLR
+			ActorRef BeltDrive: Actuators.DriveLR
 			SAP timeout: PTimer
 			SAP sensor: protos.automation.service.io.PDigIn
-			ActorRef BeltDrive: Actuators.DriveLR
 			Binding motor and BeltDrive.fct
 		}
 		Behavior {

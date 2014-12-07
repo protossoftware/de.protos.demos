@@ -22,6 +22,11 @@ RoomModel AutomationProtocols {
 			Message receivedPart ()
 		}
 	}
+	ProtocolClass PInlineElementControl {
+		incoming {
+			Message setProcessingActive (state: boolean)
+		}
+	}
 
 	ProtocolClass PTransport {
 		incoming {

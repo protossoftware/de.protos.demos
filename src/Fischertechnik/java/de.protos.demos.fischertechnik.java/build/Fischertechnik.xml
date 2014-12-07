@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="deploy" name="Create Runnable Jar for Project de.protos.demos.fischertechnik.java with Jar-in-Jar Loader and deploy">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="../release/Fischertechnik.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="Fischertechnik.Node_nodeRef1_subSystemRunner"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ jamod-1.2-SNAPSHOT.jar junit.jar org.hamcrest.core_1.3.0.v201303031735.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="../bin"/>
+            <fileset dir="../../org.eclipse.etrice.runtime.java/target/classes"/>
+            <fileset dir="../../de.protos.automation.io/bin"/>
+            <zipfileset dir="../../de.protos.automation.io\libs\modbus\jamod" includes="jamod-1.2-SNAPSHOT.jar"/>
+            <zipfileset dir="C:\entw\tools\Eclipse\kepler-R-win32-eTrice-dev\eclipse\plugins\org.junit_4.11.0.v201303080030" includes="junit.jar"/>
+            <zipfileset dir="C:\entw\tools\Eclipse\kepler-R-win32-eTrice-dev\eclipse\plugins" includes="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+            <fileset dir="../../org.eclipse.etrice.modellib.java/target/classes"/>
+        </jar>
+    </target>
+    <target name="deploy" depends="create_run_jar">
+    	<copy file="../release/Fischertechnik.jar" tofile="C:\entw\demos\FischertechnikReleases\Fischertechnik.jar"/>
+	</target>
+	
+</project>

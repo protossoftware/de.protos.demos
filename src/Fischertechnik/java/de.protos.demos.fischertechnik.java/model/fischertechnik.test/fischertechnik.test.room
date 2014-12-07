@@ -1,0 +1,12 @@
+RoomModel fischertechnik.test {
+	LogicalSystem TestSystem {
+		SubSystemRef subSys:TestSubSys 
+	}
+	SubSystemClass TestSubSys {
+		ActorRef actorRef1:ActorClass1 
+		LogicalThread defaultThread
+	}
+	ActorClass ActorClass1 {
+	}
+	
+}
