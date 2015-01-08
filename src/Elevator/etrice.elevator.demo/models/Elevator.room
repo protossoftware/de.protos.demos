@@ -5,11 +5,10 @@ for embedded realtime systems. It provides a run to completion semantics. ETrice
 ] {
 
 	import room.basic.types.* from "Types.room"
-
 	import room.basic.service.timing.* from "TimingService.room"
-
 	import room.basic.service.serial.* from "SerialService.room"
 	import room.basic.annotations.* from "Annotations.room"
+	import room.basic.service.gpio.* from "pclGPIOService.room"
 
 	LogicalSystem Elevator_LogSys {
 		SubSystemRef elevator_subSysRef: Elevator_LogSubSys
@@ -22,14 +21,31 @@ The instance diagram provides an overview of the generated instances."
 	] {
 		ActorRef elevator: ElevatorTop
 		ActorRef timingService: ATimingService
+		ActorRef ioService: AIOBitService
+		ActorRef ioReg8Service: AIORegister8Service
 		LayerConnection ref elevator satisfied_by timingService.timer
+		LayerConnection ref elevator satisfied_by ioService.iobitOut
+		LayerConnection ref elevator satisfied_by ioService.iobitIn
+		LayerConnection ref ioService satisfied_by timingService.timer
+		LayerConnection ref elevator satisfied_by ioReg8Service.ioReg8Out
+		LayerConnection ref ioReg8Service satisfied_by timingService.timer
 		LogicalThread defaultThread
 		LogicalThread midPrioThread
 		LogicalThread timingThread
 		ActorInstanceMapping elevator/top -> midPrioThread
 		ActorInstanceMapping timingService -> timingThread
 	}
-
+ ActorClass AFloorContainer {
+	Interface {
+			Port p0 [5]: PFloorControl
+		}
+	Structure {
+			ActorRef floors [5]: AFloorController
+			Binding p0 and floors.ControlPort
+		}
+	Behavior {
+	}
+}
 	ActorClass AElevatorMainController [ "The main Controller provides the strategie for the elevator!" ] {
 		Interface {
 			conjugated Port CabinePort: PCabineControl [ "Port to the cabine" ]
@@ -337,12 +353,14 @@ The instance diagram provides an overview of the generated instances."
 								"controlPort.idle();"
 							}
 						}
-						Transition tr9: doorClosed -> my tp1 {
+						Transition tr9: doorClosed -> tp0 of moveToIdleFloor {
 							triggers {
 								<timeout: timer>
 							}
+						}
+						Transition tr13: tp1 of moveToIdleFloor -> doorClosed {
 							action {
-								"upRequests[idleFloor]=1;"
+								"if (isRequestHere() || isRequestAbove() || isRequestBelow() ) {\n\tHelperPort.requestCheck();\n}"
 							}
 						}
 						ChoicePoint cp0
@@ -359,6 +377,59 @@ The instance diagram provides an overview of the generated instances."
 						State doorClosed {
 							entry {
 								"reportState=3;\n\nif ( (floor!=idleFloor) && (idleTime > 0) ) {\n\ttimer.startTimeout(idleTime * 1000);\t\n}\n\n\n//if ( (floor!=idleFloor) && (idleTime > 0) ) {\n//\ttimer.startTimeout(idleTime * 1000);\t\n//}\n//transitioncode:\n//upRequests[idleFloor]=1;"
+							}
+						}
+						State moveToIdleFloor {
+							subgraph {
+								Transition tr0: my tp0 -> cp cp0
+								Transition tr1: cp cp0 -> my tp1
+								Transition tr2: cp cp0 -> moveToIdle {
+									cond {
+										"(floor < idleFloor)"
+									}
+									action {
+										"MotorPort.goUpOneFloor();"
+									}
+								}
+								Transition tr3: cp cp0 -> moveToIdle {
+									cond {
+										"(floor > idleFloor)"
+									}
+									action {
+										"MotorPort.goDownOneFloor();"
+									}
+								}
+								Transition tr4: cp cp1 -> my tp1
+								Transition tr5: moveToIdle -> cp cp1 {
+									triggers {
+										<floorReached: MotorPort>
+									}
+									action {
+										"floor = data;"
+										"CabinePort.set7seg(data+1);"
+									}
+								}
+								Transition tr6: cp cp1 -> moveToIdle {
+									cond {
+										"(floor < idleFloor)"
+									}
+									action {
+										"MotorPort.goUpOneFloor();"
+									}
+								}
+								Transition tr7: cp cp1 -> moveToIdle {
+									cond {
+										"(floor > idleFloor)"
+									}
+									action {
+										"MotorPort.goDownOneFloor();"
+									}
+								}
+								ChoicePoint cp0
+								ChoicePoint cp1
+								EntryPoint tp0
+								ExitPoint tp1
+								State moveToIdle
 							}
 						}
 					}
@@ -895,10 +966,10 @@ The instance diagram provides an overview of the generated instances."
 
 	ActorClass ElevatorTop {
 		Structure {
-			ActorRef floors [5]: AFloorController
 			ActorRef motor: AMotorController
 			ActorRef cabine: ACabineControllerWithIndication
 			ActorRef top: AElevatorMainController
+			ActorRef floors [5]: AFloorController
 			Binding motor.ControlPort and top.MotorPort
 			Binding top.CabinePort and cabine.ControlPort
 			Binding top.FloorPort and floors.ControlPort
@@ -933,7 +1004,6 @@ The instance diagram provides an overview of the generated instances."
 			}
 		}
 	}
-
 	ActorClass AButtonController {
 		Interface {
 			Port ControlPort: PButtonControl
@@ -943,55 +1013,35 @@ The instance diagram provides an overview of the generated instances."
 				"#include \"etPlatform.h\""
 			}
 			external Port ControlPort
-			SAP timer: PTimer
-			Attribute buttonId: uint8
-			Attribute ledId: uint8
-			Attribute floor: uint8
+			SAP io_in: PIOBitInput
+			SAP io_out: PIOBitOutput
+			Attribute buttonId: uint8 = "0xFF"
+			Attribute ledId: uint8 = "0xFF"
+			Attribute floor: uint8 = "0xFF"
 		}
 		Behavior {
-			Operation repeatPressed() {
-				"/*do nothing*/"
+			Operation initIO_in() {
+				"DGPIOData d;"
+				"d.channel = (((uint32)floor)<<16) + ((uint32)buttonId);"
+				"d.changeMessageEnabled = ET_IOBit_CHANGE_MESSAGE_ON_SET;"
+				"d.lastValue = 0;"
+				"io_in.init(&d);"
+			}
+			Operation initIO_out() {
+				"uint32 id;"
+				"id = (((uint32)floor)<<16) + ((uint32)ledId);"
+				"io_out.init(id);"
+			}
+			Operation sendPressed(data:uint8){
+				"ControlPort.pressed();"
 			}
 			StateMachine {
-				Transition tr1: released -> cp cp1 {
-					triggers {
-						<timeout: timer>
-					}
-					action {
-						"timer.startTimeout(50);"
-					}
-				}
-				Transition tr3: cp cp1 -> released
-				Transition tr4: cp cp1 -> pressed {
-					cond {
-						"getButtonStatus(floor,buttonId)"
-					}
-					action {
-						"ControlPort.pressed();"
-					}
-				}
-				Transition tr2: pressed -> cp cp0 {
-					triggers {
-						<timeout: timer>
-					}
-					action {
-						"timer.startTimeout(50);"
-					}
-				}
-				Transition tr6: cp cp0 -> released {
-					cond {
-						"!getButtonStatus(floor,buttonId)"
-					}
-					action {
-						"ControlPort.released();"
-					}
-				}
 				Transition tr7: my tp0 -> my tp0 {
 					triggers {
 						<setButtonId: ControlPort>
 					}
 					action {
-						"buttonId=data;"
+						"buttonId=data;\nif (floor != 0xFF) initIO_in();"
 					}
 				}
 				Transition tr8: my tp0 -> my tp0 {
@@ -999,12 +1049,7 @@ The instance diagram provides an overview of the generated instances."
 						<setFloor: ControlPort>
 					}
 					action {
-						"floor=data;"
-					}
-				}
-				Transition init: initial -> released {
-					action {
-						"timer.startTimeout(50);"
+						"floor=data;\nif(buttonId != 0xFF) initIO_in();\nif(ledId != 0xFF) initIO_out();"
 					}
 				}
 				Transition tr0: my tp1 -> my tp1 {
@@ -1012,7 +1057,8 @@ The instance diagram provides an overview of the generated instances."
 						<ledOn: ControlPort>
 					}
 					action {
-						"writeToButtonLed(floor, ledId, ON);"
+						"//writeToButtonLed(floor, ledId, ON);"
+						"io_out.setBit();"
 					}
 				}
 				Transition tr9: my tp1 -> my tp1 {
@@ -1020,7 +1066,8 @@ The instance diagram provides an overview of the generated instances."
 						<ledOff: ControlPort>
 					}
 					action {
-						"writeToButtonLed(floor, ledId, OFF);"
+						"//writeToButtonLed(floor, ledId, OFF);"
+						"io_out.resetBit();"
 					}
 				}
 				Transition tr10: my tp0 -> my tp0 {
@@ -1029,11 +1076,7 @@ The instance diagram provides an overview of the generated instances."
 					}
 					action {
 						"ledId=data;"
-					}
-				}
-				Transition tr5: cp cp0 -> pressed {
-					action {
-						"repeatPressed();"
+						"if(floor != 0xFF) initIO_out();"
 					}
 				}
 				Transition tr11: my tp1 -> my tp1 {
@@ -1041,128 +1084,284 @@ The instance diagram provides an overview of the generated instances."
 						<ledToggle: ControlPort>
 					}
 					action {
-						"writeToButtonLed(floor, ledId, TOGGLE);"
+						"//writeToButtonLed(floor, ledId, TOGGLE);"
 					}
 				}
-				ChoicePoint cp1
-				ChoicePoint cp0
+				Transition tr12: my tp2 -> my tp2 {
+					triggers {
+						<valueChanged: io_in>
+					}
+					action {
+						"sendPressed(data);"
+					}
+				}
+				Transition init: initial -> running
 				handler TransitionPoint tp0
 				handler TransitionPoint tp1
-				State released
-				State pressed
+				handler TransitionPoint tp2
+				State running
 			}
 		}
 	}
 
-	ActorClass AButtonControllerT2 {
-		Interface {
-			Port ControlPort: PButtonControl
-		}
-		Structure {
-			usercode1 {
-				"#include \"etPlatform.h\""
-			}
-			external Port ControlPort
-			SAP timer: PTimer
-			Attribute buttonId: uint8
-			Attribute ledId: uint8
-			Attribute floor: uint8
-		}
-		Behavior {
-			StateMachine {
-				Transition tr1: released -> cp cp1 {
-					triggers {
-						<timeout: timer>
-					}
-					action {
-						"timer.startTimeout(50);"
-					}
-				}
-				Transition tr3: cp cp1 -> released
-				Transition tr4: cp cp1 -> pressed {
-					cond {
-						"getButtonStatus(floor,buttonId)"
-					}
-					action {
-						"ControlPort.pressed();"
-					}
-				}
-				Transition tr2: pressed -> cp cp0 {
-					triggers {
-						<timeout: timer>
-					}
-					action {
-						"timer.startTimeout(50);"
-					}
-				}
-				Transition tr5: cp cp0 -> pressed {
-					action {
-						"ControlPort.pressed();"
-					}
-				}
-				Transition tr6: cp cp0 -> released {
-					cond {
-						"!getButtonStatus(floor,buttonId)"
-					}
-					action {
-						"ControlPort.released();"
-					}
-				}
-				Transition tr7: my tp0 -> my tp0 {
-					triggers {
-						<setButtonId: ControlPort>
-					}
-					action {
-						"buttonId=data;"
-					}
-				}
-				Transition tr8: my tp0 -> my tp0 {
-					triggers {
-						<setFloor: ControlPort>
-					}
-					action {
-						"floor=data;"
-					}
-				}
-				Transition init: initial -> released {
-					action {
-						"timer.startTimeout(50);"
-					}
-				}
-				Transition tr0: my tp1 -> my tp1 {
-					triggers {
-						<ledOn: ControlPort>
-					}
-					action {
-						"writeToButtonLed(floor, ledId, ON);"
-					}
-				}
-				Transition tr9: my tp1 -> my tp1 {
-					triggers {
-						<ledOff: ControlPort>
-					}
-					action {
-						"writeToButtonLed(floor, ledId, OFF);"
-					}
-				}
-				Transition tr10: my tp0 -> my tp0 {
-					triggers {
-						<setLedId: ControlPort>
-					}
-					action {
-						"ledId=data;"
-					}
-				}
-				ChoicePoint cp1
-				ChoicePoint cp0
-				handler TransitionPoint tp0
-				handler TransitionPoint tp1
-				State released
-				State pressed
-			}
-		}
-	}
+//	ActorClass AButtonController_old {
+//		Interface {
+//			Port ControlPort: PButtonControl
+//		}
+//		Structure {
+//			usercode1 {
+//				"#include \"etPlatform.h\""
+//			}
+//			external Port ControlPort
+//			SAP timer: PTimer
+//			SAP io_in: PIOBit
+//			SAP io_out: PIOBit
+//			Attribute buttonId: uint8 = "0xFF"
+//			Attribute ledId: uint8 = "0xFF"
+//			Attribute floor: uint8 = "0xFF"
+//		}
+//		Behavior {
+//			Operation repeatPressed() {
+//				"/*do nothing*/"
+//			}
+//			Operation initIO_in() {
+//				"DIOBitData d;"
+//				"d.hwId = (((uint32)floor)<<16) + ((uint32)buttonId);"
+//				"d.ioType = ET_IOBit_INPUT;"
+//				"d.changeMessageEnabled = ET_IOBit_CHANGE_MESSAGE_ON_SET;"
+//				"d.lastValue = 0;"
+//				"io_in.init(&d);"
+//			}
+//			Operation initIO_out() {
+//				"DIOBitData d;"
+//				"d.hwId = (((uint32)floor)<<16) + ((uint32)ledId);"
+//				"d.ioType = ET_IOBit_OUTPUT;"
+//				"d.changeMessageEnabled = ET_IOBit_NO_CHANGE_MESSAGE;"
+//				"d.lastValue = 0;"
+//				"io_out.init(&d);"
+//			}
+//			StateMachine {
+//				Transition tr1: released -> cp cp1 {
+//					triggers {
+//						<timeout: timer>
+//					}
+//					action {
+//						"timer.startTimeout(50);"
+//					}
+//				}
+//				Transition tr3: cp cp1 -> released
+//				Transition tr4: cp cp1 -> pressed {
+//					cond {
+//						"getButtonStatus(floor,buttonId)"
+//					}
+//					action {
+//						"ControlPort.pressed();"
+//					}
+//				}
+//				Transition tr2: pressed -> cp cp0 {
+//					triggers {
+//						<timeout: timer>
+//					}
+//					action {
+//						"timer.startTimeout(50);"
+//					}
+//				}
+//				Transition tr6: cp cp0 -> released {
+//					cond {
+//						"!getButtonStatus(floor,buttonId)"
+//					}
+//					action {
+//						"ControlPort.released();"
+//					}
+//				}
+//				Transition tr7: my tp0 -> my tp0 {
+//					triggers {
+//						<setButtonId: ControlPort>
+//					}
+//					action {
+//						"buttonId=data;\nif (floor != 0xFF) initIO_in();"
+//					}
+//				}
+//				Transition tr8: my tp0 -> my tp0 {
+//					triggers {
+//						<setFloor: ControlPort>
+//					}
+//					action {
+//						"floor=data;\nif(buttonId != 0xFF) initIO_in();\nif(ledId != 0xFF) initIO_out();"
+//					}
+//				}
+//				Transition init: initial -> released {
+//					action {
+//						"//timer.startTimeout(50);"
+//					}
+//				}
+//				Transition tr0: my tp1 -> my tp1 {
+//					triggers {
+//						<ledOn: ControlPort>
+//					}
+//					action {
+//						"//writeToButtonLed(floor, ledId, ON);"
+//						"io_out.setBit();"
+//					}
+//				}
+//				Transition tr9: my tp1 -> my tp1 {
+//					triggers {
+//						<ledOff: ControlPort>
+//					}
+//					action {
+//						"//writeToButtonLed(floor, ledId, OFF);"
+//						"io_out.resetBit();"
+//					}
+//				}
+//				Transition tr10: my tp0 -> my tp0 {
+//					triggers {
+//						<setLedId: ControlPort>
+//					}
+//					action {
+//						"ledId=data;"
+//						"if(floor != 0xFF) initIO_out();"
+//					}
+//				}
+//				Transition tr5: cp cp0 -> pressed {
+//					action {
+//						"repeatPressed();"
+//					}
+//				}
+//				Transition tr11: my tp1 -> my tp1 {
+//					triggers {
+//						<ledToggle: ControlPort>
+//					}
+//					action {
+//						"//writeToButtonLed(floor, ledId, TOGGLE);"
+//					}
+//				}
+//				Transition tr12: my tp2 -> my tp2 {
+//					triggers {
+//						<valueChanged: io_in>
+//					}
+//					action {
+//						"ControlPort.pressed();"
+//					}
+//				}
+//				ChoicePoint cp1
+//				ChoicePoint cp0
+//				handler TransitionPoint tp0
+//				handler TransitionPoint tp1
+//				handler TransitionPoint tp2
+//				State released
+//				State pressed
+//			}
+//		}
+//	}
 
+	//	ActorClass AButtonControllerT2 {
+	//		Interface {
+	//			Port ControlPort: PButtonControl
+	//		}
+	//		Structure {
+	//			usercode1 {
+	//				"#include \"etPlatform.h\""
+	//			}
+	//			external Port ControlPort
+	//			SAP timer: PTimer
+	//			Attribute buttonId: uint8 = "0xFF"
+	//			Attribute ledId: uint8 = "0xFF"
+	//			Attribute floor: uint8 = "0xFF"
+	//		}
+	//		Behavior {
+	//			StateMachine {
+	//				Transition tr1: released -> cp cp1 {
+	//					triggers {
+	//						<timeout: timer>
+	//					}
+	//					action {
+	//						"timer.startTimeout(50);"
+	//					}
+	//				}
+	//				Transition tr3: cp cp1 -> released
+	//				Transition tr4: cp cp1 -> pressed {
+	//					cond {
+	//						"getButtonStatus(floor,buttonId)"
+	//					}
+	//					action {
+	//						"ControlPort.pressed();"
+	//					}
+	//				}
+	//				Transition tr2: pressed -> cp cp0 {
+	//					triggers {
+	//						<timeout: timer>
+	//					}
+	//					action {
+	//						"timer.startTimeout(50);"
+	//					}
+	//				}
+	//				Transition tr5: cp cp0 -> pressed {
+	//					action {
+	//						"ControlPort.pressed();"
+	//					}
+	//				}
+	//				Transition tr6: cp cp0 -> released {
+	//					cond {
+	//						"!getButtonStatus(floor,buttonId)"
+	//					}
+	//					action {
+	//						"ControlPort.released();"
+	//					}
+	//				}
+	//				Transition tr7: my tp0 -> my tp0 {
+	//					triggers {
+	//						<setButtonId: ControlPort>
+	//					}
+	//					action {
+	//						"buttonId=data;"
+	//					}
+	//				}
+	//				Transition tr8: my tp0 -> my tp0 {
+	//					triggers {
+	//						<setFloor: ControlPort>
+	//					}
+	//					action {
+	//						"floor=data;"
+	//					}
+	//				}
+	//				Transition init: initial -> released {
+	//					action {
+	//						"timer.startTimeout(50);"
+	//					}
+	//				}
+	//				Transition tr0: my tp1 -> my tp1 {
+	//					triggers {
+	//						<ledOn: ControlPort>
+	//					}
+	//					action {
+	//						"writeToButtonLed(floor, ledId, ON);"
+	//					}
+	//				}
+	//				Transition tr9: my tp1 -> my tp1 {
+	//					triggers {
+	//						<ledOff: ControlPort>
+	//					}
+	//					action {
+	//						"writeToButtonLed(floor, ledId, OFF);"
+	//					}
+	//				}
+	//				Transition tr10: my tp0 -> my tp0 {
+	//					triggers {
+	//						<setLedId: ControlPort>
+	//					}
+	//					action {
+	//						"ledId=data;"
+	//					}
+	//				}
+	//				ChoicePoint cp1
+	//				ChoicePoint cp0
+	//				handler TransitionPoint tp0
+	//				handler TransitionPoint tp1
+	//				State released
+	//				State pressed
+	//			}
+	//		}
+	//	}
 	ActorClass ADoorController {
 		Interface {
 			Port ControlPort: PDoorControl
@@ -1173,6 +1372,7 @@ The instance diagram provides an overview of the generated instances."
 			}
 			external Port ControlPort
 			SAP timer: PTimer
+			SAP doorPort: PIORegister8Output
 			Attribute id: uint8
 			Attribute counter: uint8
 		}
@@ -1184,8 +1384,7 @@ The instance diagram provides an overview of the generated instances."
 						<setFloor: ControlPort>
 					}
 					action {
-						"id=data;"
-						"writeToDoor(id,0);"
+						"id=data;\n//writeToDoor(id,0);\ndoorPort.init(((uint32)data) << 16);\ndoorPort.setRegister8(0);"
 					}
 				}
 				Transition tr0: close -> opening {
@@ -1208,8 +1407,7 @@ The instance diagram provides an overview of the generated instances."
 						"counter<11"
 					}
 					action {
-						"timer.startTimeout(50);"
-						"writeToDoor(id,counter);"
+						"timer.startTimeout(50);\n//writeToDoor(id,counter);\ndoorPort.setRegister8(counter);"
 					}
 				}
 				Transition tr3: opening -> cp cp0 {
@@ -1239,8 +1437,7 @@ The instance diagram provides an overview of the generated instances."
 				}
 				Transition tr6: cp cp1 -> close {
 					action {
-						"writeToDoor(id,0);"
-						"ControlPort.done();"
+						"//writeToDoor(id,0);\ndoorPort.setRegister8(0);\nControlPort.done();"
 					}
 				}
 				Transition tr7: cp cp1 -> closing {
@@ -1248,8 +1445,7 @@ The instance diagram provides an overview of the generated instances."
 						"counter>0"
 					}
 					action {
-						"timer.startTimeout(50);"
-						"writeToDoor(id,counter);"
+						"timer.startTimeout(50);\n//writeToDoor(id,counter);\ndoorPort.setRegister8(counter);"
 					}
 				}
 				Transition tr8: closing -> opening {
@@ -1822,12 +2018,41 @@ The instance diagram provides an overview of the generated instances."
 	}
 
 	ActorClass AButtonControllerRelMsg extends AButtonController {
-		Structure { }
+		Structure {
+			SAP timer:PTimer
+		}
 		Behavior {
-			Operation repeatPressed() {
-				"ControlPort.pressed();"
+			Operation initIO_in() {
+				"DGPIOData d;"
+				"d.channel = (((uint32)floor)<<16) + ((uint32)buttonId);"
+				"d.changeMessageEnabled = ET_IOBit_CHANGE_MESSAGE_ON_SET | ET_IOBit_CHANGE_MESSAGE_ON_RESET;"
+				"d.lastValue = 0;"
+				"io_in.init(&d);"
 			}
-			StateMachine { }
+			Operation initIO_out() {
+				"uint32 id;"
+				"id = (((uint32)floor)<<16) + ((uint32)ledId);"
+				"io_out.init(id);"
+			}
+			Operation sendPressed(data:uint8){
+				"if (data == 1) {"
+				"	ControlPort.pressed();"
+				"	timer.startTimer(100);"
+				"	}else{"
+				"	timer.kill();"
+				"	}"
+			}
+			
+			StateMachine {
+				Transition tr1: my tp2 -> my tp2 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"ControlPort.pressed();"
+					}
+				}
+			}
 		}
 	}
 
@@ -1839,7 +2064,7 @@ The instance diagram provides an overview of the generated instances."
 			external Port p0
 		}
 		Behavior {
-		@BehaviorManual
+			@BehaviorManual
 		}
 	}
 

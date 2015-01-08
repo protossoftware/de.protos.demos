@@ -2,8 +2,8 @@
 <launchConfiguration type="org.eclipse.etrice.generator.launch.c.launchConfigurationType">
 <booleanAttribute key="Debug" value="false"/>
 <stringAttribute key="DocPath" value="doc-gen"/>
-<booleanAttribute key="GenDocumentation" value="true"/>
-<booleanAttribute key="GenInstanceDiagram" value="true"/>
+<booleanAttribute key="GenDocumentation" value="false"/>
+<booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
 <stringAttribute key="InfoPath" value="src-gen-info-mt"/>
 <booleanAttribute key="Lib" value="false"/>

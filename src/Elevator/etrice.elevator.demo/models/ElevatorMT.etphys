@@ -16,7 +16,7 @@ PhysicalModel ElevatorDemoBoard_PhysicalModel {
 			prio = 2
 			stacksize = 200
 			msgblocksize = 32
-			msgpoolsize = 50
+			msgpoolsize = 70
 		}
 		
 		Thread PhysicalThreadMidPrio {
@@ -25,7 +25,7 @@ PhysicalModel ElevatorDemoBoard_PhysicalModel {
 			prio = 3
 			stacksize = 200
 			msgblocksize = 32
-			msgpoolsize = 50
+			msgpoolsize = 70
 		}
 		
 		Thread PhysicalThreadHighPrio {
@@ -34,7 +34,7 @@ PhysicalModel ElevatorDemoBoard_PhysicalModel {
 			prio = 4
 			stacksize = 200
 			msgblocksize = 32
-			msgpoolsize = 50
+			msgpoolsize = 70
 		}
 		
 	}

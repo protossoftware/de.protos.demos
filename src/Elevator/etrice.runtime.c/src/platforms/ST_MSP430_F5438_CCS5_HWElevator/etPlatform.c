@@ -243,17 +243,6 @@ unsigned char retVal=0;
 	return retVal;
 }
 
-unsigned char getFloorButtons(unsigned char floor){
-unsigned char mask = 0x01;
-	mask <<= floor;
-	P8OUT = mask;
-	P8DIR = mask;
-	mask = P8IN & 0xE0;
-	P8DIR = 0x00;
-
-	return mask;
-}
-
 void initClockSystem(void){
 	//Select DCO range 4..60Mhz
 	UCSCTL1=DCORSEL_6;
