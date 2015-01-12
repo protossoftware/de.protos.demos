@@ -1,0 +1,1116 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etMemory_FreeList.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.etMemory_getHeapMem,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  24              	etMemory_getHeapMem:
+  25              	.LFB0:
+  26              		.file 1 "../etRuntime/src/common/base/etMemory_FreeList.c"
+   1:../etRuntime/src/common/base/etMemory_FreeList.c **** /*******************************************************************************
+   2:../etRuntime/src/common/base/etMemory_FreeList.c ****  * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/base/etMemory_FreeList.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/base/etMemory_FreeList.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/base/etMemory_FreeList.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/base/etMemory_FreeList.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/base/etMemory_FreeList.c ****  *
+   8:../etRuntime/src/common/base/etMemory_FreeList.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/base/etMemory_FreeList.c ****  * 		Henrik Rentz-Reichert (initial contribution)
+  10:../etRuntime/src/common/base/etMemory_FreeList.c ****  *
+  11:../etRuntime/src/common/base/etMemory_FreeList.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  13:../etRuntime/src/common/base/etMemory_FreeList.c **** #include "base/etMemory_FreeList.h"
+  14:../etRuntime/src/common/base/etMemory_FreeList.c **** #include "debugging/etLogger.h"
+  15:../etRuntime/src/common/base/etMemory_FreeList.c **** #include "debugging/etMSCLogger.h"
+  16:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  17:../etRuntime/src/common/base/etMemory_FreeList.c **** #define UNUSED_LIST		0
+  18:../etRuntime/src/common/base/etMemory_FreeList.c **** #define DEBUG_FREE_LISTS	1
+  19:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  20:../etRuntime/src/common/base/etMemory_FreeList.c **** typedef struct etFreeListObj {
+  21:../etRuntime/src/common/base/etMemory_FreeList.c **** 	struct etFreeListObj* next;
+  22:../etRuntime/src/common/base/etMemory_FreeList.c **** } etFreeListObj;
+  23:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  24:../etRuntime/src/common/base/etMemory_FreeList.c **** typedef struct etFreeListInfo {
+  25:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etUInt16 objsize;		/**< the size in bytes of the objects in this list */
+  26:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etFreeListObj* head;	/**< the list head */
+  27:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  28:../etRuntime/src/common/base/etMemory_FreeList.c **** #if DEBUG_FREE_LISTS
+  29:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etUInt16 nobjects;		/**< the number of objects in the list */
+  30:../etRuntime/src/common/base/etMemory_FreeList.c **** #endif
+  31:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  32:../etRuntime/src/common/base/etMemory_FreeList.c **** } etFreeListInfo;
+  33:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  34:../etRuntime/src/common/base/etMemory_FreeList.c **** typedef struct etFreeListMemory {
+  35:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etMemory base;					/** the "base class" */
+  36:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etUInt8* current;				/**< next free position on the heap */
+  37:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etUInt16 nslots;				/**< number of free lists */
+  38:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etFreeListInfo freelists[1];	/**< array of free list infos (array used with size nslots) */
+  39:../etRuntime/src/common/base/etMemory_FreeList.c **** } etFreeListMemory;
+  40:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  41:../etRuntime/src/common/base/etMemory_FreeList.c **** /*
+  42:../etRuntime/src/common/base/etMemory_FreeList.c ****  * private functions
+  43:../etRuntime/src/common/base/etMemory_FreeList.c ****  */
+  44:../etRuntime/src/common/base/etMemory_FreeList.c **** static void* etMemory_getHeapMem(etFreeListMemory* self, etUInt16 size) {
+  27              		.loc 1 44 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 85B0     		sub	sp, sp, #20
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 24
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  43 0008 0B46     		mov	r3, r1
+  44 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+  45:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etUInt8* obj = NULL;
+  45              		.loc 1 45 0
+  46 000c 4FF00003 		mov	r3, #0
+  47 0010 FB60     		str	r3, [r7, #12]
+  46:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getHeapListMem")
+  47:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  48:../etRuntime/src/common/base/etMemory_FreeList.c **** 	if (self->current < ((etUInt8*)self)+self->base.size)
+  48              		.loc 1 48 0
+  49 0012 7B68     		ldr	r3, [r7, #4]
+  50 0014 DA68     		ldr	r2, [r3, #12]
+  51 0016 7B68     		ldr	r3, [r7, #4]
+  52 0018 1B68     		ldr	r3, [r3, #0]
+  53 001a 7968     		ldr	r1, [r7, #4]
+  54 001c CB18     		adds	r3, r1, r3
+  55 001e 9A42     		cmp	r2, r3
+  56 0020 08D2     		bcs	.L2
+  49:../etRuntime/src/common/base/etMemory_FreeList.c **** 	{
+  50:../etRuntime/src/common/base/etMemory_FreeList.c **** 		obj = self->current;
+  57              		.loc 1 50 0
+  58 0022 7B68     		ldr	r3, [r7, #4]
+  59 0024 DB68     		ldr	r3, [r3, #12]
+  60 0026 FB60     		str	r3, [r7, #12]
+  51:../etRuntime/src/common/base/etMemory_FreeList.c **** 		self->current += size;
+  61              		.loc 1 51 0
+  62 0028 7B68     		ldr	r3, [r7, #4]
+  63 002a DA68     		ldr	r2, [r3, #12]
+  64 002c 7B88     		ldrh	r3, [r7, #2]
+  65 002e D218     		adds	r2, r2, r3
+  66 0030 7B68     		ldr	r3, [r7, #4]
+  67 0032 DA60     		str	r2, [r3, #12]
+  68              	.L2:
+  52:../etRuntime/src/common/base/etMemory_FreeList.c **** 	}
+  53:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  54:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  55:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return obj;
+  69              		.loc 1 55 0
+  70 0034 FB68     		ldr	r3, [r7, #12]
+  56:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+  71              		.loc 1 56 0
+  72 0036 1846     		mov	r0, r3
+  73 0038 07F11407 		add	r7, r7, #20
+  74 003c BD46     		mov	sp, r7
+  75 003e 80BC     		pop	{r7}
+  76 0040 7047     		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE0:
+  80 0042 00BF     		.section	.text.etMemory_getFreeListMem,"ax",%progbits
+  81              		.align	2
+  82              		.thumb
+  83              		.thumb_func
+  85              	etMemory_getFreeListMem:
+  86              	.LFB1:
+  57:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  58:../etRuntime/src/common/base/etMemory_FreeList.c **** static void* etMemory_getFreeListMem(etFreeListMemory* self, etUInt16 size) {
+  87              		.loc 1 58 0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 32
+  90              		@ frame_needed = 1, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92 0000 80B4     		push	{r7}
+  93              	.LCFI3:
+  94              		.cfi_def_cfa_offset 4
+  95              		.cfi_offset 7, -4
+  96 0002 89B0     		sub	sp, sp, #36
+  97              	.LCFI4:
+  98              		.cfi_def_cfa_offset 40
+  99 0004 00AF     		add	r7, sp, #0
+ 100              	.LCFI5:
+ 101              		.cfi_def_cfa_register 7
+ 102 0006 7860     		str	r0, [r7, #4]
+ 103 0008 0B46     		mov	r3, r1
+ 104 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+  59:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etUInt8* mem = NULL;
+ 105              		.loc 1 59 0
+ 106 000c 4FF00003 		mov	r3, #0
+ 107 0010 FB61     		str	r3, [r7, #28]
+  60:../etRuntime/src/common/base/etMemory_FreeList.c **** 	int asize, slot_offset, slot, slot_size;
+  61:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getFreeListMem")
+  62:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  63:../etRuntime/src/common/base/etMemory_FreeList.c **** 	asize = (size / ALIGNMENT);
+ 108              		.loc 1 63 0
+ 109 0012 7B88     		ldrh	r3, [r7, #2]
+ 110 0014 4FEA9303 		lsr	r3, r3, #2
+ 111 0018 9BB2     		uxth	r3, r3
+ 112 001a 7B61     		str	r3, [r7, #20]
+  64:../etRuntime/src/common/base/etMemory_FreeList.c **** 	for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
+ 113              		.loc 1 64 0
+ 114 001c 4FF00003 		mov	r3, #0
+ 115 0020 BB61     		str	r3, [r7, #24]
+ 116 0022 6AE0     		b	.L5
+ 117              	.L10:
+  65:../etRuntime/src/common/base/etMemory_FreeList.c **** 		slot = (asize + slot_offset) % self->nslots;
+ 118              		.loc 1 65 0
+ 119 0024 7A69     		ldr	r2, [r7, #20]
+ 120 0026 BB69     		ldr	r3, [r7, #24]
+ 121 0028 D318     		adds	r3, r2, r3
+ 122 002a 7A68     		ldr	r2, [r7, #4]
+ 123 002c 128A     		ldrh	r2, [r2, #16]
+ 124 002e 93FBF2F1 		sdiv	r1, r3, r2
+ 125 0032 02FB01F2 		mul	r2, r2, r1
+ 126 0036 9B1A     		subs	r3, r3, r2
+ 127 0038 3B61     		str	r3, [r7, #16]
+  66:../etRuntime/src/common/base/etMemory_FreeList.c **** 		slot_size = self->freelists[slot].objsize;
+ 128              		.loc 1 66 0
+ 129 003a 7968     		ldr	r1, [r7, #4]
+ 130 003c 3A69     		ldr	r2, [r7, #16]
+ 131 003e 1346     		mov	r3, r2
+ 132 0040 4FEA4303 		lsl	r3, r3, #1
+ 133 0044 9B18     		adds	r3, r3, r2
+ 134 0046 4FEA8303 		lsl	r3, r3, #2
+ 135 004a CB18     		adds	r3, r1, r3
+ 136 004c 03F11003 		add	r3, r3, #16
+ 137 0050 9B88     		ldrh	r3, [r3, #4]
+ 138 0052 FB60     		str	r3, [r7, #12]
+  67:../etRuntime/src/common/base/etMemory_FreeList.c **** 		if (slot_size == size) {
+ 139              		.loc 1 67 0
+ 140 0054 7A88     		ldrh	r2, [r7, #2]
+ 141 0056 FB68     		ldr	r3, [r7, #12]
+ 142 0058 9A42     		cmp	r2, r3
+ 143 005a 47D1     		bne	.L6
+  68:../etRuntime/src/common/base/etMemory_FreeList.c **** 			if (self->freelists[slot].head != NULL) {
+ 144              		.loc 1 68 0
+ 145 005c 7968     		ldr	r1, [r7, #4]
+ 146 005e 3A69     		ldr	r2, [r7, #16]
+ 147 0060 1346     		mov	r3, r2
+ 148 0062 4FEA4303 		lsl	r3, r3, #1
+ 149 0066 9B18     		adds	r3, r3, r2
+ 150 0068 4FEA8303 		lsl	r3, r3, #2
+ 151 006c CB18     		adds	r3, r1, r3
+ 152 006e 03F11803 		add	r3, r3, #24
+ 153 0072 1B68     		ldr	r3, [r3, #0]
+ 154 0074 002B     		cmp	r3, #0
+ 155 0076 47D0     		beq	.L12
+ 156              	.LBB2:
+  69:../etRuntime/src/common/base/etMemory_FreeList.c **** 				etFreeListObj* obj = self->freelists[slot].head;
+ 157              		.loc 1 69 0
+ 158 0078 7968     		ldr	r1, [r7, #4]
+ 159 007a 3A69     		ldr	r2, [r7, #16]
+ 160 007c 1346     		mov	r3, r2
+ 161 007e 4FEA4303 		lsl	r3, r3, #1
+ 162 0082 9B18     		adds	r3, r3, r2
+ 163 0084 4FEA8303 		lsl	r3, r3, #2
+ 164 0088 CB18     		adds	r3, r1, r3
+ 165 008a 03F11803 		add	r3, r3, #24
+ 166 008e 1B68     		ldr	r3, [r3, #0]
+ 167 0090 BB60     		str	r3, [r7, #8]
+  70:../etRuntime/src/common/base/etMemory_FreeList.c **** 				self->freelists[slot].head = obj->next;
+ 168              		.loc 1 70 0
+ 169 0092 BB68     		ldr	r3, [r7, #8]
+ 170 0094 1968     		ldr	r1, [r3, #0]
+ 171 0096 7868     		ldr	r0, [r7, #4]
+ 172 0098 3A69     		ldr	r2, [r7, #16]
+ 173 009a 1346     		mov	r3, r2
+ 174 009c 4FEA4303 		lsl	r3, r3, #1
+ 175 00a0 9B18     		adds	r3, r3, r2
+ 176 00a2 4FEA8303 		lsl	r3, r3, #2
+ 177 00a6 C318     		adds	r3, r0, r3
+ 178 00a8 03F11803 		add	r3, r3, #24
+ 179 00ac 1960     		str	r1, [r3, #0]
+  71:../etRuntime/src/common/base/etMemory_FreeList.c **** 				mem = (void *) obj;
+ 180              		.loc 1 71 0
+ 181 00ae BB68     		ldr	r3, [r7, #8]
+ 182 00b0 FB61     		str	r3, [r7, #28]
+  72:../etRuntime/src/common/base/etMemory_FreeList.c **** #if DEBUG_FREE_LISTS
+  73:../etRuntime/src/common/base/etMemory_FreeList.c **** 				--self->freelists[slot].nobjects;
+ 183              		.loc 1 73 0
+ 184 00b2 7968     		ldr	r1, [r7, #4]
+ 185 00b4 3A69     		ldr	r2, [r7, #16]
+ 186 00b6 1346     		mov	r3, r2
+ 187 00b8 4FEA4303 		lsl	r3, r3, #1
+ 188 00bc 9B18     		adds	r3, r3, r2
+ 189 00be 4FEA8303 		lsl	r3, r3, #2
+ 190 00c2 CB18     		adds	r3, r1, r3
+ 191 00c4 03F11803 		add	r3, r3, #24
+ 192 00c8 9B88     		ldrh	r3, [r3, #4]
+ 193 00ca 03F1FF33 		add	r3, r3, #-1
+ 194 00ce 99B2     		uxth	r1, r3
+ 195 00d0 7868     		ldr	r0, [r7, #4]
+ 196 00d2 3A69     		ldr	r2, [r7, #16]
+ 197 00d4 1346     		mov	r3, r2
+ 198 00d6 4FEA4303 		lsl	r3, r3, #1
+ 199 00da 9B18     		adds	r3, r3, r2
+ 200 00dc 4FEA8303 		lsl	r3, r3, #2
+ 201 00e0 C318     		adds	r3, r0, r3
+ 202 00e2 03F11803 		add	r3, r3, #24
+ 203 00e6 0A46     		mov	r2, r1	@ movhi
+ 204 00e8 9A80     		strh	r2, [r3, #4]	@ movhi
+ 205              	.LBE2:
+  74:../etRuntime/src/common/base/etMemory_FreeList.c **** #endif
+  75:../etRuntime/src/common/base/etMemory_FreeList.c **** 			}
+  76:../etRuntime/src/common/base/etMemory_FreeList.c **** 			break;
+ 206              		.loc 1 76 0
+ 207 00ea 0DE0     		b	.L12
+ 208              	.L6:
+  77:../etRuntime/src/common/base/etMemory_FreeList.c **** 		}
+  78:../etRuntime/src/common/base/etMemory_FreeList.c **** 		else if (slot_size == UNUSED_LIST)
+ 209              		.loc 1 78 0
+ 210 00ec FB68     		ldr	r3, [r7, #12]
+ 211 00ee 002B     		cmp	r3, #0
+ 212 00f0 0CD0     		beq	.L13
+ 213              	.L9:
+  64:../etRuntime/src/common/base/etMemory_FreeList.c **** 	for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
+ 214              		.loc 1 64 0
+ 215 00f2 BB69     		ldr	r3, [r7, #24]
+ 216 00f4 03F10103 		add	r3, r3, #1
+ 217 00f8 BB61     		str	r3, [r7, #24]
+ 218              	.L5:
+  64:../etRuntime/src/common/base/etMemory_FreeList.c **** 	for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
+ 219              		.loc 1 64 0 is_stmt 0 discriminator 1
+ 220 00fa 7B68     		ldr	r3, [r7, #4]
+ 221 00fc 1B8A     		ldrh	r3, [r3, #16]
+ 222 00fe 1A46     		mov	r2, r3
+ 223 0100 BB69     		ldr	r3, [r7, #24]
+ 224 0102 9A42     		cmp	r2, r3
+ 225 0104 8EDC     		bgt	.L10
+ 226 0106 02E0     		b	.L8
+ 227              	.L12:
+  76:../etRuntime/src/common/base/etMemory_FreeList.c **** 			break;
+ 228              		.loc 1 76 0 is_stmt 1
+ 229 0108 00BF     		nop
+ 230 010a 00E0     		b	.L8
+ 231              	.L13:
+  79:../etRuntime/src/common/base/etMemory_FreeList.c **** 			break;
+ 232              		.loc 1 79 0
+ 233 010c 00BF     		nop
+ 234              	.L8:
+  80:../etRuntime/src/common/base/etMemory_FreeList.c **** 	}
+  81:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  82:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return mem;
+ 235              		.loc 1 82 0
+ 236 010e FB69     		ldr	r3, [r7, #28]
+  83:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 237              		.loc 1 83 0
+ 238 0110 1846     		mov	r0, r3
+ 239 0112 07F12407 		add	r7, r7, #36
+ 240 0116 BD46     		mov	sp, r7
+ 241 0118 80BC     		pop	{r7}
+ 242 011a 7047     		bx	lr
+ 243              		.cfi_endproc
+ 244              	.LFE1:
+ 246              		.section	.text.etMemory_putFreeListMem,"ax",%progbits
+ 247              		.align	2
+ 248              		.thumb
+ 249              		.thumb_func
+ 251              	etMemory_putFreeListMem:
+ 252              	.LFB2:
+  84:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  85:../etRuntime/src/common/base/etMemory_FreeList.c **** static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 size) {
+ 253              		.loc 1 85 0
+ 254              		.cfi_startproc
+ 255              		@ args = 0, pretend = 0, frame = 32
+ 256              		@ frame_needed = 1, uses_anonymous_args = 0
+ 257              		@ link register save eliminated.
+ 258 0000 80B4     		push	{r7}
+ 259              	.LCFI6:
+ 260              		.cfi_def_cfa_offset 4
+ 261              		.cfi_offset 7, -4
+ 262 0002 89B0     		sub	sp, sp, #36
+ 263              	.LCFI7:
+ 264              		.cfi_def_cfa_offset 40
+ 265 0004 00AF     		add	r7, sp, #0
+ 266              	.LCFI8:
+ 267              		.cfi_def_cfa_register 7
+ 268 0006 F860     		str	r0, [r7, #12]
+ 269 0008 B960     		str	r1, [r7, #8]
+ 270 000a 1346     		mov	r3, r2
+ 271 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 272              	.LBB3:
+  86:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "putFreeListMem")
+  87:../etRuntime/src/common/base/etMemory_FreeList.c **** 	{
+  88:../etRuntime/src/common/base/etMemory_FreeList.c **** 		int asize, slot_offset, slot, slot_size;
+  89:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+  90:../etRuntime/src/common/base/etMemory_FreeList.c **** 		asize = (size / ALIGNMENT);
+ 273              		.loc 1 90 0
+ 274 000e FB88     		ldrh	r3, [r7, #6]
+ 275 0010 4FEA9303 		lsr	r3, r3, #2
+ 276 0014 9BB2     		uxth	r3, r3
+ 277 0016 BB61     		str	r3, [r7, #24]
+  91:../etRuntime/src/common/base/etMemory_FreeList.c **** 		for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
+ 278              		.loc 1 91 0
+ 279 0018 4FF00003 		mov	r3, #0
+ 280 001c FB61     		str	r3, [r7, #28]
+ 281 001e 87E0     		b	.L15
+ 282              	.L19:
+  92:../etRuntime/src/common/base/etMemory_FreeList.c **** 			slot = (asize + slot_offset) % self->nslots;
+ 283              		.loc 1 92 0
+ 284 0020 BA69     		ldr	r2, [r7, #24]
+ 285 0022 FB69     		ldr	r3, [r7, #28]
+ 286 0024 D318     		adds	r3, r2, r3
+ 287 0026 FA68     		ldr	r2, [r7, #12]
+ 288 0028 128A     		ldrh	r2, [r2, #16]
+ 289 002a 93FBF2F1 		sdiv	r1, r3, r2
+ 290 002e 02FB01F2 		mul	r2, r2, r1
+ 291 0032 9B1A     		subs	r3, r3, r2
+ 292 0034 7B61     		str	r3, [r7, #20]
+  93:../etRuntime/src/common/base/etMemory_FreeList.c **** 			slot_size = self->freelists[slot].objsize;
+ 293              		.loc 1 93 0
+ 294 0036 F968     		ldr	r1, [r7, #12]
+ 295 0038 7A69     		ldr	r2, [r7, #20]
+ 296 003a 1346     		mov	r3, r2
+ 297 003c 4FEA4303 		lsl	r3, r3, #1
+ 298 0040 9B18     		adds	r3, r3, r2
+ 299 0042 4FEA8303 		lsl	r3, r3, #2
+ 300 0046 CB18     		adds	r3, r1, r3
+ 301 0048 03F11003 		add	r3, r3, #16
+ 302 004c 9B88     		ldrh	r3, [r3, #4]
+ 303 004e 3B61     		str	r3, [r7, #16]
+  94:../etRuntime/src/common/base/etMemory_FreeList.c **** 			if (slot_size == size) {
+ 304              		.loc 1 94 0
+ 305 0050 FA88     		ldrh	r2, [r7, #6]
+ 306 0052 3B69     		ldr	r3, [r7, #16]
+ 307 0054 9A42     		cmp	r2, r3
+ 308 0056 37D1     		bne	.L16
+  95:../etRuntime/src/common/base/etMemory_FreeList.c **** 				/* we insert the object as new head */
+  96:../etRuntime/src/common/base/etMemory_FreeList.c **** 				((etFreeListObj*)obj)->next = self->freelists[slot].head;
+ 309              		.loc 1 96 0
+ 310 0058 F968     		ldr	r1, [r7, #12]
+ 311 005a 7A69     		ldr	r2, [r7, #20]
+ 312 005c 1346     		mov	r3, r2
+ 313 005e 4FEA4303 		lsl	r3, r3, #1
+ 314 0062 9B18     		adds	r3, r3, r2
+ 315 0064 4FEA8303 		lsl	r3, r3, #2
+ 316 0068 CB18     		adds	r3, r1, r3
+ 317 006a 03F11803 		add	r3, r3, #24
+ 318 006e 1A68     		ldr	r2, [r3, #0]
+ 319 0070 BB68     		ldr	r3, [r7, #8]
+ 320 0072 1A60     		str	r2, [r3, #0]
+  97:../etRuntime/src/common/base/etMemory_FreeList.c **** 				self->freelists[slot].head = (etFreeListObj*)obj;
+ 321              		.loc 1 97 0
+ 322 0074 F968     		ldr	r1, [r7, #12]
+ 323 0076 7A69     		ldr	r2, [r7, #20]
+ 324 0078 1346     		mov	r3, r2
+ 325 007a 4FEA4303 		lsl	r3, r3, #1
+ 326 007e 9B18     		adds	r3, r3, r2
+ 327 0080 4FEA8303 		lsl	r3, r3, #2
+ 328 0084 CB18     		adds	r3, r1, r3
+ 329 0086 03F11803 		add	r3, r3, #24
+ 330 008a BA68     		ldr	r2, [r7, #8]
+ 331 008c 1A60     		str	r2, [r3, #0]
+  98:../etRuntime/src/common/base/etMemory_FreeList.c **** #if DEBUG_FREE_LISTS
+  99:../etRuntime/src/common/base/etMemory_FreeList.c **** 				++self->freelists[slot].nobjects;
+ 332              		.loc 1 99 0
+ 333 008e F968     		ldr	r1, [r7, #12]
+ 334 0090 7A69     		ldr	r2, [r7, #20]
+ 335 0092 1346     		mov	r3, r2
+ 336 0094 4FEA4303 		lsl	r3, r3, #1
+ 337 0098 9B18     		adds	r3, r3, r2
+ 338 009a 4FEA8303 		lsl	r3, r3, #2
+ 339 009e CB18     		adds	r3, r1, r3
+ 340 00a0 03F11803 		add	r3, r3, #24
+ 341 00a4 9B88     		ldrh	r3, [r3, #4]
+ 342 00a6 03F10103 		add	r3, r3, #1
+ 343 00aa 99B2     		uxth	r1, r3
+ 344 00ac F868     		ldr	r0, [r7, #12]
+ 345 00ae 7A69     		ldr	r2, [r7, #20]
+ 346 00b0 1346     		mov	r3, r2
+ 347 00b2 4FEA4303 		lsl	r3, r3, #1
+ 348 00b6 9B18     		adds	r3, r3, r2
+ 349 00b8 4FEA8303 		lsl	r3, r3, #2
+ 350 00bc C318     		adds	r3, r0, r3
+ 351 00be 03F11803 		add	r3, r3, #24
+ 352 00c2 0A46     		mov	r2, r1	@ movhi
+ 353 00c4 9A80     		strh	r2, [r3, #4]	@ movhi
+ 100:../etRuntime/src/common/base/etMemory_FreeList.c **** #endif
+ 101:../etRuntime/src/common/base/etMemory_FreeList.c **** 				break;
+ 354              		.loc 1 101 0
+ 355 00c6 3AE0     		b	.L14
+ 356              	.L16:
+ 102:../etRuntime/src/common/base/etMemory_FreeList.c **** 			}
+ 103:../etRuntime/src/common/base/etMemory_FreeList.c **** 			else if (slot_size == UNUSED_LIST) {
+ 357              		.loc 1 103 0
+ 358 00c8 3B69     		ldr	r3, [r7, #16]
+ 359 00ca 002B     		cmp	r3, #0
+ 360 00cc 2CD1     		bne	.L18
+ 104:../etRuntime/src/common/base/etMemory_FreeList.c **** 				/* initialize unused list and insert the object as new head */
+ 105:../etRuntime/src/common/base/etMemory_FreeList.c **** 				self->freelists[slot].objsize = size;
+ 361              		.loc 1 105 0
+ 362 00ce F968     		ldr	r1, [r7, #12]
+ 363 00d0 7A69     		ldr	r2, [r7, #20]
+ 364 00d2 1346     		mov	r3, r2
+ 365 00d4 4FEA4303 		lsl	r3, r3, #1
+ 366 00d8 9B18     		adds	r3, r3, r2
+ 367 00da 4FEA8303 		lsl	r3, r3, #2
+ 368 00de CB18     		adds	r3, r1, r3
+ 369 00e0 03F11003 		add	r3, r3, #16
+ 370 00e4 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 371 00e6 9A80     		strh	r2, [r3, #4]	@ movhi
+ 106:../etRuntime/src/common/base/etMemory_FreeList.c **** 				((etFreeListObj*)obj)->next = NULL;
+ 372              		.loc 1 106 0
+ 373 00e8 BB68     		ldr	r3, [r7, #8]
+ 374 00ea 4FF00002 		mov	r2, #0
+ 375 00ee 1A60     		str	r2, [r3, #0]
+ 107:../etRuntime/src/common/base/etMemory_FreeList.c **** 				self->freelists[slot].head = (etFreeListObj*)obj;
+ 376              		.loc 1 107 0
+ 377 00f0 F968     		ldr	r1, [r7, #12]
+ 378 00f2 7A69     		ldr	r2, [r7, #20]
+ 379 00f4 1346     		mov	r3, r2
+ 380 00f6 4FEA4303 		lsl	r3, r3, #1
+ 381 00fa 9B18     		adds	r3, r3, r2
+ 382 00fc 4FEA8303 		lsl	r3, r3, #2
+ 383 0100 CB18     		adds	r3, r1, r3
+ 384 0102 03F11803 		add	r3, r3, #24
+ 385 0106 BA68     		ldr	r2, [r7, #8]
+ 386 0108 1A60     		str	r2, [r3, #0]
+ 108:../etRuntime/src/common/base/etMemory_FreeList.c **** #if DEBUG_FREE_LISTS
+ 109:../etRuntime/src/common/base/etMemory_FreeList.c **** 				self->freelists[slot].nobjects = 1;
+ 387              		.loc 1 109 0
+ 388 010a F968     		ldr	r1, [r7, #12]
+ 389 010c 7A69     		ldr	r2, [r7, #20]
+ 390 010e 1346     		mov	r3, r2
+ 391 0110 4FEA4303 		lsl	r3, r3, #1
+ 392 0114 9B18     		adds	r3, r3, r2
+ 393 0116 4FEA8303 		lsl	r3, r3, #2
+ 394 011a CB18     		adds	r3, r1, r3
+ 395 011c 03F11803 		add	r3, r3, #24
+ 396 0120 4FF00102 		mov	r2, #1
+ 397 0124 9A80     		strh	r2, [r3, #4]	@ movhi
+ 110:../etRuntime/src/common/base/etMemory_FreeList.c **** #endif
+ 111:../etRuntime/src/common/base/etMemory_FreeList.c **** 				break;
+ 398              		.loc 1 111 0
+ 399 0126 0AE0     		b	.L14
+ 400              	.L18:
+  91:../etRuntime/src/common/base/etMemory_FreeList.c **** 		for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
+ 401              		.loc 1 91 0
+ 402 0128 FB69     		ldr	r3, [r7, #28]
+ 403 012a 03F10103 		add	r3, r3, #1
+ 404 012e FB61     		str	r3, [r7, #28]
+ 405              	.L15:
+  91:../etRuntime/src/common/base/etMemory_FreeList.c **** 		for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
+ 406              		.loc 1 91 0 is_stmt 0 discriminator 1
+ 407 0130 FB68     		ldr	r3, [r7, #12]
+ 408 0132 1B8A     		ldrh	r3, [r3, #16]
+ 409 0134 1A46     		mov	r2, r3
+ 410 0136 FB69     		ldr	r3, [r7, #28]
+ 411 0138 9A42     		cmp	r2, r3
+ 412 013a 3FF771AF 		bgt	.L19
+ 413              	.L14:
+ 414              	.LBE3:
+ 112:../etRuntime/src/common/base/etMemory_FreeList.c **** 			}
+ 113:../etRuntime/src/common/base/etMemory_FreeList.c **** 		}
+ 114:../etRuntime/src/common/base/etMemory_FreeList.c **** 	}
+ 115:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 116:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 415              		.loc 1 116 0 is_stmt 1
+ 416 013e 07F12407 		add	r7, r7, #36
+ 417 0142 BD46     		mov	sp, r7
+ 418 0144 80BC     		pop	{r7}
+ 419 0146 7047     		bx	lr
+ 420              		.cfi_endproc
+ 421              	.LFE2:
+ 423              		.section	.text.etMemory_FreeList_alloc,"ax",%progbits
+ 424              		.align	2
+ 425              		.global	etMemory_FreeList_alloc
+ 426              		.thumb
+ 427              		.thumb_func
+ 429              	etMemory_FreeList_alloc:
+ 430              	.LFB3:
+ 117:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 118:../etRuntime/src/common/base/etMemory_FreeList.c **** void* etMemory_FreeList_alloc(etMemory* heap, etUInt16 size) {
+ 431              		.loc 1 118 0
+ 432              		.cfi_startproc
+ 433              		@ args = 0, pretend = 0, frame = 16
+ 434              		@ frame_needed = 1, uses_anonymous_args = 0
+ 435 0000 80B5     		push	{r7, lr}
+ 436              	.LCFI9:
+ 437              		.cfi_def_cfa_offset 8
+ 438              		.cfi_offset 7, -8
+ 439              		.cfi_offset 14, -4
+ 440 0002 84B0     		sub	sp, sp, #16
+ 441              	.LCFI10:
+ 442              		.cfi_def_cfa_offset 24
+ 443 0004 00AF     		add	r7, sp, #0
+ 444              	.LCFI11:
+ 445              		.cfi_def_cfa_register 7
+ 446 0006 7860     		str	r0, [r7, #4]
+ 447 0008 0B46     		mov	r3, r1
+ 448 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 119:../etRuntime/src/common/base/etMemory_FreeList.c **** 	void* mem;
+ 120:../etRuntime/src/common/base/etMemory_FreeList.c **** 	size = MEM_CEIL(size);
+ 449              		.loc 1 120 0
+ 450 000c 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 451 000e C3F10003 		rsb	r3, r3, #0
+ 452 0012 9BB2     		uxth	r3, r3
+ 453 0014 03F00303 		and	r3, r3, #3
+ 454 0018 9AB2     		uxth	r2, r3
+ 455 001a 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 456 001c D318     		adds	r3, r2, r3
+ 457 001e 7B80     		strh	r3, [r7, #2]	@ movhi
+ 121:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "alloc")
+ 122:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 123:../etRuntime/src/common/base/etMemory_FreeList.c **** 	mem = etMemory_getFreeListMem((etFreeListMemory*) heap, size);
+ 458              		.loc 1 123 0
+ 459 0020 7B88     		ldrh	r3, [r7, #2]
+ 460 0022 7868     		ldr	r0, [r7, #4]
+ 461 0024 1946     		mov	r1, r3
+ 462 0026 FFF7FEFF 		bl	etMemory_getFreeListMem
+ 463 002a F860     		str	r0, [r7, #12]
+ 124:../etRuntime/src/common/base/etMemory_FreeList.c **** 	if (mem==NULL)
+ 464              		.loc 1 124 0
+ 465 002c FB68     		ldr	r3, [r7, #12]
+ 466 002e 002B     		cmp	r3, #0
+ 467 0030 05D1     		bne	.L21
+ 125:../etRuntime/src/common/base/etMemory_FreeList.c **** 		mem = etMemory_getHeapMem((etFreeListMemory*) heap, size);
+ 468              		.loc 1 125 0
+ 469 0032 7B88     		ldrh	r3, [r7, #2]
+ 470 0034 7868     		ldr	r0, [r7, #4]
+ 471 0036 1946     		mov	r1, r3
+ 472 0038 FFF7FEFF 		bl	etMemory_getHeapMem
+ 473 003c F860     		str	r0, [r7, #12]
+ 474              	.L21:
+ 126:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 127:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 128:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return mem;
+ 475              		.loc 1 128 0
+ 476 003e FB68     		ldr	r3, [r7, #12]
+ 129:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 477              		.loc 1 129 0
+ 478 0040 1846     		mov	r0, r3
+ 479 0042 07F11007 		add	r7, r7, #16
+ 480 0046 BD46     		mov	sp, r7
+ 481 0048 80BD     		pop	{r7, pc}
+ 482              		.cfi_endproc
+ 483              	.LFE3:
+ 485 004a 00BF     		.section	.text.etMemory_FreeList_free,"ax",%progbits
+ 486              		.align	2
+ 487              		.global	etMemory_FreeList_free
+ 488              		.thumb
+ 489              		.thumb_func
+ 491              	etMemory_FreeList_free:
+ 492              	.LFB4:
+ 130:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 131:../etRuntime/src/common/base/etMemory_FreeList.c **** void etMemory_FreeList_free(etMemory* heap, void* obj, etUInt16 size) {
+ 493              		.loc 1 131 0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 16
+ 496              		@ frame_needed = 1, uses_anonymous_args = 0
+ 497 0000 80B5     		push	{r7, lr}
+ 498              	.LCFI12:
+ 499              		.cfi_def_cfa_offset 8
+ 500              		.cfi_offset 7, -8
+ 501              		.cfi_offset 14, -4
+ 502 0002 84B0     		sub	sp, sp, #16
+ 503              	.LCFI13:
+ 504              		.cfi_def_cfa_offset 24
+ 505 0004 00AF     		add	r7, sp, #0
+ 506              	.LCFI14:
+ 507              		.cfi_def_cfa_register 7
+ 508 0006 F860     		str	r0, [r7, #12]
+ 509 0008 B960     		str	r1, [r7, #8]
+ 510 000a 1346     		mov	r3, r2
+ 511 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 132:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "free")
+ 133:../etRuntime/src/common/base/etMemory_FreeList.c **** 	{
+ 134:../etRuntime/src/common/base/etMemory_FreeList.c **** 		size = MEM_CEIL(size);
+ 512              		.loc 1 134 0
+ 513 000e FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 514 0010 C3F10003 		rsb	r3, r3, #0
+ 515 0014 9BB2     		uxth	r3, r3
+ 516 0016 03F00303 		and	r3, r3, #3
+ 517 001a 9AB2     		uxth	r2, r3
+ 518 001c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 519 001e D318     		adds	r3, r2, r3
+ 520 0020 FB80     		strh	r3, [r7, #6]	@ movhi
+ 135:../etRuntime/src/common/base/etMemory_FreeList.c **** 		etMemory_putFreeListMem((etFreeListMemory*) heap, obj, size);
+ 521              		.loc 1 135 0
+ 522 0022 FB88     		ldrh	r3, [r7, #6]
+ 523 0024 F868     		ldr	r0, [r7, #12]
+ 524 0026 B968     		ldr	r1, [r7, #8]
+ 525 0028 1A46     		mov	r2, r3
+ 526 002a FFF7FEFF 		bl	etMemory_putFreeListMem
+ 136:../etRuntime/src/common/base/etMemory_FreeList.c **** 	}
+ 137:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 138:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 527              		.loc 1 138 0
+ 528 002e 07F11007 		add	r7, r7, #16
+ 529 0032 BD46     		mov	sp, r7
+ 530 0034 80BD     		pop	{r7, pc}
+ 531              		.cfi_endproc
+ 532              	.LFE4:
+ 534 0036 00BF     		.section	.text.etMemory_FreeList_init,"ax",%progbits
+ 535              		.align	2
+ 536              		.global	etMemory_FreeList_init
+ 537              		.thumb
+ 538              		.thumb_func
+ 540              	etMemory_FreeList_init:
+ 541              	.LFB5:
+ 139:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 140:../etRuntime/src/common/base/etMemory_FreeList.c **** /*
+ 141:../etRuntime/src/common/base/etMemory_FreeList.c ****  * the public interface
+ 142:../etRuntime/src/common/base/etMemory_FreeList.c ****  */
+ 143:../etRuntime/src/common/base/etMemory_FreeList.c **** etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
+ 542              		.loc 1 143 0
+ 543              		.cfi_startproc
+ 544              		@ args = 0, pretend = 0, frame = 32
+ 545              		@ frame_needed = 1, uses_anonymous_args = 0
+ 546              		@ link register save eliminated.
+ 547 0000 80B4     		push	{r7}
+ 548              	.LCFI15:
+ 549              		.cfi_def_cfa_offset 4
+ 550              		.cfi_offset 7, -4
+ 551 0002 89B0     		sub	sp, sp, #36
+ 552              	.LCFI16:
+ 553              		.cfi_def_cfa_offset 40
+ 554 0004 00AF     		add	r7, sp, #0
+ 555              	.LCFI17:
+ 556              		.cfi_def_cfa_register 7
+ 557 0006 F860     		str	r0, [r7, #12]
+ 558 0008 B960     		str	r1, [r7, #8]
+ 559 000a 1346     		mov	r3, r2
+ 560 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 144:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etFreeListMemory* self = (etFreeListMemory*) heap;
+ 561              		.loc 1 144 0
+ 562 000e FB68     		ldr	r3, [r7, #12]
+ 563 0010 BB61     		str	r3, [r7, #24]
+ 145:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList_init", "init")
+ 146:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 147:../etRuntime/src/common/base/etMemory_FreeList.c **** 	self->base.size = size;
+ 564              		.loc 1 147 0
+ 565 0012 BB69     		ldr	r3, [r7, #24]
+ 566 0014 BA68     		ldr	r2, [r7, #8]
+ 567 0016 1A60     		str	r2, [r3, #0]
+ 148:../etRuntime/src/common/base/etMemory_FreeList.c **** 	self->base.alloc = etMemory_FreeList_alloc;
+ 568              		.loc 1 148 0
+ 569 0018 BA69     		ldr	r2, [r7, #24]
+ 570 001a 40F20003 		movw	r3, #:lower16:etMemory_FreeList_alloc
+ 571 001e C0F20003 		movt	r3, #:upper16:etMemory_FreeList_alloc
+ 572 0022 5360     		str	r3, [r2, #4]
+ 149:../etRuntime/src/common/base/etMemory_FreeList.c **** 	self->base.free = etMemory_FreeList_free;
+ 573              		.loc 1 149 0
+ 574 0024 BA69     		ldr	r2, [r7, #24]
+ 575 0026 40F20003 		movw	r3, #:lower16:etMemory_FreeList_free
+ 576 002a C0F20003 		movt	r3, #:upper16:etMemory_FreeList_free
+ 577 002e 9360     		str	r3, [r2, #8]
+ 150:../etRuntime/src/common/base/etMemory_FreeList.c **** 	self->nslots = nslots;
+ 578              		.loc 1 150 0
+ 579 0030 BB69     		ldr	r3, [r7, #24]
+ 580 0032 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 581 0034 1A82     		strh	r2, [r3, #16]	@ movhi
+ 582              	.LBB4:
+ 151:../etRuntime/src/common/base/etMemory_FreeList.c **** 	{
+ 152:../etRuntime/src/common/base/etMemory_FreeList.c **** 		int used = sizeof(etFreeListMemory)+(self->nslots-1)*sizeof(etFreeListObj);
+ 583              		.loc 1 152 0
+ 584 0036 BB69     		ldr	r3, [r7, #24]
+ 585 0038 1B8A     		ldrh	r3, [r3, #16]
+ 586 003a 03F1FF33 		add	r3, r3, #-1
+ 587 003e 4FEA8303 		lsl	r3, r3, #2
+ 588 0042 03F12003 		add	r3, r3, #32
+ 589 0046 7B61     		str	r3, [r7, #20]
+ 153:../etRuntime/src/common/base/etMemory_FreeList.c **** 		self->current = ((etUInt8*)self)+MEM_CEIL(used);
+ 590              		.loc 1 153 0
+ 591 0048 7B69     		ldr	r3, [r7, #20]
+ 592 004a C3F10003 		rsb	r3, r3, #0
+ 593 004e 03F00302 		and	r2, r3, #3
+ 594 0052 7B69     		ldr	r3, [r7, #20]
+ 595 0054 D318     		adds	r3, r2, r3
+ 596 0056 BA69     		ldr	r2, [r7, #24]
+ 597 0058 D218     		adds	r2, r2, r3
+ 598 005a BB69     		ldr	r3, [r7, #24]
+ 599 005c DA60     		str	r2, [r3, #12]
+ 600              	.LBE4:
+ 601              	.LBB5:
+ 154:../etRuntime/src/common/base/etMemory_FreeList.c **** 	}
+ 155:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 156:../etRuntime/src/common/base/etMemory_FreeList.c **** 	/* initialize the free lists */
+ 157:../etRuntime/src/common/base/etMemory_FreeList.c **** 	{
+ 158:../etRuntime/src/common/base/etMemory_FreeList.c **** 		int i;
+ 159:../etRuntime/src/common/base/etMemory_FreeList.c **** 		for (i=0; i<self->nslots; ++i)
+ 602              		.loc 1 159 0
+ 603 005e 4FF00003 		mov	r3, #0
+ 604 0062 FB61     		str	r3, [r7, #28]
+ 605 0064 11E0     		b	.L25
+ 606              	.L26:
+ 160:../etRuntime/src/common/base/etMemory_FreeList.c **** 			self->freelists[i].objsize = UNUSED_LIST;
+ 607              		.loc 1 160 0 discriminator 2
+ 608 0066 B969     		ldr	r1, [r7, #24]
+ 609 0068 FA69     		ldr	r2, [r7, #28]
+ 610 006a 1346     		mov	r3, r2
+ 611 006c 4FEA4303 		lsl	r3, r3, #1
+ 612 0070 9B18     		adds	r3, r3, r2
+ 613 0072 4FEA8303 		lsl	r3, r3, #2
+ 614 0076 CB18     		adds	r3, r1, r3
+ 615 0078 03F11003 		add	r3, r3, #16
+ 616 007c 4FF00002 		mov	r2, #0
+ 617 0080 9A80     		strh	r2, [r3, #4]	@ movhi
+ 159:../etRuntime/src/common/base/etMemory_FreeList.c **** 		for (i=0; i<self->nslots; ++i)
+ 618              		.loc 1 159 0 discriminator 2
+ 619 0082 FB69     		ldr	r3, [r7, #28]
+ 620 0084 03F10103 		add	r3, r3, #1
+ 621 0088 FB61     		str	r3, [r7, #28]
+ 622              	.L25:
+ 159:../etRuntime/src/common/base/etMemory_FreeList.c **** 		for (i=0; i<self->nslots; ++i)
+ 623              		.loc 1 159 0 is_stmt 0 discriminator 1
+ 624 008a BB69     		ldr	r3, [r7, #24]
+ 625 008c 1B8A     		ldrh	r3, [r3, #16]
+ 626 008e 1A46     		mov	r2, r3
+ 627 0090 FB69     		ldr	r3, [r7, #28]
+ 628 0092 9A42     		cmp	r2, r3
+ 629 0094 E7DC     		bgt	.L26
+ 630              	.LBE5:
+ 161:../etRuntime/src/common/base/etMemory_FreeList.c **** 	}
+ 162:../etRuntime/src/common/base/etMemory_FreeList.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 163:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 164:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return &self->base;
+ 631              		.loc 1 164 0 is_stmt 1
+ 632 0096 BB69     		ldr	r3, [r7, #24]
+ 165:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 633              		.loc 1 165 0
+ 634 0098 1846     		mov	r0, r3
+ 635 009a 07F12407 		add	r7, r7, #36
+ 636 009e BD46     		mov	sp, r7
+ 637 00a0 80BC     		pop	{r7}
+ 638 00a2 7047     		bx	lr
+ 639              		.cfi_endproc
+ 640              	.LFE5:
+ 642              		.section	.text.etMemory_FreeList_freeHeapMem,"ax",%progbits
+ 643              		.align	2
+ 644              		.global	etMemory_FreeList_freeHeapMem
+ 645              		.thumb
+ 646              		.thumb_func
+ 648              	etMemory_FreeList_freeHeapMem:
+ 649              	.LFB6:
+ 166:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 167:../etRuntime/src/common/base/etMemory_FreeList.c **** etUInt32 etMemory_FreeList_freeHeapMem(void* heap) {
+ 650              		.loc 1 167 0
+ 651              		.cfi_startproc
+ 652              		@ args = 0, pretend = 0, frame = 16
+ 653              		@ frame_needed = 1, uses_anonymous_args = 0
+ 654              		@ link register save eliminated.
+ 655 0000 80B4     		push	{r7}
+ 656              	.LCFI18:
+ 657              		.cfi_def_cfa_offset 4
+ 658              		.cfi_offset 7, -4
+ 659 0002 85B0     		sub	sp, sp, #20
+ 660              	.LCFI19:
+ 661              		.cfi_def_cfa_offset 24
+ 662 0004 00AF     		add	r7, sp, #0
+ 663              	.LCFI20:
+ 664              		.cfi_def_cfa_register 7
+ 665 0006 7860     		str	r0, [r7, #4]
+ 168:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etFreeListMemory* self = (etFreeListMemory*) heap;
+ 666              		.loc 1 168 0
+ 667 0008 7B68     		ldr	r3, [r7, #4]
+ 668 000a FB60     		str	r3, [r7, #12]
+ 169:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return ((etUInt8*)self)+self->base.size - self->current;
+ 669              		.loc 1 169 0
+ 670 000c FB68     		ldr	r3, [r7, #12]
+ 671 000e 1B68     		ldr	r3, [r3, #0]
+ 672 0010 FA68     		ldr	r2, [r7, #12]
+ 673 0012 D318     		adds	r3, r2, r3
+ 674 0014 1A46     		mov	r2, r3
+ 675 0016 FB68     		ldr	r3, [r7, #12]
+ 676 0018 DB68     		ldr	r3, [r3, #12]
+ 677 001a D31A     		subs	r3, r2, r3
+ 170:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 678              		.loc 1 170 0
+ 679 001c 1846     		mov	r0, r3
+ 680 001e 07F11407 		add	r7, r7, #20
+ 681 0022 BD46     		mov	sp, r7
+ 682 0024 80BC     		pop	{r7}
+ 683 0026 7047     		bx	lr
+ 684              		.cfi_endproc
+ 685              	.LFE6:
+ 687              		.section	.text.etMemory_FreeList_freeSlots,"ax",%progbits
+ 688              		.align	2
+ 689              		.global	etMemory_FreeList_freeSlots
+ 690              		.thumb
+ 691              		.thumb_func
+ 693              	etMemory_FreeList_freeSlots:
+ 694              	.LFB7:
+ 171:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 172:../etRuntime/src/common/base/etMemory_FreeList.c **** etUInt16 etMemory_FreeList_freeSlots(void* heap) {
+ 695              		.loc 1 172 0
+ 696              		.cfi_startproc
+ 697              		@ args = 0, pretend = 0, frame = 24
+ 698              		@ frame_needed = 1, uses_anonymous_args = 0
+ 699              		@ link register save eliminated.
+ 700 0000 80B4     		push	{r7}
+ 701              	.LCFI21:
+ 702              		.cfi_def_cfa_offset 4
+ 703              		.cfi_offset 7, -4
+ 704 0002 87B0     		sub	sp, sp, #28
+ 705              	.LCFI22:
+ 706              		.cfi_def_cfa_offset 32
+ 707 0004 00AF     		add	r7, sp, #0
+ 708              	.LCFI23:
+ 709              		.cfi_def_cfa_register 7
+ 710 0006 7860     		str	r0, [r7, #4]
+ 173:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etFreeListMemory* self = (etFreeListMemory*) heap;
+ 711              		.loc 1 173 0
+ 712 0008 7B68     		ldr	r3, [r7, #4]
+ 713 000a FB60     		str	r3, [r7, #12]
+ 174:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etUInt16 free = 0;
+ 714              		.loc 1 174 0
+ 715 000c 4FF00003 		mov	r3, #0
+ 716 0010 FB82     		strh	r3, [r7, #22]	@ movhi
+ 175:../etRuntime/src/common/base/etMemory_FreeList.c **** 	int slot;
+ 176:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 177:../etRuntime/src/common/base/etMemory_FreeList.c **** 	for (slot=0; slot<self->nslots; ++slot)
+ 717              		.loc 1 177 0
+ 718 0012 4FF00003 		mov	r3, #0
+ 719 0016 3B61     		str	r3, [r7, #16]
+ 720 0018 15E0     		b	.L31
+ 721              	.L33:
+ 178:../etRuntime/src/common/base/etMemory_FreeList.c **** 		if (self->freelists[slot].objsize==UNUSED_LIST)
+ 722              		.loc 1 178 0
+ 723 001a F968     		ldr	r1, [r7, #12]
+ 724 001c 3A69     		ldr	r2, [r7, #16]
+ 725 001e 1346     		mov	r3, r2
+ 726 0020 4FEA4303 		lsl	r3, r3, #1
+ 727 0024 9B18     		adds	r3, r3, r2
+ 728 0026 4FEA8303 		lsl	r3, r3, #2
+ 729 002a CB18     		adds	r3, r1, r3
+ 730 002c 03F11003 		add	r3, r3, #16
+ 731 0030 9B88     		ldrh	r3, [r3, #4]
+ 732 0032 002B     		cmp	r3, #0
+ 733 0034 03D1     		bne	.L32
+ 179:../etRuntime/src/common/base/etMemory_FreeList.c **** 			++free;
+ 734              		.loc 1 179 0
+ 735 0036 FB8A     		ldrh	r3, [r7, #22]	@ movhi
+ 736 0038 03F10103 		add	r3, r3, #1
+ 737 003c FB82     		strh	r3, [r7, #22]	@ movhi
+ 738              	.L32:
+ 177:../etRuntime/src/common/base/etMemory_FreeList.c **** 	for (slot=0; slot<self->nslots; ++slot)
+ 739              		.loc 1 177 0
+ 740 003e 3B69     		ldr	r3, [r7, #16]
+ 741 0040 03F10103 		add	r3, r3, #1
+ 742 0044 3B61     		str	r3, [r7, #16]
+ 743              	.L31:
+ 177:../etRuntime/src/common/base/etMemory_FreeList.c **** 	for (slot=0; slot<self->nslots; ++slot)
+ 744              		.loc 1 177 0 is_stmt 0 discriminator 1
+ 745 0046 FB68     		ldr	r3, [r7, #12]
+ 746 0048 1B8A     		ldrh	r3, [r3, #16]
+ 747 004a 1A46     		mov	r2, r3
+ 748 004c 3B69     		ldr	r3, [r7, #16]
+ 749 004e 9A42     		cmp	r2, r3
+ 750 0050 E3DC     		bgt	.L33
+ 180:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 181:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return free;
+ 751              		.loc 1 181 0 is_stmt 1
+ 752 0052 FB8A     		ldrh	r3, [r7, #22]
+ 182:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 753              		.loc 1 182 0
+ 754 0054 1846     		mov	r0, r3
+ 755 0056 07F11C07 		add	r7, r7, #28
+ 756 005a BD46     		mov	sp, r7
+ 757 005c 80BC     		pop	{r7}
+ 758 005e 7047     		bx	lr
+ 759              		.cfi_endproc
+ 760              	.LFE7:
+ 762              		.section	.text.etMemory_FreeList_nObjects,"ax",%progbits
+ 763              		.align	2
+ 764              		.global	etMemory_FreeList_nObjects
+ 765              		.thumb
+ 766              		.thumb_func
+ 768              	etMemory_FreeList_nObjects:
+ 769              	.LFB8:
+ 183:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 184:../etRuntime/src/common/base/etMemory_FreeList.c **** etUInt16 etMemory_FreeList_nObjects(void* heap, etUInt16 slot) {
+ 770              		.loc 1 184 0
+ 771              		.cfi_startproc
+ 772              		@ args = 0, pretend = 0, frame = 16
+ 773              		@ frame_needed = 1, uses_anonymous_args = 0
+ 774              		@ link register save eliminated.
+ 775 0000 80B4     		push	{r7}
+ 776              	.LCFI24:
+ 777              		.cfi_def_cfa_offset 4
+ 778              		.cfi_offset 7, -4
+ 779 0002 85B0     		sub	sp, sp, #20
+ 780              	.LCFI25:
+ 781              		.cfi_def_cfa_offset 24
+ 782 0004 00AF     		add	r7, sp, #0
+ 783              	.LCFI26:
+ 784              		.cfi_def_cfa_register 7
+ 785 0006 7860     		str	r0, [r7, #4]
+ 786 0008 0B46     		mov	r3, r1
+ 787 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 185:../etRuntime/src/common/base/etMemory_FreeList.c **** #if DEBUG_FREE_LISTS
+ 186:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etFreeListMemory* self = (etFreeListMemory*) heap;
+ 788              		.loc 1 186 0
+ 789 000c 7B68     		ldr	r3, [r7, #4]
+ 790 000e FB60     		str	r3, [r7, #12]
+ 187:../etRuntime/src/common/base/etMemory_FreeList.c **** 	if (slot<self->nslots)
+ 791              		.loc 1 187 0
+ 792 0010 FB68     		ldr	r3, [r7, #12]
+ 793 0012 1B8A     		ldrh	r3, [r3, #16]
+ 794 0014 7A88     		ldrh	r2, [r7, #2]
+ 795 0016 9A42     		cmp	r2, r3
+ 796 0018 0CD2     		bcs	.L36
+ 188:../etRuntime/src/common/base/etMemory_FreeList.c **** 		return self->freelists[slot].nobjects;
+ 797              		.loc 1 188 0
+ 798 001a 7A88     		ldrh	r2, [r7, #2]
+ 799 001c F968     		ldr	r1, [r7, #12]
+ 800 001e 1346     		mov	r3, r2
+ 801 0020 4FEA4303 		lsl	r3, r3, #1
+ 802 0024 9B18     		adds	r3, r3, r2
+ 803 0026 4FEA8303 		lsl	r3, r3, #2
+ 804 002a CB18     		adds	r3, r1, r3
+ 805 002c 03F11803 		add	r3, r3, #24
+ 806 0030 9B88     		ldrh	r3, [r3, #4]
+ 807 0032 01E0     		b	.L37
+ 808              	.L36:
+ 189:../etRuntime/src/common/base/etMemory_FreeList.c **** #endif
+ 190:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return 0;
+ 809              		.loc 1 190 0
+ 810 0034 4FF00003 		mov	r3, #0
+ 811              	.L37:
+ 191:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 812              		.loc 1 191 0
+ 813 0038 1846     		mov	r0, r3
+ 814 003a 07F11407 		add	r7, r7, #20
+ 815 003e BD46     		mov	sp, r7
+ 816 0040 80BC     		pop	{r7}
+ 817 0042 7047     		bx	lr
+ 818              		.cfi_endproc
+ 819              	.LFE8:
+ 821              		.section	.text.etMemory_FreeList_sizeObjects,"ax",%progbits
+ 822              		.align	2
+ 823              		.global	etMemory_FreeList_sizeObjects
+ 824              		.thumb
+ 825              		.thumb_func
+ 827              	etMemory_FreeList_sizeObjects:
+ 828              	.LFB9:
+ 192:../etRuntime/src/common/base/etMemory_FreeList.c **** 
+ 193:../etRuntime/src/common/base/etMemory_FreeList.c **** etUInt16 etMemory_FreeList_sizeObjects(void* heap, etUInt16 slot) {
+ 829              		.loc 1 193 0
+ 830              		.cfi_startproc
+ 831              		@ args = 0, pretend = 0, frame = 16
+ 832              		@ frame_needed = 1, uses_anonymous_args = 0
+ 833              		@ link register save eliminated.
+ 834 0000 80B4     		push	{r7}
+ 835              	.LCFI27:
+ 836              		.cfi_def_cfa_offset 4
+ 837              		.cfi_offset 7, -4
+ 838 0002 85B0     		sub	sp, sp, #20
+ 839              	.LCFI28:
+ 840              		.cfi_def_cfa_offset 24
+ 841 0004 00AF     		add	r7, sp, #0
+ 842              	.LCFI29:
+ 843              		.cfi_def_cfa_register 7
+ 844 0006 7860     		str	r0, [r7, #4]
+ 845 0008 0B46     		mov	r3, r1
+ 846 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 194:../etRuntime/src/common/base/etMemory_FreeList.c **** 	etFreeListMemory* self = (etFreeListMemory*) heap;
+ 847              		.loc 1 194 0
+ 848 000c 7B68     		ldr	r3, [r7, #4]
+ 849 000e FB60     		str	r3, [r7, #12]
+ 195:../etRuntime/src/common/base/etMemory_FreeList.c **** 	if (slot<self->nslots)
+ 850              		.loc 1 195 0
+ 851 0010 FB68     		ldr	r3, [r7, #12]
+ 852 0012 1B8A     		ldrh	r3, [r3, #16]
+ 853 0014 7A88     		ldrh	r2, [r7, #2]
+ 854 0016 9A42     		cmp	r2, r3
+ 855 0018 0CD2     		bcs	.L39
+ 196:../etRuntime/src/common/base/etMemory_FreeList.c **** 		return self->freelists[slot].objsize;
+ 856              		.loc 1 196 0
+ 857 001a 7A88     		ldrh	r2, [r7, #2]
+ 858 001c F968     		ldr	r1, [r7, #12]
+ 859 001e 1346     		mov	r3, r2
+ 860 0020 4FEA4303 		lsl	r3, r3, #1
+ 861 0024 9B18     		adds	r3, r3, r2
+ 862 0026 4FEA8303 		lsl	r3, r3, #2
+ 863 002a CB18     		adds	r3, r1, r3
+ 864 002c 03F11003 		add	r3, r3, #16
+ 865 0030 9B88     		ldrh	r3, [r3, #4]
+ 866 0032 01E0     		b	.L40
+ 867              	.L39:
+ 197:../etRuntime/src/common/base/etMemory_FreeList.c **** 	return 0;
+ 868              		.loc 1 197 0
+ 869 0034 4FF00003 		mov	r3, #0
+ 870              	.L40:
+ 198:../etRuntime/src/common/base/etMemory_FreeList.c **** }
+ 871              		.loc 1 198 0
+ 872 0038 1846     		mov	r0, r3
+ 873 003a 07F11407 		add	r7, r7, #20
+ 874 003e BD46     		mov	sp, r7
+ 875 0040 80BC     		pop	{r7}
+ 876 0042 7047     		bx	lr
+ 877              		.cfi_endproc
+ 878              	.LFE9:
+ 880              		.text
+ 881              	.Letext0:
+ 882              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 883              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etMemory_FreeList.c
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:20     .text.etMemory_getHeapMem:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:24     .text.etMemory_getHeapMem:00000000 etMemory_getHeapMem
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:81     .text.etMemory_getFreeListMem:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:85     .text.etMemory_getFreeListMem:00000000 etMemory_getFreeListMem
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:247    .text.etMemory_putFreeListMem:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:251    .text.etMemory_putFreeListMem:00000000 etMemory_putFreeListMem
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:424    .text.etMemory_FreeList_alloc:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:429    .text.etMemory_FreeList_alloc:00000000 etMemory_FreeList_alloc
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:486    .text.etMemory_FreeList_free:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:491    .text.etMemory_FreeList_free:00000000 etMemory_FreeList_free
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:535    .text.etMemory_FreeList_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:540    .text.etMemory_FreeList_init:00000000 etMemory_FreeList_init
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:643    .text.etMemory_FreeList_freeHeapMem:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:648    .text.etMemory_FreeList_freeHeapMem:00000000 etMemory_FreeList_freeHeapMem
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:688    .text.etMemory_FreeList_freeSlots:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:693    .text.etMemory_FreeList_freeSlots:00000000 etMemory_FreeList_freeSlots
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:763    .text.etMemory_FreeList_nObjects:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:768    .text.etMemory_FreeList_nObjects:00000000 etMemory_FreeList_nObjects
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:822    .text.etMemory_FreeList_sizeObjects:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cczuWRzR.s:827    .text.etMemory_FreeList_sizeObjects:00000000 etMemory_FreeList_sizeObjects
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.141.92ef314402d3b770bc37bd8efd7aeec4
+
+NO UNDEFINED SYMBOLS

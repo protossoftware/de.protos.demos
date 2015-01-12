@@ -1,0 +1,647 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"pclCANService.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.pclCANInitNodes,"ax",%progbits
+  20              		.align	2
+  21              		.global	pclCANInitNodes
+  22              		.thumb
+  23              		.thumb_func
+  25              	pclCANInitNodes:
+  26              	.LFB112:
+  27              		.file 1 "../pclCANService.c"
+   1:../pclCANService.c **** /*******************************************************************************
+   2:../pclCANService.c ****  *  Copyright (c) 2015 protos software gmbh (http://www.protos.de).
+   3:../pclCANService.c ****  *
+   4:../pclCANService.c ****  *  Created on: 10.01.2015
+   5:../pclCANService.c ****  *      Author: Thomas Jung, Thomas Schuetz (initial contribution)
+   6:../pclCANService.c ****  *******************************************************************************/
+   7:../pclCANService.c **** 
+   8:../pclCANService.c **** 
+   9:../pclCANService.c **** //-------------IO Service--------------------
+  10:../pclCANService.c **** // channel 0xXXYYYYYY  => XX = CAN Node Id
+  11:../pclCANService.c **** //                        YY = Message Object Number
+  12:../pclCANService.c **** 
+  13:../pclCANService.c **** 
+  14:../pclCANService.c **** //#include "../../../../de.protos.componentlib.hal.api/inc/pclCANService.h"
+  15:../pclCANService.c **** #include "pclCANService.h"
+  16:../pclCANService.c **** #include "Dave3.h"
+  17:../pclCANService.c **** 
+  18:../pclCANService.c **** void pclCANInitNodes(){}
+  28              		.loc 1 18 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 00AF     		add	r7, sp, #0
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_register 7
+  40              		.loc 1 18 0
+  41 0004 BD46     		mov	sp, r7
+  42 0006 80BC     		pop	{r7}
+  43 0008 7047     		bx	lr
+  44              		.cfi_endproc
+  45              	.LFE112:
+  47 000a 00BF     		.section	.text.pclCANInitMO,"ax",%progbits
+  48              		.align	2
+  49              		.global	pclCANInitMO
+  50              		.thumb
+  51              		.thumb_func
+  53              	pclCANInitMO:
+  54              	.LFB113:
+  19:../pclCANService.c **** void pclCANInitMO(uint32_t channel){}
+  55              		.loc 1 19 0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 8
+  58              		@ frame_needed = 1, uses_anonymous_args = 0
+  59              		@ link register save eliminated.
+  60 0000 80B4     		push	{r7}
+  61              	.LCFI2:
+  62              		.cfi_def_cfa_offset 4
+  63              		.cfi_offset 7, -4
+  64 0002 83B0     		sub	sp, sp, #12
+  65              	.LCFI3:
+  66              		.cfi_def_cfa_offset 16
+  67 0004 00AF     		add	r7, sp, #0
+  68              	.LCFI4:
+  69              		.cfi_def_cfa_register 7
+  70 0006 7860     		str	r0, [r7, #4]
+  71              		.loc 1 19 0
+  72 0008 07F10C07 		add	r7, r7, #12
+  73 000c BD46     		mov	sp, r7
+  74 000e 80BC     		pop	{r7}
+  75 0010 7047     		bx	lr
+  76              		.cfi_endproc
+  77              	.LFE113:
+  79 0012 00BF     		.section	.text.pclCANSendMsg,"ax",%progbits
+  80              		.align	2
+  81              		.global	pclCANSendMsg
+  82              		.thumb
+  83              		.thumb_func
+  85              	pclCANSendMsg:
+  86              	.LFB114:
+  20:../pclCANService.c **** 
+  21:../pclCANService.c **** void pclCANSendMsg(uint32_t channel, pclCANMsg *msg){
+  87              		.loc 1 21 0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 48
+  90              		@ frame_needed = 1, uses_anonymous_args = 0
+  91 0000 80B5     		push	{r7, lr}
+  92              	.LCFI5:
+  93              		.cfi_def_cfa_offset 8
+  94              		.cfi_offset 7, -8
+  95              		.cfi_offset 14, -4
+  96 0002 8CB0     		sub	sp, sp, #48
+  97              	.LCFI6:
+  98              		.cfi_def_cfa_offset 56
+  99 0004 00AF     		add	r7, sp, #0
+ 100              	.LCFI7:
+ 101              		.cfi_def_cfa_register 7
+ 102 0006 7860     		str	r0, [r7, #4]
+ 103 0008 3960     		str	r1, [r7, #0]
+  22:../pclCANService.c **** uint32_t ifNb = (channel >> 24);
+ 104              		.loc 1 22 0
+ 105 000a 7B68     		ldr	r3, [r7, #4]
+ 106 000c 4FEA1363 		lsr	r3, r3, #24
+ 107 0010 BB62     		str	r3, [r7, #40]
+  23:../pclCANService.c **** uint8_t MoNb = (uint8_t) (channel & 0x000000FF);
+ 108              		.loc 1 23 0
+ 109 0012 7B68     		ldr	r3, [r7, #4]
+ 110 0014 87F82730 		strb	r3, [r7, #39]
+  24:../pclCANService.c **** uint32_t i;
+  25:../pclCANService.c **** uint32_t Status;
+  26:../pclCANService.c **** CAN001_MessageHandleType TempMsgHandle;
+  27:../pclCANService.c **** 
+  28:../pclCANService.c **** 	TempMsgHandle.DataLength=msg->len;
+ 111              		.loc 1 28 0
+ 112 0018 3B68     		ldr	r3, [r7, #0]
+ 113 001a 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 114 001c BB74     		strb	r3, [r7, #18]
+  29:../pclCANService.c **** 	TempMsgHandle.IDExten=STANDARDTYPE;
+ 115              		.loc 1 29 0
+ 116 001e 4FF00003 		mov	r3, #0
+ 117 0022 3B74     		strb	r3, [r7, #16]
+  30:../pclCANService.c **** 	TempMsgHandle.Identifier=msg->id;
+ 118              		.loc 1 30 0
+ 119 0024 3B68     		ldr	r3, [r7, #0]
+ 120 0026 1B68     		ldr	r3, [r3, #0]
+ 121 0028 BB60     		str	r3, [r7, #8]
+  31:../pclCANService.c **** 	TempMsgHandle.MsgObjEN = CAN001_ENABLE;
+ 122              		.loc 1 31 0
+ 123 002a 4FF00103 		mov	r3, #1
+ 124 002e FB76     		strb	r3, [r7, #27]
+  32:../pclCANService.c **** 	TempMsgHandle.MsgObjType=TRANSMSGOBJ;
+ 125              		.loc 1 32 0
+ 126 0030 4FF00103 		mov	r3, #1
+ 127 0034 3B77     		strb	r3, [r7, #28]
+  33:../pclCANService.c **** 	for (i=0;i<msg->len;i++){
+ 128              		.loc 1 33 0
+ 129 0036 4FF00003 		mov	r3, #0
+ 130 003a FB62     		str	r3, [r7, #44]
+ 131 003c 0CE0     		b	.L4
+ 132              	.L5:
+  34:../pclCANService.c **** 		TempMsgHandle.data[i]=msg->data[i];
+ 133              		.loc 1 34 0 discriminator 2
+ 134 003e 3A68     		ldr	r2, [r7, #0]
+ 135 0040 FB6A     		ldr	r3, [r7, #44]
+ 136 0042 D318     		adds	r3, r2, r3
+ 137 0044 5A79     		ldrb	r2, [r3, #5]	@ zero_extendqisi2
+ 138 0046 07F11001 		add	r1, r7, #16
+ 139 004a FB6A     		ldr	r3, [r7, #44]
+ 140 004c CB18     		adds	r3, r1, r3
+ 141 004e DA70     		strb	r2, [r3, #3]
+  33:../pclCANService.c **** 	for (i=0;i<msg->len;i++){
+ 142              		.loc 1 33 0 discriminator 2
+ 143 0050 FB6A     		ldr	r3, [r7, #44]
+ 144 0052 03F10103 		add	r3, r3, #1
+ 145 0056 FB62     		str	r3, [r7, #44]
+ 146              	.L4:
+  33:../pclCANService.c **** 	for (i=0;i<msg->len;i++){
+ 147              		.loc 1 33 0 is_stmt 0 discriminator 1
+ 148 0058 3B68     		ldr	r3, [r7, #0]
+ 149 005a 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 150 005c 1A46     		mov	r2, r3
+ 151 005e FB6A     		ldr	r3, [r7, #44]
+ 152 0060 9A42     		cmp	r2, r3
+ 153 0062 ECD8     		bhi	.L5
+  35:../pclCANService.c **** 	}
+  36:../pclCANService.c **** 
+  37:../pclCANService.c **** 	//ToDo: Think about checking the flag before sending instead of behind
+  38:../pclCANService.c **** 	// This would increase CAN performance significantly
+  39:../pclCANService.c **** 	//while(!CAN001_GetMOFlagStatus(&CAN001_Handle0,MoNb,TRANSMIT_PENDING));
+  40:../pclCANService.c **** 	CAN001_ClearMOFlagStatus(&CAN001_Handle0,MoNb,TRANSMIT_PENDING);
+ 154              		.loc 1 40 0 is_stmt 1
+ 155 0064 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 156 0068 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 157 006c C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 158 0070 1946     		mov	r1, r3
+ 159 0072 4FF00202 		mov	r2, #2
+ 160 0076 FFF7FEFF 		bl	CAN001_ClearMOFlagStatus
+  41:../pclCANService.c **** 	Status = CAN001_ConfigMsgObj(&CAN001_Handle0,&TempMsgHandle, MoNb);
+ 161              		.loc 1 41 0
+ 162 007a 07F10802 		add	r2, r7, #8
+ 163 007e 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 164 0082 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 165 0086 C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 166 008a 1146     		mov	r1, r2
+ 167 008c 1A46     		mov	r2, r3
+ 168 008e FFF7FEFF 		bl	CAN001_ConfigMsgObj
+ 169 0092 3862     		str	r0, [r7, #32]
+  42:../pclCANService.c **** 	if(Status != DAVEApp_SUCCESS) while(1);
+ 170              		.loc 1 42 0
+ 171 0094 3B6A     		ldr	r3, [r7, #32]
+ 172 0096 002B     		cmp	r3, #0
+ 173 0098 00D0     		beq	.L6
+ 174              	.L7:
+ 175              		.loc 1 42 0 is_stmt 0 discriminator 1
+ 176 009a FEE7     		b	.L7
+ 177              	.L6:
+  43:../pclCANService.c **** 	Status = CAN001_SendDataFrame(&CAN001_Handle0,MoNb);
+ 178              		.loc 1 43 0 is_stmt 1
+ 179 009c 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 180 00a0 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 181 00a4 C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 182 00a8 1946     		mov	r1, r3
+ 183 00aa FFF7FEFF 		bl	CAN001_SendDataFrame
+ 184 00ae 3862     		str	r0, [r7, #32]
+  44:../pclCANService.c **** 	if(Status != DAVEApp_SUCCESS) while(1);
+ 185              		.loc 1 44 0
+ 186 00b0 3B6A     		ldr	r3, [r7, #32]
+ 187 00b2 002B     		cmp	r3, #0
+ 188 00b4 00D0     		beq	.L11
+ 189              	.L9:
+ 190              		.loc 1 44 0 is_stmt 0 discriminator 1
+ 191 00b6 FEE7     		b	.L9
+ 192              	.L11:
+  45:../pclCANService.c **** 	while(!CAN001_GetMOFlagStatus(&CAN001_Handle0,MoNb,TRANSMIT_PENDING));
+ 193              		.loc 1 45 0 is_stmt 1
+ 194 00b8 00BF     		nop
+ 195              	.L10:
+ 196              		.loc 1 45 0 is_stmt 0 discriminator 1
+ 197 00ba 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 198 00be 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 199 00c2 C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 200 00c6 1946     		mov	r1, r3
+ 201 00c8 4FF00202 		mov	r2, #2
+ 202 00cc FFF7FEFF 		bl	CAN001_GetMOFlagStatus
+ 203 00d0 0346     		mov	r3, r0
+ 204 00d2 002B     		cmp	r3, #0
+ 205 00d4 F1D0     		beq	.L10
+  46:../pclCANService.c **** }
+ 206              		.loc 1 46 0 is_stmt 1
+ 207 00d6 07F13007 		add	r7, r7, #48
+ 208 00da BD46     		mov	sp, r7
+ 209 00dc 80BD     		pop	{r7, pc}
+ 210              		.cfi_endproc
+ 211              	.LFE114:
+ 213 00de 00BF     		.section	.text.pclCANListenOnMsg,"ax",%progbits
+ 214              		.align	2
+ 215              		.global	pclCANListenOnMsg
+ 216              		.thumb
+ 217              		.thumb_func
+ 219              	pclCANListenOnMsg:
+ 220              	.LFB115:
+  47:../pclCANService.c **** 
+  48:../pclCANService.c **** void pclCANListenOnMsg(uint32_t channel, pclCANMsg *msg){
+ 221              		.loc 1 48 0
+ 222              		.cfi_startproc
+ 223              		@ args = 0, pretend = 0, frame = 48
+ 224              		@ frame_needed = 1, uses_anonymous_args = 0
+ 225 0000 80B5     		push	{r7, lr}
+ 226              	.LCFI8:
+ 227              		.cfi_def_cfa_offset 8
+ 228              		.cfi_offset 7, -8
+ 229              		.cfi_offset 14, -4
+ 230 0002 8CB0     		sub	sp, sp, #48
+ 231              	.LCFI9:
+ 232              		.cfi_def_cfa_offset 56
+ 233 0004 00AF     		add	r7, sp, #0
+ 234              	.LCFI10:
+ 235              		.cfi_def_cfa_register 7
+ 236 0006 7860     		str	r0, [r7, #4]
+ 237 0008 3960     		str	r1, [r7, #0]
+  49:../pclCANService.c **** uint32_t ifNb = (channel >> 24);
+ 238              		.loc 1 49 0
+ 239 000a 7B68     		ldr	r3, [r7, #4]
+ 240 000c 4FEA1363 		lsr	r3, r3, #24
+ 241 0010 FB62     		str	r3, [r7, #44]
+  50:../pclCANService.c **** uint8_t MoNb = (uint8_t) (channel & 0x000000FF);
+ 242              		.loc 1 50 0
+ 243 0012 7B68     		ldr	r3, [r7, #4]
+ 244 0014 87F82B30 		strb	r3, [r7, #43]
+  51:../pclCANService.c **** uint32_t i;
+  52:../pclCANService.c **** uint32_t Status;
+  53:../pclCANService.c **** CAN001_MessageHandleType TempMsgHandle;
+  54:../pclCANService.c **** 
+  55:../pclCANService.c **** 		TempMsgHandle.IDExten=STANDARDTYPE;
+ 245              		.loc 1 55 0
+ 246 0018 4FF00003 		mov	r3, #0
+ 247 001c 3B75     		strb	r3, [r7, #20]
+  56:../pclCANService.c **** 		TempMsgHandle.IDMask=0x7FF;
+ 248              		.loc 1 56 0
+ 249 001e 40F2FF73 		movw	r3, #2047
+ 250 0022 3B61     		str	r3, [r7, #16]
+  57:../pclCANService.c **** 		TempMsgHandle.Identifier=msg->id;
+ 251              		.loc 1 57 0
+ 252 0024 3B68     		ldr	r3, [r7, #0]
+ 253 0026 1B68     		ldr	r3, [r3, #0]
+ 254 0028 FB60     		str	r3, [r7, #12]
+  58:../pclCANService.c **** 		TempMsgHandle.MsgObjEN = CAN001_ENABLE;
+ 255              		.loc 1 58 0
+ 256 002a 4FF00103 		mov	r3, #1
+ 257 002e FB77     		strb	r3, [r7, #31]
+  59:../pclCANService.c **** 		TempMsgHandle.MsgObjType=RECMSGOBJ;
+ 258              		.loc 1 59 0
+ 259 0030 4FF00003 		mov	r3, #0
+ 260 0034 87F82030 		strb	r3, [r7, #32]
+  60:../pclCANService.c **** 
+  61:../pclCANService.c **** 		Status = CAN001_ConfigMsgObj(&CAN001_Handle0,&TempMsgHandle, MoNb);
+ 261              		.loc 1 61 0
+ 262 0038 07F10C02 		add	r2, r7, #12
+ 263 003c 97F82B30 		ldrb	r3, [r7, #43]	@ zero_extendqisi2
+ 264 0040 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 265 0044 C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 266 0048 1146     		mov	r1, r2
+ 267 004a 1A46     		mov	r2, r3
+ 268 004c FFF7FEFF 		bl	CAN001_ConfigMsgObj
+ 269 0050 7862     		str	r0, [r7, #36]
+  62:../pclCANService.c **** 		if(Status != DAVEApp_SUCCESS) while(1);
+ 270              		.loc 1 62 0
+ 271 0052 7B6A     		ldr	r3, [r7, #36]
+ 272 0054 002B     		cmp	r3, #0
+ 273 0056 00D0     		beq	.L12
+ 274              	.L14:
+ 275              		.loc 1 62 0 is_stmt 0 discriminator 1
+ 276 0058 FEE7     		b	.L14
+ 277              	.L12:
+  63:../pclCANService.c **** }
+ 278              		.loc 1 63 0 is_stmt 1
+ 279 005a 07F13007 		add	r7, r7, #48
+ 280 005e BD46     		mov	sp, r7
+ 281 0060 80BD     		pop	{r7, pc}
+ 282              		.cfi_endproc
+ 283              	.LFE115:
+ 285 0062 00BF     		.section	.text.pclCANCheckReception,"ax",%progbits
+ 286              		.align	2
+ 287              		.global	pclCANCheckReception
+ 288              		.thumb
+ 289              		.thumb_func
+ 291              	pclCANCheckReception:
+ 292              	.LFB116:
+  64:../pclCANService.c **** 
+  65:../pclCANService.c **** uint8_t pclCANCheckReception(uint32_t channel, pclCANMsg *msg){
+ 293              		.loc 1 65 0
+ 294              		.cfi_startproc
+ 295              		@ args = 0, pretend = 0, frame = 48
+ 296              		@ frame_needed = 1, uses_anonymous_args = 0
+ 297 0000 80B5     		push	{r7, lr}
+ 298              	.LCFI11:
+ 299              		.cfi_def_cfa_offset 8
+ 300              		.cfi_offset 7, -8
+ 301              		.cfi_offset 14, -4
+ 302 0002 8CB0     		sub	sp, sp, #48
+ 303              	.LCFI12:
+ 304              		.cfi_def_cfa_offset 56
+ 305 0004 00AF     		add	r7, sp, #0
+ 306              	.LCFI13:
+ 307              		.cfi_def_cfa_register 7
+ 308 0006 7860     		str	r0, [r7, #4]
+ 309 0008 3960     		str	r1, [r7, #0]
+  66:../pclCANService.c **** uint32_t ifNb = (channel >> 24);
+ 310              		.loc 1 66 0
+ 311 000a 7B68     		ldr	r3, [r7, #4]
+ 312 000c 4FEA1363 		lsr	r3, r3, #24
+ 313 0010 BB62     		str	r3, [r7, #40]
+  67:../pclCANService.c **** uint8_t MoNb = (uint8_t) (channel & 0x000000FF);
+ 314              		.loc 1 67 0
+ 315 0012 7B68     		ldr	r3, [r7, #4]
+ 316 0014 87F82730 		strb	r3, [r7, #39]
+  68:../pclCANService.c **** uint8_t i;
+  69:../pclCANService.c **** uint32_t Status;
+  70:../pclCANService.c **** CAN001_MessageHandleType CanRecMsgObj;
+  71:../pclCANService.c **** 
+  72:../pclCANService.c ****  	 if (CAN001_GetMOFlagStatus(&CAN001_Handle0,MoNb,RECEIVE_PENDING)){
+ 317              		.loc 1 72 0
+ 318 0018 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 319 001c 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 320 0020 C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 321 0024 1946     		mov	r1, r3
+ 322 0026 4FF00102 		mov	r2, #1
+ 323 002a FFF7FEFF 		bl	CAN001_GetMOFlagStatus
+ 324 002e 0346     		mov	r3, r0
+ 325 0030 002B     		cmp	r3, #0
+ 326 0032 46D0     		beq	.L16
+  73:../pclCANService.c ****  		 // new message available
+  74:../pclCANService.c ****  		Status=CAN001_ReadMsgObj(&CAN001_Handle0,&CanRecMsgObj,MoNb);
+ 327              		.loc 1 74 0
+ 328 0034 07F10802 		add	r2, r7, #8
+ 329 0038 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 330 003c 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 331 0040 C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 332 0044 1146     		mov	r1, r2
+ 333 0046 1A46     		mov	r2, r3
+ 334 0048 FFF7FEFF 		bl	CAN001_ReadMsgObj
+ 335 004c 3862     		str	r0, [r7, #32]
+  75:../pclCANService.c ****  		if(Status != DAVEApp_SUCCESS) while(1);
+ 336              		.loc 1 75 0
+ 337 004e 3B6A     		ldr	r3, [r7, #32]
+ 338 0050 002B     		cmp	r3, #0
+ 339 0052 00D0     		beq	.L17
+ 340              	.L18:
+ 341              		.loc 1 75 0 is_stmt 0 discriminator 1
+ 342 0054 FEE7     		b	.L18
+ 343              	.L17:
+  76:../pclCANService.c ****  		Status=CAN001_ClearMOFlagStatus(&CAN001_Handle0,MoNb,RECEIVE_PENDING);
+ 344              		.loc 1 76 0 is_stmt 1
+ 345 0056 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 346 005a 40F20000 		movw	r0, #:lower16:CAN001_Handle0
+ 347 005e C0F20000 		movt	r0, #:upper16:CAN001_Handle0
+ 348 0062 1946     		mov	r1, r3
+ 349 0064 4FF00102 		mov	r2, #1
+ 350 0068 FFF7FEFF 		bl	CAN001_ClearMOFlagStatus
+ 351 006c 3862     		str	r0, [r7, #32]
+  77:../pclCANService.c ****  		if(Status != DAVEApp_SUCCESS) while(1);
+ 352              		.loc 1 77 0
+ 353 006e 3B6A     		ldr	r3, [r7, #32]
+ 354 0070 002B     		cmp	r3, #0
+ 355 0072 00D0     		beq	.L19
+ 356              	.L20:
+ 357              		.loc 1 77 0 is_stmt 0 discriminator 1
+ 358 0074 FEE7     		b	.L20
+ 359              	.L19:
+  78:../pclCANService.c ****  		msg->id = CanRecMsgObj.Identifier;
+ 360              		.loc 1 78 0 is_stmt 1
+ 361 0076 BA68     		ldr	r2, [r7, #8]
+ 362 0078 3B68     		ldr	r3, [r7, #0]
+ 363 007a 1A60     		str	r2, [r3, #0]
+  79:../pclCANService.c ****  		msg->len = CanRecMsgObj.DataLength;
+ 364              		.loc 1 79 0
+ 365 007c BA7C     		ldrb	r2, [r7, #18]	@ zero_extendqisi2
+ 366 007e 3B68     		ldr	r3, [r7, #0]
+ 367 0080 1A71     		strb	r2, [r3, #4]
+  80:../pclCANService.c ****  		for (i=0; i<msg->len;i++){
+ 368              		.loc 1 80 0
+ 369 0082 4FF00003 		mov	r3, #0
+ 370 0086 87F82F30 		strb	r3, [r7, #47]
+ 371 008a 11E0     		b	.L21
+ 372              	.L22:
+  81:../pclCANService.c ****  			msg->data[i]=CanRecMsgObj.data[i];
+ 373              		.loc 1 81 0 discriminator 2
+ 374 008c 97F82F30 		ldrb	r3, [r7, #47]	@ zero_extendqisi2
+ 375 0090 97F82F20 		ldrb	r2, [r7, #47]	@ zero_extendqisi2
+ 376 0094 07F13001 		add	r1, r7, #48
+ 377 0098 8A18     		adds	r2, r1, r2
+ 378 009a 12F81D2C 		ldrb	r2, [r2, #-29]	@ zero_extendqisi2
+ 379 009e 3968     		ldr	r1, [r7, #0]
+ 380 00a0 CB18     		adds	r3, r1, r3
+ 381 00a2 5A71     		strb	r2, [r3, #5]
+  80:../pclCANService.c ****  		for (i=0; i<msg->len;i++){
+ 382              		.loc 1 80 0 discriminator 2
+ 383 00a4 97F82F30 		ldrb	r3, [r7, #47]
+ 384 00a8 03F10103 		add	r3, r3, #1
+ 385 00ac 87F82F30 		strb	r3, [r7, #47]
+ 386              	.L21:
+  80:../pclCANService.c ****  		for (i=0; i<msg->len;i++){
+ 387              		.loc 1 80 0 is_stmt 0 discriminator 1
+ 388 00b0 3B68     		ldr	r3, [r7, #0]
+ 389 00b2 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 390 00b4 97F82F20 		ldrb	r2, [r7, #47]	@ zero_extendqisi2
+ 391 00b8 9A42     		cmp	r2, r3
+ 392 00ba E7D3     		bcc	.L22
+  82:../pclCANService.c ****  		}
+  83:../pclCANService.c ****  		return PCL_TRUE;
+ 393              		.loc 1 83 0 is_stmt 1
+ 394 00bc 4FF00103 		mov	r3, #1
+ 395 00c0 01E0     		b	.L24
+ 396              	.L16:
+  84:../pclCANService.c ****  	 }
+  85:../pclCANService.c ****  	 return PCL_FALSE;
+ 397              		.loc 1 85 0
+ 398 00c2 4FF00003 		mov	r3, #0
+ 399              	.L24:
+  86:../pclCANService.c **** }
+ 400              		.loc 1 86 0
+ 401 00c6 1846     		mov	r0, r3
+ 402 00c8 07F13007 		add	r7, r7, #48
+ 403 00cc BD46     		mov	sp, r7
+ 404 00ce 80BD     		pop	{r7, pc}
+ 405              		.cfi_endproc
+ 406              	.LFE116:
+ 408              		.section	.text.pclCANUpdateMO,"ax",%progbits
+ 409              		.align	2
+ 410              		.global	pclCANUpdateMO
+ 411              		.thumb
+ 412              		.thumb_func
+ 414              	pclCANUpdateMO:
+ 415              	.LFB117:
+  87:../pclCANService.c **** 
+  88:../pclCANService.c **** 
+  89:../pclCANService.c **** void pclCANUpdateMO(uint32_t channel){}
+ 416              		.loc 1 89 0
+ 417              		.cfi_startproc
+ 418              		@ args = 0, pretend = 0, frame = 8
+ 419              		@ frame_needed = 1, uses_anonymous_args = 0
+ 420              		@ link register save eliminated.
+ 421 0000 80B4     		push	{r7}
+ 422              	.LCFI14:
+ 423              		.cfi_def_cfa_offset 4
+ 424              		.cfi_offset 7, -4
+ 425 0002 83B0     		sub	sp, sp, #12
+ 426              	.LCFI15:
+ 427              		.cfi_def_cfa_offset 16
+ 428 0004 00AF     		add	r7, sp, #0
+ 429              	.LCFI16:
+ 430              		.cfi_def_cfa_register 7
+ 431 0006 7860     		str	r0, [r7, #4]
+ 432              		.loc 1 89 0
+ 433 0008 07F10C07 		add	r7, r7, #12
+ 434 000c BD46     		mov	sp, r7
+ 435 000e 80BC     		pop	{r7}
+ 436 0010 7047     		bx	lr
+ 437              		.cfi_endproc
+ 438              	.LFE117:
+ 440 0012 00BF     		.section	.text.pclCANUpdateMOData,"ax",%progbits
+ 441              		.align	2
+ 442              		.global	pclCANUpdateMOData
+ 443              		.thumb
+ 444              		.thumb_func
+ 446              	pclCANUpdateMOData:
+ 447              	.LFB118:
+  90:../pclCANService.c **** void pclCANUpdateMOData(uint32_t channel){}
+ 448              		.loc 1 90 0
+ 449              		.cfi_startproc
+ 450              		@ args = 0, pretend = 0, frame = 8
+ 451              		@ frame_needed = 1, uses_anonymous_args = 0
+ 452              		@ link register save eliminated.
+ 453 0000 80B4     		push	{r7}
+ 454              	.LCFI17:
+ 455              		.cfi_def_cfa_offset 4
+ 456              		.cfi_offset 7, -4
+ 457 0002 83B0     		sub	sp, sp, #12
+ 458              	.LCFI18:
+ 459              		.cfi_def_cfa_offset 16
+ 460 0004 00AF     		add	r7, sp, #0
+ 461              	.LCFI19:
+ 462              		.cfi_def_cfa_register 7
+ 463 0006 7860     		str	r0, [r7, #4]
+ 464              		.loc 1 90 0
+ 465 0008 07F10C07 		add	r7, r7, #12
+ 466 000c BD46     		mov	sp, r7
+ 467 000e 80BC     		pop	{r7}
+ 468 0010 7047     		bx	lr
+ 469              		.cfi_endproc
+ 470              	.LFE118:
+ 472 0012 00BF     		.section	.text.pclCANReadMsg,"ax",%progbits
+ 473              		.align	2
+ 474              		.global	pclCANReadMsg
+ 475              		.thumb
+ 476              		.thumb_func
+ 478              	pclCANReadMsg:
+ 479              	.LFB119:
+  91:../pclCANService.c **** 
+  92:../pclCANService.c **** void pclCANReadMsg(uint32_t channel){}
+ 480              		.loc 1 92 0
+ 481              		.cfi_startproc
+ 482              		@ args = 0, pretend = 0, frame = 8
+ 483              		@ frame_needed = 1, uses_anonymous_args = 0
+ 484              		@ link register save eliminated.
+ 485 0000 80B4     		push	{r7}
+ 486              	.LCFI20:
+ 487              		.cfi_def_cfa_offset 4
+ 488              		.cfi_offset 7, -4
+ 489 0002 83B0     		sub	sp, sp, #12
+ 490              	.LCFI21:
+ 491              		.cfi_def_cfa_offset 16
+ 492 0004 00AF     		add	r7, sp, #0
+ 493              	.LCFI22:
+ 494              		.cfi_def_cfa_register 7
+ 495 0006 7860     		str	r0, [r7, #4]
+ 496              		.loc 1 92 0
+ 497 0008 07F10C07 		add	r7, r7, #12
+ 498 000c BD46     		mov	sp, r7
+ 499 000e 80BC     		pop	{r7}
+ 500 0010 7047     		bx	lr
+ 501              		.cfi_endproc
+ 502              	.LFE119:
+ 504 0012 00BF     		.text
+ 505              	.Letext0:
+ 506              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 507              		.file 3 "../pclCANService.h"
+ 508              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 509              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+ 510              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+ 511              		.file 7 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 512              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+DEFINED SYMBOLS
+                            *ABS*:00000000 pclCANService.c
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:20     .text.pclCANInitNodes:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:25     .text.pclCANInitNodes:00000000 pclCANInitNodes
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:48     .text.pclCANInitMO:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:53     .text.pclCANInitMO:00000000 pclCANInitMO
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:80     .text.pclCANSendMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:85     .text.pclCANSendMsg:00000000 pclCANSendMsg
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:214    .text.pclCANListenOnMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:219    .text.pclCANListenOnMsg:00000000 pclCANListenOnMsg
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:286    .text.pclCANCheckReception:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:291    .text.pclCANCheckReception:00000000 pclCANCheckReception
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:409    .text.pclCANUpdateMO:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:414    .text.pclCANUpdateMO:00000000 pclCANUpdateMO
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:441    .text.pclCANUpdateMOData:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:446    .text.pclCANUpdateMOData:00000000 pclCANUpdateMOData
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:473    .text.pclCANReadMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:478    .text.pclCANReadMsg:00000000 pclCANReadMsg
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.pclCANService.h.14.381c25c15f2d4e381783b6816fbce3e8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.94e6f9e83cbaf2d2b00f265c326df8e7
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.82a8db895dc146da001475dd68223522
+                           .group:00000000 wm4.CAN_Types.h.39.df7fb5ef31e40aa4065540aa5507b9c8
+                           .group:00000000 wm4.CAN001.h.81.2ffbbfa413249ddb098d31e13be0595a
+                           .group:00000000 wm4.CAN001_Conf.h.47.921d834dba1940f3c71e32b82c523e95
+                           .group:00000000 wm4.CAN001.h.1198.6bba25bd7048241963d5031cb79ff965
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+
+UNDEFINED SYMBOLS
+CAN001_Handle0
+CAN001_ClearMOFlagStatus
+CAN001_ConfigMsgObj
+CAN001_SendDataFrame
+CAN001_GetMOFlagStatus
+CAN001_ReadMsgObj

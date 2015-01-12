@@ -1,0 +1,9 @@
+MappingModel HexagonCANDemo {
+	import HexagonCANDemo.* from "HexagonCANDemo.room"
+	import HexagonCANDemo.* from "HexagonCANDemo_ST.etphys"
+	Mapping HexagonCANDemo -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

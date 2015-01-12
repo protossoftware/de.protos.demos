@@ -1,0 +1,617 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etMSCLogger.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	etMSCLogger_fileHandle:
+  22 0000 00000000 		.space	4
+  23              		.section	.rodata
+  24              		.align	2
+  25              	.LC0:
+  26 0000 00       		.ascii	"\000"
+  27              		.data
+  28              		.align	2
+  31              	etMSCLogger_objectName:
+  32 0000 00000000 		.word	.LC0
+  33              		.section	.rodata
+  34 0001 000000   		.align	2
+  35              	.LC1:
+  36 0004 25732F25 		.ascii	"%s/%s.seq\000"
+  36      732E7365 
+  36      7100
+  37 000e 0000     		.align	2
+  38              	.LC2:
+  39 0010 772B00   		.ascii	"w+\000"
+  40              		.section	.text.etMSCLogger_open,"ax",%progbits
+  41              		.align	2
+  42              		.global	etMSCLogger_open
+  43              		.thumb
+  44              		.thumb_func
+  46              	etMSCLogger_open:
+  47              	.LFB0:
+  48              		.file 1 "../etRuntime/src/common/debugging/etMSCLogger.c"
+   1:../etRuntime/src/common/debugging/etMSCLogger.c **** /*******************************************************************************
+   2:../etRuntime/src/common/debugging/etMSCLogger.c ****  * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/debugging/etMSCLogger.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/debugging/etMSCLogger.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/debugging/etMSCLogger.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/debugging/etMSCLogger.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/debugging/etMSCLogger.c ****  *
+   8:../etRuntime/src/common/debugging/etMSCLogger.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/debugging/etMSCLogger.c ****  * 		Thomas Schuetz (initial contribution)
+  10:../etRuntime/src/common/debugging/etMSCLogger.c ****  *
+  11:../etRuntime/src/common/debugging/etMSCLogger.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  13:../etRuntime/src/common/debugging/etMSCLogger.c **** #include "debugging/etMSCLogger.h"
+  14:../etRuntime/src/common/debugging/etMSCLogger.c **** #include "debugging/etLogger.h"
+  15:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  16:../etRuntime/src/common/debugging/etMSCLogger.c **** #include "osal/etThread.h"
+  17:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  18:../etRuntime/src/common/debugging/etMSCLogger.c **** static etFileHandle etMSCLogger_fileHandle = NULL;
+  19:../etRuntime/src/common/debugging/etMSCLogger.c **** static const char* etMSCLogger_objectName = "";
+  20:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  21:../etRuntime/src/common/debugging/etMSCLogger.c **** /*TODO: move or replace ET_MAX_FILENAME_LEN */
+  22:../etRuntime/src/common/debugging/etMSCLogger.c **** #define ET_MAX_FILENAME_LEN 256
+  23:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  24:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_open(const char* logPath, const char* mscName){
+  49              		.loc 1 24 0
+  50              		.cfi_startproc
+  51              		@ args = 0, pretend = 0, frame = 264
+  52              		@ frame_needed = 1, uses_anonymous_args = 0
+  53 0000 80B5     		push	{r7, lr}
+  54              	.LCFI0:
+  55              		.cfi_def_cfa_offset 8
+  56              		.cfi_offset 7, -8
+  57              		.cfi_offset 14, -4
+  58 0002 C2B0     		sub	sp, sp, #264
+  59              	.LCFI1:
+  60              		.cfi_def_cfa_offset 272
+  61 0004 00AF     		add	r7, sp, #0
+  62              	.LCFI2:
+  63              		.cfi_def_cfa_register 7
+  64 0006 07F10403 		add	r3, r7, #4
+  65 000a 1860     		str	r0, [r3, #0]
+  66 000c 3B46     		mov	r3, r7
+  67 000e 1960     		str	r1, [r3, #0]
+  25:../etRuntime/src/common/debugging/etMSCLogger.c **** 	char path[ET_MAX_FILENAME_LEN];
+  26:../etRuntime/src/common/debugging/etMSCLogger.c **** 	sprintf(path, "%s/%s.seq", logPath, mscName);
+  68              		.loc 1 26 0
+  69 0010 07F10801 		add	r1, r7, #8
+  70 0014 07F10402 		add	r2, r7, #4
+  71 0018 3B46     		mov	r3, r7
+  72 001a 0846     		mov	r0, r1
+  73 001c 40F20001 		movw	r1, #:lower16:.LC1
+  74 0020 C0F20001 		movt	r1, #:upper16:.LC1
+  75 0024 1268     		ldr	r2, [r2, #0]
+  76 0026 1B68     		ldr	r3, [r3, #0]
+  77 0028 FFF7FEFF 		bl	sprintf
+  27:../etRuntime/src/common/debugging/etMSCLogger.c **** 	etMSCLogger_fileHandle = etLogger_fopen(path, "w+");
+  78              		.loc 1 27 0
+  79 002c 07F10803 		add	r3, r7, #8
+  80 0030 1846     		mov	r0, r3
+  81 0032 40F20001 		movw	r1, #:lower16:.LC2
+  82 0036 C0F20001 		movt	r1, #:upper16:.LC2
+  83 003a FFF7FEFF 		bl	etLogger_fopen
+  84 003e 0246     		mov	r2, r0
+  85 0040 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+  86 0044 C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+  87 0048 1A60     		str	r2, [r3, #0]
+  28:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+  88              		.loc 1 28 0
+  89 004a 07F58477 		add	r7, r7, #264
+  90 004e BD46     		mov	sp, r7
+  91 0050 80BD     		pop	{r7, pc}
+  92              		.cfi_endproc
+  93              	.LFE0:
+  95 0052 00BF     		.section	.text.etMSCLogger_close,"ax",%progbits
+  96              		.align	2
+  97              		.global	etMSCLogger_close
+  98              		.thumb
+  99              		.thumb_func
+ 101              	etMSCLogger_close:
+ 102              	.LFB1:
+  29:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  30:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_close(void){
+ 103              		.loc 1 30 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 1, uses_anonymous_args = 0
+ 107 0000 80B5     		push	{r7, lr}
+ 108              	.LCFI3:
+ 109              		.cfi_def_cfa_offset 8
+ 110              		.cfi_offset 7, -8
+ 111              		.cfi_offset 14, -4
+ 112 0002 00AF     		add	r7, sp, #0
+ 113              	.LCFI4:
+ 114              		.cfi_def_cfa_register 7
+  31:../etRuntime/src/common/debugging/etMSCLogger.c **** 	if (etMSCLogger_fileHandle != NULL){
+ 115              		.loc 1 31 0
+ 116 0004 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 117 0008 C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 118 000c 1B68     		ldr	r3, [r3, #0]
+ 119 000e 002B     		cmp	r3, #0
+ 120 0010 07D0     		beq	.L2
+  32:../etRuntime/src/common/debugging/etMSCLogger.c **** 		etLogger_fclose(etMSCLogger_fileHandle);
+ 121              		.loc 1 32 0
+ 122 0012 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 123 0016 C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 124 001a 1B68     		ldr	r3, [r3, #0]
+ 125 001c 1846     		mov	r0, r3
+ 126 001e FFF7FEFF 		bl	etLogger_fclose
+ 127              	.L2:
+  33:../etRuntime/src/common/debugging/etMSCLogger.c **** 	}
+  34:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  35:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 128              		.loc 1 35 0
+ 129 0022 80BD     		pop	{r7, pc}
+ 130              		.cfi_endproc
+ 131              	.LFE1:
+ 133              		.section	.text.etMSCLogger_setObjectName,"ax",%progbits
+ 134              		.align	2
+ 135              		.global	etMSCLogger_setObjectName
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	etMSCLogger_setObjectName:
+ 140              	.LFB2:
+  36:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  37:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_setObjectName(const char* objectName){
+ 141              		.loc 1 37 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 8
+ 144              		@ frame_needed = 1, uses_anonymous_args = 0
+ 145              		@ link register save eliminated.
+ 146 0000 80B4     		push	{r7}
+ 147              	.LCFI5:
+ 148              		.cfi_def_cfa_offset 4
+ 149              		.cfi_offset 7, -4
+ 150 0002 83B0     		sub	sp, sp, #12
+ 151              	.LCFI6:
+ 152              		.cfi_def_cfa_offset 16
+ 153 0004 00AF     		add	r7, sp, #0
+ 154              	.LCFI7:
+ 155              		.cfi_def_cfa_register 7
+ 156 0006 7860     		str	r0, [r7, #4]
+  38:../etRuntime/src/common/debugging/etMSCLogger.c **** 	etMSCLogger_objectName = objectName;
+ 157              		.loc 1 38 0
+ 158 0008 40F20003 		movw	r3, #:lower16:etMSCLogger_objectName
+ 159 000c C0F20003 		movt	r3, #:upper16:etMSCLogger_objectName
+ 160 0010 7A68     		ldr	r2, [r7, #4]
+ 161 0012 1A60     		str	r2, [r3, #0]
+  39:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 162              		.loc 1 39 0
+ 163 0014 07F10C07 		add	r7, r7, #12
+ 164 0018 BD46     		mov	sp, r7
+ 165 001a 80BC     		pop	{r7}
+ 166 001c 7047     		bx	lr
+ 167              		.cfi_endproc
+ 168              	.LFE2:
+ 170 001e 00BF     		.section	.text.etMSCLogger_getObjectName,"ax",%progbits
+ 171              		.align	2
+ 172              		.global	etMSCLogger_getObjectName
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	etMSCLogger_getObjectName:
+ 177              	.LFB3:
+  40:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  41:../etRuntime/src/common/debugging/etMSCLogger.c **** const char* etMSCLogger_getObjectName(void){
+ 178              		.loc 1 41 0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 1, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 183 0000 80B4     		push	{r7}
+ 184              	.LCFI8:
+ 185              		.cfi_def_cfa_offset 4
+ 186              		.cfi_offset 7, -4
+ 187 0002 00AF     		add	r7, sp, #0
+ 188              	.LCFI9:
+ 189              		.cfi_def_cfa_register 7
+  42:../etRuntime/src/common/debugging/etMSCLogger.c **** 	return etMSCLogger_objectName;
+ 190              		.loc 1 42 0
+ 191 0004 40F20003 		movw	r3, #:lower16:etMSCLogger_objectName
+ 192 0008 C0F20003 		movt	r3, #:upper16:etMSCLogger_objectName
+ 193 000c 1B68     		ldr	r3, [r3, #0]
+  43:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 194              		.loc 1 43 0
+ 195 000e 1846     		mov	r0, r3
+ 196 0010 BD46     		mov	sp, r7
+ 197 0012 80BC     		pop	{r7}
+ 198 0014 7047     		bx	lr
+ 199              		.cfi_endproc
+ 200              	.LFE3:
+ 202 0016 00BF     		.section	.rodata
+ 203 0013 00       		.align	2
+ 204              	.LC3:
+ 205 0014 2573203D 		.ascii	"%s ==> %s %s(thread=%ld)\012\000"
+ 205      3D3E2025 
+ 205      73202573 
+ 205      28746872 
+ 205      6561643D 
+ 206              		.section	.text.etMSCLogger_syncCall,"ax",%progbits
+ 207              		.align	2
+ 208              		.global	etMSCLogger_syncCall
+ 209              		.thumb
+ 210              		.thumb_func
+ 212              	etMSCLogger_syncCall:
+ 213              	.LFB4:
+  44:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  45:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_syncCall(const char* sourceName, const char* messageName, const char* targetName){
+ 214              		.loc 1 45 0
+ 215              		.cfi_startproc
+ 216              		@ args = 0, pretend = 0, frame = 16
+ 217              		@ frame_needed = 1, uses_anonymous_args = 0
+ 218 0000 90B5     		push	{r4, r7, lr}
+ 219              	.LCFI10:
+ 220              		.cfi_def_cfa_offset 12
+ 221              		.cfi_offset 4, -12
+ 222              		.cfi_offset 7, -8
+ 223              		.cfi_offset 14, -4
+ 224 0002 87B0     		sub	sp, sp, #28
+ 225              	.LCFI11:
+ 226              		.cfi_def_cfa_offset 40
+ 227 0004 02AF     		add	r7, sp, #8
+ 228              	.LCFI12:
+ 229              		.cfi_def_cfa 7, 32
+ 230 0006 F860     		str	r0, [r7, #12]
+ 231 0008 B960     		str	r1, [r7, #8]
+ 232 000a 7A60     		str	r2, [r7, #4]
+  46:../etRuntime/src/common/debugging/etMSCLogger.c **** 	if (etMSCLogger_fileHandle != NULL) {
+ 233              		.loc 1 46 0
+ 234 000c 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 235 0010 C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 236 0014 1B68     		ldr	r3, [r3, #0]
+ 237 0016 002B     		cmp	r3, #0
+ 238 0018 13D0     		beq	.L7
+  47:../etRuntime/src/common/debugging/etMSCLogger.c **** 		etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s(thread=%ld)\n", sourceName, targetName, me
+ 239              		.loc 1 47 0
+ 240 001a 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 241 001e C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 242 0022 1C68     		ldr	r4, [r3, #0]
+ 243 0024 FFF7FEFF 		bl	etThread_self_id
+ 244 0028 0346     		mov	r3, r0
+ 245 002a BA68     		ldr	r2, [r7, #8]
+ 246 002c 0092     		str	r2, [sp, #0]
+ 247 002e 0193     		str	r3, [sp, #4]
+ 248 0030 2046     		mov	r0, r4
+ 249 0032 40F20001 		movw	r1, #:lower16:.LC3
+ 250 0036 C0F20001 		movt	r1, #:upper16:.LC3
+ 251 003a FA68     		ldr	r2, [r7, #12]
+ 252 003c 7B68     		ldr	r3, [r7, #4]
+ 253 003e FFF7FEFF 		bl	etLogger_fprintf
+ 254              	.L7:
+  48:../etRuntime/src/common/debugging/etMSCLogger.c **** 	}
+  49:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 255              		.loc 1 49 0
+ 256 0042 07F11407 		add	r7, r7, #20
+ 257 0046 BD46     		mov	sp, r7
+ 258 0048 90BD     		pop	{r4, r7, pc}
+ 259              		.cfi_endproc
+ 260              	.LFE4:
+ 262 004a 00BF     		.section	.rodata
+ 263 002e 0000     		.align	2
+ 264              	.LC4:
+ 265 0030 2573203C 		.ascii	"%s <== %s\012\000"
+ 265      3D3D2025 
+ 265      730A00
+ 266              		.section	.text.etMSCLogger_syncReturn,"ax",%progbits
+ 267              		.align	2
+ 268              		.global	etMSCLogger_syncReturn
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	etMSCLogger_syncReturn:
+ 273              	.LFB5:
+  50:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  51:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_syncReturn(const char* sourceName, const char* targetName){
+ 274              		.loc 1 51 0
+ 275              		.cfi_startproc
+ 276              		@ args = 0, pretend = 0, frame = 8
+ 277              		@ frame_needed = 1, uses_anonymous_args = 0
+ 278 0000 80B5     		push	{r7, lr}
+ 279              	.LCFI13:
+ 280              		.cfi_def_cfa_offset 8
+ 281              		.cfi_offset 7, -8
+ 282              		.cfi_offset 14, -4
+ 283 0002 82B0     		sub	sp, sp, #8
+ 284              	.LCFI14:
+ 285              		.cfi_def_cfa_offset 16
+ 286 0004 00AF     		add	r7, sp, #0
+ 287              	.LCFI15:
+ 288              		.cfi_def_cfa_register 7
+ 289 0006 7860     		str	r0, [r7, #4]
+ 290 0008 3960     		str	r1, [r7, #0]
+  52:../etRuntime/src/common/debugging/etMSCLogger.c **** 	if (etMSCLogger_fileHandle != NULL) {
+ 291              		.loc 1 52 0
+ 292 000a 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 293 000e C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 294 0012 1B68     		ldr	r3, [r3, #0]
+ 295 0014 002B     		cmp	r3, #0
+ 296 0016 0DD0     		beq	.L9
+  53:../etRuntime/src/common/debugging/etMSCLogger.c **** 		etLogger_fprintf(etMSCLogger_fileHandle, "%s <== %s\n", sourceName, targetName);
+ 297              		.loc 1 53 0
+ 298 0018 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 299 001c C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 300 0020 1B68     		ldr	r3, [r3, #0]
+ 301 0022 1846     		mov	r0, r3
+ 302 0024 40F20001 		movw	r1, #:lower16:.LC4
+ 303 0028 C0F20001 		movt	r1, #:upper16:.LC4
+ 304 002c 7A68     		ldr	r2, [r7, #4]
+ 305 002e 3B68     		ldr	r3, [r7, #0]
+ 306 0030 FFF7FEFF 		bl	etLogger_fprintf
+ 307              	.L9:
+  54:../etRuntime/src/common/debugging/etMSCLogger.c **** 	}
+  55:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 308              		.loc 1 55 0
+ 309 0034 07F10807 		add	r7, r7, #8
+ 310 0038 BD46     		mov	sp, r7
+ 311 003a 80BD     		pop	{r7, pc}
+ 312              		.cfi_endproc
+ 313              	.LFE5:
+ 315              		.section	.rodata
+ 316 003b 00       		.align	2
+ 317              	.LC5:
+ 318 003c 2573203E 		.ascii	"%s >-- %s %s\012\000"
+ 318      2D2D2025 
+ 318      73202573 
+ 318      0A00
+ 319              		.section	.text.etMSCLogger_asyncOut,"ax",%progbits
+ 320              		.align	2
+ 321              		.global	etMSCLogger_asyncOut
+ 322              		.thumb
+ 323              		.thumb_func
+ 325              	etMSCLogger_asyncOut:
+ 326              	.LFB6:
+  56:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  57:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_asyncOut(const char* sourceName, const char* messageName, const char* targetName){
+ 327              		.loc 1 57 0
+ 328              		.cfi_startproc
+ 329              		@ args = 0, pretend = 0, frame = 16
+ 330              		@ frame_needed = 1, uses_anonymous_args = 0
+ 331 0000 80B5     		push	{r7, lr}
+ 332              	.LCFI16:
+ 333              		.cfi_def_cfa_offset 8
+ 334              		.cfi_offset 7, -8
+ 335              		.cfi_offset 14, -4
+ 336 0002 86B0     		sub	sp, sp, #24
+ 337              	.LCFI17:
+ 338              		.cfi_def_cfa_offset 32
+ 339 0004 02AF     		add	r7, sp, #8
+ 340              	.LCFI18:
+ 341              		.cfi_def_cfa 7, 24
+ 342 0006 F860     		str	r0, [r7, #12]
+ 343 0008 B960     		str	r1, [r7, #8]
+ 344 000a 7A60     		str	r2, [r7, #4]
+  58:../etRuntime/src/common/debugging/etMSCLogger.c **** 	if (etMSCLogger_fileHandle != NULL) {
+ 345              		.loc 1 58 0
+ 346 000c 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 347 0010 C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 348 0014 1B68     		ldr	r3, [r3, #0]
+ 349 0016 002B     		cmp	r3, #0
+ 350 0018 0FD0     		beq	.L11
+  59:../etRuntime/src/common/debugging/etMSCLogger.c **** 		etLogger_fprintf(etMSCLogger_fileHandle, "%s >-- %s %s\n", sourceName, targetName, messageName);
+ 351              		.loc 1 59 0
+ 352 001a 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 353 001e C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 354 0022 1B68     		ldr	r3, [r3, #0]
+ 355 0024 BA68     		ldr	r2, [r7, #8]
+ 356 0026 0092     		str	r2, [sp, #0]
+ 357 0028 1846     		mov	r0, r3
+ 358 002a 40F20001 		movw	r1, #:lower16:.LC5
+ 359 002e C0F20001 		movt	r1, #:upper16:.LC5
+ 360 0032 FA68     		ldr	r2, [r7, #12]
+ 361 0034 7B68     		ldr	r3, [r7, #4]
+ 362 0036 FFF7FEFF 		bl	etLogger_fprintf
+ 363              	.L11:
+  60:../etRuntime/src/common/debugging/etMSCLogger.c **** 	}
+  61:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 364              		.loc 1 61 0
+ 365 003a 07F11007 		add	r7, r7, #16
+ 366 003e BD46     		mov	sp, r7
+ 367 0040 80BD     		pop	{r7, pc}
+ 368              		.cfi_endproc
+ 369              	.LFE6:
+ 371 0042 00BF     		.section	.rodata
+ 372 004a 0000     		.align	2
+ 373              	.LC6:
+ 374 004c 2573202D 		.ascii	"%s --> %s %s\012\000"
+ 374      2D3E2025 
+ 374      73202573 
+ 374      0A00
+ 375              		.section	.text.etMSCLogger_asyncIn,"ax",%progbits
+ 376              		.align	2
+ 377              		.global	etMSCLogger_asyncIn
+ 378              		.thumb
+ 379              		.thumb_func
+ 381              	etMSCLogger_asyncIn:
+ 382              	.LFB7:
+  62:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  63:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_asyncIn(const char* sourceName, const char* messageName, const char* targetName){
+ 383              		.loc 1 63 0
+ 384              		.cfi_startproc
+ 385              		@ args = 0, pretend = 0, frame = 16
+ 386              		@ frame_needed = 1, uses_anonymous_args = 0
+ 387 0000 80B5     		push	{r7, lr}
+ 388              	.LCFI19:
+ 389              		.cfi_def_cfa_offset 8
+ 390              		.cfi_offset 7, -8
+ 391              		.cfi_offset 14, -4
+ 392 0002 86B0     		sub	sp, sp, #24
+ 393              	.LCFI20:
+ 394              		.cfi_def_cfa_offset 32
+ 395 0004 02AF     		add	r7, sp, #8
+ 396              	.LCFI21:
+ 397              		.cfi_def_cfa 7, 24
+ 398 0006 F860     		str	r0, [r7, #12]
+ 399 0008 B960     		str	r1, [r7, #8]
+ 400 000a 7A60     		str	r2, [r7, #4]
+  64:../etRuntime/src/common/debugging/etMSCLogger.c **** 	if (etMSCLogger_fileHandle != NULL) {
+ 401              		.loc 1 64 0
+ 402 000c 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 403 0010 C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 404 0014 1B68     		ldr	r3, [r3, #0]
+ 405 0016 002B     		cmp	r3, #0
+ 406 0018 0FD0     		beq	.L13
+  65:../etRuntime/src/common/debugging/etMSCLogger.c **** 		etLogger_fprintf(etMSCLogger_fileHandle, "%s --> %s %s\n", sourceName, targetName, messageName);
+ 407              		.loc 1 65 0
+ 408 001a 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 409 001e C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 410 0022 1B68     		ldr	r3, [r3, #0]
+ 411 0024 BA68     		ldr	r2, [r7, #8]
+ 412 0026 0092     		str	r2, [sp, #0]
+ 413 0028 1846     		mov	r0, r3
+ 414 002a 40F20001 		movw	r1, #:lower16:.LC6
+ 415 002e C0F20001 		movt	r1, #:upper16:.LC6
+ 416 0032 FA68     		ldr	r2, [r7, #12]
+ 417 0034 7B68     		ldr	r3, [r7, #4]
+ 418 0036 FFF7FEFF 		bl	etLogger_fprintf
+ 419              	.L13:
+  66:../etRuntime/src/common/debugging/etMSCLogger.c **** 	}
+  67:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 420              		.loc 1 67 0
+ 421 003a 07F11007 		add	r7, r7, #16
+ 422 003e BD46     		mov	sp, r7
+ 423 0040 80BD     		pop	{r7, pc}
+ 424              		.cfi_endproc
+ 425              	.LFE7:
+ 427 0042 00BF     		.section	.rodata
+ 428 005a 0000     		.align	2
+ 429              	.LC7:
+ 430 005c 2573203E 		.ascii	"%s >>> %s\012\000"
+ 430      3E3E2025 
+ 430      730A00
+ 431 0067 00       		.section	.text.etMSCLogger_setState,"ax",%progbits
+ 432              		.align	2
+ 433              		.global	etMSCLogger_setState
+ 434              		.thumb
+ 435              		.thumb_func
+ 437              	etMSCLogger_setState:
+ 438              	.LFB8:
+  68:../etRuntime/src/common/debugging/etMSCLogger.c **** 
+  69:../etRuntime/src/common/debugging/etMSCLogger.c **** void etMSCLogger_setState(const char* objectName, const char* stateName){
+ 439              		.loc 1 69 0
+ 440              		.cfi_startproc
+ 441              		@ args = 0, pretend = 0, frame = 8
+ 442              		@ frame_needed = 1, uses_anonymous_args = 0
+ 443 0000 80B5     		push	{r7, lr}
+ 444              	.LCFI22:
+ 445              		.cfi_def_cfa_offset 8
+ 446              		.cfi_offset 7, -8
+ 447              		.cfi_offset 14, -4
+ 448 0002 82B0     		sub	sp, sp, #8
+ 449              	.LCFI23:
+ 450              		.cfi_def_cfa_offset 16
+ 451 0004 00AF     		add	r7, sp, #0
+ 452              	.LCFI24:
+ 453              		.cfi_def_cfa_register 7
+ 454 0006 7860     		str	r0, [r7, #4]
+ 455 0008 3960     		str	r1, [r7, #0]
+  70:../etRuntime/src/common/debugging/etMSCLogger.c **** 	if (etMSCLogger_fileHandle != NULL) {
+ 456              		.loc 1 70 0
+ 457 000a 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 458 000e C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 459 0012 1B68     		ldr	r3, [r3, #0]
+ 460 0014 002B     		cmp	r3, #0
+ 461 0016 0DD0     		beq	.L15
+  71:../etRuntime/src/common/debugging/etMSCLogger.c **** 		etLogger_fprintf(etMSCLogger_fileHandle, "%s >>> %s\n", objectName, stateName);
+ 462              		.loc 1 71 0
+ 463 0018 40F20003 		movw	r3, #:lower16:etMSCLogger_fileHandle
+ 464 001c C0F20003 		movt	r3, #:upper16:etMSCLogger_fileHandle
+ 465 0020 1B68     		ldr	r3, [r3, #0]
+ 466 0022 1846     		mov	r0, r3
+ 467 0024 40F20001 		movw	r1, #:lower16:.LC7
+ 468 0028 C0F20001 		movt	r1, #:upper16:.LC7
+ 469 002c 7A68     		ldr	r2, [r7, #4]
+ 470 002e 3B68     		ldr	r3, [r7, #0]
+ 471 0030 FFF7FEFF 		bl	etLogger_fprintf
+ 472              	.L15:
+  72:../etRuntime/src/common/debugging/etMSCLogger.c **** 	}
+  73:../etRuntime/src/common/debugging/etMSCLogger.c **** }
+ 473              		.loc 1 73 0
+ 474 0034 07F10807 		add	r7, r7, #8
+ 475 0038 BD46     		mov	sp, r7
+ 476 003a 80BD     		pop	{r7, pc}
+ 477              		.cfi_endproc
+ 478              	.LFE8:
+ 480              		.text
+ 481              	.Letext0:
+ 482              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 483              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 484              		.file 4 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/include/stddef.h"
+ 485              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 486              		.file 6 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 487              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etMSCLogger.c
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:20     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:21     .bss:00000000 etMSCLogger_fileHandle
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:24     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:28     .data:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:31     .data:00000000 etMSCLogger_objectName
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:35     .rodata:00000004 .LC1
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:38     .rodata:00000010 .LC2
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:41     .text.etMSCLogger_open:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:46     .text.etMSCLogger_open:00000000 etMSCLogger_open
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:96     .text.etMSCLogger_close:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:101    .text.etMSCLogger_close:00000000 etMSCLogger_close
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:134    .text.etMSCLogger_setObjectName:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:139    .text.etMSCLogger_setObjectName:00000000 etMSCLogger_setObjectName
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:171    .text.etMSCLogger_getObjectName:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:176    .text.etMSCLogger_getObjectName:00000000 etMSCLogger_getObjectName
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:204    .rodata:00000014 .LC3
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:207    .text.etMSCLogger_syncCall:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:212    .text.etMSCLogger_syncCall:00000000 etMSCLogger_syncCall
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:264    .rodata:00000030 .LC4
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:267    .text.etMSCLogger_syncReturn:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:272    .text.etMSCLogger_syncReturn:00000000 etMSCLogger_syncReturn
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:317    .rodata:0000003c .LC5
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:320    .text.etMSCLogger_asyncOut:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:325    .text.etMSCLogger_asyncOut:00000000 etMSCLogger_asyncOut
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:373    .rodata:0000004c .LC6
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:376    .text.etMSCLogger_asyncIn:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:381    .text.etMSCLogger_asyncIn:00000000 etMSCLogger_asyncIn
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:429    .rodata:0000005c .LC7
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:432    .text.etMSCLogger_setState:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:437    .text.etMSCLogger_setState:00000000 etMSCLogger_setState
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.141.92ef314402d3b770bc37bd8efd7aeec4
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.14.8989d26d807c4501fc0302abd0dbe63e
+
+UNDEFINED SYMBOLS
+sprintf
+etLogger_fopen
+etLogger_fclose
+etThread_self_id
+etLogger_fprintf

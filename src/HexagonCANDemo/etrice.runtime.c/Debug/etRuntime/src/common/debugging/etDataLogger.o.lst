@@ -1,0 +1,497 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etDataLogger.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	etDataLogger_fileHandle:
+  22 0000 00000000 		.space	4
+  23              		.align	2
+  24              	etDataLogger_row:
+  25 0004 00000000 		.space	4
+  26              		.section	.rodata
+  27              		.align	2
+  28              	.LC0:
+  29 0000 25732F25 		.ascii	"%s/%s.data.csv\000"
+  29      732E6461 
+  29      74612E63 
+  29      737600
+  30 000f 00       		.align	2
+  31              	.LC1:
+  32 0010 772B00   		.ascii	"w+\000"
+  33              		.section	.text.etDataLogger_open,"ax",%progbits
+  34              		.align	2
+  35              		.global	etDataLogger_open
+  36              		.thumb
+  37              		.thumb_func
+  39              	etDataLogger_open:
+  40              	.LFB0:
+  41              		.file 1 "../etRuntime/src/common/debugging/etDataLogger.c"
+   1:../etRuntime/src/common/debugging/etDataLogger.c **** /*******************************************************************************
+   2:../etRuntime/src/common/debugging/etDataLogger.c ****  * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/debugging/etDataLogger.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/debugging/etDataLogger.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/debugging/etDataLogger.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/debugging/etDataLogger.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/debugging/etDataLogger.c ****  * 
+   8:../etRuntime/src/common/debugging/etDataLogger.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/debugging/etDataLogger.c ****  * 		Henrik Rentz-Reichert (initial contribution)
+  10:../etRuntime/src/common/debugging/etDataLogger.c ****  * 
+  11:../etRuntime/src/common/debugging/etDataLogger.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  13:../etRuntime/src/common/debugging/etDataLogger.c **** #include "debugging/etDataLogger.h"
+  14:../etRuntime/src/common/debugging/etDataLogger.c **** #include "debugging/etLogger.h"
+  15:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  16:../etRuntime/src/common/debugging/etDataLogger.c **** static etFileHandle etDataLogger_fileHandle = NULL;
+  17:../etRuntime/src/common/debugging/etDataLogger.c **** static int etDataLogger_row = 0;
+  18:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  19:../etRuntime/src/common/debugging/etDataLogger.c **** /*TODO: move or replace ET_MAX_FILENAME_LEN */
+  20:../etRuntime/src/common/debugging/etDataLogger.c **** #define ET_MAX_FILENAME_LEN 256
+  21:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  22:../etRuntime/src/common/debugging/etDataLogger.c **** void etDataLogger_open(const char* logPath, const char* logName) {
+  42              		.loc 1 22 0
+  43              		.cfi_startproc
+  44              		@ args = 0, pretend = 0, frame = 264
+  45              		@ frame_needed = 1, uses_anonymous_args = 0
+  46 0000 80B5     		push	{r7, lr}
+  47              	.LCFI0:
+  48              		.cfi_def_cfa_offset 8
+  49              		.cfi_offset 7, -8
+  50              		.cfi_offset 14, -4
+  51 0002 C2B0     		sub	sp, sp, #264
+  52              	.LCFI1:
+  53              		.cfi_def_cfa_offset 272
+  54 0004 00AF     		add	r7, sp, #0
+  55              	.LCFI2:
+  56              		.cfi_def_cfa_register 7
+  57 0006 07F10403 		add	r3, r7, #4
+  58 000a 1860     		str	r0, [r3, #0]
+  59 000c 3B46     		mov	r3, r7
+  60 000e 1960     		str	r1, [r3, #0]
+  23:../etRuntime/src/common/debugging/etDataLogger.c **** 	char path[ET_MAX_FILENAME_LEN];
+  24:../etRuntime/src/common/debugging/etDataLogger.c **** 	etDataLogger_row = 0;
+  61              		.loc 1 24 0
+  62 0010 40F20003 		movw	r3, #:lower16:etDataLogger_row
+  63 0014 C0F20003 		movt	r3, #:upper16:etDataLogger_row
+  64 0018 4FF00002 		mov	r2, #0
+  65 001c 1A60     		str	r2, [r3, #0]
+  25:../etRuntime/src/common/debugging/etDataLogger.c **** 	sprintf(path, "%s/%s.data.csv", logPath, logName);
+  66              		.loc 1 25 0
+  67 001e 07F10801 		add	r1, r7, #8
+  68 0022 07F10402 		add	r2, r7, #4
+  69 0026 3B46     		mov	r3, r7
+  70 0028 0846     		mov	r0, r1
+  71 002a 40F20001 		movw	r1, #:lower16:.LC0
+  72 002e C0F20001 		movt	r1, #:upper16:.LC0
+  73 0032 1268     		ldr	r2, [r2, #0]
+  74 0034 1B68     		ldr	r3, [r3, #0]
+  75 0036 FFF7FEFF 		bl	sprintf
+  26:../etRuntime/src/common/debugging/etDataLogger.c **** 	etDataLogger_fileHandle = etLogger_fopen(path, "w+");
+  76              		.loc 1 26 0
+  77 003a 07F10803 		add	r3, r7, #8
+  78 003e 1846     		mov	r0, r3
+  79 0040 40F20001 		movw	r1, #:lower16:.LC1
+  80 0044 C0F20001 		movt	r1, #:upper16:.LC1
+  81 0048 FFF7FEFF 		bl	etLogger_fopen
+  82 004c 0246     		mov	r2, r0
+  83 004e 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+  84 0052 C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+  85 0056 1A60     		str	r2, [r3, #0]
+  27:../etRuntime/src/common/debugging/etDataLogger.c **** }
+  86              		.loc 1 27 0
+  87 0058 07F58477 		add	r7, r7, #264
+  88 005c BD46     		mov	sp, r7
+  89 005e 80BD     		pop	{r7, pc}
+  90              		.cfi_endproc
+  91              	.LFE0:
+  93              		.section	.text.etDataLogger_close,"ax",%progbits
+  94              		.align	2
+  95              		.global	etDataLogger_close
+  96              		.thumb
+  97              		.thumb_func
+  99              	etDataLogger_close:
+ 100              	.LFB1:
+  28:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  29:../etRuntime/src/common/debugging/etDataLogger.c **** void etDataLogger_close(void) {
+ 101              		.loc 1 29 0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 1, uses_anonymous_args = 0
+ 105 0000 80B5     		push	{r7, lr}
+ 106              	.LCFI3:
+ 107              		.cfi_def_cfa_offset 8
+ 108              		.cfi_offset 7, -8
+ 109              		.cfi_offset 14, -4
+ 110 0002 00AF     		add	r7, sp, #0
+ 111              	.LCFI4:
+ 112              		.cfi_def_cfa_register 7
+  30:../etRuntime/src/common/debugging/etDataLogger.c **** 	if (etDataLogger_fileHandle != NULL) {
+ 113              		.loc 1 30 0
+ 114 0004 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 115 0008 C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 116 000c 1B68     		ldr	r3, [r3, #0]
+ 117 000e 002B     		cmp	r3, #0
+ 118 0010 07D0     		beq	.L2
+  31:../etRuntime/src/common/debugging/etDataLogger.c **** 		etLogger_fclose(etDataLogger_fileHandle);
+ 119              		.loc 1 31 0
+ 120 0012 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 121 0016 C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 122 001a 1B68     		ldr	r3, [r3, #0]
+ 123 001c 1846     		mov	r0, r3
+ 124 001e FFF7FEFF 		bl	etLogger_fclose
+ 125              	.L2:
+  32:../etRuntime/src/common/debugging/etDataLogger.c **** 	}
+  33:../etRuntime/src/common/debugging/etDataLogger.c **** }
+ 126              		.loc 1 33 0
+ 127 0022 80BD     		pop	{r7, pc}
+ 128              		.cfi_endproc
+ 129              	.LFE1:
+ 131              		.section	.rodata
+ 132 0013 00       		.align	2
+ 133              	.LC2:
+ 134 0014 2C257300 		.ascii	",%s\000"
+ 135              		.section	.text.etDataLogger_logString,"ax",%progbits
+ 136              		.align	2
+ 137              		.global	etDataLogger_logString
+ 138              		.thumb
+ 139              		.thumb_func
+ 141              	etDataLogger_logString:
+ 142              	.LFB2:
+  34:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  35:../etRuntime/src/common/debugging/etDataLogger.c **** void etDataLogger_logString(const char* entry) {
+ 143              		.loc 1 35 0
+ 144              		.cfi_startproc
+ 145              		@ args = 0, pretend = 0, frame = 8
+ 146              		@ frame_needed = 1, uses_anonymous_args = 0
+ 147 0000 80B5     		push	{r7, lr}
+ 148              	.LCFI5:
+ 149              		.cfi_def_cfa_offset 8
+ 150              		.cfi_offset 7, -8
+ 151              		.cfi_offset 14, -4
+ 152 0002 82B0     		sub	sp, sp, #8
+ 153              	.LCFI6:
+ 154              		.cfi_def_cfa_offset 16
+ 155 0004 00AF     		add	r7, sp, #0
+ 156              	.LCFI7:
+ 157              		.cfi_def_cfa_register 7
+ 158 0006 7860     		str	r0, [r7, #4]
+  36:../etRuntime/src/common/debugging/etDataLogger.c **** 	if (etDataLogger_fileHandle != NULL) {
+ 159              		.loc 1 36 0
+ 160 0008 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 161 000c C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 162 0010 1B68     		ldr	r3, [r3, #0]
+ 163 0012 002B     		cmp	r3, #0
+ 164 0014 0CD0     		beq	.L4
+  37:../etRuntime/src/common/debugging/etDataLogger.c **** 		etLogger_fprintf(etDataLogger_fileHandle, ",%s", entry);
+ 165              		.loc 1 37 0
+ 166 0016 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 167 001a C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 168 001e 1B68     		ldr	r3, [r3, #0]
+ 169 0020 1846     		mov	r0, r3
+ 170 0022 40F20001 		movw	r1, #:lower16:.LC2
+ 171 0026 C0F20001 		movt	r1, #:upper16:.LC2
+ 172 002a 7A68     		ldr	r2, [r7, #4]
+ 173 002c FFF7FEFF 		bl	etLogger_fprintf
+ 174              	.L4:
+  38:../etRuntime/src/common/debugging/etDataLogger.c **** 	}
+  39:../etRuntime/src/common/debugging/etDataLogger.c **** }
+ 175              		.loc 1 39 0
+ 176 0030 07F10807 		add	r7, r7, #8
+ 177 0034 BD46     		mov	sp, r7
+ 178 0036 80BD     		pop	{r7, pc}
+ 179              		.cfi_endproc
+ 180              	.LFE2:
+ 182              		.section	.rodata
+ 183              		.align	2
+ 184              	.LC3:
+ 185 0018 2C256400 		.ascii	",%d\000"
+ 186              		.section	.text.etDataLogger_logBool,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	etDataLogger_logBool
+ 189              		.thumb
+ 190              		.thumb_func
+ 192              	etDataLogger_logBool:
+ 193              	.LFB3:
+  40:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  41:../etRuntime/src/common/debugging/etDataLogger.c **** void etDataLogger_logBool(int val) {
+ 194              		.loc 1 41 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 8
+ 197              		@ frame_needed = 1, uses_anonymous_args = 0
+ 198 0000 80B5     		push	{r7, lr}
+ 199              	.LCFI8:
+ 200              		.cfi_def_cfa_offset 8
+ 201              		.cfi_offset 7, -8
+ 202              		.cfi_offset 14, -4
+ 203 0002 82B0     		sub	sp, sp, #8
+ 204              	.LCFI9:
+ 205              		.cfi_def_cfa_offset 16
+ 206 0004 00AF     		add	r7, sp, #0
+ 207              	.LCFI10:
+ 208              		.cfi_def_cfa_register 7
+ 209 0006 7860     		str	r0, [r7, #4]
+  42:../etRuntime/src/common/debugging/etDataLogger.c **** 	if (etDataLogger_fileHandle != NULL) {
+ 210              		.loc 1 42 0
+ 211 0008 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 212 000c C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 213 0010 1B68     		ldr	r3, [r3, #0]
+ 214 0012 002B     		cmp	r3, #0
+ 215 0014 0CD0     		beq	.L6
+  43:../etRuntime/src/common/debugging/etDataLogger.c **** 		etLogger_fprintf(etDataLogger_fileHandle, ",%d", val);
+ 216              		.loc 1 43 0
+ 217 0016 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 218 001a C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 219 001e 1B68     		ldr	r3, [r3, #0]
+ 220 0020 1846     		mov	r0, r3
+ 221 0022 40F20001 		movw	r1, #:lower16:.LC3
+ 222 0026 C0F20001 		movt	r1, #:upper16:.LC3
+ 223 002a 7A68     		ldr	r2, [r7, #4]
+ 224 002c FFF7FEFF 		bl	etLogger_fprintf
+ 225              	.L6:
+  44:../etRuntime/src/common/debugging/etDataLogger.c **** 	}
+  45:../etRuntime/src/common/debugging/etDataLogger.c **** }
+ 226              		.loc 1 45 0
+ 227 0030 07F10807 		add	r7, r7, #8
+ 228 0034 BD46     		mov	sp, r7
+ 229 0036 80BD     		pop	{r7, pc}
+ 230              		.cfi_endproc
+ 231              	.LFE3:
+ 233              		.section	.text.etDataLogger_logInt,"ax",%progbits
+ 234              		.align	2
+ 235              		.global	etDataLogger_logInt
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	etDataLogger_logInt:
+ 240              	.LFB4:
+  46:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  47:../etRuntime/src/common/debugging/etDataLogger.c **** void etDataLogger_logInt(int val) {
+ 241              		.loc 1 47 0
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 8
+ 244              		@ frame_needed = 1, uses_anonymous_args = 0
+ 245 0000 80B5     		push	{r7, lr}
+ 246              	.LCFI11:
+ 247              		.cfi_def_cfa_offset 8
+ 248              		.cfi_offset 7, -8
+ 249              		.cfi_offset 14, -4
+ 250 0002 82B0     		sub	sp, sp, #8
+ 251              	.LCFI12:
+ 252              		.cfi_def_cfa_offset 16
+ 253 0004 00AF     		add	r7, sp, #0
+ 254              	.LCFI13:
+ 255              		.cfi_def_cfa_register 7
+ 256 0006 7860     		str	r0, [r7, #4]
+  48:../etRuntime/src/common/debugging/etDataLogger.c **** 	if (etDataLogger_fileHandle != NULL) {
+ 257              		.loc 1 48 0
+ 258 0008 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 259 000c C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 260 0010 1B68     		ldr	r3, [r3, #0]
+ 261 0012 002B     		cmp	r3, #0
+ 262 0014 0CD0     		beq	.L8
+  49:../etRuntime/src/common/debugging/etDataLogger.c **** 		etLogger_fprintf(etDataLogger_fileHandle, ",%d", val);
+ 263              		.loc 1 49 0
+ 264 0016 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 265 001a C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 266 001e 1B68     		ldr	r3, [r3, #0]
+ 267 0020 1846     		mov	r0, r3
+ 268 0022 40F20001 		movw	r1, #:lower16:.LC3
+ 269 0026 C0F20001 		movt	r1, #:upper16:.LC3
+ 270 002a 7A68     		ldr	r2, [r7, #4]
+ 271 002c FFF7FEFF 		bl	etLogger_fprintf
+ 272              	.L8:
+  50:../etRuntime/src/common/debugging/etDataLogger.c **** 	}
+  51:../etRuntime/src/common/debugging/etDataLogger.c **** }
+ 273              		.loc 1 51 0
+ 274 0030 07F10807 		add	r7, r7, #8
+ 275 0034 BD46     		mov	sp, r7
+ 276 0036 80BD     		pop	{r7, pc}
+ 277              		.cfi_endproc
+ 278              	.LFE4:
+ 280              		.section	.rodata
+ 281              		.align	2
+ 282              	.LC4:
+ 283 001c 2C256C66 		.ascii	",%lf\000"
+ 283      00
+ 284              		.section	.text.etDataLogger_logDouble,"ax",%progbits
+ 285              		.align	2
+ 286              		.global	etDataLogger_logDouble
+ 287              		.thumb
+ 288              		.thumb_func
+ 290              	etDataLogger_logDouble:
+ 291              	.LFB5:
+  52:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  53:../etRuntime/src/common/debugging/etDataLogger.c **** void etDataLogger_logDouble(double val) {
+ 292              		.loc 1 53 0
+ 293              		.cfi_startproc
+ 294              		@ args = 0, pretend = 0, frame = 8
+ 295              		@ frame_needed = 1, uses_anonymous_args = 0
+ 296 0000 80B5     		push	{r7, lr}
+ 297              	.LCFI14:
+ 298              		.cfi_def_cfa_offset 8
+ 299              		.cfi_offset 7, -8
+ 300              		.cfi_offset 14, -4
+ 301 0002 82B0     		sub	sp, sp, #8
+ 302              	.LCFI15:
+ 303              		.cfi_def_cfa_offset 16
+ 304 0004 00AF     		add	r7, sp, #0
+ 305              	.LCFI16:
+ 306              		.cfi_def_cfa_register 7
+ 307 0006 C7E90001 		strd	r0, [r7]
+  54:../etRuntime/src/common/debugging/etDataLogger.c **** 	if (etDataLogger_fileHandle != NULL) {
+ 308              		.loc 1 54 0
+ 309 000a 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 310 000e C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 311 0012 1B68     		ldr	r3, [r3, #0]
+ 312 0014 002B     		cmp	r3, #0
+ 313 0016 0DD0     		beq	.L10
+  55:../etRuntime/src/common/debugging/etDataLogger.c **** 		etLogger_fprintf(etDataLogger_fileHandle, ",%lf", val);
+ 314              		.loc 1 55 0
+ 315 0018 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 316 001c C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 317 0020 1B68     		ldr	r3, [r3, #0]
+ 318 0022 1846     		mov	r0, r3
+ 319 0024 40F20001 		movw	r1, #:lower16:.LC4
+ 320 0028 C0F20001 		movt	r1, #:upper16:.LC4
+ 321 002c D7E90023 		ldrd	r2, [r7]
+ 322 0030 FFF7FEFF 		bl	etLogger_fprintf
+ 323              	.L10:
+  56:../etRuntime/src/common/debugging/etDataLogger.c **** 	}
+  57:../etRuntime/src/common/debugging/etDataLogger.c **** }
+ 324              		.loc 1 57 0
+ 325 0034 07F10807 		add	r7, r7, #8
+ 326 0038 BD46     		mov	sp, r7
+ 327 003a 80BD     		pop	{r7, pc}
+ 328              		.cfi_endproc
+ 329              	.LFE5:
+ 331              		.section	.rodata
+ 332 0021 000000   		.align	2
+ 333              	.LC5:
+ 334 0024 0A256400 		.ascii	"\012%d\000"
+ 335              		.section	.text.etDataLogger_newRow,"ax",%progbits
+ 336              		.align	2
+ 337              		.global	etDataLogger_newRow
+ 338              		.thumb
+ 339              		.thumb_func
+ 341              	etDataLogger_newRow:
+ 342              	.LFB6:
+  58:../etRuntime/src/common/debugging/etDataLogger.c **** 
+  59:../etRuntime/src/common/debugging/etDataLogger.c **** void etDataLogger_newRow() {
+ 343              		.loc 1 59 0
+ 344              		.cfi_startproc
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 1, uses_anonymous_args = 0
+ 347 0000 80B5     		push	{r7, lr}
+ 348              	.LCFI17:
+ 349              		.cfi_def_cfa_offset 8
+ 350              		.cfi_offset 7, -8
+ 351              		.cfi_offset 14, -4
+ 352 0002 00AF     		add	r7, sp, #0
+ 353              	.LCFI18:
+ 354              		.cfi_def_cfa_register 7
+  60:../etRuntime/src/common/debugging/etDataLogger.c **** 	if (etDataLogger_fileHandle != NULL) {
+ 355              		.loc 1 60 0
+ 356 0004 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 357 0008 C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 358 000c 1B68     		ldr	r3, [r3, #0]
+ 359 000e 002B     		cmp	r3, #0
+ 360 0010 18D0     		beq	.L12
+  61:../etRuntime/src/common/debugging/etDataLogger.c **** 		etLogger_fprintf(etDataLogger_fileHandle, "\n%d", etDataLogger_row++);
+ 361              		.loc 1 61 0
+ 362 0012 40F20003 		movw	r3, #:lower16:etDataLogger_fileHandle
+ 363 0016 C0F20003 		movt	r3, #:upper16:etDataLogger_fileHandle
+ 364 001a 1968     		ldr	r1, [r3, #0]
+ 365 001c 40F20003 		movw	r3, #:lower16:etDataLogger_row
+ 366 0020 C0F20003 		movt	r3, #:upper16:etDataLogger_row
+ 367 0024 1B68     		ldr	r3, [r3, #0]
+ 368 0026 1A46     		mov	r2, r3
+ 369 0028 03F10100 		add	r0, r3, #1
+ 370 002c 40F20003 		movw	r3, #:lower16:etDataLogger_row
+ 371 0030 C0F20003 		movt	r3, #:upper16:etDataLogger_row
+ 372 0034 1860     		str	r0, [r3, #0]
+ 373 0036 0846     		mov	r0, r1
+ 374 0038 40F20001 		movw	r1, #:lower16:.LC5
+ 375 003c C0F20001 		movt	r1, #:upper16:.LC5
+ 376 0040 FFF7FEFF 		bl	etLogger_fprintf
+ 377              	.L12:
+  62:../etRuntime/src/common/debugging/etDataLogger.c **** 	}
+  63:../etRuntime/src/common/debugging/etDataLogger.c **** }
+ 378              		.loc 1 63 0
+ 379 0044 80BD     		pop	{r7, pc}
+ 380              		.cfi_endproc
+ 381              	.LFE6:
+ 383 0046 00BF     		.text
+ 384              	.Letext0:
+ 385              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 386              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 387              		.file 4 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/include/stddef.h"
+ 388              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 389              		.file 6 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 390              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etDataLogger.c
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:20     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:21     .bss:00000000 etDataLogger_fileHandle
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:24     .bss:00000004 etDataLogger_row
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:27     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:28     .rodata:00000000 .LC0
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:31     .rodata:00000010 .LC1
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:34     .text.etDataLogger_open:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:39     .text.etDataLogger_open:00000000 etDataLogger_open
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:94     .text.etDataLogger_close:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:99     .text.etDataLogger_close:00000000 etDataLogger_close
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:133    .rodata:00000014 .LC2
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:136    .text.etDataLogger_logString:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:141    .text.etDataLogger_logString:00000000 etDataLogger_logString
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:184    .rodata:00000018 .LC3
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:187    .text.etDataLogger_logBool:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:192    .text.etDataLogger_logBool:00000000 etDataLogger_logBool
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:234    .text.etDataLogger_logInt:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:239    .text.etDataLogger_logInt:00000000 etDataLogger_logInt
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:282    .rodata:0000001c .LC4
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:285    .text.etDataLogger_logDouble:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:290    .text.etDataLogger_logDouble:00000000 etDataLogger_logDouble
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:333    .rodata:00000024 .LC5
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:336    .text.etDataLogger_newRow:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:341    .text.etDataLogger_newRow:00000000 etDataLogger_newRow
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etDataLogger.h.87.2b6975cd847f5d79226611171b62ff9e
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.14.8989d26d807c4501fc0302abd0dbe63e
+
+UNDEFINED SYMBOLS
+sprintf
+etLogger_fopen
+etLogger_fclose
+etLogger_fprintf

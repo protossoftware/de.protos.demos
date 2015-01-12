@@ -1,0 +1,599 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etTime.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	targetTime,8,4
+  20              		.section	.text.etTime_init,"ax",%progbits
+  21              		.align	2
+  22              		.global	etTime_init
+  23              		.thumb
+  24              		.thumb_func
+  26              	etTime_init:
+  27              	.LFB112:
+  28              		.file 1 "../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c"
+   1:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** /*******************************************************************************
+   2:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  *
+   8:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  * 		Thomas Schuetz, Thomas Jung (initial contribution)
+  10:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  *
+  11:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c ****  *******************************************************************************/
+  12:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  13:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** #include "osal/etTime.h"
+  14:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** #include "XMC4500.h"
+  15:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  16:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** etTime targetTime;
+  17:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  18:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** void etTime_init(void){
+  29              		.loc 1 18 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 80B4     		push	{r7}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 7, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+  19:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	targetTime.nSec=0;
+  41              		.loc 1 19 0
+  42 0004 40F20003 		movw	r3, #:lower16:targetTime
+  43 0008 C0F20003 		movt	r3, #:upper16:targetTime
+  44 000c 4FF00002 		mov	r2, #0
+  45 0010 5A60     		str	r2, [r3, #4]
+  20:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	targetTime.sec=0;
+  46              		.loc 1 20 0
+  47 0012 40F20003 		movw	r3, #:lower16:targetTime
+  48 0016 C0F20003 		movt	r3, #:upper16:targetTime
+  49 001a 4FF00002 		mov	r2, #0
+  50 001e 1A60     		str	r2, [r3, #0]
+  21:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** }
+  51              		.loc 1 21 0
+  52 0020 BD46     		mov	sp, r7
+  53 0022 80BC     		pop	{r7}
+  54 0024 7047     		bx	lr
+  55              		.cfi_endproc
+  56              	.LFE112:
+  58 0026 00BF     		.section	.text.getTimeFromTarget,"ax",%progbits
+  59              		.align	2
+  60              		.global	getTimeFromTarget
+  61              		.thumb
+  62              		.thumb_func
+  64              	getTimeFromTarget:
+  65              	.LFB113:
+  22:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  23:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  24:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** void getTimeFromTarget(etTime *t) {
+  66              		.loc 1 24 0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 8
+  69              		@ frame_needed = 1, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  71 0000 80B4     		push	{r7}
+  72              	.LCFI2:
+  73              		.cfi_def_cfa_offset 4
+  74              		.cfi_offset 7, -4
+  75 0002 83B0     		sub	sp, sp, #12
+  76              	.LCFI3:
+  77              		.cfi_def_cfa_offset 16
+  78 0004 00AF     		add	r7, sp, #0
+  79              	.LCFI4:
+  80              		.cfi_def_cfa_register 7
+  81 0006 7860     		str	r0, [r7, #4]
+  82              	.LBB6:
+  83              	.LBB7:
+  84              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cmFunc.h"
+   1:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /**************************************************************************//**
+   2:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  * @file     core_cmFunc.h
+   3:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  * @brief    CMSIS Cortex-M Core Function Access Header File
+   4:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  * @version  V3.20
+   5:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  * @date     25. February 2013
+   6:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  *
+   7:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  * @note
+   8:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  *
+   9:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  ******************************************************************************/
+  10:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* Copyright (c) 2009 - 2013 ARM LIMITED
+  11:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  12:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    All rights reserved.
+  13:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    Redistribution and use in source and binary forms, with or without
+  14:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    modification, are permitted provided that the following conditions are met:
+  15:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    - Redistributions of source code must retain the above copyright
+  16:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****      notice, this list of conditions and the following disclaimer.
+  17:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    - Redistributions in binary form must reproduce the above copyright
+  18:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****      notice, this list of conditions and the following disclaimer in the
+  19:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****      documentation and/or other materials provided with the distribution.
+  20:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    - Neither the name of ARM nor the names of its contributors may be used
+  21:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****      to endorse or promote products derived from this software without
+  22:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****      specific prior written permission.
+  23:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    *
+  24:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  25:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  26:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  27:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+  28:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  29:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  30:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  31:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  32:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  33:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  34:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    POSSIBILITY OF SUCH DAMAGE.
+  35:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    ---------------------------------------------------------------------------*/
+  36:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  37:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  38:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #ifndef __CORE_CMFUNC_H
+  39:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #define __CORE_CMFUNC_H
+  40:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  41:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  42:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* ###########################  Core Function Access  ########################### */
+  43:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+  44:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+  45:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   @{
+  46:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+  47:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  48:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  49:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* ARM armcc specific functions */
+  50:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  51:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #if (__ARMCC_VERSION < 400677)
+  52:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+  53:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #endif
+  54:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  55:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* intrinsic void __enable_irq();     */
+  56:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* intrinsic void __disable_irq();    */
+  57:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  58:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get Control Register
+  59:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  60:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the content of the Control Register.
+  61:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  62:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               Control Register value
+  63:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+  64:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_CONTROL(void)
+  65:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+  66:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
+  67:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regControl);
+  68:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+  69:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  70:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  71:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Set Control Register
+  72:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  73:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function writes the given value to the Control Register.
+  74:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  75:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \param [in]    control  Control Register value to set
+  76:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+  77:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE void __set_CONTROL(uint32_t control)
+  78:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+  79:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
+  80:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __regControl = control;
+  81:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+  82:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  83:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  84:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get IPSR Register
+  85:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  86:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the content of the IPSR Register.
+  87:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  88:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               IPSR Register value
+  89:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+  90:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_IPSR(void)
+  91:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+  92:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regIPSR          __ASM("ipsr");
+  93:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regIPSR);
+  94:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+  95:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  96:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  97:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get APSR Register
+  98:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+  99:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the content of the APSR Register.
+ 100:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 101:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               APSR Register value
+ 102:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 103:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_APSR(void)
+ 104:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 105:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regAPSR          __ASM("apsr");
+ 106:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regAPSR);
+ 107:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 108:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 109:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 110:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get xPSR Register
+ 111:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 112:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the content of the xPSR Register.
+ 113:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 114:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               xPSR Register value
+ 115:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 116:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_xPSR(void)
+ 117:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 118:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regXPSR          __ASM("xpsr");
+ 119:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regXPSR);
+ 120:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 121:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 122:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 123:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get Process Stack Pointer
+ 124:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 125:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the current value of the Process Stack Pointer (PSP).
+ 126:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 127:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               PSP Register value
+ 128:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 129:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_PSP(void)
+ 130:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 131:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
+ 132:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regProcessStackPointer);
+ 133:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 134:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 135:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 136:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Set Process Stack Pointer
+ 137:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 138:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function assigns the given value to the Process Stack Pointer (PSP).
+ 139:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 140:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 141:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 142:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE void __set_PSP(uint32_t topOfProcStack)
+ 143:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 144:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
+ 145:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __regProcessStackPointer = topOfProcStack;
+ 146:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 147:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 148:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 149:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get Main Stack Pointer
+ 150:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 151:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the current value of the Main Stack Pointer (MSP).
+ 152:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 153:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               MSP Register value
+ 154:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 155:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_MSP(void)
+ 156:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 157:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
+ 158:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regMainStackPointer);
+ 159:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 160:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 161:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 162:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Set Main Stack Pointer
+ 163:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 164:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function assigns the given value to the Main Stack Pointer (MSP).
+ 165:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 166:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 167:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 168:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE void __set_MSP(uint32_t topOfMainStack)
+ 169:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 170:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
+ 171:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __regMainStackPointer = topOfMainStack;
+ 172:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 173:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 174:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 175:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get Priority Mask
+ 176:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 177:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the current state of the priority mask bit from the Priority Mask Registe
+ 178:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 179:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               Priority Mask value
+ 180:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 181:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_PRIMASK(void)
+ 182:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 183:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 184:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regPriMask);
+ 185:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 186:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 187:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 188:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Set Priority Mask
+ 189:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 190:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function assigns the given value to the Priority Mask Register.
+ 191:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 192:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \param [in]    priMask  Priority Mask
+ 193:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 194:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE void __set_PRIMASK(uint32_t priMask)
+ 195:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 196:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 197:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __regPriMask = (priMask);
+ 198:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 199:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 200:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 201:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #if       (__CORTEX_M >= 0x03)
+ 202:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 203:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Enable FIQ
+ 204:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 205:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function enables FIQ interrupts by clearing the F-bit in the CPSR.
+ 206:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     Can only be executed in Privileged modes.
+ 207:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 208:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #define __enable_fault_irq                __enable_fiq
+ 209:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 210:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 211:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Disable FIQ
+ 212:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 213:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function disables FIQ interrupts by setting the F-bit in the CPSR.
+ 214:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     Can only be executed in Privileged modes.
+ 215:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 216:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #define __disable_fault_irq               __disable_fiq
+ 217:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 218:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 219:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get Base Priority
+ 220:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 221:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the current value of the Base Priority register.
+ 222:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 223:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               Base Priority register value
+ 224:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 225:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t  __get_BASEPRI(void)
+ 226:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 227:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 228:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regBasePri);
+ 229:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 230:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 231:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 232:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Set Base Priority
+ 233:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 234:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function assigns the given value to the Base Priority register.
+ 235:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 236:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \param [in]    basePri  Base Priority value to set
+ 237:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 238:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE void __set_BASEPRI(uint32_t basePri)
+ 239:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 240:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 241:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __regBasePri = (basePri & 0xff);
+ 242:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 243:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 244:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 245:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get Fault Mask
+ 246:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 247:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the current value of the Fault Mask register.
+ 248:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 249:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               Fault Mask register value
+ 250:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 251:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_FAULTMASK(void)
+ 252:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 253:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 254:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regFaultMask);
+ 255:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 256:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 257:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 258:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Set Fault Mask
+ 259:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 260:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function assigns the given value to the Fault Mask register.
+ 261:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 262:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \param [in]    faultMask  Fault Mask value to set
+ 263:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 264:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE void __set_FAULTMASK(uint32_t faultMask)
+ 265:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 266:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 267:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __regFaultMask = (faultMask & (uint32_t)1);
+ 268:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 269:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 270:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 271:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 272:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 273:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #if       (__CORTEX_M == 0x04)
+ 274:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 275:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Get FPSCR
+ 276:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 277:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function returns the current value of the Floating Point Status/Control register.
+ 278:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 279:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \return               Floating Point Status/Control register value
+ 280:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 281:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE uint32_t __get_FPSCR(void)
+ 282:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 283:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 284:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
+ 285:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   return(__regfpscr);
+ 286:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #else
+ 287:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****    return(0);
+ 288:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #endif
+ 289:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 290:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 291:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 292:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Set FPSCR
+ 293:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 294:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     This function assigns the given value to the Floating Point Status/Control register.
+ 295:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 296:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****     \param [in]    fpscr  Floating Point Status/Control value to set
+ 297:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 298:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __STATIC_INLINE void __set_FPSCR(uint32_t fpscr)
+ 299:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 300:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 301:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
+ 302:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __regfpscr = (fpscr);
+ 303:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #endif
+ 304:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 305:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 306:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #endif /* (__CORTEX_M == 0x04) */
+ 307:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 308:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 309:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 310:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* IAR iccarm specific functions */
+ 311:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 312:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #include <cmsis_iar.h>
+ 313:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 314:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 315:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #elif defined ( __TMS470__ ) /*---------------- TI CCS Compiler ------------------*/
+ 316:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* TI CCS specific functions */
+ 317:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 318:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #include <cmsis_ccs.h>
+ 319:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 320:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 321:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 322:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /* GNU gcc specific functions */
+ 323:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 324:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Enable IRQ Interrupts
+ 325:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 326:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   This function enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 327:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   Can only be executed in Privileged modes.
+ 328:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 329:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __enable_irq(void)
+ 330:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 331:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 332:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** }
+ 333:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 334:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 335:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** /** \brief  Disable IRQ Interrupts
+ 336:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** 
+ 337:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   This function disables IRQ interrupts by setting the I-bit in the CPSR.
+ 338:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   Can only be executed in Privileged modes.
+ 339:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****  */
+ 340:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_irq(void)
+ 341:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h **** {
+ 342:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+  85              		.loc 2 342 0
+  86              	@ 342 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+  87 0008 72B6     		cpsid i
+  88              	@ 0 "" 2
+  89              		.thumb
+  90              	.LBE7:
+  91              	.LBE6:
+  25:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	__disable_irq();
+  26:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	*t = targetTime;
+  92              		.loc 1 26 0
+  93 000a 7A68     		ldr	r2, [r7, #4]
+  94 000c 40F20003 		movw	r3, #:lower16:targetTime
+  95 0010 C0F20003 		movt	r3, #:upper16:targetTime
+  96 0014 93E80300 		ldmia	r3, {r0, r1}
+  97 0018 82E80300 		stmia	r2, {r0, r1}
+  98              	.LBB8:
+  99              	.LBB9:
+ 331:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cmFunc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 100              		.loc 2 331 0
+ 101              	@ 331 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 102 001c 62B6     		cpsie i
+ 103              	@ 0 "" 2
+ 104              		.thumb
+ 105              	.LBE9:
+ 106              	.LBE8:
+  27:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	__enable_irq();
+  28:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** }
+ 107              		.loc 1 28 0
+ 108 001e 07F10C07 		add	r7, r7, #12
+ 109 0022 BD46     		mov	sp, r7
+ 110 0024 80BC     		pop	{r7}
+ 111 0026 7047     		bx	lr
+ 112              		.cfi_endproc
+ 113              	.LFE113:
+ 115              		.section	.text.etTick_Handler,"ax",%progbits
+ 116              		.align	2
+ 117              		.global	etTick_Handler
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	etTick_Handler:
+ 122              	.LFB114:
+  29:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  30:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** /* the timer interrupt */
+  31:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  32:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** void etTick_Handler(void) {
+ 123              		.loc 1 32 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 127              		@ link register save eliminated.
+ 128 0000 80B4     		push	{r7}
+ 129              	.LCFI5:
+ 130              		.cfi_def_cfa_offset 4
+ 131              		.cfi_offset 7, -4
+ 132 0002 00AF     		add	r7, sp, #0
+ 133              	.LCFI6:
+ 134              		.cfi_def_cfa_register 7
+  33:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** // this interrupt will be called every 1ms
+  34:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	targetTime.nSec += 1000000L;
+ 135              		.loc 1 34 0
+ 136 0004 40F20003 		movw	r3, #:lower16:targetTime
+ 137 0008 C0F20003 		movt	r3, #:upper16:targetTime
+ 138 000c 5B68     		ldr	r3, [r3, #4]
+ 139 000e 03F57422 		add	r2, r3, #999424
+ 140 0012 02F51072 		add	r2, r2, #576
+ 141 0016 40F20003 		movw	r3, #:lower16:targetTime
+ 142 001a C0F20003 		movt	r3, #:upper16:targetTime
+ 143 001e 5A60     		str	r2, [r3, #4]
+  35:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 
+  36:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	if (targetTime.nSec >= 1000000000L) {
+ 144              		.loc 1 36 0
+ 145 0020 40F20003 		movw	r3, #:lower16:targetTime
+ 146 0024 C0F20003 		movt	r3, #:upper16:targetTime
+ 147 0028 5A68     		ldr	r2, [r3, #4]
+ 148 002a 4CF6FF13 		movw	r3, #51711
+ 149 002e C3F69A33 		movt	r3, 15258
+ 150 0032 9A42     		cmp	r2, r3
+ 151 0034 1ADD     		ble	.L3
+  37:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 		targetTime.nSec -= 1000000000L;
+ 152              		.loc 1 37 0
+ 153 0036 40F20003 		movw	r3, #:lower16:targetTime
+ 154 003a C0F20003 		movt	r3, #:upper16:targetTime
+ 155 003e 5A68     		ldr	r2, [r3, #4]
+ 156 0040 4FF45853 		mov	r3, #13824
+ 157 0044 CCF26543 		movt	r3, 50277
+ 158 0048 D318     		adds	r3, r2, r3
+ 159 004a 40F20002 		movw	r2, #:lower16:targetTime
+ 160 004e C0F20002 		movt	r2, #:upper16:targetTime
+ 161 0052 5360     		str	r3, [r2, #4]
+  38:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 		targetTime.sec++;
+ 162              		.loc 1 38 0
+ 163 0054 40F20003 		movw	r3, #:lower16:targetTime
+ 164 0058 C0F20003 		movt	r3, #:upper16:targetTime
+ 165 005c 1B68     		ldr	r3, [r3, #0]
+ 166 005e 03F10102 		add	r2, r3, #1
+ 167 0062 40F20003 		movw	r3, #:lower16:targetTime
+ 168 0066 C0F20003 		movt	r3, #:upper16:targetTime
+ 169 006a 1A60     		str	r2, [r3, #0]
+ 170              	.L3:
+  39:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** 	}
+  40:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTime.c **** }
+ 171              		.loc 1 40 0
+ 172 006c BD46     		mov	sp, r7
+ 173 006e 80BC     		pop	{r7}
+ 174 0070 7047     		bx	lr
+ 175              		.cfi_endproc
+ 176              	.LFE114:
+ 178 0072 00BF     		.text
+ 179              	.Letext0:
+ 180              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 181              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 182              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 183              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 etTime.c
+                            *COM*:00000008 targetTime
+C:\Users\TJung\AppData\Local\Temp\cc9sBnzj.s:21     .text.etTime_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc9sBnzj.s:26     .text.etTime_init:00000000 etTime_init
+C:\Users\TJung\AppData\Local\Temp\cc9sBnzj.s:59     .text.getTimeFromTarget:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc9sBnzj.s:64     .text.getTimeFromTarget:00000000 getTimeFromTarget
+C:\Users\TJung\AppData\Local\Temp\cc9sBnzj.s:116    .text.etTick_Handler:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc9sBnzj.s:121    .text.etTick_Handler:00000000 etTick_Handler
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+
+NO UNDEFINED SYMBOLS

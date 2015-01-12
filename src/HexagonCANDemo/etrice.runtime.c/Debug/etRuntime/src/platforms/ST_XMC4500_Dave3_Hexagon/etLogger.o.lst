@@ -1,0 +1,463 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etLogger.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.etLogger_logError,"ax",%progbits
+  20              		.align	2
+  21              		.global	etLogger_logError
+  22              		.thumb
+  23              		.thumb_func
+  25              	etLogger_logError:
+  26              	.LFB0:
+  27              		.file 1 "../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c"
+   1:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** /*******************************************************************************
+   2:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  *
+   8:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * 		Thomas Schuetz (initial contribution)
+  10:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  *
+  11:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  *******************************************************************************/
+  12:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  13:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** /*
+  14:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  * etLogger.c
+  15:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  *
+  16:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  *  Created on: 16.01.2012
+  17:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  *      Author: tschuetz
+  18:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c ****  */
+  19:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  20:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  21:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #include "debugging/etLogger.h"
+  22:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  23:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #include <stdarg.h>
+  24:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  25:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  26:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** void etLogger_logError(const char* message){
+  28              		.loc 1 26 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  27:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  28:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("ERROR:   %s\n", message);
+  29:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  30:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+  44              		.loc 1 30 0
+  45 0008 07F10C07 		add	r7, r7, #12
+  46 000c BD46     		mov	sp, r7
+  47 000e 80BC     		pop	{r7}
+  48 0010 7047     		bx	lr
+  49              		.cfi_endproc
+  50              	.LFE0:
+  52 0012 00BF     		.section	.text.etLogger_logWarning,"ax",%progbits
+  53              		.align	2
+  54              		.global	etLogger_logWarning
+  55              		.thumb
+  56              		.thumb_func
+  58              	etLogger_logWarning:
+  59              	.LFB1:
+  31:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  32:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** void etLogger_logWarning(const char* message){
+  60              		.loc 1 32 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 8
+  63              		@ frame_needed = 1, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  65 0000 80B4     		push	{r7}
+  66              	.LCFI3:
+  67              		.cfi_def_cfa_offset 4
+  68              		.cfi_offset 7, -4
+  69 0002 83B0     		sub	sp, sp, #12
+  70              	.LCFI4:
+  71              		.cfi_def_cfa_offset 16
+  72 0004 00AF     		add	r7, sp, #0
+  73              	.LCFI5:
+  74              		.cfi_def_cfa_register 7
+  75 0006 7860     		str	r0, [r7, #4]
+  33:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  34:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("WARNING: %s\n", message);
+  35:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  36:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+  76              		.loc 1 36 0
+  77 0008 07F10C07 		add	r7, r7, #12
+  78 000c BD46     		mov	sp, r7
+  79 000e 80BC     		pop	{r7}
+  80 0010 7047     		bx	lr
+  81              		.cfi_endproc
+  82              	.LFE1:
+  84 0012 00BF     		.section	.text.etLogger_logInfo,"ax",%progbits
+  85              		.align	2
+  86              		.global	etLogger_logInfo
+  87              		.thumb
+  88              		.thumb_func
+  90              	etLogger_logInfo:
+  91              	.LFB2:
+  37:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  38:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** void etLogger_logInfo(const char* message){
+  92              		.loc 1 38 0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 8
+  95              		@ frame_needed = 1, uses_anonymous_args = 0
+  96              		@ link register save eliminated.
+  97 0000 80B4     		push	{r7}
+  98              	.LCFI6:
+  99              		.cfi_def_cfa_offset 4
+ 100              		.cfi_offset 7, -4
+ 101 0002 83B0     		sub	sp, sp, #12
+ 102              	.LCFI7:
+ 103              		.cfi_def_cfa_offset 16
+ 104 0004 00AF     		add	r7, sp, #0
+ 105              	.LCFI8:
+ 106              		.cfi_def_cfa_register 7
+ 107 0006 7860     		str	r0, [r7, #4]
+  39:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  40:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("INFO:    %s\n", message);
+  41:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  42:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+ 108              		.loc 1 42 0
+ 109 0008 07F10C07 		add	r7, r7, #12
+ 110 000c BD46     		mov	sp, r7
+ 111 000e 80BC     		pop	{r7}
+ 112 0010 7047     		bx	lr
+ 113              		.cfi_endproc
+ 114              	.LFE2:
+ 116 0012 00BF     		.section	.text.etLogger_logErrorF,"ax",%progbits
+ 117              		.align	2
+ 118              		.global	etLogger_logErrorF
+ 119              		.thumb
+ 120              		.thumb_func
+ 122              	etLogger_logErrorF:
+ 123              	.LFB3:
+  43:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  44:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** void etLogger_logErrorF(const char* format, ... ){
+ 124              		.loc 1 44 0
+ 125              		.cfi_startproc
+ 126              		@ args = 4, pretend = 16, frame = 0
+ 127              		@ frame_needed = 1, uses_anonymous_args = 1
+ 128              		@ link register save eliminated.
+ 129 0000 0FB4     		push	{r0, r1, r2, r3}
+ 130              	.LCFI9:
+ 131              		.cfi_def_cfa_offset 16
+ 132              		.cfi_offset 0, -16
+ 133              		.cfi_offset 1, -12
+ 134              		.cfi_offset 2, -8
+ 135              		.cfi_offset 3, -4
+ 136 0002 80B4     		push	{r7}
+ 137              	.LCFI10:
+ 138              		.cfi_def_cfa_offset 20
+ 139              		.cfi_offset 7, -20
+ 140 0004 00AF     		add	r7, sp, #0
+ 141              	.LCFI11:
+ 142              		.cfi_def_cfa_register 7
+  45:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  46:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("ERROR:   ");
+  47:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_list arglist;
+  48:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_start( arglist, format );
+  49:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	vprintf( format, arglist );
+  50:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_end( arglist );
+  51:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("\n");
+  52:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  53:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+ 143              		.loc 1 53 0
+ 144 0006 BD46     		mov	sp, r7
+ 145 0008 80BC     		pop	{r7}
+ 146 000a 04B0     		add	sp, sp, #16
+ 147 000c 7047     		bx	lr
+ 148              		.cfi_endproc
+ 149              	.LFE3:
+ 151 000e 00BF     		.section	.text.etLogger_logWarningF,"ax",%progbits
+ 152              		.align	2
+ 153              		.global	etLogger_logWarningF
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	etLogger_logWarningF:
+ 158              	.LFB4:
+  54:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  55:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** void etLogger_logWarningF(const char* format, ... ){
+ 159              		.loc 1 55 0
+ 160              		.cfi_startproc
+ 161              		@ args = 4, pretend = 16, frame = 0
+ 162              		@ frame_needed = 1, uses_anonymous_args = 1
+ 163              		@ link register save eliminated.
+ 164 0000 0FB4     		push	{r0, r1, r2, r3}
+ 165              	.LCFI12:
+ 166              		.cfi_def_cfa_offset 16
+ 167              		.cfi_offset 0, -16
+ 168              		.cfi_offset 1, -12
+ 169              		.cfi_offset 2, -8
+ 170              		.cfi_offset 3, -4
+ 171 0002 80B4     		push	{r7}
+ 172              	.LCFI13:
+ 173              		.cfi_def_cfa_offset 20
+ 174              		.cfi_offset 7, -20
+ 175 0004 00AF     		add	r7, sp, #0
+ 176              	.LCFI14:
+ 177              		.cfi_def_cfa_register 7
+  56:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  57:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("WARNING: ");
+  58:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_list arglist;
+  59:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_start( arglist, format );
+  60:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	vprintf( format, arglist );
+  61:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_end( arglist );
+  62:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("\n");
+  63:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  64:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+ 178              		.loc 1 64 0
+ 179 0006 BD46     		mov	sp, r7
+ 180 0008 80BC     		pop	{r7}
+ 181 000a 04B0     		add	sp, sp, #16
+ 182 000c 7047     		bx	lr
+ 183              		.cfi_endproc
+ 184              	.LFE4:
+ 186 000e 00BF     		.section	.text.etLogger_logInfoF,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	etLogger_logInfoF
+ 189              		.thumb
+ 190              		.thumb_func
+ 192              	etLogger_logInfoF:
+ 193              	.LFB5:
+  65:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  66:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** void etLogger_logInfoF(const char* format, ... ){
+ 194              		.loc 1 66 0
+ 195              		.cfi_startproc
+ 196              		@ args = 4, pretend = 16, frame = 0
+ 197              		@ frame_needed = 1, uses_anonymous_args = 1
+ 198              		@ link register save eliminated.
+ 199 0000 0FB4     		push	{r0, r1, r2, r3}
+ 200              	.LCFI15:
+ 201              		.cfi_def_cfa_offset 16
+ 202              		.cfi_offset 0, -16
+ 203              		.cfi_offset 1, -12
+ 204              		.cfi_offset 2, -8
+ 205              		.cfi_offset 3, -4
+ 206 0002 80B4     		push	{r7}
+ 207              	.LCFI16:
+ 208              		.cfi_def_cfa_offset 20
+ 209              		.cfi_offset 7, -20
+ 210 0004 00AF     		add	r7, sp, #0
+ 211              	.LCFI17:
+ 212              		.cfi_def_cfa_register 7
+  67:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  68:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("INFO:    ");
+  69:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_list arglist;
+  70:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_start( arglist, format );
+  71:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	vprintf( format, arglist );
+  72:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_end( arglist );
+  73:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	printf("\n");
+  74:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  75:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+ 213              		.loc 1 75 0
+ 214 0006 BD46     		mov	sp, r7
+ 215 0008 80BC     		pop	{r7}
+ 216 000a 04B0     		add	sp, sp, #16
+ 217 000c 7047     		bx	lr
+ 218              		.cfi_endproc
+ 219              	.LFE5:
+ 221 000e 00BF     		.section	.text.etLogger_fopen,"ax",%progbits
+ 222              		.align	2
+ 223              		.global	etLogger_fopen
+ 224              		.thumb
+ 225              		.thumb_func
+ 227              	etLogger_fopen:
+ 228              	.LFB6:
+  76:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  77:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** etFileHandle etLogger_fopen(const char* filename, const char* mode){
+ 229              		.loc 1 77 0
+ 230              		.cfi_startproc
+ 231              		@ args = 0, pretend = 0, frame = 8
+ 232              		@ frame_needed = 1, uses_anonymous_args = 0
+ 233              		@ link register save eliminated.
+ 234 0000 80B4     		push	{r7}
+ 235              	.LCFI18:
+ 236              		.cfi_def_cfa_offset 4
+ 237              		.cfi_offset 7, -4
+ 238 0002 83B0     		sub	sp, sp, #12
+ 239              	.LCFI19:
+ 240              		.cfi_def_cfa_offset 16
+ 241 0004 00AF     		add	r7, sp, #0
+ 242              	.LCFI20:
+ 243              		.cfi_def_cfa_register 7
+ 244 0006 7860     		str	r0, [r7, #4]
+ 245 0008 3960     		str	r1, [r7, #0]
+  78:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  79:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	return( fopen(filename, mode) );
+  80:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #else
+  81:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	return (0);
+ 246              		.loc 1 81 0
+ 247 000a 4FF00003 		mov	r3, #0
+  82:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  83:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+ 248              		.loc 1 83 0
+ 249 000e 1846     		mov	r0, r3
+ 250 0010 07F10C07 		add	r7, r7, #12
+ 251 0014 BD46     		mov	sp, r7
+ 252 0016 80BC     		pop	{r7}
+ 253 0018 7047     		bx	lr
+ 254              		.cfi_endproc
+ 255              	.LFE6:
+ 257 001a 00BF     		.section	.text.etLogger_fclose,"ax",%progbits
+ 258              		.align	2
+ 259              		.global	etLogger_fclose
+ 260              		.thumb
+ 261              		.thumb_func
+ 263              	etLogger_fclose:
+ 264              	.LFB7:
+  84:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  85:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** int etLogger_fclose(etFileHandle file){
+ 265              		.loc 1 85 0
+ 266              		.cfi_startproc
+ 267              		@ args = 0, pretend = 0, frame = 8
+ 268              		@ frame_needed = 1, uses_anonymous_args = 0
+ 269              		@ link register save eliminated.
+ 270 0000 80B4     		push	{r7}
+ 271              	.LCFI21:
+ 272              		.cfi_def_cfa_offset 4
+ 273              		.cfi_offset 7, -4
+ 274 0002 83B0     		sub	sp, sp, #12
+ 275              	.LCFI22:
+ 276              		.cfi_def_cfa_offset 16
+ 277 0004 00AF     		add	r7, sp, #0
+ 278              	.LCFI23:
+ 279              		.cfi_def_cfa_register 7
+ 280 0006 7860     		str	r0, [r7, #4]
+  86:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  87:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	return( fclose(file) );
+  88:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #else
+  89:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	return(0);
+ 281              		.loc 1 89 0
+ 282 0008 4FF00003 		mov	r3, #0
+  90:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+  91:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+ 283              		.loc 1 91 0
+ 284 000c 1846     		mov	r0, r3
+ 285 000e 07F10C07 		add	r7, r7, #12
+ 286 0012 BD46     		mov	sp, r7
+ 287 0014 80BC     		pop	{r7}
+ 288 0016 7047     		bx	lr
+ 289              		.cfi_endproc
+ 290              	.LFE7:
+ 292              		.section	.text.etLogger_fprintf,"ax",%progbits
+ 293              		.align	2
+ 294              		.global	etLogger_fprintf
+ 295              		.thumb
+ 296              		.thumb_func
+ 298              	etLogger_fprintf:
+ 299              	.LFB8:
+  92:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 
+  93:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** void etLogger_fprintf(etFileHandle file, const char* format, ... ){
+ 300              		.loc 1 93 0
+ 301              		.cfi_startproc
+ 302              		@ args = 4, pretend = 12, frame = 8
+ 303              		@ frame_needed = 1, uses_anonymous_args = 1
+ 304              		@ link register save eliminated.
+ 305 0000 0EB4     		push	{r1, r2, r3}
+ 306              	.LCFI24:
+ 307              		.cfi_def_cfa_offset 12
+ 308              		.cfi_offset 1, -12
+ 309              		.cfi_offset 2, -8
+ 310              		.cfi_offset 3, -4
+ 311 0002 80B4     		push	{r7}
+ 312              	.LCFI25:
+ 313              		.cfi_def_cfa_offset 16
+ 314              		.cfi_offset 7, -16
+ 315 0004 82B0     		sub	sp, sp, #8
+ 316              	.LCFI26:
+ 317              		.cfi_def_cfa_offset 24
+ 318 0006 00AF     		add	r7, sp, #0
+ 319              	.LCFI27:
+ 320              		.cfi_def_cfa_register 7
+ 321 0008 7860     		str	r0, [r7, #4]
+  94:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #ifdef ET_LOGGER_ACTIVATE
+  95:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_list arglist;
+  96:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_start( arglist, format );
+  97:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	vfprintf(file, format, arglist );
+  98:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** 	va_end( arglist );
+  99:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** #endif
+ 100:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etLogger.c **** }
+ 322              		.loc 1 100 0
+ 323 000a 07F10807 		add	r7, r7, #8
+ 324 000e BD46     		mov	sp, r7
+ 325 0010 80BC     		pop	{r7}
+ 326 0012 03B0     		add	sp, sp, #12
+ 327 0014 7047     		bx	lr
+ 328              		.cfi_endproc
+ 329              	.LFE8:
+ 331 0016 00BF     		.text
+ 332              	.Letext0:
+ 333              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 334              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 335              		.file 4 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/include/stddef.h"
+ 336              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 337              		.file 6 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 338              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etLogger.c
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:20     .text.etLogger_logError:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:25     .text.etLogger_logError:00000000 etLogger_logError
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:53     .text.etLogger_logWarning:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:58     .text.etLogger_logWarning:00000000 etLogger_logWarning
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:85     .text.etLogger_logInfo:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:90     .text.etLogger_logInfo:00000000 etLogger_logInfo
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:117    .text.etLogger_logErrorF:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:122    .text.etLogger_logErrorF:00000000 etLogger_logErrorF
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:152    .text.etLogger_logWarningF:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:157    .text.etLogger_logWarningF:00000000 etLogger_logWarningF
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:187    .text.etLogger_logInfoF:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:192    .text.etLogger_logInfoF:00000000 etLogger_logInfoF
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:222    .text.etLogger_fopen:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:227    .text.etLogger_fopen:00000000 etLogger_fopen
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:258    .text.etLogger_fclose:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:263    .text.etLogger_fclose:00000000 etLogger_fclose
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:293    .text.etLogger_fprintf:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:298    .text.etLogger_fprintf:00000000 etLogger_fprintf
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.14.8989d26d807c4501fc0302abd0dbe63e
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,217 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etPort.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.etPort_sendMessage,"ax",%progbits
+  20              		.align	2
+  21              		.global	etPort_sendMessage
+  22              		.thumb
+  23              		.thumb_func
+  25              	etPort_sendMessage:
+  26              	.LFB0:
+  27              		.file 1 "../etRuntime/src/common/modelbase/etPort.c"
+   1:../etRuntime/src/common/modelbase/etPort.c **** /*******************************************************************************
+   2:../etRuntime/src/common/modelbase/etPort.c ****  * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/modelbase/etPort.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/modelbase/etPort.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/modelbase/etPort.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/modelbase/etPort.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/modelbase/etPort.c ****  *
+   8:../etRuntime/src/common/modelbase/etPort.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/modelbase/etPort.c ****  * 		Thomas Schuetz (initial contribution)
+  10:../etRuntime/src/common/modelbase/etPort.c ****  *
+  11:../etRuntime/src/common/modelbase/etPort.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/modelbase/etPort.c **** 
+  13:../etRuntime/src/common/modelbase/etPort.c **** #include "modelbase/etPort.h"
+  14:../etRuntime/src/common/modelbase/etPort.c **** 
+  15:../etRuntime/src/common/modelbase/etPort.c **** #include "debugging/etMSCLogger.h"
+  16:../etRuntime/src/common/modelbase/etPort.c **** #include "base/etMemory.h"
+  17:../etRuntime/src/common/modelbase/etPort.c **** #include <string.h>
+  18:../etRuntime/src/common/modelbase/etPort.c **** 
+  19:../etRuntime/src/common/modelbase/etPort.c **** /*
+  20:../etRuntime/src/common/modelbase/etPort.c **** void etPort_receive(const etPort* self, const etMessage* msg) {
+  21:../etRuntime/src/common/modelbase/etPort.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etPort", "receive")
+  22:../etRuntime/src/common/modelbase/etPort.c **** 	if (self->receiveMessageFunc!=NULL)
+  23:../etRuntime/src/common/modelbase/etPort.c **** 		(self->receiveMessageFunc)(self->myActor, (void*)self, msg);
+  24:../etRuntime/src/common/modelbase/etPort.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  25:../etRuntime/src/common/modelbase/etPort.c **** }
+  26:../etRuntime/src/common/modelbase/etPort.c **** */
+  27:../etRuntime/src/common/modelbase/etPort.c **** 
+  28:../etRuntime/src/common/modelbase/etPort.c **** void etPort_sendMessage(const etPort* self, etInt16 evtId, int size, void* data) {
+  28              		.loc 1 28 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 88B0     		sub	sp, sp, #32
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 7A60     		str	r2, [r7, #4]
+  45 000a 3B60     		str	r3, [r7, #0]
+  46 000c 0B46     		mov	r3, r1	@ movhi
+  47 000e 7B81     		strh	r3, [r7, #10]	@ movhi
+  29:../etRuntime/src/common/modelbase/etPort.c **** 	int offset = MEM_CEIL(sizeof(etMessage));
+  48              		.loc 1 29 0
+  49 0010 4FF00803 		mov	r3, #8
+  50 0014 FB61     		str	r3, [r7, #28]
+  30:../etRuntime/src/common/modelbase/etPort.c **** 	int totalSize = offset+size;
+  51              		.loc 1 30 0
+  52 0016 FA69     		ldr	r2, [r7, #28]
+  53 0018 7B68     		ldr	r3, [r7, #4]
+  54 001a D318     		adds	r3, r2, r3
+  55 001c BB61     		str	r3, [r7, #24]
+  31:../etRuntime/src/common/modelbase/etPort.c **** 	etMessage* msg = NULL;
+  56              		.loc 1 31 0
+  57 001e 4FF00003 		mov	r3, #0
+  58 0022 7B61     		str	r3, [r7, #20]
+  32:../etRuntime/src/common/modelbase/etPort.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etPort", "sendMessage")
+  33:../etRuntime/src/common/modelbase/etPort.c **** 	if(self->msgService == NULL) return;
+  59              		.loc 1 33 0
+  60 0024 FB68     		ldr	r3, [r7, #12]
+  61 0026 5B68     		ldr	r3, [r3, #4]
+  62 0028 002B     		cmp	r3, #0
+  63 002a 29D0     		beq	.L5
+  64              	.L2:
+  34:../etRuntime/src/common/modelbase/etPort.c **** 	msg = etMessageService_getMessageBuffer(self->msgService, totalSize);
+  65              		.loc 1 34 0
+  66 002c FB68     		ldr	r3, [r7, #12]
+  67 002e 5A68     		ldr	r2, [r3, #4]
+  68 0030 BB69     		ldr	r3, [r7, #24]
+  69 0032 9BB2     		uxth	r3, r3
+  70 0034 1046     		mov	r0, r2
+  71 0036 1946     		mov	r1, r3
+  72 0038 FFF7FEFF 		bl	etMessageService_getMessageBuffer
+  73 003c 7861     		str	r0, [r7, #20]
+  35:../etRuntime/src/common/modelbase/etPort.c **** 	if (msg!=NULL) {
+  74              		.loc 1 35 0
+  75 003e 7B69     		ldr	r3, [r7, #20]
+  76 0040 002B     		cmp	r3, #0
+  77 0042 1ED0     		beq	.L1
+  36:../etRuntime/src/common/modelbase/etPort.c **** 		msg->address = self->peerAddress;
+  78              		.loc 1 36 0
+  79 0044 FB68     		ldr	r3, [r7, #12]
+  80 0046 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+  81 0048 1A46     		mov	r2, r3
+  82 004a 7B69     		ldr	r3, [r7, #20]
+  83 004c 9A80     		strh	r2, [r3, #4]	@ movhi
+  37:../etRuntime/src/common/modelbase/etPort.c **** 		msg->evtID = evtId;
+  84              		.loc 1 37 0
+  85 004e 7B69     		ldr	r3, [r7, #20]
+  86 0050 7A89     		ldrh	r2, [r7, #10]	@ movhi
+  87 0052 DA80     		strh	r2, [r3, #6]	@ movhi
+  38:../etRuntime/src/common/modelbase/etPort.c **** 
+  39:../etRuntime/src/common/modelbase/etPort.c **** 		if (size>0 && data!=NULL) {
+  88              		.loc 1 39 0
+  89 0054 7B68     		ldr	r3, [r7, #4]
+  90 0056 002B     		cmp	r3, #0
+  91 0058 0BDD     		ble	.L4
+  92              		.loc 1 39 0 is_stmt 0 discriminator 1
+  93 005a 3B68     		ldr	r3, [r7, #0]
+  94 005c 002B     		cmp	r3, #0
+  95 005e 08D0     		beq	.L4
+  40:../etRuntime/src/common/modelbase/etPort.c **** 			memcpy(((char*)msg)+offset, data, size);
+  96              		.loc 1 40 0 is_stmt 1
+  97 0060 FB69     		ldr	r3, [r7, #28]
+  98 0062 7A69     		ldr	r2, [r7, #20]
+  99 0064 D218     		adds	r2, r2, r3
+ 100 0066 7B68     		ldr	r3, [r7, #4]
+ 101 0068 1046     		mov	r0, r2
+ 102 006a 3968     		ldr	r1, [r7, #0]
+ 103 006c 1A46     		mov	r2, r3
+ 104 006e FFF7FEFF 		bl	memcpy
+ 105              	.L4:
+  41:../etRuntime/src/common/modelbase/etPort.c **** 		}
+  42:../etRuntime/src/common/modelbase/etPort.c **** 
+  43:../etRuntime/src/common/modelbase/etPort.c **** 		etMessageService_pushMessage(self->msgService, msg);
+ 106              		.loc 1 43 0
+ 107 0072 FB68     		ldr	r3, [r7, #12]
+ 108 0074 5B68     		ldr	r3, [r3, #4]
+ 109 0076 1846     		mov	r0, r3
+ 110 0078 7969     		ldr	r1, [r7, #20]
+ 111 007a FFF7FEFF 		bl	etMessageService_pushMessage
+ 112 007e 00E0     		b	.L1
+ 113              	.L5:
+  33:../etRuntime/src/common/modelbase/etPort.c **** 	if(self->msgService == NULL) return;
+ 114              		.loc 1 33 0
+ 115 0080 00BF     		nop
+ 116              	.L1:
+  44:../etRuntime/src/common/modelbase/etPort.c **** 	}
+  45:../etRuntime/src/common/modelbase/etPort.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  46:../etRuntime/src/common/modelbase/etPort.c **** }
+ 117              		.loc 1 46 0
+ 118 0082 07F12007 		add	r7, r7, #32
+ 119 0086 BD46     		mov	sp, r7
+ 120 0088 80BD     		pop	{r7, pc}
+ 121              		.cfi_endproc
+ 122              	.LFE0:
+ 124 008a 00BF     		.text
+ 125              	.Letext0:
+ 126              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 127              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 128              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 129              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 130              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 131              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 132              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 133              		.file 9 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 134              		.file 10 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 135              		.file 11 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 136              		.file 12 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+DEFINED SYMBOLS
+                            *ABS*:00000000 etPort.c
+C:\Users\TJung\AppData\Local\Temp\ccTiq1K9.s:20     .text.etPort_sendMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccTiq1K9.s:25     .text.etPort_sendMessage:00000000 etPort_sendMessage
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.etMessageService.h.35.d59d0242cc2158bcaed8acc00ffa8450
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.23.8776f0b4cca7a780673ce7e90ee97990
+                           .group:00000000 wm4.etMemory.h.14.7eccd5774aae195c80edaa99dd2a2bc1
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+
+UNDEFINED SYMBOLS
+etMessageService_getMessageBuffer
+memcpy
+etMessageService_pushMessage

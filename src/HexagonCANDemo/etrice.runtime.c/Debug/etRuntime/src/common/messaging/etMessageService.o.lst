@@ -1,0 +1,1097 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etMessageService.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.rodata
+  20              		.align	2
+  21              	.LC0:
+  22 0000 4D657373 		.ascii	"MessageService\000"
+  22      61676553 
+  22      65727669 
+  22      636500
+  23              		.section	.text.etMessageService_init,"ax",%progbits
+  24              		.align	2
+  25              		.global	etMessageService_init
+  26              		.thumb
+  27              		.thumb_func
+  29              	etMessageService_init:
+  30              	.LFB0:
+  31              		.file 1 "../etRuntime/src/common/messaging/etMessageService.c"
+   1:../etRuntime/src/common/messaging/etMessageService.c **** /*******************************************************************************
+   2:../etRuntime/src/common/messaging/etMessageService.c ****  * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/messaging/etMessageService.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/messaging/etMessageService.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/messaging/etMessageService.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/messaging/etMessageService.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/messaging/etMessageService.c ****  *
+   8:../etRuntime/src/common/messaging/etMessageService.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/messaging/etMessageService.c ****  * 		Thomas Schuetz (initial contribution)
+  10:../etRuntime/src/common/messaging/etMessageService.c ****  *
+  11:../etRuntime/src/common/messaging/etMessageService.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/messaging/etMessageService.c **** 
+  13:../etRuntime/src/common/messaging/etMessageService.c **** 
+  14:../etRuntime/src/common/messaging/etMessageService.c **** #include "etMessageService.h"
+  15:../etRuntime/src/common/messaging/etMessageService.c **** 
+  16:../etRuntime/src/common/messaging/etMessageService.c **** 
+  17:../etRuntime/src/common/messaging/etMessageService.c **** #include "etSystemProtocol.h"
+  18:../etRuntime/src/common/messaging/etMessageService.c **** #include "debugging/etLogger.h"
+  19:../etRuntime/src/common/messaging/etMessageService.c **** #include "debugging/etMSCLogger.h"
+  20:../etRuntime/src/common/messaging/etMessageService.c **** 
+  21:../etRuntime/src/common/messaging/etMessageService.c **** static void etMessageService_timerCallback(void* data);
+  22:../etRuntime/src/common/messaging/etMessageService.c **** static void etMessageService_deliverAllMessages(etMessageService* self);
+  23:../etRuntime/src/common/messaging/etMessageService.c **** 
+  24:../etRuntime/src/common/messaging/etMessageService.c **** /*
+  25:../etRuntime/src/common/messaging/etMessageService.c ****  * initialize message service with all needed data and initialize message queue and message pool
+  26:../etRuntime/src/common/messaging/etMessageService.c ****  *
+  27:../etRuntime/src/common/messaging/etMessageService.c ****  */
+  28:../etRuntime/src/common/messaging/etMessageService.c **** void etMessageService_init(
+  29:../etRuntime/src/common/messaging/etMessageService.c **** 		etMessageService* self,
+  30:../etRuntime/src/common/messaging/etMessageService.c **** 		etUInt8* buffer,
+  31:../etRuntime/src/common/messaging/etMessageService.c **** 		etUInt16 maxBlocks,
+  32:../etRuntime/src/common/messaging/etMessageService.c **** 		etUInt16 blockSize,
+  33:../etRuntime/src/common/messaging/etMessageService.c **** 		etStacksize stacksize,
+  34:../etRuntime/src/common/messaging/etMessageService.c **** 		etPriority priority,
+  35:../etRuntime/src/common/messaging/etMessageService.c **** 		etTime interval,
+  36:../etRuntime/src/common/messaging/etMessageService.c **** 		etDispatcherReceiveMessage msgDispatcher,
+  37:../etRuntime/src/common/messaging/etMessageService.c **** 		etMessageService_execmode execmode){
+  32              		.loc 1 37 0
+  33              		.cfi_startproc
+  34              		@ args = 24, pretend = 0, frame = 16
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36 0000 80B5     		push	{r7, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 86B0     		sub	sp, sp, #24
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 32
+  44 0004 02AF     		add	r7, sp, #8
+  45              	.LCFI2:
+  46              		.cfi_def_cfa 7, 24
+  47 0006 F860     		str	r0, [r7, #12]
+  48 0008 B960     		str	r1, [r7, #8]
+  49 000a FA80     		strh	r2, [r7, #6]	@ movhi
+  50 000c BB80     		strh	r3, [r7, #4]	@ movhi
+  38:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "init")
+  39:../etRuntime/src/common/messaging/etMessageService.c **** 
+  40:../etRuntime/src/common/messaging/etMessageService.c **** 	/* copy init data to self */
+  41:../etRuntime/src/common/messaging/etMessageService.c **** 	self->messageBuffer.buffer = buffer;
+  51              		.loc 1 41 0
+  52 000e FB68     		ldr	r3, [r7, #12]
+  53 0010 BA68     		ldr	r2, [r7, #8]
+  54 0012 1A62     		str	r2, [r3, #32]
+  42:../etRuntime/src/common/messaging/etMessageService.c **** 	self->messageBuffer.maxBlocks = maxBlocks;
+  55              		.loc 1 42 0
+  56 0014 FB68     		ldr	r3, [r7, #12]
+  57 0016 FA88     		ldrh	r2, [r7, #6]	@ movhi
+  58 0018 9A84     		strh	r2, [r3, #36]	@ movhi
+  43:../etRuntime/src/common/messaging/etMessageService.c **** 	self->messageBuffer.blockSize = blockSize;
+  59              		.loc 1 43 0
+  60 001a FB68     		ldr	r3, [r7, #12]
+  61 001c BA88     		ldrh	r2, [r7, #4]	@ movhi
+  62 001e DA84     		strh	r2, [r3, #38]	@ movhi
+  44:../etRuntime/src/common/messaging/etMessageService.c **** 	self->msgDispatcher = msgDispatcher;
+  63              		.loc 1 44 0
+  64 0020 FB68     		ldr	r3, [r7, #12]
+  65 0022 BA6A     		ldr	r2, [r7, #40]
+  66 0024 9A62     		str	r2, [r3, #40]
+  45:../etRuntime/src/common/messaging/etMessageService.c **** 	self->execmode = execmode;
+  67              		.loc 1 45 0
+  68 0026 FB68     		ldr	r3, [r7, #12]
+  69 0028 97F82C20 		ldrb	r2, [r7, #44]
+  70 002c 83F86820 		strb	r2, [r3, #104]
+  46:../etRuntime/src/common/messaging/etMessageService.c **** 
+  47:../etRuntime/src/common/messaging/etMessageService.c **** 	/* init queue and pool */
+  48:../etRuntime/src/common/messaging/etMessageService.c **** 	etMessageQueue_init( &(self->messagePool) ); 	/* the pool is also a queue*/
+  71              		.loc 1 48 0
+  72 0030 FB68     		ldr	r3, [r7, #12]
+  73 0032 03F11003 		add	r3, r3, #16
+  74 0036 1846     		mov	r0, r3
+  75 0038 FFF7FEFF 		bl	etMessageQueue_init
+  49:../etRuntime/src/common/messaging/etMessageService.c **** 	etMessageQueue_init( &(self->messageQueue) );
+  76              		.loc 1 49 0
+  77 003c FB68     		ldr	r3, [r7, #12]
+  78 003e 1846     		mov	r0, r3
+  79 0040 FFF7FEFF 		bl	etMessageQueue_init
+  50:../etRuntime/src/common/messaging/etMessageService.c **** 	etMessageService_initMessagePool(self);
+  80              		.loc 1 50 0
+  81 0044 F868     		ldr	r0, [r7, #12]
+  82 0046 FFF7FEFF 		bl	etMessageService_initMessagePool
+  51:../etRuntime/src/common/messaging/etMessageService.c **** 
+  52:../etRuntime/src/common/messaging/etMessageService.c **** 	/* init mutexes and semaphores */
+  53:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_construct( &(self->poolMutex) );
+  83              		.loc 1 53 0
+  84 004a FB68     		ldr	r3, [r7, #12]
+  85 004c 03F14803 		add	r3, r3, #72
+  86 0050 1846     		mov	r0, r3
+  87 0052 FFF7FEFF 		bl	etMutex_construct
+  54:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_construct( &(self->queueMutex) );
+  88              		.loc 1 54 0
+  89 0056 FB68     		ldr	r3, [r7, #12]
+  90 0058 03F14C03 		add	r3, r3, #76
+  91 005c 1846     		mov	r0, r3
+  92 005e FFF7FEFF 		bl	etMutex_construct
+  55:../etRuntime/src/common/messaging/etMessageService.c **** 	etSema_construct( &(self->executionSemaphore) );
+  93              		.loc 1 55 0
+  94 0062 FB68     		ldr	r3, [r7, #12]
+  95 0064 03F15003 		add	r3, r3, #80
+  96 0068 1846     		mov	r0, r3
+  97 006a FFF7FEFF 		bl	etSema_construct
+  56:../etRuntime/src/common/messaging/etMessageService.c **** 
+  57:../etRuntime/src/common/messaging/etMessageService.c **** 	/* init thread */
+  58:../etRuntime/src/common/messaging/etMessageService.c **** 	etThread_construct(&self->thread, stacksize, priority, "MessageService", (etThreadFunction) etMess
+  98              		.loc 1 58 0
+  99 006e FB68     		ldr	r3, [r7, #12]
+ 100 0070 03F12C02 		add	r2, r3, #44
+ 101 0074 40F20003 		movw	r3, #:lower16:etMessageService_deliverAllMessages
+ 102 0078 C0F20003 		movt	r3, #:upper16:etMessageService_deliverAllMessages
+ 103 007c 0093     		str	r3, [sp, #0]
+ 104 007e FB68     		ldr	r3, [r7, #12]
+ 105 0080 0193     		str	r3, [sp, #4]
+ 106 0082 1046     		mov	r0, r2
+ 107 0084 B969     		ldr	r1, [r7, #24]
+ 108 0086 FA69     		ldr	r2, [r7, #28]
+ 109 0088 40F20003 		movw	r3, #:lower16:.LC0
+ 110 008c C0F20003 		movt	r3, #:upper16:.LC0
+ 111 0090 FFF7FEFF 		bl	etThread_construct
+  59:../etRuntime/src/common/messaging/etMessageService.c **** 
+  60:../etRuntime/src/common/messaging/etMessageService.c **** 	if (execmode==EXECMODE_POLLED || execmode==EXECMODE_MIXED) {
+ 112              		.loc 1 60 0
+ 113 0094 97F82C30 		ldrb	r3, [r7, #44]	@ zero_extendqisi2
+ 114 0098 002B     		cmp	r3, #0
+ 115 009a 03D0     		beq	.L2
+ 116              		.loc 1 60 0 is_stmt 0 discriminator 1
+ 117 009c 97F82C30 		ldrb	r3, [r7, #44]	@ zero_extendqisi2
+ 118 00a0 022B     		cmp	r3, #2
+ 119 00a2 0DD1     		bne	.L1
+ 120              	.L2:
+  61:../etRuntime/src/common/messaging/etMessageService.c **** 		/* init timer */
+  62:../etRuntime/src/common/messaging/etMessageService.c **** 		etTimer_construct(&self->timer, &interval, etMessageService_timerCallback, self);
+ 121              		.loc 1 62 0 is_stmt 1
+ 122 00a4 FB68     		ldr	r3, [r7, #12]
+ 123 00a6 03F15402 		add	r2, r3, #84
+ 124 00aa 07F12003 		add	r3, r7, #32
+ 125 00ae 1046     		mov	r0, r2
+ 126 00b0 1946     		mov	r1, r3
+ 127 00b2 40F20002 		movw	r2, #:lower16:etMessageService_timerCallback
+ 128 00b6 C0F20002 		movt	r2, #:upper16:etMessageService_timerCallback
+ 129 00ba FB68     		ldr	r3, [r7, #12]
+ 130 00bc FFF7FEFF 		bl	etTimer_construct
+ 131              	.L1:
+  63:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+  64:../etRuntime/src/common/messaging/etMessageService.c **** 
+  65:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  66:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 132              		.loc 1 66 0
+ 133 00c0 07F11007 		add	r7, r7, #16
+ 134 00c4 BD46     		mov	sp, r7
+ 135 00c6 80BD     		pop	{r7, pc}
+ 136              		.cfi_endproc
+ 137              	.LFE0:
+ 139              		.section	.text.etMessageService_start,"ax",%progbits
+ 140              		.align	2
+ 141              		.global	etMessageService_start
+ 142              		.thumb
+ 143              		.thumb_func
+ 145              	etMessageService_start:
+ 146              	.LFB1:
+  67:../etRuntime/src/common/messaging/etMessageService.c **** 
+  68:../etRuntime/src/common/messaging/etMessageService.c **** void etMessageService_start(etMessageService* self){
+ 147              		.loc 1 68 0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 8
+ 150              		@ frame_needed = 1, uses_anonymous_args = 0
+ 151 0000 80B5     		push	{r7, lr}
+ 152              	.LCFI3:
+ 153              		.cfi_def_cfa_offset 8
+ 154              		.cfi_offset 7, -8
+ 155              		.cfi_offset 14, -4
+ 156 0002 82B0     		sub	sp, sp, #8
+ 157              	.LCFI4:
+ 158              		.cfi_def_cfa_offset 16
+ 159 0004 00AF     		add	r7, sp, #0
+ 160              	.LCFI5:
+ 161              		.cfi_def_cfa_register 7
+ 162 0006 7860     		str	r0, [r7, #4]
+  69:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "start")
+  70:../etRuntime/src/common/messaging/etMessageService.c **** 	etThread_start( &(self->thread) );
+ 163              		.loc 1 70 0
+ 164 0008 7B68     		ldr	r3, [r7, #4]
+ 165 000a 03F12C03 		add	r3, r3, #44
+ 166 000e 1846     		mov	r0, r3
+ 167 0010 FFF7FEFF 		bl	etThread_start
+  71:../etRuntime/src/common/messaging/etMessageService.c **** 	if (self->execmode==EXECMODE_POLLED || self->execmode==EXECMODE_MIXED) {
+ 168              		.loc 1 71 0
+ 169 0014 7B68     		ldr	r3, [r7, #4]
+ 170 0016 93F86830 		ldrb	r3, [r3, #104]	@ zero_extendqisi2
+ 171 001a 002B     		cmp	r3, #0
+ 172 001c 04D0     		beq	.L5
+ 173              		.loc 1 71 0 is_stmt 0 discriminator 1
+ 174 001e 7B68     		ldr	r3, [r7, #4]
+ 175 0020 93F86830 		ldrb	r3, [r3, #104]	@ zero_extendqisi2
+ 176 0024 022B     		cmp	r3, #2
+ 177 0026 05D1     		bne	.L4
+ 178              	.L5:
+  72:../etRuntime/src/common/messaging/etMessageService.c **** 		etTimer_start(&self->timer);
+ 179              		.loc 1 72 0 is_stmt 1
+ 180 0028 7B68     		ldr	r3, [r7, #4]
+ 181 002a 03F15403 		add	r3, r3, #84
+ 182 002e 1846     		mov	r0, r3
+ 183 0030 FFF7FEFF 		bl	etTimer_start
+ 184              	.L4:
+  73:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+  74:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  75:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 185              		.loc 1 75 0
+ 186 0034 07F10807 		add	r7, r7, #8
+ 187 0038 BD46     		mov	sp, r7
+ 188 003a 80BD     		pop	{r7, pc}
+ 189              		.cfi_endproc
+ 190              	.LFE1:
+ 192              		.section	.text.etMessageService_stop,"ax",%progbits
+ 193              		.align	2
+ 194              		.global	etMessageService_stop
+ 195              		.thumb
+ 196              		.thumb_func
+ 198              	etMessageService_stop:
+ 199              	.LFB2:
+  76:../etRuntime/src/common/messaging/etMessageService.c **** 
+  77:../etRuntime/src/common/messaging/etMessageService.c **** void etMessageService_stop(etMessageService* self){
+ 200              		.loc 1 77 0
+ 201              		.cfi_startproc
+ 202              		@ args = 0, pretend = 0, frame = 24
+ 203              		@ frame_needed = 1, uses_anonymous_args = 0
+ 204 0000 80B5     		push	{r7, lr}
+ 205              	.LCFI6:
+ 206              		.cfi_def_cfa_offset 8
+ 207              		.cfi_offset 7, -8
+ 208              		.cfi_offset 14, -4
+ 209 0002 86B0     		sub	sp, sp, #24
+ 210              	.LCFI7:
+ 211              		.cfi_def_cfa_offset 32
+ 212 0004 00AF     		add	r7, sp, #0
+ 213              	.LCFI8:
+ 214              		.cfi_def_cfa_register 7
+ 215 0006 7860     		str	r0, [r7, #4]
+  78:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "stop")
+  79:../etRuntime/src/common/messaging/etMessageService.c **** 
+  80:../etRuntime/src/common/messaging/etMessageService.c **** 	if (self->execmode==EXECMODE_POLLED || self->execmode==EXECMODE_MIXED) {
+ 216              		.loc 1 80 0
+ 217 0008 7B68     		ldr	r3, [r7, #4]
+ 218 000a 93F86830 		ldrb	r3, [r3, #104]	@ zero_extendqisi2
+ 219 000e 002B     		cmp	r3, #0
+ 220 0010 04D0     		beq	.L8
+ 221              		.loc 1 80 0 is_stmt 0 discriminator 1
+ 222 0012 7B68     		ldr	r3, [r7, #4]
+ 223 0014 93F86830 		ldrb	r3, [r3, #104]	@ zero_extendqisi2
+ 224 0018 022B     		cmp	r3, #2
+ 225 001a 05D1     		bne	.L9
+ 226              	.L8:
+  81:../etRuntime/src/common/messaging/etMessageService.c **** 		etTimer_stop(&self->timer);
+ 227              		.loc 1 81 0 is_stmt 1
+ 228 001c 7B68     		ldr	r3, [r7, #4]
+ 229 001e 03F15403 		add	r3, r3, #84
+ 230 0022 1846     		mov	r0, r3
+ 231 0024 FFF7FEFF 		bl	etTimer_stop
+ 232              	.L9:
+  82:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+  83:../etRuntime/src/common/messaging/etMessageService.c **** 
+  84:../etRuntime/src/common/messaging/etMessageService.c **** 	/* create a temporary port struct and send the terminate message */
+  85:../etRuntime/src/common/messaging/etMessageService.c **** 	etSystemProtocolConjPort port;
+  86:../etRuntime/src/common/messaging/etMessageService.c **** 	port.localId = 0;
+ 233              		.loc 1 86 0
+ 234 0028 4FF00003 		mov	r3, #0
+ 235 002c 7B75     		strb	r3, [r7, #21]
+  87:../etRuntime/src/common/messaging/etMessageService.c **** 	port.msgService = self;
+ 236              		.loc 1 87 0
+ 237 002e 7B68     		ldr	r3, [r7, #4]
+ 238 0030 3B61     		str	r3, [r7, #16]
+  88:../etRuntime/src/common/messaging/etMessageService.c **** 	port.peerAddress = MESSAGESERVICE_ADDRESS;
+ 239              		.loc 1 88 0
+ 240 0032 4FF00103 		mov	r3, #1
+ 241 0036 3B75     		strb	r3, [r7, #20]
+  89:../etRuntime/src/common/messaging/etMessageService.c **** 	etSystemProtocolConjPort_terminate(&port);
+ 242              		.loc 1 89 0
+ 243 0038 07F10C03 		add	r3, r7, #12
+ 244 003c 1846     		mov	r0, r3
+ 245 003e FFF7FEFF 		bl	etSystemProtocolConjPort_terminate
+  90:../etRuntime/src/common/messaging/etMessageService.c **** 
+  91:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  92:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 246              		.loc 1 92 0
+ 247 0042 07F11807 		add	r7, r7, #24
+ 248 0046 BD46     		mov	sp, r7
+ 249 0048 80BD     		pop	{r7, pc}
+ 250              		.cfi_endproc
+ 251              	.LFE2:
+ 253 004a 00BF     		.section	.text.etMessageService_destroy,"ax",%progbits
+ 254              		.align	2
+ 255              		.global	etMessageService_destroy
+ 256              		.thumb
+ 257              		.thumb_func
+ 259              	etMessageService_destroy:
+ 260              	.LFB3:
+  93:../etRuntime/src/common/messaging/etMessageService.c **** 
+  94:../etRuntime/src/common/messaging/etMessageService.c **** void etMessageService_destroy(etMessageService* self){
+ 261              		.loc 1 94 0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 8
+ 264              		@ frame_needed = 1, uses_anonymous_args = 0
+ 265 0000 80B5     		push	{r7, lr}
+ 266              	.LCFI9:
+ 267              		.cfi_def_cfa_offset 8
+ 268              		.cfi_offset 7, -8
+ 269              		.cfi_offset 14, -4
+ 270 0002 82B0     		sub	sp, sp, #8
+ 271              	.LCFI10:
+ 272              		.cfi_def_cfa_offset 16
+ 273 0004 00AF     		add	r7, sp, #0
+ 274              	.LCFI11:
+ 275              		.cfi_def_cfa_register 7
+ 276 0006 7860     		str	r0, [r7, #4]
+  95:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "destroy")
+  96:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_destruct( &(self->poolMutex) );
+ 277              		.loc 1 96 0
+ 278 0008 7B68     		ldr	r3, [r7, #4]
+ 279 000a 03F14803 		add	r3, r3, #72
+ 280 000e 1846     		mov	r0, r3
+ 281 0010 FFF7FEFF 		bl	etMutex_destruct
+  97:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_destruct( &(self->queueMutex) );
+ 282              		.loc 1 97 0
+ 283 0014 7B68     		ldr	r3, [r7, #4]
+ 284 0016 03F14C03 		add	r3, r3, #76
+ 285 001a 1846     		mov	r0, r3
+ 286 001c FFF7FEFF 		bl	etMutex_destruct
+  98:../etRuntime/src/common/messaging/etMessageService.c **** 	etSema_destruct( &(self->executionSemaphore) );
+ 287              		.loc 1 98 0
+ 288 0020 7B68     		ldr	r3, [r7, #4]
+ 289 0022 03F15003 		add	r3, r3, #80
+ 290 0026 1846     		mov	r0, r3
+ 291 0028 FFF7FEFF 		bl	etSema_destruct
+  99:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 100:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 292              		.loc 1 100 0
+ 293 002c 07F10807 		add	r7, r7, #8
+ 294 0030 BD46     		mov	sp, r7
+ 295 0032 80BD     		pop	{r7, pc}
+ 296              		.cfi_endproc
+ 297              	.LFE3:
+ 299              		.section	.text.etMessageService_initMessagePool,"ax",%progbits
+ 300              		.align	2
+ 301              		.global	etMessageService_initMessagePool
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	etMessageService_initMessagePool:
+ 306              	.LFB4:
+ 101:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 102:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 103:../etRuntime/src/common/messaging/etMessageService.c **** /*
+ 104:../etRuntime/src/common/messaging/etMessageService.c ****  * initialize message pool with block buffer
+ 105:../etRuntime/src/common/messaging/etMessageService.c ****  * all blocks are added to pool
+ 106:../etRuntime/src/common/messaging/etMessageService.c ****  */
+ 107:../etRuntime/src/common/messaging/etMessageService.c **** void etMessageService_initMessagePool(etMessageService* self){
+ 307              		.loc 1 107 0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 16
+ 310              		@ frame_needed = 1, uses_anonymous_args = 0
+ 311 0000 80B5     		push	{r7, lr}
+ 312              	.LCFI12:
+ 313              		.cfi_def_cfa_offset 8
+ 314              		.cfi_offset 7, -8
+ 315              		.cfi_offset 14, -4
+ 316 0002 84B0     		sub	sp, sp, #16
+ 317              	.LCFI13:
+ 318              		.cfi_def_cfa_offset 24
+ 319 0004 00AF     		add	r7, sp, #0
+ 320              	.LCFI14:
+ 321              		.cfi_def_cfa_register 7
+ 322 0006 7860     		str	r0, [r7, #4]
+ 108:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "initMessagePool")
+ 109:../etRuntime/src/common/messaging/etMessageService.c **** 	etInt16 i;
+ 110:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 111:../etRuntime/src/common/messaging/etMessageService.c **** 	for (i=0; i<self->messageBuffer.maxBlocks; i++){
+ 323              		.loc 1 111 0
+ 324 0008 4FF00003 		mov	r3, #0
+ 325 000c FB81     		strh	r3, [r7, #14]	@ movhi
+ 326 000e 14E0     		b	.L12
+ 327              	.L13:
+ 328              	.LBB2:
+ 112:../etRuntime/src/common/messaging/etMessageService.c **** 		etMessage* block = (etMessage*) &self->messageBuffer.buffer[i*self->messageBuffer.blockSize];
+ 329              		.loc 1 112 0 discriminator 2
+ 330 0010 7B68     		ldr	r3, [r7, #4]
+ 331 0012 1A6A     		ldr	r2, [r3, #32]
+ 332 0014 B7F90E30 		ldrsh	r3, [r7, #14]
+ 333 0018 7968     		ldr	r1, [r7, #4]
+ 334 001a C98C     		ldrh	r1, [r1, #38]
+ 335 001c 01FB03F3 		mul	r3, r1, r3
+ 336 0020 D318     		adds	r3, r2, r3
+ 337 0022 BB60     		str	r3, [r7, #8]
+ 113:../etRuntime/src/common/messaging/etMessageService.c **** 		etMessageQueue_push(&self->messagePool, block);
+ 338              		.loc 1 113 0 discriminator 2
+ 339 0024 7B68     		ldr	r3, [r7, #4]
+ 340 0026 03F11003 		add	r3, r3, #16
+ 341 002a 1846     		mov	r0, r3
+ 342 002c B968     		ldr	r1, [r7, #8]
+ 343 002e FFF7FEFF 		bl	etMessageQueue_push
+ 344              	.LBE2:
+ 111:../etRuntime/src/common/messaging/etMessageService.c **** 	for (i=0; i<self->messageBuffer.maxBlocks; i++){
+ 345              		.loc 1 111 0 discriminator 2
+ 346 0032 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 347 0034 03F10103 		add	r3, r3, #1
+ 348 0038 FB81     		strh	r3, [r7, #14]	@ movhi
+ 349              	.L12:
+ 111:../etRuntime/src/common/messaging/etMessageService.c **** 	for (i=0; i<self->messageBuffer.maxBlocks; i++){
+ 350              		.loc 1 111 0 is_stmt 0 discriminator 1
+ 351 003a B7F90E20 		ldrsh	r2, [r7, #14]
+ 352 003e 7B68     		ldr	r3, [r7, #4]
+ 353 0040 9B8C     		ldrh	r3, [r3, #36]
+ 354 0042 9A42     		cmp	r2, r3
+ 355 0044 E4DB     		blt	.L13
+ 114:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+ 115:../etRuntime/src/common/messaging/etMessageService.c **** 	etMessageQueue_resetLowWaterMark(&self->messagePool);
+ 356              		.loc 1 115 0 is_stmt 1
+ 357 0046 7B68     		ldr	r3, [r7, #4]
+ 358 0048 03F11003 		add	r3, r3, #16
+ 359 004c 1846     		mov	r0, r3
+ 360 004e FFF7FEFF 		bl	etMessageQueue_resetLowWaterMark
+ 116:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 117:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 361              		.loc 1 117 0
+ 362 0052 07F11007 		add	r7, r7, #16
+ 363 0056 BD46     		mov	sp, r7
+ 364 0058 80BD     		pop	{r7, pc}
+ 365              		.cfi_endproc
+ 366              	.LFE4:
+ 368              		.section	.text.etMessageService_pushMessage,"ax",%progbits
+ 369              		.align	2
+ 370              		.global	etMessageService_pushMessage
+ 371              		.thumb
+ 372              		.thumb_func
+ 374              	etMessageService_pushMessage:
+ 375              	.LFB5:
+ 118:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 119:../etRuntime/src/common/messaging/etMessageService.c **** void etMessageService_pushMessage(etMessageService* self, etMessage* msg){
+ 376              		.loc 1 119 0
+ 377              		.cfi_startproc
+ 378              		@ args = 0, pretend = 0, frame = 8
+ 379              		@ frame_needed = 1, uses_anonymous_args = 0
+ 380 0000 80B5     		push	{r7, lr}
+ 381              	.LCFI15:
+ 382              		.cfi_def_cfa_offset 8
+ 383              		.cfi_offset 7, -8
+ 384              		.cfi_offset 14, -4
+ 385 0002 82B0     		sub	sp, sp, #8
+ 386              	.LCFI16:
+ 387              		.cfi_def_cfa_offset 16
+ 388 0004 00AF     		add	r7, sp, #0
+ 389              	.LCFI17:
+ 390              		.cfi_def_cfa_register 7
+ 391 0006 7860     		str	r0, [r7, #4]
+ 392 0008 3960     		str	r1, [r7, #0]
+ 120:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "pushMessage")
+ 121:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_enter(&self->queueMutex);
+ 393              		.loc 1 121 0
+ 394 000a 7B68     		ldr	r3, [r7, #4]
+ 395 000c 03F14C03 		add	r3, r3, #76
+ 396 0010 1846     		mov	r0, r3
+ 397 0012 FFF7FEFF 		bl	etMutex_enter
+ 122:../etRuntime/src/common/messaging/etMessageService.c **** 	etMessageQueue_push(&self->messageQueue, msg);
+ 398              		.loc 1 122 0
+ 399 0016 7B68     		ldr	r3, [r7, #4]
+ 400 0018 1846     		mov	r0, r3
+ 401 001a 3968     		ldr	r1, [r7, #0]
+ 402 001c FFF7FEFF 		bl	etMessageQueue_push
+ 123:../etRuntime/src/common/messaging/etMessageService.c **** 	etSema_wakeup(&self->executionSemaphore);
+ 403              		.loc 1 123 0
+ 404 0020 7B68     		ldr	r3, [r7, #4]
+ 405 0022 03F15003 		add	r3, r3, #80
+ 406 0026 1846     		mov	r0, r3
+ 407 0028 FFF7FEFF 		bl	etSema_wakeup
+ 124:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_leave(&self->queueMutex);
+ 408              		.loc 1 124 0
+ 409 002c 7B68     		ldr	r3, [r7, #4]
+ 410 002e 03F14C03 		add	r3, r3, #76
+ 411 0032 1846     		mov	r0, r3
+ 412 0034 FFF7FEFF 		bl	etMutex_leave
+ 125:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 126:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 413              		.loc 1 126 0
+ 414 0038 07F10807 		add	r7, r7, #8
+ 415 003c BD46     		mov	sp, r7
+ 416 003e 80BD     		pop	{r7, pc}
+ 417              		.cfi_endproc
+ 418              	.LFE5:
+ 420              		.section	.text.etMessageService_popMessage,"ax",%progbits
+ 421              		.align	2
+ 422              		.global	etMessageService_popMessage
+ 423              		.thumb
+ 424              		.thumb_func
+ 426              	etMessageService_popMessage:
+ 427              	.LFB6:
+ 127:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 128:../etRuntime/src/common/messaging/etMessageService.c **** etMessage* etMessageService_popMessage(etMessageService* self){
+ 428              		.loc 1 128 0
+ 429              		.cfi_startproc
+ 430              		@ args = 0, pretend = 0, frame = 16
+ 431              		@ frame_needed = 1, uses_anonymous_args = 0
+ 432 0000 80B5     		push	{r7, lr}
+ 433              	.LCFI18:
+ 434              		.cfi_def_cfa_offset 8
+ 435              		.cfi_offset 7, -8
+ 436              		.cfi_offset 14, -4
+ 437 0002 84B0     		sub	sp, sp, #16
+ 438              	.LCFI19:
+ 439              		.cfi_def_cfa_offset 24
+ 440 0004 00AF     		add	r7, sp, #0
+ 441              	.LCFI20:
+ 442              		.cfi_def_cfa_register 7
+ 443 0006 7860     		str	r0, [r7, #4]
+ 129:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "popMessage")
+ 130:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_enter(&self->queueMutex);
+ 444              		.loc 1 130 0
+ 445 0008 7B68     		ldr	r3, [r7, #4]
+ 446 000a 03F14C03 		add	r3, r3, #76
+ 447 000e 1846     		mov	r0, r3
+ 448 0010 FFF7FEFF 		bl	etMutex_enter
+ 131:../etRuntime/src/common/messaging/etMessageService.c **** 	etMessage* msg = etMessageQueue_pop(&self->messageQueue);
+ 449              		.loc 1 131 0
+ 450 0014 7B68     		ldr	r3, [r7, #4]
+ 451 0016 1846     		mov	r0, r3
+ 452 0018 FFF7FEFF 		bl	etMessageQueue_pop
+ 453 001c F860     		str	r0, [r7, #12]
+ 132:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_leave(&self->queueMutex);
+ 454              		.loc 1 132 0
+ 455 001e 7B68     		ldr	r3, [r7, #4]
+ 456 0020 03F14C03 		add	r3, r3, #76
+ 457 0024 1846     		mov	r0, r3
+ 458 0026 FFF7FEFF 		bl	etMutex_leave
+ 133:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 134:../etRuntime/src/common/messaging/etMessageService.c **** 	return msg;
+ 459              		.loc 1 134 0
+ 460 002a FB68     		ldr	r3, [r7, #12]
+ 135:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 461              		.loc 1 135 0
+ 462 002c 1846     		mov	r0, r3
+ 463 002e 07F11007 		add	r7, r7, #16
+ 464 0032 BD46     		mov	sp, r7
+ 465 0034 80BD     		pop	{r7, pc}
+ 466              		.cfi_endproc
+ 467              	.LFE6:
+ 469 0036 00BF     		.section	.rodata
+ 470 000f 00       		.align	2
+ 471              	.LC1:
+ 472 0010 65744D65 		.ascii	"etMessageService_getMessageBuffer: message pool emp"
+ 472      73736167 
+ 472      65536572 
+ 472      76696365 
+ 472      5F676574 
+ 473 0043 74793A20 		.ascii	"ty: %d\000"
+ 473      256400
+ 474 004a 0000     		.align	2
+ 475              	.LC2:
+ 476 004c 65744D65 		.ascii	"etMessageService_getMessageBuffer: message too big:"
+ 476      73736167 
+ 476      65536572 
+ 476      76696365 
+ 476      5F676574 
+ 477 007f 2025642C 		.ascii	" %d, blockSize: %d\000"
+ 477      20626C6F 
+ 477      636B5369 
+ 477      7A653A20 
+ 477      256400
+ 478 0092 0000     		.section	.text.etMessageService_getMessageBuffer,"ax",%progbits
+ 479              		.align	2
+ 480              		.global	etMessageService_getMessageBuffer
+ 481              		.thumb
+ 482              		.thumb_func
+ 484              	etMessageService_getMessageBuffer:
+ 485              	.LFB7:
+ 136:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 137:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 138:../etRuntime/src/common/messaging/etMessageService.c **** etMessage* etMessageService_getMessageBuffer(etMessageService* self, etUInt16 size){
+ 486              		.loc 1 138 0
+ 487              		.cfi_startproc
+ 488              		@ args = 0, pretend = 0, frame = 16
+ 489              		@ frame_needed = 1, uses_anonymous_args = 0
+ 490 0000 80B5     		push	{r7, lr}
+ 491              	.LCFI21:
+ 492              		.cfi_def_cfa_offset 8
+ 493              		.cfi_offset 7, -8
+ 494              		.cfi_offset 14, -4
+ 495 0002 84B0     		sub	sp, sp, #16
+ 496              	.LCFI22:
+ 497              		.cfi_def_cfa_offset 24
+ 498 0004 00AF     		add	r7, sp, #0
+ 499              	.LCFI23:
+ 500              		.cfi_def_cfa_register 7
+ 501 0006 7860     		str	r0, [r7, #4]
+ 502 0008 0B46     		mov	r3, r1
+ 503 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 139:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "getMessageBuffer")
+ 140:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_enter(&self->poolMutex);
+ 504              		.loc 1 140 0
+ 505 000c 7B68     		ldr	r3, [r7, #4]
+ 506 000e 03F14803 		add	r3, r3, #72
+ 507 0012 1846     		mov	r0, r3
+ 508 0014 FFF7FEFF 		bl	etMutex_enter
+ 141:../etRuntime/src/common/messaging/etMessageService.c **** 	if (size<=self->messageBuffer.blockSize){
+ 509              		.loc 1 141 0
+ 510 0018 7B68     		ldr	r3, [r7, #4]
+ 511 001a DB8C     		ldrh	r3, [r3, #38]
+ 512 001c 7A88     		ldrh	r2, [r7, #2]
+ 513 001e 9A42     		cmp	r2, r3
+ 514 0020 1FD8     		bhi	.L18
+ 142:../etRuntime/src/common/messaging/etMessageService.c **** 		if (self->messagePool.size>0){
+ 515              		.loc 1 142 0
+ 516 0022 7B68     		ldr	r3, [r7, #4]
+ 517 0024 9B8B     		ldrh	r3, [r3, #28]
+ 518 0026 1BB2     		sxth	r3, r3
+ 519 0028 002B     		cmp	r3, #0
+ 520 002a 0EDD     		ble	.L19
+ 521              	.LBB3:
+ 143:../etRuntime/src/common/messaging/etMessageService.c **** 			etMessage* msg = etMessageQueue_pop(&self->messagePool);
+ 522              		.loc 1 143 0
+ 523 002c 7B68     		ldr	r3, [r7, #4]
+ 524 002e 03F11003 		add	r3, r3, #16
+ 525 0032 1846     		mov	r0, r3
+ 526 0034 FFF7FEFF 		bl	etMessageQueue_pop
+ 527 0038 F860     		str	r0, [r7, #12]
+ 144:../etRuntime/src/common/messaging/etMessageService.c **** 			etMutex_leave(&self->poolMutex);
+ 528              		.loc 1 144 0
+ 529 003a 7B68     		ldr	r3, [r7, #4]
+ 530 003c 03F14803 		add	r3, r3, #72
+ 531 0040 1846     		mov	r0, r3
+ 532 0042 FFF7FEFF 		bl	etMutex_leave
+ 145:../etRuntime/src/common/messaging/etMessageService.c **** 			ET_MSC_LOGGER_SYNC_EXIT
+ 146:../etRuntime/src/common/messaging/etMessageService.c **** 			return msg;
+ 533              		.loc 1 146 0
+ 534 0046 FB68     		ldr	r3, [r7, #12]
+ 535 0048 1EE0     		b	.L20
+ 536              	.L19:
+ 537              	.LBE3:
+ 147:../etRuntime/src/common/messaging/etMessageService.c **** 		}
+ 148:../etRuntime/src/common/messaging/etMessageService.c **** 		else {
+ 149:../etRuntime/src/common/messaging/etMessageService.c **** 			etLogger_logErrorF("etMessageService_getMessageBuffer: message pool empty: %d", etMessageService
+ 538              		.loc 1 149 0
+ 539 004a 7868     		ldr	r0, [r7, #4]
+ 540 004c FFF7FEFF 		bl	etMessageService_getMessagePoolLowWaterMark
+ 541 0050 0346     		mov	r3, r0
+ 542 0052 40F20000 		movw	r0, #:lower16:.LC1
+ 543 0056 C0F20000 		movt	r0, #:upper16:.LC1
+ 544 005a 1946     		mov	r1, r3
+ 545 005c FFF7FEFF 		bl	etLogger_logErrorF
+ 546 0060 0AE0     		b	.L21
+ 547              	.L18:
+ 150:../etRuntime/src/common/messaging/etMessageService.c **** 		}
+ 151:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+ 152:../etRuntime/src/common/messaging/etMessageService.c **** 	else {
+ 153:../etRuntime/src/common/messaging/etMessageService.c **** 		etLogger_logErrorF("etMessageService_getMessageBuffer: message too big: %d, blockSize: %d", size,
+ 548              		.loc 1 153 0
+ 549 0062 7A88     		ldrh	r2, [r7, #2]
+ 550 0064 7B68     		ldr	r3, [r7, #4]
+ 551 0066 DB8C     		ldrh	r3, [r3, #38]
+ 552 0068 40F20000 		movw	r0, #:lower16:.LC2
+ 553 006c C0F20000 		movt	r0, #:upper16:.LC2
+ 554 0070 1146     		mov	r1, r2
+ 555 0072 1A46     		mov	r2, r3
+ 556 0074 FFF7FEFF 		bl	etLogger_logErrorF
+ 557              	.L21:
+ 154:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+ 155:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_leave(&self->poolMutex);
+ 558              		.loc 1 155 0
+ 559 0078 7B68     		ldr	r3, [r7, #4]
+ 560 007a 03F14803 		add	r3, r3, #72
+ 561 007e 1846     		mov	r0, r3
+ 562 0080 FFF7FEFF 		bl	etMutex_leave
+ 156:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 157:../etRuntime/src/common/messaging/etMessageService.c **** 	return NULL;
+ 563              		.loc 1 157 0
+ 564 0084 4FF00003 		mov	r3, #0
+ 565              	.L20:
+ 158:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 566              		.loc 1 158 0
+ 567 0088 1846     		mov	r0, r3
+ 568 008a 07F11007 		add	r7, r7, #16
+ 569 008e BD46     		mov	sp, r7
+ 570 0090 80BD     		pop	{r7, pc}
+ 571              		.cfi_endproc
+ 572              	.LFE7:
+ 574 0092 00BF     		.section	.text.etMessageService_returnMessageBuffer,"ax",%progbits
+ 575              		.align	2
+ 576              		.global	etMessageService_returnMessageBuffer
+ 577              		.thumb
+ 578              		.thumb_func
+ 580              	etMessageService_returnMessageBuffer:
+ 581              	.LFB8:
+ 159:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 160:../etRuntime/src/common/messaging/etMessageService.c **** void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buffer){
+ 582              		.loc 1 160 0
+ 583              		.cfi_startproc
+ 584              		@ args = 0, pretend = 0, frame = 8
+ 585              		@ frame_needed = 1, uses_anonymous_args = 0
+ 586 0000 80B5     		push	{r7, lr}
+ 587              	.LCFI24:
+ 588              		.cfi_def_cfa_offset 8
+ 589              		.cfi_offset 7, -8
+ 590              		.cfi_offset 14, -4
+ 591 0002 82B0     		sub	sp, sp, #8
+ 592              	.LCFI25:
+ 593              		.cfi_def_cfa_offset 16
+ 594 0004 00AF     		add	r7, sp, #0
+ 595              	.LCFI26:
+ 596              		.cfi_def_cfa_register 7
+ 597 0006 7860     		str	r0, [r7, #4]
+ 598 0008 3960     		str	r1, [r7, #0]
+ 161:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "returnMessageBuffer")
+ 162:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_enter(&self->poolMutex);
+ 599              		.loc 1 162 0
+ 600 000a 7B68     		ldr	r3, [r7, #4]
+ 601 000c 03F14803 		add	r3, r3, #72
+ 602 0010 1846     		mov	r0, r3
+ 603 0012 FFF7FEFF 		bl	etMutex_enter
+ 163:../etRuntime/src/common/messaging/etMessageService.c **** 	etMessageQueue_push(&self->messagePool, buffer);
+ 604              		.loc 1 163 0
+ 605 0016 7B68     		ldr	r3, [r7, #4]
+ 606 0018 03F11003 		add	r3, r3, #16
+ 607 001c 1846     		mov	r0, r3
+ 608 001e 3968     		ldr	r1, [r7, #0]
+ 609 0020 FFF7FEFF 		bl	etMessageQueue_push
+ 164:../etRuntime/src/common/messaging/etMessageService.c **** 	etMutex_leave(&self->poolMutex);
+ 610              		.loc 1 164 0
+ 611 0024 7B68     		ldr	r3, [r7, #4]
+ 612 0026 03F14803 		add	r3, r3, #72
+ 613 002a 1846     		mov	r0, r3
+ 614 002c FFF7FEFF 		bl	etMutex_leave
+ 165:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 166:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 615              		.loc 1 166 0
+ 616 0030 07F10807 		add	r7, r7, #8
+ 617 0034 BD46     		mov	sp, r7
+ 618 0036 80BD     		pop	{r7, pc}
+ 619              		.cfi_endproc
+ 620              	.LFE8:
+ 622              		.section	.text.etMessageService_deliverAllMessages,"ax",%progbits
+ 623              		.align	2
+ 624              		.thumb
+ 625              		.thumb_func
+ 627              	etMessageService_deliverAllMessages:
+ 628              	.LFB9:
+ 167:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 168:../etRuntime/src/common/messaging/etMessageService.c **** static void etMessageService_deliverAllMessages(etMessageService* self){
+ 629              		.loc 1 168 0
+ 630              		.cfi_startproc
+ 631              		@ args = 0, pretend = 0, frame = 16
+ 632              		@ frame_needed = 1, uses_anonymous_args = 0
+ 633 0000 80B5     		push	{r7, lr}
+ 634              	.LCFI27:
+ 635              		.cfi_def_cfa_offset 8
+ 636              		.cfi_offset 7, -8
+ 637              		.cfi_offset 14, -4
+ 638 0002 84B0     		sub	sp, sp, #16
+ 639              	.LCFI28:
+ 640              		.cfi_def_cfa_offset 24
+ 641 0004 00AF     		add	r7, sp, #0
+ 642              	.LCFI29:
+ 643              		.cfi_def_cfa_register 7
+ 644 0006 7860     		str	r0, [r7, #4]
+ 645              	.LBB4:
+ 169:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
+ 170:../etRuntime/src/common/messaging/etMessageService.c **** 	{
+ 171:../etRuntime/src/common/messaging/etMessageService.c **** 		etBool cont = ET_TRUE;
+ 646              		.loc 1 171 0
+ 647 0008 4FF00103 		mov	r3, #1
+ 648 000c FB73     		strb	r3, [r7, #15]
+ 172:../etRuntime/src/common/messaging/etMessageService.c **** 		while (cont){
+ 649              		.loc 1 172 0
+ 650 000e 26E0     		b	.L24
+ 651              	.L28:
+ 652              	.LBB5:
+ 173:../etRuntime/src/common/messaging/etMessageService.c **** 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
+ 174:../etRuntime/src/common/messaging/etMessageService.c **** 				etMessage* msg = etMessageService_popMessage(self);
+ 653              		.loc 1 174 0
+ 654 0010 7868     		ldr	r0, [r7, #4]
+ 655 0012 FFF7FEFF 		bl	etMessageService_popMessage
+ 656 0016 B860     		str	r0, [r7, #8]
+ 175:../etRuntime/src/common/messaging/etMessageService.c **** 				if (!self->msgDispatcher(msg))
+ 657              		.loc 1 175 0
+ 658 0018 7B68     		ldr	r3, [r7, #4]
+ 659 001a 9B6A     		ldr	r3, [r3, #40]
+ 660 001c B868     		ldr	r0, [r7, #8]
+ 661 001e 9847     		blx	r3
+ 662 0020 0346     		mov	r3, r0
+ 663 0022 002B     		cmp	r3, #0
+ 664 0024 02D1     		bne	.L26
+ 176:../etRuntime/src/common/messaging/etMessageService.c **** 					cont = ET_FALSE;
+ 665              		.loc 1 176 0
+ 666 0026 4FF00003 		mov	r3, #0
+ 667 002a FB73     		strb	r3, [r7, #15]
+ 668              	.L26:
+ 177:../etRuntime/src/common/messaging/etMessageService.c **** 				etMessageService_returnMessageBuffer(self, msg);
+ 669              		.loc 1 177 0
+ 670 002c 7868     		ldr	r0, [r7, #4]
+ 671 002e B968     		ldr	r1, [r7, #8]
+ 672 0030 FFF7FEFF 		bl	etMessageService_returnMessageBuffer
+ 673 0034 00E0     		b	.L25
+ 674              	.L30:
+ 675              	.LBE5:
+ 173:../etRuntime/src/common/messaging/etMessageService.c **** 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
+ 676              		.loc 1 173 0
+ 677 0036 00BF     		nop
+ 678              	.L25:
+ 173:../etRuntime/src/common/messaging/etMessageService.c **** 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
+ 679              		.loc 1 173 0 is_stmt 0 discriminator 1
+ 680 0038 7B68     		ldr	r3, [r7, #4]
+ 681 003a 1846     		mov	r0, r3
+ 682 003c FFF7FEFF 		bl	etMessageQueue_isNotEmpty
+ 683 0040 0346     		mov	r3, r0
+ 684 0042 002B     		cmp	r3, #0
+ 685 0044 02D0     		beq	.L27
+ 173:../etRuntime/src/common/messaging/etMessageService.c **** 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
+ 686              		.loc 1 173 0 discriminator 2
+ 687 0046 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 688 0048 002B     		cmp	r3, #0
+ 689 004a E1D1     		bne	.L28
+ 690              	.L27:
+ 178:../etRuntime/src/common/messaging/etMessageService.c **** 			}
+ 179:../etRuntime/src/common/messaging/etMessageService.c **** 			if (cont)
+ 691              		.loc 1 179 0 is_stmt 1
+ 692 004c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 693 004e 002B     		cmp	r3, #0
+ 694 0050 05D0     		beq	.L24
+ 180:../etRuntime/src/common/messaging/etMessageService.c **** 				etSema_waitForWakeup(&self->executionSemaphore);
+ 695              		.loc 1 180 0
+ 696 0052 7B68     		ldr	r3, [r7, #4]
+ 697 0054 03F15003 		add	r3, r3, #80
+ 698 0058 1846     		mov	r0, r3
+ 699 005a FFF7FEFF 		bl	etSema_waitForWakeup
+ 700              	.L24:
+ 172:../etRuntime/src/common/messaging/etMessageService.c **** 		while (cont){
+ 701              		.loc 1 172 0 discriminator 1
+ 702 005e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 703 0060 002B     		cmp	r3, #0
+ 704 0062 E8D1     		bne	.L30
+ 705              	.LBE4:
+ 181:../etRuntime/src/common/messaging/etMessageService.c **** 		}
+ 182:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+ 183:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 184:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 706              		.loc 1 184 0
+ 707 0064 07F11007 		add	r7, r7, #16
+ 708 0068 BD46     		mov	sp, r7
+ 709 006a 80BD     		pop	{r7, pc}
+ 710              		.cfi_endproc
+ 711              	.LFE9:
+ 713              		.section	.text.etMessageService_getMessagePoolLowWaterMark,"ax",%progbits
+ 714              		.align	2
+ 715              		.global	etMessageService_getMessagePoolLowWaterMark
+ 716              		.thumb
+ 717              		.thumb_func
+ 719              	etMessageService_getMessagePoolLowWaterMark:
+ 720              	.LFB10:
+ 185:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 186:../etRuntime/src/common/messaging/etMessageService.c **** etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self){
+ 721              		.loc 1 186 0
+ 722              		.cfi_startproc
+ 723              		@ args = 0, pretend = 0, frame = 16
+ 724              		@ frame_needed = 1, uses_anonymous_args = 0
+ 725 0000 80B5     		push	{r7, lr}
+ 726              	.LCFI30:
+ 727              		.cfi_def_cfa_offset 8
+ 728              		.cfi_offset 7, -8
+ 729              		.cfi_offset 14, -4
+ 730 0002 84B0     		sub	sp, sp, #16
+ 731              	.LCFI31:
+ 732              		.cfi_def_cfa_offset 24
+ 733 0004 00AF     		add	r7, sp, #0
+ 734              	.LCFI32:
+ 735              		.cfi_def_cfa_register 7
+ 736 0006 7860     		str	r0, [r7, #4]
+ 187:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "getMessagePoolLowWaterMark")
+ 188:../etRuntime/src/common/messaging/etMessageService.c **** 	etInt16 lowWaterMark = etMessageQueue_getLowWaterMark(&self->messagePool);
+ 737              		.loc 1 188 0
+ 738 0008 7B68     		ldr	r3, [r7, #4]
+ 739 000a 03F11003 		add	r3, r3, #16
+ 740 000e 1846     		mov	r0, r3
+ 741 0010 FFF7FEFF 		bl	etMessageQueue_getLowWaterMark
+ 742 0014 0346     		mov	r3, r0
+ 743 0016 FB81     		strh	r3, [r7, #14]	@ movhi
+ 189:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 190:../etRuntime/src/common/messaging/etMessageService.c **** 	return lowWaterMark;
+ 744              		.loc 1 190 0
+ 745 0018 FB89     		ldrh	r3, [r7, #14]
+ 746 001a 1BB2     		sxth	r3, r3
+ 191:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 747              		.loc 1 191 0
+ 748 001c 1846     		mov	r0, r3
+ 749 001e 07F11007 		add	r7, r7, #16
+ 750 0022 BD46     		mov	sp, r7
+ 751 0024 80BD     		pop	{r7, pc}
+ 752              		.cfi_endproc
+ 753              	.LFE10:
+ 755 0026 00BF     		.section	.text.etMessageService_timerCallback,"ax",%progbits
+ 756              		.align	2
+ 757              		.thumb
+ 758              		.thumb_func
+ 760              	etMessageService_timerCallback:
+ 761              	.LFB11:
+ 192:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 193:../etRuntime/src/common/messaging/etMessageService.c **** static void etMessageService_timerCallback(void* data) {
+ 762              		.loc 1 193 0
+ 763              		.cfi_startproc
+ 764              		@ args = 0, pretend = 0, frame = 24
+ 765              		@ frame_needed = 1, uses_anonymous_args = 0
+ 766 0000 80B5     		push	{r7, lr}
+ 767              	.LCFI33:
+ 768              		.cfi_def_cfa_offset 8
+ 769              		.cfi_offset 7, -8
+ 770              		.cfi_offset 14, -4
+ 771 0002 86B0     		sub	sp, sp, #24
+ 772              	.LCFI34:
+ 773              		.cfi_def_cfa_offset 32
+ 774 0004 00AF     		add	r7, sp, #0
+ 775              	.LCFI35:
+ 776              		.cfi_def_cfa_register 7
+ 777 0006 7860     		str	r0, [r7, #4]
+ 778              	.LBB6:
+ 194:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "timerCallback")
+ 195:../etRuntime/src/common/messaging/etMessageService.c **** 	{
+ 196:../etRuntime/src/common/messaging/etMessageService.c **** 		etMessageService* self = (etMessageService*) data;
+ 779              		.loc 1 196 0
+ 780 0008 7B68     		ldr	r3, [r7, #4]
+ 781 000a 7B61     		str	r3, [r7, #20]
+ 197:../etRuntime/src/common/messaging/etMessageService.c **** 
+ 198:../etRuntime/src/common/messaging/etMessageService.c **** 		/* create a temporary port struct and send the poll message */
+ 199:../etRuntime/src/common/messaging/etMessageService.c **** 		etSystemProtocolConjPort port;
+ 200:../etRuntime/src/common/messaging/etMessageService.c **** 		port.localId = 0;
+ 782              		.loc 1 200 0
+ 783 000c 4FF00003 		mov	r3, #0
+ 784 0010 7B74     		strb	r3, [r7, #17]
+ 201:../etRuntime/src/common/messaging/etMessageService.c **** 		port.msgService = self;
+ 785              		.loc 1 201 0
+ 786 0012 7B69     		ldr	r3, [r7, #20]
+ 787 0014 FB60     		str	r3, [r7, #12]
+ 202:../etRuntime/src/common/messaging/etMessageService.c **** 		port.peerAddress = MESSAGESERVICE_ADDRESS;
+ 788              		.loc 1 202 0
+ 789 0016 4FF00103 		mov	r3, #1
+ 790 001a 3B74     		strb	r3, [r7, #16]
+ 203:../etRuntime/src/common/messaging/etMessageService.c **** 		etSystemProtocolConjPort_poll(&port);
+ 791              		.loc 1 203 0
+ 792 001c 07F10803 		add	r3, r7, #8
+ 793 0020 1846     		mov	r0, r3
+ 794 0022 FFF7FEFF 		bl	etSystemProtocolConjPort_poll
+ 795              	.LBE6:
+ 204:../etRuntime/src/common/messaging/etMessageService.c **** 	}
+ 205:../etRuntime/src/common/messaging/etMessageService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 206:../etRuntime/src/common/messaging/etMessageService.c **** }
+ 796              		.loc 1 206 0
+ 797 0026 07F11807 		add	r7, r7, #24
+ 798 002a BD46     		mov	sp, r7
+ 799 002c 80BD     		pop	{r7, pc}
+ 800              		.cfi_endproc
+ 801              	.LFE11:
+ 803 002e 00BF     		.text
+ 804              	.Letext0:
+ 805              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 806              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 807              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 808              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 809              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 810              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 811              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 812              		.file 9 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 813              		.file 10 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 814              		.file 11 "../etRuntime/src/common/messaging/etMessageService.h"
+ 815              		.file 12 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 816              		.file 13 "../etRuntime/src/common/messaging/etSystemProtocol.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 etMessageService.c
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:20     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:21     .rodata:00000000 .LC0
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:24     .text.etMessageService_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:29     .text.etMessageService_init:00000000 etMessageService_init
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:305    .text.etMessageService_initMessagePool:00000000 etMessageService_initMessagePool
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:627    .text.etMessageService_deliverAllMessages:00000000 etMessageService_deliverAllMessages
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:760    .text.etMessageService_timerCallback:00000000 etMessageService_timerCallback
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:140    .text.etMessageService_start:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:145    .text.etMessageService_start:00000000 etMessageService_start
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:193    .text.etMessageService_stop:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:198    .text.etMessageService_stop:00000000 etMessageService_stop
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:254    .text.etMessageService_destroy:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:259    .text.etMessageService_destroy:00000000 etMessageService_destroy
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:300    .text.etMessageService_initMessagePool:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:369    .text.etMessageService_pushMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:374    .text.etMessageService_pushMessage:00000000 etMessageService_pushMessage
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:421    .text.etMessageService_popMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:426    .text.etMessageService_popMessage:00000000 etMessageService_popMessage
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:471    .rodata:00000010 .LC1
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:475    .rodata:0000004c .LC2
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:479    .text.etMessageService_getMessageBuffer:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:484    .text.etMessageService_getMessageBuffer:00000000 etMessageService_getMessageBuffer
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:719    .text.etMessageService_getMessagePoolLowWaterMark:00000000 etMessageService_getMessagePoolLowWaterMark
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:575    .text.etMessageService_returnMessageBuffer:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:580    .text.etMessageService_returnMessageBuffer:00000000 etMessageService_returnMessageBuffer
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:623    .text.etMessageService_deliverAllMessages:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:714    .text.etMessageService_getMessagePoolLowWaterMark:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccnnvFcf.s:756    .text.etMessageService_timerCallback:00000000 $t
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.etMessageService.h.35.d59d0242cc2158bcaed8acc00ffa8450
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.23.8776f0b4cca7a780673ce7e90ee97990
+
+UNDEFINED SYMBOLS
+etMessageQueue_init
+etMutex_construct
+etSema_construct
+etThread_construct
+etTimer_construct
+etThread_start
+etTimer_start
+etTimer_stop
+etSystemProtocolConjPort_terminate
+etMutex_destruct
+etSema_destruct
+etMessageQueue_push
+etMessageQueue_resetLowWaterMark
+etMutex_enter
+etSema_wakeup
+etMutex_leave
+etMessageQueue_pop
+etLogger_logErrorF
+etMessageQueue_isNotEmpty
+etSema_waitForWakeup
+etMessageQueue_getLowWaterMark
+etSystemProtocolConjPort_poll

@@ -1,0 +1,337 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etThread.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	noThread
+  20              		.bss
+  21              		.align	2
+  24              	noThread:
+  25 0000 00000000 		.space	4
+  26              		.section	.text.etThread_construct,"ax",%progbits
+  27              		.align	2
+  28              		.global	etThread_construct
+  29              		.thumb
+  30              		.thumb_func
+  32              	etThread_construct:
+  33              	.LFB0:
+  34              		.file 1 "../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c"
+   1:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** /*******************************************************************************
+   2:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  *
+   8:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * 		Thomas Schuetz, Thomas Jung (initial contribution)
+  10:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  *
+  11:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  *******************************************************************************/
+  12:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  13:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** /**
+  14:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  *
+  15:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  * etThread.c FreeRTOS implementation of etThread
+  16:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  *
+  17:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c ****  */
+  18:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  19:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** #include "osal/etThread.h"
+  20:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  21:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** #include "debugging/etLogger.h"
+  22:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** #include "debugging/etMSCLogger.h"
+  23:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  24:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** void etThread_execute(etThread* self);
+  25:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  26:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** etThread * noThread = 0;
+  27:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  28:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** void etThread_construct(
+  29:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		etThread* self,
+  30:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		etStacksize stacksize,
+  31:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		etPriority priority,
+  32:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		etThreadname threadName,
+  33:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		etThreadFunction threadFunction,
+  34:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		void* threadFunctionData)
+  35:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** {
+  35              		.loc 1 35 0
+  36              		.cfi_startproc
+  37              		@ args = 8, pretend = 0, frame = 16
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39              		@ link register save eliminated.
+  40 0000 80B4     		push	{r7}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 4
+  43              		.cfi_offset 7, -4
+  44 0002 85B0     		sub	sp, sp, #20
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_offset 24
+  47 0004 00AF     		add	r7, sp, #0
+  48              	.LCFI2:
+  49              		.cfi_def_cfa_register 7
+  50 0006 F860     		str	r0, [r7, #12]
+  51 0008 B960     		str	r1, [r7, #8]
+  52 000a 7A60     		str	r2, [r7, #4]
+  53 000c 3B60     		str	r3, [r7, #0]
+  36:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "construct")
+  37:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  38:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	/* fill in data */
+  39:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	self->stacksize = stacksize;
+  54              		.loc 1 39 0
+  55 000e FB68     		ldr	r3, [r7, #12]
+  56 0010 BA68     		ldr	r2, [r7, #8]
+  57 0012 9A60     		str	r2, [r3, #8]
+  40:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	self->priority = priority;
+  58              		.loc 1 40 0
+  59 0014 FB68     		ldr	r3, [r7, #12]
+  60 0016 7A68     		ldr	r2, [r7, #4]
+  61 0018 DA60     		str	r2, [r3, #12]
+  41:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	self->threadName = threadName;
+  62              		.loc 1 41 0
+  63 001a FB68     		ldr	r3, [r7, #12]
+  64 001c 3A68     		ldr	r2, [r7, #0]
+  65 001e 1A61     		str	r2, [r3, #16]
+  42:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	self->threadFunction = threadFunction;
+  66              		.loc 1 42 0
+  67 0020 FB68     		ldr	r3, [r7, #12]
+  68 0022 BA69     		ldr	r2, [r7, #24]
+  69 0024 5A61     		str	r2, [r3, #20]
+  43:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	self->threadFunctionData = threadFunctionData;
+  70              		.loc 1 43 0
+  71 0026 FB68     		ldr	r3, [r7, #12]
+  72 0028 FA69     		ldr	r2, [r7, #28]
+  73 002a 9A61     		str	r2, [r3, #24]
+  44:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	// for the single threaded port stacksize and prio is not needed
+  45:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	// save the Threadpointer as singleton
+  46:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	if(noThread==0){
+  74              		.loc 1 46 0
+  75 002c 40F20003 		movw	r3, #:lower16:noThread
+  76 0030 C0F20003 		movt	r3, #:upper16:noThread
+  77 0034 1B68     		ldr	r3, [r3, #0]
+  78 0036 002B     		cmp	r3, #0
+  79 0038 06D1     		bne	.L2
+  47:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		noThread=self;
+  80              		.loc 1 47 0
+  81 003a 40F20003 		movw	r3, #:lower16:noThread
+  82 003e C0F20003 		movt	r3, #:upper16:noThread
+  83 0042 FA68     		ldr	r2, [r7, #12]
+  84 0044 1A60     		str	r2, [r3, #0]
+  85 0046 00E0     		b	.L3
+  86              	.L2:
+  48:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		}else{
+  49:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 			while(1){};
+  87              		.loc 1 49 0 discriminator 1
+  88 0048 FEE7     		b	.L2
+  89              	.L3:
+  50:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 		}
+  51:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  52:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** }
+  90              		.loc 1 52 0
+  91 004a 07F11407 		add	r7, r7, #20
+  92 004e BD46     		mov	sp, r7
+  93 0050 80BC     		pop	{r7}
+  94 0052 7047     		bx	lr
+  95              		.cfi_endproc
+  96              	.LFE0:
+  98              		.section	.text.etThread_start,"ax",%progbits
+  99              		.align	2
+ 100              		.global	etThread_start
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	etThread_start:
+ 105              	.LFB1:
+  53:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  54:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** void etThread_start(etThread* self) {
+ 106              		.loc 1 54 0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 8
+ 109              		@ frame_needed = 1, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
+ 111 0000 80B4     		push	{r7}
+ 112              	.LCFI3:
+ 113              		.cfi_def_cfa_offset 4
+ 114              		.cfi_offset 7, -4
+ 115 0002 83B0     		sub	sp, sp, #12
+ 116              	.LCFI4:
+ 117              		.cfi_def_cfa_offset 16
+ 118 0004 00AF     		add	r7, sp, #0
+ 119              	.LCFI5:
+ 120              		.cfi_def_cfa_register 7
+ 121 0006 7860     		str	r0, [r7, #4]
+  55:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "start")
+  56:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  57:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** }
+ 122              		.loc 1 57 0
+ 123 0008 07F10C07 		add	r7, r7, #12
+ 124 000c BD46     		mov	sp, r7
+ 125 000e 80BC     		pop	{r7}
+ 126 0010 7047     		bx	lr
+ 127              		.cfi_endproc
+ 128              	.LFE1:
+ 130 0012 00BF     		.section	.text.etThread_execute,"ax",%progbits
+ 131              		.align	2
+ 132              		.global	etThread_execute
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	etThread_execute:
+ 137              	.LFB2:
+  58:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  59:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** void etThread_execute(etThread* self){
+ 138              		.loc 1 59 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 8
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142 0000 80B5     		push	{r7, lr}
+ 143              	.LCFI6:
+ 144              		.cfi_def_cfa_offset 8
+ 145              		.cfi_offset 7, -8
+ 146              		.cfi_offset 14, -4
+ 147 0002 82B0     		sub	sp, sp, #8
+ 148              	.LCFI7:
+ 149              		.cfi_def_cfa_offset 16
+ 150 0004 00AF     		add	r7, sp, #0
+ 151              	.LCFI8:
+ 152              		.cfi_def_cfa_register 7
+ 153 0006 7860     		str	r0, [r7, #4]
+  60:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "execute")
+  61:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	/* etThread_execute redirects the call from the thread to the execute function in the eTrice runti
+  62:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	self->threadFunction(self->threadFunctionData);
+ 154              		.loc 1 62 0
+ 155 0008 7B68     		ldr	r3, [r7, #4]
+ 156 000a 5B69     		ldr	r3, [r3, #20]
+ 157 000c 7A68     		ldr	r2, [r7, #4]
+ 158 000e 9269     		ldr	r2, [r2, #24]
+ 159 0010 1046     		mov	r0, r2
+ 160 0012 9847     		blx	r3
+  63:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  64:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** }
+ 161              		.loc 1 64 0
+ 162 0014 07F10807 		add	r7, r7, #8
+ 163 0018 BD46     		mov	sp, r7
+ 164 001a 80BD     		pop	{r7, pc}
+ 165              		.cfi_endproc
+ 166              	.LFE2:
+ 168              		.section	.text.etThread_destruct,"ax",%progbits
+ 169              		.align	2
+ 170              		.global	etThread_destruct
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	etThread_destruct:
+ 175              	.LFB3:
+  65:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  66:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** void etThread_destruct(etThread* self){
+ 176              		.loc 1 66 0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 8
+ 179              		@ frame_needed = 1, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 181 0000 80B4     		push	{r7}
+ 182              	.LCFI9:
+ 183              		.cfi_def_cfa_offset 4
+ 184              		.cfi_offset 7, -4
+ 185 0002 83B0     		sub	sp, sp, #12
+ 186              	.LCFI10:
+ 187              		.cfi_def_cfa_offset 16
+ 188 0004 00AF     		add	r7, sp, #0
+ 189              	.LCFI11:
+ 190              		.cfi_def_cfa_register 7
+ 191 0006 7860     		str	r0, [r7, #4]
+  67:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "destruct")
+  68:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  69:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  70:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** }
+ 192              		.loc 1 70 0
+ 193 0008 07F10C07 		add	r7, r7, #12
+ 194 000c BD46     		mov	sp, r7
+ 195 000e 80BC     		pop	{r7}
+ 196 0010 7047     		bx	lr
+ 197              		.cfi_endproc
+ 198              	.LFE3:
+ 200 0012 00BF     		.section	.text.etThread_sleep,"ax",%progbits
+ 201              		.align	2
+ 202              		.global	etThread_sleep
+ 203              		.thumb
+ 204              		.thumb_func
+ 206              	etThread_sleep:
+ 207              	.LFB4:
+  71:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  72:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** void etThread_sleep(etInt32 millis){
+ 208              		.loc 1 72 0
+ 209              		.cfi_startproc
+ 210              		@ args = 0, pretend = 0, frame = 8
+ 211              		@ frame_needed = 1, uses_anonymous_args = 0
+ 212              		@ link register save eliminated.
+ 213 0000 80B4     		push	{r7}
+ 214              	.LCFI12:
+ 215              		.cfi_def_cfa_offset 4
+ 216              		.cfi_offset 7, -4
+ 217 0002 83B0     		sub	sp, sp, #12
+ 218              	.LCFI13:
+ 219              		.cfi_def_cfa_offset 16
+ 220 0004 00AF     		add	r7, sp, #0
+ 221              	.LCFI14:
+ 222              		.cfi_def_cfa_register 7
+ 223 0006 7860     		str	r0, [r7, #4]
+  73:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "sleep")
+  74:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 
+  75:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  76:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etThread.c **** }
+ 224              		.loc 1 76 0
+ 225 0008 07F10C07 		add	r7, r7, #12
+ 226 000c BD46     		mov	sp, r7
+ 227 000e 80BC     		pop	{r7}
+ 228 0010 7047     		bx	lr
+ 229              		.cfi_endproc
+ 230              	.LFE4:
+ 232 0012 00BF     		.text
+ 233              	.Letext0:
+ 234              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 235              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etThread.c
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:24     .bss:00000000 noThread
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:21     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:27     .text.etThread_construct:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:32     .text.etThread_construct:00000000 etThread_construct
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:99     .text.etThread_start:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:104    .text.etThread_start:00000000 etThread_start
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:131    .text.etThread_execute:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:136    .text.etThread_execute:00000000 etThread_execute
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:169    .text.etThread_destruct:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:174    .text.etThread_destruct:00000000 etThread_destruct
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:201    .text.etThread_sleep:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccf194aN.s:206    .text.etThread_sleep:00000000 etThread_sleep
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.141.92ef314402d3b770bc37bd8efd7aeec4
+
+NO UNDEFINED SYMBOLS

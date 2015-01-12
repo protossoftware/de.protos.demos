@@ -27,9 +27,9 @@ RoomModel XMC2GoDemoModel {
 	}
 
 
-  ActorClass ABusyWaitingSimu {
+	ActorClass ABusyWaitingSimu {
 		Structure {
-			SAP timer:PTimer
+			SAP timer: PTimer
 		}
 		Behavior {
 			StateMachine {
@@ -43,18 +43,13 @@ RoomModel XMC2GoDemoModel {
 						<timeout: timer>
 					}
 					action {
-						"volatile unsigned int test=0;"
-						"unsigned int i;"
-						""
-						"for (i=0;i<100000;i++){"
-						"test++;"
-						"}"
+						"volatile unsigned int test=0;\nunsigned int i;\n\nfor (i=0;i<100000;i++){\ntest++;\n}"
 					}
 				}
 				State running
 			}
 		}
-	}	
+	}
 
 	ActorClass AUartMirror {
 		Interface {
@@ -100,7 +95,6 @@ RoomModel XMC2GoDemoModel {
 			ActorRef dimmer: ADimmer
 			ActorRef dimmer2: ADimmer
 			ActorRef uartMirror: AUartMirror
-			ActorRef busyWating: ABusyWaitingSimu
 			Binding ping.p0 and pong.p0
 			Binding uartMirror.uartIsrPort and interruptSender
 		}

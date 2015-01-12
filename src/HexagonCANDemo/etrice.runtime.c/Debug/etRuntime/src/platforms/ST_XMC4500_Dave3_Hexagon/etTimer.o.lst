@@ -1,0 +1,265 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etTimer.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	singleThreadedTimer,4,4
+  20              		.section	.text.etTimer_construct,"ax",%progbits
+  21              		.align	2
+  22              		.global	etTimer_construct
+  23              		.thumb
+  24              		.thumb_func
+  26              	etTimer_construct:
+  27              	.LFB0:
+  28              		.file 1 "../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c"
+   1:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** /*******************************************************************************
+   2:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  *
+   8:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  * 		Thomas Schuetz (initial contribution), Thomas Jung
+  10:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  *
+  11:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c ****  *******************************************************************************/
+  12:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  13:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** #include "osal/etTimer.h"
+  14:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** #include "helpers/etTimeHelpers.h"
+  15:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  16:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** #include "debugging/etLogger.h"
+  17:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** #include "debugging/etMSCLogger.h"
+  18:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  19:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** etTimer * singleThreadedTimer;
+  20:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  21:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction, void* t
+  29              		.loc 1 21 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 16
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 80B4     		push	{r7}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 7, -4
+  38 0002 85B0     		sub	sp, sp, #20
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 24
+  41 0004 00AF     		add	r7, sp, #0
+  42              	.LCFI2:
+  43              		.cfi_def_cfa_register 7
+  44 0006 F860     		str	r0, [r7, #12]
+  45 0008 B960     		str	r1, [r7, #8]
+  46 000a 7A60     		str	r2, [r7, #4]
+  47 000c 3B60     		str	r3, [r7, #0]
+  22:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "construct")
+  23:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	{
+  24:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 		self->osTimerData = NULL;
+  48              		.loc 1 24 0
+  49 000e FB68     		ldr	r3, [r7, #12]
+  50 0010 4FF00002 		mov	r2, #0
+  51 0014 1A61     		str	r2, [r3, #16]
+  25:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 		self->timerInterval.sec = timerInterval->sec;
+  52              		.loc 1 25 0
+  53 0016 BB68     		ldr	r3, [r7, #8]
+  54 0018 1A68     		ldr	r2, [r3, #0]
+  55 001a FB68     		ldr	r3, [r7, #12]
+  56 001c 1A60     		str	r2, [r3, #0]
+  26:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 		self->timerInterval.nSec = timerInterval->nSec;
+  57              		.loc 1 26 0
+  58 001e BB68     		ldr	r3, [r7, #8]
+  59 0020 5A68     		ldr	r2, [r3, #4]
+  60 0022 FB68     		ldr	r3, [r7, #12]
+  61 0024 5A60     		str	r2, [r3, #4]
+  27:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 		self->timerFunction = timerFunction;
+  62              		.loc 1 27 0
+  63 0026 FB68     		ldr	r3, [r7, #12]
+  64 0028 7A68     		ldr	r2, [r7, #4]
+  65 002a 9A60     		str	r2, [r3, #8]
+  28:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 		self->timerFunctionData = timerFunctionData;
+  66              		.loc 1 28 0
+  67 002c FB68     		ldr	r3, [r7, #12]
+  68 002e 3A68     		ldr	r2, [r7, #0]
+  69 0030 DA60     		str	r2, [r3, #12]
+  29:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  30:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  31:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	}
+  32:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	// store the timer, it will be needed to call the do actions
+  33:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	singleThreadedTimer = self;
+  70              		.loc 1 33 0
+  71 0032 40F20003 		movw	r3, #:lower16:singleThreadedTimer
+  72 0036 C0F20003 		movt	r3, #:upper16:singleThreadedTimer
+  73 003a FA68     		ldr	r2, [r7, #12]
+  74 003c 1A60     		str	r2, [r3, #0]
+  34:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  35:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  36:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** }
+  75              		.loc 1 36 0
+  76 003e 07F11407 		add	r7, r7, #20
+  77 0042 BD46     		mov	sp, r7
+  78 0044 80BC     		pop	{r7}
+  79 0046 7047     		bx	lr
+  80              		.cfi_endproc
+  81              	.LFE0:
+  83              		.section	.text.etTimer_start,"ax",%progbits
+  84              		.align	2
+  85              		.global	etTimer_start
+  86              		.thumb
+  87              		.thumb_func
+  89              	etTimer_start:
+  90              	.LFB1:
+  37:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  38:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** void etTimer_start(etTimer* self){
+  91              		.loc 1 38 0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 8
+  94              		@ frame_needed = 1, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  96 0000 80B4     		push	{r7}
+  97              	.LCFI3:
+  98              		.cfi_def_cfa_offset 4
+  99              		.cfi_offset 7, -4
+ 100 0002 83B0     		sub	sp, sp, #12
+ 101              	.LCFI4:
+ 102              		.cfi_def_cfa_offset 16
+ 103 0004 00AF     		add	r7, sp, #0
+ 104              	.LCFI5:
+ 105              		.cfi_def_cfa_register 7
+ 106 0006 7860     		str	r0, [r7, #4]
+  39:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "start")
+  40:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  41:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  42:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** }
+ 107              		.loc 1 42 0
+ 108 0008 07F10C07 		add	r7, r7, #12
+ 109 000c BD46     		mov	sp, r7
+ 110 000e 80BC     		pop	{r7}
+ 111 0010 7047     		bx	lr
+ 112              		.cfi_endproc
+ 113              	.LFE1:
+ 115 0012 00BF     		.section	.text.etTimer_stop,"ax",%progbits
+ 116              		.align	2
+ 117              		.global	etTimer_stop
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	etTimer_stop:
+ 122              	.LFB2:
+  43:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  44:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  45:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** void etTimer_stop(etTimer* self){
+ 123              		.loc 1 45 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 8
+ 126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 127              		@ link register save eliminated.
+ 128 0000 80B4     		push	{r7}
+ 129              	.LCFI6:
+ 130              		.cfi_def_cfa_offset 4
+ 131              		.cfi_offset 7, -4
+ 132 0002 83B0     		sub	sp, sp, #12
+ 133              	.LCFI7:
+ 134              		.cfi_def_cfa_offset 16
+ 135 0004 00AF     		add	r7, sp, #0
+ 136              	.LCFI8:
+ 137              		.cfi_def_cfa_register 7
+ 138 0006 7860     		str	r0, [r7, #4]
+  46:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "stop")
+  47:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  48:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  49:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** }
+ 139              		.loc 1 49 0
+ 140 0008 07F10C07 		add	r7, r7, #12
+ 141 000c BD46     		mov	sp, r7
+ 142 000e 80BC     		pop	{r7}
+ 143 0010 7047     		bx	lr
+ 144              		.cfi_endproc
+ 145              	.LFE2:
+ 147 0012 00BF     		.section	.text.etTimer_destruct,"ax",%progbits
+ 148              		.align	2
+ 149              		.global	etTimer_destruct
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	etTimer_destruct:
+ 154              	.LFB3:
+  50:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  51:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** void etTimer_destruct(etTimer* self){
+ 155              		.loc 1 51 0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 8
+ 158              		@ frame_needed = 1, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+ 160 0000 80B4     		push	{r7}
+ 161              	.LCFI9:
+ 162              		.cfi_def_cfa_offset 4
+ 163              		.cfi_offset 7, -4
+ 164 0002 83B0     		sub	sp, sp, #12
+ 165              	.LCFI10:
+ 166              		.cfi_def_cfa_offset 16
+ 167 0004 00AF     		add	r7, sp, #0
+ 168              	.LCFI11:
+ 169              		.cfi_def_cfa_register 7
+ 170 0006 7860     		str	r0, [r7, #4]
+  52:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "destruct")
+  53:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 
+  54:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  55:../etRuntime/src/platforms/ST_XMC4500_Dave3_Hexagon/etTimer.c **** }
+ 171              		.loc 1 55 0
+ 172 0008 07F10C07 		add	r7, r7, #12
+ 173 000c BD46     		mov	sp, r7
+ 174 000e 80BC     		pop	{r7}
+ 175 0010 7047     		bx	lr
+ 176              		.cfi_endproc
+ 177              	.LFE3:
+ 179 0012 00BF     		.text
+ 180              	.Letext0:
+ 181              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 182              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 183              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etTimer.c
+                            *COM*:00000004 singleThreadedTimer
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:21     .text.etTimer_construct:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:26     .text.etTimer_construct:00000000 etTimer_construct
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:84     .text.etTimer_start:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:89     .text.etTimer_start:00000000 etTimer_start
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:116    .text.etTimer_stop:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:121    .text.etTimer_stop:00000000 etTimer_stop
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:148    .text.etTimer_destruct:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc6ND8mw.s:153    .text.etTimer_destruct:00000000 etTimer_destruct
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.141.92ef314402d3b770bc37bd8efd7aeec4
+
+NO UNDEFINED SYMBOLS

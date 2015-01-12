@@ -1,0 +1,110 @@
+RoomModel HexagonCANDemo {
+
+	import room.basic.types.* from "Types.room"
+
+	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.service.can.* from "pclCANService.room"
+
+	LogicalSystem HexagonCANDemo {
+		SubSystemRef main: MainSubSystem
+	}
+
+	SubSystemClass MainSubSystem {
+		ActorRef appl: Application
+		ActorRef timingService: ATimingService
+		ActorRef canService: ACANService
+		LayerConnection ref appl satisfied_by timingService.timer
+		LayerConnection ref appl satisfied_by canService.canTx
+		LayerConnection ref appl satisfied_by canService.canRx
+		LayerConnection ref canService satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	ActorClass Application {
+		Structure {
+			ActorRef mrPing: AMrPing
+			ActorRef mrPong: AMrPong
+			Binding mrPing.p0 and mrPong.p0
+		}
+		Behavior { }
+	}
+
+	ActorClass AMrPing {
+		Interface {
+			Port p0: PPingPong
+		}
+		Structure {
+			external Port p0
+			SAP timer: PTimer
+			SAP canTx: PCANTx
+			SAP canRx: PCANRx
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"pclCANMsg msg;\n\n\ntimer.startTimeout(500);\ncanTx.init(0x00000005);\ncanRx.init(0x00000007);\n\nmsg.id = 0x12;\ncanRx.listenOnMsg(&msg);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"p0.pong();"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<ping: p0>
+					}
+					action {
+						"static uint8 counter=0;\npclCANMsg msg;\n\nif (counter & 0x01){\n\tmsg.id = 0x27;\n\t}else{\n\tmsg.id=0x30;\n\t}\nmsg.len = 8;\nmsg.data[0] = 10;\nmsg.data[1] = 11;\nmsg.data[2] = 12;\nmsg.data[3] = 13;\nmsg.data[4] = 14;\nmsg.data[5] = 15;\nmsg.data[6] = 16;\nmsg.data[7] = counter++;\n\ntimer.startTimeout(500);\ncanTx.sendMsg(&msg);"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<msgReceived: canRx>
+					}
+					action {
+						"volatile pclCANMsg msg;\n\nmsg = *data;"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ActorClass AMrPong {
+		Interface {
+			conjugated Port p0: PPingPong
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<pong: p0>
+					}
+					action {
+						"p0.ping();"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ProtocolClass PPingPong {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}

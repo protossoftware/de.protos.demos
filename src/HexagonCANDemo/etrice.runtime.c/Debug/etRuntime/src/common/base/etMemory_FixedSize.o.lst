@@ -1,0 +1,379 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etMemory_FixedSize.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.etMemory_FixedSize_alloc,"ax",%progbits
+  20              		.align	2
+  21              		.global	etMemory_FixedSize_alloc
+  22              		.thumb
+  23              		.thumb_func
+  25              	etMemory_FixedSize_alloc:
+  26              	.LFB0:
+  27              		.file 1 "../etRuntime/src/common/base/etMemory_FixedSize.c"
+   1:../etRuntime/src/common/base/etMemory_FixedSize.c **** /*******************************************************************************
+   2:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/base/etMemory_FixedSize.c ****  *
+   8:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * 		Henrik Rentz-Reichert (initial contribution)
+  10:../etRuntime/src/common/base/etMemory_FixedSize.c ****  *
+  11:../etRuntime/src/common/base/etMemory_FixedSize.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  13:../etRuntime/src/common/base/etMemory_FixedSize.c **** #include "base/etMemory_FixedSize.h"
+  14:../etRuntime/src/common/base/etMemory_FixedSize.c **** #include "base/etQueue.h"
+  15:../etRuntime/src/common/base/etMemory_FixedSize.c **** #include "debugging/etLogger.h"
+  16:../etRuntime/src/common/base/etMemory_FixedSize.c **** #include "debugging/etMSCLogger.h"
+  17:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  18:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  19:../etRuntime/src/common/base/etMemory_FixedSize.c **** typedef struct etFixedSizeMemory {
+  20:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etMemory base;
+  21:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  22:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etUInt8 *buffer;
+  23:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etUInt16 maxBlocks;
+  24:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etUInt16 blockSize;
+  25:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etQueue blockPool;
+  26:../etRuntime/src/common/base/etMemory_FixedSize.c **** } etFixedSizeMemory;
+  27:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  28:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  29:../etRuntime/src/common/base/etMemory_FixedSize.c **** void* etMemory_FixedSize_alloc(etMemory* heap, etUInt16 size) {
+  28              		.loc 1 29 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 84B0     		sub	sp, sp, #16
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  44 0008 0B46     		mov	r3, r1
+  45 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+  30:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
+  46              		.loc 1 30 0
+  47 000c 7B68     		ldr	r3, [r7, #4]
+  48 000e BB60     		str	r3, [r7, #8]
+  31:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	void* mem = NULL;
+  49              		.loc 1 31 0
+  50 0010 4FF00003 		mov	r3, #0
+  51 0014 FB60     		str	r3, [r7, #12]
+  32:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	size = MEM_CEIL(size);
+  52              		.loc 1 32 0
+  53 0016 7B88     		ldrh	r3, [r7, #2]	@ movhi
+  54 0018 C3F10003 		rsb	r3, r3, #0
+  55 001c 9BB2     		uxth	r3, r3
+  56 001e 03F00303 		and	r3, r3, #3
+  57 0022 9AB2     		uxth	r2, r3
+  58 0024 7B88     		ldrh	r3, [r7, #2]	@ movhi
+  59 0026 D318     		adds	r3, r2, r3
+  60 0028 7B80     		strh	r3, [r7, #2]	@ movhi
+  33:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  34:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "alloc")
+  35:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  36:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	if (size<=self->blockSize){
+  61              		.loc 1 36 0
+  62 002a BB68     		ldr	r3, [r7, #8]
+  63 002c 5B8A     		ldrh	r3, [r3, #18]
+  64 002e 7A88     		ldrh	r2, [r7, #2]
+  65 0030 9A42     		cmp	r2, r3
+  66 0032 0BD8     		bhi	.L2
+  37:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		if (self->blockPool.size>0) {
+  67              		.loc 1 37 0
+  68 0034 BB68     		ldr	r3, [r7, #8]
+  69 0036 DB8B     		ldrh	r3, [r3, #30]
+  70 0038 1BB2     		sxth	r3, r3
+  71 003a 002B     		cmp	r3, #0
+  72 003c 06DD     		ble	.L2
+  38:../etRuntime/src/common/base/etMemory_FixedSize.c **** 			mem = etQueue_pop(&self->blockPool);
+  73              		.loc 1 38 0
+  74 003e BB68     		ldr	r3, [r7, #8]
+  75 0040 03F11403 		add	r3, r3, #20
+  76 0044 1846     		mov	r0, r3
+  77 0046 FFF7FEFF 		bl	etQueue_pop
+  78 004a F860     		str	r0, [r7, #12]
+  79              	.L2:
+  39:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		}
+  40:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	}
+  41:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  42:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  43:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	return mem;
+  80              		.loc 1 43 0
+  81 004c FB68     		ldr	r3, [r7, #12]
+  44:../etRuntime/src/common/base/etMemory_FixedSize.c **** }
+  82              		.loc 1 44 0
+  83 004e 1846     		mov	r0, r3
+  84 0050 07F11007 		add	r7, r7, #16
+  85 0054 BD46     		mov	sp, r7
+  86 0056 80BD     		pop	{r7, pc}
+  87              		.cfi_endproc
+  88              	.LFE0:
+  90              		.section	.text.etMemory_FixedSize_free,"ax",%progbits
+  91              		.align	2
+  92              		.global	etMemory_FixedSize_free
+  93              		.thumb
+  94              		.thumb_func
+  96              	etMemory_FixedSize_free:
+  97              	.LFB1:
+  45:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  46:../etRuntime/src/common/base/etMemory_FixedSize.c **** void etMemory_FixedSize_free(etMemory* heap, void* obj, etUInt16 size) {
+  98              		.loc 1 46 0
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 24
+ 101              		@ frame_needed = 1, uses_anonymous_args = 0
+ 102 0000 80B5     		push	{r7, lr}
+ 103              	.LCFI3:
+ 104              		.cfi_def_cfa_offset 8
+ 105              		.cfi_offset 7, -8
+ 106              		.cfi_offset 14, -4
+ 107 0002 86B0     		sub	sp, sp, #24
+ 108              	.LCFI4:
+ 109              		.cfi_def_cfa_offset 32
+ 110 0004 00AF     		add	r7, sp, #0
+ 111              	.LCFI5:
+ 112              		.cfi_def_cfa_register 7
+ 113 0006 F860     		str	r0, [r7, #12]
+ 114 0008 B960     		str	r1, [r7, #8]
+ 115 000a 1346     		mov	r3, r2
+ 116 000c FB80     		strh	r3, [r7, #6]	@ movhi
+  47:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
+ 117              		.loc 1 47 0
+ 118 000e FB68     		ldr	r3, [r7, #12]
+ 119 0010 7B61     		str	r3, [r7, #20]
+  48:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  49:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "free")
+  50:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  51:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etQueue_push(&self->blockPool, obj);
+ 120              		.loc 1 51 0
+ 121 0012 7B69     		ldr	r3, [r7, #20]
+ 122 0014 03F11403 		add	r3, r3, #20
+ 123 0018 1846     		mov	r0, r3
+ 124 001a B968     		ldr	r1, [r7, #8]
+ 125 001c FFF7FEFF 		bl	etQueue_push
+  52:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  53:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  54:../etRuntime/src/common/base/etMemory_FixedSize.c **** }
+ 126              		.loc 1 54 0
+ 127 0020 07F11807 		add	r7, r7, #24
+ 128 0024 BD46     		mov	sp, r7
+ 129 0026 80BD     		pop	{r7, pc}
+ 130              		.cfi_endproc
+ 131              	.LFE1:
+ 133              		.section	.text.etMemory_FixedSize_init,"ax",%progbits
+ 134              		.align	2
+ 135              		.global	etMemory_FixedSize_init
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	etMemory_FixedSize_init:
+ 140              	.LFB2:
+  55:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  56:../etRuntime/src/common/base/etMemory_FixedSize.c **** /*
+  57:../etRuntime/src/common/base/etMemory_FixedSize.c ****  * the public interface
+  58:../etRuntime/src/common/base/etMemory_FixedSize.c ****  */
+  59:../etRuntime/src/common/base/etMemory_FixedSize.c **** etMemory* etMemory_FixedSize_init(void* heap, etUInt32 size, etUInt16 blockSize) {
+ 141              		.loc 1 59 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 32
+ 144              		@ frame_needed = 1, uses_anonymous_args = 0
+ 145 0000 80B5     		push	{r7, lr}
+ 146              	.LCFI6:
+ 147              		.cfi_def_cfa_offset 8
+ 148              		.cfi_offset 7, -8
+ 149              		.cfi_offset 14, -4
+ 150 0002 88B0     		sub	sp, sp, #32
+ 151              	.LCFI7:
+ 152              		.cfi_def_cfa_offset 40
+ 153 0004 00AF     		add	r7, sp, #0
+ 154              	.LCFI8:
+ 155              		.cfi_def_cfa_register 7
+ 156 0006 F860     		str	r0, [r7, #12]
+ 157 0008 B960     		str	r1, [r7, #8]
+ 158 000a 1346     		mov	r3, r2
+ 159 000c FB80     		strh	r3, [r7, #6]	@ movhi
+  60:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
+ 160              		.loc 1 60 0
+ 161 000e FB68     		ldr	r3, [r7, #12]
+ 162 0010 BB61     		str	r3, [r7, #24]
+  61:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	size_t data_size = MEM_CEIL(sizeof(etFixedSizeMemory));
+ 163              		.loc 1 61 0
+ 164 0012 4FF02003 		mov	r3, #32
+ 165 0016 7B61     		str	r3, [r7, #20]
+  62:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	int i;
+  63:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  64:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "init")
+  65:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  66:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	self->base.size = size;
+ 166              		.loc 1 66 0
+ 167 0018 BB69     		ldr	r3, [r7, #24]
+ 168 001a BA68     		ldr	r2, [r7, #8]
+ 169 001c 1A60     		str	r2, [r3, #0]
+  67:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	self->base.alloc = etMemory_FixedSize_alloc;
+ 170              		.loc 1 67 0
+ 171 001e BA69     		ldr	r2, [r7, #24]
+ 172 0020 40F20003 		movw	r3, #:lower16:etMemory_FixedSize_alloc
+ 173 0024 C0F20003 		movt	r3, #:upper16:etMemory_FixedSize_alloc
+ 174 0028 5360     		str	r3, [r2, #4]
+  68:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	self->base.free = etMemory_FixedSize_free;
+ 175              		.loc 1 68 0
+ 176 002a BA69     		ldr	r2, [r7, #24]
+ 177 002c 40F20003 		movw	r3, #:lower16:etMemory_FixedSize_free
+ 178 0030 C0F20003 		movt	r3, #:upper16:etMemory_FixedSize_free
+ 179 0034 9360     		str	r3, [r2, #8]
+  69:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  70:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	if (size > data_size) {
+ 180              		.loc 1 70 0
+ 181 0036 BA68     		ldr	r2, [r7, #8]
+ 182 0038 7B69     		ldr	r3, [r7, #20]
+ 183 003a 9A42     		cmp	r2, r3
+ 184 003c 30D9     		bls	.L6
+  71:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		self->buffer = ((etUInt8*) self) + data_size;
+ 185              		.loc 1 71 0
+ 186 003e BA69     		ldr	r2, [r7, #24]
+ 187 0040 7B69     		ldr	r3, [r7, #20]
+ 188 0042 D218     		adds	r2, r2, r3
+ 189 0044 BB69     		ldr	r3, [r7, #24]
+ 190 0046 DA60     		str	r2, [r3, #12]
+  72:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		self->blockSize = blockSize;
+ 191              		.loc 1 72 0
+ 192 0048 BB69     		ldr	r3, [r7, #24]
+ 193 004a FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 194 004c 5A82     		strh	r2, [r3, #18]	@ movhi
+  73:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		self->maxBlocks = (size - data_size) / self->blockSize;
+ 195              		.loc 1 73 0
+ 196 004e BA68     		ldr	r2, [r7, #8]
+ 197 0050 7B69     		ldr	r3, [r7, #20]
+ 198 0052 D21A     		subs	r2, r2, r3
+ 199 0054 BB69     		ldr	r3, [r7, #24]
+ 200 0056 5B8A     		ldrh	r3, [r3, #18]
+ 201 0058 B2FBF3F3 		udiv	r3, r2, r3
+ 202 005c 9AB2     		uxth	r2, r3
+ 203 005e BB69     		ldr	r3, [r7, #24]
+ 204 0060 1A82     		strh	r2, [r3, #16]	@ movhi
+  74:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		for (i=0; i<self->maxBlocks; i++){
+ 205              		.loc 1 74 0
+ 206 0062 4FF00003 		mov	r3, #0
+ 207 0066 FB61     		str	r3, [r7, #28]
+ 208 0068 13E0     		b	.L7
+ 209              	.L8:
+ 210              	.LBB2:
+  75:../etRuntime/src/common/base/etMemory_FixedSize.c **** 			void* block = &(self->buffer[i*self->blockSize]);
+ 211              		.loc 1 75 0 discriminator 2
+ 212 006a BB69     		ldr	r3, [r7, #24]
+ 213 006c DA68     		ldr	r2, [r3, #12]
+ 214 006e BB69     		ldr	r3, [r7, #24]
+ 215 0070 5B8A     		ldrh	r3, [r3, #18]
+ 216 0072 F969     		ldr	r1, [r7, #28]
+ 217 0074 01FB03F3 		mul	r3, r1, r3
+ 218 0078 D318     		adds	r3, r2, r3
+ 219 007a 3B61     		str	r3, [r7, #16]
+  76:../etRuntime/src/common/base/etMemory_FixedSize.c **** 			etQueue_push(&self->blockPool, block);
+ 220              		.loc 1 76 0 discriminator 2
+ 221 007c BB69     		ldr	r3, [r7, #24]
+ 222 007e 03F11403 		add	r3, r3, #20
+ 223 0082 1846     		mov	r0, r3
+ 224 0084 3969     		ldr	r1, [r7, #16]
+ 225 0086 FFF7FEFF 		bl	etQueue_push
+ 226              	.LBE2:
+  74:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		for (i=0; i<self->maxBlocks; i++){
+ 227              		.loc 1 74 0 discriminator 2
+ 228 008a FB69     		ldr	r3, [r7, #28]
+ 229 008c 03F10103 		add	r3, r3, #1
+ 230 0090 FB61     		str	r3, [r7, #28]
+ 231              	.L7:
+  74:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		for (i=0; i<self->maxBlocks; i++){
+ 232              		.loc 1 74 0 is_stmt 0 discriminator 1
+ 233 0092 BB69     		ldr	r3, [r7, #24]
+ 234 0094 1B8A     		ldrh	r3, [r3, #16]
+ 235 0096 1A46     		mov	r2, r3
+ 236 0098 FB69     		ldr	r3, [r7, #28]
+ 237 009a 9A42     		cmp	r2, r3
+ 238 009c E5DC     		bgt	.L8
+  74:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		for (i=0; i<self->maxBlocks; i++){
+ 239              		.loc 1 74 0
+ 240 009e 03E0     		b	.L9
+ 241              	.L6:
+  77:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		}
+  78:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	}
+  79:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	else {
+  80:../etRuntime/src/common/base/etMemory_FixedSize.c **** 		self->blockSize = 0;
+ 242              		.loc 1 80 0 is_stmt 1
+ 243 00a0 BB69     		ldr	r3, [r7, #24]
+ 244 00a2 4FF00002 		mov	r2, #0
+ 245 00a6 5A82     		strh	r2, [r3, #18]	@ movhi
+ 246              	.L9:
+  81:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	}
+  82:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  83:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  84:../etRuntime/src/common/base/etMemory_FixedSize.c **** 
+  85:../etRuntime/src/common/base/etMemory_FixedSize.c **** 	return &self->base;
+ 247              		.loc 1 85 0
+ 248 00a8 BB69     		ldr	r3, [r7, #24]
+  86:../etRuntime/src/common/base/etMemory_FixedSize.c **** }
+ 249              		.loc 1 86 0
+ 250 00aa 1846     		mov	r0, r3
+ 251 00ac 07F12007 		add	r7, r7, #32
+ 252 00b0 BD46     		mov	sp, r7
+ 253 00b2 80BD     		pop	{r7, pc}
+ 254              		.cfi_endproc
+ 255              	.LFE2:
+ 257              		.text
+ 258              	.Letext0:
+ 259              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/include/stddef.h"
+ 260              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 261              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 262              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etMemory_FixedSize.c
+C:\Users\TJung\AppData\Local\Temp\cc9oIhoq.s:20     .text.etMemory_FixedSize_alloc:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc9oIhoq.s:25     .text.etMemory_FixedSize_alloc:00000000 etMemory_FixedSize_alloc
+C:\Users\TJung\AppData\Local\Temp\cc9oIhoq.s:91     .text.etMemory_FixedSize_free:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc9oIhoq.s:96     .text.etMemory_FixedSize_free:00000000 etMemory_FixedSize_free
+C:\Users\TJung\AppData\Local\Temp\cc9oIhoq.s:134    .text.etMemory_FixedSize_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc9oIhoq.s:139    .text.etMemory_FixedSize_init:00000000 etMemory_FixedSize_init
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.141.92ef314402d3b770bc37bd8efd7aeec4
+
+UNDEFINED SYMBOLS
+etQueue_pop
+etQueue_push

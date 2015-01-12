@@ -1,0 +1,554 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etQueue.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.etQueue_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	etQueue_init
+  22              		.thumb
+  23              		.thumb_func
+  25              	etQueue_init:
+  26              	.LFB0:
+  27              		.file 1 "../etRuntime/src/common/base/etQueue.c"
+   1:../etRuntime/src/common/base/etQueue.c **** /*******************************************************************************
+   2:../etRuntime/src/common/base/etQueue.c ****  * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/base/etQueue.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/base/etQueue.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/base/etQueue.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/base/etQueue.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/base/etQueue.c ****  *
+   8:../etRuntime/src/common/base/etQueue.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/base/etQueue.c ****  * 		Thomas Schuetz (initial contribution)
+  10:../etRuntime/src/common/base/etQueue.c ****  *
+  11:../etRuntime/src/common/base/etQueue.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/base/etQueue.c **** 
+  13:../etRuntime/src/common/base/etQueue.c **** #include "base/etQueue.h"
+  14:../etRuntime/src/common/base/etQueue.c **** #include "debugging/etMSCLogger.h"
+  15:../etRuntime/src/common/base/etQueue.c **** 
+  16:../etRuntime/src/common/base/etQueue.c **** void etQueue_init(etQueue* self){
+  28              		.loc 1 16 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  17:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "init")
+  18:../etRuntime/src/common/base/etQueue.c **** 
+  19:../etRuntime/src/common/base/etQueue.c **** 	self->first = NULL;
+  44              		.loc 1 19 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 4FF00002 		mov	r2, #0
+  47 000e 1A60     		str	r2, [r3, #0]
+  20:../etRuntime/src/common/base/etQueue.c **** 	self->last = NULL;
+  48              		.loc 1 20 0
+  49 0010 7B68     		ldr	r3, [r7, #4]
+  50 0012 4FF00002 		mov	r2, #0
+  51 0016 5A60     		str	r2, [r3, #4]
+  21:../etRuntime/src/common/base/etQueue.c **** 	self->highWaterMark = 0;
+  52              		.loc 1 21 0
+  53 0018 7B68     		ldr	r3, [r7, #4]
+  54 001a 4FF00002 		mov	r2, #0
+  55 001e 1A81     		strh	r2, [r3, #8]	@ movhi
+  22:../etRuntime/src/common/base/etQueue.c **** 	self->size = 0;
+  56              		.loc 1 22 0
+  57 0020 7B68     		ldr	r3, [r7, #4]
+  58 0022 4FF00002 		mov	r2, #0
+  59 0026 5A81     		strh	r2, [r3, #10]	@ movhi
+  23:../etRuntime/src/common/base/etQueue.c **** 
+  24:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  25:../etRuntime/src/common/base/etQueue.c **** }
+  60              		.loc 1 25 0
+  61 0028 07F10C07 		add	r7, r7, #12
+  62 002c BD46     		mov	sp, r7
+  63 002e 80BC     		pop	{r7}
+  64 0030 7047     		bx	lr
+  65              		.cfi_endproc
+  66              	.LFE0:
+  68 0032 00BF     		.section	.text.etQueue_push,"ax",%progbits
+  69              		.align	2
+  70              		.global	etQueue_push
+  71              		.thumb
+  72              		.thumb_func
+  74              	etQueue_push:
+  75              	.LFB1:
+  26:../etRuntime/src/common/base/etQueue.c **** 
+  27:../etRuntime/src/common/base/etQueue.c **** 
+  28:../etRuntime/src/common/base/etQueue.c **** void etQueue_push(etQueue* self, etQueueObj* obj){
+  76              		.loc 1 28 0
+  77              		.cfi_startproc
+  78              		@ args = 0, pretend = 0, frame = 8
+  79              		@ frame_needed = 1, uses_anonymous_args = 0
+  80              		@ link register save eliminated.
+  81 0000 80B4     		push	{r7}
+  82              	.LCFI3:
+  83              		.cfi_def_cfa_offset 4
+  84              		.cfi_offset 7, -4
+  85 0002 83B0     		sub	sp, sp, #12
+  86              	.LCFI4:
+  87              		.cfi_def_cfa_offset 16
+  88 0004 00AF     		add	r7, sp, #0
+  89              	.LCFI5:
+  90              		.cfi_def_cfa_register 7
+  91 0006 7860     		str	r0, [r7, #4]
+  92 0008 3960     		str	r1, [r7, #0]
+  29:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "push")
+  30:../etRuntime/src/common/base/etQueue.c **** 
+  31:../etRuntime/src/common/base/etQueue.c **** 	if (self->first == NULL) {
+  93              		.loc 1 31 0
+  94 000a 7B68     		ldr	r3, [r7, #4]
+  95 000c 1B68     		ldr	r3, [r3, #0]
+  96 000e 002B     		cmp	r3, #0
+  97 0010 07D1     		bne	.L3
+  32:../etRuntime/src/common/base/etQueue.c **** 		/*no object in queue*/
+  33:../etRuntime/src/common/base/etQueue.c **** 		self->first = self->last = obj;
+  98              		.loc 1 33 0
+  99 0012 7B68     		ldr	r3, [r7, #4]
+ 100 0014 3A68     		ldr	r2, [r7, #0]
+ 101 0016 5A60     		str	r2, [r3, #4]
+ 102 0018 7B68     		ldr	r3, [r7, #4]
+ 103 001a 5A68     		ldr	r2, [r3, #4]
+ 104 001c 7B68     		ldr	r3, [r7, #4]
+ 105 001e 1A60     		str	r2, [r3, #0]
+ 106 0020 06E0     		b	.L4
+ 107              	.L3:
+  34:../etRuntime/src/common/base/etQueue.c **** 	}
+  35:../etRuntime/src/common/base/etQueue.c **** 	else {
+  36:../etRuntime/src/common/base/etQueue.c **** 		/*at least one object in queue*/
+  37:../etRuntime/src/common/base/etQueue.c **** 		self->last->next = obj;
+ 108              		.loc 1 37 0
+ 109 0022 7B68     		ldr	r3, [r7, #4]
+ 110 0024 5B68     		ldr	r3, [r3, #4]
+ 111 0026 3A68     		ldr	r2, [r7, #0]
+ 112 0028 1A60     		str	r2, [r3, #0]
+  38:../etRuntime/src/common/base/etQueue.c **** 		self->last = obj;
+ 113              		.loc 1 38 0
+ 114 002a 7B68     		ldr	r3, [r7, #4]
+ 115 002c 3A68     		ldr	r2, [r7, #0]
+ 116 002e 5A60     		str	r2, [r3, #4]
+ 117              	.L4:
+  39:../etRuntime/src/common/base/etQueue.c **** 	}
+  40:../etRuntime/src/common/base/etQueue.c **** 	obj->next = NULL; /*TODO: optimization: this line could be removed if we assume that all objects a
+ 118              		.loc 1 40 0
+ 119 0030 3B68     		ldr	r3, [r7, #0]
+ 120 0032 4FF00002 		mov	r2, #0
+ 121 0036 1A60     		str	r2, [r3, #0]
+  41:../etRuntime/src/common/base/etQueue.c **** 
+  42:../etRuntime/src/common/base/etQueue.c **** 	if (++self->size > self->highWaterMark)
+ 122              		.loc 1 42 0
+ 123 0038 7B68     		ldr	r3, [r7, #4]
+ 124 003a 5B89     		ldrh	r3, [r3, #10]
+ 125 003c 03F10103 		add	r3, r3, #1
+ 126 0040 9AB2     		uxth	r2, r3
+ 127 0042 7B68     		ldr	r3, [r7, #4]
+ 128 0044 5A81     		strh	r2, [r3, #10]	@ movhi
+ 129 0046 7B68     		ldr	r3, [r7, #4]
+ 130 0048 5A89     		ldrh	r2, [r3, #10]
+ 131 004a 7B68     		ldr	r3, [r7, #4]
+ 132 004c 1B89     		ldrh	r3, [r3, #8]
+ 133 004e 12B2     		sxth	r2, r2
+ 134 0050 1BB2     		sxth	r3, r3
+ 135 0052 9A42     		cmp	r2, r3
+ 136 0054 06DD     		ble	.L2
+  43:../etRuntime/src/common/base/etQueue.c **** 		self->highWaterMark++;
+ 137              		.loc 1 43 0
+ 138 0056 7B68     		ldr	r3, [r7, #4]
+ 139 0058 1B89     		ldrh	r3, [r3, #8]
+ 140 005a 03F10103 		add	r3, r3, #1
+ 141 005e 9AB2     		uxth	r2, r3
+ 142 0060 7B68     		ldr	r3, [r7, #4]
+ 143 0062 1A81     		strh	r2, [r3, #8]	@ movhi
+ 144              	.L2:
+  44:../etRuntime/src/common/base/etQueue.c **** 
+  45:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  46:../etRuntime/src/common/base/etQueue.c **** }
+ 145              		.loc 1 46 0
+ 146 0064 07F10C07 		add	r7, r7, #12
+ 147 0068 BD46     		mov	sp, r7
+ 148 006a 80BC     		pop	{r7}
+ 149 006c 7047     		bx	lr
+ 150              		.cfi_endproc
+ 151              	.LFE1:
+ 153 006e 00BF     		.section	.text.etQueue_pop,"ax",%progbits
+ 154              		.align	2
+ 155              		.global	etQueue_pop
+ 156              		.thumb
+ 157              		.thumb_func
+ 159              	etQueue_pop:
+ 160              	.LFB2:
+  47:../etRuntime/src/common/base/etQueue.c **** 
+  48:../etRuntime/src/common/base/etQueue.c **** etQueueObj* etQueue_pop(etQueue* self){
+ 161              		.loc 1 48 0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 16
+ 164              		@ frame_needed = 1, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+ 166 0000 80B4     		push	{r7}
+ 167              	.LCFI6:
+ 168              		.cfi_def_cfa_offset 4
+ 169              		.cfi_offset 7, -4
+ 170 0002 85B0     		sub	sp, sp, #20
+ 171              	.LCFI7:
+ 172              		.cfi_def_cfa_offset 24
+ 173 0004 00AF     		add	r7, sp, #0
+ 174              	.LCFI8:
+ 175              		.cfi_def_cfa_register 7
+ 176 0006 7860     		str	r0, [r7, #4]
+  49:../etRuntime/src/common/base/etQueue.c **** 	etQueueObj* pop_msg = self->first;
+ 177              		.loc 1 49 0
+ 178 0008 7B68     		ldr	r3, [r7, #4]
+ 179 000a 1B68     		ldr	r3, [r3, #0]
+ 180 000c FB60     		str	r3, [r7, #12]
+  50:../etRuntime/src/common/base/etQueue.c **** 
+  51:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "pop")
+  52:../etRuntime/src/common/base/etQueue.c **** 
+  53:../etRuntime/src/common/base/etQueue.c **** 	if (self->first == NULL){
+ 181              		.loc 1 53 0
+ 182 000e 7B68     		ldr	r3, [r7, #4]
+ 183 0010 1B68     		ldr	r3, [r3, #0]
+ 184 0012 002B     		cmp	r3, #0
+ 185 0014 02D1     		bne	.L7
+  54:../etRuntime/src/common/base/etQueue.c **** 		/*no message in queue*/
+  55:../etRuntime/src/common/base/etQueue.c **** 		ET_MSC_LOGGER_SYNC_EXIT
+  56:../etRuntime/src/common/base/etQueue.c **** 		return NULL;
+ 186              		.loc 1 56 0
+ 187 0016 4FF00003 		mov	r3, #0
+ 188 001a 1EE0     		b	.L8
+ 189              	.L7:
+  57:../etRuntime/src/common/base/etQueue.c **** 	}
+  58:../etRuntime/src/common/base/etQueue.c **** 	if (self->first->next==NULL){
+ 190              		.loc 1 58 0
+ 191 001c 7B68     		ldr	r3, [r7, #4]
+ 192 001e 1B68     		ldr	r3, [r3, #0]
+ 193 0020 1B68     		ldr	r3, [r3, #0]
+ 194 0022 002B     		cmp	r3, #0
+ 195 0024 08D1     		bne	.L9
+  59:../etRuntime/src/common/base/etQueue.c **** 		/*only one message in queue*/
+  60:../etRuntime/src/common/base/etQueue.c **** 		self->first = self->last = NULL;
+ 196              		.loc 1 60 0
+ 197 0026 7B68     		ldr	r3, [r7, #4]
+ 198 0028 4FF00002 		mov	r2, #0
+ 199 002c 5A60     		str	r2, [r3, #4]
+ 200 002e 7B68     		ldr	r3, [r7, #4]
+ 201 0030 5A68     		ldr	r2, [r3, #4]
+ 202 0032 7B68     		ldr	r3, [r7, #4]
+ 203 0034 1A60     		str	r2, [r3, #0]
+ 204 0036 04E0     		b	.L10
+ 205              	.L9:
+  61:../etRuntime/src/common/base/etQueue.c **** 	}
+  62:../etRuntime/src/common/base/etQueue.c **** 	else {
+  63:../etRuntime/src/common/base/etQueue.c **** 		/*more than one message in queue -> set first to nex message*/
+  64:../etRuntime/src/common/base/etQueue.c **** 		self->first = self->first->next;
+ 206              		.loc 1 64 0
+ 207 0038 7B68     		ldr	r3, [r7, #4]
+ 208 003a 1B68     		ldr	r3, [r3, #0]
+ 209 003c 1A68     		ldr	r2, [r3, #0]
+ 210 003e 7B68     		ldr	r3, [r7, #4]
+ 211 0040 1A60     		str	r2, [r3, #0]
+ 212              	.L10:
+  65:../etRuntime/src/common/base/etQueue.c **** 	}
+  66:../etRuntime/src/common/base/etQueue.c **** 
+  67:../etRuntime/src/common/base/etQueue.c **** 	pop_msg->next=NULL;
+ 213              		.loc 1 67 0
+ 214 0042 FB68     		ldr	r3, [r7, #12]
+ 215 0044 4FF00002 		mov	r2, #0
+ 216 0048 1A60     		str	r2, [r3, #0]
+  68:../etRuntime/src/common/base/etQueue.c **** 	self->size--;
+ 217              		.loc 1 68 0
+ 218 004a 7B68     		ldr	r3, [r7, #4]
+ 219 004c 5B89     		ldrh	r3, [r3, #10]
+ 220 004e 03F1FF33 		add	r3, r3, #-1
+ 221 0052 9AB2     		uxth	r2, r3
+ 222 0054 7B68     		ldr	r3, [r7, #4]
+ 223 0056 5A81     		strh	r2, [r3, #10]	@ movhi
+  69:../etRuntime/src/common/base/etQueue.c **** 
+  70:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  71:../etRuntime/src/common/base/etQueue.c **** 	return pop_msg;
+ 224              		.loc 1 71 0
+ 225 0058 FB68     		ldr	r3, [r7, #12]
+ 226              	.L8:
+  72:../etRuntime/src/common/base/etQueue.c **** }
+ 227              		.loc 1 72 0
+ 228 005a 1846     		mov	r0, r3
+ 229 005c 07F11407 		add	r7, r7, #20
+ 230 0060 BD46     		mov	sp, r7
+ 231 0062 80BC     		pop	{r7}
+ 232 0064 7047     		bx	lr
+ 233              		.cfi_endproc
+ 234              	.LFE2:
+ 236 0066 00BF     		.section	.text.etQueue_getSize,"ax",%progbits
+ 237              		.align	2
+ 238              		.global	etQueue_getSize
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	etQueue_getSize:
+ 243              	.LFB3:
+  73:../etRuntime/src/common/base/etQueue.c **** 
+  74:../etRuntime/src/common/base/etQueue.c **** etInt16 etQueue_getSize(etQueue* self) {
+ 244              		.loc 1 74 0
+ 245              		.cfi_startproc
+ 246              		@ args = 0, pretend = 0, frame = 8
+ 247              		@ frame_needed = 1, uses_anonymous_args = 0
+ 248              		@ link register save eliminated.
+ 249 0000 80B4     		push	{r7}
+ 250              	.LCFI9:
+ 251              		.cfi_def_cfa_offset 4
+ 252              		.cfi_offset 7, -4
+ 253 0002 83B0     		sub	sp, sp, #12
+ 254              	.LCFI10:
+ 255              		.cfi_def_cfa_offset 16
+ 256 0004 00AF     		add	r7, sp, #0
+ 257              	.LCFI11:
+ 258              		.cfi_def_cfa_register 7
+ 259 0006 7860     		str	r0, [r7, #4]
+  75:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "getSize")
+  76:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  77:../etRuntime/src/common/base/etQueue.c **** 	return self->size;
+ 260              		.loc 1 77 0
+ 261 0008 7B68     		ldr	r3, [r7, #4]
+ 262 000a 5B89     		ldrh	r3, [r3, #10]
+ 263 000c 1BB2     		sxth	r3, r3
+  78:../etRuntime/src/common/base/etQueue.c **** }
+ 264              		.loc 1 78 0
+ 265 000e 1846     		mov	r0, r3
+ 266 0010 07F10C07 		add	r7, r7, #12
+ 267 0014 BD46     		mov	sp, r7
+ 268 0016 80BC     		pop	{r7}
+ 269 0018 7047     		bx	lr
+ 270              		.cfi_endproc
+ 271              	.LFE3:
+ 273 001a 00BF     		.section	.text.etQueue_getFirst,"ax",%progbits
+ 274              		.align	2
+ 275              		.global	etQueue_getFirst
+ 276              		.thumb
+ 277              		.thumb_func
+ 279              	etQueue_getFirst:
+ 280              	.LFB4:
+  79:../etRuntime/src/common/base/etQueue.c **** 
+  80:../etRuntime/src/common/base/etQueue.c **** etQueueObj* etQueue_getFirst(etQueue* self){
+ 281              		.loc 1 80 0
+ 282              		.cfi_startproc
+ 283              		@ args = 0, pretend = 0, frame = 8
+ 284              		@ frame_needed = 1, uses_anonymous_args = 0
+ 285              		@ link register save eliminated.
+ 286 0000 80B4     		push	{r7}
+ 287              	.LCFI12:
+ 288              		.cfi_def_cfa_offset 4
+ 289              		.cfi_offset 7, -4
+ 290 0002 83B0     		sub	sp, sp, #12
+ 291              	.LCFI13:
+ 292              		.cfi_def_cfa_offset 16
+ 293 0004 00AF     		add	r7, sp, #0
+ 294              	.LCFI14:
+ 295              		.cfi_def_cfa_register 7
+ 296 0006 7860     		str	r0, [r7, #4]
+  81:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "getFirst")
+  82:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  83:../etRuntime/src/common/base/etQueue.c **** 	return self->first;
+ 297              		.loc 1 83 0
+ 298 0008 7B68     		ldr	r3, [r7, #4]
+ 299 000a 1B68     		ldr	r3, [r3, #0]
+  84:../etRuntime/src/common/base/etQueue.c **** }
+ 300              		.loc 1 84 0
+ 301 000c 1846     		mov	r0, r3
+ 302 000e 07F10C07 		add	r7, r7, #12
+ 303 0012 BD46     		mov	sp, r7
+ 304 0014 80BC     		pop	{r7}
+ 305 0016 7047     		bx	lr
+ 306              		.cfi_endproc
+ 307              	.LFE4:
+ 309              		.section	.text.etQueue_getLast,"ax",%progbits
+ 310              		.align	2
+ 311              		.global	etQueue_getLast
+ 312              		.thumb
+ 313              		.thumb_func
+ 315              	etQueue_getLast:
+ 316              	.LFB5:
+  85:../etRuntime/src/common/base/etQueue.c **** 
+  86:../etRuntime/src/common/base/etQueue.c **** etQueueObj* etQueue_getLast(etQueue* self){
+ 317              		.loc 1 86 0
+ 318              		.cfi_startproc
+ 319              		@ args = 0, pretend = 0, frame = 8
+ 320              		@ frame_needed = 1, uses_anonymous_args = 0
+ 321              		@ link register save eliminated.
+ 322 0000 80B4     		push	{r7}
+ 323              	.LCFI15:
+ 324              		.cfi_def_cfa_offset 4
+ 325              		.cfi_offset 7, -4
+ 326 0002 83B0     		sub	sp, sp, #12
+ 327              	.LCFI16:
+ 328              		.cfi_def_cfa_offset 16
+ 329 0004 00AF     		add	r7, sp, #0
+ 330              	.LCFI17:
+ 331              		.cfi_def_cfa_register 7
+ 332 0006 7860     		str	r0, [r7, #4]
+  87:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "getLast")
+  88:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  89:../etRuntime/src/common/base/etQueue.c **** 	return self->last;
+ 333              		.loc 1 89 0
+ 334 0008 7B68     		ldr	r3, [r7, #4]
+ 335 000a 5B68     		ldr	r3, [r3, #4]
+  90:../etRuntime/src/common/base/etQueue.c **** }
+ 336              		.loc 1 90 0
+ 337 000c 1846     		mov	r0, r3
+ 338 000e 07F10C07 		add	r7, r7, #12
+ 339 0012 BD46     		mov	sp, r7
+ 340 0014 80BC     		pop	{r7}
+ 341 0016 7047     		bx	lr
+ 342              		.cfi_endproc
+ 343              	.LFE5:
+ 345              		.section	.text.etQueue_isNotEmpty,"ax",%progbits
+ 346              		.align	2
+ 347              		.global	etQueue_isNotEmpty
+ 348              		.thumb
+ 349              		.thumb_func
+ 351              	etQueue_isNotEmpty:
+ 352              	.LFB6:
+  91:../etRuntime/src/common/base/etQueue.c **** 
+  92:../etRuntime/src/common/base/etQueue.c **** etBool etQueue_isNotEmpty(etQueue* self){
+ 353              		.loc 1 92 0
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 8
+ 356              		@ frame_needed = 1, uses_anonymous_args = 0
+ 357              		@ link register save eliminated.
+ 358 0000 80B4     		push	{r7}
+ 359              	.LCFI18:
+ 360              		.cfi_def_cfa_offset 4
+ 361              		.cfi_offset 7, -4
+ 362 0002 83B0     		sub	sp, sp, #12
+ 363              	.LCFI19:
+ 364              		.cfi_def_cfa_offset 16
+ 365 0004 00AF     		add	r7, sp, #0
+ 366              	.LCFI20:
+ 367              		.cfi_def_cfa_register 7
+ 368 0006 7860     		str	r0, [r7, #4]
+  93:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "isNotEmpty")
+  94:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+  95:../etRuntime/src/common/base/etQueue.c **** 	return self->last != NULL;
+ 369              		.loc 1 95 0
+ 370 0008 7B68     		ldr	r3, [r7, #4]
+ 371 000a 5B68     		ldr	r3, [r3, #4]
+ 372 000c 002B     		cmp	r3, #0
+ 373 000e 0CBF     		ite	eq
+ 374 0010 0023     		moveq	r3, #0
+ 375 0012 0123     		movne	r3, #1
+ 376 0014 DBB2     		uxtb	r3, r3
+  96:../etRuntime/src/common/base/etQueue.c **** }
+ 377              		.loc 1 96 0
+ 378 0016 1846     		mov	r0, r3
+ 379 0018 07F10C07 		add	r7, r7, #12
+ 380 001c BD46     		mov	sp, r7
+ 381 001e 80BC     		pop	{r7}
+ 382 0020 7047     		bx	lr
+ 383              		.cfi_endproc
+ 384              	.LFE6:
+ 386 0022 00BF     		.section	.text.etQueue_getHighWaterMark,"ax",%progbits
+ 387              		.align	2
+ 388              		.global	etQueue_getHighWaterMark
+ 389              		.thumb
+ 390              		.thumb_func
+ 392              	etQueue_getHighWaterMark:
+ 393              	.LFB7:
+  97:../etRuntime/src/common/base/etQueue.c **** 
+  98:../etRuntime/src/common/base/etQueue.c **** etInt16 etQueue_getHighWaterMark(etQueue* self) {
+ 394              		.loc 1 98 0
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 8
+ 397              		@ frame_needed = 1, uses_anonymous_args = 0
+ 398              		@ link register save eliminated.
+ 399 0000 80B4     		push	{r7}
+ 400              	.LCFI21:
+ 401              		.cfi_def_cfa_offset 4
+ 402              		.cfi_offset 7, -4
+ 403 0002 83B0     		sub	sp, sp, #12
+ 404              	.LCFI22:
+ 405              		.cfi_def_cfa_offset 16
+ 406 0004 00AF     		add	r7, sp, #0
+ 407              	.LCFI23:
+ 408              		.cfi_def_cfa_register 7
+ 409 0006 7860     		str	r0, [r7, #4]
+  99:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("etQueue", "getHightWaterMark")
+ 100:../etRuntime/src/common/base/etQueue.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 101:../etRuntime/src/common/base/etQueue.c **** 	return self->highWaterMark;
+ 410              		.loc 1 101 0
+ 411 0008 7B68     		ldr	r3, [r7, #4]
+ 412 000a 1B89     		ldrh	r3, [r3, #8]
+ 413 000c 1BB2     		sxth	r3, r3
+ 102:../etRuntime/src/common/base/etQueue.c **** }
+ 414              		.loc 1 102 0
+ 415 000e 1846     		mov	r0, r3
+ 416 0010 07F10C07 		add	r7, r7, #12
+ 417 0014 BD46     		mov	sp, r7
+ 418 0016 80BC     		pop	{r7}
+ 419 0018 7047     		bx	lr
+ 420              		.cfi_endproc
+ 421              	.LFE7:
+ 423 001a 00BF     		.text
+ 424              	.Letext0:
+ 425              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 426              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etQueue.c
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:20     .text.etQueue_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:25     .text.etQueue_init:00000000 etQueue_init
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:69     .text.etQueue_push:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:74     .text.etQueue_push:00000000 etQueue_push
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:154    .text.etQueue_pop:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:159    .text.etQueue_pop:00000000 etQueue_pop
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:237    .text.etQueue_getSize:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:242    .text.etQueue_getSize:00000000 etQueue_getSize
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:274    .text.etQueue_getFirst:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:279    .text.etQueue_getFirst:00000000 etQueue_getFirst
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:310    .text.etQueue_getLast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:315    .text.etQueue_getLast:00000000 etQueue_getLast
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:346    .text.etQueue_isNotEmpty:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:351    .text.etQueue_isNotEmpty:00000000 etQueue_isNotEmpty
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:387    .text.etQueue_getHighWaterMark:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc4lxB9c.s:392    .text.etQueue_getHighWaterMark:00000000 etQueue_getHighWaterMark
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
+                           .group:00000000 wm4.etMSCLogger.h.141.92ef314402d3b770bc37bd8efd7aeec4
+
+NO UNDEFINED SYMBOLS

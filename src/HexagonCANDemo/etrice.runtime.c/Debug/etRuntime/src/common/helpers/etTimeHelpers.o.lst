@@ -1,0 +1,435 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etTimeHelpers.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.etTimeHelpers_normalize,"ax",%progbits
+  20              		.align	2
+  21              		.global	etTimeHelpers_normalize
+  22              		.thumb
+  23              		.thumb_func
+  25              	etTimeHelpers_normalize:
+  26              	.LFB0:
+  27              		.file 1 "../etRuntime/src/common/helpers/etTimeHelpers.c"
+   1:../etRuntime/src/common/helpers/etTimeHelpers.c **** /*******************************************************************************
+   2:../etRuntime/src/common/helpers/etTimeHelpers.c ****  * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/helpers/etTimeHelpers.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/helpers/etTimeHelpers.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/helpers/etTimeHelpers.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/helpers/etTimeHelpers.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/helpers/etTimeHelpers.c ****  *
+   8:../etRuntime/src/common/helpers/etTimeHelpers.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/helpers/etTimeHelpers.c ****  * 		Thomas Schuetz (initial contribution)
+  10:../etRuntime/src/common/helpers/etTimeHelpers.c ****  *
+  11:../etRuntime/src/common/helpers/etTimeHelpers.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  13:../etRuntime/src/common/helpers/etTimeHelpers.c **** #include "helpers/etTimeHelpers.h"
+  14:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  15:../etRuntime/src/common/helpers/etTimeHelpers.c **** #define _1E9	1000000000
+  16:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  17:../etRuntime/src/common/helpers/etTimeHelpers.c **** void etTimeHelpers_normalize(etTime* time) {
+  28              		.loc 1 17 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  18:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	if (time->nSec < 0){
+  44              		.loc 1 18 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 5B68     		ldr	r3, [r3, #4]
+  47 000c 002B     		cmp	r3, #0
+  48 000e 0FDA     		bge	.L2
+  19:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		/* precondition: -1e9 < nSec < 0 */
+  20:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		time->sec -= 1;
+  49              		.loc 1 20 0
+  50 0010 7B68     		ldr	r3, [r7, #4]
+  51 0012 1B68     		ldr	r3, [r3, #0]
+  52 0014 03F1FF32 		add	r2, r3, #-1
+  53 0018 7B68     		ldr	r3, [r7, #4]
+  54 001a 1A60     		str	r2, [r3, #0]
+  21:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		time->nSec += _1E9;
+  55              		.loc 1 21 0
+  56 001c 7B68     		ldr	r3, [r7, #4]
+  57 001e 5A68     		ldr	r2, [r3, #4]
+  58 0020 4FF44A43 		mov	r3, #51712
+  59 0024 C3F69A33 		movt	r3, 15258
+  60 0028 D318     		adds	r3, r2, r3
+  61 002a 7A68     		ldr	r2, [r7, #4]
+  62 002c 5360     		str	r3, [r2, #4]
+  63 002e 16E0     		b	.L1
+  64              	.L2:
+  22:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		/* postcondition: 0<nSec<1e9 ==> no overflow possible */
+  23:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	}
+  24:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	else {
+  25:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		/* treat possible overflow */
+  26:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		if (time->nSec < _1E9){
+  65              		.loc 1 26 0
+  66 0030 7B68     		ldr	r3, [r7, #4]
+  67 0032 5A68     		ldr	r2, [r3, #4]
+  68 0034 4CF6FF13 		movw	r3, #51711
+  69 0038 C3F69A33 		movt	r3, 15258
+  70 003c 9A42     		cmp	r2, r3
+  71 003e 0EDD     		ble	.L1
+  27:../etRuntime/src/common/helpers/etTimeHelpers.c **** 			/* no overflow ==> nothing to do */
+  28:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		}
+  29:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		else {
+  30:../etRuntime/src/common/helpers/etTimeHelpers.c **** 			/* overflow ==> shift both values */
+  31:../etRuntime/src/common/helpers/etTimeHelpers.c **** 			time->sec += 1;
+  72              		.loc 1 31 0
+  73 0040 7B68     		ldr	r3, [r7, #4]
+  74 0042 1B68     		ldr	r3, [r3, #0]
+  75 0044 03F10102 		add	r2, r3, #1
+  76 0048 7B68     		ldr	r3, [r7, #4]
+  77 004a 1A60     		str	r2, [r3, #0]
+  32:../etRuntime/src/common/helpers/etTimeHelpers.c **** 			time->nSec -= _1E9;
+  78              		.loc 1 32 0
+  79 004c 7B68     		ldr	r3, [r7, #4]
+  80 004e 5A68     		ldr	r2, [r3, #4]
+  81 0050 4FF45853 		mov	r3, #13824
+  82 0054 CCF26543 		movt	r3, 50277
+  83 0058 D318     		adds	r3, r2, r3
+  84 005a 7A68     		ldr	r2, [r7, #4]
+  85 005c 5360     		str	r3, [r2, #4]
+  86              	.L1:
+  33:../etRuntime/src/common/helpers/etTimeHelpers.c **** 		}
+  34:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	}
+  35:../etRuntime/src/common/helpers/etTimeHelpers.c **** }
+  87              		.loc 1 35 0
+  88 005e 07F10C07 		add	r7, r7, #12
+  89 0062 BD46     		mov	sp, r7
+  90 0064 80BC     		pop	{r7}
+  91 0066 7047     		bx	lr
+  92              		.cfi_endproc
+  93              	.LFE0:
+  95              		.section	.text.etTimeHelpers_subtract,"ax",%progbits
+  96              		.align	2
+  97              		.global	etTimeHelpers_subtract
+  98              		.thumb
+  99              		.thumb_func
+ 101              	etTimeHelpers_subtract:
+ 102              	.LFB1:
+  36:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  37:../etRuntime/src/common/helpers/etTimeHelpers.c **** void etTimeHelpers_subtract(etTime *first, const etTime* second){
+ 103              		.loc 1 37 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 8
+ 106              		@ frame_needed = 1, uses_anonymous_args = 0
+ 107 0000 80B5     		push	{r7, lr}
+ 108              	.LCFI3:
+ 109              		.cfi_def_cfa_offset 8
+ 110              		.cfi_offset 7, -8
+ 111              		.cfi_offset 14, -4
+ 112 0002 82B0     		sub	sp, sp, #8
+ 113              	.LCFI4:
+ 114              		.cfi_def_cfa_offset 16
+ 115 0004 00AF     		add	r7, sp, #0
+ 116              	.LCFI5:
+ 117              		.cfi_def_cfa_register 7
+ 118 0006 7860     		str	r0, [r7, #4]
+ 119 0008 3960     		str	r1, [r7, #0]
+  38:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	first->sec -= second->sec;
+ 120              		.loc 1 38 0
+ 121 000a 7B68     		ldr	r3, [r7, #4]
+ 122 000c 1A68     		ldr	r2, [r3, #0]
+ 123 000e 3B68     		ldr	r3, [r7, #0]
+ 124 0010 1B68     		ldr	r3, [r3, #0]
+ 125 0012 D21A     		subs	r2, r2, r3
+ 126 0014 7B68     		ldr	r3, [r7, #4]
+ 127 0016 1A60     		str	r2, [r3, #0]
+  39:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	first->nSec -= second->nSec;
+ 128              		.loc 1 39 0
+ 129 0018 7B68     		ldr	r3, [r7, #4]
+ 130 001a 5A68     		ldr	r2, [r3, #4]
+ 131 001c 3B68     		ldr	r3, [r7, #0]
+ 132 001e 5B68     		ldr	r3, [r3, #4]
+ 133 0020 D21A     		subs	r2, r2, r3
+ 134 0022 7B68     		ldr	r3, [r7, #4]
+ 135 0024 5A60     		str	r2, [r3, #4]
+  40:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	etTimeHelpers_normalize(first);
+ 136              		.loc 1 40 0
+ 137 0026 7868     		ldr	r0, [r7, #4]
+ 138 0028 FFF7FEFF 		bl	etTimeHelpers_normalize
+  41:../etRuntime/src/common/helpers/etTimeHelpers.c **** }
+ 139              		.loc 1 41 0
+ 140 002c 07F10807 		add	r7, r7, #8
+ 141 0030 BD46     		mov	sp, r7
+ 142 0032 80BD     		pop	{r7, pc}
+ 143              		.cfi_endproc
+ 144              	.LFE1:
+ 146              		.section	.text.etTimeHelpers_add,"ax",%progbits
+ 147              		.align	2
+ 148              		.global	etTimeHelpers_add
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	etTimeHelpers_add:
+ 153              	.LFB2:
+  42:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  43:../etRuntime/src/common/helpers/etTimeHelpers.c **** void etTimeHelpers_add(etTime *first, const etTime* second){
+ 154              		.loc 1 43 0
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 8
+ 157              		@ frame_needed = 1, uses_anonymous_args = 0
+ 158 0000 80B5     		push	{r7, lr}
+ 159              	.LCFI6:
+ 160              		.cfi_def_cfa_offset 8
+ 161              		.cfi_offset 7, -8
+ 162              		.cfi_offset 14, -4
+ 163 0002 82B0     		sub	sp, sp, #8
+ 164              	.LCFI7:
+ 165              		.cfi_def_cfa_offset 16
+ 166 0004 00AF     		add	r7, sp, #0
+ 167              	.LCFI8:
+ 168              		.cfi_def_cfa_register 7
+ 169 0006 7860     		str	r0, [r7, #4]
+ 170 0008 3960     		str	r1, [r7, #0]
+  44:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	first->sec += second->sec;
+ 171              		.loc 1 44 0
+ 172 000a 7B68     		ldr	r3, [r7, #4]
+ 173 000c 1A68     		ldr	r2, [r3, #0]
+ 174 000e 3B68     		ldr	r3, [r7, #0]
+ 175 0010 1B68     		ldr	r3, [r3, #0]
+ 176 0012 D218     		adds	r2, r2, r3
+ 177 0014 7B68     		ldr	r3, [r7, #4]
+ 178 0016 1A60     		str	r2, [r3, #0]
+  45:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	first->nSec += second->nSec;
+ 179              		.loc 1 45 0
+ 180 0018 7B68     		ldr	r3, [r7, #4]
+ 181 001a 5A68     		ldr	r2, [r3, #4]
+ 182 001c 3B68     		ldr	r3, [r7, #0]
+ 183 001e 5B68     		ldr	r3, [r3, #4]
+ 184 0020 D218     		adds	r2, r2, r3
+ 185 0022 7B68     		ldr	r3, [r7, #4]
+ 186 0024 5A60     		str	r2, [r3, #4]
+  46:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	etTimeHelpers_normalize(first);
+ 187              		.loc 1 46 0
+ 188 0026 7868     		ldr	r0, [r7, #4]
+ 189 0028 FFF7FEFF 		bl	etTimeHelpers_normalize
+  47:../etRuntime/src/common/helpers/etTimeHelpers.c **** }
+ 190              		.loc 1 47 0
+ 191 002c 07F10807 		add	r7, r7, #8
+ 192 0030 BD46     		mov	sp, r7
+ 193 0032 80BD     		pop	{r7, pc}
+ 194              		.cfi_endproc
+ 195              	.LFE2:
+ 197              		.section	.text.etTimeHelpers_copy,"ax",%progbits
+ 198              		.align	2
+ 199              		.global	etTimeHelpers_copy
+ 200              		.thumb
+ 201              		.thumb_func
+ 203              	etTimeHelpers_copy:
+ 204              	.LFB3:
+  48:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  49:../etRuntime/src/common/helpers/etTimeHelpers.c **** void etTimeHelpers_copy(const etTime* source, etTime* target){
+ 205              		.loc 1 49 0
+ 206              		.cfi_startproc
+ 207              		@ args = 0, pretend = 0, frame = 8
+ 208              		@ frame_needed = 1, uses_anonymous_args = 0
+ 209              		@ link register save eliminated.
+ 210 0000 80B4     		push	{r7}
+ 211              	.LCFI9:
+ 212              		.cfi_def_cfa_offset 4
+ 213              		.cfi_offset 7, -4
+ 214 0002 83B0     		sub	sp, sp, #12
+ 215              	.LCFI10:
+ 216              		.cfi_def_cfa_offset 16
+ 217 0004 00AF     		add	r7, sp, #0
+ 218              	.LCFI11:
+ 219              		.cfi_def_cfa_register 7
+ 220 0006 7860     		str	r0, [r7, #4]
+ 221 0008 3960     		str	r1, [r7, #0]
+  50:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	target->sec = source->sec;
+ 222              		.loc 1 50 0
+ 223 000a 7B68     		ldr	r3, [r7, #4]
+ 224 000c 1A68     		ldr	r2, [r3, #0]
+ 225 000e 3B68     		ldr	r3, [r7, #0]
+ 226 0010 1A60     		str	r2, [r3, #0]
+  51:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	target->nSec = source->nSec;
+ 227              		.loc 1 51 0
+ 228 0012 7B68     		ldr	r3, [r7, #4]
+ 229 0014 5A68     		ldr	r2, [r3, #4]
+ 230 0016 3B68     		ldr	r3, [r7, #0]
+ 231 0018 5A60     		str	r2, [r3, #4]
+  52:../etRuntime/src/common/helpers/etTimeHelpers.c **** }
+ 232              		.loc 1 52 0
+ 233 001a 07F10C07 		add	r7, r7, #12
+ 234 001e BD46     		mov	sp, r7
+ 235 0020 80BC     		pop	{r7}
+ 236 0022 7047     		bx	lr
+ 237              		.cfi_endproc
+ 238              	.LFE3:
+ 240              		.section	.text.etTimeHelpers_convertToMSec,"ax",%progbits
+ 241              		.align	2
+ 242              		.global	etTimeHelpers_convertToMSec
+ 243              		.thumb
+ 244              		.thumb_func
+ 246              	etTimeHelpers_convertToMSec:
+ 247              	.LFB4:
+  53:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  54:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  55:../etRuntime/src/common/helpers/etTimeHelpers.c **** etInt32 etTimeHelpers_convertToMSec(const etTime *time){
+ 248              		.loc 1 55 0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 8
+ 251              		@ frame_needed = 1, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253 0000 80B4     		push	{r7}
+ 254              	.LCFI12:
+ 255              		.cfi_def_cfa_offset 4
+ 256              		.cfi_offset 7, -4
+ 257 0002 83B0     		sub	sp, sp, #12
+ 258              	.LCFI13:
+ 259              		.cfi_def_cfa_offset 16
+ 260 0004 00AF     		add	r7, sp, #0
+ 261              	.LCFI14:
+ 262              		.cfi_def_cfa_register 7
+ 263 0006 7860     		str	r0, [r7, #4]
+  56:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	return time->sec * 1000 + time->nSec / 1000000;
+ 264              		.loc 1 56 0
+ 265 0008 7B68     		ldr	r3, [r7, #4]
+ 266 000a 1B68     		ldr	r3, [r3, #0]
+ 267 000c 4FF47A72 		mov	r2, #1000
+ 268 0010 02FB03F1 		mul	r1, r2, r3
+ 269 0014 7B68     		ldr	r3, [r7, #4]
+ 270 0016 5A68     		ldr	r2, [r3, #4]
+ 271 0018 4DF68363 		movw	r3, #56963
+ 272 001c C4F21B33 		movt	r3, 17179
+ 273 0020 83FB0203 		smull	r0, r3, r3, r2
+ 274 0024 4FEAA340 		asr	r0, r3, #18
+ 275 0028 4FEAE273 		asr	r3, r2, #31
+ 276 002c C31A     		subs	r3, r0, r3
+ 277 002e CB18     		adds	r3, r1, r3
+  57:../etRuntime/src/common/helpers/etTimeHelpers.c **** }
+ 278              		.loc 1 57 0
+ 279 0030 1846     		mov	r0, r3
+ 280 0032 07F10C07 		add	r7, r7, #12
+ 281 0036 BD46     		mov	sp, r7
+ 282 0038 80BC     		pop	{r7}
+ 283 003a 7047     		bx	lr
+ 284              		.cfi_endproc
+ 285              	.LFE4:
+ 287              		.section	.text.etTimeHelpers_convertToEtTime,"ax",%progbits
+ 288              		.align	2
+ 289              		.global	etTimeHelpers_convertToEtTime
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	etTimeHelpers_convertToEtTime:
+ 294              	.LFB5:
+  58:../etRuntime/src/common/helpers/etTimeHelpers.c **** 
+  59:../etRuntime/src/common/helpers/etTimeHelpers.c **** void etTimeHelpers_convertToEtTime(etTime *result, etInt32 milliSeconds){
+ 295              		.loc 1 59 0
+ 296              		.cfi_startproc
+ 297              		@ args = 0, pretend = 0, frame = 8
+ 298              		@ frame_needed = 1, uses_anonymous_args = 0
+ 299              		@ link register save eliminated.
+ 300 0000 80B4     		push	{r7}
+ 301              	.LCFI15:
+ 302              		.cfi_def_cfa_offset 4
+ 303              		.cfi_offset 7, -4
+ 304 0002 83B0     		sub	sp, sp, #12
+ 305              	.LCFI16:
+ 306              		.cfi_def_cfa_offset 16
+ 307 0004 00AF     		add	r7, sp, #0
+ 308              	.LCFI17:
+ 309              		.cfi_def_cfa_register 7
+ 310 0006 7860     		str	r0, [r7, #4]
+ 311 0008 3960     		str	r1, [r7, #0]
+  60:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	result->sec = milliSeconds/1000;
+ 312              		.loc 1 60 0
+ 313 000a 3A68     		ldr	r2, [r7, #0]
+ 314 000c 44F6D353 		movw	r3, #19923
+ 315 0010 C1F26203 		movt	r3, 4194
+ 316 0014 83FB0213 		smull	r1, r3, r3, r2
+ 317 0018 4FEAA311 		asr	r1, r3, #6
+ 318 001c 4FEAE273 		asr	r3, r2, #31
+ 319 0020 CA1A     		subs	r2, r1, r3
+ 320 0022 7B68     		ldr	r3, [r7, #4]
+ 321 0024 1A60     		str	r2, [r3, #0]
+  61:../etRuntime/src/common/helpers/etTimeHelpers.c **** 	result->nSec = milliSeconds%1000 * 1000000;
+ 322              		.loc 1 61 0
+ 323 0026 3A68     		ldr	r2, [r7, #0]
+ 324 0028 44F6D353 		movw	r3, #19923
+ 325 002c C1F26203 		movt	r3, 4194
+ 326 0030 83FB0213 		smull	r1, r3, r3, r2
+ 327 0034 4FEAA311 		asr	r1, r3, #6
+ 328 0038 4FEAE273 		asr	r3, r2, #31
+ 329 003c CB1A     		subs	r3, r1, r3
+ 330 003e 4FF47A71 		mov	r1, #1000
+ 331 0042 01FB03F3 		mul	r3, r1, r3
+ 332 0046 D31A     		subs	r3, r2, r3
+ 333 0048 44F24022 		movw	r2, #16960
+ 334 004c C0F20F02 		movt	r2, 15
+ 335 0050 02FB03F2 		mul	r2, r2, r3
+ 336 0054 7B68     		ldr	r3, [r7, #4]
+ 337 0056 5A60     		str	r2, [r3, #4]
+  62:../etRuntime/src/common/helpers/etTimeHelpers.c **** }
+ 338              		.loc 1 62 0
+ 339 0058 07F10C07 		add	r7, r7, #12
+ 340 005c BD46     		mov	sp, r7
+ 341 005e 80BC     		pop	{r7}
+ 342 0060 7047     		bx	lr
+ 343              		.cfi_endproc
+ 344              	.LFE5:
+ 346 0062 00BF     		.text
+ 347              	.Letext0:
+ 348              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 349              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etTimeHelpers.c
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:20     .text.etTimeHelpers_normalize:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:25     .text.etTimeHelpers_normalize:00000000 etTimeHelpers_normalize
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:96     .text.etTimeHelpers_subtract:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:101    .text.etTimeHelpers_subtract:00000000 etTimeHelpers_subtract
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:147    .text.etTimeHelpers_add:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:152    .text.etTimeHelpers_add:00000000 etTimeHelpers_add
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:198    .text.etTimeHelpers_copy:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:203    .text.etTimeHelpers_copy:00000000 etTimeHelpers_copy
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:241    .text.etTimeHelpers_convertToMSec:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:246    .text.etTimeHelpers_convertToMSec:00000000 etTimeHelpers_convertToMSec
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:288    .text.etTimeHelpers_convertToEtTime:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cctsLMmg.s:293    .text.etTimeHelpers_convertToEtTime:00000000 etTimeHelpers_convertToEtTime
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+
+NO UNDEFINED SYMBOLS

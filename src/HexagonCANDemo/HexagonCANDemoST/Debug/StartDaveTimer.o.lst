@@ -1,0 +1,157 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"StartDaveTimer.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.timerCallback,"ax",%progbits
+  20              		.align	2
+  21              		.global	timerCallback
+  22              		.thumb
+  23              		.thumb_func
+  25              	timerCallback:
+  26              	.LFB112:
+  27              		.file 1 "../StartDaveTimer.c"
+   1:../StartDaveTimer.c **** /*
+   2:../StartDaveTimer.c ****  * StartDaveTimer.c
+   3:../StartDaveTimer.c ****  *
+   4:../StartDaveTimer.c ****  *  Created on: 09.11.2014
+   5:../StartDaveTimer.c ****  *      Author: TJung
+   6:../StartDaveTimer.c ****  */
+   7:../StartDaveTimer.c **** 
+   8:../StartDaveTimer.c **** #include "DAVE3.h"
+   9:../StartDaveTimer.c **** 
+  10:../StartDaveTimer.c **** void etTick_Handler(void);
+  11:../StartDaveTimer.c **** 
+  12:../StartDaveTimer.c **** void timerCallback(void * arg){
+  28              		.loc 1 12 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 82B0     		sub	sp, sp, #8
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  13:../StartDaveTimer.c **** 	etTick_Handler();
+  44              		.loc 1 13 0
+  45 0008 FFF7FEFF 		bl	etTick_Handler
+  14:../StartDaveTimer.c **** }
+  46              		.loc 1 14 0
+  47 000c 07F10807 		add	r7, r7, #8
+  48 0010 BD46     		mov	sp, r7
+  49 0012 80BD     		pop	{r7, pc}
+  50              		.cfi_endproc
+  51              	.LFE112:
+  53              		.section	.text.StartDaveTimer,"ax",%progbits
+  54              		.align	2
+  55              		.global	StartDaveTimer
+  56              		.thumb
+  57              		.thumb_func
+  59              	StartDaveTimer:
+  60              	.LFB113:
+  15:../StartDaveTimer.c **** 
+  16:../StartDaveTimer.c **** typedef void (*SYSTM001_TimerCallBackPtr)(void* ParamToCallBack);
+  17:../StartDaveTimer.c **** 
+  18:../StartDaveTimer.c **** void StartDaveTimer(void){
+  61              		.loc 1 18 0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 8
+  64              		@ frame_needed = 1, uses_anonymous_args = 0
+  65 0000 80B5     		push	{r7, lr}
+  66              	.LCFI3:
+  67              		.cfi_def_cfa_offset 8
+  68              		.cfi_offset 7, -8
+  69              		.cfi_offset 14, -4
+  70 0002 82B0     		sub	sp, sp, #8
+  71              	.LCFI4:
+  72              		.cfi_def_cfa_offset 16
+  73 0004 00AF     		add	r7, sp, #0
+  74              	.LCFI5:
+  75              		.cfi_def_cfa_register 7
+  19:../StartDaveTimer.c **** handle_t timer;
+  20:../StartDaveTimer.c **** 
+  21:../StartDaveTimer.c **** 	timer = SYSTM001_CreateTimer(1,SYSTM001_PERIODIC,(SYSTM001_TimerCallBackPtr*) timerCallback,(void*
+  76              		.loc 1 21 0
+  77 0006 4FF00100 		mov	r0, #1
+  78 000a 4FF00101 		mov	r1, #1
+  79 000e 40F20002 		movw	r2, #:lower16:timerCallback
+  80 0012 C0F20002 		movt	r2, #:upper16:timerCallback
+  81 0016 4FF00003 		mov	r3, #0
+  82 001a FFF7FEFF 		bl	SYSTM001_CreateTimer
+  83 001e 7860     		str	r0, [r7, #4]
+  22:../StartDaveTimer.c **** 	SYSTM001_StartTimer(timer);
+  84              		.loc 1 22 0
+  85 0020 7868     		ldr	r0, [r7, #4]
+  86 0022 FFF7FEFF 		bl	SYSTM001_StartTimer
+  23:../StartDaveTimer.c **** }
+  87              		.loc 1 23 0
+  88 0026 07F10807 		add	r7, r7, #8
+  89 002a BD46     		mov	sp, r7
+  90 002c 80BD     		pop	{r7, pc}
+  91              		.cfi_endproc
+  92              	.LFE113:
+  94 002e 00BF     		.text
+  95              	.Letext0:
+  96              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  97              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+  98              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+  99              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 StartDaveTimer.c
+C:\Users\TJung\AppData\Local\Temp\ccHzIJ09.s:20     .text.timerCallback:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHzIJ09.s:25     .text.timerCallback:00000000 timerCallback
+C:\Users\TJung\AppData\Local\Temp\ccHzIJ09.s:54     .text.StartDaveTimer:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHzIJ09.s:59     .text.StartDaveTimer:00000000 StartDaveTimer
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.94e6f9e83cbaf2d2b00f265c326df8e7
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.82a8db895dc146da001475dd68223522
+                           .group:00000000 wm4.CAN_Types.h.39.df7fb5ef31e40aa4065540aa5507b9c8
+                           .group:00000000 wm4.CAN001.h.81.2ffbbfa413249ddb098d31e13be0595a
+                           .group:00000000 wm4.CAN001_Conf.h.47.921d834dba1940f3c71e32b82c523e95
+                           .group:00000000 wm4.CAN001.h.1198.6bba25bd7048241963d5031cb79ff965
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+
+UNDEFINED SYMBOLS
+etTick_Handler
+SYSTM001_CreateTimer
+SYSTM001_StartTimer

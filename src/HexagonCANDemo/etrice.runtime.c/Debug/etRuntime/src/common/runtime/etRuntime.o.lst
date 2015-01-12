@@ -1,0 +1,131 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"etRuntime.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	terminateSemaphore:
+  22 0000 00000000 		.space	4
+  23              		.section	.text.etRuntime_getTerminateSemaphore,"ax",%progbits
+  24              		.align	2
+  25              		.global	etRuntime_getTerminateSemaphore
+  26              		.thumb
+  27              		.thumb_func
+  29              	etRuntime_getTerminateSemaphore:
+  30              	.LFB0:
+  31              		.file 1 "../etRuntime/src/common/runtime/etRuntime.c"
+   1:../etRuntime/src/common/runtime/etRuntime.c **** /*******************************************************************************
+   2:../etRuntime/src/common/runtime/etRuntime.c ****  * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
+   3:../etRuntime/src/common/runtime/etRuntime.c ****  * All rights reserved. This program and the accompanying materials
+   4:../etRuntime/src/common/runtime/etRuntime.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   5:../etRuntime/src/common/runtime/etRuntime.c ****  * which accompanies this distribution, and is available at
+   6:../etRuntime/src/common/runtime/etRuntime.c ****  * http://www.eclipse.org/legal/epl-v10.html
+   7:../etRuntime/src/common/runtime/etRuntime.c ****  *
+   8:../etRuntime/src/common/runtime/etRuntime.c ****  * CONTRIBUTORS:
+   9:../etRuntime/src/common/runtime/etRuntime.c ****  * 		Thomas Schuetz (initial contribution)
+  10:../etRuntime/src/common/runtime/etRuntime.c ****  *
+  11:../etRuntime/src/common/runtime/etRuntime.c ****  *******************************************************************************/
+  12:../etRuntime/src/common/runtime/etRuntime.c **** 
+  13:../etRuntime/src/common/runtime/etRuntime.c **** 
+  14:../etRuntime/src/common/runtime/etRuntime.c **** #include "runtime/etRuntime.h"
+  15:../etRuntime/src/common/runtime/etRuntime.c **** 
+  16:../etRuntime/src/common/runtime/etRuntime.c **** 
+  17:../etRuntime/src/common/runtime/etRuntime.c **** static etSema terminateSemaphore;
+  18:../etRuntime/src/common/runtime/etRuntime.c **** 
+  19:../etRuntime/src/common/runtime/etRuntime.c **** etSema* etRuntime_getTerminateSemaphore() {
+  32              		.loc 1 19 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36 0000 80B5     		push	{r7, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 00AF     		add	r7, sp, #0
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_register 7
+  20:../etRuntime/src/common/runtime/etRuntime.c **** 	static etBool initialized = ET_FALSE;
+  21:../etRuntime/src/common/runtime/etRuntime.c **** 
+  22:../etRuntime/src/common/runtime/etRuntime.c **** 	if (!initialized) {
+  44              		.loc 1 22 0
+  45 0004 40F20003 		movw	r3, #:lower16:initialized.4989
+  46 0008 C0F20003 		movt	r3, #:upper16:initialized.4989
+  47 000c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  48 000e 002B     		cmp	r3, #0
+  49 0010 0CD1     		bne	.L2
+  23:../etRuntime/src/common/runtime/etRuntime.c **** 		initialized = ET_TRUE;
+  50              		.loc 1 23 0
+  51 0012 40F20003 		movw	r3, #:lower16:initialized.4989
+  52 0016 C0F20003 		movt	r3, #:upper16:initialized.4989
+  53 001a 4FF00102 		mov	r2, #1
+  54 001e 1A70     		strb	r2, [r3, #0]
+  24:../etRuntime/src/common/runtime/etRuntime.c **** 		etSema_construct(&terminateSemaphore);
+  55              		.loc 1 24 0
+  56 0020 40F20000 		movw	r0, #:lower16:terminateSemaphore
+  57 0024 C0F20000 		movt	r0, #:upper16:terminateSemaphore
+  58 0028 FFF7FEFF 		bl	etSema_construct
+  59              	.L2:
+  25:../etRuntime/src/common/runtime/etRuntime.c **** 	}
+  26:../etRuntime/src/common/runtime/etRuntime.c **** 
+  27:../etRuntime/src/common/runtime/etRuntime.c **** 	return &terminateSemaphore;
+  60              		.loc 1 27 0
+  61 002c 40F20003 		movw	r3, #:lower16:terminateSemaphore
+  62 0030 C0F20003 		movt	r3, #:upper16:terminateSemaphore
+  28:../etRuntime/src/common/runtime/etRuntime.c **** }
+  63              		.loc 1 28 0
+  64 0034 1846     		mov	r0, r3
+  65 0036 80BD     		pop	{r7, pc}
+  66              		.cfi_endproc
+  67              	.LFE0:
+  69              		.bss
+  70              	initialized.4989:
+  71 0004 00       		.space	1
+  72 0005 000000   		.text
+  73              	.Letext0:
+  74              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+  75              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+DEFINED SYMBOLS
+                            *ABS*:00000000 etRuntime.c
+C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:20     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:21     .bss:00000000 terminateSemaphore
+C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:24     .text.etRuntime_getTerminateSemaphore:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:29     .text.etRuntime_getTerminateSemaphore:00000000 etRuntime_getTerminateSemaphore
+C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:70     .bss:00000004 initialized.4989
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
+
+UNDEFINED SYMBOLS
+etSema_construct
