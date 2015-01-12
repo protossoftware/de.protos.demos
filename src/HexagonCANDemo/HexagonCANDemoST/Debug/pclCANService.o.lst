@@ -485,129 +485,27 @@
  404 00ce 80BD     		pop	{r7, pc}
  405              		.cfi_endproc
  406              	.LFE116:
- 408              		.section	.text.pclCANUpdateMO,"ax",%progbits
- 409              		.align	2
- 410              		.global	pclCANUpdateMO
- 411              		.thumb
- 412              		.thumb_func
- 414              	pclCANUpdateMO:
- 415              	.LFB117:
-  87:../pclCANService.c **** 
-  88:../pclCANService.c **** 
-  89:../pclCANService.c **** void pclCANUpdateMO(uint32_t channel){}
- 416              		.loc 1 89 0
- 417              		.cfi_startproc
- 418              		@ args = 0, pretend = 0, frame = 8
- 419              		@ frame_needed = 1, uses_anonymous_args = 0
- 420              		@ link register save eliminated.
- 421 0000 80B4     		push	{r7}
- 422              	.LCFI14:
- 423              		.cfi_def_cfa_offset 4
- 424              		.cfi_offset 7, -4
- 425 0002 83B0     		sub	sp, sp, #12
- 426              	.LCFI15:
- 427              		.cfi_def_cfa_offset 16
- 428 0004 00AF     		add	r7, sp, #0
- 429              	.LCFI16:
- 430              		.cfi_def_cfa_register 7
- 431 0006 7860     		str	r0, [r7, #4]
- 432              		.loc 1 89 0
- 433 0008 07F10C07 		add	r7, r7, #12
- 434 000c BD46     		mov	sp, r7
- 435 000e 80BC     		pop	{r7}
- 436 0010 7047     		bx	lr
- 437              		.cfi_endproc
- 438              	.LFE117:
- 440 0012 00BF     		.section	.text.pclCANUpdateMOData,"ax",%progbits
- 441              		.align	2
- 442              		.global	pclCANUpdateMOData
- 443              		.thumb
- 444              		.thumb_func
- 446              	pclCANUpdateMOData:
- 447              	.LFB118:
-  90:../pclCANService.c **** void pclCANUpdateMOData(uint32_t channel){}
- 448              		.loc 1 90 0
- 449              		.cfi_startproc
- 450              		@ args = 0, pretend = 0, frame = 8
- 451              		@ frame_needed = 1, uses_anonymous_args = 0
- 452              		@ link register save eliminated.
- 453 0000 80B4     		push	{r7}
- 454              	.LCFI17:
- 455              		.cfi_def_cfa_offset 4
- 456              		.cfi_offset 7, -4
- 457 0002 83B0     		sub	sp, sp, #12
- 458              	.LCFI18:
- 459              		.cfi_def_cfa_offset 16
- 460 0004 00AF     		add	r7, sp, #0
- 461              	.LCFI19:
- 462              		.cfi_def_cfa_register 7
- 463 0006 7860     		str	r0, [r7, #4]
- 464              		.loc 1 90 0
- 465 0008 07F10C07 		add	r7, r7, #12
- 466 000c BD46     		mov	sp, r7
- 467 000e 80BC     		pop	{r7}
- 468 0010 7047     		bx	lr
- 469              		.cfi_endproc
- 470              	.LFE118:
- 472 0012 00BF     		.section	.text.pclCANReadMsg,"ax",%progbits
- 473              		.align	2
- 474              		.global	pclCANReadMsg
- 475              		.thumb
- 476              		.thumb_func
- 478              	pclCANReadMsg:
- 479              	.LFB119:
-  91:../pclCANService.c **** 
-  92:../pclCANService.c **** void pclCANReadMsg(uint32_t channel){}
- 480              		.loc 1 92 0
- 481              		.cfi_startproc
- 482              		@ args = 0, pretend = 0, frame = 8
- 483              		@ frame_needed = 1, uses_anonymous_args = 0
- 484              		@ link register save eliminated.
- 485 0000 80B4     		push	{r7}
- 486              	.LCFI20:
- 487              		.cfi_def_cfa_offset 4
- 488              		.cfi_offset 7, -4
- 489 0002 83B0     		sub	sp, sp, #12
- 490              	.LCFI21:
- 491              		.cfi_def_cfa_offset 16
- 492 0004 00AF     		add	r7, sp, #0
- 493              	.LCFI22:
- 494              		.cfi_def_cfa_register 7
- 495 0006 7860     		str	r0, [r7, #4]
- 496              		.loc 1 92 0
- 497 0008 07F10C07 		add	r7, r7, #12
- 498 000c BD46     		mov	sp, r7
- 499 000e 80BC     		pop	{r7}
- 500 0010 7047     		bx	lr
- 501              		.cfi_endproc
- 502              	.LFE119:
- 504 0012 00BF     		.text
- 505              	.Letext0:
- 506              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 507              		.file 3 "../pclCANService.h"
- 508              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
- 509              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
- 510              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
- 511              		.file 7 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
- 512              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+ 408              		.text
+ 409              	.Letext0:
+ 410              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 411              		.file 3 "../pclCANService.h"
+ 412              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 413              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+ 414              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
+ 415              		.file 7 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 416              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST\\Dav
 DEFINED SYMBOLS
                             *ABS*:00000000 pclCANService.c
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:20     .text.pclCANInitNodes:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:25     .text.pclCANInitNodes:00000000 pclCANInitNodes
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:48     .text.pclCANInitMO:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:53     .text.pclCANInitMO:00000000 pclCANInitMO
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:80     .text.pclCANSendMsg:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:85     .text.pclCANSendMsg:00000000 pclCANSendMsg
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:214    .text.pclCANListenOnMsg:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:219    .text.pclCANListenOnMsg:00000000 pclCANListenOnMsg
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:286    .text.pclCANCheckReception:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:291    .text.pclCANCheckReception:00000000 pclCANCheckReception
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:409    .text.pclCANUpdateMO:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:414    .text.pclCANUpdateMO:00000000 pclCANUpdateMO
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:441    .text.pclCANUpdateMOData:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:446    .text.pclCANUpdateMOData:00000000 pclCANUpdateMOData
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:473    .text.pclCANReadMsg:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccD4uuPr.s:478    .text.pclCANReadMsg:00000000 pclCANReadMsg
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:20     .text.pclCANInitNodes:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:25     .text.pclCANInitNodes:00000000 pclCANInitNodes
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:48     .text.pclCANInitMO:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:53     .text.pclCANInitMO:00000000 pclCANInitMO
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:80     .text.pclCANSendMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:85     .text.pclCANSendMsg:00000000 pclCANSendMsg
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:214    .text.pclCANListenOnMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:219    .text.pclCANListenOnMsg:00000000 pclCANListenOnMsg
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:286    .text.pclCANCheckReception:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccaPXrDp.s:291    .text.pclCANCheckReception:00000000 pclCANCheckReception
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
                            .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5

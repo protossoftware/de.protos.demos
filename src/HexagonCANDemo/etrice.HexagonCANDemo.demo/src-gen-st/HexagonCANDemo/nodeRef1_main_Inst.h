@@ -9,10 +9,10 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
-#include "room/basic/service/can/ACANService.h"
-#include "HexagonCANDemo/AMrPing.h"
-#include "HexagonCANDemo/Application.h"
 #include "HexagonCANDemo/AMrPong.h"
+#include "HexagonCANDemo/Application.h"
+#include "HexagonCANDemo/AMrPing.h"
+#include "room/basic/service/can/ACANService.h"
 #include "room/basic/service/timing/ATimingService.h"
 
 /* include all referenced ProtcolClasses */
@@ -160,86 +160,46 @@ static ACANService _HexagonCANDemo_main_canService = {
 	
 	/* attributes */
 	{ {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	} } 		/* rxData[10] */,
 	{ {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */,
-		0xFFFFFFFF		/* msgId */,
-		{0, 0, 0, 0, 0, 0, 0, 0}		/* data[8] */
+		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
 	} } 		/* txData[10] */,
 	50		/* pollTime */
 	

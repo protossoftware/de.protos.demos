@@ -144,16 +144,9 @@ RoomModel room.basic.service.can {
 		}
 	}
 
-//	DataClass DCANMsg {
-//		Attribute id: uint32 = "0xFFFFFFFF"
-//		Attribute len: uint8
-//		Attribute data [ 8 ]: uint8
-//	}
-
 	DataClass DCANData {
 		Attribute channel: uint32 = " ET_CAN_CHANNEL_NOT_DEFINED "
-		Attribute msgId: uint32 = "0xFFFFFFFF"
-		Attribute data [ 8 ]: uint8
 	}
-ExternalType pclCANMsg -> "pclCANMsg"
+
+	ExternalType pclCANMsg -> "pclCANMsg"
 }

@@ -15,8 +15,6 @@
 typedef struct {
 	/*--------------------- attributes ---------------------*/
 	uint32 channel;
-	uint32 msgId;
-	uint8 data[8];
 } DCANData;
 
 

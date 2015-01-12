@@ -18,8 +18,6 @@
 
 /* attributes */
 #define channel (self->channel)
-#define msgId (self->msgId)
-#define data (self->data)
 
 #endif /* _ROOM_BASIC_SERVICE_CAN_DCANDATA_UTILS_H_ */
 

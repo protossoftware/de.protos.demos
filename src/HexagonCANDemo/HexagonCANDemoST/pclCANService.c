@@ -84,11 +84,3 @@ CAN001_MessageHandleType CanRecMsgObj;
  	 }
  	 return PCL_FALSE;
 }
-
-
-void pclCANUpdateMO(uint32_t channel){}
-void pclCANUpdateMOData(uint32_t channel){}
-
-void pclCANReadMsg(uint32_t channel){}
-
-

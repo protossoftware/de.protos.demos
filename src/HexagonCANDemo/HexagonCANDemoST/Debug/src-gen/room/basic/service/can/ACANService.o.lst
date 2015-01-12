@@ -111,7 +111,7 @@
   45              		.loc 1 67 0
   46 000c 7B68     		ldr	r3, [r7, #4]
   47 000e 7A88     		ldrh	r2, [r7, #2]	@ movhi
-  48 0010 A3F84821 		strh	r2, [r3, #328]	@ movhi
+  48 0010 A3F85820 		strh	r2, [r3, #88]	@ movhi
   68:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
   49              		.loc 1 68 0
   50 0014 07F10C07 		add	r7, r7, #12
@@ -147,7 +147,7 @@
   71:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	return self->state;
   80              		.loc 1 71 0
   81 0008 7B68     		ldr	r3, [r7, #4]
-  82 000a B3F84831 		ldrh	r3, [r3, #328]
+  82 000a B3F85830 		ldrh	r3, [r3, #88]
   83 000e 1BB2     		sxth	r3, r3
   72:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
   84              		.loc 1 72 0
@@ -191,21 +191,21 @@
  118 000a 1B68     		ldr	r3, [r3, #0]
  119 000c 1A46     		mov	r2, r3
  120 000e 7B68     		ldr	r3, [r7, #4]
- 121 0010 D3F84431 		ldr	r3, [r3, #324]
- 122 0014 1046     		mov	r0, r2
- 123 0016 1946     		mov	r1, r3
- 124 0018 FFF7FEFF 		bl	PTimerConjPort_startTimer
+ 121 0010 5B6D     		ldr	r3, [r3, #84]
+ 122 0012 1046     		mov	r0, r2
+ 123 0014 1946     		mov	r1, r3
+ 124 0016 FFF7FEFF 		bl	PTimerConjPort_startTimer
   79:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	pclCANInitNodes();
  125              		.loc 1 79 0
- 126 001c FFF7FEFF 		bl	pclCANInitNodes
+ 126 001a FFF7FEFF 		bl	pclCANInitNodes
   80:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
  127              		.loc 1 80 0
- 128 0020 07F10807 		add	r7, r7, #8
- 129 0024 BD46     		mov	sp, r7
- 130 0026 80BD     		pop	{r7, pc}
+ 128 001e 07F10807 		add	r7, r7, #8
+ 129 0022 BD46     		mov	sp, r7
+ 130 0024 80BD     		pop	{r7, pc}
  131              		.cfi_endproc
  132              	.LFE2:
- 134              		.section	.text.action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0,"ax",%progbits
+ 134 0026 00BF     		.section	.text.action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0,"ax",%progbits
  135              		.align	2
  136              		.thumb
  137              		.thumb_func
@@ -238,206 +238,202 @@
  161 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
  162 0010 FA68     		ldr	r2, [r7, #12]
  163 0012 03F10A03 		add	r3, r3, #10
- 164 0016 4FEA0313 		lsl	r3, r3, #4
+ 164 0016 4FEA8303 		lsl	r3, r3, #2
  165 001a D318     		adds	r3, r2, r3
- 166 001c 03F10403 		add	r3, r3, #4
- 167 0020 1B68     		ldr	r3, [r3, #0]
- 168 0022 7B61     		str	r3, [r7, #20]
+ 166 001c 5B68     		ldr	r3, [r3, #4]
+ 167 001e 7B61     		str	r3, [r7, #20]
   85:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	pclCANSendMsg(c,data);
- 169              		.loc 1 85 0
- 170 0024 7869     		ldr	r0, [r7, #20]
- 171 0026 7968     		ldr	r1, [r7, #4]
- 172 0028 FFF7FEFF 		bl	pclCANSendMsg
+ 168              		.loc 1 85 0
+ 169 0020 7869     		ldr	r0, [r7, #20]
+ 170 0022 7968     		ldr	r1, [r7, #4]
+ 171 0024 FFF7FEFF 		bl	pclCANSendMsg
   86:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 173              		.loc 1 86 0
- 174 002c 07F11807 		add	r7, r7, #24
- 175 0030 BD46     		mov	sp, r7
- 176 0032 80BD     		pop	{r7, pc}
- 177              		.cfi_endproc
- 178              	.LFE3:
- 180              		.section	.text.action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1,"ax",%progbits
- 181              		.align	2
- 182              		.thumb
- 183              		.thumb_func
- 185              	action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1:
- 186              	.LFB4:
+ 172              		.loc 1 86 0
+ 173 0028 07F11807 		add	r7, r7, #24
+ 174 002c BD46     		mov	sp, r7
+ 175 002e 80BD     		pop	{r7, pc}
+ 176              		.cfi_endproc
+ 177              	.LFE3:
+ 179              		.section	.text.action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1,"ax",%progbits
+ 180              		.align	2
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1:
+ 185              	.LFB4:
   87:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1(ACANService* self, co
- 187              		.loc 1 87 0
- 188              		.cfi_startproc
- 189              		@ args = 0, pretend = 0, frame = 16
- 190              		@ frame_needed = 1, uses_anonymous_args = 0
- 191 0000 80B5     		push	{r7, lr}
- 192              	.LCFI12:
- 193              		.cfi_def_cfa_offset 8
- 194              		.cfi_offset 7, -8
- 195              		.cfi_offset 14, -4
- 196 0002 84B0     		sub	sp, sp, #16
- 197              	.LCFI13:
- 198              		.cfi_def_cfa_offset 24
- 199 0004 00AF     		add	r7, sp, #0
- 200              	.LCFI14:
- 201              		.cfi_def_cfa_register 7
- 202 0006 F860     		str	r0, [r7, #12]
- 203 0008 B960     		str	r1, [r7, #8]
- 204 000a 7A60     		str	r2, [r7, #4]
+ 186              		.loc 1 87 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 16
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190 0000 80B5     		push	{r7, lr}
+ 191              	.LCFI12:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 7, -8
+ 194              		.cfi_offset 14, -4
+ 195 0002 84B0     		sub	sp, sp, #16
+ 196              	.LCFI13:
+ 197              		.cfi_def_cfa_offset 24
+ 198 0004 00AF     		add	r7, sp, #0
+ 199              	.LCFI14:
+ 200              		.cfi_def_cfa_register 7
+ 201 0006 F860     		str	r0, [r7, #12]
+ 202 0008 B960     		str	r1, [r7, #8]
+ 203 000a 7A60     		str	r2, [r7, #4]
   88:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	txData[((etReplSubPort*)ifitem)->index].channel = data;
- 205              		.loc 1 88 0
- 206 000c BB68     		ldr	r3, [r7, #8]
- 207 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
- 208 0010 FA68     		ldr	r2, [r7, #12]
- 209 0012 03F10A03 		add	r3, r3, #10
- 210 0016 4FEA0313 		lsl	r3, r3, #4
- 211 001a D318     		adds	r3, r2, r3
- 212 001c 03F10403 		add	r3, r3, #4
- 213 0020 7A68     		ldr	r2, [r7, #4]
- 214 0022 1A60     		str	r2, [r3, #0]
+ 204              		.loc 1 88 0
+ 205 000c BB68     		ldr	r3, [r7, #8]
+ 206 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 207 0010 FA68     		ldr	r2, [r7, #12]
+ 208 0012 03F10A03 		add	r3, r3, #10
+ 209 0016 4FEA8303 		lsl	r3, r3, #2
+ 210 001a D318     		adds	r3, r2, r3
+ 211 001c 7A68     		ldr	r2, [r7, #4]
+ 212 001e 5A60     		str	r2, [r3, #4]
   89:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	pclCANInitMO(data);
- 215              		.loc 1 89 0
- 216 0024 7868     		ldr	r0, [r7, #4]
- 217 0026 FFF7FEFF 		bl	pclCANInitMO
+ 213              		.loc 1 89 0
+ 214 0020 7868     		ldr	r0, [r7, #4]
+ 215 0022 FFF7FEFF 		bl	pclCANInitMO
   90:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 218              		.loc 1 90 0
- 219 002a 07F11007 		add	r7, r7, #16
- 220 002e BD46     		mov	sp, r7
- 221 0030 80BD     		pop	{r7, pc}
- 222              		.cfi_endproc
- 223              	.LFE4:
- 225 0032 00BF     		.section	.text.action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2,"ax",%progbits
- 226              		.align	2
- 227              		.thumb
- 228              		.thumb_func
- 230              	action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2:
- 231              	.LFB5:
+ 216              		.loc 1 90 0
+ 217 0026 07F11007 		add	r7, r7, #16
+ 218 002a BD46     		mov	sp, r7
+ 219 002c 80BD     		pop	{r7, pc}
+ 220              		.cfi_endproc
+ 221              	.LFE4:
+ 223 002e 00BF     		.section	.text.action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2,"ax",%progbits
+ 224              		.align	2
+ 225              		.thumb
+ 226              		.thumb_func
+ 228              	action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2:
+ 229              	.LFB5:
   91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static void action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2(ACANService* self, co
- 232              		.loc 1 91 0
- 233              		.cfi_startproc
- 234              		@ args = 0, pretend = 0, frame = 16
- 235              		@ frame_needed = 1, uses_anonymous_args = 0
- 236 0000 80B5     		push	{r7, lr}
- 237              	.LCFI15:
- 238              		.cfi_def_cfa_offset 8
- 239              		.cfi_offset 7, -8
- 240              		.cfi_offset 14, -4
- 241 0002 84B0     		sub	sp, sp, #16
- 242              	.LCFI16:
- 243              		.cfi_def_cfa_offset 24
- 244 0004 00AF     		add	r7, sp, #0
- 245              	.LCFI17:
- 246              		.cfi_def_cfa_register 7
- 247 0006 F860     		str	r0, [r7, #12]
- 248 0008 B960     		str	r1, [r7, #8]
- 249 000a 7A60     		str	r2, [r7, #4]
+ 230              		.loc 1 91 0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 16
+ 233              		@ frame_needed = 1, uses_anonymous_args = 0
+ 234 0000 80B5     		push	{r7, lr}
+ 235              	.LCFI15:
+ 236              		.cfi_def_cfa_offset 8
+ 237              		.cfi_offset 7, -8
+ 238              		.cfi_offset 14, -4
+ 239 0002 84B0     		sub	sp, sp, #16
+ 240              	.LCFI16:
+ 241              		.cfi_def_cfa_offset 24
+ 242 0004 00AF     		add	r7, sp, #0
+ 243              	.LCFI17:
+ 244              		.cfi_def_cfa_register 7
+ 245 0006 F860     		str	r0, [r7, #12]
+ 246 0008 B960     		str	r1, [r7, #8]
+ 247 000a 7A60     		str	r2, [r7, #4]
   92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	rxData[((etReplSubPort*)ifitem)->index].channel = data;
- 250              		.loc 1 92 0
- 251 000c BB68     		ldr	r3, [r7, #8]
- 252 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
- 253 0010 FA68     		ldr	r2, [r7, #12]
- 254 0012 4FEA0313 		lsl	r3, r3, #4
- 255 0016 D318     		adds	r3, r2, r3
- 256 0018 03F10403 		add	r3, r3, #4
- 257 001c 7A68     		ldr	r2, [r7, #4]
- 258 001e 1A60     		str	r2, [r3, #0]
+ 248              		.loc 1 92 0
+ 249 000c BB68     		ldr	r3, [r7, #8]
+ 250 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 251 0010 FA68     		ldr	r2, [r7, #12]
+ 252 0012 4FEA8303 		lsl	r3, r3, #2
+ 253 0016 D318     		adds	r3, r2, r3
+ 254 0018 7A68     		ldr	r2, [r7, #4]
+ 255 001a 5A60     		str	r2, [r3, #4]
   93:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	pclCANInitMO(data);
- 259              		.loc 1 93 0
- 260 0020 7868     		ldr	r0, [r7, #4]
- 261 0022 FFF7FEFF 		bl	pclCANInitMO
+ 256              		.loc 1 93 0
+ 257 001c 7868     		ldr	r0, [r7, #4]
+ 258 001e FFF7FEFF 		bl	pclCANInitMO
   94:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 262              		.loc 1 94 0
- 263 0026 07F11007 		add	r7, r7, #16
- 264 002a BD46     		mov	sp, r7
- 265 002c 80BD     		pop	{r7, pc}
- 266              		.cfi_endproc
- 267              	.LFE5:
- 269 002e 00BF     		.section	.text.action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3,"ax",%progbits
- 270              		.align	2
- 271              		.thumb
- 272              		.thumb_func
- 274              	action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3:
- 275              	.LFB6:
+ 259              		.loc 1 94 0
+ 260 0022 07F11007 		add	r7, r7, #16
+ 261 0026 BD46     		mov	sp, r7
+ 262 0028 80BD     		pop	{r7, pc}
+ 263              		.cfi_endproc
+ 264              	.LFE5:
+ 266 002a 00BF     		.section	.text.action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3,"ax",%progbits
+ 267              		.align	2
+ 268              		.thumb
+ 269              		.thumb_func
+ 271              	action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3:
+ 272              	.LFB6:
   95:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3(ACANService* self,
- 276              		.loc 1 95 0
- 277              		.cfi_startproc
- 278              		@ args = 0, pretend = 0, frame = 8
- 279              		@ frame_needed = 1, uses_anonymous_args = 0
- 280 0000 80B5     		push	{r7, lr}
- 281              	.LCFI18:
- 282              		.cfi_def_cfa_offset 8
- 283              		.cfi_offset 7, -8
- 284              		.cfi_offset 14, -4
- 285 0002 82B0     		sub	sp, sp, #8
- 286              	.LCFI19:
- 287              		.cfi_def_cfa_offset 16
- 288 0004 00AF     		add	r7, sp, #0
- 289              	.LCFI20:
- 290              		.cfi_def_cfa_register 7
- 291 0006 7860     		str	r0, [r7, #4]
- 292 0008 3960     		str	r1, [r7, #0]
+ 273              		.loc 1 95 0
+ 274              		.cfi_startproc
+ 275              		@ args = 0, pretend = 0, frame = 8
+ 276              		@ frame_needed = 1, uses_anonymous_args = 0
+ 277 0000 80B5     		push	{r7, lr}
+ 278              	.LCFI18:
+ 279              		.cfi_def_cfa_offset 8
+ 280              		.cfi_offset 7, -8
+ 281              		.cfi_offset 14, -4
+ 282 0002 82B0     		sub	sp, sp, #8
+ 283              	.LCFI19:
+ 284              		.cfi_def_cfa_offset 16
+ 285 0004 00AF     		add	r7, sp, #0
+ 286              	.LCFI20:
+ 287              		.cfi_def_cfa_register 7
+ 288 0006 7860     		str	r0, [r7, #4]
+ 289 0008 3960     		str	r1, [r7, #0]
   96:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	pollAllRxMsgs();
- 293              		.loc 1 96 0
- 294 000a 7868     		ldr	r0, [r7, #4]
- 295 000c FFF7FEFF 		bl	ACANService_pollAllRxMsgs
+ 290              		.loc 1 96 0
+ 291 000a 7868     		ldr	r0, [r7, #4]
+ 292 000c FFF7FEFF 		bl	ACANService_pollAllRxMsgs
   97:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 296              		.loc 1 97 0
- 297 0010 07F10807 		add	r7, r7, #8
- 298 0014 BD46     		mov	sp, r7
- 299 0016 80BD     		pop	{r7, pc}
- 300              		.cfi_endproc
- 301              	.LFE6:
- 303              		.section	.text.action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4,"ax",%prog
- 304              		.align	2
- 305              		.thumb
- 306              		.thumb_func
- 308              	action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4:
- 309              	.LFB7:
+ 293              		.loc 1 97 0
+ 294 0010 07F10807 		add	r7, r7, #8
+ 295 0014 BD46     		mov	sp, r7
+ 296 0016 80BD     		pop	{r7, pc}
+ 297              		.cfi_endproc
+ 298              	.LFE6:
+ 300              		.section	.text.action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4,"ax",%prog
+ 301              		.align	2
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4:
+ 306              	.LFB7:
   98:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4(ACANService* s
- 310              		.loc 1 98 0
- 311              		.cfi_startproc
- 312              		@ args = 0, pretend = 0, frame = 24
- 313              		@ frame_needed = 1, uses_anonymous_args = 0
- 314 0000 80B5     		push	{r7, lr}
- 315              	.LCFI21:
- 316              		.cfi_def_cfa_offset 8
- 317              		.cfi_offset 7, -8
- 318              		.cfi_offset 14, -4
- 319 0002 86B0     		sub	sp, sp, #24
- 320              	.LCFI22:
- 321              		.cfi_def_cfa_offset 32
- 322 0004 00AF     		add	r7, sp, #0
- 323              	.LCFI23:
- 324              		.cfi_def_cfa_register 7
- 325 0006 F860     		str	r0, [r7, #12]
- 326 0008 B960     		str	r1, [r7, #8]
- 327 000a 7A60     		str	r2, [r7, #4]
+ 307              		.loc 1 98 0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 24
+ 310              		@ frame_needed = 1, uses_anonymous_args = 0
+ 311 0000 80B5     		push	{r7, lr}
+ 312              	.LCFI21:
+ 313              		.cfi_def_cfa_offset 8
+ 314              		.cfi_offset 7, -8
+ 315              		.cfi_offset 14, -4
+ 316 0002 86B0     		sub	sp, sp, #24
+ 317              	.LCFI22:
+ 318              		.cfi_def_cfa_offset 32
+ 319 0004 00AF     		add	r7, sp, #0
+ 320              	.LCFI23:
+ 321              		.cfi_def_cfa_register 7
+ 322 0006 F860     		str	r0, [r7, #12]
+ 323 0008 B960     		str	r1, [r7, #8]
+ 324 000a 7A60     		str	r2, [r7, #4]
   99:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	uint32 c;
  100:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	
  101:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	c =rxData[((etReplSubPort*)ifitem)->index].channel;
- 328              		.loc 1 101 0
- 329 000c BB68     		ldr	r3, [r7, #8]
- 330 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
- 331 0010 FA68     		ldr	r2, [r7, #12]
- 332 0012 4FEA0313 		lsl	r3, r3, #4
- 333 0016 D318     		adds	r3, r2, r3
- 334 0018 03F10403 		add	r3, r3, #4
- 335 001c 1B68     		ldr	r3, [r3, #0]
- 336 001e 7B61     		str	r3, [r7, #20]
+ 325              		.loc 1 101 0
+ 326 000c BB68     		ldr	r3, [r7, #8]
+ 327 000e 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 328 0010 FA68     		ldr	r2, [r7, #12]
+ 329 0012 4FEA8303 		lsl	r3, r3, #2
+ 330 0016 D318     		adds	r3, r2, r3
+ 331 0018 5B68     		ldr	r3, [r3, #4]
+ 332 001a 7B61     		str	r3, [r7, #20]
  102:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	pclCANListenOnMsg(c,data);
- 337              		.loc 1 102 0
- 338 0020 7869     		ldr	r0, [r7, #20]
- 339 0022 7968     		ldr	r1, [r7, #4]
- 340 0024 FFF7FEFF 		bl	pclCANListenOnMsg
+ 333              		.loc 1 102 0
+ 334 001c 7869     		ldr	r0, [r7, #20]
+ 335 001e 7968     		ldr	r1, [r7, #4]
+ 336 0020 FFF7FEFF 		bl	pclCANListenOnMsg
  103:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 341              		.loc 1 103 0
- 342 0028 07F11807 		add	r7, r7, #24
- 343 002c BD46     		mov	sp, r7
- 344 002e 80BD     		pop	{r7, pc}
- 345              		.cfi_endproc
- 346              	.LFE7:
- 348              		.section	.text.exitTo,"ax",%progbits
- 349              		.align	2
- 350              		.thumb
- 351              		.thumb_func
- 353              	exitTo:
- 354              	.LFB8:
+ 337              		.loc 1 103 0
+ 338 0024 07F11807 		add	r7, r7, #24
+ 339 0028 BD46     		mov	sp, r7
+ 340 002a 80BD     		pop	{r7, pc}
+ 341              		.cfi_endproc
+ 342              	.LFE7:
+ 344              		.section	.text.exitTo,"ax",%progbits
+ 345              		.align	2
+ 346              		.thumb
+ 347              		.thumb_func
+ 349              	exitTo:
+ 350              	.LFB8:
  104:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  105:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** /**
  106:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  * calls exit codes while exiting from the current state to one of its
@@ -446,78 +442,78 @@
  109:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  * @param to - the final parent state
  110:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  */
  111:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static void exitTo(ACANService* self, etInt16 current__et, etInt16 to) {
- 355              		.loc 1 111 0
- 356              		.cfi_startproc
- 357              		@ args = 0, pretend = 0, frame = 8
- 358              		@ frame_needed = 1, uses_anonymous_args = 0
- 359              		@ link register save eliminated.
- 360 0000 80B4     		push	{r7}
- 361              	.LCFI24:
- 362              		.cfi_def_cfa_offset 4
- 363              		.cfi_offset 7, -4
- 364 0002 83B0     		sub	sp, sp, #12
- 365              	.LCFI25:
- 366              		.cfi_def_cfa_offset 16
- 367 0004 00AF     		add	r7, sp, #0
- 368              	.LCFI26:
- 369              		.cfi_def_cfa_register 7
- 370 0006 7860     		str	r0, [r7, #4]
- 371 0008 1346     		mov	r3, r2
- 372 000a 0A46     		mov	r2, r1	@ movhi
- 373 000c 7A80     		strh	r2, [r7, #2]	@ movhi
- 374 000e 3B80     		strh	r3, [r7, #0]	@ movhi
+ 351              		.loc 1 111 0
+ 352              		.cfi_startproc
+ 353              		@ args = 0, pretend = 0, frame = 8
+ 354              		@ frame_needed = 1, uses_anonymous_args = 0
+ 355              		@ link register save eliminated.
+ 356 0000 80B4     		push	{r7}
+ 357              	.LCFI24:
+ 358              		.cfi_def_cfa_offset 4
+ 359              		.cfi_offset 7, -4
+ 360 0002 83B0     		sub	sp, sp, #12
+ 361              	.LCFI25:
+ 362              		.cfi_def_cfa_offset 16
+ 363 0004 00AF     		add	r7, sp, #0
+ 364              	.LCFI26:
+ 365              		.cfi_def_cfa_register 7
+ 366 0006 7860     		str	r0, [r7, #4]
+ 367 0008 1346     		mov	r3, r2
+ 368 000a 0A46     		mov	r2, r1	@ movhi
+ 369 000c 7A80     		strh	r2, [r7, #2]	@ movhi
+ 370 000e 3B80     		strh	r3, [r7, #0]	@ movhi
  112:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	while (current__et!=to) {
- 375              		.loc 1 112 0
- 376 0010 0DE0     		b	.L11
- 377              	.L14:
+ 371              		.loc 1 112 0
+ 372 0010 0DE0     		b	.L11
+ 373              	.L14:
  113:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		switch (current__et) {
- 378              		.loc 1 113 0
- 379 0012 B7F90230 		ldrsh	r3, [r7, #2]
- 380 0016 022B     		cmp	r3, #2
- 381 0018 08D1     		bne	.L15
- 382              	.L13:
+ 374              		.loc 1 113 0
+ 375 0012 B7F90230 		ldrsh	r3, [r7, #2]
+ 376 0016 022B     		cmp	r3, #2
+ 377 0018 08D1     		bne	.L15
+ 378              	.L13:
  114:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			case STATE_Operational:
  115:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				self->history[STATE_TOP] = STATE_Operational;
- 383              		.loc 1 115 0
- 384 001a 7B68     		ldr	r3, [r7, #4]
- 385 001c 4FF00202 		mov	r2, #2
- 386 0020 A3F84C21 		strh	r2, [r3, #332]	@ movhi
+ 379              		.loc 1 115 0
+ 380 001a 7B68     		ldr	r3, [r7, #4]
+ 381 001c 4FF00202 		mov	r2, #2
+ 382 0020 A3F85C20 		strh	r2, [r3, #92]	@ movhi
  116:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				current__et = STATE_TOP;
- 387              		.loc 1 116 0
- 388 0024 4FF00103 		mov	r3, #1
- 389 0028 7B80     		strh	r3, [r7, #2]	@ movhi
+ 383              		.loc 1 116 0
+ 384 0024 4FF00103 		mov	r3, #1
+ 385 0028 7B80     		strh	r3, [r7, #2]	@ movhi
  117:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				break;
- 390              		.loc 1 117 0
- 391 002a 00E0     		b	.L11
- 392              	.L15:
+ 386              		.loc 1 117 0
+ 387 002a 00E0     		b	.L11
+ 388              	.L15:
  118:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			default:
  119:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				/* should not occur */
  120:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				break;
- 393              		.loc 1 120 0
- 394 002c 00BF     		nop
- 395              	.L11:
+ 389              		.loc 1 120 0
+ 390 002c 00BF     		nop
+ 391              	.L11:
  112:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	while (current__et!=to) {
- 396              		.loc 1 112 0 discriminator 1
- 397 002e B7F90220 		ldrsh	r2, [r7, #2]
- 398 0032 B7F90030 		ldrsh	r3, [r7, #0]
- 399 0036 9A42     		cmp	r2, r3
- 400 0038 EBD1     		bne	.L14
+ 392              		.loc 1 112 0 discriminator 1
+ 393 002e B7F90220 		ldrsh	r2, [r7, #2]
+ 394 0032 B7F90030 		ldrsh	r3, [r7, #0]
+ 395 0036 9A42     		cmp	r2, r3
+ 396 0038 EBD1     		bne	.L14
  121:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  122:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	}
  123:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 401              		.loc 1 123 0
- 402 003a 07F10C07 		add	r7, r7, #12
- 403 003e BD46     		mov	sp, r7
- 404 0040 80BC     		pop	{r7}
- 405 0042 7047     		bx	lr
- 406              		.cfi_endproc
- 407              	.LFE8:
- 409              		.section	.text.executeTransitionChain,"ax",%progbits
- 410              		.align	2
- 411              		.thumb
- 412              		.thumb_func
- 414              	executeTransitionChain:
- 415              	.LFB9:
+ 397              		.loc 1 123 0
+ 398 003a 07F10C07 		add	r7, r7, #12
+ 399 003e BD46     		mov	sp, r7
+ 400 0040 80BC     		pop	{r7}
+ 401 0042 7047     		bx	lr
+ 402              		.cfi_endproc
+ 403              	.LFE8:
+ 405              		.section	.text.executeTransitionChain,"ax",%progbits
+ 406              		.align	2
+ 407              		.thumb
+ 408              		.thumb_func
+ 410              	executeTransitionChain:
+ 411              	.LFB9:
  124:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  125:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** /**
  126:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  * calls action, entry and exit codes along a transition chain. The generic data are cast to typed 
@@ -527,175 +523,175 @@
  130:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  * @return the +/- ID of the final state either with a positive sign, that indicates to execute the
  131:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  */
  132:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static etInt16 executeTransitionChain(ACANService* self, int chain__et, const InterfaceItemBase* if
- 416              		.loc 1 132 0
- 417              		.cfi_startproc
- 418              		@ args = 0, pretend = 0, frame = 32
- 419              		@ frame_needed = 1, uses_anonymous_args = 0
- 420 0000 80B5     		push	{r7, lr}
- 421              	.LCFI27:
- 422              		.cfi_def_cfa_offset 8
- 423              		.cfi_offset 7, -8
- 424              		.cfi_offset 14, -4
- 425 0002 88B0     		sub	sp, sp, #32
- 426              	.LCFI28:
- 427              		.cfi_def_cfa_offset 40
- 428 0004 00AF     		add	r7, sp, #0
- 429              	.LCFI29:
- 430              		.cfi_def_cfa_register 7
- 431 0006 F860     		str	r0, [r7, #12]
- 432 0008 B960     		str	r1, [r7, #8]
- 433 000a 7A60     		str	r2, [r7, #4]
- 434 000c 3B60     		str	r3, [r7, #0]
+ 412              		.loc 1 132 0
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 32
+ 415              		@ frame_needed = 1, uses_anonymous_args = 0
+ 416 0000 80B5     		push	{r7, lr}
+ 417              	.LCFI27:
+ 418              		.cfi_def_cfa_offset 8
+ 419              		.cfi_offset 7, -8
+ 420              		.cfi_offset 14, -4
+ 421 0002 88B0     		sub	sp, sp, #32
+ 422              	.LCFI28:
+ 423              		.cfi_def_cfa_offset 40
+ 424 0004 00AF     		add	r7, sp, #0
+ 425              	.LCFI29:
+ 426              		.cfi_def_cfa_register 7
+ 427 0006 F860     		str	r0, [r7, #12]
+ 428 0008 B960     		str	r1, [r7, #8]
+ 429 000a 7A60     		str	r2, [r7, #4]
+ 430 000c 3B60     		str	r3, [r7, #0]
  133:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	switch (chain__et) {
- 435              		.loc 1 133 0
- 436 000e BB68     		ldr	r3, [r7, #8]
- 437 0010 03F1FF33 		add	r3, r3, #-1
- 438 0014 052B     		cmp	r3, #5
- 439 0016 46D8     		bhi	.L27
- 440 0018 01A2     		adr	r2, .L24
- 441 001a 52F823F0 		ldr	pc, [r2, r3, lsl #2]
- 442 001e 00BF     		.align	2
- 443              	.L24:
- 444 0020 39000000 		.word	.L18+1
- 445 0024 45000000 		.word	.L19+1
- 446 0028 59000000 		.word	.L20+1
- 447 002c 6F000000 		.word	.L21+1
- 448 0030 85000000 		.word	.L22+1
- 449 0034 93000000 		.word	.L23+1
- 450              	.L18:
+ 431              		.loc 1 133 0
+ 432 000e BB68     		ldr	r3, [r7, #8]
+ 433 0010 03F1FF33 		add	r3, r3, #-1
+ 434 0014 052B     		cmp	r3, #5
+ 435 0016 46D8     		bhi	.L27
+ 436 0018 01A2     		adr	r2, .L24
+ 437 001a 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 438 001e 00BF     		.align	2
+ 439              	.L24:
+ 440 0020 39000000 		.word	.L18+1
+ 441 0024 45000000 		.word	.L19+1
+ 442 0028 59000000 		.word	.L20+1
+ 443 002c 6F000000 		.word	.L21+1
+ 444 0030 85000000 		.word	.L22+1
+ 445 0034 93000000 		.word	.L23+1
+ 446              	.L18:
  134:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		case CHAIN_TRANS_INITIAL_TO__Operational:
  135:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		{
  136:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			action_TRANS_INITIAL_TO__Operational(self);
- 451              		.loc 1 136 0
- 452 0038 F868     		ldr	r0, [r7, #12]
- 453 003a FFF7FEFF 		bl	action_TRANS_INITIAL_TO__Operational
+ 447              		.loc 1 136 0
+ 448 0038 F868     		ldr	r0, [r7, #12]
+ 449 003a FFF7FEFF 		bl	action_TRANS_INITIAL_TO__Operational
  137:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			return STATE_Operational;
- 454              		.loc 1 137 0
- 455 003e 4FF00203 		mov	r3, #2
- 456 0042 33E0     		b	.L25
- 457              	.L19:
- 458              	.LBB2:
+ 450              		.loc 1 137 0
+ 451 003e 4FF00203 		mov	r3, #2
+ 452 0042 33E0     		b	.L25
+ 453              	.L19:
+ 454              	.LBB2:
  138:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  139:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		case CHAIN_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0:
  140:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		{
  141:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			pclCANMsg* data = ((pclCANMsg*) generic_data__et);
- 459              		.loc 1 141 0
- 460 0044 3B68     		ldr	r3, [r7, #0]
- 461 0046 FB61     		str	r3, [r7, #28]
+ 455              		.loc 1 141 0
+ 456 0044 3B68     		ldr	r3, [r7, #0]
+ 457 0046 FB61     		str	r3, [r7, #28]
  142:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0(self, ifitem, data);
- 462              		.loc 1 142 0
- 463 0048 F868     		ldr	r0, [r7, #12]
- 464 004a 7968     		ldr	r1, [r7, #4]
- 465 004c FA69     		ldr	r2, [r7, #28]
- 466 004e FFF7FEFF 		bl	action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0
+ 458              		.loc 1 142 0
+ 459 0048 F868     		ldr	r0, [r7, #12]
+ 460 004a 7968     		ldr	r1, [r7, #4]
+ 461 004c FA69     		ldr	r2, [r7, #28]
+ 462 004e FFF7FEFF 		bl	action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0
  143:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			return STATE_Operational;
- 467              		.loc 1 143 0
- 468 0052 4FF00203 		mov	r3, #2
- 469 0056 29E0     		b	.L25
- 470              	.L20:
- 471              	.LBE2:
- 472              	.LBB3:
+ 463              		.loc 1 143 0
+ 464 0052 4FF00203 		mov	r3, #2
+ 465 0056 29E0     		b	.L25
+ 466              	.L20:
+ 467              	.LBE2:
+ 468              	.LBB3:
  144:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  145:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		case CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1:
  146:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		{
  147:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			uint32 data = *((uint32*) generic_data__et);
- 473              		.loc 1 147 0
- 474 0058 3B68     		ldr	r3, [r7, #0]
- 475 005a 1B68     		ldr	r3, [r3, #0]
- 476 005c BB61     		str	r3, [r7, #24]
+ 469              		.loc 1 147 0
+ 470 0058 3B68     		ldr	r3, [r7, #0]
+ 471 005a 1B68     		ldr	r3, [r3, #0]
+ 472 005c BB61     		str	r3, [r7, #24]
  148:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1(self, ifitem, data);
- 477              		.loc 1 148 0
- 478 005e F868     		ldr	r0, [r7, #12]
- 479 0060 7968     		ldr	r1, [r7, #4]
- 480 0062 BA69     		ldr	r2, [r7, #24]
- 481 0064 FFF7FEFF 		bl	action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1
+ 473              		.loc 1 148 0
+ 474 005e F868     		ldr	r0, [r7, #12]
+ 475 0060 7968     		ldr	r1, [r7, #4]
+ 476 0062 BA69     		ldr	r2, [r7, #24]
+ 477 0064 FFF7FEFF 		bl	action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1
  149:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			return STATE_Operational;
- 482              		.loc 1 149 0
- 483 0068 4FF00203 		mov	r3, #2
- 484 006c 1EE0     		b	.L25
- 485              	.L21:
- 486              	.LBE3:
- 487              	.LBB4:
+ 478              		.loc 1 149 0
+ 479 0068 4FF00203 		mov	r3, #2
+ 480 006c 1EE0     		b	.L25
+ 481              	.L21:
+ 482              	.LBE3:
+ 483              	.LBB4:
  150:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  151:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		case CHAIN_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2:
  152:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		{
  153:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			uint32 data = *((uint32*) generic_data__et);
- 488              		.loc 1 153 0
- 489 006e 3B68     		ldr	r3, [r7, #0]
- 490 0070 1B68     		ldr	r3, [r3, #0]
- 491 0072 7B61     		str	r3, [r7, #20]
+ 484              		.loc 1 153 0
+ 485 006e 3B68     		ldr	r3, [r7, #0]
+ 486 0070 1B68     		ldr	r3, [r3, #0]
+ 487 0072 7B61     		str	r3, [r7, #20]
  154:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2(self, ifitem, data);
- 492              		.loc 1 154 0
- 493 0074 F868     		ldr	r0, [r7, #12]
- 494 0076 7968     		ldr	r1, [r7, #4]
- 495 0078 7A69     		ldr	r2, [r7, #20]
- 496 007a FFF7FEFF 		bl	action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2
+ 488              		.loc 1 154 0
+ 489 0074 F868     		ldr	r0, [r7, #12]
+ 490 0076 7968     		ldr	r1, [r7, #4]
+ 491 0078 7A69     		ldr	r2, [r7, #20]
+ 492 007a FFF7FEFF 		bl	action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2
  155:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			return STATE_Operational;
- 497              		.loc 1 155 0
- 498 007e 4FF00203 		mov	r3, #2
- 499 0082 13E0     		b	.L25
- 500              	.L22:
- 501              	.LBE4:
+ 493              		.loc 1 155 0
+ 494 007e 4FF00203 		mov	r3, #2
+ 495 0082 13E0     		b	.L25
+ 496              	.L22:
+ 497              	.LBE4:
  156:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  157:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		case CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3:
  158:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		{
  159:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3(self, ifitem);
- 502              		.loc 1 159 0
- 503 0084 F868     		ldr	r0, [r7, #12]
- 504 0086 7968     		ldr	r1, [r7, #4]
- 505 0088 FFF7FEFF 		bl	action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3
+ 498              		.loc 1 159 0
+ 499 0084 F868     		ldr	r0, [r7, #12]
+ 500 0086 7968     		ldr	r1, [r7, #4]
+ 501 0088 FFF7FEFF 		bl	action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3
  160:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			return STATE_Operational;
- 506              		.loc 1 160 0
- 507 008c 4FF00203 		mov	r3, #2
- 508 0090 0CE0     		b	.L25
- 509              	.L23:
- 510              	.LBB5:
+ 502              		.loc 1 160 0
+ 503 008c 4FF00203 		mov	r3, #2
+ 504 0090 0CE0     		b	.L25
+ 505              	.L23:
+ 506              	.LBB5:
  161:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  162:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		case CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4:
  163:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		{
  164:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			pclCANMsg* data = ((pclCANMsg*) generic_data__et);
- 511              		.loc 1 164 0
- 512 0092 3B68     		ldr	r3, [r7, #0]
- 513 0094 3B61     		str	r3, [r7, #16]
+ 507              		.loc 1 164 0
+ 508 0092 3B68     		ldr	r3, [r7, #0]
+ 509 0094 3B61     		str	r3, [r7, #16]
  165:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4(self, ifitem, data);
- 514              		.loc 1 165 0
- 515 0096 F868     		ldr	r0, [r7, #12]
- 516 0098 7968     		ldr	r1, [r7, #4]
- 517 009a 3A69     		ldr	r2, [r7, #16]
- 518 009c FFF7FEFF 		bl	action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4
+ 510              		.loc 1 165 0
+ 511 0096 F868     		ldr	r0, [r7, #12]
+ 512 0098 7968     		ldr	r1, [r7, #4]
+ 513 009a 3A69     		ldr	r2, [r7, #16]
+ 514 009c FFF7FEFF 		bl	action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4
  166:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			return STATE_Operational;
- 519              		.loc 1 166 0
- 520 00a0 4FF00203 		mov	r3, #2
- 521 00a4 02E0     		b	.L25
- 522              	.L27:
- 523              	.LBE5:
+ 515              		.loc 1 166 0
+ 516 00a0 4FF00203 		mov	r3, #2
+ 517 00a4 02E0     		b	.L25
+ 518              	.L27:
+ 519              	.LBE5:
  167:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  168:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			default:
  169:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				/* should not occur */
  170:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				break;
- 524              		.loc 1 170 0
- 525 00a6 00BF     		nop
- 526              	.L26:
+ 520              		.loc 1 170 0
+ 521 00a6 00BF     		nop
+ 522              	.L26:
  171:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	}
  172:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	return NO_STATE;
- 527              		.loc 1 172 0
- 528 00a8 4FF00003 		mov	r3, #0
- 529              	.L25:
- 530 00ac 1BB2     		sxth	r3, r3
+ 523              		.loc 1 172 0
+ 524 00a8 4FF00003 		mov	r3, #0
+ 525              	.L25:
+ 526 00ac 1BB2     		sxth	r3, r3
  173:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 531              		.loc 1 173 0
- 532 00ae 1846     		mov	r0, r3
- 533 00b0 07F12007 		add	r7, r7, #32
- 534 00b4 BD46     		mov	sp, r7
- 535 00b6 80BD     		pop	{r7, pc}
- 536              		.cfi_endproc
- 537              	.LFE9:
- 539              		.section	.text.enterHistory,"ax",%progbits
- 540              		.align	2
- 541              		.thumb
- 542              		.thumb_func
- 544              	enterHistory:
- 545              	.LFB10:
+ 527              		.loc 1 173 0
+ 528 00ae 1846     		mov	r0, r3
+ 529 00b0 07F12007 		add	r7, r7, #32
+ 530 00b4 BD46     		mov	sp, r7
+ 531 00b6 80BD     		pop	{r7, pc}
+ 532              		.cfi_endproc
+ 533              	.LFE9:
+ 535              		.section	.text.enterHistory,"ax",%progbits
+ 536              		.align	2
+ 537              		.thumb
+ 538              		.thumb_func
+ 540              	enterHistory:
+ 541              	.LFB10:
  174:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  175:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** /**
  176:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  * calls entry codes while entering a state's history. The ID of the final leaf state is returned
@@ -703,657 +699,656 @@
  178:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  * @return - the ID of the final leaf state
  179:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c ****  */
  180:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static etInt16 enterHistory(ACANService* self, etInt16 state__et) {
- 546              		.loc 1 180 0
- 547              		.cfi_startproc
- 548              		@ args = 0, pretend = 0, frame = 16
- 549              		@ frame_needed = 1, uses_anonymous_args = 0
- 550              		@ link register save eliminated.
- 551 0000 80B4     		push	{r7}
- 552              	.LCFI30:
- 553              		.cfi_def_cfa_offset 4
- 554              		.cfi_offset 7, -4
- 555 0002 85B0     		sub	sp, sp, #20
- 556              	.LCFI31:
- 557              		.cfi_def_cfa_offset 24
- 558 0004 00AF     		add	r7, sp, #0
- 559              	.LCFI32:
- 560              		.cfi_def_cfa_register 7
- 561 0006 7860     		str	r0, [r7, #4]
- 562 0008 0B46     		mov	r3, r1
- 563 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 542              		.loc 1 180 0
+ 543              		.cfi_startproc
+ 544              		@ args = 0, pretend = 0, frame = 16
+ 545              		@ frame_needed = 1, uses_anonymous_args = 0
+ 546              		@ link register save eliminated.
+ 547 0000 80B4     		push	{r7}
+ 548              	.LCFI30:
+ 549              		.cfi_def_cfa_offset 4
+ 550              		.cfi_offset 7, -4
+ 551 0002 85B0     		sub	sp, sp, #20
+ 552              	.LCFI31:
+ 553              		.cfi_def_cfa_offset 24
+ 554 0004 00AF     		add	r7, sp, #0
+ 555              	.LCFI32:
+ 556              		.cfi_def_cfa_register 7
+ 557 0006 7860     		str	r0, [r7, #4]
+ 558 0008 0B46     		mov	r3, r1
+ 559 000a 7B80     		strh	r3, [r7, #2]	@ movhi
  181:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	boolean skip_entry__et = ET_FALSE;
- 564              		.loc 1 181 0
- 565 000c 4FF00003 		mov	r3, #0
- 566 0010 FB73     		strb	r3, [r7, #15]
+ 560              		.loc 1 181 0
+ 561 000c 4FF00003 		mov	r3, #0
+ 562 0010 FB73     		strb	r3, [r7, #15]
  182:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	if (state__et >= STATE_MAX) {
- 567              		.loc 1 182 0
- 568 0012 B7F90230 		ldrsh	r3, [r7, #2]
- 569 0016 022B     		cmp	r3, #2
- 570 0018 07DD     		ble	.L29
+ 563              		.loc 1 182 0
+ 564 0012 B7F90230 		ldrsh	r3, [r7, #2]
+ 565 0016 022B     		cmp	r3, #2
+ 566 0018 07DD     		ble	.L29
  183:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		state__et = (etInt16) (state__et - STATE_MAX);
- 571              		.loc 1 183 0
- 572 001a 7B88     		ldrh	r3, [r7, #2]
- 573 001c A3F10303 		sub	r3, r3, #3
- 574 0020 9BB2     		uxth	r3, r3
- 575 0022 7B80     		strh	r3, [r7, #2]	@ movhi
+ 567              		.loc 1 183 0
+ 568 001a 7B88     		ldrh	r3, [r7, #2]
+ 569 001c A3F10303 		sub	r3, r3, #3
+ 570 0020 9BB2     		uxth	r3, r3
+ 571 0022 7B80     		strh	r3, [r7, #2]	@ movhi
  184:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		skip_entry__et = ET_TRUE;
- 576              		.loc 1 184 0
- 577 0024 4FF00103 		mov	r3, #1
- 578 0028 FB73     		strb	r3, [r7, #15]
- 579              	.L29:
+ 572              		.loc 1 184 0
+ 573 0024 4FF00103 		mov	r3, #1
+ 574 0028 FB73     		strb	r3, [r7, #15]
+ 575              	.L29:
  185:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	}
  186:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	while (ET_TRUE) {
  187:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		switch (state__et) {
- 580              		.loc 1 187 0
- 581 002a B7F90230 		ldrsh	r3, [r7, #2]
- 582 002e 012B     		cmp	r3, #1
- 583 0030 05D0     		beq	.L31
- 584 0032 022B     		cmp	r3, #2
- 585 0034 08D1     		bne	.L35
- 586              	.L32:
+ 576              		.loc 1 187 0
+ 577 002a B7F90230 		ldrsh	r3, [r7, #2]
+ 578 002e 012B     		cmp	r3, #1
+ 579 0030 05D0     		beq	.L31
+ 580 0032 022B     		cmp	r3, #2
+ 581 0034 08D1     		bne	.L35
+ 582              	.L32:
  188:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			case STATE_Operational:
  189:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				/* in leaf state: return state id */
  190:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				return STATE_Operational;
- 587              		.loc 1 190 0
- 588 0036 4FF00203 		mov	r3, #2
- 589 003a 1BB2     		sxth	r3, r3
- 590 003c 09E0     		b	.L36
- 591              	.L31:
+ 583              		.loc 1 190 0
+ 584 0036 4FF00203 		mov	r3, #2
+ 585 003a 1BB2     		sxth	r3, r3
+ 586 003c 09E0     		b	.L36
+ 587              	.L31:
  191:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			case STATE_TOP:
  192:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				state__et = self->history[STATE_TOP];
- 592              		.loc 1 192 0
- 593 003e 7B68     		ldr	r3, [r7, #4]
- 594 0040 B3F84C31 		ldrh	r3, [r3, #332]	@ movhi
- 595 0044 7B80     		strh	r3, [r7, #2]	@ movhi
+ 588              		.loc 1 192 0
+ 589 003e 7B68     		ldr	r3, [r7, #4]
+ 590 0040 B3F85C30 		ldrh	r3, [r3, #92]	@ movhi
+ 591 0044 7B80     		strh	r3, [r7, #2]	@ movhi
  193:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				break;
- 596              		.loc 1 193 0
- 597 0046 00E0     		b	.L34
- 598              	.L35:
+ 592              		.loc 1 193 0
+ 593 0046 00E0     		b	.L34
+ 594              	.L35:
  194:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			default:
  195:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				/* should not occur */
  196:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				break;
- 599              		.loc 1 196 0
- 600 0048 00BF     		nop
- 601              	.L34:
+ 595              		.loc 1 196 0
+ 596 0048 00BF     		nop
+ 597              	.L34:
  197:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  198:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		skip_entry__et = ET_FALSE;
- 602              		.loc 1 198 0
- 603 004a 4FF00003 		mov	r3, #0
- 604 004e FB73     		strb	r3, [r7, #15]
+ 598              		.loc 1 198 0
+ 599 004a 4FF00003 		mov	r3, #0
+ 600 004e FB73     		strb	r3, [r7, #15]
  199:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	}
- 605              		.loc 1 199 0
- 606 0050 EBE7     		b	.L29
- 607              	.L36:
+ 601              		.loc 1 199 0
+ 602 0050 EBE7     		b	.L29
+ 603              	.L36:
  200:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) 
  201:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 608              		.loc 1 201 0
- 609 0052 1846     		mov	r0, r3
- 610 0054 07F11407 		add	r7, r7, #20
- 611 0058 BD46     		mov	sp, r7
- 612 005a 80BC     		pop	{r7}
- 613 005c 7047     		bx	lr
- 614              		.cfi_endproc
- 615              	.LFE10:
- 617 005e 00BF     		.section	.text.ACANService_executeInitTransition,"ax",%progbits
- 618              		.align	2
- 619              		.thumb
- 620              		.thumb_func
- 622              	ACANService_executeInitTransition:
- 623              	.LFB11:
+ 604              		.loc 1 201 0
+ 605 0052 1846     		mov	r0, r3
+ 606 0054 07F11407 		add	r7, r7, #20
+ 607 0058 BD46     		mov	sp, r7
+ 608 005a 80BC     		pop	{r7}
+ 609 005c 7047     		bx	lr
+ 610              		.cfi_endproc
+ 611              	.LFE10:
+ 613 005e 00BF     		.section	.text.ACANService_executeInitTransition,"ax",%progbits
+ 614              		.align	2
+ 615              		.thumb
+ 616              		.thumb_func
+ 618              	ACANService_executeInitTransition:
+ 619              	.LFB11:
  202:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  203:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static void ACANService_executeInitTransition(ACANService* self) {
- 624              		.loc 1 203 0
- 625              		.cfi_startproc
- 626              		@ args = 0, pretend = 0, frame = 16
- 627              		@ frame_needed = 1, uses_anonymous_args = 0
- 628 0000 80B5     		push	{r7, lr}
- 629              	.LCFI33:
- 630              		.cfi_def_cfa_offset 8
- 631              		.cfi_offset 7, -8
- 632              		.cfi_offset 14, -4
- 633 0002 84B0     		sub	sp, sp, #16
- 634              	.LCFI34:
- 635              		.cfi_def_cfa_offset 24
- 636 0004 00AF     		add	r7, sp, #0
- 637              	.LCFI35:
- 638              		.cfi_def_cfa_register 7
- 639 0006 7860     		str	r0, [r7, #4]
+ 620              		.loc 1 203 0
+ 621              		.cfi_startproc
+ 622              		@ args = 0, pretend = 0, frame = 16
+ 623              		@ frame_needed = 1, uses_anonymous_args = 0
+ 624 0000 80B5     		push	{r7, lr}
+ 625              	.LCFI33:
+ 626              		.cfi_def_cfa_offset 8
+ 627              		.cfi_offset 7, -8
+ 628              		.cfi_offset 14, -4
+ 629 0002 84B0     		sub	sp, sp, #16
+ 630              	.LCFI34:
+ 631              		.cfi_def_cfa_offset 24
+ 632 0004 00AF     		add	r7, sp, #0
+ 633              	.LCFI35:
+ 634              		.cfi_def_cfa_register 7
+ 635 0006 7860     		str	r0, [r7, #4]
  204:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	int chain__et = CHAIN_TRANS_INITIAL_TO__Operational;
- 640              		.loc 1 204 0
- 641 0008 4FF00103 		mov	r3, #1
- 642 000c FB60     		str	r3, [r7, #12]
+ 636              		.loc 1 204 0
+ 637 0008 4FF00103 		mov	r3, #1
+ 638 000c FB60     		str	r3, [r7, #12]
  205:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	etInt16 next__et = executeTransitionChain(self, chain__et, NULL, NULL);
- 643              		.loc 1 205 0
- 644 000e 7868     		ldr	r0, [r7, #4]
- 645 0010 F968     		ldr	r1, [r7, #12]
- 646 0012 4FF00002 		mov	r2, #0
- 647 0016 4FF00003 		mov	r3, #0
- 648 001a FFF7FEFF 		bl	executeTransitionChain
- 649 001e 0346     		mov	r3, r0
- 650 0020 7B81     		strh	r3, [r7, #10]	@ movhi
+ 639              		.loc 1 205 0
+ 640 000e 7868     		ldr	r0, [r7, #4]
+ 641 0010 F968     		ldr	r1, [r7, #12]
+ 642 0012 4FF00002 		mov	r2, #0
+ 643 0016 4FF00003 		mov	r3, #0
+ 644 001a FFF7FEFF 		bl	executeTransitionChain
+ 645 001e 0346     		mov	r3, r0
+ 646 0020 7B81     		strh	r3, [r7, #10]	@ movhi
  206:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	next__et = enterHistory(self, next__et);
- 651              		.loc 1 206 0
- 652 0022 B7F90A30 		ldrsh	r3, [r7, #10]
- 653 0026 7868     		ldr	r0, [r7, #4]
- 654 0028 1946     		mov	r1, r3
- 655 002a FFF7FEFF 		bl	enterHistory
- 656 002e 0346     		mov	r3, r0
- 657 0030 7B81     		strh	r3, [r7, #10]	@ movhi
+ 647              		.loc 1 206 0
+ 648 0022 B7F90A30 		ldrsh	r3, [r7, #10]
+ 649 0026 7868     		ldr	r0, [r7, #4]
+ 650 0028 1946     		mov	r1, r3
+ 651 002a FFF7FEFF 		bl	enterHistory
+ 652 002e 0346     		mov	r3, r0
+ 653 0030 7B81     		strh	r3, [r7, #10]	@ movhi
  207:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	setState(self, next__et);
- 658              		.loc 1 207 0
- 659 0032 B7F90A30 		ldrsh	r3, [r7, #10]
- 660 0036 7868     		ldr	r0, [r7, #4]
- 661 0038 1946     		mov	r1, r3
- 662 003a FFF7FEFF 		bl	setState
+ 654              		.loc 1 207 0
+ 655 0032 B7F90A30 		ldrsh	r3, [r7, #10]
+ 656 0036 7868     		ldr	r0, [r7, #4]
+ 657 0038 1946     		mov	r1, r3
+ 658 003a FFF7FEFF 		bl	setState
  208:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 663              		.loc 1 208 0
- 664 003e 07F11007 		add	r7, r7, #16
- 665 0042 BD46     		mov	sp, r7
- 666 0044 80BD     		pop	{r7, pc}
- 667              		.cfi_endproc
- 668              	.LFE11:
- 670 0046 00BF     		.section	.text.ACANService_receiveEvent,"ax",%progbits
- 671              		.align	2
- 672              		.thumb
- 673              		.thumb_func
- 675              	ACANService_receiveEvent:
- 676              	.LFB12:
+ 659              		.loc 1 208 0
+ 660 003e 07F11007 		add	r7, r7, #16
+ 661 0042 BD46     		mov	sp, r7
+ 662 0044 80BD     		pop	{r7, pc}
+ 663              		.cfi_endproc
+ 664              	.LFE11:
+ 666 0046 00BF     		.section	.text.ACANService_receiveEvent,"ax",%progbits
+ 667              		.align	2
+ 668              		.thumb
+ 669              		.thumb_func
+ 671              	ACANService_receiveEvent:
+ 672              	.LFB12:
  209:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  210:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** /* receiveEvent contains the main implementation of the FSM */
  211:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** static void ACANService_receiveEvent(ACANService* self, InterfaceItemBase* ifitem, int evt, void* g
- 677              		.loc 1 211 0
- 678              		.cfi_startproc
- 679              		@ args = 0, pretend = 0, frame = 32
- 680              		@ frame_needed = 1, uses_anonymous_args = 0
- 681 0000 80B5     		push	{r7, lr}
- 682              	.LCFI36:
- 683              		.cfi_def_cfa_offset 8
- 684              		.cfi_offset 7, -8
- 685              		.cfi_offset 14, -4
- 686 0002 88B0     		sub	sp, sp, #32
- 687              	.LCFI37:
- 688              		.cfi_def_cfa_offset 40
- 689 0004 00AF     		add	r7, sp, #0
- 690              	.LCFI38:
- 691              		.cfi_def_cfa_register 7
- 692 0006 F860     		str	r0, [r7, #12]
- 693 0008 B960     		str	r1, [r7, #8]
- 694 000a 7A60     		str	r2, [r7, #4]
- 695 000c 3B60     		str	r3, [r7, #0]
+ 673              		.loc 1 211 0
+ 674              		.cfi_startproc
+ 675              		@ args = 0, pretend = 0, frame = 32
+ 676              		@ frame_needed = 1, uses_anonymous_args = 0
+ 677 0000 80B5     		push	{r7, lr}
+ 678              	.LCFI36:
+ 679              		.cfi_def_cfa_offset 8
+ 680              		.cfi_offset 7, -8
+ 681              		.cfi_offset 14, -4
+ 682 0002 88B0     		sub	sp, sp, #32
+ 683              	.LCFI37:
+ 684              		.cfi_def_cfa_offset 40
+ 685 0004 00AF     		add	r7, sp, #0
+ 686              	.LCFI38:
+ 687              		.cfi_def_cfa_register 7
+ 688 0006 F860     		str	r0, [r7, #12]
+ 689 0008 B960     		str	r1, [r7, #8]
+ 690 000a 7A60     		str	r2, [r7, #4]
+ 691 000c 3B60     		str	r3, [r7, #0]
  212:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	int trigger__et = ifitem->localId + EVT_SHIFT*evt;
- 696              		.loc 1 212 0
- 697 000e BB68     		ldr	r3, [r7, #8]
- 698 0010 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
- 699 0012 1A46     		mov	r2, r3
- 700 0014 7B68     		ldr	r3, [r7, #4]
- 701 0016 4FF06401 		mov	r1, #100
- 702 001a 01FB03F3 		mul	r3, r1, r3
- 703 001e D318     		adds	r3, r2, r3
- 704 0020 7B61     		str	r3, [r7, #20]
+ 692              		.loc 1 212 0
+ 693 000e BB68     		ldr	r3, [r7, #8]
+ 694 0010 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+ 695 0012 1A46     		mov	r2, r3
+ 696 0014 7B68     		ldr	r3, [r7, #4]
+ 697 0016 4FF06401 		mov	r1, #100
+ 698 001a 01FB03F3 		mul	r3, r1, r3
+ 699 001e D318     		adds	r3, r2, r3
+ 700 0020 7B61     		str	r3, [r7, #20]
  213:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	int chain__et = NOT_CAUGHT;
- 705              		.loc 1 213 0
- 706 0022 4FF00003 		mov	r3, #0
- 707 0026 FB61     		str	r3, [r7, #28]
+ 701              		.loc 1 213 0
+ 702 0022 4FF00003 		mov	r3, #0
+ 703 0026 FB61     		str	r3, [r7, #28]
  214:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	etInt16 catching_state__et = NO_STATE;
- 708              		.loc 1 214 0
- 709 0028 4FF00003 		mov	r3, #0
- 710 002c 7B83     		strh	r3, [r7, #26]	@ movhi
+ 704              		.loc 1 214 0
+ 705 0028 4FF00003 		mov	r3, #0
+ 706 002c 7B83     		strh	r3, [r7, #26]	@ movhi
  215:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	((void)trigger__et);	/* avoids unused warning */
  216:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	
  217:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
- 711              		.loc 1 217 0
- 712 002e B868     		ldr	r0, [r7, #8]
- 713 0030 7968     		ldr	r1, [r7, #4]
- 714 0032 3A68     		ldr	r2, [r7, #0]
- 715 0034 FFF7FEFF 		bl	handleSystemEvent
- 716 0038 0346     		mov	r3, r0
- 717 003a 002B     		cmp	r3, #0
- 718 003c 3DD1     		bne	.L39
+ 707              		.loc 1 217 0
+ 708 002e B868     		ldr	r0, [r7, #8]
+ 709 0030 7968     		ldr	r1, [r7, #4]
+ 710 0032 3A68     		ldr	r2, [r7, #0]
+ 711 0034 FFF7FEFF 		bl	handleSystemEvent
+ 712 0038 0346     		mov	r3, r0
+ 713 003a 002B     		cmp	r3, #0
+ 714 003c 3DD1     		bne	.L39
  218:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		switch (getState(self)) {
- 719              		.loc 1 218 0
- 720 003e F868     		ldr	r0, [r7, #12]
- 721 0040 FFF7FEFF 		bl	getState
- 722 0044 0346     		mov	r3, r0
- 723 0046 022B     		cmp	r3, #2
- 724 0048 36D1     		bne	.L51
- 725              	.L41:
+ 715              		.loc 1 218 0
+ 716 003e F868     		ldr	r0, [r7, #12]
+ 717 0040 FFF7FEFF 		bl	getState
+ 718 0044 0346     		mov	r3, r0
+ 719 0046 022B     		cmp	r3, #2
+ 720 0048 36D1     		bne	.L51
+ 721              	.L41:
  219:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			case STATE_Operational:
  220:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				switch(trigger__et) {
- 726              		.loc 1 220 0
- 727 004a 7B69     		ldr	r3, [r7, #20]
- 728 004c CB2B     		cmp	r3, #203
- 729 004e 1CD0     		beq	.L45
- 730 0050 CB2B     		cmp	r3, #203
- 731 0052 04DC     		bgt	.L48
- 732 0054 652B     		cmp	r3, #101
- 733 0056 1FD0     		beq	.L43
- 734 0058 CA2B     		cmp	r3, #202
- 735 005a 0FD0     		beq	.L44
- 736 005c 2AE0     		b	.L42
- 737              	.L48:
- 738 005e B3F5977F 		cmp	r3, #302
- 739 0062 04D0     		beq	.L46
- 740 0064 40F29312 		movw	r2, #403
- 741 0068 9342     		cmp	r3, r2
- 742 006a 1CD0     		beq	.L47
- 743 006c 22E0     		b	.L42
- 744              	.L46:
+ 722              		.loc 1 220 0
+ 723 004a 7B69     		ldr	r3, [r7, #20]
+ 724 004c CB2B     		cmp	r3, #203
+ 725 004e 1CD0     		beq	.L45
+ 726 0050 CB2B     		cmp	r3, #203
+ 727 0052 04DC     		bgt	.L48
+ 728 0054 652B     		cmp	r3, #101
+ 729 0056 1FD0     		beq	.L43
+ 730 0058 CA2B     		cmp	r3, #202
+ 731 005a 0FD0     		beq	.L44
+ 732 005c 2AE0     		b	.L42
+ 733              	.L48:
+ 734 005e B3F5977F 		cmp	r3, #302
+ 735 0062 04D0     		beq	.L46
+ 736 0064 40F29312 		movw	r2, #403
+ 737 0068 9342     		cmp	r3, r2
+ 738 006a 1CD0     		beq	.L47
+ 739 006c 22E0     		b	.L42
+ 740              	.L46:
  221:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						case TRIG_canTx__sendMsg:
  222:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							{
  223:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								chain__et = CHAIN_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0;
- 745              		.loc 1 223 0
- 746 006e 4FF00203 		mov	r3, #2
- 747 0072 FB61     		str	r3, [r7, #28]
+ 741              		.loc 1 223 0
+ 742 006e 4FF00203 		mov	r3, #2
+ 743 0072 FB61     		str	r3, [r7, #28]
  224:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								catching_state__et = STATE_TOP;
- 748              		.loc 1 224 0
- 749 0074 4FF00103 		mov	r3, #1
- 750 0078 7B83     		strh	r3, [r7, #26]	@ movhi
+ 744              		.loc 1 224 0
+ 745 0074 4FF00103 		mov	r3, #1
+ 746 0078 7B83     		strh	r3, [r7, #26]	@ movhi
  225:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							}
  226:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						break;
- 751              		.loc 1 226 0
- 752 007a 1CE0     		b	.L49
- 753              	.L44:
+ 747              		.loc 1 226 0
+ 748 007a 1CE0     		b	.L49
+ 749              	.L44:
  227:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						case TRIG_canTx__init:
  228:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							{
  229:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								chain__et = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1;
- 754              		.loc 1 229 0
- 755 007c 4FF00303 		mov	r3, #3
- 756 0080 FB61     		str	r3, [r7, #28]
+ 750              		.loc 1 229 0
+ 751 007c 4FF00303 		mov	r3, #3
+ 752 0080 FB61     		str	r3, [r7, #28]
  230:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								catching_state__et = STATE_TOP;
- 757              		.loc 1 230 0
- 758 0082 4FF00103 		mov	r3, #1
- 759 0086 7B83     		strh	r3, [r7, #26]	@ movhi
+ 753              		.loc 1 230 0
+ 754 0082 4FF00103 		mov	r3, #1
+ 755 0086 7B83     		strh	r3, [r7, #26]	@ movhi
  231:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							}
  232:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						break;
- 760              		.loc 1 232 0
- 761 0088 15E0     		b	.L49
- 762              	.L45:
+ 756              		.loc 1 232 0
+ 757 0088 15E0     		b	.L49
+ 758              	.L45:
  233:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						case TRIG_canRx__init:
  234:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							{
  235:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								chain__et = CHAIN_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2;
- 763              		.loc 1 235 0
- 764 008a 4FF00403 		mov	r3, #4
- 765 008e FB61     		str	r3, [r7, #28]
+ 759              		.loc 1 235 0
+ 760 008a 4FF00403 		mov	r3, #4
+ 761 008e FB61     		str	r3, [r7, #28]
  236:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								catching_state__et = STATE_TOP;
- 766              		.loc 1 236 0
- 767 0090 4FF00103 		mov	r3, #1
- 768 0094 7B83     		strh	r3, [r7, #26]	@ movhi
+ 762              		.loc 1 236 0
+ 763 0090 4FF00103 		mov	r3, #1
+ 764 0094 7B83     		strh	r3, [r7, #26]	@ movhi
  237:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							}
  238:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						break;
- 769              		.loc 1 238 0
- 770 0096 0EE0     		b	.L49
- 771              	.L43:
+ 765              		.loc 1 238 0
+ 766 0096 0EE0     		b	.L49
+ 767              	.L43:
  239:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						case TRIG_timer__timeout:
  240:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							{
  241:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								chain__et = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3;
- 772              		.loc 1 241 0
- 773 0098 4FF00503 		mov	r3, #5
- 774 009c FB61     		str	r3, [r7, #28]
+ 768              		.loc 1 241 0
+ 769 0098 4FF00503 		mov	r3, #5
+ 770 009c FB61     		str	r3, [r7, #28]
  242:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								catching_state__et = STATE_TOP;
- 775              		.loc 1 242 0
- 776 009e 4FF00103 		mov	r3, #1
- 777 00a2 7B83     		strh	r3, [r7, #26]	@ movhi
+ 771              		.loc 1 242 0
+ 772 009e 4FF00103 		mov	r3, #1
+ 773 00a2 7B83     		strh	r3, [r7, #26]	@ movhi
  243:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							}
  244:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						break;
- 778              		.loc 1 244 0
- 779 00a4 07E0     		b	.L49
- 780              	.L47:
+ 774              		.loc 1 244 0
+ 775 00a4 07E0     		b	.L49
+ 776              	.L47:
  245:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						case TRIG_canRx__listenOnMsg:
  246:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							{
  247:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								chain__et = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4;
- 781              		.loc 1 247 0
- 782 00a6 4FF00603 		mov	r3, #6
- 783 00aa FB61     		str	r3, [r7, #28]
+ 777              		.loc 1 247 0
+ 778 00a6 4FF00603 		mov	r3, #6
+ 779 00aa FB61     		str	r3, [r7, #28]
  248:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 								catching_state__et = STATE_TOP;
- 784              		.loc 1 248 0
- 785 00ac 4FF00103 		mov	r3, #1
- 786 00b0 7B83     		strh	r3, [r7, #26]	@ movhi
+ 780              		.loc 1 248 0
+ 781 00ac 4FF00103 		mov	r3, #1
+ 782 00b0 7B83     		strh	r3, [r7, #26]	@ movhi
  249:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							}
  250:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						break;
- 787              		.loc 1 250 0
- 788 00b2 00E0     		b	.L49
- 789              	.L42:
+ 783              		.loc 1 250 0
+ 784 00b2 00E0     		b	.L49
+ 785              	.L42:
  251:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 						default:
  252:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							/* should not occur */
  253:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 							break;
- 790              		.loc 1 253 0
- 791 00b4 00BF     		nop
- 792              	.L49:
+ 786              		.loc 1 253 0
+ 787 00b4 00BF     		nop
+ 788              	.L49:
  254:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				}
  255:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				break;
- 793              		.loc 1 255 0
- 794 00b6 00E0     		b	.L39
- 795              	.L51:
+ 789              		.loc 1 255 0
+ 790 00b6 00E0     		b	.L39
+ 791              	.L51:
  256:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			default:
  257:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				/* should not occur */
  258:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 				break;
- 796              		.loc 1 258 0
- 797 00b8 00BF     		nop
- 798              	.L39:
+ 792              		.loc 1 258 0
+ 793 00b8 00BF     		nop
+ 794              	.L39:
  259:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  260:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	}
  261:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	if (chain__et != NOT_CAUGHT) {
- 799              		.loc 1 261 0
- 800 00ba FB69     		ldr	r3, [r7, #28]
- 801 00bc 002B     		cmp	r3, #0
- 802 00be 21D0     		beq	.L38
+ 795              		.loc 1 261 0
+ 796 00ba FB69     		ldr	r3, [r7, #28]
+ 797 00bc 002B     		cmp	r3, #0
+ 798 00be 21D0     		beq	.L38
  262:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		exitTo(self, getState(self), catching_state__et);
- 803              		.loc 1 262 0
- 804 00c0 F868     		ldr	r0, [r7, #12]
- 805 00c2 FFF7FEFF 		bl	getState
- 806 00c6 0346     		mov	r3, r0
- 807 00c8 1A46     		mov	r2, r3
- 808 00ca B7F91A30 		ldrsh	r3, [r7, #26]
- 809 00ce F868     		ldr	r0, [r7, #12]
- 810 00d0 1146     		mov	r1, r2
- 811 00d2 1A46     		mov	r2, r3
- 812 00d4 FFF7FEFF 		bl	exitTo
- 813              	.LBB6:
+ 799              		.loc 1 262 0
+ 800 00c0 F868     		ldr	r0, [r7, #12]
+ 801 00c2 FFF7FEFF 		bl	getState
+ 802 00c6 0346     		mov	r3, r0
+ 803 00c8 1A46     		mov	r2, r3
+ 804 00ca B7F91A30 		ldrsh	r3, [r7, #26]
+ 805 00ce F868     		ldr	r0, [r7, #12]
+ 806 00d0 1146     		mov	r1, r2
+ 807 00d2 1A46     		mov	r2, r3
+ 808 00d4 FFF7FEFF 		bl	exitTo
+ 809              	.LBB6:
  263:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		{
  264:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			etInt16 next__et = executeTransitionChain(self, chain__et, ifitem, generic_data__et);
- 814              		.loc 1 264 0
- 815 00d8 F868     		ldr	r0, [r7, #12]
- 816 00da F969     		ldr	r1, [r7, #28]
- 817 00dc BA68     		ldr	r2, [r7, #8]
- 818 00de 3B68     		ldr	r3, [r7, #0]
- 819 00e0 FFF7FEFF 		bl	executeTransitionChain
- 820 00e4 0346     		mov	r3, r0
- 821 00e6 7B82     		strh	r3, [r7, #18]	@ movhi
+ 810              		.loc 1 264 0
+ 811 00d8 F868     		ldr	r0, [r7, #12]
+ 812 00da F969     		ldr	r1, [r7, #28]
+ 813 00dc BA68     		ldr	r2, [r7, #8]
+ 814 00de 3B68     		ldr	r3, [r7, #0]
+ 815 00e0 FFF7FEFF 		bl	executeTransitionChain
+ 816 00e4 0346     		mov	r3, r0
+ 817 00e6 7B82     		strh	r3, [r7, #18]	@ movhi
  265:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			next__et = enterHistory(self, next__et);
- 822              		.loc 1 265 0
- 823 00e8 B7F91230 		ldrsh	r3, [r7, #18]
- 824 00ec F868     		ldr	r0, [r7, #12]
- 825 00ee 1946     		mov	r1, r3
- 826 00f0 FFF7FEFF 		bl	enterHistory
- 827 00f4 0346     		mov	r3, r0
- 828 00f6 7B82     		strh	r3, [r7, #18]	@ movhi
+ 818              		.loc 1 265 0
+ 819 00e8 B7F91230 		ldrsh	r3, [r7, #18]
+ 820 00ec F868     		ldr	r0, [r7, #12]
+ 821 00ee 1946     		mov	r1, r3
+ 822 00f0 FFF7FEFF 		bl	enterHistory
+ 823 00f4 0346     		mov	r3, r0
+ 824 00f6 7B82     		strh	r3, [r7, #18]	@ movhi
  266:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			setState(self, next__et);
- 829              		.loc 1 266 0
- 830 00f8 B7F91230 		ldrsh	r3, [r7, #18]
- 831 00fc F868     		ldr	r0, [r7, #12]
- 832 00fe 1946     		mov	r1, r3
- 833 0100 FFF7FEFF 		bl	setState
- 834              	.L38:
- 835              	.LBE6:
+ 825              		.loc 1 266 0
+ 826 00f8 B7F91230 		ldrsh	r3, [r7, #18]
+ 827 00fc F868     		ldr	r0, [r7, #12]
+ 828 00fe 1946     		mov	r1, r3
+ 829 0100 FFF7FEFF 		bl	setState
+ 830              	.L38:
+ 831              	.LBE6:
  267:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  268:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	}
  269:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 836              		.loc 1 269 0
- 837 0104 07F12007 		add	r7, r7, #32
- 838 0108 BD46     		mov	sp, r7
- 839 010a 80BD     		pop	{r7, pc}
- 840              		.cfi_endproc
- 841              	.LFE12:
- 843              		.section	.text.ACANService_init,"ax",%progbits
- 844              		.align	2
- 845              		.global	ACANService_init
- 846              		.thumb
- 847              		.thumb_func
- 849              	ACANService_init:
- 850              	.LFB13:
+ 832              		.loc 1 269 0
+ 833 0104 07F12007 		add	r7, r7, #32
+ 834 0108 BD46     		mov	sp, r7
+ 835 010a 80BD     		pop	{r7, pc}
+ 836              		.cfi_endproc
+ 837              	.LFE12:
+ 839              		.section	.text.ACANService_init,"ax",%progbits
+ 840              		.align	2
+ 841              		.global	ACANService_init
+ 842              		.thumb
+ 843              		.thumb_func
+ 845              	ACANService_init:
+ 846              	.LFB13:
  270:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  271:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** void ACANService_init(ACANService* self){
- 851              		.loc 1 271 0
- 852              		.cfi_startproc
- 853              		@ args = 0, pretend = 0, frame = 16
- 854              		@ frame_needed = 1, uses_anonymous_args = 0
- 855 0000 80B5     		push	{r7, lr}
- 856              	.LCFI39:
- 857              		.cfi_def_cfa_offset 8
- 858              		.cfi_offset 7, -8
- 859              		.cfi_offset 14, -4
- 860 0002 84B0     		sub	sp, sp, #16
- 861              	.LCFI40:
- 862              		.cfi_def_cfa_offset 24
- 863 0004 00AF     		add	r7, sp, #0
- 864              	.LCFI41:
- 865              		.cfi_def_cfa_register 7
- 866 0006 7860     		str	r0, [r7, #4]
+ 847              		.loc 1 271 0
+ 848              		.cfi_startproc
+ 849              		@ args = 0, pretend = 0, frame = 16
+ 850              		@ frame_needed = 1, uses_anonymous_args = 0
+ 851 0000 80B5     		push	{r7, lr}
+ 852              	.LCFI39:
+ 853              		.cfi_def_cfa_offset 8
+ 854              		.cfi_offset 7, -8
+ 855              		.cfi_offset 14, -4
+ 856 0002 84B0     		sub	sp, sp, #16
+ 857              	.LCFI40:
+ 858              		.cfi_def_cfa_offset 24
+ 859 0004 00AF     		add	r7, sp, #0
+ 860              	.LCFI41:
+ 861              		.cfi_def_cfa_register 7
+ 862 0006 7860     		str	r0, [r7, #4]
  272:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("ACANService", "init")
  273:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	self->state = STATE_TOP;
- 867              		.loc 1 273 0
- 868 0008 7B68     		ldr	r3, [r7, #4]
- 869 000a 4FF00102 		mov	r2, #1
- 870 000e A3F84821 		strh	r2, [r3, #328]	@ movhi
- 871              	.LBB7:
+ 863              		.loc 1 273 0
+ 864 0008 7B68     		ldr	r3, [r7, #4]
+ 865 000a 4FF00102 		mov	r2, #1
+ 866 000e A3F85820 		strh	r2, [r3, #88]	@ movhi
+ 867              	.LBB7:
  274:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	{
  275:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		int i;
  276:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		for (i=0; i<ACANSERVICE_HISTORY_SIZE; ++i)
- 872              		.loc 1 276 0
- 873 0012 4FF00003 		mov	r3, #0
- 874 0016 FB60     		str	r3, [r7, #12]
- 875 0018 0DE0     		b	.L53
- 876              	.L54:
+ 868              		.loc 1 276 0
+ 869 0012 4FF00003 		mov	r3, #0
+ 870 0016 FB60     		str	r3, [r7, #12]
+ 871 0018 0DE0     		b	.L53
+ 872              	.L54:
  277:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			self->history[i] = NO_STATE;
- 877              		.loc 1 277 0 discriminator 2
- 878 001a 7A68     		ldr	r2, [r7, #4]
- 879 001c FB68     		ldr	r3, [r7, #12]
- 880 001e 03F1A403 		add	r3, r3, #164
- 881 0022 4FEA4303 		lsl	r3, r3, #1
- 882 0026 D318     		adds	r3, r2, r3
- 883 0028 4FF00002 		mov	r2, #0
- 884 002c 5A80     		strh	r2, [r3, #2]	@ movhi
+ 873              		.loc 1 277 0 discriminator 2
+ 874 001a 7A68     		ldr	r2, [r7, #4]
+ 875 001c FB68     		ldr	r3, [r7, #12]
+ 876 001e 03F12C03 		add	r3, r3, #44
+ 877 0022 4FEA4303 		lsl	r3, r3, #1
+ 878 0026 D318     		adds	r3, r2, r3
+ 879 0028 4FF00002 		mov	r2, #0
+ 880 002c 5A80     		strh	r2, [r3, #2]	@ movhi
  276:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		for (i=0; i<ACANSERVICE_HISTORY_SIZE; ++i)
- 885              		.loc 1 276 0 discriminator 2
- 886 002e FB68     		ldr	r3, [r7, #12]
- 887 0030 03F10103 		add	r3, r3, #1
- 888 0034 FB60     		str	r3, [r7, #12]
- 889              	.L53:
+ 881              		.loc 1 276 0 discriminator 2
+ 882 002e FB68     		ldr	r3, [r7, #12]
+ 883 0030 03F10103 		add	r3, r3, #1
+ 884 0034 FB60     		str	r3, [r7, #12]
+ 885              	.L53:
  276:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		for (i=0; i<ACANSERVICE_HISTORY_SIZE; ++i)
- 890              		.loc 1 276 0 is_stmt 0 discriminator 1
- 891 0036 FB68     		ldr	r3, [r7, #12]
- 892 0038 012B     		cmp	r3, #1
- 893 003a EEDD     		ble	.L54
- 894              	.LBE7:
+ 886              		.loc 1 276 0 is_stmt 0 discriminator 1
+ 887 0036 FB68     		ldr	r3, [r7, #12]
+ 888 0038 012B     		cmp	r3, #1
+ 889 003a EEDD     		ble	.L54
+ 890              	.LBE7:
  278:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	}
  279:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	ACANService_executeInitTransition(self);
- 895              		.loc 1 279 0 is_stmt 1
- 896 003c 7868     		ldr	r0, [r7, #4]
- 897 003e FFF7FEFF 		bl	ACANService_executeInitTransition
+ 891              		.loc 1 279 0 is_stmt 1
+ 892 003c 7868     		ldr	r0, [r7, #4]
+ 893 003e FFF7FEFF 		bl	ACANService_executeInitTransition
  280:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  281:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 898              		.loc 1 281 0
- 899 0042 07F11007 		add	r7, r7, #16
- 900 0046 BD46     		mov	sp, r7
- 901 0048 80BD     		pop	{r7, pc}
- 902              		.cfi_endproc
- 903              	.LFE13:
- 905 004a 00BF     		.section	.text.ACANService_receiveMessage,"ax",%progbits
- 906              		.align	2
- 907              		.global	ACANService_receiveMessage
- 908              		.thumb
- 909              		.thumb_func
- 911              	ACANService_receiveMessage:
- 912              	.LFB14:
+ 894              		.loc 1 281 0
+ 895 0042 07F11007 		add	r7, r7, #16
+ 896 0046 BD46     		mov	sp, r7
+ 897 0048 80BD     		pop	{r7, pc}
+ 898              		.cfi_endproc
+ 899              	.LFE13:
+ 901 004a 00BF     		.section	.text.ACANService_receiveMessage,"ax",%progbits
+ 902              		.align	2
+ 903              		.global	ACANService_receiveMessage
+ 904              		.thumb
+ 905              		.thumb_func
+ 907              	ACANService_receiveMessage:
+ 908              	.LFB14:
  282:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  283:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  284:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** void ACANService_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
- 913              		.loc 1 284 0
- 914              		.cfi_startproc
- 915              		@ args = 0, pretend = 0, frame = 16
- 916              		@ frame_needed = 1, uses_anonymous_args = 0
- 917 0000 80B5     		push	{r7, lr}
- 918              	.LCFI42:
- 919              		.cfi_def_cfa_offset 8
- 920              		.cfi_offset 7, -8
- 921              		.cfi_offset 14, -4
- 922 0002 84B0     		sub	sp, sp, #16
- 923              	.LCFI43:
- 924              		.cfi_def_cfa_offset 24
- 925 0004 00AF     		add	r7, sp, #0
- 926              	.LCFI44:
- 927              		.cfi_def_cfa_register 7
- 928 0006 F860     		str	r0, [r7, #12]
- 929 0008 B960     		str	r1, [r7, #8]
- 930 000a 7A60     		str	r2, [r7, #4]
+ 909              		.loc 1 284 0
+ 910              		.cfi_startproc
+ 911              		@ args = 0, pretend = 0, frame = 16
+ 912              		@ frame_needed = 1, uses_anonymous_args = 0
+ 913 0000 80B5     		push	{r7, lr}
+ 914              	.LCFI42:
+ 915              		.cfi_def_cfa_offset 8
+ 916              		.cfi_offset 7, -8
+ 917              		.cfi_offset 14, -4
+ 918 0002 84B0     		sub	sp, sp, #16
+ 919              	.LCFI43:
+ 920              		.cfi_def_cfa_offset 24
+ 921 0004 00AF     		add	r7, sp, #0
+ 922              	.LCFI44:
+ 923              		.cfi_def_cfa_register 7
+ 924 0006 F860     		str	r0, [r7, #12]
+ 925 0008 B960     		str	r1, [r7, #8]
+ 926 000a 7A60     		str	r2, [r7, #4]
  285:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("ACANService", "_receiveMessage")
  286:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	
  287:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	ACANService_receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(e
- 931              		.loc 1 287 0
- 932 000c 7B68     		ldr	r3, [r7, #4]
- 933 000e DB88     		ldrh	r3, [r3, #6]
- 934 0010 1AB2     		sxth	r2, r3
- 935 0012 7B68     		ldr	r3, [r7, #4]
- 936 0014 03F10803 		add	r3, r3, #8
- 937 0018 F868     		ldr	r0, [r7, #12]
- 938 001a B968     		ldr	r1, [r7, #8]
- 939 001c FFF7FEFF 		bl	ACANService_receiveEvent
+ 927              		.loc 1 287 0
+ 928 000c 7B68     		ldr	r3, [r7, #4]
+ 929 000e DB88     		ldrh	r3, [r3, #6]
+ 930 0010 1AB2     		sxth	r2, r3
+ 931 0012 7B68     		ldr	r3, [r7, #4]
+ 932 0014 03F10803 		add	r3, r3, #8
+ 933 0018 F868     		ldr	r0, [r7, #12]
+ 934 001a B968     		ldr	r1, [r7, #8]
+ 935 001c FFF7FEFF 		bl	ACANService_receiveEvent
  288:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	
  289:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  290:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 940              		.loc 1 290 0
- 941 0020 07F11007 		add	r7, r7, #16
- 942 0024 BD46     		mov	sp, r7
- 943 0026 80BD     		pop	{r7, pc}
- 944              		.cfi_endproc
- 945              	.LFE14:
- 947              		.section	.text.ACANService_pollAllRxMsgs,"ax",%progbits
- 948              		.align	2
- 949              		.global	ACANService_pollAllRxMsgs
- 950              		.thumb
- 951              		.thumb_func
- 953              	ACANService_pollAllRxMsgs:
- 954              	.LFB15:
+ 936              		.loc 1 290 0
+ 937 0020 07F11007 		add	r7, r7, #16
+ 938 0024 BD46     		mov	sp, r7
+ 939 0026 80BD     		pop	{r7, pc}
+ 940              		.cfi_endproc
+ 941              	.LFE14:
+ 943              		.section	.text.ACANService_pollAllRxMsgs,"ax",%progbits
+ 944              		.align	2
+ 945              		.global	ACANService_pollAllRxMsgs
+ 946              		.thumb
+ 947              		.thumb_func
+ 949              	ACANService_pollAllRxMsgs:
+ 950              	.LFB15:
  291:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  292:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 
  293:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** /*--------------------- operations ---------------------*/
  294:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** void ACANService_pollAllRxMsgs(ACANService* self) {
- 955              		.loc 1 294 0
- 956              		.cfi_startproc
- 957              		@ args = 0, pretend = 0, frame = 32
- 958              		@ frame_needed = 1, uses_anonymous_args = 0
- 959 0000 80B5     		push	{r7, lr}
- 960              	.LCFI45:
- 961              		.cfi_def_cfa_offset 8
- 962              		.cfi_offset 7, -8
- 963              		.cfi_offset 14, -4
- 964 0002 88B0     		sub	sp, sp, #32
- 965              	.LCFI46:
- 966              		.cfi_def_cfa_offset 40
- 967 0004 00AF     		add	r7, sp, #0
- 968              	.LCFI47:
- 969              		.cfi_def_cfa_register 7
- 970 0006 7860     		str	r0, [r7, #4]
+ 951              		.loc 1 294 0
+ 952              		.cfi_startproc
+ 953              		@ args = 0, pretend = 0, frame = 32
+ 954              		@ frame_needed = 1, uses_anonymous_args = 0
+ 955 0000 80B5     		push	{r7, lr}
+ 956              	.LCFI45:
+ 957              		.cfi_def_cfa_offset 8
+ 958              		.cfi_offset 7, -8
+ 959              		.cfi_offset 14, -4
+ 960 0002 88B0     		sub	sp, sp, #32
+ 961              	.LCFI46:
+ 962              		.cfi_def_cfa_offset 40
+ 963 0004 00AF     		add	r7, sp, #0
+ 964              	.LCFI47:
+ 965              		.cfi_def_cfa_register 7
+ 966 0006 7860     		str	r0, [r7, #4]
  295:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	pclCANMsg msg;
  296:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	uint32 i;
  297:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	uint8 val;
  298:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	uint32 numberOfPorts = PCANRxReplPort_getReplication(&(self->constData->canRx));
- 971              		.loc 1 298 0
- 972 0008 7B68     		ldr	r3, [r7, #4]
- 973 000a 1B68     		ldr	r3, [r3, #0]
- 974 000c 03F11403 		add	r3, r3, #20
- 975 0010 1846     		mov	r0, r3
- 976 0012 FFF7FEFF 		bl	PCANRxReplPort_getReplication
- 977 0016 0346     		mov	r3, r0
- 978 0018 BB61     		str	r3, [r7, #24]
+ 967              		.loc 1 298 0
+ 968 0008 7B68     		ldr	r3, [r7, #4]
+ 969 000a 1B68     		ldr	r3, [r3, #0]
+ 970 000c 03F11403 		add	r3, r3, #20
+ 971 0010 1846     		mov	r0, r3
+ 972 0012 FFF7FEFF 		bl	PCANRxReplPort_getReplication
+ 973 0016 0346     		mov	r3, r0
+ 974 0018 BB61     		str	r3, [r7, #24]
  299:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	for(i=0;i<numberOfPorts;i++){
- 979              		.loc 1 299 0
- 980 001a 4FF00003 		mov	r3, #0
- 981 001e FB61     		str	r3, [r7, #28]
- 982 0020 20E0     		b	.L57
- 983              	.L59:
+ 975              		.loc 1 299 0
+ 976 001a 4FF00003 		mov	r3, #0
+ 977 001e FB61     		str	r3, [r7, #28]
+ 978 0020 1EE0     		b	.L57
+ 979              	.L59:
  300:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		if (PCL_TRUE == pclCANCheckReception(rxData[i].channel, &msg)){
- 984              		.loc 1 300 0
- 985 0022 7A68     		ldr	r2, [r7, #4]
- 986 0024 FB69     		ldr	r3, [r7, #28]
- 987 0026 4FEA0313 		lsl	r3, r3, #4
- 988 002a D318     		adds	r3, r2, r3
- 989 002c 03F10403 		add	r3, r3, #4
- 990 0030 1A68     		ldr	r2, [r3, #0]
- 991 0032 07F10803 		add	r3, r7, #8
- 992 0036 1046     		mov	r0, r2
- 993 0038 1946     		mov	r1, r3
- 994 003a FFF7FEFF 		bl	pclCANCheckReception
- 995 003e 0346     		mov	r3, r0
- 996 0040 012B     		cmp	r3, #1
- 997 0042 0BD1     		bne	.L58
+ 980              		.loc 1 300 0
+ 981 0022 7A68     		ldr	r2, [r7, #4]
+ 982 0024 FB69     		ldr	r3, [r7, #28]
+ 983 0026 4FEA8303 		lsl	r3, r3, #2
+ 984 002a D318     		adds	r3, r2, r3
+ 985 002c 5A68     		ldr	r2, [r3, #4]
+ 986 002e 07F10803 		add	r3, r7, #8
+ 987 0032 1046     		mov	r0, r2
+ 988 0034 1946     		mov	r1, r3
+ 989 0036 FFF7FEFF 		bl	pclCANCheckReception
+ 990 003a 0346     		mov	r3, r0
+ 991 003c 012B     		cmp	r3, #1
+ 992 003e 0BD1     		bne	.L58
  301:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			canRx_msgReceived(i, &msg);
- 998              		.loc 1 301 0
- 999 0044 7B68     		ldr	r3, [r7, #4]
- 1000 0046 1B68     		ldr	r3, [r3, #0]
- 1001 0048 03F11401 		add	r1, r3, #20
- 1002 004c FA69     		ldr	r2, [r7, #28]
- 1003 004e 07F10803 		add	r3, r7, #8
- 1004 0052 0846     		mov	r0, r1
- 1005 0054 1146     		mov	r1, r2
- 1006 0056 1A46     		mov	r2, r3
- 1007 0058 FFF7FEFF 		bl	PCANRxReplPort_msgReceived
- 1008              	.L58:
+ 993              		.loc 1 301 0
+ 994 0040 7B68     		ldr	r3, [r7, #4]
+ 995 0042 1B68     		ldr	r3, [r3, #0]
+ 996 0044 03F11401 		add	r1, r3, #20
+ 997 0048 FA69     		ldr	r2, [r7, #28]
+ 998 004a 07F10803 		add	r3, r7, #8
+ 999 004e 0846     		mov	r0, r1
+ 1000 0050 1146     		mov	r1, r2
+ 1001 0052 1A46     		mov	r2, r3
+ 1002 0054 FFF7FEFF 		bl	PCANRxReplPort_msgReceived
+ 1003              	.L58:
  299:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	for(i=0;i<numberOfPorts;i++){
- 1009              		.loc 1 299 0
- 1010 005c FB69     		ldr	r3, [r7, #28]
- 1011 005e 03F10103 		add	r3, r3, #1
- 1012 0062 FB61     		str	r3, [r7, #28]
- 1013              	.L57:
+ 1004              		.loc 1 299 0
+ 1005 0058 FB69     		ldr	r3, [r7, #28]
+ 1006 005a 03F10103 		add	r3, r3, #1
+ 1007 005e FB61     		str	r3, [r7, #28]
+ 1008              	.L57:
  299:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 	for(i=0;i<numberOfPorts;i++){
- 1014              		.loc 1 299 0 is_stmt 0 discriminator 1
- 1015 0064 FA69     		ldr	r2, [r7, #28]
- 1016 0066 BB69     		ldr	r3, [r7, #24]
- 1017 0068 9A42     		cmp	r2, r3
- 1018 006a DAD3     		bcc	.L59
+ 1009              		.loc 1 299 0 is_stmt 0 discriminator 1
+ 1010 0060 FA69     		ldr	r2, [r7, #28]
+ 1011 0062 BB69     		ldr	r3, [r7, #24]
+ 1012 0064 9A42     		cmp	r2, r3
+ 1013 0066 DCD3     		bcc	.L59
  302:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 			}
  303:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** 		}
  304:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/can\ACANService.c **** }
- 1019              		.loc 1 304 0 is_stmt 1
- 1020 006c 07F12007 		add	r7, r7, #32
- 1021 0070 BD46     		mov	sp, r7
- 1022 0072 80BD     		pop	{r7, pc}
- 1023              		.cfi_endproc
- 1024              	.LFE15:
- 1026              		.text
- 1027              	.Letext0:
- 1028              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1029              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1030              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDemo
- 1031              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1032              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1033              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1034              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1035              		.file 9 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1036              		.file 10 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1037              		.file 11 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1038              		.file 12 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1039              		.file 13 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1040              		.file 14 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/
- 1041              		.file 15 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST/pcl
- 1042              		.file 16 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1043              		.file 17 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/
+ 1014              		.loc 1 304 0 is_stmt 1
+ 1015 0068 07F12007 		add	r7, r7, #32
+ 1016 006c BD46     		mov	sp, r7
+ 1017 006e 80BD     		pop	{r7, pc}
+ 1018              		.cfi_endproc
+ 1019              	.LFE15:
+ 1021              		.text
+ 1022              	.Letext0:
+ 1023              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1024              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1025              		.file 4 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDemo
+ 1026              		.file 5 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1027              		.file 6 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1028              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1029              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1030              		.file 9 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1031              		.file 10 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1032              		.file 11 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1033              		.file 12 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1034              		.file 13 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1035              		.file 14 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/
+ 1036              		.file 15 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\HexagonCANDemoST/pcl
+ 1037              		.file 16 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1038              		.file 17 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/
 DEFINED SYMBOLS
                             *ABS*:00000000 ACANService.c
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:20     .text.setState:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:24     .text.setState:00000000 setState
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:58     .text.getState:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:62     .text.getState:00000000 getState
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:94     .text.action_TRANS_INITIAL_TO__Operational:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:98     .text.action_TRANS_INITIAL_TO__Operational:00000000 action_TRANS_INITIAL_TO__Operational
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:135    .text.action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:139    .text.action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0:00000000 action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:181    .text.action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:185    .text.action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1:00000000 action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:226    .text.action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:230    .text.action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2:00000000 action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:270    .text.action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:274    .text.action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3:00000000 action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:953    .text.ACANService_pollAllRxMsgs:00000000 ACANService_pollAllRxMsgs
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:304    .text.action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:308    .text.action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4:00000000 action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:349    .text.exitTo:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:353    .text.exitTo:00000000 exitTo
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:410    .text.executeTransitionChain:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:414    .text.executeTransitionChain:00000000 executeTransitionChain
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:444    .text.executeTransitionChain:00000020 $d
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:452    .text.executeTransitionChain:00000038 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:540    .text.enterHistory:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:544    .text.enterHistory:00000000 enterHistory
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:618    .text.ACANService_executeInitTransition:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:622    .text.ACANService_executeInitTransition:00000000 ACANService_executeInitTransition
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:671    .text.ACANService_receiveEvent:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:675    .text.ACANService_receiveEvent:00000000 ACANService_receiveEvent
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:844    .text.ACANService_init:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:849    .text.ACANService_init:00000000 ACANService_init
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:906    .text.ACANService_receiveMessage:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:911    .text.ACANService_receiveMessage:00000000 ACANService_receiveMessage
-C:\Users\TJung\AppData\Local\Temp\ccCxTF55.s:948    .text.ACANService_pollAllRxMsgs:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:20     .text.setState:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:24     .text.setState:00000000 setState
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:58     .text.getState:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:62     .text.getState:00000000 getState
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:94     .text.action_TRANS_INITIAL_TO__Operational:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:98     .text.action_TRANS_INITIAL_TO__Operational:00000000 action_TRANS_INITIAL_TO__Operational
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:135    .text.action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:139    .text.action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0:00000000 action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:180    .text.action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:184    .text.action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1:00000000 action_TRANS_tr1_FROM_Operational_TO_Operational_BY_initcanTx_tr1
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:224    .text.action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:228    .text.action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2:00000000 action_TRANS_tr2_FROM_Operational_TO_Operational_BY_initcanRx_tr2
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:267    .text.action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:271    .text.action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3:00000000 action_TRANS_tr3_FROM_Operational_TO_Operational_BY_timeouttimer_tr3
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:949    .text.ACANService_pollAllRxMsgs:00000000 ACANService_pollAllRxMsgs
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:301    .text.action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:305    .text.action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4:00000000 action_TRANS_tr4_FROM_Operational_TO_Operational_BY_listenOnMsgcanRx_tr4
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:345    .text.exitTo:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:349    .text.exitTo:00000000 exitTo
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:406    .text.executeTransitionChain:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:410    .text.executeTransitionChain:00000000 executeTransitionChain
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:440    .text.executeTransitionChain:00000020 $d
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:448    .text.executeTransitionChain:00000038 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:536    .text.enterHistory:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:540    .text.enterHistory:00000000 enterHistory
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:614    .text.ACANService_executeInitTransition:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:618    .text.ACANService_executeInitTransition:00000000 ACANService_executeInitTransition
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:667    .text.ACANService_receiveEvent:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:671    .text.ACANService_receiveEvent:00000000 ACANService_receiveEvent
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:840    .text.ACANService_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:845    .text.ACANService_init:00000000 ACANService_init
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:902    .text.ACANService_receiveMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:907    .text.ACANService_receiveMessage:00000000 ACANService_receiveMessage
+C:\Users\TJung\AppData\Local\Temp\ccjFrNjG.s:944    .text.ACANService_pollAllRxMsgs:00000000 $t
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
                            .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5

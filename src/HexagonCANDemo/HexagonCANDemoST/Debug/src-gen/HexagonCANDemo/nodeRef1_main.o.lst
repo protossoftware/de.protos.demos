@@ -67,309 +67,129 @@
   63 002c 94000000 		.word	_HexagonCANDemo_main_canService_const
   64 0030 FFFFFFFF 		.word	-1
   65 0034 FFFFFFFF 		.word	-1
-  66 0038 00       		.byte	0
-  67 0039 00       		.byte	0
-  68 003a 00       		.byte	0
-  69 003b 00       		.byte	0
-  70 003c 00       		.byte	0
-  71 003d 00       		.byte	0
-  72 003e 00       		.byte	0
-  73 003f 00       		.byte	0
-  74 0040 FFFFFFFF 		.word	-1
-  75 0044 FFFFFFFF 		.word	-1
-  76 0048 00       		.byte	0
-  77 0049 00       		.byte	0
-  78 004a 00       		.byte	0
-  79 004b 00       		.byte	0
-  80 004c 00       		.byte	0
-  81 004d 00       		.byte	0
-  82 004e 00       		.byte	0
-  83 004f 00       		.byte	0
-  84 0050 FFFFFFFF 		.word	-1
-  85 0054 FFFFFFFF 		.word	-1
-  86 0058 00       		.byte	0
-  87 0059 00       		.byte	0
-  88 005a 00       		.byte	0
-  89 005b 00       		.byte	0
-  90 005c 00       		.byte	0
-  91 005d 00       		.byte	0
-  92 005e 00       		.byte	0
-  93 005f 00       		.byte	0
-  94 0060 FFFFFFFF 		.word	-1
-  95 0064 FFFFFFFF 		.word	-1
-  96 0068 00       		.byte	0
-  97 0069 00       		.byte	0
-  98 006a 00       		.byte	0
-  99 006b 00       		.byte	0
- 100 006c 00       		.byte	0
- 101 006d 00       		.byte	0
- 102 006e 00       		.byte	0
- 103 006f 00       		.byte	0
- 104 0070 FFFFFFFF 		.word	-1
- 105 0074 FFFFFFFF 		.word	-1
- 106 0078 00       		.byte	0
- 107 0079 00       		.byte	0
- 108 007a 00       		.byte	0
- 109 007b 00       		.byte	0
- 110 007c 00       		.byte	0
- 111 007d 00       		.byte	0
- 112 007e 00       		.byte	0
- 113 007f 00       		.byte	0
- 114 0080 FFFFFFFF 		.word	-1
- 115 0084 FFFFFFFF 		.word	-1
- 116 0088 00       		.byte	0
- 117 0089 00       		.byte	0
- 118 008a 00       		.byte	0
- 119 008b 00       		.byte	0
- 120 008c 00       		.byte	0
- 121 008d 00       		.byte	0
- 122 008e 00       		.byte	0
- 123 008f 00       		.byte	0
- 124 0090 FFFFFFFF 		.word	-1
- 125 0094 FFFFFFFF 		.word	-1
- 126 0098 00       		.byte	0
- 127 0099 00       		.byte	0
- 128 009a 00       		.byte	0
- 129 009b 00       		.byte	0
- 130 009c 00       		.byte	0
- 131 009d 00       		.byte	0
- 132 009e 00       		.byte	0
- 133 009f 00       		.byte	0
- 134 00a0 FFFFFFFF 		.word	-1
- 135 00a4 FFFFFFFF 		.word	-1
- 136 00a8 00       		.byte	0
- 137 00a9 00       		.byte	0
- 138 00aa 00       		.byte	0
- 139 00ab 00       		.byte	0
- 140 00ac 00       		.byte	0
- 141 00ad 00       		.byte	0
- 142 00ae 00       		.byte	0
- 143 00af 00       		.byte	0
- 144 00b0 FFFFFFFF 		.word	-1
- 145 00b4 FFFFFFFF 		.word	-1
- 146 00b8 00       		.byte	0
- 147 00b9 00       		.byte	0
- 148 00ba 00       		.byte	0
- 149 00bb 00       		.byte	0
- 150 00bc 00       		.byte	0
- 151 00bd 00       		.byte	0
- 152 00be 00       		.byte	0
- 153 00bf 00       		.byte	0
- 154 00c0 FFFFFFFF 		.word	-1
- 155 00c4 FFFFFFFF 		.word	-1
- 156 00c8 00       		.byte	0
- 157 00c9 00       		.byte	0
- 158 00ca 00       		.byte	0
- 159 00cb 00       		.byte	0
- 160 00cc 00       		.byte	0
- 161 00cd 00       		.byte	0
- 162 00ce 00       		.byte	0
- 163 00cf 00       		.byte	0
- 164 00d0 FFFFFFFF 		.word	-1
- 165 00d4 FFFFFFFF 		.word	-1
- 166 00d8 00       		.byte	0
- 167 00d9 00       		.byte	0
- 168 00da 00       		.byte	0
- 169 00db 00       		.byte	0
- 170 00dc 00       		.byte	0
- 171 00dd 00       		.byte	0
- 172 00de 00       		.byte	0
- 173 00df 00       		.byte	0
- 174 00e0 FFFFFFFF 		.word	-1
- 175 00e4 FFFFFFFF 		.word	-1
- 176 00e8 00       		.byte	0
- 177 00e9 00       		.byte	0
- 178 00ea 00       		.byte	0
- 179 00eb 00       		.byte	0
- 180 00ec 00       		.byte	0
- 181 00ed 00       		.byte	0
- 182 00ee 00       		.byte	0
- 183 00ef 00       		.byte	0
- 184 00f0 FFFFFFFF 		.word	-1
- 185 00f4 FFFFFFFF 		.word	-1
- 186 00f8 00       		.byte	0
- 187 00f9 00       		.byte	0
- 188 00fa 00       		.byte	0
- 189 00fb 00       		.byte	0
- 190 00fc 00       		.byte	0
- 191 00fd 00       		.byte	0
- 192 00fe 00       		.byte	0
- 193 00ff 00       		.byte	0
- 194 0100 FFFFFFFF 		.word	-1
- 195 0104 FFFFFFFF 		.word	-1
- 196 0108 00       		.byte	0
- 197 0109 00       		.byte	0
- 198 010a 00       		.byte	0
- 199 010b 00       		.byte	0
- 200 010c 00       		.byte	0
- 201 010d 00       		.byte	0
- 202 010e 00       		.byte	0
- 203 010f 00       		.byte	0
- 204 0110 FFFFFFFF 		.word	-1
- 205 0114 FFFFFFFF 		.word	-1
- 206 0118 00       		.byte	0
- 207 0119 00       		.byte	0
- 208 011a 00       		.byte	0
- 209 011b 00       		.byte	0
- 210 011c 00       		.byte	0
- 211 011d 00       		.byte	0
- 212 011e 00       		.byte	0
- 213 011f 00       		.byte	0
- 214 0120 FFFFFFFF 		.word	-1
- 215 0124 FFFFFFFF 		.word	-1
- 216 0128 00       		.byte	0
- 217 0129 00       		.byte	0
- 218 012a 00       		.byte	0
- 219 012b 00       		.byte	0
- 220 012c 00       		.byte	0
- 221 012d 00       		.byte	0
- 222 012e 00       		.byte	0
- 223 012f 00       		.byte	0
- 224 0130 FFFFFFFF 		.word	-1
- 225 0134 FFFFFFFF 		.word	-1
- 226 0138 00       		.byte	0
- 227 0139 00       		.byte	0
- 228 013a 00       		.byte	0
- 229 013b 00       		.byte	0
- 230 013c 00       		.byte	0
- 231 013d 00       		.byte	0
- 232 013e 00       		.byte	0
- 233 013f 00       		.byte	0
- 234 0140 FFFFFFFF 		.word	-1
- 235 0144 FFFFFFFF 		.word	-1
- 236 0148 00       		.byte	0
- 237 0149 00       		.byte	0
- 238 014a 00       		.byte	0
- 239 014b 00       		.byte	0
- 240 014c 00       		.byte	0
- 241 014d 00       		.byte	0
- 242 014e 00       		.byte	0
- 243 014f 00       		.byte	0
- 244 0150 FFFFFFFF 		.word	-1
- 245 0154 FFFFFFFF 		.word	-1
- 246 0158 00       		.byte	0
- 247 0159 00       		.byte	0
- 248 015a 00       		.byte	0
- 249 015b 00       		.byte	0
- 250 015c 00       		.byte	0
- 251 015d 00       		.byte	0
- 252 015e 00       		.byte	0
- 253 015f 00       		.byte	0
- 254 0160 FFFFFFFF 		.word	-1
- 255 0164 FFFFFFFF 		.word	-1
- 256 0168 00       		.byte	0
- 257 0169 00       		.byte	0
- 258 016a 00       		.byte	0
- 259 016b 00       		.byte	0
- 260 016c 00       		.byte	0
- 261 016d 00       		.byte	0
- 262 016e 00       		.byte	0
- 263 016f 00       		.byte	0
- 264 0170 32000000 		.word	50
- 265 0174 00000000 		.space	8
- 265      00000000 
- 266              		.bss
- 267              		.align	2
- 268              	_HexagonCANDemo_main_appl_mrPing_timer_var:
- 269 0570 00       		.space	1
- 270              		.data
- 271              		.align	2
- 274              	_HexagonCANDemo_main_appl_mrPing_canTx_var:
- 275 017c FFFFFFFF 		.word	-1
- 276              		.align	2
- 279              	_HexagonCANDemo_main_appl_mrPing_canRx_var:
- 280 0180 FFFFFFFF 		.word	-1
- 281              		.bss
- 282 0571 000000   		.align	2
- 283              	_HexagonCANDemo_main_canService_timer_var:
- 284 0574 00       		.space	1
- 285 0575 000000   		.section	.rodata
- 286 000e 0000     		.align	2
- 289              	_HexagonCANDemo_main_appl_mrPing_const:
- 290 0010 00000000 		.word	0
- 291 0014 00050000 		.word	msgService_PhysicalThread1
- 292 0018 28       		.byte	40
- 293 0019 01       		.byte	1
- 294 001a 0000     		.space	2
- 295 001c 70050000 		.word	_HexagonCANDemo_main_appl_mrPing_timer_var
- 296 0020 00050000 		.word	msgService_PhysicalThread1
- 297 0024 2A       		.byte	42
- 298 0025 02       		.byte	2
- 299 0026 0000     		.space	2
- 300 0028 7C010000 		.word	_HexagonCANDemo_main_appl_mrPing_canTx_var
- 301 002c 00050000 		.word	msgService_PhysicalThread1
- 302 0030 2E       		.byte	46
- 303 0031 03       		.byte	3
- 304 0032 0000     		.space	2
- 305 0034 80010000 		.word	_HexagonCANDemo_main_appl_mrPing_canRx_var
- 306 0038 00050000 		.word	msgService_PhysicalThread1
- 307 003c 2F       		.byte	47
- 308 003d 04       		.byte	4
- 309 003e 0000     		.space	2
- 310              		.align	2
- 313              	_HexagonCANDemo_main_appl_mrPong_const:
- 314 0040 00000000 		.word	0
- 315 0044 00050000 		.word	msgService_PhysicalThread1
- 316 0048 23       		.byte	35
- 317 0049 01       		.byte	1
- 318 004a 0000     		.space	2
- 319              		.align	2
- 322              	_HexagonCANDemo_main_timingService_repl_sub_ports:
- 323 004c 00000000 		.word	0
- 324 0050 00050000 		.word	msgService_PhysicalThread1
- 325 0054 24       		.byte	36
- 326 0055 01       		.byte	1
- 327 0056 0000     		.space	2
- 328 0058 00       		.byte	0
- 329 0059 000000   		.space	3
- 330 005c 00000000 		.word	0
- 331 0060 00050000 		.word	msgService_PhysicalThread1
- 332 0064 2D       		.byte	45
- 333 0065 01       		.byte	1
- 334 0066 0000     		.space	2
- 335 0068 01       		.byte	1
- 336 0069 000000   		.space	3
- 337              		.align	2
- 340              	_HexagonCANDemo_main_timingService_const:
- 341 006c 0200     		.short	2
- 342 006e 0000     		.space	2
- 343 0070 4C000000 		.word	_HexagonCANDemo_main_timingService_repl_sub_ports
- 344              		.align	2
- 347              	_HexagonCANDemo_main_canService_repl_sub_ports:
- 348 0074 00000000 		.word	0
- 349 0078 00050000 		.word	msgService_PhysicalThread1
- 350 007c 25       		.byte	37
- 351 007d 02       		.byte	2
- 352 007e 0000     		.space	2
- 353 0080 00       		.byte	0
- 354 0081 000000   		.space	3
- 355 0084 00000000 		.word	0
- 356 0088 00050000 		.word	msgService_PhysicalThread1
- 357 008c 26       		.byte	38
- 358 008d 03       		.byte	3
- 359 008e 0000     		.space	2
- 360 0090 00       		.byte	0
- 361 0091 000000   		.space	3
- 362              		.align	2
- 365              	_HexagonCANDemo_main_canService_const:
- 366 0094 74050000 		.word	_HexagonCANDemo_main_canService_timer_var
- 367 0098 00050000 		.word	msgService_PhysicalThread1
- 368 009c 2B       		.byte	43
- 369 009d 01       		.byte	1
- 370 009e 0000     		.space	2
- 371 00a0 0100     		.short	1
- 372 00a2 0000     		.space	2
- 373 00a4 74000000 		.word	_HexagonCANDemo_main_canService_repl_sub_ports
- 374 00a8 0100     		.short	1
- 375 00aa 0000     		.space	2
- 376 00ac 84000000 		.word	_HexagonCANDemo_main_canService_repl_sub_ports+16
- 377              		.section	.text.MsgDispatcher_PhysicalThread1_poll,"ax",%progbits
- 378              		.align	2
- 379              		.thumb
- 380              		.thumb_func
- 382              	MsgDispatcher_PhysicalThread1_poll:
- 383              	.LFB0:
- 384              		.file 1 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/s
+  66 0038 FFFFFFFF 		.word	-1
+  67 003c FFFFFFFF 		.word	-1
+  68 0040 FFFFFFFF 		.word	-1
+  69 0044 FFFFFFFF 		.word	-1
+  70 0048 FFFFFFFF 		.word	-1
+  71 004c FFFFFFFF 		.word	-1
+  72 0050 FFFFFFFF 		.word	-1
+  73 0054 FFFFFFFF 		.word	-1
+  74 0058 FFFFFFFF 		.word	-1
+  75 005c FFFFFFFF 		.word	-1
+  76 0060 FFFFFFFF 		.word	-1
+  77 0064 FFFFFFFF 		.word	-1
+  78 0068 FFFFFFFF 		.word	-1
+  79 006c FFFFFFFF 		.word	-1
+  80 0070 FFFFFFFF 		.word	-1
+  81 0074 FFFFFFFF 		.word	-1
+  82 0078 FFFFFFFF 		.word	-1
+  83 007c FFFFFFFF 		.word	-1
+  84 0080 32000000 		.word	50
+  85 0084 00000000 		.space	8
+  85      00000000 
+  86              		.bss
+  87              		.align	2
+  88              	_HexagonCANDemo_main_appl_mrPing_timer_var:
+  89 0570 00       		.space	1
+  90              		.data
+  91              		.align	2
+  94              	_HexagonCANDemo_main_appl_mrPing_canTx_var:
+  95 008c FFFFFFFF 		.word	-1
+  96              		.align	2
+  99              	_HexagonCANDemo_main_appl_mrPing_canRx_var:
+ 100 0090 FFFFFFFF 		.word	-1
+ 101              		.bss
+ 102 0571 000000   		.align	2
+ 103              	_HexagonCANDemo_main_canService_timer_var:
+ 104 0574 00       		.space	1
+ 105 0575 000000   		.section	.rodata
+ 106 000e 0000     		.align	2
+ 109              	_HexagonCANDemo_main_appl_mrPing_const:
+ 110 0010 00000000 		.word	0
+ 111 0014 00050000 		.word	msgService_PhysicalThread1
+ 112 0018 28       		.byte	40
+ 113 0019 01       		.byte	1
+ 114 001a 0000     		.space	2
+ 115 001c 70050000 		.word	_HexagonCANDemo_main_appl_mrPing_timer_var
+ 116 0020 00050000 		.word	msgService_PhysicalThread1
+ 117 0024 2A       		.byte	42
+ 118 0025 02       		.byte	2
+ 119 0026 0000     		.space	2
+ 120 0028 8C000000 		.word	_HexagonCANDemo_main_appl_mrPing_canTx_var
+ 121 002c 00050000 		.word	msgService_PhysicalThread1
+ 122 0030 2E       		.byte	46
+ 123 0031 03       		.byte	3
+ 124 0032 0000     		.space	2
+ 125 0034 90000000 		.word	_HexagonCANDemo_main_appl_mrPing_canRx_var
+ 126 0038 00050000 		.word	msgService_PhysicalThread1
+ 127 003c 2F       		.byte	47
+ 128 003d 04       		.byte	4
+ 129 003e 0000     		.space	2
+ 130              		.align	2
+ 133              	_HexagonCANDemo_main_appl_mrPong_const:
+ 134 0040 00000000 		.word	0
+ 135 0044 00050000 		.word	msgService_PhysicalThread1
+ 136 0048 23       		.byte	35
+ 137 0049 01       		.byte	1
+ 138 004a 0000     		.space	2
+ 139              		.align	2
+ 142              	_HexagonCANDemo_main_timingService_repl_sub_ports:
+ 143 004c 00000000 		.word	0
+ 144 0050 00050000 		.word	msgService_PhysicalThread1
+ 145 0054 24       		.byte	36
+ 146 0055 01       		.byte	1
+ 147 0056 0000     		.space	2
+ 148 0058 00       		.byte	0
+ 149 0059 000000   		.space	3
+ 150 005c 00000000 		.word	0
+ 151 0060 00050000 		.word	msgService_PhysicalThread1
+ 152 0064 2D       		.byte	45
+ 153 0065 01       		.byte	1
+ 154 0066 0000     		.space	2
+ 155 0068 01       		.byte	1
+ 156 0069 000000   		.space	3
+ 157              		.align	2
+ 160              	_HexagonCANDemo_main_timingService_const:
+ 161 006c 0200     		.short	2
+ 162 006e 0000     		.space	2
+ 163 0070 4C000000 		.word	_HexagonCANDemo_main_timingService_repl_sub_ports
+ 164              		.align	2
+ 167              	_HexagonCANDemo_main_canService_repl_sub_ports:
+ 168 0074 00000000 		.word	0
+ 169 0078 00050000 		.word	msgService_PhysicalThread1
+ 170 007c 25       		.byte	37
+ 171 007d 02       		.byte	2
+ 172 007e 0000     		.space	2
+ 173 0080 00       		.byte	0
+ 174 0081 000000   		.space	3
+ 175 0084 00000000 		.word	0
+ 176 0088 00050000 		.word	msgService_PhysicalThread1
+ 177 008c 26       		.byte	38
+ 178 008d 03       		.byte	3
+ 179 008e 0000     		.space	2
+ 180 0090 00       		.byte	0
+ 181 0091 000000   		.space	3
+ 182              		.align	2
+ 185              	_HexagonCANDemo_main_canService_const:
+ 186 0094 74050000 		.word	_HexagonCANDemo_main_canService_timer_var
+ 187 0098 00050000 		.word	msgService_PhysicalThread1
+ 188 009c 2B       		.byte	43
+ 189 009d 01       		.byte	1
+ 190 009e 0000     		.space	2
+ 191 00a0 0100     		.short	1
+ 192 00a2 0000     		.space	2
+ 193 00a4 74000000 		.word	_HexagonCANDemo_main_canService_repl_sub_ports
+ 194 00a8 0100     		.short	1
+ 195 00aa 0000     		.space	2
+ 196 00ac 84000000 		.word	_HexagonCANDemo_main_canService_repl_sub_ports+16
+ 197              		.section	.text.MsgDispatcher_PhysicalThread1_poll,"ax",%progbits
+ 198              		.align	2
+ 199              		.thumb
+ 200              		.thumb_func
+ 202              	MsgDispatcher_PhysicalThread1_poll:
+ 203              	.LFB0:
+ 204              		.file 1 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/s
    1:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** /**
    2:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h ****  * @author generated by eTrice
    3:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h ****  *
@@ -386,410 +206,410 @@
   14:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h ****  * generated execute function for all cyclic execute calls for the async or datadriven actor instan
   15:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h ****  */
   16:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** static void MsgDispatcher_PhysicalThread1_poll(void){
- 385              		.loc 1 16 0
- 386              		.cfi_startproc
- 387              		@ args = 0, pretend = 0, frame = 0
- 388              		@ frame_needed = 1, uses_anonymous_args = 0
- 389 0000 80B5     		push	{r7, lr}
- 390              	.LCFI0:
- 391              		.cfi_def_cfa_offset 8
- 392              		.cfi_offset 7, -8
- 393              		.cfi_offset 14, -4
- 394 0002 00AF     		add	r7, sp, #0
- 395              	.LCFI1:
- 396              		.cfi_def_cfa_register 7
+ 205              		.loc 1 16 0
+ 206              		.cfi_startproc
+ 207              		@ args = 0, pretend = 0, frame = 0
+ 208              		@ frame_needed = 1, uses_anonymous_args = 0
+ 209 0000 80B5     		push	{r7, lr}
+ 210              	.LCFI0:
+ 211              		.cfi_def_cfa_offset 8
+ 212              		.cfi_offset 7, -8
+ 213              		.cfi_offset 14, -4
+ 214 0002 00AF     		add	r7, sp, #0
+ 215              	.LCFI1:
+ 216              		.cfi_def_cfa_register 7
   17:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_PhysicalThread1", "execute")
   18:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	ATimingService_execute((void*)&_HexagonCANDemo_main_timingService);
- 397              		.loc 1 18 0
- 398 0004 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
- 399 0008 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
- 400 000c FFF7FEFF 		bl	ATimingService_execute
+ 217              		.loc 1 18 0
+ 218 0004 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
+ 219 0008 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
+ 220 000c FFF7FEFF 		bl	ATimingService_execute
   19:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	ET_MSC_LOGGER_SYNC_EXIT
   20:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** }
- 401              		.loc 1 20 0
- 402 0010 80BD     		pop	{r7, pc}
- 403              		.cfi_endproc
- 404              	.LFE0:
- 406 0012 00BF     		.section	.rodata
- 407              		.align	2
- 408              	.LC1:
- 409 00b0 4D657373 		.ascii	"MessageService_PhysicalThread1_receiveMessage: addr"
- 409      61676553 
- 409      65727669 
- 409      63655F50 
- 409      68797369 
- 410 00e3 65737320 		.ascii	"ess %d does not exist \000"
- 410      25642064 
- 410      6F657320 
- 410      6E6F7420 
- 410      65786973 
- 411              		.section	.text.MsgDispatcher_PhysicalThread1_receiveMessage,"ax",%progbits
- 412              		.align	2
- 413              		.thumb
- 414              		.thumb_func
- 416              	MsgDispatcher_PhysicalThread1_receiveMessage:
- 417              	.LFB1:
+ 221              		.loc 1 20 0
+ 222 0010 80BD     		pop	{r7, pc}
+ 223              		.cfi_endproc
+ 224              	.LFE0:
+ 226 0012 00BF     		.section	.rodata
+ 227              		.align	2
+ 228              	.LC1:
+ 229 00b0 4D657373 		.ascii	"MessageService_PhysicalThread1_receiveMessage: addr"
+ 229      61676553 
+ 229      65727669 
+ 229      63655F50 
+ 229      68797369 
+ 230 00e3 65737320 		.ascii	"ess %d does not exist \000"
+ 230      25642064 
+ 230      6F657320 
+ 230      6E6F7420 
+ 230      65786973 
+ 231              		.section	.text.MsgDispatcher_PhysicalThread1_receiveMessage,"ax",%progbits
+ 232              		.align	2
+ 233              		.thumb
+ 234              		.thumb_func
+ 236              	MsgDispatcher_PhysicalThread1_receiveMessage:
+ 237              	.LFB1:
   21:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 
   22:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** /**
   23:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h ****  * generated dispatch function for all messages for the thread "PhysicalThread1"
   24:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h ****  */
   25:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** static etBool MsgDispatcher_PhysicalThread1_receiveMessage(const etMessage* msg){
- 418              		.loc 1 25 0
- 419              		.cfi_startproc
- 420              		@ args = 0, pretend = 0, frame = 8
- 421              		@ frame_needed = 1, uses_anonymous_args = 0
- 422 0000 80B5     		push	{r7, lr}
- 423              	.LCFI2:
- 424              		.cfi_def_cfa_offset 8
- 425              		.cfi_offset 7, -8
- 426              		.cfi_offset 14, -4
- 427 0002 82B0     		sub	sp, sp, #8
- 428              	.LCFI3:
- 429              		.cfi_def_cfa_offset 16
- 430 0004 00AF     		add	r7, sp, #0
- 431              	.LCFI4:
- 432              		.cfi_def_cfa_register 7
- 433 0006 7860     		str	r0, [r7, #4]
+ 238              		.loc 1 25 0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 8
+ 241              		@ frame_needed = 1, uses_anonymous_args = 0
+ 242 0000 80B5     		push	{r7, lr}
+ 243              	.LCFI2:
+ 244              		.cfi_def_cfa_offset 8
+ 245              		.cfi_offset 7, -8
+ 246              		.cfi_offset 14, -4
+ 247 0002 82B0     		sub	sp, sp, #8
+ 248              	.LCFI3:
+ 249              		.cfi_def_cfa_offset 16
+ 250 0004 00AF     		add	r7, sp, #0
+ 251              	.LCFI4:
+ 252              		.cfi_def_cfa_register 7
+ 253 0006 7860     		str	r0, [r7, #4]
   26:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_PhysicalThread1", "receiveMessage")
   27:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	switch(msg->address){
- 434              		.loc 1 27 0
- 435 0008 7B68     		ldr	r3, [r7, #4]
- 436 000a 9B88     		ldrh	r3, [r3, #4]
- 437 000c 1BB2     		sxth	r3, r3
- 438 000e 03F1FF33 		add	r3, r3, #-1
- 439 0012 2E2B     		cmp	r3, #46
- 440 0014 00F21581 		bhi	.L3
- 441 0018 01A2     		adr	r2, .L15
- 442 001a 52F823F0 		ldr	pc, [r2, r3, lsl #2]
- 443 001e 00BF     		.align	2
- 444              	.L15:
- 445 0020 DD000000 		.word	.L4+1
- 446 0024 43020000 		.word	.L3+1
- 447 0028 43020000 		.word	.L3+1
- 448 002c 43020000 		.word	.L3+1
- 449 0030 43020000 		.word	.L3+1
- 450 0034 43020000 		.word	.L3+1
- 451 0038 43020000 		.word	.L3+1
- 452 003c 43020000 		.word	.L3+1
- 453 0040 43020000 		.word	.L3+1
- 454 0044 43020000 		.word	.L3+1
- 455 0048 43020000 		.word	.L3+1
- 456 004c 43020000 		.word	.L3+1
- 457 0050 43020000 		.word	.L3+1
- 458 0054 43020000 		.word	.L3+1
- 459 0058 43020000 		.word	.L3+1
- 460 005c 43020000 		.word	.L3+1
- 461 0060 43020000 		.word	.L3+1
- 462 0064 43020000 		.word	.L3+1
- 463 0068 43020000 		.word	.L3+1
- 464 006c 43020000 		.word	.L3+1
- 465 0070 43020000 		.word	.L3+1
- 466 0074 43020000 		.word	.L3+1
- 467 0078 43020000 		.word	.L3+1
- 468 007c 43020000 		.word	.L3+1
- 469 0080 43020000 		.word	.L3+1
- 470 0084 43020000 		.word	.L3+1
- 471 0088 43020000 		.word	.L3+1
- 472 008c 43020000 		.word	.L3+1
- 473 0090 43020000 		.word	.L3+1
- 474 0094 43020000 		.word	.L3+1
- 475 0098 43020000 		.word	.L3+1
- 476 009c 43020000 		.word	.L3+1
- 477 00a0 43020000 		.word	.L3+1
- 478 00a4 43020000 		.word	.L3+1
- 479 00a8 FF000000 		.word	.L5+1
- 480 00ac 17010000 		.word	.L6+1
- 481 00b0 4F010000 		.word	.L7+1
- 482 00b4 61010000 		.word	.L8+1
- 483 00b8 43020000 		.word	.L3+1
- 484 00bc 73010000 		.word	.L9+1
- 485 00c0 43020000 		.word	.L3+1
- 486 00c4 8B010000 		.word	.L10+1
- 487 00c8 A7010000 		.word	.L11+1
- 488 00cc 43020000 		.word	.L3+1
- 489 00d0 C7010000 		.word	.L12+1
- 490 00d4 0B020000 		.word	.L13+1
- 491 00d8 27020000 		.word	.L14+1
- 492              	.L4:
+ 254              		.loc 1 27 0
+ 255 0008 7B68     		ldr	r3, [r7, #4]
+ 256 000a 9B88     		ldrh	r3, [r3, #4]
+ 257 000c 1BB2     		sxth	r3, r3
+ 258 000e 03F1FF33 		add	r3, r3, #-1
+ 259 0012 2E2B     		cmp	r3, #46
+ 260 0014 00F21581 		bhi	.L3
+ 261 0018 01A2     		adr	r2, .L15
+ 262 001a 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 263 001e 00BF     		.align	2
+ 264              	.L15:
+ 265 0020 DD000000 		.word	.L4+1
+ 266 0024 43020000 		.word	.L3+1
+ 267 0028 43020000 		.word	.L3+1
+ 268 002c 43020000 		.word	.L3+1
+ 269 0030 43020000 		.word	.L3+1
+ 270 0034 43020000 		.word	.L3+1
+ 271 0038 43020000 		.word	.L3+1
+ 272 003c 43020000 		.word	.L3+1
+ 273 0040 43020000 		.word	.L3+1
+ 274 0044 43020000 		.word	.L3+1
+ 275 0048 43020000 		.word	.L3+1
+ 276 004c 43020000 		.word	.L3+1
+ 277 0050 43020000 		.word	.L3+1
+ 278 0054 43020000 		.word	.L3+1
+ 279 0058 43020000 		.word	.L3+1
+ 280 005c 43020000 		.word	.L3+1
+ 281 0060 43020000 		.word	.L3+1
+ 282 0064 43020000 		.word	.L3+1
+ 283 0068 43020000 		.word	.L3+1
+ 284 006c 43020000 		.word	.L3+1
+ 285 0070 43020000 		.word	.L3+1
+ 286 0074 43020000 		.word	.L3+1
+ 287 0078 43020000 		.word	.L3+1
+ 288 007c 43020000 		.word	.L3+1
+ 289 0080 43020000 		.word	.L3+1
+ 290 0084 43020000 		.word	.L3+1
+ 291 0088 43020000 		.word	.L3+1
+ 292 008c 43020000 		.word	.L3+1
+ 293 0090 43020000 		.word	.L3+1
+ 294 0094 43020000 		.word	.L3+1
+ 295 0098 43020000 		.word	.L3+1
+ 296 009c 43020000 		.word	.L3+1
+ 297 00a0 43020000 		.word	.L3+1
+ 298 00a4 43020000 		.word	.L3+1
+ 299 00a8 FF000000 		.word	.L5+1
+ 300 00ac 17010000 		.word	.L6+1
+ 301 00b0 4F010000 		.word	.L7+1
+ 302 00b4 61010000 		.word	.L8+1
+ 303 00b8 43020000 		.word	.L3+1
+ 304 00bc 73010000 		.word	.L9+1
+ 305 00c0 43020000 		.word	.L3+1
+ 306 00c4 8B010000 		.word	.L10+1
+ 307 00c8 A7010000 		.word	.L11+1
+ 308 00cc 43020000 		.word	.L3+1
+ 309 00d0 C7010000 		.word	.L12+1
+ 310 00d4 0B020000 		.word	.L13+1
+ 311 00d8 27020000 		.word	.L14+1
+ 312              	.L4:
   28:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	
   29:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case MESSAGESERVICE_ADDRESS:
   30:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			if (msg->evtID == etSystemProtocol_IN_poll) {
- 493              		.loc 1 30 0
- 494 00dc 7B68     		ldr	r3, [r7, #4]
- 495 00de DB88     		ldrh	r3, [r3, #6]
- 496 00e0 1BB2     		sxth	r3, r3
- 497 00e2 012B     		cmp	r3, #1
- 498 00e4 02D1     		bne	.L16
+ 313              		.loc 1 30 0
+ 314 00dc 7B68     		ldr	r3, [r7, #4]
+ 315 00de DB88     		ldrh	r3, [r3, #6]
+ 316 00e0 1BB2     		sxth	r3, r3
+ 317 00e2 012B     		cmp	r3, #1
+ 318 00e4 02D1     		bne	.L16
   31:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 				MsgDispatcher_PhysicalThread1_poll();
- 499              		.loc 1 31 0
- 500 00e6 FFF7FEFF 		bl	MsgDispatcher_PhysicalThread1_poll
+ 319              		.loc 1 31 0
+ 320 00e6 FFF7FEFF 		bl	MsgDispatcher_PhysicalThread1_poll
   32:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			}
   33:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			else
   34:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			if (msg->evtID == etSystemProtocol_IN_terminate)
   35:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 				return ET_FALSE;
   36:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 501              		.loc 1 36 0
- 502 00ea B5E0     		b	.L28
- 503              	.L16:
+ 321              		.loc 1 36 0
+ 322 00ea B5E0     		b	.L28
+ 323              	.L16:
   34:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			if (msg->evtID == etSystemProtocol_IN_terminate)
- 504              		.loc 1 34 0
- 505 00ec 7B68     		ldr	r3, [r7, #4]
- 506 00ee DB88     		ldrh	r3, [r3, #6]
- 507 00f0 1BB2     		sxth	r3, r3
- 508 00f2 022B     		cmp	r3, #2
- 509 00f4 40F0B080 		bne	.L28
+ 324              		.loc 1 34 0
+ 325 00ec 7B68     		ldr	r3, [r7, #4]
+ 326 00ee DB88     		ldrh	r3, [r3, #6]
+ 327 00f0 1BB2     		sxth	r3, r3
+ 328 00f2 022B     		cmp	r3, #2
+ 329 00f4 40F0B080 		bne	.L28
   35:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 				return ET_FALSE;
- 510              		.loc 1 35 0
- 511 00f8 4FF00003 		mov	r3, #0
- 512 00fc AFE0     		b	.L18
- 513              	.L5:
+ 330              		.loc 1 35 0
+ 331 00f8 4FF00003 		mov	r3, #0
+ 332 00fc AFE0     		b	.L18
+ 333              	.L5:
   37:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		
   38:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		/* interface items of /HexagonCANDemo/main/appl */
   39:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		
   40:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		/* interface items of /HexagonCANDemo/main/appl/mrPing */
   41:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 3+BASE_ADDRESS:
   42:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			AMrPing_receiveMessage((void*)&_HexagonCANDemo_main_appl_mrPing,(etPort*)&_HexagonCANDemo_main_a
- 514              		.loc 1 42 0
- 515 00fe 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
- 516 0102 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
- 517 0106 40F20001 		movw	r1, #:lower16:_HexagonCANDemo_main_appl_mrPing_const
- 518 010a C0F20001 		movt	r1, #:upper16:_HexagonCANDemo_main_appl_mrPing_const
- 519 010e 7A68     		ldr	r2, [r7, #4]
- 520 0110 FFF7FEFF 		bl	AMrPing_receiveMessage
+ 334              		.loc 1 42 0
+ 335 00fe 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
+ 336 0102 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
+ 337 0106 40F20001 		movw	r1, #:lower16:_HexagonCANDemo_main_appl_mrPing_const
+ 338 010a C0F20001 		movt	r1, #:upper16:_HexagonCANDemo_main_appl_mrPing_const
+ 339 010e 7A68     		ldr	r2, [r7, #4]
+ 340 0110 FFF7FEFF 		bl	AMrPing_receiveMessage
   43:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 521              		.loc 1 43 0
- 522 0114 A1E0     		b	.L19
- 523              	.L6:
+ 341              		.loc 1 43 0
+ 342 0114 A1E0     		b	.L19
+ 343              	.L6:
   44:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 4+BASE_ADDRESS:
   45:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			switch (msg->evtID){
- 524              		.loc 1 45 0
- 525 0116 7B68     		ldr	r3, [r7, #4]
- 526 0118 DB88     		ldrh	r3, [r3, #6]
- 527 011a 1BB2     		sxth	r3, r3
- 528 011c 012B     		cmp	r3, #1
- 529 011e 0CD1     		bne	.L26
- 530              	.L21:
+ 344              		.loc 1 45 0
+ 345 0116 7B68     		ldr	r3, [r7, #4]
+ 346 0118 DB88     		ldrh	r3, [r3, #6]
+ 347 011a 1BB2     		sxth	r3, r3
+ 348 011c 012B     		cmp	r3, #1
+ 349 011e 0CD1     		bne	.L26
+ 350              	.L21:
   46:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 				case PTimer_OUT_timeout:
   47:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 					PTimerConjPort_timeout_receiveHandler((etPort *)&_HexagonCANDemo_main_appl_mrPing_const.timer,
- 531              		.loc 1 47 0
- 532 0120 5148     		ldr	r0, .L29
- 533 0122 7968     		ldr	r1, [r7, #4]
- 534 0124 40F20002 		movw	r2, #:lower16:_HexagonCANDemo_main_appl_mrPing
- 535 0128 C0F20002 		movt	r2, #:upper16:_HexagonCANDemo_main_appl_mrPing
- 536 012c 40F20003 		movw	r3, #:lower16:AMrPing_receiveMessage
- 537 0130 C0F20003 		movt	r3, #:upper16:AMrPing_receiveMessage
- 538 0134 FFF7FEFF 		bl	PTimerConjPort_timeout_receiveHandler
+ 351              		.loc 1 47 0
+ 352 0120 5148     		ldr	r0, .L29
+ 353 0122 7968     		ldr	r1, [r7, #4]
+ 354 0124 40F20002 		movw	r2, #:lower16:_HexagonCANDemo_main_appl_mrPing
+ 355 0128 C0F20002 		movt	r2, #:upper16:_HexagonCANDemo_main_appl_mrPing
+ 356 012c 40F20003 		movw	r3, #:lower16:AMrPing_receiveMessage
+ 357 0130 C0F20003 		movt	r3, #:upper16:AMrPing_receiveMessage
+ 358 0134 FFF7FEFF 		bl	PTimerConjPort_timeout_receiveHandler
   48:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 					break;
- 539              		.loc 1 48 0
- 540 0138 08E0     		b	.L22
- 541              	.L26:
+ 359              		.loc 1 48 0
+ 360 0138 08E0     		b	.L22
+ 361              	.L26:
   49:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 				default: AMrPing_receiveMessage((void*)&_HexagonCANDemo_main_appl_mrPing,(etPort*)&_HexagonCAND
- 542              		.loc 1 49 0
- 543 013a 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
- 544 013e C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
- 545 0142 4949     		ldr	r1, .L29
- 546 0144 7A68     		ldr	r2, [r7, #4]
- 547 0146 FFF7FEFF 		bl	AMrPing_receiveMessage
+ 362              		.loc 1 49 0
+ 363 013a 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
+ 364 013e C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
+ 365 0142 4949     		ldr	r1, .L29
+ 366 0144 7A68     		ldr	r2, [r7, #4]
+ 367 0146 FFF7FEFF 		bl	AMrPing_receiveMessage
   50:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 					break;
- 548              		.loc 1 50 0
- 549 014a 00BF     		nop
- 550              	.L22:
+ 368              		.loc 1 50 0
+ 369 014a 00BF     		nop
+ 370              	.L22:
   51:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			}
   52:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 551              		.loc 1 52 0
- 552 014c 85E0     		b	.L19
- 553              	.L7:
+ 371              		.loc 1 52 0
+ 372 014c 85E0     		b	.L19
+ 373              	.L7:
   53:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 5+BASE_ADDRESS:
   54:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			AMrPing_receiveMessage((void*)&_HexagonCANDemo_main_appl_mrPing,(etPort*)&_HexagonCANDemo_main_a
- 554              		.loc 1 54 0
- 555 014e 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
- 556 0152 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
- 557 0156 4549     		ldr	r1, .L29+4
- 558 0158 7A68     		ldr	r2, [r7, #4]
- 559 015a FFF7FEFF 		bl	AMrPing_receiveMessage
+ 374              		.loc 1 54 0
+ 375 014e 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
+ 376 0152 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
+ 377 0156 4549     		ldr	r1, .L29+4
+ 378 0158 7A68     		ldr	r2, [r7, #4]
+ 379 015a FFF7FEFF 		bl	AMrPing_receiveMessage
   55:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 560              		.loc 1 55 0
- 561 015e 7CE0     		b	.L19
- 562              	.L8:
+ 380              		.loc 1 55 0
+ 381 015e 7CE0     		b	.L19
+ 382              	.L8:
   56:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 6+BASE_ADDRESS:
   57:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			AMrPing_receiveMessage((void*)&_HexagonCANDemo_main_appl_mrPing,(etPort*)&_HexagonCANDemo_main_a
- 563              		.loc 1 57 0
- 564 0160 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
- 565 0164 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
- 566 0168 4149     		ldr	r1, .L29+8
- 567 016a 7A68     		ldr	r2, [r7, #4]
- 568 016c FFF7FEFF 		bl	AMrPing_receiveMessage
+ 383              		.loc 1 57 0
+ 384 0160 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
+ 385 0164 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
+ 386 0168 4149     		ldr	r1, .L29+8
+ 387 016a 7A68     		ldr	r2, [r7, #4]
+ 388 016c FFF7FEFF 		bl	AMrPing_receiveMessage
   58:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 569              		.loc 1 58 0
- 570 0170 73E0     		b	.L19
- 571              	.L9:
+ 389              		.loc 1 58 0
+ 390 0170 73E0     		b	.L19
+ 391              	.L9:
   59:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		
   60:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		/* interface items of /HexagonCANDemo/main/appl/mrPong */
   61:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 8+BASE_ADDRESS:
   62:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			AMrPong_receiveMessage((void*)&_HexagonCANDemo_main_appl_mrPong,(etPort*)&_HexagonCANDemo_main_a
- 572              		.loc 1 62 0
- 573 0172 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPong
- 574 0176 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPong
- 575 017a 40F20001 		movw	r1, #:lower16:_HexagonCANDemo_main_appl_mrPong_const
- 576 017e C0F20001 		movt	r1, #:upper16:_HexagonCANDemo_main_appl_mrPong_const
- 577 0182 7A68     		ldr	r2, [r7, #4]
- 578 0184 FFF7FEFF 		bl	AMrPong_receiveMessage
+ 392              		.loc 1 62 0
+ 393 0172 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPong
+ 394 0176 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPong
+ 395 017a 40F20001 		movw	r1, #:lower16:_HexagonCANDemo_main_appl_mrPong_const
+ 396 017e C0F20001 		movt	r1, #:upper16:_HexagonCANDemo_main_appl_mrPong_const
+ 397 0182 7A68     		ldr	r2, [r7, #4]
+ 398 0184 FFF7FEFF 		bl	AMrPong_receiveMessage
   63:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 579              		.loc 1 63 0
- 580 0188 67E0     		b	.L19
- 581              	.L10:
+ 399              		.loc 1 63 0
+ 400 0188 67E0     		b	.L19
+ 401              	.L10:
   64:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		
   65:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		/* interface items of /HexagonCANDemo/main/timingService */
   66:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 10+BASE_ADDRESS:
   67:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			ATimingService_receiveMessage((void*)&_HexagonCANDemo_main_timingService,&_HexagonCANDemo_main_t
- 582              		.loc 1 67 0
- 583 018a 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_timingService_const
- 584 018e C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_timingService_const
- 585 0192 5B68     		ldr	r3, [r3, #4]
- 586 0194 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
- 587 0198 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
- 588 019c 1946     		mov	r1, r3
- 589 019e 7A68     		ldr	r2, [r7, #4]
- 590 01a0 FFF7FEFF 		bl	ATimingService_receiveMessage
+ 402              		.loc 1 67 0
+ 403 018a 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_timingService_const
+ 404 018e C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_timingService_const
+ 405 0192 5B68     		ldr	r3, [r3, #4]
+ 406 0194 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
+ 407 0198 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
+ 408 019c 1946     		mov	r1, r3
+ 409 019e 7A68     		ldr	r2, [r7, #4]
+ 410 01a0 FFF7FEFF 		bl	ATimingService_receiveMessage
   68:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		break;
- 591              		.loc 1 68 0
- 592 01a4 59E0     		b	.L19
- 593              	.L11:
+ 411              		.loc 1 68 0
+ 412 01a4 59E0     		b	.L19
+ 413              	.L11:
   69:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 11+BASE_ADDRESS:
   70:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			ATimingService_receiveMessage((void*)&_HexagonCANDemo_main_timingService,&_HexagonCANDemo_main_t
- 594              		.loc 1 70 0
- 595 01a6 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_timingService_const
- 596 01aa C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_timingService_const
- 597 01ae 5B68     		ldr	r3, [r3, #4]
- 598 01b0 03F11003 		add	r3, r3, #16
- 599 01b4 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
- 600 01b8 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
- 601 01bc 1946     		mov	r1, r3
- 602 01be 7A68     		ldr	r2, [r7, #4]
- 603 01c0 FFF7FEFF 		bl	ATimingService_receiveMessage
+ 414              		.loc 1 70 0
+ 415 01a6 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_timingService_const
+ 416 01aa C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_timingService_const
+ 417 01ae 5B68     		ldr	r3, [r3, #4]
+ 418 01b0 03F11003 		add	r3, r3, #16
+ 419 01b4 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
+ 420 01b8 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
+ 421 01bc 1946     		mov	r1, r3
+ 422 01be 7A68     		ldr	r2, [r7, #4]
+ 423 01c0 FFF7FEFF 		bl	ATimingService_receiveMessage
   71:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		break;
- 604              		.loc 1 71 0
- 605 01c4 49E0     		b	.L19
- 606              	.L12:
+ 424              		.loc 1 71 0
+ 425 01c4 49E0     		b	.L19
+ 426              	.L12:
   72:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		
   73:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		/* interface items of /HexagonCANDemo/main/canService */
   74:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 13+BASE_ADDRESS:
   75:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			switch (msg->evtID){
- 607              		.loc 1 75 0
- 608 01c6 7B68     		ldr	r3, [r7, #4]
- 609 01c8 DB88     		ldrh	r3, [r3, #6]
- 610 01ca 1BB2     		sxth	r3, r3
- 611 01cc 012B     		cmp	r3, #1
- 612 01ce 0FD1     		bne	.L27
- 613              	.L24:
+ 427              		.loc 1 75 0
+ 428 01c6 7B68     		ldr	r3, [r7, #4]
+ 429 01c8 DB88     		ldrh	r3, [r3, #6]
+ 430 01ca 1BB2     		sxth	r3, r3
+ 431 01cc 012B     		cmp	r3, #1
+ 432 01ce 0FD1     		bne	.L27
+ 433              	.L24:
   76:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 				case PTimer_OUT_timeout:
   77:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 					PTimerConjPort_timeout_receiveHandler((etPort *)&_HexagonCANDemo_main_canService_const.timer,m
- 614              		.loc 1 77 0
- 615 01d0 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService_const
- 616 01d4 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService_const
- 617 01d8 7968     		ldr	r1, [r7, #4]
- 618 01da 40F20002 		movw	r2, #:lower16:_HexagonCANDemo_main_canService
- 619 01de C0F20002 		movt	r2, #:upper16:_HexagonCANDemo_main_canService
- 620 01e2 40F20003 		movw	r3, #:lower16:ACANService_receiveMessage
- 621 01e6 C0F20003 		movt	r3, #:upper16:ACANService_receiveMessage
- 622 01ea FFF7FEFF 		bl	PTimerConjPort_timeout_receiveHandler
+ 434              		.loc 1 77 0
+ 435 01d0 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService_const
+ 436 01d4 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService_const
+ 437 01d8 7968     		ldr	r1, [r7, #4]
+ 438 01da 40F20002 		movw	r2, #:lower16:_HexagonCANDemo_main_canService
+ 439 01de C0F20002 		movt	r2, #:upper16:_HexagonCANDemo_main_canService
+ 440 01e2 40F20003 		movw	r3, #:lower16:ACANService_receiveMessage
+ 441 01e6 C0F20003 		movt	r3, #:upper16:ACANService_receiveMessage
+ 442 01ea FFF7FEFF 		bl	PTimerConjPort_timeout_receiveHandler
   78:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 					break;
- 623              		.loc 1 78 0
- 624 01ee 0BE0     		b	.L25
- 625              	.L27:
+ 443              		.loc 1 78 0
+ 444 01ee 0BE0     		b	.L25
+ 445              	.L27:
   79:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 				default: ACANService_receiveMessage((void*)&_HexagonCANDemo_main_canService,(etPort*)&_HexagonC
- 626              		.loc 1 79 0
- 627 01f0 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
- 628 01f4 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
- 629 01f8 40F20001 		movw	r1, #:lower16:_HexagonCANDemo_main_canService_const
- 630 01fc C0F20001 		movt	r1, #:upper16:_HexagonCANDemo_main_canService_const
- 631 0200 7A68     		ldr	r2, [r7, #4]
- 632 0202 FFF7FEFF 		bl	ACANService_receiveMessage
+ 446              		.loc 1 79 0
+ 447 01f0 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
+ 448 01f4 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
+ 449 01f8 40F20001 		movw	r1, #:lower16:_HexagonCANDemo_main_canService_const
+ 450 01fc C0F20001 		movt	r1, #:upper16:_HexagonCANDemo_main_canService_const
+ 451 0200 7A68     		ldr	r2, [r7, #4]
+ 452 0202 FFF7FEFF 		bl	ACANService_receiveMessage
   80:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 					break;
- 633              		.loc 1 80 0
- 634 0206 00BF     		nop
- 635              	.L25:
+ 453              		.loc 1 80 0
+ 454 0206 00BF     		nop
+ 455              	.L25:
   81:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			}
   82:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 636              		.loc 1 82 0
- 637 0208 27E0     		b	.L19
- 638              	.L13:
+ 456              		.loc 1 82 0
+ 457 0208 27E0     		b	.L19
+ 458              	.L13:
   83:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 14+BASE_ADDRESS:
   84:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			ACANService_receiveMessage((void*)&_HexagonCANDemo_main_canService,&_HexagonCANDemo_main_canServ
- 639              		.loc 1 84 0
- 640 020a 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_canService_const
- 641 020e C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_canService_const
- 642 0212 1B69     		ldr	r3, [r3, #16]
- 643 0214 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
- 644 0218 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
- 645 021c 1946     		mov	r1, r3
- 646 021e 7A68     		ldr	r2, [r7, #4]
- 647 0220 FFF7FEFF 		bl	ACANService_receiveMessage
+ 459              		.loc 1 84 0
+ 460 020a 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_canService_const
+ 461 020e C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_canService_const
+ 462 0212 1B69     		ldr	r3, [r3, #16]
+ 463 0214 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
+ 464 0218 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
+ 465 021c 1946     		mov	r1, r3
+ 466 021e 7A68     		ldr	r2, [r7, #4]
+ 467 0220 FFF7FEFF 		bl	ACANService_receiveMessage
   85:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		break;
- 648              		.loc 1 85 0
- 649 0224 19E0     		b	.L19
- 650              	.L14:
+ 468              		.loc 1 85 0
+ 469 0224 19E0     		b	.L19
+ 470              	.L14:
   86:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		case 15+BASE_ADDRESS:
   87:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			ACANService_receiveMessage((void*)&_HexagonCANDemo_main_canService,&_HexagonCANDemo_main_canServ
- 651              		.loc 1 87 0
- 652 0226 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_canService_const
- 653 022a C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_canService_const
- 654 022e 9B69     		ldr	r3, [r3, #24]
- 655 0230 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
- 656 0234 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
- 657 0238 1946     		mov	r1, r3
- 658 023a 7A68     		ldr	r2, [r7, #4]
- 659 023c FFF7FEFF 		bl	ACANService_receiveMessage
+ 471              		.loc 1 87 0
+ 472 0226 40F20003 		movw	r3, #:lower16:_HexagonCANDemo_main_canService_const
+ 473 022a C0F20003 		movt	r3, #:upper16:_HexagonCANDemo_main_canService_const
+ 474 022e 9B69     		ldr	r3, [r3, #24]
+ 475 0230 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
+ 476 0234 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
+ 477 0238 1946     		mov	r1, r3
+ 478 023a 7A68     		ldr	r2, [r7, #4]
+ 479 023c FFF7FEFF 		bl	ACANService_receiveMessage
   88:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		break;
- 660              		.loc 1 88 0
- 661 0240 0BE0     		b	.L19
- 662              	.L3:
+ 480              		.loc 1 88 0
+ 481 0240 0BE0     		b	.L19
+ 482              	.L3:
   89:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		
   90:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 		default:
   91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			etLogger_logErrorF("MessageService_PhysicalThread1_receiveMessage: address %d does not exist ", 
- 663              		.loc 1 91 0
- 664 0242 7B68     		ldr	r3, [r7, #4]
- 665 0244 9B88     		ldrh	r3, [r3, #4]
- 666 0246 1BB2     		sxth	r3, r3
- 667 0248 40F20000 		movw	r0, #:lower16:.LC1
- 668 024c C0F20000 		movt	r0, #:upper16:.LC1
- 669 0250 1946     		mov	r1, r3
- 670 0252 FFF7FEFF 		bl	etLogger_logErrorF
+ 483              		.loc 1 91 0
+ 484 0242 7B68     		ldr	r3, [r7, #4]
+ 485 0244 9B88     		ldrh	r3, [r3, #4]
+ 486 0246 1BB2     		sxth	r3, r3
+ 487 0248 40F20000 		movw	r0, #:lower16:.LC1
+ 488 024c C0F20000 		movt	r0, #:upper16:.LC1
+ 489 0250 1946     		mov	r1, r3
+ 490 0252 FFF7FEFF 		bl	etLogger_logErrorF
   92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 671              		.loc 1 92 0
- 672 0256 00E0     		b	.L19
- 673              	.L28:
+ 491              		.loc 1 92 0
+ 492 0256 00E0     		b	.L19
+ 493              	.L28:
   36:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 			break;
- 674              		.loc 1 36 0
- 675 0258 00BF     		nop
- 676              	.L19:
+ 494              		.loc 1 36 0
+ 495 0258 00BF     		nop
+ 496              	.L19:
   93:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	}
   94:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	ET_MSC_LOGGER_SYNC_EXIT
   95:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** 	return ET_TRUE;
- 677              		.loc 1 95 0
- 678 025a 4FF00103 		mov	r3, #1
- 679              	.L18:
+ 497              		.loc 1 95 0
+ 498 025a 4FF00103 		mov	r3, #1
+ 499              	.L18:
   96:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main_Disp.h **** }
- 680              		.loc 1 96 0
- 681 025e 1846     		mov	r0, r3
- 682 0260 07F10807 		add	r7, r7, #8
- 683 0264 BD46     		mov	sp, r7
- 684 0266 80BD     		pop	{r7, pc}
- 685              	.L30:
- 686              		.align	2
- 687              	.L29:
- 688 0268 1C000000 		.word	_HexagonCANDemo_main_appl_mrPing_const+12
- 689 026c 28000000 		.word	_HexagonCANDemo_main_appl_mrPing_const+24
- 690 0270 34000000 		.word	_HexagonCANDemo_main_appl_mrPing_const+36
- 691              		.cfi_endproc
- 692              	.LFE1:
- 694              		.section	.text.nodeRef1_main_initMessageServices,"ax",%progbits
- 695              		.align	2
- 696              		.thumb
- 697              		.thumb_func
- 699              	nodeRef1_main_initMessageServices:
- 700              	.LFB2:
- 701              		.file 2 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/s
+ 500              		.loc 1 96 0
+ 501 025e 1846     		mov	r0, r3
+ 502 0260 07F10807 		add	r7, r7, #8
+ 503 0264 BD46     		mov	sp, r7
+ 504 0266 80BD     		pop	{r7, pc}
+ 505              	.L30:
+ 506              		.align	2
+ 507              	.L29:
+ 508 0268 1C000000 		.word	_HexagonCANDemo_main_appl_mrPing_const+12
+ 509 026c 28000000 		.word	_HexagonCANDemo_main_appl_mrPing_const+24
+ 510 0270 34000000 		.word	_HexagonCANDemo_main_appl_mrPing_const+36
+ 511              		.cfi_endproc
+ 512              	.LFE1:
+ 514              		.section	.text.nodeRef1_main_initMessageServices,"ax",%progbits
+ 515              		.align	2
+ 516              		.thumb
+ 517              		.thumb_func
+ 519              	nodeRef1_main_initMessageServices:
+ 520              	.LFB2:
+ 521              		.file 2 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/s
    1:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** /**
    2:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c ****  * @author generated by eTrice
    3:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c ****  *
@@ -829,59 +649,59 @@
   37:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** #include "nodeRef1_main_Disp.h"
   38:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
   39:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** static void nodeRef1_main_initMessageServices(void) {
- 702              		.loc 2 39 0
- 703              		.cfi_startproc
- 704              		@ args = 0, pretend = 0, frame = 8
- 705              		@ frame_needed = 1, uses_anonymous_args = 0
- 706 0000 80B5     		push	{r7, lr}
- 707              	.LCFI5:
- 708              		.cfi_def_cfa_offset 8
- 709              		.cfi_offset 7, -8
- 710              		.cfi_offset 14, -4
- 711 0002 88B0     		sub	sp, sp, #32
- 712              	.LCFI6:
- 713              		.cfi_def_cfa_offset 40
- 714 0004 06AF     		add	r7, sp, #24
- 715              	.LCFI7:
- 716              		.cfi_def_cfa 7, 16
- 717              	.LBB2:
+ 522              		.loc 2 39 0
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 8
+ 525              		@ frame_needed = 1, uses_anonymous_args = 0
+ 526 0000 80B5     		push	{r7, lr}
+ 527              	.LCFI5:
+ 528              		.cfi_def_cfa_offset 8
+ 529              		.cfi_offset 7, -8
+ 530              		.cfi_offset 14, -4
+ 531 0002 88B0     		sub	sp, sp, #32
+ 532              	.LCFI6:
+ 533              		.cfi_def_cfa_offset 40
+ 534 0004 06AF     		add	r7, sp, #24
+ 535              	.LCFI7:
+ 536              		.cfi_def_cfa 7, 16
+ 537              	.LBB2:
   40:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "initMessageServices")
   41:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	{
   42:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		etTime interval;
   43:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		
   44:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		/* initialization of all message services */
   45:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		interval.sec = 0;
- 718              		.loc 2 45 0
- 719 0006 4FF00003 		mov	r3, #0
- 720 000a 3B60     		str	r3, [r7, #0]
+ 538              		.loc 2 45 0
+ 539 0006 4FF00003 		mov	r3, #0
+ 540 000a 3B60     		str	r3, [r7, #0]
   46:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		interval.nSec = 10000000;
- 721              		.loc 2 46 0
- 722 000c 49F28063 		movw	r3, #38528
- 723 0010 C0F29803 		movt	r3, 152
- 724 0014 7B60     		str	r3, [r7, #4]
+ 541              		.loc 2 46 0
+ 542 000c 49F28063 		movw	r3, #38528
+ 543 0010 C0F29803 		movt	r3, 152
+ 544 0014 7B60     		str	r3, [r7, #4]
   47:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		etMessageService_init(
- 725              		.loc 2 47 0
- 726 0016 4FF48063 		mov	r3, #1024
- 727 001a 0093     		str	r3, [sp, #0]
- 728 001c 4FF00303 		mov	r3, #3
- 729 0020 0193     		str	r3, [sp, #4]
- 730 0022 02AA     		add	r2, sp, #8
- 731 0024 3B46     		mov	r3, r7
- 732 0026 93E80300 		ldmia	r3, {r0, r1}
- 733 002a 82E80300 		stmia	r2, {r0, r1}
- 734 002e 40F20003 		movw	r3, #:lower16:MsgDispatcher_PhysicalThread1_receiveMessage
- 735 0032 C0F20003 		movt	r3, #:upper16:MsgDispatcher_PhysicalThread1_receiveMessage
- 736 0036 0493     		str	r3, [sp, #16]
- 737 0038 4FF00203 		mov	r3, #2
- 738 003c 0593     		str	r3, [sp, #20]
- 739 003e 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
- 740 0042 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
- 741 0046 40F20001 		movw	r1, #:lower16:msgBuffer_PhysicalThread1
- 742 004a C0F20001 		movt	r1, #:upper16:msgBuffer_PhysicalThread1
- 743 004e 4FF02802 		mov	r2, #40
- 744 0052 4FF02003 		mov	r3, #32
- 745 0056 FFF7FEFF 		bl	etMessageService_init
- 746              	.LBE2:
+ 545              		.loc 2 47 0
+ 546 0016 4FF48063 		mov	r3, #1024
+ 547 001a 0093     		str	r3, [sp, #0]
+ 548 001c 4FF00303 		mov	r3, #3
+ 549 0020 0193     		str	r3, [sp, #4]
+ 550 0022 02AA     		add	r2, sp, #8
+ 551 0024 3B46     		mov	r3, r7
+ 552 0026 93E80300 		ldmia	r3, {r0, r1}
+ 553 002a 82E80300 		stmia	r2, {r0, r1}
+ 554 002e 40F20003 		movw	r3, #:lower16:MsgDispatcher_PhysicalThread1_receiveMessage
+ 555 0032 C0F20003 		movt	r3, #:upper16:MsgDispatcher_PhysicalThread1_receiveMessage
+ 556 0036 0493     		str	r3, [sp, #16]
+ 557 0038 4FF00203 		mov	r3, #2
+ 558 003c 0593     		str	r3, [sp, #20]
+ 559 003e 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
+ 560 0042 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
+ 561 0046 40F20001 		movw	r1, #:lower16:msgBuffer_PhysicalThread1
+ 562 004a C0F20001 		movt	r1, #:upper16:msgBuffer_PhysicalThread1
+ 563 004e 4FF02802 		mov	r2, #40
+ 564 0052 4FF02003 		mov	r3, #32
+ 565 0056 FFF7FEFF 		bl	etMessageService_init
+ 566              	.LBE2:
   48:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 			&msgService_PhysicalThread1,
   49:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 			msgBuffer_PhysicalThread1,
   50:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 			PHYSICALTHREAD1_POOL_SIZE,
@@ -896,290 +716,290 @@
   59:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   60:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
   61:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 747              		.loc 2 61 0
- 748 005a 07F10807 		add	r7, r7, #8
- 749 005e BD46     		mov	sp, r7
- 750 0060 80BD     		pop	{r7, pc}
- 751              		.cfi_endproc
- 752              	.LFE2:
- 754 0062 00BF     		.section	.text.nodeRef1_main_startMessageServices,"ax",%progbits
- 755              		.align	2
- 756              		.thumb
- 757              		.thumb_func
- 759              	nodeRef1_main_startMessageServices:
- 760              	.LFB3:
+ 567              		.loc 2 61 0
+ 568 005a 07F10807 		add	r7, r7, #8
+ 569 005e BD46     		mov	sp, r7
+ 570 0060 80BD     		pop	{r7, pc}
+ 571              		.cfi_endproc
+ 572              	.LFE2:
+ 574 0062 00BF     		.section	.text.nodeRef1_main_startMessageServices,"ax",%progbits
+ 575              		.align	2
+ 576              		.thumb
+ 577              		.thumb_func
+ 579              	nodeRef1_main_startMessageServices:
+ 580              	.LFB3:
   62:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
   63:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** static void nodeRef1_main_startMessageServices(void) {
- 761              		.loc 2 63 0
- 762              		.cfi_startproc
- 763              		@ args = 0, pretend = 0, frame = 0
- 764              		@ frame_needed = 1, uses_anonymous_args = 0
- 765 0000 80B5     		push	{r7, lr}
- 766              	.LCFI8:
- 767              		.cfi_def_cfa_offset 8
- 768              		.cfi_offset 7, -8
- 769              		.cfi_offset 14, -4
- 770 0002 00AF     		add	r7, sp, #0
- 771              	.LCFI9:
- 772              		.cfi_def_cfa_register 7
+ 581              		.loc 2 63 0
+ 582              		.cfi_startproc
+ 583              		@ args = 0, pretend = 0, frame = 0
+ 584              		@ frame_needed = 1, uses_anonymous_args = 0
+ 585 0000 80B5     		push	{r7, lr}
+ 586              	.LCFI8:
+ 587              		.cfi_def_cfa_offset 8
+ 588              		.cfi_offset 7, -8
+ 589              		.cfi_offset 14, -4
+ 590 0002 00AF     		add	r7, sp, #0
+ 591              	.LCFI9:
+ 592              		.cfi_def_cfa_register 7
   64:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "startMessageServices")
   65:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   66:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etMessageService_start(&msgService_PhysicalThread1);
- 773              		.loc 2 66 0
- 774 0004 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
- 775 0008 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
- 776 000c FFF7FEFF 		bl	etMessageService_start
+ 593              		.loc 2 66 0
+ 594 0004 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
+ 595 0008 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
+ 596 000c FFF7FEFF 		bl	etMessageService_start
   67:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   68:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
   69:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 777              		.loc 2 69 0
- 778 0010 80BD     		pop	{r7, pc}
- 779              		.cfi_endproc
- 780              	.LFE3:
- 782 0012 00BF     		.section	.text.nodeRef1_main_stopMessageServices,"ax",%progbits
- 783              		.align	2
- 784              		.thumb
- 785              		.thumb_func
- 787              	nodeRef1_main_stopMessageServices:
- 788              	.LFB4:
+ 597              		.loc 2 69 0
+ 598 0010 80BD     		pop	{r7, pc}
+ 599              		.cfi_endproc
+ 600              	.LFE3:
+ 602 0012 00BF     		.section	.text.nodeRef1_main_stopMessageServices,"ax",%progbits
+ 603              		.align	2
+ 604              		.thumb
+ 605              		.thumb_func
+ 607              	nodeRef1_main_stopMessageServices:
+ 608              	.LFB4:
   70:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
   71:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** static void nodeRef1_main_stopMessageServices(void) {
- 789              		.loc 2 71 0
- 790              		.cfi_startproc
- 791              		@ args = 0, pretend = 0, frame = 0
- 792              		@ frame_needed = 1, uses_anonymous_args = 0
- 793 0000 80B5     		push	{r7, lr}
- 794              	.LCFI10:
- 795              		.cfi_def_cfa_offset 8
- 796              		.cfi_offset 7, -8
- 797              		.cfi_offset 14, -4
- 798 0002 00AF     		add	r7, sp, #0
- 799              	.LCFI11:
- 800              		.cfi_def_cfa_register 7
+ 609              		.loc 2 71 0
+ 610              		.cfi_startproc
+ 611              		@ args = 0, pretend = 0, frame = 0
+ 612              		@ frame_needed = 1, uses_anonymous_args = 0
+ 613 0000 80B5     		push	{r7, lr}
+ 614              	.LCFI10:
+ 615              		.cfi_def_cfa_offset 8
+ 616              		.cfi_offset 7, -8
+ 617              		.cfi_offset 14, -4
+ 618 0002 00AF     		add	r7, sp, #0
+ 619              	.LCFI11:
+ 620              		.cfi_def_cfa_register 7
   72:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "stopMessageServices")
   73:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   74:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etMessageService_stop(&msgService_PhysicalThread1);
- 801              		.loc 2 74 0
- 802 0004 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
- 803 0008 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
- 804 000c FFF7FEFF 		bl	etMessageService_stop
+ 621              		.loc 2 74 0
+ 622 0004 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
+ 623 0008 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
+ 624 000c FFF7FEFF 		bl	etMessageService_stop
   75:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   76:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
   77:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 805              		.loc 2 77 0
- 806 0010 80BD     		pop	{r7, pc}
- 807              		.cfi_endproc
- 808              	.LFE4:
- 810 0012 00BF     		.section	.text.nodeRef1_main_destroyMessageServices,"ax",%progbits
- 811              		.align	2
- 812              		.thumb
- 813              		.thumb_func
- 815              	nodeRef1_main_destroyMessageServices:
- 816              	.LFB5:
+ 625              		.loc 2 77 0
+ 626 0010 80BD     		pop	{r7, pc}
+ 627              		.cfi_endproc
+ 628              	.LFE4:
+ 630 0012 00BF     		.section	.text.nodeRef1_main_destroyMessageServices,"ax",%progbits
+ 631              		.align	2
+ 632              		.thumb
+ 633              		.thumb_func
+ 635              	nodeRef1_main_destroyMessageServices:
+ 636              	.LFB5:
   78:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
   79:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** static void nodeRef1_main_destroyMessageServices(void) {
- 817              		.loc 2 79 0
- 818              		.cfi_startproc
- 819              		@ args = 0, pretend = 0, frame = 0
- 820              		@ frame_needed = 1, uses_anonymous_args = 0
- 821 0000 80B5     		push	{r7, lr}
- 822              	.LCFI12:
- 823              		.cfi_def_cfa_offset 8
- 824              		.cfi_offset 7, -8
- 825              		.cfi_offset 14, -4
- 826 0002 00AF     		add	r7, sp, #0
- 827              	.LCFI13:
- 828              		.cfi_def_cfa_register 7
+ 637              		.loc 2 79 0
+ 638              		.cfi_startproc
+ 639              		@ args = 0, pretend = 0, frame = 0
+ 640              		@ frame_needed = 1, uses_anonymous_args = 0
+ 641 0000 80B5     		push	{r7, lr}
+ 642              	.LCFI12:
+ 643              		.cfi_def_cfa_offset 8
+ 644              		.cfi_offset 7, -8
+ 645              		.cfi_offset 14, -4
+ 646 0002 00AF     		add	r7, sp, #0
+ 647              	.LCFI13:
+ 648              		.cfi_def_cfa_register 7
   80:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "destroyMessageServices")
   81:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   82:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etMessageService_destroy(&msgService_PhysicalThread1);
- 829              		.loc 2 82 0
- 830 0004 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
- 831 0008 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
- 832 000c FFF7FEFF 		bl	etMessageService_destroy
+ 649              		.loc 2 82 0
+ 650 0004 40F20000 		movw	r0, #:lower16:msgService_PhysicalThread1
+ 651 0008 C0F20000 		movt	r0, #:upper16:msgService_PhysicalThread1
+ 652 000c FFF7FEFF 		bl	etMessageService_destroy
   83:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   84:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
   85:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 833              		.loc 2 85 0
- 834 0010 80BD     		pop	{r7, pc}
- 835              		.cfi_endproc
- 836              	.LFE5:
- 838 0012 00BF     		.section	.rodata
- 839 00fa 0000     		.align	2
- 840              	.LC2:
- 841 00fc 25735F69 		.ascii	"%s_init\000"
- 841      6E697400 
- 842              		.section	.text.nodeRef1_main_init,"ax",%progbits
- 843              		.align	2
- 844              		.global	nodeRef1_main_init
- 845              		.thumb
- 846              		.thumb_func
- 848              	nodeRef1_main_init:
- 849              	.LFB6:
+ 653              		.loc 2 85 0
+ 654 0010 80BD     		pop	{r7, pc}
+ 655              		.cfi_endproc
+ 656              	.LFE5:
+ 658 0012 00BF     		.section	.rodata
+ 659 00fa 0000     		.align	2
+ 660              	.LC2:
+ 661 00fc 25735F69 		.ascii	"%s_init\000"
+ 661      6E697400 
+ 662              		.section	.text.nodeRef1_main_init,"ax",%progbits
+ 663              		.align	2
+ 664              		.global	nodeRef1_main_init
+ 665              		.thumb
+ 666              		.thumb_func
+ 668              	nodeRef1_main_init:
+ 669              	.LFB6:
   86:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
   87:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** void nodeRef1_main_init(void) {
- 850              		.loc 2 87 0
- 851              		.cfi_startproc
- 852              		@ args = 0, pretend = 0, frame = 0
- 853              		@ frame_needed = 1, uses_anonymous_args = 0
- 854 0000 80B5     		push	{r7, lr}
- 855              	.LCFI14:
- 856              		.cfi_def_cfa_offset 8
- 857              		.cfi_offset 7, -8
- 858              		.cfi_offset 14, -4
- 859 0002 00AF     		add	r7, sp, #0
- 860              	.LCFI15:
- 861              		.cfi_def_cfa_register 7
+ 670              		.loc 2 87 0
+ 671              		.cfi_startproc
+ 672              		@ args = 0, pretend = 0, frame = 0
+ 673              		@ frame_needed = 1, uses_anonymous_args = 0
+ 674 0000 80B5     		push	{r7, lr}
+ 675              	.LCFI14:
+ 676              		.cfi_def_cfa_offset 8
+ 677              		.cfi_offset 7, -8
+ 678              		.cfi_offset 14, -4
+ 679 0002 00AF     		add	r7, sp, #0
+ 680              	.LCFI15:
+ 681              		.cfi_def_cfa_register 7
   88:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "init")
   89:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etLogger_logInfoF("%s_init", nodeRef1_mainInst.name);
- 862              		.loc 2 89 0
- 863 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
- 864 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
- 865 000c 1B68     		ldr	r3, [r3, #0]
- 866 000e 40F20000 		movw	r0, #:lower16:.LC2
- 867 0012 C0F20000 		movt	r0, #:upper16:.LC2
- 868 0016 1946     		mov	r1, r3
- 869 0018 FFF7FEFF 		bl	etLogger_logInfoF
+ 682              		.loc 2 89 0
+ 683 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
+ 684 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
+ 685 000c 1B68     		ldr	r3, [r3, #0]
+ 686 000e 40F20000 		movw	r0, #:lower16:.LC2
+ 687 0012 C0F20000 		movt	r0, #:upper16:.LC2
+ 688 0016 1946     		mov	r1, r3
+ 689 0018 FFF7FEFF 		bl	etLogger_logInfoF
   90:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	/* construct all actors */
   92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	nodeRef1_main_constructActorInstances();
- 870              		.loc 2 92 0
- 871 001c FFF7FEFF 		bl	nodeRef1_main_constructActorInstances
+ 690              		.loc 2 92 0
+ 691 001c FFF7FEFF 		bl	nodeRef1_main_constructActorInstances
   93:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   94:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	/* initialization of all message services */
   95:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	nodeRef1_main_initMessageServices();
- 872              		.loc 2 95 0
- 873 0020 FFF7FEFF 		bl	nodeRef1_main_initMessageServices
+ 692              		.loc 2 95 0
+ 693 0020 FFF7FEFF 		bl	nodeRef1_main_initMessageServices
   96:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
   97:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	/* init all actors */
   98:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	nodeRef1_main_initActorInstances();
- 874              		.loc 2 98 0
- 875 0024 FFF7FEFF 		bl	nodeRef1_main_initActorInstances
+ 694              		.loc 2 98 0
+ 695 0024 FFF7FEFF 		bl	nodeRef1_main_initActorInstances
   99:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  100:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  101:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  102:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 876              		.loc 2 102 0
- 877 0028 80BD     		pop	{r7, pc}
- 878              		.cfi_endproc
- 879              	.LFE6:
- 881 002a 00BF     		.section	.rodata
- 882              		.align	2
- 883              	.LC3:
- 884 0104 25735F73 		.ascii	"%s_start\000"
- 884      74617274 
- 884      00
- 885              		.section	.text.nodeRef1_main_start,"ax",%progbits
- 886              		.align	2
- 887              		.global	nodeRef1_main_start
- 888              		.thumb
- 889              		.thumb_func
- 891              	nodeRef1_main_start:
- 892              	.LFB7:
+ 696              		.loc 2 102 0
+ 697 0028 80BD     		pop	{r7, pc}
+ 698              		.cfi_endproc
+ 699              	.LFE6:
+ 701 002a 00BF     		.section	.rodata
+ 702              		.align	2
+ 703              	.LC3:
+ 704 0104 25735F73 		.ascii	"%s_start\000"
+ 704      74617274 
+ 704      00
+ 705              		.section	.text.nodeRef1_main_start,"ax",%progbits
+ 706              		.align	2
+ 707              		.global	nodeRef1_main_start
+ 708              		.thumb
+ 709              		.thumb_func
+ 711              	nodeRef1_main_start:
+ 712              	.LFB7:
  103:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  104:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** void nodeRef1_main_start(void) {
- 893              		.loc 2 104 0
- 894              		.cfi_startproc
- 895              		@ args = 0, pretend = 0, frame = 0
- 896              		@ frame_needed = 1, uses_anonymous_args = 0
- 897 0000 80B5     		push	{r7, lr}
- 898              	.LCFI16:
- 899              		.cfi_def_cfa_offset 8
- 900              		.cfi_offset 7, -8
- 901              		.cfi_offset 14, -4
- 902 0002 00AF     		add	r7, sp, #0
- 903              	.LCFI17:
- 904              		.cfi_def_cfa_register 7
+ 713              		.loc 2 104 0
+ 714              		.cfi_startproc
+ 715              		@ args = 0, pretend = 0, frame = 0
+ 716              		@ frame_needed = 1, uses_anonymous_args = 0
+ 717 0000 80B5     		push	{r7, lr}
+ 718              	.LCFI16:
+ 719              		.cfi_def_cfa_offset 8
+ 720              		.cfi_offset 7, -8
+ 721              		.cfi_offset 14, -4
+ 722 0002 00AF     		add	r7, sp, #0
+ 723              	.LCFI17:
+ 724              		.cfi_def_cfa_register 7
  105:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "start")
  106:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etLogger_logInfoF("%s_start", nodeRef1_mainInst.name);
- 905              		.loc 2 106 0
- 906 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
- 907 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
- 908 000c 1B68     		ldr	r3, [r3, #0]
- 909 000e 40F20000 		movw	r0, #:lower16:.LC3
- 910 0012 C0F20000 		movt	r0, #:upper16:.LC3
- 911 0016 1946     		mov	r1, r3
- 912 0018 FFF7FEFF 		bl	etLogger_logInfoF
+ 725              		.loc 2 106 0
+ 726 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
+ 727 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
+ 728 000c 1B68     		ldr	r3, [r3, #0]
+ 729 000e 40F20000 		movw	r0, #:lower16:.LC3
+ 730 0012 C0F20000 		movt	r0, #:upper16:.LC3
+ 731 0016 1946     		mov	r1, r3
+ 732 0018 FFF7FEFF 		bl	etLogger_logInfoF
  107:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	nodeRef1_main_startMessageServices();
- 913              		.loc 2 107 0
- 914 001c FFF7FEFF 		bl	nodeRef1_main_startMessageServices
+ 733              		.loc 2 107 0
+ 734 001c FFF7FEFF 		bl	nodeRef1_main_startMessageServices
  108:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  109:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 915              		.loc 2 109 0
- 916 0020 80BD     		pop	{r7, pc}
- 917              		.cfi_endproc
- 918              	.LFE7:
- 920 0022 00BF     		.section	.rodata
- 921 010d 000000   		.align	2
- 922              	.LC4:
- 923 0110 74797065 		.ascii	"type quit to exit\000"
- 923      20717569 
- 923      7420746F 
- 923      20657869 
- 923      7400
- 924 0122 0000     		.align	2
- 925              	.LC5:
- 926 0124 71756974 		.ascii	"quit\000"
- 926      00
- 927              		.section	.text.nodeRef1_main_run,"ax",%progbits
- 928              		.align	2
- 929              		.global	nodeRef1_main_run
- 930              		.thumb
- 931              		.thumb_func
- 933              	nodeRef1_main_run:
- 934              	.LFB8:
+ 735              		.loc 2 109 0
+ 736 0020 80BD     		pop	{r7, pc}
+ 737              		.cfi_endproc
+ 738              	.LFE7:
+ 740 0022 00BF     		.section	.rodata
+ 741 010d 000000   		.align	2
+ 742              	.LC4:
+ 743 0110 74797065 		.ascii	"type quit to exit\000"
+ 743      20717569 
+ 743      7420746F 
+ 743      20657869 
+ 743      7400
+ 744 0122 0000     		.align	2
+ 745              	.LC5:
+ 746 0124 71756974 		.ascii	"quit\000"
+ 746      00
+ 747              		.section	.text.nodeRef1_main_run,"ax",%progbits
+ 748              		.align	2
+ 749              		.global	nodeRef1_main_run
+ 750              		.thumb
+ 751              		.thumb_func
+ 753              	nodeRef1_main_run:
+ 754              	.LFB8:
  110:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  111:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** void nodeRef1_main_run(etBool runAsTest) {
- 935              		.loc 2 111 0
- 936              		.cfi_startproc
- 937              		@ args = 0, pretend = 0, frame = 72
- 938              		@ frame_needed = 1, uses_anonymous_args = 0
- 939 0000 80B5     		push	{r7, lr}
- 940              	.LCFI18:
- 941              		.cfi_def_cfa_offset 8
- 942              		.cfi_offset 7, -8
- 943              		.cfi_offset 14, -4
- 944 0002 92B0     		sub	sp, sp, #72
- 945              	.LCFI19:
- 946              		.cfi_def_cfa_offset 80
- 947 0004 00AF     		add	r7, sp, #0
- 948              	.LCFI20:
- 949              		.cfi_def_cfa_register 7
- 950 0006 0346     		mov	r3, r0
- 951 0008 FB71     		strb	r3, [r7, #7]
+ 755              		.loc 2 111 0
+ 756              		.cfi_startproc
+ 757              		@ args = 0, pretend = 0, frame = 72
+ 758              		@ frame_needed = 1, uses_anonymous_args = 0
+ 759 0000 80B5     		push	{r7, lr}
+ 760              	.LCFI18:
+ 761              		.cfi_def_cfa_offset 8
+ 762              		.cfi_offset 7, -8
+ 763              		.cfi_offset 14, -4
+ 764 0002 92B0     		sub	sp, sp, #72
+ 765              	.LCFI19:
+ 766              		.cfi_def_cfa_offset 80
+ 767 0004 00AF     		add	r7, sp, #0
+ 768              	.LCFI20:
+ 769              		.cfi_def_cfa_register 7
+ 770 0006 0346     		mov	r3, r0
+ 771 0008 FB71     		strb	r3, [r7, #7]
  112:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** #ifdef ET_RUNNER_ACTIVATE 
  113:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "run")
  114:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  115:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	if (runAsTest) {
- 952              		.loc 2 115 0
- 953 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 954 000c 002B     		cmp	r3, #0
- 955 000e 06D0     		beq	.L38
+ 772              		.loc 2 115 0
+ 773 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 774 000c 002B     		cmp	r3, #0
+ 775 000e 06D0     		beq	.L38
  116:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		etSema_waitForWakeup(etRuntime_getTerminateSemaphore());
- 956              		.loc 2 116 0
- 957 0010 FFF7FEFF 		bl	etRuntime_getTerminateSemaphore
- 958 0014 0346     		mov	r3, r0
- 959 0016 1846     		mov	r0, r3
- 960 0018 FFF7FEFF 		bl	etSema_waitForWakeup
- 961 001c 2FE0     		b	.L37
- 962              	.L38:
+ 776              		.loc 2 116 0
+ 777 0010 FFF7FEFF 		bl	etRuntime_getTerminateSemaphore
+ 778 0014 0346     		mov	r3, r0
+ 779 0016 1846     		mov	r0, r3
+ 780 0018 FFF7FEFF 		bl	etSema_waitForWakeup
+ 781 001c 2FE0     		b	.L37
+ 782              	.L38:
  117:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	}
  118:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	else {
  119:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		printf("type quit to exit\n");
- 963              		.loc 2 119 0
- 964 001e 40F20000 		movw	r0, #:lower16:.LC4
- 965 0022 C0F20000 		movt	r0, #:upper16:.LC4
- 966 0026 FFF7FEFF 		bl	puts
+ 783              		.loc 2 119 0
+ 784 001e 40F20000 		movw	r0, #:lower16:.LC4
+ 785 0022 C0F20000 		movt	r0, #:upper16:.LC4
+ 786 0026 FFF7FEFF 		bl	puts
  120:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		fflush(stdout);
- 967              		.loc 2 120 0
- 968 002a 40F20003 		movw	r3, #:lower16:_impure_ptr
- 969 002e C0F20003 		movt	r3, #:upper16:_impure_ptr
- 970 0032 1B68     		ldr	r3, [r3, #0]
- 971 0034 9B68     		ldr	r3, [r3, #8]
- 972 0036 1846     		mov	r0, r3
- 973 0038 FFF7FEFF 		bl	fflush
- 974 003c 00E0     		b	.L42
- 975              	.L43:
+ 787              		.loc 2 120 0
+ 788 002a 40F20003 		movw	r3, #:lower16:_impure_ptr
+ 789 002e C0F20003 		movt	r3, #:upper16:_impure_ptr
+ 790 0032 1B68     		ldr	r3, [r3, #0]
+ 791 0034 9B68     		ldr	r3, [r3, #8]
+ 792 0036 1846     		mov	r0, r3
+ 793 0038 FFF7FEFF 		bl	fflush
+ 794 003c 00E0     		b	.L42
+ 795              	.L43:
  121:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		while (ET_TRUE) {
  122:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 			char line[64];
  123:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
@@ -1188,371 +1008,371 @@
  126:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 					break;
  127:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 			}
  128:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 		}
- 976              		.loc 2 128 0
- 977 003e 00BF     		nop
- 978              	.L42:
- 979              	.LBB3:
+ 796              		.loc 2 128 0
+ 797 003e 00BF     		nop
+ 798              	.L42:
+ 799              	.LBB3:
  124:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 			if (fgets(line, 64, stdin) != NULL) {
- 980              		.loc 2 124 0
- 981 0040 40F20003 		movw	r3, #:lower16:_impure_ptr
- 982 0044 C0F20003 		movt	r3, #:upper16:_impure_ptr
- 983 0048 1B68     		ldr	r3, [r3, #0]
- 984 004a 5B68     		ldr	r3, [r3, #4]
- 985 004c 07F10802 		add	r2, r7, #8
- 986 0050 1046     		mov	r0, r2
- 987 0052 4FF04001 		mov	r1, #64
- 988 0056 1A46     		mov	r2, r3
- 989 0058 FFF7FEFF 		bl	fgets
- 990 005c 0346     		mov	r3, r0
- 991 005e 002B     		cmp	r3, #0
- 992 0060 EDD0     		beq	.L43
+ 800              		.loc 2 124 0
+ 801 0040 40F20003 		movw	r3, #:lower16:_impure_ptr
+ 802 0044 C0F20003 		movt	r3, #:upper16:_impure_ptr
+ 803 0048 1B68     		ldr	r3, [r3, #0]
+ 804 004a 5B68     		ldr	r3, [r3, #4]
+ 805 004c 07F10802 		add	r2, r7, #8
+ 806 0050 1046     		mov	r0, r2
+ 807 0052 4FF04001 		mov	r1, #64
+ 808 0056 1A46     		mov	r2, r3
+ 809 0058 FFF7FEFF 		bl	fgets
+ 810 005c 0346     		mov	r3, r0
+ 811 005e 002B     		cmp	r3, #0
+ 812 0060 EDD0     		beq	.L43
  125:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 				if (strncmp(line, "quit", 4)==0)
- 993              		.loc 2 125 0
- 994 0062 07F10803 		add	r3, r7, #8
- 995 0066 1846     		mov	r0, r3
- 996 0068 40F20001 		movw	r1, #:lower16:.LC5
- 997 006c C0F20001 		movt	r1, #:upper16:.LC5
- 998 0070 4FF00402 		mov	r2, #4
- 999 0074 FFF7FEFF 		bl	strncmp
- 1000 0078 0346     		mov	r3, r0
- 1001 007a 002B     		cmp	r3, #0
- 1002 007c DFD1     		bne	.L43
- 1003              	.L37:
- 1004              	.LBE3:
+ 813              		.loc 2 125 0
+ 814 0062 07F10803 		add	r3, r7, #8
+ 815 0066 1846     		mov	r0, r3
+ 816 0068 40F20001 		movw	r1, #:lower16:.LC5
+ 817 006c C0F20001 		movt	r1, #:upper16:.LC5
+ 818 0070 4FF00402 		mov	r2, #4
+ 819 0074 FFF7FEFF 		bl	strncmp
+ 820 0078 0346     		mov	r3, r0
+ 821 007a 002B     		cmp	r3, #0
+ 822 007c DFD1     		bne	.L43
+ 823              	.L37:
+ 824              	.LBE3:
  129:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	}
  130:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  131:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  132:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** #endif	
  133:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 1005              		.loc 2 133 0
- 1006 007e 07F14807 		add	r7, r7, #72
- 1007 0082 BD46     		mov	sp, r7
- 1008 0084 80BD     		pop	{r7, pc}
- 1009              		.cfi_endproc
- 1010              	.LFE8:
- 1012 0086 00BF     		.section	.rodata
- 1013 0129 000000   		.align	2
- 1014              	.LC6:
- 1015 012c 25735F73 		.ascii	"%s_stop\000"
- 1015      746F7000 
- 1016              		.section	.text.nodeRef1_main_stop,"ax",%progbits
- 1017              		.align	2
- 1018              		.global	nodeRef1_main_stop
- 1019              		.thumb
- 1020              		.thumb_func
- 1022              	nodeRef1_main_stop:
- 1023              	.LFB9:
+ 825              		.loc 2 133 0
+ 826 007e 07F14807 		add	r7, r7, #72
+ 827 0082 BD46     		mov	sp, r7
+ 828 0084 80BD     		pop	{r7, pc}
+ 829              		.cfi_endproc
+ 830              	.LFE8:
+ 832 0086 00BF     		.section	.rodata
+ 833 0129 000000   		.align	2
+ 834              	.LC6:
+ 835 012c 25735F73 		.ascii	"%s_stop\000"
+ 835      746F7000 
+ 836              		.section	.text.nodeRef1_main_stop,"ax",%progbits
+ 837              		.align	2
+ 838              		.global	nodeRef1_main_stop
+ 839              		.thumb
+ 840              		.thumb_func
+ 842              	nodeRef1_main_stop:
+ 843              	.LFB9:
  134:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  135:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** void nodeRef1_main_stop(void){
- 1024              		.loc 2 135 0
- 1025              		.cfi_startproc
- 1026              		@ args = 0, pretend = 0, frame = 0
- 1027              		@ frame_needed = 1, uses_anonymous_args = 0
- 1028 0000 80B5     		push	{r7, lr}
- 1029              	.LCFI21:
- 1030              		.cfi_def_cfa_offset 8
- 1031              		.cfi_offset 7, -8
- 1032              		.cfi_offset 14, -4
- 1033 0002 00AF     		add	r7, sp, #0
- 1034              	.LCFI22:
- 1035              		.cfi_def_cfa_register 7
+ 844              		.loc 2 135 0
+ 845              		.cfi_startproc
+ 846              		@ args = 0, pretend = 0, frame = 0
+ 847              		@ frame_needed = 1, uses_anonymous_args = 0
+ 848 0000 80B5     		push	{r7, lr}
+ 849              	.LCFI21:
+ 850              		.cfi_def_cfa_offset 8
+ 851              		.cfi_offset 7, -8
+ 852              		.cfi_offset 14, -4
+ 853 0002 00AF     		add	r7, sp, #0
+ 854              	.LCFI22:
+ 855              		.cfi_def_cfa_register 7
  136:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "stop")
  137:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etLogger_logInfoF("%s_stop", nodeRef1_mainInst.name);
- 1036              		.loc 2 137 0
- 1037 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
- 1038 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
- 1039 000c 1B68     		ldr	r3, [r3, #0]
- 1040 000e 40F20000 		movw	r0, #:lower16:.LC6
- 1041 0012 C0F20000 		movt	r0, #:upper16:.LC6
- 1042 0016 1946     		mov	r1, r3
- 1043 0018 FFF7FEFF 		bl	etLogger_logInfoF
+ 856              		.loc 2 137 0
+ 857 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
+ 858 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
+ 859 000c 1B68     		ldr	r3, [r3, #0]
+ 860 000e 40F20000 		movw	r0, #:lower16:.LC6
+ 861 0012 C0F20000 		movt	r0, #:upper16:.LC6
+ 862 0016 1946     		mov	r1, r3
+ 863 0018 FFF7FEFF 		bl	etLogger_logInfoF
  138:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  139:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	nodeRef1_main_stopMessageServices();
- 1044              		.loc 2 139 0
- 1045 001c FFF7FEFF 		bl	nodeRef1_main_stopMessageServices
+ 864              		.loc 2 139 0
+ 865 001c FFF7FEFF 		bl	nodeRef1_main_stopMessageServices
  140:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  141:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  142:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 1046              		.loc 2 142 0
- 1047 0020 80BD     		pop	{r7, pc}
- 1048              		.cfi_endproc
- 1049              	.LFE9:
- 1051 0022 00BF     		.section	.rodata
- 1052              		.align	2
- 1053              	.LC7:
- 1054 0134 25735F64 		.ascii	"%s_destroy\000"
- 1054      65737472 
- 1054      6F7900
- 1055              		.section	.text.nodeRef1_main_destroy,"ax",%progbits
- 1056              		.align	2
- 1057              		.global	nodeRef1_main_destroy
- 1058              		.thumb
- 1059              		.thumb_func
- 1061              	nodeRef1_main_destroy:
- 1062              	.LFB10:
+ 866              		.loc 2 142 0
+ 867 0020 80BD     		pop	{r7, pc}
+ 868              		.cfi_endproc
+ 869              	.LFE9:
+ 871 0022 00BF     		.section	.rodata
+ 872              		.align	2
+ 873              	.LC7:
+ 874 0134 25735F64 		.ascii	"%s_destroy\000"
+ 874      65737472 
+ 874      6F7900
+ 875              		.section	.text.nodeRef1_main_destroy,"ax",%progbits
+ 876              		.align	2
+ 877              		.global	nodeRef1_main_destroy
+ 878              		.thumb
+ 879              		.thumb_func
+ 881              	nodeRef1_main_destroy:
+ 882              	.LFB10:
  143:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  144:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** void nodeRef1_main_destroy(void){
- 1063              		.loc 2 144 0
- 1064              		.cfi_startproc
- 1065              		@ args = 0, pretend = 0, frame = 0
- 1066              		@ frame_needed = 1, uses_anonymous_args = 0
- 1067 0000 80B5     		push	{r7, lr}
- 1068              	.LCFI23:
- 1069              		.cfi_def_cfa_offset 8
- 1070              		.cfi_offset 7, -8
- 1071              		.cfi_offset 14, -4
- 1072 0002 00AF     		add	r7, sp, #0
- 1073              	.LCFI24:
- 1074              		.cfi_def_cfa_register 7
+ 883              		.loc 2 144 0
+ 884              		.cfi_startproc
+ 885              		@ args = 0, pretend = 0, frame = 0
+ 886              		@ frame_needed = 1, uses_anonymous_args = 0
+ 887 0000 80B5     		push	{r7, lr}
+ 888              	.LCFI23:
+ 889              		.cfi_def_cfa_offset 8
+ 890              		.cfi_offset 7, -8
+ 891              		.cfi_offset 14, -4
+ 892 0002 00AF     		add	r7, sp, #0
+ 893              	.LCFI24:
+ 894              		.cfi_def_cfa_register 7
  145:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "destroy")
  146:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etLogger_logInfoF("%s_destroy", nodeRef1_mainInst.name);
- 1075              		.loc 2 146 0
- 1076 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
- 1077 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
- 1078 000c 1B68     		ldr	r3, [r3, #0]
- 1079 000e 40F20000 		movw	r0, #:lower16:.LC7
- 1080 0012 C0F20000 		movt	r0, #:upper16:.LC7
- 1081 0016 1946     		mov	r1, r3
- 1082 0018 FFF7FEFF 		bl	etLogger_logInfoF
+ 895              		.loc 2 146 0
+ 896 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
+ 897 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
+ 898 000c 1B68     		ldr	r3, [r3, #0]
+ 899 000e 40F20000 		movw	r0, #:lower16:.LC7
+ 900 0012 C0F20000 		movt	r0, #:upper16:.LC7
+ 901 0016 1946     		mov	r1, r3
+ 902 0018 FFF7FEFF 		bl	etLogger_logInfoF
  147:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  148:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	nodeRef1_main_destroyMessageServices();
- 1083              		.loc 2 148 0
- 1084 001c FFF7FEFF 		bl	nodeRef1_main_destroyMessageServices
+ 903              		.loc 2 148 0
+ 904 001c FFF7FEFF 		bl	nodeRef1_main_destroyMessageServices
  149:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  150:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  151:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 1085              		.loc 2 151 0
- 1086 0020 80BD     		pop	{r7, pc}
- 1087              		.cfi_endproc
- 1088              	.LFE10:
- 1090 0022 00BF     		.section	.rodata
- 1091 013f 00       		.align	2
- 1092              	.LC8:
- 1093 0140 25735F73 		.ascii	"%s_shutdown\000"
- 1093      68757464 
- 1093      6F776E00 
- 1094              		.section	.text.nodeRef1_main_shutdown,"ax",%progbits
- 1095              		.align	2
- 1096              		.global	nodeRef1_main_shutdown
- 1097              		.thumb
- 1098              		.thumb_func
- 1100              	nodeRef1_main_shutdown:
- 1101              	.LFB11:
+ 905              		.loc 2 151 0
+ 906 0020 80BD     		pop	{r7, pc}
+ 907              		.cfi_endproc
+ 908              	.LFE10:
+ 910 0022 00BF     		.section	.rodata
+ 911 013f 00       		.align	2
+ 912              	.LC8:
+ 913 0140 25735F73 		.ascii	"%s_shutdown\000"
+ 913      68757464 
+ 913      6F776E00 
+ 914              		.section	.text.nodeRef1_main_shutdown,"ax",%progbits
+ 915              		.align	2
+ 916              		.global	nodeRef1_main_shutdown
+ 917              		.thumb
+ 918              		.thumb_func
+ 920              	nodeRef1_main_shutdown:
+ 921              	.LFB11:
  152:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  153:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** void nodeRef1_main_shutdown(void){
- 1102              		.loc 2 153 0
- 1103              		.cfi_startproc
- 1104              		@ args = 0, pretend = 0, frame = 0
- 1105              		@ frame_needed = 1, uses_anonymous_args = 0
- 1106 0000 80B5     		push	{r7, lr}
- 1107              	.LCFI25:
- 1108              		.cfi_def_cfa_offset 8
- 1109              		.cfi_offset 7, -8
- 1110              		.cfi_offset 14, -4
- 1111 0002 00AF     		add	r7, sp, #0
- 1112              	.LCFI26:
- 1113              		.cfi_def_cfa_register 7
+ 922              		.loc 2 153 0
+ 923              		.cfi_startproc
+ 924              		@ args = 0, pretend = 0, frame = 0
+ 925              		@ frame_needed = 1, uses_anonymous_args = 0
+ 926 0000 80B5     		push	{r7, lr}
+ 927              	.LCFI25:
+ 928              		.cfi_def_cfa_offset 8
+ 929              		.cfi_offset 7, -8
+ 930              		.cfi_offset 14, -4
+ 931 0002 00AF     		add	r7, sp, #0
+ 932              	.LCFI26:
+ 933              		.cfi_def_cfa_register 7
  154:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "shutdown")
  155:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	etLogger_logInfoF("%s_shutdown", nodeRef1_mainInst.name);
- 1114              		.loc 2 155 0
- 1115 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
- 1116 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
- 1117 000c 1B68     		ldr	r3, [r3, #0]
- 1118 000e 40F20000 		movw	r0, #:lower16:.LC8
- 1119 0012 C0F20000 		movt	r0, #:upper16:.LC8
- 1120 0016 1946     		mov	r1, r3
- 1121 0018 FFF7FEFF 		bl	etLogger_logInfoF
+ 934              		.loc 2 155 0
+ 935 0004 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
+ 936 0008 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
+ 937 000c 1B68     		ldr	r3, [r3, #0]
+ 938 000e 40F20000 		movw	r0, #:lower16:.LC8
+ 939 0012 C0F20000 		movt	r0, #:upper16:.LC8
+ 940 0016 1946     		mov	r1, r3
+ 941 0018 FFF7FEFF 		bl	etLogger_logInfoF
  156:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  157:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	nodeRef1_mainInst.shutdownRequest = 1;
- 1122              		.loc 2 157 0
- 1123 001c 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
- 1124 0020 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
- 1125 0024 4FF00102 		mov	r2, #1
- 1126 0028 5A60     		str	r2, [r3, #4]
+ 942              		.loc 2 157 0
+ 943 001c 40F20003 		movw	r3, #:lower16:nodeRef1_mainInst
+ 944 0020 C0F20003 		movt	r3, #:upper16:nodeRef1_mainInst
+ 945 0024 4FF00102 		mov	r2, #1
+ 946 0028 5A60     		str	r2, [r3, #4]
  158:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  159:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  160:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 1127              		.loc 2 160 0
- 1128 002a 80BD     		pop	{r7, pc}
- 1129              		.cfi_endproc
- 1130              	.LFE11:
- 1132              		.section	.text.nodeRef1_main_constructActorInstances,"ax",%progbits
- 1133              		.align	2
- 1134              		.thumb
- 1135              		.thumb_func
- 1137              	nodeRef1_main_constructActorInstances:
- 1138              	.LFB12:
+ 947              		.loc 2 160 0
+ 948 002a 80BD     		pop	{r7, pc}
+ 949              		.cfi_endproc
+ 950              	.LFE11:
+ 952              		.section	.text.nodeRef1_main_constructActorInstances,"ax",%progbits
+ 953              		.align	2
+ 954              		.thumb
+ 955              		.thumb_func
+ 957              	nodeRef1_main_constructActorInstances:
+ 958              	.LFB12:
  161:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  162:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  163:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** static void nodeRef1_main_constructActorInstances(void){
- 1139              		.loc 2 163 0
- 1140              		.cfi_startproc
- 1141              		@ args = 0, pretend = 0, frame = 0
- 1142              		@ frame_needed = 1, uses_anonymous_args = 0
- 1143              		@ link register save eliminated.
- 1144 0000 80B4     		push	{r7}
- 1145              	.LCFI27:
- 1146              		.cfi_def_cfa_offset 4
- 1147              		.cfi_offset 7, -4
- 1148 0002 00AF     		add	r7, sp, #0
- 1149              	.LCFI28:
- 1150              		.cfi_def_cfa_register 7
+ 959              		.loc 2 163 0
+ 960              		.cfi_startproc
+ 961              		@ args = 0, pretend = 0, frame = 0
+ 962              		@ frame_needed = 1, uses_anonymous_args = 0
+ 963              		@ link register save eliminated.
+ 964 0000 80B4     		push	{r7}
+ 965              	.LCFI27:
+ 966              		.cfi_def_cfa_offset 4
+ 967              		.cfi_offset 7, -4
+ 968 0002 00AF     		add	r7, sp, #0
+ 969              	.LCFI28:
+ 970              		.cfi_def_cfa_register 7
  164:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "constructActorInstances")
  165:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  166:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  167:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  168:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 1151              		.loc 2 168 0
- 1152 0004 BD46     		mov	sp, r7
- 1153 0006 80BC     		pop	{r7}
- 1154 0008 7047     		bx	lr
- 1155              		.cfi_endproc
- 1156              	.LFE12:
- 1158 000a 00BF     		.section	.text.nodeRef1_main_initActorInstances,"ax",%progbits
- 1159              		.align	2
- 1160              		.thumb
- 1161              		.thumb_func
- 1163              	nodeRef1_main_initActorInstances:
- 1164              	.LFB13:
+ 971              		.loc 2 168 0
+ 972 0004 BD46     		mov	sp, r7
+ 973 0006 80BC     		pop	{r7}
+ 974 0008 7047     		bx	lr
+ 975              		.cfi_endproc
+ 976              	.LFE12:
+ 978 000a 00BF     		.section	.text.nodeRef1_main_initActorInstances,"ax",%progbits
+ 979              		.align	2
+ 980              		.thumb
+ 981              		.thumb_func
+ 983              	nodeRef1_main_initActorInstances:
+ 984              	.LFB13:
  169:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 
  170:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** static void nodeRef1_main_initActorInstances(void){
- 1165              		.loc 2 170 0
- 1166              		.cfi_startproc
- 1167              		@ args = 0, pretend = 0, frame = 0
- 1168              		@ frame_needed = 1, uses_anonymous_args = 0
- 1169 0000 80B5     		push	{r7, lr}
- 1170              	.LCFI29:
- 1171              		.cfi_def_cfa_offset 8
- 1172              		.cfi_offset 7, -8
- 1173              		.cfi_offset 14, -4
- 1174 0002 00AF     		add	r7, sp, #0
- 1175              	.LCFI30:
- 1176              		.cfi_def_cfa_register 7
+ 985              		.loc 2 170 0
+ 986              		.cfi_startproc
+ 987              		@ args = 0, pretend = 0, frame = 0
+ 988              		@ frame_needed = 1, uses_anonymous_args = 0
+ 989 0000 80B5     		push	{r7, lr}
+ 990              	.LCFI29:
+ 991              		.cfi_def_cfa_offset 8
+ 992              		.cfi_offset 7, -8
+ 993              		.cfi_offset 14, -4
+ 994 0002 00AF     		add	r7, sp, #0
+ 995              	.LCFI30:
+ 996              		.cfi_def_cfa_register 7
  171:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "initActorInstances")
  172:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  173:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	Application_init(&_HexagonCANDemo_main_appl);
- 1177              		.loc 2 173 0
- 1178 0004 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl
- 1179 0008 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl
- 1180 000c FFF7FEFF 		bl	Application_init
+ 997              		.loc 2 173 0
+ 998 0004 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl
+ 999 0008 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl
+ 1000 000c FFF7FEFF 		bl	Application_init
  174:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	AMrPing_init(&_HexagonCANDemo_main_appl_mrPing);
- 1181              		.loc 2 174 0
- 1182 0010 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
- 1183 0014 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
- 1184 0018 FFF7FEFF 		bl	AMrPing_init
+ 1001              		.loc 2 174 0
+ 1002 0010 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPing
+ 1003 0014 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPing
+ 1004 0018 FFF7FEFF 		bl	AMrPing_init
  175:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	AMrPong_init(&_HexagonCANDemo_main_appl_mrPong);
- 1185              		.loc 2 175 0
- 1186 001c 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPong
- 1187 0020 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPong
- 1188 0024 FFF7FEFF 		bl	AMrPong_init
+ 1005              		.loc 2 175 0
+ 1006 001c 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_appl_mrPong
+ 1007 0020 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_appl_mrPong
+ 1008 0024 FFF7FEFF 		bl	AMrPong_init
  176:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ATimingService_init(&_HexagonCANDemo_main_timingService);
- 1189              		.loc 2 176 0
- 1190 0028 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
- 1191 002c C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
- 1192 0030 FFF7FEFF 		bl	ATimingService_init
+ 1009              		.loc 2 176 0
+ 1010 0028 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_timingService
+ 1011 002c C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_timingService
+ 1012 0030 FFF7FEFF 		bl	ATimingService_init
  177:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ACANService_init(&_HexagonCANDemo_main_canService);
- 1193              		.loc 2 177 0
- 1194 0034 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
- 1195 0038 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
- 1196 003c FFF7FEFF 		bl	ACANService_init
+ 1013              		.loc 2 177 0
+ 1014 0034 40F20000 		movw	r0, #:lower16:_HexagonCANDemo_main_canService
+ 1015 0038 C0F20000 		movt	r0, #:upper16:_HexagonCANDemo_main_canService
+ 1016 003c FFF7FEFF 		bl	ACANService_init
  178:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	
  179:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** 	ET_MSC_LOGGER_SYNC_EXIT
  180:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\nodeRef1_main.c **** }
- 1197              		.loc 2 180 0
- 1198 0040 80BD     		pop	{r7, pc}
- 1199              		.cfi_endproc
- 1200              	.LFE13:
- 1202 0042 00BF     		.text
- 1203              	.Letext0:
- 1204              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 1205              		.file 4 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 1206              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/include/stddef.h"
- 1207              		.file 6 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 1208              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1209              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1210              		.file 9 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
- 1211              		.file 10 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1212              		.file 11 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1213              		.file 12 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1214              		.file 13 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1215              		.file 14 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1216              		.file 15 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1217              		.file 16 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1218              		.file 17 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1219              		.file 18 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
- 1220              		.file 19 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1221              		.file 20 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1222              		.file 21 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1223              		.file 22 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1224              		.file 23 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1225              		.file 24 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1226              		.file 25 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1227              		.file 26 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1228              		.file 27 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1229              		.file 28 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
- 1230              		.file 29 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/
+ 1017              		.loc 2 180 0
+ 1018 0040 80BD     		pop	{r7, pc}
+ 1019              		.cfi_endproc
+ 1020              	.LFE13:
+ 1022 0042 00BF     		.text
+ 1023              	.Letext0:
+ 1024              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1025              		.file 4 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1026              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/include/stddef.h"
+ 1027              		.file 6 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1028              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1029              		.file 8 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1030              		.file 9 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
+ 1031              		.file 10 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1032              		.file 11 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1033              		.file 12 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1034              		.file 13 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1035              		.file 14 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1036              		.file 15 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1037              		.file 16 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1038              		.file 17 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1039              		.file 18 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\et
+ 1040              		.file 19 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1041              		.file 20 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1042              		.file 21 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1043              		.file 22 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1044              		.file 23 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1045              		.file 24 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1046              		.file 25 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1047              		.file 26 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1048              		.file 27 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1049              		.file 28 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.HexagonCANDem
+ 1050              		.file 29 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/
 DEFINED SYMBOLS
                             *ABS*:00000000 nodeRef1_main.c
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:20     .rodata:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:24     .data:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:27     .data:00000000 nodeRef1_mainInst
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:31     .bss:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:32     .bss:00000000 msgBuffer_PhysicalThread1
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:35     .bss:00000500 msgService_PhysicalThread1
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:38     .bss:0000056c _HexagonCANDemo_main_appl
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:44     .data:00000008 _HexagonCANDemo_main_appl_mrPing
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:289    .rodata:00000010 _HexagonCANDemo_main_appl_mrPing_const
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:50     .data:00000014 _HexagonCANDemo_main_appl_mrPong
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:313    .rodata:00000040 _HexagonCANDemo_main_appl_mrPong_const
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:56     .data:00000020 _HexagonCANDemo_main_timingService
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:340    .rodata:0000006c _HexagonCANDemo_main_timingService_const
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:62     .data:0000002c _HexagonCANDemo_main_canService
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:365    .rodata:00000094 _HexagonCANDemo_main_canService_const
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:268    .bss:00000570 _HexagonCANDemo_main_appl_mrPing_timer_var
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:274    .data:0000017c _HexagonCANDemo_main_appl_mrPing_canTx_var
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:279    .data:00000180 _HexagonCANDemo_main_appl_mrPing_canRx_var
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:283    .bss:00000574 _HexagonCANDemo_main_canService_timer_var
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:322    .rodata:0000004c _HexagonCANDemo_main_timingService_repl_sub_ports
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:347    .rodata:00000074 _HexagonCANDemo_main_canService_repl_sub_ports
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:378    .text.MsgDispatcher_PhysicalThread1_poll:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:382    .text.MsgDispatcher_PhysicalThread1_poll:00000000 MsgDispatcher_PhysicalThread1_poll
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:408    .rodata:000000b0 .LC1
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:412    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:416    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000000 MsgDispatcher_PhysicalThread1_receiveMessage
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:445    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000020 $d
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:494    .text.MsgDispatcher_PhysicalThread1_receiveMessage:000000dc $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:688    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000268 $d
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:695    .text.nodeRef1_main_initMessageServices:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:699    .text.nodeRef1_main_initMessageServices:00000000 nodeRef1_main_initMessageServices
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:755    .text.nodeRef1_main_startMessageServices:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:759    .text.nodeRef1_main_startMessageServices:00000000 nodeRef1_main_startMessageServices
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:783    .text.nodeRef1_main_stopMessageServices:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:787    .text.nodeRef1_main_stopMessageServices:00000000 nodeRef1_main_stopMessageServices
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:811    .text.nodeRef1_main_destroyMessageServices:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:815    .text.nodeRef1_main_destroyMessageServices:00000000 nodeRef1_main_destroyMessageServices
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:840    .rodata:000000fc .LC2
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:843    .text.nodeRef1_main_init:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:848    .text.nodeRef1_main_init:00000000 nodeRef1_main_init
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1137   .text.nodeRef1_main_constructActorInstances:00000000 nodeRef1_main_constructActorInstances
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1163   .text.nodeRef1_main_initActorInstances:00000000 nodeRef1_main_initActorInstances
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:883    .rodata:00000104 .LC3
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:886    .text.nodeRef1_main_start:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:891    .text.nodeRef1_main_start:00000000 nodeRef1_main_start
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:922    .rodata:00000110 .LC4
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:925    .rodata:00000124 .LC5
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:928    .text.nodeRef1_main_run:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:933    .text.nodeRef1_main_run:00000000 nodeRef1_main_run
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1014   .rodata:0000012c .LC6
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1017   .text.nodeRef1_main_stop:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1022   .text.nodeRef1_main_stop:00000000 nodeRef1_main_stop
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1053   .rodata:00000134 .LC7
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1056   .text.nodeRef1_main_destroy:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1061   .text.nodeRef1_main_destroy:00000000 nodeRef1_main_destroy
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1092   .rodata:00000140 .LC8
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1095   .text.nodeRef1_main_shutdown:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1100   .text.nodeRef1_main_shutdown:00000000 nodeRef1_main_shutdown
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1133   .text.nodeRef1_main_constructActorInstances:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1159   .text.nodeRef1_main_initActorInstances:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:20     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:24     .data:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:27     .data:00000000 nodeRef1_mainInst
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:31     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:32     .bss:00000000 msgBuffer_PhysicalThread1
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:35     .bss:00000500 msgService_PhysicalThread1
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:38     .bss:0000056c _HexagonCANDemo_main_appl
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:44     .data:00000008 _HexagonCANDemo_main_appl_mrPing
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:109    .rodata:00000010 _HexagonCANDemo_main_appl_mrPing_const
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:50     .data:00000014 _HexagonCANDemo_main_appl_mrPong
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:133    .rodata:00000040 _HexagonCANDemo_main_appl_mrPong_const
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:56     .data:00000020 _HexagonCANDemo_main_timingService
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:160    .rodata:0000006c _HexagonCANDemo_main_timingService_const
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:62     .data:0000002c _HexagonCANDemo_main_canService
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:185    .rodata:00000094 _HexagonCANDemo_main_canService_const
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:88     .bss:00000570 _HexagonCANDemo_main_appl_mrPing_timer_var
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:94     .data:0000008c _HexagonCANDemo_main_appl_mrPing_canTx_var
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:99     .data:00000090 _HexagonCANDemo_main_appl_mrPing_canRx_var
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:103    .bss:00000574 _HexagonCANDemo_main_canService_timer_var
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:142    .rodata:0000004c _HexagonCANDemo_main_timingService_repl_sub_ports
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:167    .rodata:00000074 _HexagonCANDemo_main_canService_repl_sub_ports
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:198    .text.MsgDispatcher_PhysicalThread1_poll:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:202    .text.MsgDispatcher_PhysicalThread1_poll:00000000 MsgDispatcher_PhysicalThread1_poll
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:228    .rodata:000000b0 .LC1
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:232    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:236    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000000 MsgDispatcher_PhysicalThread1_receiveMessage
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:265    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000020 $d
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:314    .text.MsgDispatcher_PhysicalThread1_receiveMessage:000000dc $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:508    .text.MsgDispatcher_PhysicalThread1_receiveMessage:00000268 $d
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:515    .text.nodeRef1_main_initMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:519    .text.nodeRef1_main_initMessageServices:00000000 nodeRef1_main_initMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:575    .text.nodeRef1_main_startMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:579    .text.nodeRef1_main_startMessageServices:00000000 nodeRef1_main_startMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:603    .text.nodeRef1_main_stopMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:607    .text.nodeRef1_main_stopMessageServices:00000000 nodeRef1_main_stopMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:631    .text.nodeRef1_main_destroyMessageServices:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:635    .text.nodeRef1_main_destroyMessageServices:00000000 nodeRef1_main_destroyMessageServices
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:660    .rodata:000000fc .LC2
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:663    .text.nodeRef1_main_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:668    .text.nodeRef1_main_init:00000000 nodeRef1_main_init
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:957    .text.nodeRef1_main_constructActorInstances:00000000 nodeRef1_main_constructActorInstances
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:983    .text.nodeRef1_main_initActorInstances:00000000 nodeRef1_main_initActorInstances
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:703    .rodata:00000104 .LC3
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:706    .text.nodeRef1_main_start:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:711    .text.nodeRef1_main_start:00000000 nodeRef1_main_start
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:742    .rodata:00000110 .LC4
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:745    .rodata:00000124 .LC5
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:748    .text.nodeRef1_main_run:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:753    .text.nodeRef1_main_run:00000000 nodeRef1_main_run
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:834    .rodata:0000012c .LC6
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:837    .text.nodeRef1_main_stop:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:842    .text.nodeRef1_main_stop:00000000 nodeRef1_main_stop
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:873    .rodata:00000134 .LC7
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:876    .text.nodeRef1_main_destroy:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:881    .text.nodeRef1_main_destroy:00000000 nodeRef1_main_destroy
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:912    .rodata:00000140 .LC8
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:915    .text.nodeRef1_main_shutdown:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:920    .text.nodeRef1_main_shutdown:00000000 nodeRef1_main_shutdown
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:953    .text.nodeRef1_main_constructActorInstances:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccHds0ld.s:979    .text.nodeRef1_main_initActorInstances:00000000 $t
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
                            .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
@@ -1584,7 +1404,7 @@ C:\Users\TJung\AppData\Local\Temp\cc5k0mcy.s:1159   .text.nodeRef1_main_initActo
                            .group:00000000 wm4.pclCANService.h.14.381c25c15f2d4e381783b6816fbce3e8
                            .group:00000000 wm4.PCANTx.h.9.cbce4a73536b1a35c96ff0ca728bc5b1
                            .group:00000000 wm4.PTimer.h.9.65e88e755dca19735e4c8a0328a94685
-                           .group:00000000 wm4.AMrPong.h.9.bb8b7a1e03a4d636d2c9c24f6a0c2fa1
+                           .group:00000000 wm4.AMrPing.h.9.f57d3477797cdd5bc4c0924c2c46a964
                            .group:00000000 wm4.ATimingService.h.19.b4f97124ee616b2e103f5e3cc5d4fcd5
                            .group:00000000 wm4.nodeRef1_main_Inst.h.22.1f48b67c5f6c0df452dfb4c53517c0c6
 
