@@ -1,0 +1,25 @@
+PhysicalModel PCANDemo {
+	
+	PhysicalSystem PhysSys1 {
+		NodeRef nodeRef1 : NodeClass1
+	}
+	
+	NodeClass NodeClass1 {
+		runtime = RuntimeClass1
+		priomin = -10
+		priomax = 10
+		
+		DefaultThread PhysicalThread1 {
+			execmode = mixed
+			interval = 100ms
+			prio = 0
+			stacksize = 4048
+			msgblocksize = 64
+			msgpoolsize = 100
+		}
+	}
+
+	RuntimeClass RuntimeClass1 {
+		model = multiThreaded
+	} 
+}

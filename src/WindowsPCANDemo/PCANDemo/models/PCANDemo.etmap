@@ -1,0 +1,9 @@
+MappingModel PCANDemo {
+	import PCANDemo.* from "PCANDemo.room"
+	import PCANDemo.* from "PCANDemo.etphys"
+	Mapping PCANDemo -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

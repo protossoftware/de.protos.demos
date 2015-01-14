@@ -17,6 +17,7 @@
 
 void pclCANInitNodes(){}
 void pclCANInitMO(uint32_t channel){}
+void pclCANReadAllMsgs(){}
 
 void pclCANSendMsg(uint32_t channel, pclCANMsg *msg){
 uint32_t ifNb = (channel >> 24);

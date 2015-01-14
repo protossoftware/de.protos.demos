@@ -1,0 +1,110 @@
+RoomModel PCANDemo {
+
+	import room.basic.types.* from "Types.room"
+
+	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.service.can.* from "pclCANService.room"
+
+	LogicalSystem PCANDemo {
+		SubSystemRef main: MainSubSystem
+	}
+
+	SubSystemClass MainSubSystem {
+		ActorRef appl: Application
+		ActorRef timing: ATimingService
+		ActorRef can: ACANService
+		LayerConnection ref appl satisfied_by timing.timer
+		LayerConnection ref can satisfied_by timing.timer
+		LayerConnection ref appl satisfied_by can.canTx
+		LayerConnection ref appl satisfied_by can.canRx
+		LogicalThread defaultThread
+	}
+
+	ActorClass Application {
+		Structure {
+			ActorRef ping: AMrPing
+			ActorRef pong: AMrPong
+			Binding ping.p0 and pong.p0
+		}
+		Behavior { }
+	}
+
+	ActorClass AMrPong {
+		Interface {
+			conjugated Port p0: PPingPong
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<pong: p0>
+					}
+					action {
+						"p0.ping();"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ActorClass AMrPing {
+		Interface {
+			Port p0: PPingPong
+		}
+		Structure {
+			external Port p0
+			SAP timer:PTimer
+			SAP canTx:PCANTx
+			SAP canRx:PCANRx
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"pclCANMsg msg;\n\ntimer.startTimeout(500);\n\ncanRx.init(ET_CAN_CHANNEL_NOT_DEFINED);\ncanTx.init(ET_CAN_CHANNEL_NOT_DEFINED);\n\nmsg.id = 0x27;\nmsg.len = 8;\ncanRx.listenOnMsg(&msg);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"p0.pong();"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<ping: p0>
+					}
+					action {
+						"pclCANMsg msg;\ntimer.startTimeout(500);\n\nmsg.id=0x30;\nmsg.len = 8;\nmsg.data[0] = 0x40;\nmsg.data[1] = 0x41;\nmsg.data[2] = 0x42;\nmsg.data[3] = 0x43;\nmsg.data[4] = 0x44;\nmsg.data[5] = 0x45;\nmsg.data[6] = 0x46;\nmsg.data[7] = 0x47;\n\ncanTx.sendMsg(&msg);"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<msgReceived: canRx>
+					}
+					action {
+						"printf(\"New CANMessage: \\nID:%i\\nLEN:%i\\n\", data->id, data->len);"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ProtocolClass PPingPong {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}

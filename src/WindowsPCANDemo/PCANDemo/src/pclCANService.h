@@ -22,6 +22,7 @@ struct _pclCANMsg {
 	};
 
 void pclCANInitNodes();
+void pclCANDeiniteNode();
 void pclCANSendMsg(uint32_t channel, pclCANMsg *msg);
 void pclCANInitMO(uint32_t channel);
 void pclCANListenOnMsg(uint32_t channel, pclCANMsg *msg);
