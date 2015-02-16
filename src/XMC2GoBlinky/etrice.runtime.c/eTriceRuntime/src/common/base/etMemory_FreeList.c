@@ -22,29 +22,20 @@ typedef struct etFreeListObj {
 } etFreeListObj;
 
 typedef struct etFreeListInfo {
-	/** the size in bytes of the objects in this list */
-	etUInt16 objsize;
-
-	/** the list head */
-	etFreeListObj* head;
+	etUInt16 objsize;		/**< the size in bytes of the objects in this list */
+	etFreeListObj* head;	/**< the list head */
 
 #if DEBUG_FREE_LISTS
-	etUInt16 nobjects;
+	etUInt16 nobjects;		/**< the number of objects in the list */
 #endif
 
 } etFreeListInfo;
 
 typedef struct etFreeListMemory {
-	etMemory base;
-
-	/** next free position on the heap */
-	etUInt8* current;
-
-	/** number of free lists */
-	etUInt16 nslots;
-
-	/** array of free list infos (array used with size nslots) */
-	etFreeListInfo freelists[1];
+	etMemory base;					/** the "base class" */
+	etUInt8* current;				/**< next free position on the heap */
+	etUInt16 nslots;				/**< number of free lists */
+	etFreeListInfo freelists[1];	/**< array of free list infos (array used with size nslots) */
 } etFreeListMemory;
 
 /*
@@ -54,7 +45,7 @@ static void* etMemory_getHeapMem(etFreeListMemory* self, etUInt16 size) {
 	etUInt8* obj = NULL;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getHeapListMem")
 
-	if (self->current < ((etUInt8*)self)+self->base.size)
+	if (self->current + size < ((etUInt8*)self) + self->base.size)
 	{
 		obj = self->current;
 		self->current += size;
@@ -105,7 +96,7 @@ static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 
 				((etFreeListObj*)obj)->next = self->freelists[slot].head;
 				self->freelists[slot].head = (etFreeListObj*)obj;
 #if DEBUG_FREE_LISTS
-				++self->freelists[slot].nobjects;
+				++(self->freelists[slot].nobjects);
 #endif
 				break;
 			}
@@ -158,7 +149,7 @@ etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	self->base.free = etMemory_FreeList_free;
 	self->nslots = nslots;
 	{
-		int used = sizeof(etFreeListMemory)+(self->nslots-1)*sizeof(etFreeListObj);
+		int used = sizeof(etFreeListMemory)+(self->nslots-1)*sizeof(etFreeListInfo);
 		self->current = ((etUInt8*)self)+MEM_CEIL(used);
 	}
 
