@@ -1,0 +1,79 @@
+RoomModel room.basic.service.serial {
+	
+	import room.basic.types.* from "Types.room"
+
+	async ActorClass ASerialService {
+		Interface {
+			SPP com: PSerial
+		}
+		Structure {
+			usercode1{"//uc1"}
+			usercode2{"//uc2"}			
+			usercode3{"//uc3
+				#include \"etPlatform.h\"
+			"}
+			ServiceImplementation of com
+			Attribute sData:DSerialData
+			Attribute chnls[20]:uint8["array to map channel to port index"]
+			}
+			Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"chnls[((etReplSubPort*)ifitem)->index]=data__et;"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<sendData: com>
+					}
+					action {
+						""
+					}
+				}
+				State state0 {
+					do {
+						"DSerialData *d;"
+						""
+						"if (etSerialDataReceived){"
+						"\tetSerialDataReceived = 0;"
+						"\td=(DSerialData*) etSerialRxBuffer;"
+						"\tif (chnls[d->chnl] != 0xFF){ "
+						"\t\tcom[chnls[d->chnl]].dataReceived(d);}"
+						"\t}"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PSerial {
+		usercode1 {
+		"#define ET_SERIAL_CHANNEL_NOT_DEFINED			0xFFFFFFFF"}
+		usercode2 {"//uc2"}
+		incoming {			
+			Message init(data: uint32)
+			Message sendData(data:DSerialData)
+			Message sendString(data:uint8 ref)
+		}
+		outgoing {
+			Message dataReceived(data:DSerialData)
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming init {
+				"ET_MSC_LOGGER_SYNC_ENTRY(\"PSerialConjPort\", \"init\")"
+				"if(data__et != ET_SERIAL_CHANNEL_NOT_DEFINED) pChannel = data__et;"
+				"etPort_sendMessage(self, PSerial_IN_init, sizeof(uint32), &pChannel);"
+				"ET_MSC_LOGGER_SYNC_EXIT"
+			}
+			Attribute pChannel: uint32 = " ET_SERIAL_CHANNEL_NOT_DEFINED " [ " must be set by configuration " ]
+		}
+	}
+
+	DataClass DSerialData {
+		Attribute len: uint16
+		Attribute buf:uint8 ref		
+	}
+}
