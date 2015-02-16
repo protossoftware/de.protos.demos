@@ -3,20 +3,32 @@ RoomModel HexagonCANDemo {
 	import room.basic.types.* from "Types.room"
 
 	import room.basic.service.timing.* from "TimingService.room"
+
 	import room.basic.service.can.* from "pclCANService.room"
+	import CruiseControlModel.* from "CruiseControl.room" 
 
 	LogicalSystem HexagonCANDemo {
 		SubSystemRef main: MainSubSystem
 	}
-
+	
 	SubSystemClass MainSubSystem {
-		ActorRef appl: Application
 		ActorRef timingService: ATimingService
-		ActorRef canService: ACANService
-		LayerConnection ref appl satisfied_by timingService.timer
-		LayerConnection ref appl satisfied_by canService.canTx
-		LayerConnection ref appl satisfied_by canService.canRx
-		LayerConnection ref canService satisfied_by timingService.timer
+		ActorRef canSimuDev: ACANSimulationService
+		ActorRef monitor: AHexagonCANMonitor
+		ActorRef cruise: ACruiseController
+		ActorRef regler: APIDController
+		ActorRef adapter: ACAN2FlowportAdapter1in1out
+		Binding cruise.ctrl and regler.ctrl
+		Binding cruise.nominalSpeed and regler.nominalIn
+		Binding adapter.pIn and regler.actuatorOut
+		Binding adapter.pOut and regler.actualIn
+		Binding regler.pTick and adapter.pTick
+		LayerConnection ref monitor satisfied_by canSimuDev.canRx
+		LayerConnection ref cruise satisfied_by canSimuDev.canRx
+		LayerConnection ref regler satisfied_by timingService.timer
+		LayerConnection ref adapter satisfied_by canSimuDev.canTx
+		LayerConnection ref adapter satisfied_by canSimuDev.canRx
+		LayerConnection ref canSimuDev satisfied_by timingService.timer
 		LogicalThread defaultThread
 	}
 
@@ -28,6 +40,59 @@ RoomModel HexagonCANDemo {
 		}
 		Behavior { }
 	}
+
+	ActorClass ACANTester {
+		Structure {
+			SAP canTx:PCANTx
+			SAP canRx:PCANRx
+			SAP timer:PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"pclCANMsg msg;"
+						""
+						"msg.id = 0x27;"
+						""
+						"canTx.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						"canRx.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						"timer.startTimer(500);"
+						"canRx.listenOnMsg(&msg);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"pclCANMsg msg;"
+						""
+						"msg.id = 0x12;"
+						"msg.len = 3;"
+						"msg.data[0] = 1;"
+						"msg.data[1] = 8;"
+						"msg.data[2] = 9;"
+						""
+						""
+						"canTx.sendMsg(&msg);"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<msgReceived: canRx>
+					}
+					action {
+						"volatile uint32 i;"
+						""
+						"i++;"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
 
 	ActorClass AMrPing {
 		Interface {
@@ -43,7 +108,7 @@ RoomModel HexagonCANDemo {
 			StateMachine {
 				Transition init: initial -> state0 {
 					action {
-						"pclCANMsg msg;\n\n\ntimer.startTimeout(500);\ncanTx.init(0x00000005);\ncanRx.init(0x00000007);\n\nmsg.id = 0x12;\ncanRx.listenOnMsg(&msg);"
+						"pclCANMsg msg;\n\n\ntimer.startTimeout(500);\ncanTx.init(ET_CAN_CHANNEL_NOT_DEFINED);\ncanRx.init(ET_CAN_CHANNEL_NOT_DEFINED);\n//canTx.init(0x00000005);\n//canRx.init(0x00000007);\n\nmsg.id = 0x12;\ncanRx.listenOnMsg(&msg);"
 					}
 				}
 				Transition tr0: state0 -> state0 {

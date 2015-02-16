@@ -78,6 +78,7 @@ void SystemInit_DAVE3(void);
 	#include "../../inc/CANGLOBAL/CANGLOBAL.h" 
 	#include "../../inc/CAN001/CAN001.h" 
 	#include "../../inc/SYSTM001/SYSTM001.h" 
+	#include "../../inc/UART001/UART001.h" 
 
                          
 

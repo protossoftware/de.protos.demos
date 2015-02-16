@@ -36,7 +36,7 @@ typedef long long int64;
 
 /* float datatypes */
 typedef float float32;
-/* typedef double float64; */ /* not available on this platform */
+typedef double float64;  /* not available on this platform */
 
 /* boolean datatypes and values */
 //typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/

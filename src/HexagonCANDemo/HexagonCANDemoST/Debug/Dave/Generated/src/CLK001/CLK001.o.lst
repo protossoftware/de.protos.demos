@@ -2130,44 +2130,28 @@
  797              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 CLK001.c
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:20     .bss:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:21     .bss:00000000 VCO
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:24     .bss:00000004 stepping_K2DIV
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:27     .text.CLK001_Delay:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:31     .text.CLK001_Delay:00000000 CLK001_Delay
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:108    .text.CLK001_SysClk_Valid:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:112    .text.CLK001_SysClk_Valid:00000000 CLK001_SysClk_Valid
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:157    .text.CLK001_BackupClkTrim:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:161    .text.CLK001_BackupClkTrim:00000000 CLK001_BackupClkTrim
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:232    .text.CLK001_SetMainPLLClkSrc:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:236    .text.CLK001_SetMainPLLClkSrc:00000000 CLK001_SetMainPLLClkSrc
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:349    .text.CLK001_ConfigMainPLL:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:353    .text.CLK001_ConfigMainPLL:00000000 CLK001_ConfigMainPLL
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:504    .text.CLK001_FreqStepupMainPLL:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:508    .text.CLK001_FreqStepupMainPLL:00000000 CLK001_FreqStepupMainPLL
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:660    .text.CLK001_SysClk_Init:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:664    .text.CLK001_SysClk_Init:00000000 CLK001_SysClk_Init
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:717    .text.CLK001_Init:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:722    .text.CLK001_Init:00000000 CLK001_Init
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:764    .text.AllowPLLInitByStartup:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccE4cpOM.s:769    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:20     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:21     .bss:00000000 VCO
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:24     .bss:00000004 stepping_K2DIV
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:27     .text.CLK001_Delay:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:31     .text.CLK001_Delay:00000000 CLK001_Delay
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:108    .text.CLK001_SysClk_Valid:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:112    .text.CLK001_SysClk_Valid:00000000 CLK001_SysClk_Valid
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:157    .text.CLK001_BackupClkTrim:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:161    .text.CLK001_BackupClkTrim:00000000 CLK001_BackupClkTrim
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:232    .text.CLK001_SetMainPLLClkSrc:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:236    .text.CLK001_SetMainPLLClkSrc:00000000 CLK001_SetMainPLLClkSrc
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:349    .text.CLK001_ConfigMainPLL:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:353    .text.CLK001_ConfigMainPLL:00000000 CLK001_ConfigMainPLL
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:504    .text.CLK001_FreqStepupMainPLL:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:508    .text.CLK001_FreqStepupMainPLL:00000000 CLK001_FreqStepupMainPLL
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:660    .text.CLK001_SysClk_Init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:664    .text.CLK001_SysClk_Init:00000000 CLK001_SysClk_Init
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:717    .text.CLK001_Init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:722    .text.CLK001_Init:00000000 CLK001_Init
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:764    .text.AllowPLLInitByStartup:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccCvjWXj.s:769    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
-                           .group:00000000 wm4.uc_id.h.35.94e6f9e83cbaf2d2b00f265c326df8e7
-                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
-                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
-                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
-                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
-                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
-                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
-                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
-                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
-                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
-                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
-                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
-                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
-                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
-                           .group:00000000 wm4.CLK001_Conf.h.81.82a8db895dc146da001475dd68223522
 
 UNDEFINED SYMBOLS
 SystemCoreClockUpdate

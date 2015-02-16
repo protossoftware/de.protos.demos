@@ -556,36 +556,36 @@
  487              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
 DEFINED SYMBOLS
                             *ABS*:00000000 etMSCLogger.c
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:20     .bss:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:21     .bss:00000000 etMSCLogger_fileHandle
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:24     .rodata:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:28     .data:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:31     .data:00000000 etMSCLogger_objectName
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:35     .rodata:00000004 .LC1
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:38     .rodata:00000010 .LC2
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:41     .text.etMSCLogger_open:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:46     .text.etMSCLogger_open:00000000 etMSCLogger_open
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:96     .text.etMSCLogger_close:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:101    .text.etMSCLogger_close:00000000 etMSCLogger_close
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:134    .text.etMSCLogger_setObjectName:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:139    .text.etMSCLogger_setObjectName:00000000 etMSCLogger_setObjectName
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:171    .text.etMSCLogger_getObjectName:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:176    .text.etMSCLogger_getObjectName:00000000 etMSCLogger_getObjectName
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:204    .rodata:00000014 .LC3
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:207    .text.etMSCLogger_syncCall:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:212    .text.etMSCLogger_syncCall:00000000 etMSCLogger_syncCall
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:264    .rodata:00000030 .LC4
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:267    .text.etMSCLogger_syncReturn:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:272    .text.etMSCLogger_syncReturn:00000000 etMSCLogger_syncReturn
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:317    .rodata:0000003c .LC5
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:320    .text.etMSCLogger_asyncOut:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:325    .text.etMSCLogger_asyncOut:00000000 etMSCLogger_asyncOut
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:373    .rodata:0000004c .LC6
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:376    .text.etMSCLogger_asyncIn:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:381    .text.etMSCLogger_asyncIn:00000000 etMSCLogger_asyncIn
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:429    .rodata:0000005c .LC7
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:432    .text.etMSCLogger_setState:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccADTLI2.s:437    .text.etMSCLogger_setState:00000000 etMSCLogger_setState
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:20     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:21     .bss:00000000 etMSCLogger_fileHandle
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:24     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:28     .data:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:31     .data:00000000 etMSCLogger_objectName
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:35     .rodata:00000004 .LC1
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:38     .rodata:00000010 .LC2
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:41     .text.etMSCLogger_open:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:46     .text.etMSCLogger_open:00000000 etMSCLogger_open
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:96     .text.etMSCLogger_close:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:101    .text.etMSCLogger_close:00000000 etMSCLogger_close
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:134    .text.etMSCLogger_setObjectName:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:139    .text.etMSCLogger_setObjectName:00000000 etMSCLogger_setObjectName
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:171    .text.etMSCLogger_getObjectName:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:176    .text.etMSCLogger_getObjectName:00000000 etMSCLogger_getObjectName
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:204    .rodata:00000014 .LC3
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:207    .text.etMSCLogger_syncCall:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:212    .text.etMSCLogger_syncCall:00000000 etMSCLogger_syncCall
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:264    .rodata:00000030 .LC4
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:267    .text.etMSCLogger_syncReturn:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:272    .text.etMSCLogger_syncReturn:00000000 etMSCLogger_syncReturn
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:317    .rodata:0000003c .LC5
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:320    .text.etMSCLogger_asyncOut:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:325    .text.etMSCLogger_asyncOut:00000000 etMSCLogger_asyncOut
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:373    .rodata:0000004c .LC6
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:376    .text.etMSCLogger_asyncIn:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:381    .text.etMSCLogger_asyncIn:00000000 etMSCLogger_asyncIn
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:429    .rodata:0000005c .LC7
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:432    .text.etMSCLogger_setState:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccoQFWTn.s:437    .text.etMSCLogger_setState:00000000 etMSCLogger_setState
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
                            .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970

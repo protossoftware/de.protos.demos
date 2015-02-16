@@ -207,38 +207,14 @@
  139              		.file 2 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
 DEFINED SYMBOLS
                             *ABS*:00000000 nodeRef1_main_Runner.c
-C:\Users\TJung\AppData\Local\Temp\ccpkyQkW.s:20     .rodata:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccpkyQkW.s:21     .rodata:00000000 .LC0
-C:\Users\TJung\AppData\Local\Temp\ccpkyQkW.s:24     .rodata:0000000c .LC1
-C:\Users\TJung\AppData\Local\Temp\ccpkyQkW.s:27     .rodata:0000001c .LC2
-C:\Users\TJung\AppData\Local\Temp\ccpkyQkW.s:30     .rodata:0000003c .LC3
-C:\Users\TJung\AppData\Local\Temp\ccpkyQkW.s:33     .text.main:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccpkyQkW.s:38     .text.main:00000000 main
+C:\Users\TJung\AppData\Local\Temp\cc7oh7Xi.s:20     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\cc7oh7Xi.s:21     .rodata:00000000 .LC0
+C:\Users\TJung\AppData\Local\Temp\cc7oh7Xi.s:24     .rodata:0000000c .LC1
+C:\Users\TJung\AppData\Local\Temp\cc7oh7Xi.s:27     .rodata:0000001c .LC2
+C:\Users\TJung\AppData\Local\Temp\cc7oh7Xi.s:30     .rodata:0000003c .LC3
+C:\Users\TJung\AppData\Local\Temp\cc7oh7Xi.s:33     .text.main:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7oh7Xi.s:38     .text.main:00000000 main
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
-                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
-                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
-                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
-                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
-                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
-                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
-                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
-                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
-                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
-                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
-                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
-                           .group:00000000 wm4.stddef.h.235.d9f4f80b8c4429535175712282cda6a6
-                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
-                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
-                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
-                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
-                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
-                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
-                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
-                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
-                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
-                           .group:00000000 wm4.etMSCLogger.h.141.92ef314402d3b770bc37bd8efd7aeec4
-                           .group:00000000 wm4.etDataLogger.h.24.5658ba618540d9d1deee126df529d311
 
 UNDEFINED SYMBOLS
 strcmp

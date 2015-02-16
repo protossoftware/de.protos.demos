@@ -10,6 +10,7 @@
 <booleanAttribute key="MSC" value="false"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/etrice.HexagonCANDemo.demo/models/HexagonCANDemo_ST.etmap}"/>
+<listEntry value="${workspace_loc:/etrice.HexagonCANDemo.demo/models/HexagonCANDemo.config}"/>
 </listAttribute>
 <booleanAttribute key="OverrideDirectories" value="true"/>
 <booleanAttribute key="SaveGenModel" value="false"/>

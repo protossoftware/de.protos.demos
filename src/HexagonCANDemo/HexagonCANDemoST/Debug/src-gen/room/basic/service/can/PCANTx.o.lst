@@ -819,59 +819,35 @@
  722              		.file 15 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/
 DEFINED SYMBOLS
                             *ABS*:00000000 PCANTx.c
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:20     .text.PCANTxPort_valueChanged:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:25     .text.PCANTxPort_valueChanged:00000000 PCANTxPort_valueChanged
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:60     .text.PCANTxReplPort_valueChanged_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:65     .text.PCANTxReplPort_valueChanged_broadcast:00000000 PCANTxReplPort_valueChanged_broadcast
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:122    .text.PCANTxReplPort_valueChanged:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:127    .text.PCANTxReplPort_valueChanged:00000000 PCANTxReplPort_valueChanged
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:180    .text.PCANTxReplPort_getReplication:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:185    .text.PCANTxReplPort_getReplication:00000000 PCANTxReplPort_getReplication
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:217    .text.PCANTxConjPort_init:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:222    .text.PCANTxConjPort_init:00000000 PCANTxConjPort_init
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:266    .text.PCANTxConjReplPort_init_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:271    .text.PCANTxConjReplPort_init_broadcast:00000000 PCANTxConjReplPort_init_broadcast
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:324    .text.PCANTxConjReplPort_init:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:329    .text.PCANTxConjReplPort_init:00000000 PCANTxConjReplPort_init
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:366    .text.PCANTxConjPort_sendMsg:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:371    .text.PCANTxConjPort_sendMsg:00000000 PCANTxConjPort_sendMsg
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:404    .text.PCANTxConjReplPort_sendMsg_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:409    .text.PCANTxConjReplPort_sendMsg_broadcast:00000000 PCANTxConjReplPort_sendMsg_broadcast
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:464    .text.PCANTxConjReplPort_sendMsg:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:469    .text.PCANTxConjReplPort_sendMsg:00000000 PCANTxConjReplPort_sendMsg
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:520    .text.PCANTxConjPort_resendMsg:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:525    .text.PCANTxConjPort_resendMsg:00000000 PCANTxConjPort_resendMsg
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:557    .text.PCANTxConjReplPort_resendMsg_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:562    .text.PCANTxConjReplPort_resendMsg_broadcast:00000000 PCANTxConjReplPort_resendMsg_broadcast
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:616    .text.PCANTxConjReplPort_resendMsg:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:621    .text.PCANTxConjReplPort_resendMsg:00000000 PCANTxConjReplPort_resendMsg
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:671    .text.PCANTxConjReplPort_getReplication:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccLEOY9K.s:676    .text.PCANTxConjReplPort_getReplication:00000000 PCANTxConjReplPort_getReplication
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:20     .text.PCANTxPort_valueChanged:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:25     .text.PCANTxPort_valueChanged:00000000 PCANTxPort_valueChanged
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:60     .text.PCANTxReplPort_valueChanged_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:65     .text.PCANTxReplPort_valueChanged_broadcast:00000000 PCANTxReplPort_valueChanged_broadcast
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:122    .text.PCANTxReplPort_valueChanged:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:127    .text.PCANTxReplPort_valueChanged:00000000 PCANTxReplPort_valueChanged
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:180    .text.PCANTxReplPort_getReplication:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:185    .text.PCANTxReplPort_getReplication:00000000 PCANTxReplPort_getReplication
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:217    .text.PCANTxConjPort_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:222    .text.PCANTxConjPort_init:00000000 PCANTxConjPort_init
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:266    .text.PCANTxConjReplPort_init_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:271    .text.PCANTxConjReplPort_init_broadcast:00000000 PCANTxConjReplPort_init_broadcast
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:324    .text.PCANTxConjReplPort_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:329    .text.PCANTxConjReplPort_init:00000000 PCANTxConjReplPort_init
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:366    .text.PCANTxConjPort_sendMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:371    .text.PCANTxConjPort_sendMsg:00000000 PCANTxConjPort_sendMsg
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:404    .text.PCANTxConjReplPort_sendMsg_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:409    .text.PCANTxConjReplPort_sendMsg_broadcast:00000000 PCANTxConjReplPort_sendMsg_broadcast
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:464    .text.PCANTxConjReplPort_sendMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:469    .text.PCANTxConjReplPort_sendMsg:00000000 PCANTxConjReplPort_sendMsg
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:520    .text.PCANTxConjPort_resendMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:525    .text.PCANTxConjPort_resendMsg:00000000 PCANTxConjPort_resendMsg
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:557    .text.PCANTxConjReplPort_resendMsg_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:562    .text.PCANTxConjReplPort_resendMsg_broadcast:00000000 PCANTxConjReplPort_resendMsg_broadcast
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:616    .text.PCANTxConjReplPort_resendMsg:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:621    .text.PCANTxConjReplPort_resendMsg:00000000 PCANTxConjReplPort_resendMsg
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:671    .text.PCANTxConjReplPort_getReplication:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccmj3eUp.s:676    .text.PCANTxConjReplPort_getReplication:00000000 PCANTxConjReplPort_getReplication
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
-                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
-                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
-                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
-                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
-                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
-                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
-                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
-                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
-                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
-                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
-                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
-                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
-                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
-                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
-                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
-                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
-                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
-                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
-                           .group:00000000 wm4.etMessageService.h.35.d59d0242cc2158bcaed8acc00ffa8450
-                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
-                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
-                           .group:00000000 wm4.pclCANService.h.14.381c25c15f2d4e381783b6816fbce3e8
-                           .group:00000000 wm4.etMSCLogger.h.23.8776f0b4cca7a780673ce7e90ee97990
 
 UNDEFINED SYMBOLS
 etPort_sendMessage

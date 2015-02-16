@@ -98,6 +98,9 @@ void DAVE_Init(void)
 	 
 	//  Initialization of app 'SYSTM001'		     
 	SYSTM001_Init();
+	 
+	//  Initialization of app 'UART001'		     
+	UART001_Init();
 	
       
 	//  MUX configurations

@@ -37,6 +37,9 @@
 #define addTime(t1, t2) ATimingService_addTime(self, t1, t2)
 
 /* attributes */
+#define tcbs (self->tcbs)
+#define usedTcbsRoot (self->usedTcbsRoot)
+#define freeTcbsRoot (self->freeTcbsRoot)
 
 /* port operations */
 

@@ -6,9 +6,10 @@
  *******************************************************************************/
 
 
-//-------------IO Service--------------------
-// channel 0xXXYYYYYY  => XX = CAN Node Id
-//                        YY = Message Object Number
+//-------------CAN Service--------------------
+// channel 0xXXYYZZZZ  => XX = Node Id
+//                        YY = CAN Interface ID
+//						  ZZ = Message Object Number
 
 
 //#include "../../../../de.protos.componentlib.hal.api/inc/pclCANService.h"
@@ -31,7 +32,7 @@ bool GetFunctionAdress(HINSTANCE h_module);
 typedef struct _pclPCANMsg pclPCANMsg;
 struct _pclPCANMsg {
 	uint8_t id;
-	uint8_t new;
+	uint8_t changed;
 	pclCANMsg msg;
 	};
 
@@ -79,6 +80,18 @@ TPCANType g_CANType;
 DWORD g_IOPort;
 WORD g_Int;
 
+uint32_t getCANInterfaceIdFromChannel(uint32_t channel){
+	return ((channel >> 16) & 0x000000FF);
+}
+
+uint32_t getCANMOIdFromChannel(uint32_t channel){
+	return (channel & 0x0000FFFF);
+}
+
+uint32_t getNodeIdFromChannel(uint32_t channel){
+	return ((channel >> 24) & 0x000000FF);
+}
+
 
 void pclCANInitNodes(){
 int ret;
@@ -123,7 +136,7 @@ uint32_t i,j;
 	while ((CANStatus=g_CAN_Read(g_hChannel, &msg, &time)) == PCAN_ERROR_OK){
 		for (i=0; i<pclCAN_MAX_MSG_COUNT-1; i++){
 			if (msg.ID == allMsgs[i].id){
-				allMsgs[i].new = PCL_TRUE;
+				allMsgs[i].changed = PCL_TRUE;
 				allMsgs[i].msg.len = msg.LEN;
 				allMsgs[i].msg.id = msg.ID;
 				for (j=0;j<msg.LEN;j++){
@@ -150,19 +163,19 @@ uint8_t i;
 }
 
 void pclCANListenOnMsg(uint32_t channel, pclCANMsg *msg){
-uint32_t ifNb = (channel >> 24);
-uint8_t MoNb = (uint8_t) (channel & 0x000000FF);
+uint32_t ifNb = getCANInterfaceIdFromChannel(channel);
+uint8_t MoNb = (uint8_t) getCANMOIdFromChannel(channel);
 	allMsgs[MoNb].id = msg->id;
-	allMsgs[MoNb].new = PCL_FALSE;
+	allMsgs[MoNb].changed = PCL_FALSE;
 
 }
 
 uint8_t pclCANCheckReception(uint32_t channel, pclCANMsg *msg){
-uint32_t ifNb = (channel >> 24);
-uint8_t MoNb = (uint8_t) (channel & 0x000000FF);
+uint32_t ifNb = getCANInterfaceIdFromChannel(channel);
+uint8_t MoNb = (uint8_t) getCANMOIdFromChannel(channel);
 
-	if(allMsgs[MoNb].new == PCL_TRUE){
-		allMsgs[MoNb].new = PCL_FALSE;
+	if(allMsgs[MoNb].changed == PCL_TRUE){
+		allMsgs[MoNb].changed = PCL_FALSE;
 		*msg=allMsgs[MoNb].msg;
 		return PCL_TRUE;
 	}

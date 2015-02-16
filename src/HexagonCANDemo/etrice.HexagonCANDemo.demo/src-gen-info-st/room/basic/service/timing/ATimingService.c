@@ -18,9 +18,7 @@
 #include "ATimingService_Utils.h"
 
 /*--------------------- begin user code ---------------------*/
-etTimerControlBlock tcbs[ET_NB_OF_TCBS];
-etTimerControlBlock* usedTcbsRoot; 
-etTimerControlBlock* freeTcbsRoot;
+/*uc3*/
 /*--------------------- end user code ---------------------*/
 
 /* interface item IDs */
@@ -308,97 +306,91 @@ void ATimingService_execute(ATimingService* self) {
 
 /*--------------------- operations ---------------------*/
 etTimerControlBlock* ATimingService_getTcb(ATimingService* self) {
+	etTimerControlBlock* temp = freeTcbsRoot;
 	
-				etTimerControlBlock* temp = freeTcbsRoot;
-				
-				if(freeTcbsRoot!=0) {
-					freeTcbsRoot=freeTcbsRoot->next;
-					temp->next=0;
-					}
-				return temp;
+	if(freeTcbsRoot!=0) {
+		freeTcbsRoot=freeTcbsRoot->next;
+		temp->next=0;
+		}
+	return temp;
 }
 void ATimingService_returnTcb(ATimingService* self, etTimerControlBlock* block) {
-	
-				block->next=freeTcbsRoot;
-				freeTcbsRoot=block;
+	block->next=freeTcbsRoot;
+	freeTcbsRoot=block;
 }
 void ATimingService_removeTcbFromUsedList(ATimingService* self, int32 idx) {
+	etTimerControlBlock* temp=usedTcbsRoot;
+	etTimerControlBlock* temp2=usedTcbsRoot;
 	
-				etTimerControlBlock* temp=usedTcbsRoot;
-				etTimerControlBlock* temp2=usedTcbsRoot;
-				
-				if (temp==0) return;
+	if (temp==0) return;
 	
-				if (usedTcbsRoot->portIdx == idx){
-					/* element found, the first one */
-					usedTcbsRoot = usedTcbsRoot->next;
-					returnTcb(temp);
-					return;
-					}
+	if (usedTcbsRoot->portIdx == idx){
+		/* element found, the first one */
+		usedTcbsRoot = usedTcbsRoot->next;
+		returnTcb(temp);
+		return;
+	}
 	
-				temp=temp->next;
-				while(temp!=0){
-					if(temp->portIdx==idx){
-						temp2->next=temp->next;
-						returnTcb(temp);
-						return;			
-					}else{
-						/* try next */
-						temp2=temp;
-						temp=temp->next;
-						}
-					}
+	temp=temp->next;
+	while(temp!=0){
+		if(temp->portIdx==idx){
+			temp2->next=temp->next;
+			returnTcb(temp);
+			return;			
+		}else{
+			/* try next */
+			temp2=temp;
+			temp=temp->next;
+			}
+	}
 }
 void ATimingService_putTcbToUsedList(ATimingService* self, etTimerControlBlock* block) {
+	etTimerControlBlock* temp=usedTcbsRoot;
+	etTimerControlBlock* temp2=usedTcbsRoot;
 	
-				etTimerControlBlock* temp=usedTcbsRoot;
-				etTimerControlBlock* temp2=usedTcbsRoot;
+	if (temp==0){
+		/* list empty put new block to root */
+		block->next=0;
+		usedTcbsRoot=block;
+		return;
+		}
 	
-				if (temp==0){
-					/* list empty put new block to root */
-					block->next=0;
+	while(1){
+		if (temp != 0){
+			if (isTimeGreater(&block->expTime,&temp->expTime)){
+				/* try next position */
+				temp2=temp;	
+				temp=temp->next;
+				}else{
+				/* right position found */
+				block->next=temp;
+				if(temp==usedTcbsRoot){
 					usedTcbsRoot=block;
-					return;
+					}else{
+					temp2->next=block;
 					}
-				
-				while(1){
-					if (temp != 0){
-						if (isTimeGreater(&block->expTime,&temp->expTime)){
-							/* try next position */
-							temp2=temp;	
-							temp=temp->next;
-							}else{
-							/* right position found */
-							block->next=temp;
-							if(temp==usedTcbsRoot){
-								usedTcbsRoot=block;
-								}else{
-								temp2->next=block;
-								}
-							return;
-							}
-						}else{
-						/* end of list reached */
-						block->next=0;
-						temp2->next=block;
-						return;
-					}
+				return;
 				}
+			}else{
+			/* end of list reached */
+			block->next=0;
+			temp2->next=block;
+			return;
+		}
+	}
 }
 boolean ATimingService_isTimeGreater(ATimingService* self, etTime* t1, etTime* t2) {
-	
-					if (t1->sec > t2->sec) return ET_TRUE;
-					if (t1->sec < t2->sec) return ET_FALSE;
-					if (t1->nSec > t2->nSec) return ET_TRUE;
-					return ET_FALSE;
+	if (t1->sec > t2->sec) return ET_TRUE;
+	if (t1->sec < t2->sec) return ET_FALSE;
+	if (t1->nSec > t2->nSec) return ET_TRUE;
+	return ET_FALSE;
 }
 void ATimingService_addTime(ATimingService* self, etTime* t1, etTime* t2) {
-	
-					t1->sec += t2->sec;
-					t1->nSec += t2->nSec;
-					while(t1->nSec >= 1000000000L){
-						t1->sec++;
-						t1->nSec-=1000000000L;
-						}
+	t1->sec += t2->sec;
+	t1->nSec += t2->nSec;
+	while(t1->nSec >= 1000000000L){
+		t1->sec++;
+		t1->nSec-=1000000000L;
+	}
 }
 

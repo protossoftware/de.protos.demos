@@ -11,8 +11,10 @@ RM := rm -rf
 -include src-gen/room/basic/service/timing/subdir.mk
 -include src-gen/room/basic/service/can/subdir.mk
 -include src-gen/HexagonCANDemo/subdir.mk
+-include src-gen/CruiseControlModel/subdir.mk
 -include Startup/subdir.mk
 -include Lib/subdir.mk
+-include Dave/Generated/src/UART001/subdir.mk
 -include Dave/Generated/src/SYSTM001/subdir.mk
 -include Dave/Generated/src/RESET001/subdir.mk
 -include Dave/Generated/src/LIBS/subdir.mk
@@ -52,7 +54,7 @@ all: HexagonCANDemoST.elf secondary-outputs
 HexagonCANDemoST.elf: $(OBJS) ../HexagonCANDemoST.ld $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM-GCC C Linker'
-	"C:\DAVE-3.1.10\ARM-GCC/bin/arm-none-eabi-gcc" -T"../HexagonCANDemoST.ld" -nostartfiles -L"C:\DAVE-3.1.10\eclipse\/../CMSIS/Infineon/Lib" -L"C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\etrice.runtime.c\Debug" -L"C:\DAVE-3.1.10\eclipse\/../Examples/Lib" -L"C:\DAVE-3.1.10\eclipse\/../emWin/Start/GUI" -Wl,-Map,"HexagonCANDemoST.map" -mcpu=cortex-m4 -mthumb -g3 -gdwarf-2 -o "HexagonCANDemoST.elf" "@makefile.rsp" $(USER_OBJS) $(LIBS)
+	"C:\DAVE-3.1.10\ARM-GCC/bin/arm-none-eabi-gcc" -T"../HexagonCANDemoST.ld" -nostartfiles -L"C:\DAVE-3.1.10\eclipse\/../CMSIS/Infineon/Lib" -L"C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\etrice.runtime.c\Debug" -L"C:\DAVE-3.1.10\eclipse\/../Examples/Lib" -L"C:\DAVE-3.1.10\eclipse\/../emWin/Start/GUI" -Wl,-Map,"HexagonCANDemoST.map" -mcpu=cortex-m4 -mthumb -g -gdwarf-2 -o "HexagonCANDemoST.elf" "@makefile.rsp" $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

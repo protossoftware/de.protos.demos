@@ -420,24 +420,24 @@
  338              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
 DEFINED SYMBOLS
                             *ABS*:00000000 etLogger.c
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:20     .text.etLogger_logError:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:25     .text.etLogger_logError:00000000 etLogger_logError
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:53     .text.etLogger_logWarning:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:58     .text.etLogger_logWarning:00000000 etLogger_logWarning
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:85     .text.etLogger_logInfo:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:90     .text.etLogger_logInfo:00000000 etLogger_logInfo
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:117    .text.etLogger_logErrorF:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:122    .text.etLogger_logErrorF:00000000 etLogger_logErrorF
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:152    .text.etLogger_logWarningF:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:157    .text.etLogger_logWarningF:00000000 etLogger_logWarningF
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:187    .text.etLogger_logInfoF:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:192    .text.etLogger_logInfoF:00000000 etLogger_logInfoF
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:222    .text.etLogger_fopen:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:227    .text.etLogger_fopen:00000000 etLogger_fopen
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:258    .text.etLogger_fclose:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:263    .text.etLogger_fclose:00000000 etLogger_fclose
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:293    .text.etLogger_fprintf:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccWAhJkz.s:298    .text.etLogger_fprintf:00000000 etLogger_fprintf
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:20     .text.etLogger_logError:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:25     .text.etLogger_logError:00000000 etLogger_logError
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:53     .text.etLogger_logWarning:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:58     .text.etLogger_logWarning:00000000 etLogger_logWarning
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:85     .text.etLogger_logInfo:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:90     .text.etLogger_logInfo:00000000 etLogger_logInfo
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:117    .text.etLogger_logErrorF:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:122    .text.etLogger_logErrorF:00000000 etLogger_logErrorF
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:152    .text.etLogger_logWarningF:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:157    .text.etLogger_logWarningF:00000000 etLogger_logWarningF
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:187    .text.etLogger_logInfoF:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:192    .text.etLogger_logInfoF:00000000 etLogger_logInfoF
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:222    .text.etLogger_fopen:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:227    .text.etLogger_fopen:00000000 etLogger_fopen
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:258    .text.etLogger_fclose:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:263    .text.etLogger_fclose:00000000 etLogger_fclose
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:293    .text.etLogger_fprintf:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc2DiOai.s:298    .text.etLogger_fprintf:00000000 etLogger_fprintf
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
                            .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5

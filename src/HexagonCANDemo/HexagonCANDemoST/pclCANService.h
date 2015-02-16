@@ -4,6 +4,10 @@
  *  Created on: 10.01.2015
  *      Author: Thomas Jung, Thomas Schuetz (initial contribution)
  *******************************************************************************/
+//-------------CAN Service--------------------
+// channel 0xXXYYZZZZ  => XX = Node Id
+//                        YY = CAN Interface ID
+//						  ZZ = Message Object Number
 
 #ifndef PCLCANSERVICE_H_
 #define PCLCANSERVICE_H_

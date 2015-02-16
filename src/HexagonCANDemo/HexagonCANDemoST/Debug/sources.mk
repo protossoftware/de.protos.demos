@@ -19,9 +19,11 @@ SUBDIRS := \
 src-gen/room/basic/service/timing \
 src-gen/room/basic/service/can \
 src-gen/HexagonCANDemo \
+src-gen/CruiseControlModel \
 . \
 Startup \
 Lib \
+Dave/Generated/src/UART001 \
 Dave/Generated/src/SYSTM001 \
 Dave/Generated/src/RESET001 \
 Dave/Generated/src/LIBS \

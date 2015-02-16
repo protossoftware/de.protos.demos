@@ -23,7 +23,12 @@ pclCANService.d pclCANService.o: ../pclCANService.c ../pclCANService.h \
  C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/CAN001/CAN001.h \
  C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/CAN001/CAN_Types.h \
  C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/CAN001/CAN001_Conf.h \
- C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/SYSTM001/SYSTM001.h
+ C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/SYSTM001/SYSTM001.h \
+ C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/UART001.h \
+ C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/Usic.h \
+ C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\LIBS/types.h \
+ C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/UART001_Conf.h \
+ C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/UART001_Extern.h
 
 ../pclCANService.h:
 
@@ -76,3 +81,13 @@ C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Da
 C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/CAN001/CAN001_Conf.h:
 
 C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/SYSTM001/SYSTM001.h:
+
+C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/UART001.h:
+
+C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/Usic.h:
+
+C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\LIBS/types.h:
+
+C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/UART001_Conf.h:
+
+C:\data\workspaces\github\de.protos.demos\src\HexagonCANDemo\HexagonCANDemoST\Dave\Generated\inc\DAVESupport/../../inc/UART001/UART001_Extern.h:

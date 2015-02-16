@@ -108,6 +108,46 @@ void DAVE_MUX_Init(void)
             	         
                                               
    	 
+      
+//********* MODULE USIC CONFIGURATIONS *************************	        
+        
+           
+   /* Disable mode before configuring all USIC registers to avoid unintended edges */   
+      /* Variable to store the CCR_MODE values for various USIC channels */ 
+      uint32_t UsicCcrMode[6] = {0};
+           
+    UsicCcrMode[0] |= (uint32_t) RD_REG(USIC0_CH0->CCR, USIC_CH_CCR_MODE_Msk, USIC_CH_CCR_MODE_Pos);
+    WR_REG(USIC0_CH0->CCR, USIC_CH_CCR_MODE_Msk, USIC_CH_CCR_MODE_Pos,0);  
+                        
+      
+    						
+   /*USIC 0 Channel 0 Mux Related SFR/Bitfields Configurations*/ 						         
+ WR_REG(USIC0_CH0->DX0CR, USIC_CH_DX0CR_DSEL_Msk, USIC_CH_DX0CR_DSEL_Pos,1); 
+  			  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
+          
+   // Data Pointer & Buffer Size for Transmitter Buffer Control  
+ WR_REG(USIC0_CH0->TBCTR, USIC_CH_TBCTR_DPTRSIZE_Msk, USIC_CH_TBCTR_DPTRSIZE_Pos,0x05000000);		/*    DPTR = 0,  SIZE = 5 */ 
+           
+  // Data Pointer & Buffer Size for Receiver Buffer Control  
+ WR_REG(USIC0_CH0->RBCTR, USIC_CH_RBCTR_DPTRSIZE_Msk, USIC_CH_RBCTR_DPTRSIZE_Pos,0x04000020);		/*    DPTR = 32,  SIZE = 4 */ 
+ 						
+   /*USIC 0 Channel 1 Mux Related SFR/Bitfields Configurations*/ 									  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
+         						
+   /*USIC 1 Channel 0 Mux Related SFR/Bitfields Configurations*/ 									  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
+       						
+   /*USIC 1 Channel 1 Mux Related SFR/Bitfields Configurations*/ 									  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
+         						
+   /*USIC 2 Channel 0 Mux Related SFR/Bitfields Configurations*/ 									  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
+       						
+   /*USIC 2 Channel 1 Mux Related SFR/Bitfields Configurations*/ 									  					 				 				 		       				              				  					    					 					   				  					 				 				       				  										 									 					 					  									      					              					  						    					      
+         
+  
+  /* Enable mode after configuring all USIC registers to avoid unintended edges */  
+            
+   WR_REG(USIC0_CH0->CCR, USIC_CH_CCR_MODE_Msk, USIC_CH_CCR_MODE_Pos,UsicCcrMode[0]); 
+                   	         
+                                              
+   	 
             	         
                                               
    	 
@@ -115,6 +155,8 @@ void DAVE_MUX_Init(void)
                                           
 
 /*        PORT Macro definitions for IOCR_OE, IOCR_PCR & HWSEL_HW     */                                      
+  WR_REG(PORT1->IOCR4, 0xb800U, PORT_IOCR_PC1_PCR_Pos, 0x12U);                /*P1.5 : PORT1_IOCR4_PC5_PCR and PORT1_IOCR4_PC5_OE */					   
+					                         
   WR_REG(PORT1->IOCR8, 0xb800U, PORT_IOCR_PC1_PCR_Pos, 0x12U);                /*P1.9 : PORT1_IOCR8_PC9_PCR and PORT1_IOCR8_PC9_OE */					   
 					      
 }
@@ -136,7 +178,7 @@ void DAVE_MUX_Init(void)
 *******************************************************************************/
  
 void DAVE_MUX_PreInit(void)
-{            
+{                
 
 /*        PORT Macro definitions for IOCR_OE, IOCR_PCR & HWSEL_HW     */                   
 }

@@ -232,11 +232,11 @@ RoomModel room.basic.service.can {
 		incoming {
 			Message init(data: uint32)
 			Message readMsg()
-			Message listenOnMsg(data: pclCANMsgM)
+			Message listenOnMsg(data: pclCANMsg)
 			Message transmitRequest()
 		}
 		outgoing {
-			Message msgReceived(data: pclCANMsgM)
+			Message msgReceived(data: pclCANMsg)
 		}
 		conjugated PortClass
 		{
@@ -258,7 +258,7 @@ RoomModel room.basic.service.can {
 		}
 		incoming {
 			Message init(data: uint32)
-			Message sendMsg(data: pclCANMsgM)
+			Message sendMsg(data: pclCANMsg)
 			Message resendMsg()
 		}
 		outgoing {
@@ -286,5 +286,5 @@ RoomModel room.basic.service.can {
 		Attribute channel: uint32 = " ET_CAN_CHANNEL_NOT_DEFINED "
 	}
 
-	ExternalType pclCANMsgM -> "pclCANMsg"
+	ExternalType pclCANMsg -> "pclCANMsg"
 }

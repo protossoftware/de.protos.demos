@@ -1,0 +1,525 @@
+RoomModel CruiseControlModel {
+
+	import room.basic.types.* from "Types.room"
+
+	import room.basic.service.timing.* from "TimingService.room"
+
+	import room.basic.service.can.* from "pclCANService.room"
+
+	LogicalSystem CruiseControlLogSys {
+		SubSystemRef cruiseControlSubSys: CruiseControlSubSys
+	}
+
+	SubSystemClass CruiseControlSubSys {
+		ActorRef cruiseControl: CruiseControlTop
+		LogicalThread defaultThread
+	}
+
+	ActorClass CruiseControlTop {
+		Structure { }
+		Behavior { }
+	}
+
+	ActorClass AHexagonCANMonitor {
+		Structure {
+			usercode1 {
+				"#include \"Dave3.h\""
+			}
+			SAP canRxThrottle: PCANRx
+			SAP canRxSpeed: PCANRx
+			SAP canRxControl: PCANRx
+			Attribute control: uint32 = "0"
+			Attribute throttle: uint32 = "0"
+			Attribute speed: uint32 = "0"
+			Attribute canIdThrottle: uint32 = "0x12"
+			Attribute canIdSpeed: uint32 = "0x11"
+			Attribute canIdControl: uint32 = "0x14"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"pclCANMsg msg;"
+						""
+						"canRxThrottle.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						"canRxSpeed.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						"canRxControl.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						""
+						"msg.id=canIdThrottle;"
+						"canRxThrottle.listenOnMsg(&msg);"
+						"msg.id=canIdSpeed;"
+						"canRxSpeed.listenOnMsg(&msg);"
+						"msg.id=canIdControl;"
+						"canRxControl.listenOnMsg(&msg);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<msgReceived: canRxThrottle>
+					}
+					action {
+						"throttle=data->data[0];\n"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<msgReceived: canRxControl>
+					}
+					action {
+						"control=data->data[0];"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<msgReceived: canRxSpeed>
+					}
+					action {
+						"uint8 str[30];"
+						"uint8 i;"
+						""
+						"speed = data->data[0];"
+						"for (i=0;i<3;i++){"
+						"\tspeed<<=8;"
+						"\tspeed += data->data[i+1];"
+						"\t}"
+						""
+						"speed = speed * 36 / 10000;"
+						""
+						"sprintf(str,\"%01d:%04d:%04d \\n\",control,throttle,speed);"
+						" "
+						"UART001_WriteDataBytes(&UART001_Handle0,str,13);"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ActorClass AVehicleSimulator {
+		Structure {
+			SAP timer: PTimer
+			SAP canRx: PCANRx
+			SAP canTx: PCANTx
+			Attribute speed: uint32 = "0" [ "aktuelle Geschwindigkeit des Fahrzeugs [m/s]" ]
+			Attribute throttleLevel: uint32 = "0" [ "Gasstellung [0..100%]" ]
+			Attribute breakLevel: uint32 = "0" [ "Bremsstellung [0..100%]" ]
+			Attribute mass: uint32 = "1000" [ "Masse [kg]" ]
+			Attribute k1: uint32 = "600" [ "Faktor zur Berechnung der Antriebskraft (Fm = k1 * throttleLevel)" ]
+			Attribute k2: uint32 = "15" [ "Faktor zur Berechnung des Luftwiderstandes (Fw = k2 * v^2)" ]
+			Attribute k3: uint32 = "7" [ "Faktor zur Berechnung der Bremsbeschleunigung (Fb = k3 * breakLevel)" ]
+			Attribute pollTime: uint32 = "10"
+			Attribute canMsgIdSpeed: uint8 = "0x11"
+			Attribute canMsgIdThrottle: uint8 = "0x12"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> running {
+					action {
+						"pclCANMsg msg;"
+						""
+						"timer.startTimer(pollTime);"
+						"canRx.init(ET_CAN_CHANNEL_NOT_DEFINED);  // must be configured via config model"
+						"canTx.init(ET_CAN_CHANNEL_NOT_DEFINED);  // must be configured via config model"
+						""
+						"msg.id = canMsgIdThrottle;"
+						""
+						"canRx.listenOnMsg(&msg);"
+					}
+				}
+				Transition tr0: running -> running {
+					triggers {
+						<msgReceived: canRx>
+					}
+					action {
+						"throttleLevel = data->data[0];"
+					}
+				}
+				Transition tr1: running -> running {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"pclCANMsg msg;"
+						"float32 f_speed;"
+						""
+						"f_speed = (float32)speed /1000;"
+						""
+						"f_speed=f_speed + (float32)(((((float32)k1*(float32)throttleLevel)-((float32)k2*f_speed*f_speed))*(float32)pollTime)/((float32)mass * (float32)1000));"
+						"speed = (uint32) (f_speed * 1000);"
+						""
+						""
+						"msg.id = canMsgIdSpeed;"
+						"msg.len = 4;"
+						"msg.data[0] = (uint8)(speed >> 24);"
+						"msg.data[1] = (uint8)(speed >> 16);"
+						"msg.data[2] = (uint8)(speed >> 8);"
+						"msg.data[3] = (uint8)speed;"
+						""
+						"canTx.sendMsg(&msg);"
+					}
+				}
+				State running
+			}
+		}
+	}
+
+	async ActorClass APIDController {
+		Interface {
+			Port ctrl: POnOff
+			Port nominalIn: PSimpleFlowValue
+			Port actualIn: PSimpleFlowValue
+			conjugated Port actuatorOut: PSimpleFlowValue
+			conjugated Port pTick: PTick
+		}
+		Structure {
+			external Port ctrl
+			external Port nominalIn
+			external Port actualIn
+			external Port actuatorOut
+			external Port pTick
+			SAP timer: PTimer
+			Attribute errorSum: float32
+			Attribute errorLast: float32
+			Attribute kp: float32 = "1"
+			Attribute ki: float32 = "1"
+			Attribute kd: float32 = "0"
+			Attribute maxOutVal: float32 = "100"
+			Attribute pollTime: uint32 = "100"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> off
+				Transition tr0: off -> on {
+					triggers {
+						<on: ctrl>
+					}
+					action {
+						"timer.startTimer(pollTime);"
+					}
+				}
+				Transition tr1: on -> off {
+					triggers {
+						<off: ctrl>
+					}
+					action {
+						"timer.kill();"
+					}
+				}
+				Transition tr2: on -> on {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"float32 inNominal = (float32)nominalIn.value;"
+						"float32 inActual = (float32)actualIn.value;"
+						"float32 error = (inNominal-inActual)/1000;"
+						"float32 outVal;"
+						""
+						"errorSum+=error;"
+						"outVal=kp*error+ki*errorSum+kd*(error - errorLast);"
+						"errorLast=error;"
+						""
+						"if (outVal > maxOutVal){"
+						"\toutVal = maxOutVal;"
+						"\t}"
+						"actuatorOut.value((uint32) outVal);"
+						""
+						"pTick.tick();"
+					}
+				}
+				State off
+				State on
+			}
+		}
+	}
+
+	async ActorClass ACruiseController {
+		Interface {
+			conjugated Port ctrl: POnOff
+			conjugated Port nominalSpeed: PSimpleFlowValue
+		}
+		Structure {
+			external Port ctrl
+			external Port nominalSpeed
+			SAP canRxCtrl: PCANRx
+			SAP canRxNominalSpeed: PCANRx
+			Attribute canRxIdCtrl: uint8 = "0x14"
+			Attribute canRxIdNominalSpeed: uint8 = "0x13"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"pclCANMsg msg;"
+						""
+						"canRxNominalSpeed.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						"canRxCtrl.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						""
+						"msg.id=canRxIdCtrl;"
+						"canRxCtrl.listenOnMsg(&msg);"
+						""
+						"msg.id=canRxIdNominalSpeed;"
+						"canRxNominalSpeed.listenOnMsg(&msg);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<msgReceived: canRxCtrl>
+					}
+					action {
+						"if (data->data[0]==0x01){"
+						"\tctrl.on();"
+						"\t}else{"
+						"\tctrl.off();"
+						"\t}"
+						""
+						"\t"
+						"\t"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<msgReceived: canRxNominalSpeed>
+					}
+					action {
+						"uint32 speed;"
+						"uint8 i;"
+						""
+						"speed = data->data[0];"
+						"for (i=0;i<3;i++){"
+						"\tspeed<<=8;"
+						"\tspeed += data->data[i+1];"
+						"\t}"
+						"\t"
+						"nominalSpeed.value(speed);\t"
+						"\t"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	async ActorClass ACAN2FlowportAdapter1in1out {
+		Interface {
+			Port pIn: PSimpleFlowValue
+			conjugated Port pOut: PSimpleFlowValue
+			Port pTick: PTick
+		}
+		Structure {
+			external Port pIn
+			external Port pOut
+			external Port pTick
+			SAP canRx: PCANRx
+			SAP canTx: PCANTx
+			Attribute canRxIdSpeed: uint8 = "0x11"
+			Attribute canTxIdThrottle: uint8 = "0x12"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"pclCANMsg msg;"
+						""
+						"msg.id=canRxIdSpeed;"
+						"canTx.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						"canRx.init(ET_CAN_CHANNEL_NOT_DEFINED);"
+						""
+						"canRx.listenOnMsg(&msg);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<msgReceived: canRx>
+					}
+					action {
+						"uint32 speed;"
+						"uint8 i;"
+						""
+						"speed = data->data[0];"
+						"for (i=0;i<3;i++){"
+						"\tspeed<<=8;"
+						"\tspeed += data->data[i+1];"
+						"\t}"
+						"\t"
+						"pOut.value(speed);"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<tick: pTick>
+					}
+					action {
+						"pclCANMsg msg;"
+						""
+						"msg.id=canTxIdThrottle;"
+						"msg.len=1;"
+						"msg.data[0]=pIn.value;"
+						""
+						"canTx.sendMsg(&msg);"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ActorClass ADriver {
+		Structure {
+			SAP canTx: PCANTx
+			SAP timer: PTimer
+			Attribute canIdThrottle: uint8 = "0x12"
+			Attribute canIdNominalSpeed: uint8 = "0x13"
+			Attribute canIdCtrl: uint8 = "0x14"
+		}
+		Behavior {
+			Operation sendThrottle(throttle: uint8) {
+				"pclCANMsg msg;"
+				" 	msg.id = canIdThrottle;"
+				" 	msg.len = 1;"
+				"	msg.data[0] = throttle;"
+				"	canTx_sendMsg(&msg);"
+			}
+			Operation sendNominalSpeed(speed: uint32) {
+				"pclCANMsg msg;"
+				" 	msg.id = canIdNominalSpeed;"
+				" 	msg.len = 4;"
+				"	msg.data[0] = (uint8)(speed>>24);"
+				"	msg.data[1] = (uint8)(speed>>18);"
+				"	msg.data[2] = (uint8)(speed>>8);"
+				"	msg.data[3] = (uint8)speed;"
+				"	canTx_sendMsg(&msg);"
+			}
+			Operation sendCtrl(ctrl: uint8) {
+				"pclCANMsg msg;"
+				" 	msg.id = canIdCtrl;"
+				" 	msg.len = 1;"
+				"	msg.data[0] = ctrl;"
+				"	canTx_sendMsg(&msg);"
+			}
+			StateMachine {
+				Transition init: initial -> tp2 of driveManual
+				Transition tr0: tp1 of driveManual -> tp0 of cruise {
+					action {
+						"sendCtrl(1);"
+					}
+				}
+				Transition tr1: tp1 of cruise -> tp0 of driveManual {
+					action {
+						"sendCtrl(0);"
+					}
+				}
+				State driveManual {
+					subgraph {
+						Transition tr0: my tp0 -> throttle50
+						Transition tr1: throttle50 -> throttle0 {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"sendThrottle(0);"
+								"timer.startTimeout(5000);"
+							}
+						}
+						Transition tr2: throttle70 -> my tp1 {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"sendThrottle(0);"
+							}
+						}
+						Transition tr3: my tp2 -> waitForInit {
+							action {
+								"timer.startTimeout(2000);"
+							}
+						}
+						Transition tr4: waitForInit -> throttle50 {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr5: throttle0 -> throttle70 {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"sendThrottle(70);"
+								"timer.startTimeout(5000);"
+							}
+						}
+						EntryPoint tp0
+						ExitPoint tp1
+						EntryPoint tp2
+						State throttle50 {
+							entry {
+								"sendThrottle(50);"
+								"timer.startTimeout(5000);"
+							}
+						}
+						State throttle70
+						State waitForInit
+						State throttle0
+					}
+				}
+				State cruise {
+					subgraph {
+						Transition tr0: my tp0 -> nominal100 {
+							action {
+								"sendNominalSpeed(0x6C82);"
+								"timer.startTimeout(12000);"
+							}
+						}
+						Transition tr1: nominal100 -> nominal170 {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"sendNominalSpeed(0xB876);"
+								"timer.startTimeout(15000);"
+							}
+						}
+						Transition tr2: nominal170 -> nominal130 {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"sendNominalSpeed(0x8D0F);"
+								"timer.startTimeout(17000);"
+							}
+						}
+						Transition tr3: nominal130 -> my tp1 {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						EntryPoint tp0
+						ExitPoint tp1
+						State nominal100
+						State nominal170
+						State nominal130
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass POnOff {
+		incoming {
+			Message on()
+			Message off()
+		}
+	}
+	ProtocolClass PTick {
+		incoming {
+			Message tick()			
+		}
+	}
+
+	datadriven ProtocolClass PSimpleFlowValue {
+		incoming {
+			Message value(data: uint32)
+		}
+	}
+
+}

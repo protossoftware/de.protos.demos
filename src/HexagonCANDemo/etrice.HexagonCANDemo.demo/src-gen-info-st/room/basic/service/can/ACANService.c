@@ -75,8 +75,8 @@ static etInt16 getState(ACANService* self) {
 
 /* Action Codes */
 static void action_TRANS_INITIAL_TO__Operational(ACANService* self) {
-	timer_startTimer(pollTime);
 	pclCANInitNodes();
+	timer_startTimer(pollTime);
 }
 static void action_TRANS_tr0_FROM_Operational_TO_Operational_BY_sendMsgcanTx_tr0(ACANService* self, const InterfaceItemBase* ifitem, pclCANMsg* data) {
 	uint32 c;
@@ -296,6 +296,7 @@ void ACANService_pollAllRxMsgs(ACANService* self) {
 	uint32 i;
 	uint8 val;
 	uint32 numberOfPorts = PCANRxReplPort_getReplication(&(self->constData->canRx));
+	pclCANReadAllMsgs();
 	for(i=0;i<numberOfPorts;i++){
 		if (PCL_TRUE == pclCANCheckReception(rxData[i].channel, &msg)){
 			canRx_msgReceived(i, &msg);

@@ -627,32 +627,16 @@
  328              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
 DEFINED SYMBOLS
                             *ABS*:00000000 RESET001.c
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:20     .text.RESET001_AssertReset:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:85     .text.RESET001_DeassertReset:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:90     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:149    .text.RESET001_GetResetInfo:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:154    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:194    .text.RESET001_GetStatus:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:199    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:282    .text.RESET001_ClearResetInfo:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccNdXh7G.s:287    .text.RESET001_ClearResetInfo:00000000 RESET001_ClearResetInfo
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:20     .text.RESET001_AssertReset:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:85     .text.RESET001_DeassertReset:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:90     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:149    .text.RESET001_GetResetInfo:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:154    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:194    .text.RESET001_GetStatus:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:199    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:282    .text.RESET001_ClearResetInfo:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7tMChq.s:287    .text.RESET001_ClearResetInfo:00000000 RESET001_ClearResetInfo
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
-                           .group:00000000 wm4.uc_id.h.35.94e6f9e83cbaf2d2b00f265c326df8e7
-                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
-                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
-                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
-                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
-                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
-                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
-                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
-                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
-                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
-                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
-                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
-                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
-                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
-                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
 
 NO UNDEFINED SYMBOLS

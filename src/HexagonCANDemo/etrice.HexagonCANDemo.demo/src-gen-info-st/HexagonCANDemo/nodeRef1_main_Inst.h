@@ -9,11 +9,12 @@
 #include "messaging/etMessageService.h"
 
 /* include all referenced ActorClasses */
-#include "HexagonCANDemo/AMrPong.h"
-#include "HexagonCANDemo/Application.h"
-#include "HexagonCANDemo/AMrPing.h"
-#include "room/basic/service/can/ACANService.h"
+#include "CruiseControlModel/AHexagonCANMonitor.h"
+#include "CruiseControlModel/APIDController.h"
 #include "room/basic/service/timing/ATimingService.h"
+#include "CruiseControlModel/ACAN2FlowportAdapter1in1out.h"
+#include "room/basic/service/can/ACANSimulationService.h"
+#include "CruiseControlModel/ACruiseController.h"
 
 /* include all referenced ProtcolClasses */
 
@@ -27,87 +28,48 @@ static etMessageService msgService_PhysicalThread1;
 /* declarations of all ActorClass instances (const and variable structs) */
 
 /* forward declaration of variable actor structs */
-static Application _HexagonCANDemo_main_appl;
-static AMrPing _HexagonCANDemo_main_appl_mrPing;
-static AMrPong _HexagonCANDemo_main_appl_mrPong;
 static ATimingService _HexagonCANDemo_main_timingService;
-static ACANService _HexagonCANDemo_main_canService;
+static ACANSimulationService _HexagonCANDemo_main_canSimuDev;
+static AHexagonCANMonitor _HexagonCANDemo_main_monitor;
+static ACruiseController _HexagonCANDemo_main_cruise;
+static APIDController _HexagonCANDemo_main_regler;
+static ACAN2FlowportAdapter1in1out _HexagonCANDemo_main_adapter;
 
 /* forward declaration of variable port structs */
-/* nothing to do */
-static PTimerConjPort_var _HexagonCANDemo_main_appl_mrPing_timer_var={
+static PTimerConjPort_var _HexagonCANDemo_main_canSimuDev_timer_var={
 	0		/* status */
 							};
-static PCANTxConjPort_var _HexagonCANDemo_main_appl_mrPing_canTx_var={
-	 ET_CAN_CHANNEL_NOT_DEFINED 		/* pChannel */
+static PCANRxConjPort_var _HexagonCANDemo_main_monitor_canRxThrottle_var={
+	33554437		/* pChannel */
 							};
-static PCANRxConjPort_var _HexagonCANDemo_main_appl_mrPing_canRx_var={
-	 ET_CAN_CHANNEL_NOT_DEFINED 		/* pChannel */
+static PCANRxConjPort_var _HexagonCANDemo_main_monitor_canRxSpeed_var={
+	33554438		/* pChannel */
 							};
-static PTimerConjPort_var _HexagonCANDemo_main_canService_timer_var={
+static PCANRxConjPort_var _HexagonCANDemo_main_monitor_canRxControl_var={
+	33554439		/* pChannel */
+							};
+static PCANRxConjPort_var _HexagonCANDemo_main_cruise_canRxCtrl_var={
+	83886083		/* pChannel */
+							};
+static PCANRxConjPort_var _HexagonCANDemo_main_cruise_canRxNominalSpeed_var={
+	83886084		/* pChannel */
+							};
+static PTimerConjPort_var _HexagonCANDemo_main_regler_timer_var={
 	0		/* status */
 							};
+static PCANRxConjPort_var _HexagonCANDemo_main_adapter_canRx_var={
+	67108873		/* pChannel */
+							};
+static PCANTxConjPort_var _HexagonCANDemo_main_adapter_canTx_var={
+	67108866		/* pChannel */
+							};
 
-
-/* instance _HexagonCANDemo_main_appl */
-/* no ports/saps/services - nothing to initialize statically */
-
-/* instance _HexagonCANDemo_main_appl_mrPing */
-static const AMrPing_const _HexagonCANDemo_main_appl_mrPing_const = {
-	/* Ports: {varData, msgService, peerAddress, localId} */
-	/* simple ports */
-	{NULL, &msgService_PhysicalThread1, 8+BASE_ADDRESS, 1} /* Port p0 */
-	
-	/* data receive ports */
-	
-	/* saps */
-	,{&_HexagonCANDemo_main_appl_mrPing_timer_var, &msgService_PhysicalThread1, 10+BASE_ADDRESS, 2} /* Port timer */
-	,{&_HexagonCANDemo_main_appl_mrPing_canTx_var, &msgService_PhysicalThread1, 14+BASE_ADDRESS, 3} /* Port canTx */
-	,{&_HexagonCANDemo_main_appl_mrPing_canRx_var, &msgService_PhysicalThread1, 15+BASE_ADDRESS, 4} /* Port canRx */
-	
-	/* replicated ports */
-	
-	/* services */
-};
-static AMrPing _HexagonCANDemo_main_appl_mrPing = {
-	&_HexagonCANDemo_main_appl_mrPing_const,
-	
-	/* data send ports */
-	
-	/* attributes */
-	
-	/* state and history are initialized in init function */
-};
-
-/* instance _HexagonCANDemo_main_appl_mrPong */
-static const AMrPong_const _HexagonCANDemo_main_appl_mrPong_const = {
-	/* Ports: {varData, msgService, peerAddress, localId} */
-	/* simple ports */
-	{NULL, &msgService_PhysicalThread1, 3+BASE_ADDRESS, 1} /* Port p0 */
-	
-	/* data receive ports */
-	
-	/* saps */
-	
-	/* replicated ports */
-	
-	/* services */
-};
-static AMrPong _HexagonCANDemo_main_appl_mrPong = {
-	&_HexagonCANDemo_main_appl_mrPong_const,
-	
-	/* data send ports */
-	
-	/* attributes */
-	
-	/* state and history are initialized in init function */
-};
 
 /* instance _HexagonCANDemo_main_timingService */
 static const etReplSubPort _HexagonCANDemo_main_timingService_repl_sub_ports[2] = {
 	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
-	{{NULL,&msgService_PhysicalThread1, 4+BASE_ADDRESS, 1},0}, /* Repl Sub Port timer idx +0*/
-	{{NULL,&msgService_PhysicalThread1, 13+BASE_ADDRESS, 1},1} /* Repl Sub Port timer idx +1*/
+	{{NULL,&msgService_PhysicalThread1, 5+BASE_ADDRESS, 1},0}, /* Repl Sub Port timer idx +0*/
+	{{NULL,&msgService_PhysicalThread1, 28+BASE_ADDRESS, 1},1} /* Repl Sub Port timer idx +1*/
 };
 static const ATimingService_const _HexagonCANDemo_main_timingService_const = {
 	/* Ports: {varData, msgService, peerAddress, localId} */
@@ -128,80 +90,424 @@ static ATimingService _HexagonCANDemo_main_timingService = {
 	/* data send ports */
 	
 	/* attributes */
+	{ {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL}, {{0,0},{0,0},0,NULL} } 		/* tcbs[30] */,
+	NULL		/* usedTcbsRoot */,
+	NULL		/* freeTcbsRoot */
 	
 	/* state and history are initialized in init function */
 };
 
-/* instance _HexagonCANDemo_main_canService */
-static const etReplSubPort _HexagonCANDemo_main_canService_repl_sub_ports[2] = {
+/* instance _HexagonCANDemo_main_canSimuDev */
+static const etReplSubPort _HexagonCANDemo_main_canSimuDev_repl_sub_ports[7] = {
 	/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
-	{{NULL,&msgService_PhysicalThread1, 5+BASE_ADDRESS, 2},0} /* Repl Sub Port canTx idx +0*/,
-	{{NULL,&msgService_PhysicalThread1, 6+BASE_ADDRESS, 3},0} /* Repl Sub Port canRx idx +0*/
+	{{NULL,&msgService_PhysicalThread1, 34+BASE_ADDRESS, 2},0} /* Repl Sub Port canTx idx +0*/,
+	{{NULL,&msgService_PhysicalThread1, 14+BASE_ADDRESS, 3},0}, /* Repl Sub Port canRx idx +0*/
+	{{NULL,&msgService_PhysicalThread1, 15+BASE_ADDRESS, 3},1}, /* Repl Sub Port canRx idx +1*/
+	{{NULL,&msgService_PhysicalThread1, 16+BASE_ADDRESS, 3},2}, /* Repl Sub Port canRx idx +2*/
+	{{NULL,&msgService_PhysicalThread1, 20+BASE_ADDRESS, 3},3}, /* Repl Sub Port canRx idx +3*/
+	{{NULL,&msgService_PhysicalThread1, 21+BASE_ADDRESS, 3},4}, /* Repl Sub Port canRx idx +4*/
+	{{NULL,&msgService_PhysicalThread1, 33+BASE_ADDRESS, 3},5} /* Repl Sub Port canRx idx +5*/
 };
-static const ACANService_const _HexagonCANDemo_main_canService_const = {
+static const ACANSimulationService_const _HexagonCANDemo_main_canSimuDev_const = {
 	/* Ports: {varData, msgService, peerAddress, localId} */
 	/* simple ports */
 	
 	/* data receive ports */
 	
 	/* saps */
-	{&_HexagonCANDemo_main_canService_timer_var, &msgService_PhysicalThread1, 11+BASE_ADDRESS, 1} /* Port timer */
+	{&_HexagonCANDemo_main_canSimuDev_timer_var, &msgService_PhysicalThread1, 2+BASE_ADDRESS, 1} /* Port timer */
 	
 	/* replicated ports */
 	
 	/* services */
-	,{1, _HexagonCANDemo_main_canService_repl_sub_ports+0}
-	,{1, _HexagonCANDemo_main_canService_repl_sub_ports+1}
+	,{1, _HexagonCANDemo_main_canSimuDev_repl_sub_ports+0}
+	,{6, _HexagonCANDemo_main_canSimuDev_repl_sub_ports+1}
 };
-static ACANService _HexagonCANDemo_main_canService = {
-	&_HexagonCANDemo_main_canService_const,
+static ACANSimulationService _HexagonCANDemo_main_canSimuDev = {
+	&_HexagonCANDemo_main_canSimuDev_const,
 	
 	/* data send ports */
 	
 	/* attributes */
 	{ {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
-	} } 		/* rxData[10] */,
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	} } 		/* rxData[40] */,
 	{ {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
+		0		/* channel */,
+		0		/* MsgId */
 	}, {
-		 ET_CAN_CHANNEL_NOT_DEFINED 		/* channel */
-	} } 		/* txData[10] */,
-	50		/* pollTime */
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	}, {
+		0		/* channel */,
+		0		/* MsgId */
+	} } 		/* txData[40] */,
+	100		/* pollTime */
+	
+	/* state and history are initialized in init function */
+};
+
+/* instance _HexagonCANDemo_main_monitor */
+static const AHexagonCANMonitor_const _HexagonCANDemo_main_monitor_const = {
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	
+	/* data receive ports */
+	
+	/* saps */
+	{&_HexagonCANDemo_main_monitor_canRxThrottle_var, &msgService_PhysicalThread1, 7+BASE_ADDRESS, 1} /* Port canRxThrottle */
+	,{&_HexagonCANDemo_main_monitor_canRxSpeed_var, &msgService_PhysicalThread1, 8+BASE_ADDRESS, 2} /* Port canRxSpeed */
+	,{&_HexagonCANDemo_main_monitor_canRxControl_var, &msgService_PhysicalThread1, 9+BASE_ADDRESS, 3} /* Port canRxControl */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static AHexagonCANMonitor _HexagonCANDemo_main_monitor = {
+	&_HexagonCANDemo_main_monitor_const,
+	
+	/* data send ports */
+	
+	/* attributes */
+	0		/* control */,
+	0		/* throttle */,
+	0		/* speed */,
+	0x12		/* canIdThrottle */,
+	0x11		/* canIdSpeed */,
+	0x14		/* canIdControl */
+	
+	/* state and history are initialized in init function */
+};
+
+/* instance _HexagonCANDemo_main_cruise */
+static const ACruiseController_const _HexagonCANDemo_main_cruise_const = {
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	{NULL, &msgService_PhysicalThread1, 23+BASE_ADDRESS, 1} /* Port ctrl */
+	
+	/* data receive ports */
+	
+	/* saps */
+	,{&_HexagonCANDemo_main_cruise_canRxCtrl_var, &msgService_PhysicalThread1, 10+BASE_ADDRESS, 3} /* Port canRxCtrl */
+	,{&_HexagonCANDemo_main_cruise_canRxNominalSpeed_var, &msgService_PhysicalThread1, 11+BASE_ADDRESS, 4} /* Port canRxNominalSpeed */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static ACruiseController _HexagonCANDemo_main_cruise = {
+	&_HexagonCANDemo_main_cruise_const,
+	
+	/* data send ports */
+	{
+		0
+	} /* send port nominalSpeed */
+	,
+	
+	/* attributes */
+	0x14		/* canRxIdCtrl */,
+	0x13		/* canRxIdNominalSpeed */
+	
+	/* state and history are initialized in init function */
+};
+
+/* instance _HexagonCANDemo_main_regler */
+static const APIDController_const _HexagonCANDemo_main_regler_const = {
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	{NULL, &msgService_PhysicalThread1, 18+BASE_ADDRESS, 1} /* Port ctrl */
+	,{NULL, &msgService_PhysicalThread1, 32+BASE_ADDRESS, 5} /* Port pTick */
+	
+	/* data receive ports */
+	,{&_HexagonCANDemo_main_cruise.nominalSpeed}
+	,{&_HexagonCANDemo_main_adapter.pOut}
+	
+	/* saps */
+	,{&_HexagonCANDemo_main_regler_timer_var, &msgService_PhysicalThread1, 3+BASE_ADDRESS, 6} /* Port timer */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static APIDController _HexagonCANDemo_main_regler = {
+	&_HexagonCANDemo_main_regler_const,
+	
+	/* data send ports */
+	{
+		0
+	} /* send port actuatorOut */
+	,
+	
+	/* attributes */
+	0		/* errorSum */,
+	0		/* errorLast */,
+	1		/* kp */,
+	1		/* ki */,
+	0		/* kd */,
+	100		/* maxOutVal */,
+	100		/* pollTime */
+	
+	/* state and history are initialized in init function */
+};
+
+/* instance _HexagonCANDemo_main_adapter */
+static const ACAN2FlowportAdapter1in1out_const _HexagonCANDemo_main_adapter_const = {
+	/* Ports: {varData, msgService, peerAddress, localId} */
+	/* simple ports */
+	{NULL, &msgService_PhysicalThread1, 27+BASE_ADDRESS, 3} /* Port pTick */
+	
+	/* data receive ports */
+	,{&_HexagonCANDemo_main_regler.actuatorOut}
+	
+	/* saps */
+	,{&_HexagonCANDemo_main_adapter_canRx_var, &msgService_PhysicalThread1, 12+BASE_ADDRESS, 4} /* Port canRx */
+	,{&_HexagonCANDemo_main_adapter_canTx_var, &msgService_PhysicalThread1, 6+BASE_ADDRESS, 5} /* Port canTx */
+	
+	/* replicated ports */
+	
+	/* services */
+};
+static ACAN2FlowportAdapter1in1out _HexagonCANDemo_main_adapter = {
+	&_HexagonCANDemo_main_adapter_const,
+	
+	/* data send ports */
+	{
+		0
+	} /* send port pOut */
+	,
+	
+	/* attributes */
+	0x11		/* canRxIdSpeed */,
+	0x12		/* canTxIdThrottle */
 	
 	/* state and history are initialized in init function */
 };

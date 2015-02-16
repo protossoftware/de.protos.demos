@@ -1,22 +1,25 @@
 RoomModel PCANDemo {
 
 	import room.basic.types.* from "Types.room"
-
 	import room.basic.service.timing.* from "TimingService.room"
 	import room.basic.service.can.* from "pclCANService.room"
+	import CruiseControlModel.* from "CruiseControl.room" 
 
 	LogicalSystem PCANDemo {
 		SubSystemRef main: MainSubSystem
 	}
 
 	SubSystemClass MainSubSystem {
-		ActorRef appl: Application
 		ActorRef timing: ATimingService
-		ActorRef can: ACANService
-		LayerConnection ref appl satisfied_by timing.timer
-		LayerConnection ref can satisfied_by timing.timer
-		LayerConnection ref appl satisfied_by can.canTx
-		LayerConnection ref appl satisfied_by can.canRx
+		ActorRef driver: ADriver
+		ActorRef simu: ACANSimulationService
+		ActorRef vehicleSim: AVehicleSimulator
+		LayerConnection ref driver satisfied_by timing.timer
+		LayerConnection ref simu satisfied_by timing.timer
+		LayerConnection ref driver satisfied_by simu.canTx
+		LayerConnection ref vehicleSim satisfied_by simu.canTx
+		LayerConnection ref vehicleSim satisfied_by simu.canRx
+		LayerConnection ref vehicleSim satisfied_by timing.timer
 		LogicalThread defaultThread
 	}
 

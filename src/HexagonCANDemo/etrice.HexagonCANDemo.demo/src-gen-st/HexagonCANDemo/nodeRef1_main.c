@@ -170,11 +170,12 @@ static void nodeRef1_main_constructActorInstances(void){
 static void nodeRef1_main_initActorInstances(void){
 	ET_MSC_LOGGER_SYNC_ENTRY("nodeRef1_main", "initActorInstances")
 	
-	Application_init(&_HexagonCANDemo_main_appl);
-	AMrPing_init(&_HexagonCANDemo_main_appl_mrPing);
-	AMrPong_init(&_HexagonCANDemo_main_appl_mrPong);
 	ATimingService_init(&_HexagonCANDemo_main_timingService);
-	ACANService_init(&_HexagonCANDemo_main_canService);
+	ACANSimulationService_init(&_HexagonCANDemo_main_canSimuDev);
+	AHexagonCANMonitor_init(&_HexagonCANDemo_main_monitor);
+	ACruiseController_init(&_HexagonCANDemo_main_cruise);
+	APIDController_init(&_HexagonCANDemo_main_regler);
+	ACAN2FlowportAdapter1in1out_init(&_HexagonCANDemo_main_adapter);
 	
 	ET_MSC_LOGGER_SYNC_EXIT
 }

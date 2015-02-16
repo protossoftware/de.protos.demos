@@ -12,10 +12,8 @@
 #include "modelbase/etPort.h"
 
 /*--------------------- begin user code ---------------------*/
-
-			#define ET_TIMER_RUNNING	0x01
-			#define ET_TIMER_PERIODIC	0x02
-			
+#define ET_TIMER_RUNNING	0x01
+#define ET_TIMER_PERIODIC	0x02
 /*--------------------- end user code ---------------------*/
 
 

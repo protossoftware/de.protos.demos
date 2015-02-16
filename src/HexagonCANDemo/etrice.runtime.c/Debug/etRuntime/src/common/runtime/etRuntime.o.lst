@@ -63,15 +63,15 @@
   21:../etRuntime/src/common/runtime/etRuntime.c **** 
   22:../etRuntime/src/common/runtime/etRuntime.c **** 	if (!initialized) {
   44              		.loc 1 22 0
-  45 0004 40F20003 		movw	r3, #:lower16:initialized.4989
-  46 0008 C0F20003 		movt	r3, #:upper16:initialized.4989
+  45 0004 40F20003 		movw	r3, #:lower16:initialized.4990
+  46 0008 C0F20003 		movt	r3, #:upper16:initialized.4990
   47 000c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
   48 000e 002B     		cmp	r3, #0
   49 0010 0CD1     		bne	.L2
   23:../etRuntime/src/common/runtime/etRuntime.c **** 		initialized = ET_TRUE;
   50              		.loc 1 23 0
-  51 0012 40F20003 		movw	r3, #:lower16:initialized.4989
-  52 0016 C0F20003 		movt	r3, #:upper16:initialized.4989
+  51 0012 40F20003 		movw	r3, #:lower16:initialized.4990
+  52 0016 C0F20003 		movt	r3, #:upper16:initialized.4990
   53 001a 4FF00102 		mov	r2, #1
   54 001e 1A70     		strb	r2, [r3, #0]
   24:../etRuntime/src/common/runtime/etRuntime.c **** 		etSema_construct(&terminateSemaphore);
@@ -93,7 +93,7 @@
   66              		.cfi_endproc
   67              	.LFE0:
   69              		.bss
-  70              	initialized.4989:
+  70              	initialized.4990:
   71 0004 00       		.space	1
   72 0005 000000   		.text
   73              	.Letext0:
@@ -101,11 +101,11 @@
   75              		.file 3 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
 DEFINED SYMBOLS
                             *ABS*:00000000 etRuntime.c
-C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:20     .bss:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:21     .bss:00000000 terminateSemaphore
-C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:24     .text.etRuntime_getTerminateSemaphore:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:29     .text.etRuntime_getTerminateSemaphore:00000000 etRuntime_getTerminateSemaphore
-C:\Users\TJung\AppData\Local\Temp\ccIfpc80.s:70     .bss:00000004 initialized.4989
+C:\Users\TJung\AppData\Local\Temp\ccUytX0l.s:20     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccUytX0l.s:21     .bss:00000000 terminateSemaphore
+C:\Users\TJung\AppData\Local\Temp\ccUytX0l.s:24     .text.etRuntime_getTerminateSemaphore:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccUytX0l.s:29     .text.etRuntime_getTerminateSemaphore:00000000 etRuntime_getTerminateSemaphore
+C:\Users\TJung\AppData\Local\Temp\ccUytX0l.s:70     .bss:00000004 initialized.4990
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
                            .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5

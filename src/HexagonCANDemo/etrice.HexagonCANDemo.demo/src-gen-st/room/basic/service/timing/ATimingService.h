@@ -14,17 +14,15 @@
 #include "room/basic/service/timing/PTimer.h"
 
 /*--------------------- begin user code ---------------------*/
-
-			#include "osal/etTime.h" 
-			#define ET_NB_OF_TCBS 20
-			typedef struct etTCB etTimerControlBlock; 
-			struct etTCB {
-				etTime expTime;
-				etTime pTime;
-				int32 portIdx;
-				etTimerControlBlock* next;
-				};
-			
+#include "osal/etTime.h" 
+#define ET_NB_OF_TCBS 30
+typedef struct etTCB etTimerControlBlock; 
+struct etTCB {
+	etTime expTime;
+	etTime pTime;
+	int32 portIdx;
+	etTimerControlBlock* next;
+	};
 /*--------------------- end user code ---------------------*/
 
 typedef struct ATimingService ATimingService;
@@ -54,6 +52,9 @@ struct ATimingService {
 	/* data send ports */
 	
 	/*--------------------- attributes ---------------------*/
+	etTimerControlBlock tcbs[30];
+	etTimerControlBlock* usedTcbsRoot;
+	etTimerControlBlock* freeTcbsRoot;
 	
 	
 	/* state machine variables */

@@ -188,29 +188,31 @@
  120 0010 1846     		mov	r0, r3
  121 0012 4FF4FA71 		mov	r1, #500
  122 0016 FFF7FEFF 		bl	PTimerConjPort_startTimeout
-  74:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canTx_init(0x00000005);
+  74:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canTx_init(ET_CAN_CHANNEL_NOT_DEFINED);
  123              		.loc 1 74 0
  124 001a 7B68     		ldr	r3, [r7, #4]
  125 001c 1B68     		ldr	r3, [r3, #0]
  126 001e 03F11803 		add	r3, r3, #24
  127 0022 1846     		mov	r0, r3
- 128 0024 4FF00501 		mov	r1, #5
+ 128 0024 4FF0FF31 		mov	r1, #-1
  129 0028 FFF7FEFF 		bl	PCANTxConjPort_init
-  75:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canRx_init(0x00000007);
+  75:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canRx_init(ET_CAN_CHANNEL_NOT_DEFINED);
  130              		.loc 1 75 0
  131 002c 7B68     		ldr	r3, [r7, #4]
  132 002e 1B68     		ldr	r3, [r3, #0]
  133 0030 03F12403 		add	r3, r3, #36
  134 0034 1846     		mov	r0, r3
- 135 0036 4FF00701 		mov	r1, #7
+ 135 0036 4FF0FF31 		mov	r1, #-1
  136 003a FFF7FEFF 		bl	PCANRxConjPort_init
-  76:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
-  77:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.id = 0x12;
- 137              		.loc 1 77 0
+  76:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	//canTx.init(0x00000005);
+  77:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	//canRx.init(0x00000007);
+  78:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
+  79:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.id = 0x12;
+ 137              		.loc 1 79 0
  138 003e 4FF01203 		mov	r3, #18
  139 0042 BB60     		str	r3, [r7, #8]
-  78:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canRx_listenOnMsg(&msg);
- 140              		.loc 1 78 0
+  80:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canRx_listenOnMsg(&msg);
+ 140              		.loc 1 80 0
  141 0044 7B68     		ldr	r3, [r7, #4]
  142 0046 1B68     		ldr	r3, [r3, #0]
  143 0048 03F12402 		add	r2, r3, #36
@@ -218,8 +220,8 @@
  145 0050 1046     		mov	r0, r2
  146 0052 1946     		mov	r1, r3
  147 0054 FFF7FEFF 		bl	PCANRxConjPort_listenOnMsg
-  79:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 148              		.loc 1 79 0
+  81:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 148              		.loc 1 81 0
  149 0058 07F11807 		add	r7, r7, #24
  150 005c BD46     		mov	sp, r7
  151 005e 80BD     		pop	{r7, pc}
@@ -231,8 +233,8 @@
  158              		.thumb_func
  160              	action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0:
  161              	.LFB3:
-  80:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0(AMrPing* self, const Interfa
- 162              		.loc 1 80 0
+  82:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0(AMrPing* self, const Interfa
+ 162              		.loc 1 82 0
  163              		.cfi_startproc
  164              		@ args = 0, pretend = 0, frame = 8
  165              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -249,14 +251,14 @@
  176              		.cfi_def_cfa_register 7
  177 0006 7860     		str	r0, [r7, #4]
  178 0008 3960     		str	r1, [r7, #0]
-  81:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	p0_pong();
- 179              		.loc 1 81 0
+  83:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	p0_pong();
+ 179              		.loc 1 83 0
  180 000a 7B68     		ldr	r3, [r7, #4]
  181 000c 1B68     		ldr	r3, [r3, #0]
  182 000e 1846     		mov	r0, r3
  183 0010 FFF7FEFF 		bl	PPingPongPort_pong
-  82:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 184              		.loc 1 82 0
+  84:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 184              		.loc 1 84 0
  185 0014 07F10807 		add	r7, r7, #8
  186 0018 BD46     		mov	sp, r7
  187 001a 80BD     		pop	{r7, pc}
@@ -268,8 +270,8 @@
  194              		.thumb_func
  196              	action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1:
  197              	.LFB4:
-  83:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1(AMrPing* self, const InterfaceItem
- 198              		.loc 1 83 0
+  85:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1(AMrPing* self, const InterfaceItem
+ 198              		.loc 1 85 0
  199              		.cfi_startproc
  200              		@ args = 0, pretend = 0, frame = 24
  201              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -286,85 +288,85 @@
  212              		.cfi_def_cfa_register 7
  213 0006 7860     		str	r0, [r7, #4]
  214 0008 3960     		str	r1, [r7, #0]
-  84:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	static uint8 counter=0;
-  85:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	pclCANMsg msg;
-  86:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
-  87:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (counter & 0x01){
- 215              		.loc 1 87 0
- 216 000a 40F20003 		movw	r3, #:lower16:counter.5680
- 217 000e C0F20003 		movt	r3, #:upper16:counter.5680
+  86:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	static uint8 counter=0;
+  87:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	pclCANMsg msg;
+  88:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
+  89:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (counter & 0x01){
+ 215              		.loc 1 89 0
+ 216 000a 40F20003 		movw	r3, #:lower16:counter.5682
+ 217 000e C0F20003 		movt	r3, #:upper16:counter.5682
  218 0012 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  219 0014 03F00103 		and	r3, r3, #1
  220 0018 002B     		cmp	r3, #0
  221 001a 03D0     		beq	.L7
-  88:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		msg.id = 0x27;
- 222              		.loc 1 88 0
+  90:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		msg.id = 0x27;
+ 222              		.loc 1 90 0
  223 001c 4FF02703 		mov	r3, #39
  224 0020 BB60     		str	r3, [r7, #8]
  225 0022 02E0     		b	.L8
  226              	.L7:
-  89:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}else{
-  90:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		msg.id=0x30;
- 227              		.loc 1 90 0
+  91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}else{
+  92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		msg.id=0x30;
+ 227              		.loc 1 92 0
  228 0024 4FF03003 		mov	r3, #48
  229 0028 BB60     		str	r3, [r7, #8]
  230              	.L8:
-  91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
-  92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.len = 8;
- 231              		.loc 1 92 0
+  93:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+  94:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.len = 8;
+ 231              		.loc 1 94 0
  232 002a 4FF00803 		mov	r3, #8
  233 002e 3B73     		strb	r3, [r7, #12]
-  93:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[0] = 10;
- 234              		.loc 1 93 0
+  95:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[0] = 10;
+ 234              		.loc 1 95 0
  235 0030 4FF00A03 		mov	r3, #10
  236 0034 7B73     		strb	r3, [r7, #13]
-  94:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[1] = 11;
- 237              		.loc 1 94 0
+  96:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[1] = 11;
+ 237              		.loc 1 96 0
  238 0036 4FF00B03 		mov	r3, #11
  239 003a BB73     		strb	r3, [r7, #14]
-  95:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[2] = 12;
- 240              		.loc 1 95 0
+  97:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[2] = 12;
+ 240              		.loc 1 97 0
  241 003c 4FF00C03 		mov	r3, #12
  242 0040 FB73     		strb	r3, [r7, #15]
-  96:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[3] = 13;
- 243              		.loc 1 96 0
+  98:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[3] = 13;
+ 243              		.loc 1 98 0
  244 0042 4FF00D03 		mov	r3, #13
  245 0046 3B74     		strb	r3, [r7, #16]
-  97:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[4] = 14;
- 246              		.loc 1 97 0
+  99:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[4] = 14;
+ 246              		.loc 1 99 0
  247 0048 4FF00E03 		mov	r3, #14
  248 004c 7B74     		strb	r3, [r7, #17]
-  98:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[5] = 15;
- 249              		.loc 1 98 0
+ 100:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[5] = 15;
+ 249              		.loc 1 100 0
  250 004e 4FF00F03 		mov	r3, #15
  251 0052 BB74     		strb	r3, [r7, #18]
-  99:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[6] = 16;
- 252              		.loc 1 99 0
+ 101:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[6] = 16;
+ 252              		.loc 1 101 0
  253 0054 4FF01003 		mov	r3, #16
  254 0058 FB74     		strb	r3, [r7, #19]
- 100:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[7] = counter++;
- 255              		.loc 1 100 0
- 256 005a 40F20003 		movw	r3, #:lower16:counter.5680
- 257 005e C0F20003 		movt	r3, #:upper16:counter.5680
+ 102:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg.data[7] = counter++;
+ 255              		.loc 1 102 0
+ 256 005a 40F20003 		movw	r3, #:lower16:counter.5682
+ 257 005e C0F20003 		movt	r3, #:upper16:counter.5682
  258 0062 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  259 0064 1A46     		mov	r2, r3
  260 0066 3A75     		strb	r2, [r7, #20]
  261 0068 03F10103 		add	r3, r3, #1
  262 006c DAB2     		uxtb	r2, r3
- 263 006e 40F20003 		movw	r3, #:lower16:counter.5680
- 264 0072 C0F20003 		movt	r3, #:upper16:counter.5680
+ 263 006e 40F20003 		movw	r3, #:lower16:counter.5682
+ 264 0072 C0F20003 		movt	r3, #:upper16:counter.5682
  265 0076 1A70     		strb	r2, [r3, #0]
- 101:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
- 102:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	timer_startTimeout(500);
- 266              		.loc 1 102 0
+ 103:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
+ 104:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	timer_startTimeout(500);
+ 266              		.loc 1 104 0
  267 0078 7B68     		ldr	r3, [r7, #4]
  268 007a 1B68     		ldr	r3, [r3, #0]
  269 007c 03F10C03 		add	r3, r3, #12
  270 0080 1846     		mov	r0, r3
  271 0082 4FF4FA71 		mov	r1, #500
  272 0086 FFF7FEFF 		bl	PTimerConjPort_startTimeout
- 103:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canTx_sendMsg(&msg);
- 273              		.loc 1 103 0
+ 105:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	canTx_sendMsg(&msg);
+ 273              		.loc 1 105 0
  274 008a 7B68     		ldr	r3, [r7, #4]
  275 008c 1B68     		ldr	r3, [r3, #0]
  276 008e 03F11802 		add	r2, r3, #24
@@ -372,8 +374,8 @@
  278 0096 1046     		mov	r0, r2
  279 0098 1946     		mov	r1, r3
  280 009a FFF7FEFF 		bl	PCANTxConjPort_sendMsg
- 104:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 281              		.loc 1 104 0
+ 106:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 281              		.loc 1 106 0
  282 009e 07F11807 		add	r7, r7, #24
  283 00a2 BD46     		mov	sp, r7
  284 00a4 80BD     		pop	{r7, pc}
@@ -385,8 +387,8 @@
  291              		.thumb_func
  293              	action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2:
  294              	.LFB5:
- 105:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2(AMrPing* self, const Int
- 295              		.loc 1 105 0
+ 107:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2(AMrPing* self, const Int
+ 295              		.loc 1 107 0
  296              		.cfi_startproc
  297              		@ args = 0, pretend = 0, frame = 32
  298              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -405,16 +407,16 @@
  311 0006 F860     		str	r0, [r7, #12]
  312 0008 B960     		str	r1, [r7, #8]
  313 000a 7A60     		str	r2, [r7, #4]
- 106:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	volatile pclCANMsg msg;
- 107:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
- 108:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg = *data;
- 314              		.loc 1 108 0
+ 108:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	volatile pclCANMsg msg;
+ 109:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
+ 110:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	msg = *data;
+ 314              		.loc 1 110 0
  315 000c 7B68     		ldr	r3, [r7, #4]
  316 000e 07F11004 		add	r4, r7, #16
  317 0012 0FCB     		ldmia	r3, {r0, r1, r2, r3}
  318 0014 84E80F00 		stmia	r4, {r0, r1, r2, r3}
- 109:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 319              		.loc 1 109 0
+ 111:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 319              		.loc 1 111 0
  320 0018 07F12007 		add	r7, r7, #32
  321 001c BD46     		mov	sp, r7
  322 001e 90BC     		pop	{r4, r7}
@@ -427,15 +429,15 @@
  330              		.thumb_func
  332              	exitTo:
  333              	.LFB6:
- 110:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 111:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /**
- 112:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * calls exit codes while exiting from the current state to one of its
- 113:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * parent states while remembering the history
- 114:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param current__et - the current state
- 115:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param to - the final parent state
- 116:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  */
- 117:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void exitTo(AMrPing* self, etInt16 current__et, etInt16 to) {
- 334              		.loc 1 117 0
+ 112:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 113:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /**
+ 114:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * calls exit codes while exiting from the current state to one of its
+ 115:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * parent states while remembering the history
+ 116:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param current__et - the current state
+ 117:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param to - the final parent state
+ 118:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  */
+ 119:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void exitTo(AMrPing* self, etInt16 current__et, etInt16 to) {
+ 334              		.loc 1 119 0
  335              		.cfi_startproc
  336              		@ args = 0, pretend = 0, frame = 8
  337              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -455,46 +457,46 @@
  351 000a 0A46     		mov	r2, r1	@ movhi
  352 000c 7A80     		strh	r2, [r7, #2]	@ movhi
  353 000e 3B80     		strh	r3, [r7, #0]	@ movhi
- 118:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	while (current__et!=to) {
- 354              		.loc 1 118 0
+ 120:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	while (current__et!=to) {
+ 354              		.loc 1 120 0
  355 0010 0CE0     		b	.L11
  356              	.L14:
- 119:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		switch (current__et) {
- 357              		.loc 1 119 0
+ 121:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		switch (current__et) {
+ 357              		.loc 1 121 0
  358 0012 B7F90230 		ldrsh	r3, [r7, #2]
  359 0016 022B     		cmp	r3, #2
  360 0018 07D1     		bne	.L15
  361              	.L13:
- 120:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_state0:
- 121:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				self->history[STATE_TOP] = STATE_state0;
- 362              		.loc 1 121 0
+ 122:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_state0:
+ 123:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				self->history[STATE_TOP] = STATE_state0;
+ 362              		.loc 1 123 0
  363 001a 7B68     		ldr	r3, [r7, #4]
  364 001c 4FF00202 		mov	r2, #2
  365 0020 1A81     		strh	r2, [r3, #8]	@ movhi
- 122:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				current__et = STATE_TOP;
- 366              		.loc 1 122 0
+ 124:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				current__et = STATE_TOP;
+ 366              		.loc 1 124 0
  367 0022 4FF00103 		mov	r3, #1
  368 0026 7B80     		strh	r3, [r7, #2]	@ movhi
- 123:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
- 369              		.loc 1 123 0
+ 125:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
+ 369              		.loc 1 125 0
  370 0028 00E0     		b	.L11
  371              	.L15:
- 124:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
- 125:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
- 126:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
- 372              		.loc 1 126 0
+ 126:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
+ 127:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
+ 128:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
+ 372              		.loc 1 128 0
  373 002a 00BF     		nop
  374              	.L11:
- 118:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	while (current__et!=to) {
- 375              		.loc 1 118 0 discriminator 1
+ 120:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	while (current__et!=to) {
+ 375              		.loc 1 120 0 discriminator 1
  376 002c B7F90220 		ldrsh	r2, [r7, #2]
  377 0030 B7F90030 		ldrsh	r3, [r7, #0]
  378 0034 9A42     		cmp	r2, r3
  379 0036 ECD1     		bne	.L14
- 127:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 128:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
- 129:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 380              		.loc 1 129 0
+ 129:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 130:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
+ 131:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 380              		.loc 1 131 0
  381 0038 07F10C07 		add	r7, r7, #12
  382 003c BD46     		mov	sp, r7
  383 003e 80BC     		pop	{r7}
@@ -507,16 +509,16 @@
  391              		.thumb_func
  393              	executeTransitionChain:
  394              	.LFB7:
- 130:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 131:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /**
- 132:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * calls action, entry and exit codes along a transition chain. The generic data are cast to typed 
- 133:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * matching the trigger of this chain. The ID of the final state is returned
- 134:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param chain__et - the chain ID
- 135:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param generic_data__et - the generic data pointer
- 136:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @return the +/- ID of the final state either with a positive sign, that indicates to execute the
- 137:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  */
- 138:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static etInt16 executeTransitionChain(AMrPing* self, int chain__et, const InterfaceItemBase* ifitem
- 395              		.loc 1 138 0
+ 132:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 133:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /**
+ 134:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * calls action, entry and exit codes along a transition chain. The generic data are cast to typed 
+ 135:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * matching the trigger of this chain. The ID of the final state is returned
+ 136:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param chain__et - the chain ID
+ 137:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param generic_data__et - the generic data pointer
+ 138:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @return the +/- ID of the final state either with a positive sign, that indicates to execute the
+ 139:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  */
+ 140:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static etInt16 executeTransitionChain(AMrPing* self, int chain__et, const InterfaceItemBase* ifitem
+ 395              		.loc 1 140 0
  396              		.cfi_startproc
  397              		@ args = 0, pretend = 0, frame = 24
  398              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -535,8 +537,8 @@
  411 0008 B960     		str	r1, [r7, #8]
  412 000a 7A60     		str	r2, [r7, #4]
  413 000c 3B60     		str	r3, [r7, #0]
- 139:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	switch (chain__et) {
- 414              		.loc 1 139 0
+ 141:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	switch (chain__et) {
+ 414              		.loc 1 141 0
  415 000e BB68     		ldr	r3, [r7, #8]
  416 0010 03F1FF33 		add	r3, r3, #-1
  417 0014 032B     		cmp	r3, #3
@@ -550,78 +552,78 @@
  425 0028 4B000000 		.word	.L20+1
  426 002c 59000000 		.word	.L21+1
  427              	.L18:
- 140:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_INITIAL_TO__state0:
- 141:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
- 142:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_INITIAL_TO__state0(self);
- 428              		.loc 1 142 0
+ 142:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_INITIAL_TO__state0:
+ 143:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
+ 144:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_INITIAL_TO__state0(self);
+ 428              		.loc 1 144 0
  429 0030 F868     		ldr	r0, [r7, #12]
  430 0032 FFF7FEFF 		bl	action_TRANS_INITIAL_TO__state0
- 143:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
- 431              		.loc 1 143 0
+ 145:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
+ 431              		.loc 1 145 0
  432 0036 4FF00203 		mov	r3, #2
  433 003a 1AE0     		b	.L23
  434              	.L19:
- 144:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 145:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0:
- 146:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
- 147:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0(self, ifitem);
- 435              		.loc 1 147 0
+ 146:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 147:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0:
+ 148:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
+ 149:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0(self, ifitem);
+ 435              		.loc 1 149 0
  436 003c F868     		ldr	r0, [r7, #12]
  437 003e 7968     		ldr	r1, [r7, #4]
  438 0040 FFF7FEFF 		bl	action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0
- 148:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
- 439              		.loc 1 148 0
+ 150:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
+ 439              		.loc 1 150 0
  440 0044 4FF00203 		mov	r3, #2
  441 0048 13E0     		b	.L23
  442              	.L20:
- 149:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 150:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1:
- 151:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
- 152:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1(self, ifitem);
- 443              		.loc 1 152 0
+ 151:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 152:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1:
+ 153:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
+ 154:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1(self, ifitem);
+ 443              		.loc 1 154 0
  444 004a F868     		ldr	r0, [r7, #12]
  445 004c 7968     		ldr	r1, [r7, #4]
  446 004e FFF7FEFF 		bl	action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1
- 153:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
- 447              		.loc 1 153 0
+ 155:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
+ 447              		.loc 1 155 0
  448 0052 4FF00203 		mov	r3, #2
  449 0056 0CE0     		b	.L23
  450              	.L21:
  451              	.LBB2:
- 154:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 155:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2:
- 156:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
- 157:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			pclCANMsg* data = ((pclCANMsg*) generic_data__et);
- 452              		.loc 1 157 0
+ 156:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 157:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		case CHAIN_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2:
+ 158:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
+ 159:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			pclCANMsg* data = ((pclCANMsg*) generic_data__et);
+ 452              		.loc 1 159 0
  453 0058 3B68     		ldr	r3, [r7, #0]
  454 005a 7B61     		str	r3, [r7, #20]
- 158:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2(self, ifitem, data);
- 455              		.loc 1 158 0
+ 160:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2(self, ifitem, data);
+ 455              		.loc 1 160 0
  456 005c F868     		ldr	r0, [r7, #12]
  457 005e 7968     		ldr	r1, [r7, #4]
  458 0060 7A69     		ldr	r2, [r7, #20]
  459 0062 FFF7FEFF 		bl	action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2
- 159:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
- 460              		.loc 1 159 0
+ 161:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			return STATE_state0;
+ 460              		.loc 1 161 0
  461 0066 4FF00203 		mov	r3, #2
  462 006a 02E0     		b	.L23
  463              	.L25:
  464              	.LBE2:
- 160:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 161:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
- 162:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
- 163:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
- 465              		.loc 1 163 0
+ 162:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 163:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
+ 164:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
+ 165:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
+ 465              		.loc 1 165 0
  466 006c 00BF     		nop
  467              	.L24:
- 164:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
- 165:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	return NO_STATE;
- 468              		.loc 1 165 0
+ 166:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
+ 167:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	return NO_STATE;
+ 468              		.loc 1 167 0
  469 006e 4FF00003 		mov	r3, #0
  470              	.L23:
  471 0072 1BB2     		sxth	r3, r3
- 166:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 472              		.loc 1 166 0
+ 168:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 472              		.loc 1 168 0
  473 0074 1846     		mov	r0, r3
  474 0076 07F11807 		add	r7, r7, #24
  475 007a BD46     		mov	sp, r7
@@ -634,14 +636,14 @@
  483              		.thumb_func
  485              	enterHistory:
  486              	.LFB8:
- 167:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 168:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /**
- 169:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * calls entry codes while entering a state's history. The ID of the final leaf state is returned
- 170:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param state__et - the state which is entered
- 171:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @return - the ID of the final leaf state
- 172:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  */
- 173:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static etInt16 enterHistory(AMrPing* self, etInt16 state__et) {
- 487              		.loc 1 173 0
+ 169:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 170:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /**
+ 171:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * calls entry codes while entering a state's history. The ID of the final leaf state is returned
+ 172:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @param state__et - the state which is entered
+ 173:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  * @return - the ID of the final leaf state
+ 174:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c ****  */
+ 175:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static etInt16 enterHistory(AMrPing* self, etInt16 state__et) {
+ 487              		.loc 1 175 0
  488              		.cfi_startproc
  489              		@ args = 0, pretend = 0, frame = 16
  490              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -659,72 +661,72 @@
  502 0006 7860     		str	r0, [r7, #4]
  503 0008 0B46     		mov	r3, r1
  504 000a 7B80     		strh	r3, [r7, #2]	@ movhi
- 174:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	boolean skip_entry__et = ET_FALSE;
- 505              		.loc 1 174 0
+ 176:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	boolean skip_entry__et = ET_FALSE;
+ 505              		.loc 1 176 0
  506 000c 4FF00003 		mov	r3, #0
  507 0010 FB73     		strb	r3, [r7, #15]
- 175:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (state__et >= STATE_MAX) {
- 508              		.loc 1 175 0
+ 177:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (state__et >= STATE_MAX) {
+ 508              		.loc 1 177 0
  509 0012 B7F90230 		ldrsh	r3, [r7, #2]
  510 0016 022B     		cmp	r3, #2
  511 0018 07DD     		ble	.L27
- 176:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		state__et = (etInt16) (state__et - STATE_MAX);
- 512              		.loc 1 176 0
+ 178:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		state__et = (etInt16) (state__et - STATE_MAX);
+ 512              		.loc 1 178 0
  513 001a 7B88     		ldrh	r3, [r7, #2]
  514 001c A3F10303 		sub	r3, r3, #3
  515 0020 9BB2     		uxth	r3, r3
  516 0022 7B80     		strh	r3, [r7, #2]	@ movhi
- 177:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		skip_entry__et = ET_TRUE;
- 517              		.loc 1 177 0
+ 179:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		skip_entry__et = ET_TRUE;
+ 517              		.loc 1 179 0
  518 0024 4FF00103 		mov	r3, #1
  519 0028 FB73     		strb	r3, [r7, #15]
  520              	.L27:
- 178:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
- 179:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	while (ET_TRUE) {
- 180:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		switch (state__et) {
- 521              		.loc 1 180 0
+ 180:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
+ 181:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	while (ET_TRUE) {
+ 182:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		switch (state__et) {
+ 521              		.loc 1 182 0
  522 002a B7F90230 		ldrsh	r3, [r7, #2]
  523 002e 012B     		cmp	r3, #1
  524 0030 05D0     		beq	.L29
  525 0032 022B     		cmp	r3, #2
  526 0034 07D1     		bne	.L33
  527              	.L30:
- 181:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_state0:
- 182:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* in leaf state: return state id */
- 183:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				return STATE_state0;
- 528              		.loc 1 183 0
+ 183:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_state0:
+ 184:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* in leaf state: return state id */
+ 185:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				return STATE_state0;
+ 528              		.loc 1 185 0
  529 0036 4FF00203 		mov	r3, #2
  530 003a 1BB2     		sxth	r3, r3
  531 003c 08E0     		b	.L34
  532              	.L29:
- 184:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_TOP:
- 185:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				state__et = self->history[STATE_TOP];
- 533              		.loc 1 185 0
+ 186:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_TOP:
+ 187:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				state__et = self->history[STATE_TOP];
+ 533              		.loc 1 187 0
  534 003e 7B68     		ldr	r3, [r7, #4]
  535 0040 1B89     		ldrh	r3, [r3, #8]	@ movhi
  536 0042 7B80     		strh	r3, [r7, #2]	@ movhi
- 186:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
- 537              		.loc 1 186 0
+ 188:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
+ 537              		.loc 1 188 0
  538 0044 00E0     		b	.L32
  539              	.L33:
- 187:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
- 188:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
- 189:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
- 540              		.loc 1 189 0
+ 189:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
+ 190:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
+ 191:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
+ 540              		.loc 1 191 0
  541 0046 00BF     		nop
  542              	.L32:
- 190:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 191:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		skip_entry__et = ET_FALSE;
- 543              		.loc 1 191 0
+ 192:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 193:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		skip_entry__et = ET_FALSE;
+ 543              		.loc 1 193 0
  544 0048 4FF00003 		mov	r3, #0
  545 004c FB73     		strb	r3, [r7, #15]
- 192:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
- 546              		.loc 1 192 0
+ 194:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
+ 546              		.loc 1 194 0
  547 004e ECE7     		b	.L27
  548              	.L34:
- 193:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) 
- 194:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 549              		.loc 1 194 0
+ 195:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) 
+ 196:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 549              		.loc 1 196 0
  550 0050 1846     		mov	r0, r3
  551 0052 07F11407 		add	r7, r7, #20
  552 0056 BD46     		mov	sp, r7
@@ -738,9 +740,9 @@
  561              		.thumb_func
  563              	AMrPing_executeInitTransition:
  564              	.LFB9:
- 195:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 196:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void AMrPing_executeInitTransition(AMrPing* self) {
- 565              		.loc 1 196 0
+ 197:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 198:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void AMrPing_executeInitTransition(AMrPing* self) {
+ 565              		.loc 1 198 0
  566              		.cfi_startproc
  567              		@ args = 0, pretend = 0, frame = 16
  568              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -756,12 +758,12 @@
  578              	.LCFI29:
  579              		.cfi_def_cfa_register 7
  580 0006 7860     		str	r0, [r7, #4]
- 197:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	int chain__et = CHAIN_TRANS_INITIAL_TO__state0;
- 581              		.loc 1 197 0
+ 199:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	int chain__et = CHAIN_TRANS_INITIAL_TO__state0;
+ 581              		.loc 1 199 0
  582 0008 4FF00103 		mov	r3, #1
  583 000c FB60     		str	r3, [r7, #12]
- 198:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	etInt16 next__et = executeTransitionChain(self, chain__et, NULL, NULL);
- 584              		.loc 1 198 0
+ 200:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	etInt16 next__et = executeTransitionChain(self, chain__et, NULL, NULL);
+ 584              		.loc 1 200 0
  585 000e 7868     		ldr	r0, [r7, #4]
  586 0010 F968     		ldr	r1, [r7, #12]
  587 0012 4FF00002 		mov	r2, #0
@@ -769,22 +771,22 @@
  589 001a FFF7FEFF 		bl	executeTransitionChain
  590 001e 0346     		mov	r3, r0
  591 0020 7B81     		strh	r3, [r7, #10]	@ movhi
- 199:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	next__et = enterHistory(self, next__et);
- 592              		.loc 1 199 0
+ 201:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	next__et = enterHistory(self, next__et);
+ 592              		.loc 1 201 0
  593 0022 B7F90A30 		ldrsh	r3, [r7, #10]
  594 0026 7868     		ldr	r0, [r7, #4]
  595 0028 1946     		mov	r1, r3
  596 002a FFF7FEFF 		bl	enterHistory
  597 002e 0346     		mov	r3, r0
  598 0030 7B81     		strh	r3, [r7, #10]	@ movhi
- 200:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	setState(self, next__et);
- 599              		.loc 1 200 0
+ 202:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	setState(self, next__et);
+ 599              		.loc 1 202 0
  600 0032 B7F90A30 		ldrsh	r3, [r7, #10]
  601 0036 7868     		ldr	r0, [r7, #4]
  602 0038 1946     		mov	r1, r3
  603 003a FFF7FEFF 		bl	setState
- 201:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 604              		.loc 1 201 0
+ 203:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 604              		.loc 1 203 0
  605 003e 07F11007 		add	r7, r7, #16
  606 0042 BD46     		mov	sp, r7
  607 0044 80BD     		pop	{r7, pc}
@@ -796,10 +798,10 @@
  614              		.thumb_func
  616              	AMrPing_receiveEvent:
  617              	.LFB10:
- 202:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 203:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /* receiveEvent contains the main implementation of the FSM */
- 204:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void AMrPing_receiveEvent(AMrPing* self, InterfaceItemBase* ifitem, int evt, void* generic_d
- 618              		.loc 1 204 0
+ 204:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 205:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** /* receiveEvent contains the main implementation of the FSM */
+ 206:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** static void AMrPing_receiveEvent(AMrPing* self, InterfaceItemBase* ifitem, int evt, void* generic_d
+ 618              		.loc 1 206 0
  619              		.cfi_startproc
  620              		@ args = 0, pretend = 0, frame = 32
  621              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -818,8 +820,8 @@
  634 0008 B960     		str	r1, [r7, #8]
  635 000a 7A60     		str	r2, [r7, #4]
  636 000c 3B60     		str	r3, [r7, #0]
- 205:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	int trigger__et = ifitem->localId + EVT_SHIFT*evt;
- 637              		.loc 1 205 0
+ 207:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	int trigger__et = ifitem->localId + EVT_SHIFT*evt;
+ 637              		.loc 1 207 0
  638 000e BB68     		ldr	r3, [r7, #8]
  639 0010 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
  640 0012 1A46     		mov	r2, r3
@@ -828,18 +830,18 @@
  643 001a 01FB03F3 		mul	r3, r1, r3
  644 001e D318     		adds	r3, r2, r3
  645 0020 7B61     		str	r3, [r7, #20]
- 206:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	int chain__et = NOT_CAUGHT;
- 646              		.loc 1 206 0
+ 208:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	int chain__et = NOT_CAUGHT;
+ 646              		.loc 1 208 0
  647 0022 4FF00003 		mov	r3, #0
  648 0026 FB61     		str	r3, [r7, #28]
- 207:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	etInt16 catching_state__et = NO_STATE;
- 649              		.loc 1 207 0
+ 209:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	etInt16 catching_state__et = NO_STATE;
+ 649              		.loc 1 209 0
  650 0028 4FF00003 		mov	r3, #0
  651 002c 7B83     		strh	r3, [r7, #26]	@ movhi
- 208:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	((void)trigger__et);	/* avoids unused warning */
- 209:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
- 210:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
- 652              		.loc 1 210 0
+ 210:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	((void)trigger__et);	/* avoids unused warning */
+ 211:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
+ 212:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
+ 652              		.loc 1 212 0
  653 002e B868     		ldr	r0, [r7, #8]
  654 0030 7968     		ldr	r1, [r7, #4]
  655 0032 3A68     		ldr	r2, [r7, #0]
@@ -847,17 +849,17 @@
  657 0038 0346     		mov	r3, r0
  658 003a 002B     		cmp	r3, #0
  659 003c 24D1     		bne	.L37
- 211:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		switch (getState(self)) {
- 660              		.loc 1 211 0
+ 213:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		switch (getState(self)) {
+ 660              		.loc 1 213 0
  661 003e F868     		ldr	r0, [r7, #12]
  662 0040 FFF7FEFF 		bl	getState
  663 0044 0346     		mov	r3, r0
  664 0046 022B     		cmp	r3, #2
  665 0048 1DD1     		bne	.L46
  666              	.L39:
- 212:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_state0:
- 213:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				switch(trigger__et) {
- 667              		.loc 1 213 0
+ 214:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			case STATE_state0:
+ 215:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				switch(trigger__et) {
+ 667              		.loc 1 215 0
  668 004a 7B69     		ldr	r3, [r7, #20]
  669 004c 682B     		cmp	r3, #104
  670 004e 11D0     		beq	.L42
@@ -866,77 +868,77 @@
  673 0054 662B     		cmp	r3, #102
  674 0056 14D1     		bne	.L47
  675              	.L41:
- 214:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						case TRIG_timer__timeout:
- 215:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							{
- 216:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								chain__et = CHAIN_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0;
- 676              		.loc 1 216 0
+ 216:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						case TRIG_timer__timeout:
+ 217:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							{
+ 218:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								chain__et = CHAIN_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0;
+ 676              		.loc 1 218 0
  677 0058 4FF00203 		mov	r3, #2
  678 005c FB61     		str	r3, [r7, #28]
- 217:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								catching_state__et = STATE_TOP;
- 679              		.loc 1 217 0
+ 219:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								catching_state__et = STATE_TOP;
+ 679              		.loc 1 219 0
  680 005e 4FF00103 		mov	r3, #1
  681 0062 7B83     		strh	r3, [r7, #26]	@ movhi
- 218:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							}
- 219:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						break;
- 682              		.loc 1 219 0
+ 220:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							}
+ 221:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						break;
+ 682              		.loc 1 221 0
  683 0064 0EE0     		b	.L44
  684              	.L43:
- 220:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						case TRIG_p0__ping:
- 221:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							{
- 222:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								chain__et = CHAIN_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1;
- 685              		.loc 1 222 0
+ 222:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						case TRIG_p0__ping:
+ 223:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							{
+ 224:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								chain__et = CHAIN_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1;
+ 685              		.loc 1 224 0
  686 0066 4FF00303 		mov	r3, #3
  687 006a FB61     		str	r3, [r7, #28]
- 223:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								catching_state__et = STATE_TOP;
- 688              		.loc 1 223 0
+ 225:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								catching_state__et = STATE_TOP;
+ 688              		.loc 1 225 0
  689 006c 4FF00103 		mov	r3, #1
  690 0070 7B83     		strh	r3, [r7, #26]	@ movhi
- 224:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							}
- 225:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						break;
- 691              		.loc 1 225 0
+ 226:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							}
+ 227:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						break;
+ 691              		.loc 1 227 0
  692 0072 07E0     		b	.L44
  693              	.L42:
- 226:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						case TRIG_canRx__msgReceived:
- 227:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							{
- 228:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								chain__et = CHAIN_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2;
- 694              		.loc 1 228 0
+ 228:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						case TRIG_canRx__msgReceived:
+ 229:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							{
+ 230:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								chain__et = CHAIN_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2;
+ 694              		.loc 1 230 0
  695 0074 4FF00403 		mov	r3, #4
  696 0078 FB61     		str	r3, [r7, #28]
- 229:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								catching_state__et = STATE_TOP;
- 697              		.loc 1 229 0
+ 231:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 								catching_state__et = STATE_TOP;
+ 697              		.loc 1 231 0
  698 007a 4FF00103 		mov	r3, #1
  699 007e 7B83     		strh	r3, [r7, #26]	@ movhi
- 230:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							}
- 231:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						break;
- 700              		.loc 1 231 0
+ 232:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							}
+ 233:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						break;
+ 700              		.loc 1 233 0
  701 0080 00E0     		b	.L44
  702              	.L47:
- 232:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						default:
- 233:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							/* should not occur */
- 234:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							break;
- 703              		.loc 1 234 0
+ 234:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 						default:
+ 235:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							/* should not occur */
+ 236:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 							break;
+ 703              		.loc 1 236 0
  704 0082 00BF     		nop
  705              	.L44:
- 235:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				}
- 236:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
- 706              		.loc 1 236 0
+ 237:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				}
+ 238:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
+ 706              		.loc 1 238 0
  707 0084 00E0     		b	.L37
  708              	.L46:
- 237:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
- 238:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
- 239:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
- 709              		.loc 1 239 0
+ 239:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			default:
+ 240:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				/* should not occur */
+ 241:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 				break;
+ 709              		.loc 1 241 0
  710 0086 00BF     		nop
  711              	.L37:
- 240:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 241:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
- 242:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (chain__et != NOT_CAUGHT) {
- 712              		.loc 1 242 0
+ 242:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 243:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
+ 244:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	if (chain__et != NOT_CAUGHT) {
+ 712              		.loc 1 244 0
  713 0088 FB69     		ldr	r3, [r7, #28]
  714 008a 002B     		cmp	r3, #0
  715 008c 21D0     		beq	.L36
- 243:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		exitTo(self, getState(self), catching_state__et);
- 716              		.loc 1 243 0
+ 245:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		exitTo(self, getState(self), catching_state__et);
+ 716              		.loc 1 245 0
  717 008e F868     		ldr	r0, [r7, #12]
  718 0090 FFF7FEFF 		bl	getState
  719 0094 0346     		mov	r3, r0
@@ -947,9 +949,9 @@
  724 00a0 1A46     		mov	r2, r3
  725 00a2 FFF7FEFF 		bl	exitTo
  726              	.LBB3:
- 244:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
- 245:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			etInt16 next__et = executeTransitionChain(self, chain__et, ifitem, generic_data__et);
- 727              		.loc 1 245 0
+ 246:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		{
+ 247:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			etInt16 next__et = executeTransitionChain(self, chain__et, ifitem, generic_data__et);
+ 727              		.loc 1 247 0
  728 00a6 F868     		ldr	r0, [r7, #12]
  729 00a8 F969     		ldr	r1, [r7, #28]
  730 00aa BA68     		ldr	r2, [r7, #8]
@@ -957,26 +959,26 @@
  732 00ae FFF7FEFF 		bl	executeTransitionChain
  733 00b2 0346     		mov	r3, r0
  734 00b4 7B82     		strh	r3, [r7, #18]	@ movhi
- 246:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			next__et = enterHistory(self, next__et);
- 735              		.loc 1 246 0
+ 248:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			next__et = enterHistory(self, next__et);
+ 735              		.loc 1 248 0
  736 00b6 B7F91230 		ldrsh	r3, [r7, #18]
  737 00ba F868     		ldr	r0, [r7, #12]
  738 00bc 1946     		mov	r1, r3
  739 00be FFF7FEFF 		bl	enterHistory
  740 00c2 0346     		mov	r3, r0
  741 00c4 7B82     		strh	r3, [r7, #18]	@ movhi
- 247:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			setState(self, next__et);
- 742              		.loc 1 247 0
+ 249:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			setState(self, next__et);
+ 742              		.loc 1 249 0
  743 00c6 B7F91230 		ldrsh	r3, [r7, #18]
  744 00ca F868     		ldr	r0, [r7, #12]
  745 00cc 1946     		mov	r1, r3
  746 00ce FFF7FEFF 		bl	setState
  747              	.L36:
  748              	.LBE3:
- 248:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
- 249:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
- 250:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 749              		.loc 1 250 0
+ 250:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		}
+ 251:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
+ 252:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 749              		.loc 1 252 0
  750 00d2 07F12007 		add	r7, r7, #32
  751 00d6 BD46     		mov	sp, r7
  752 00d8 80BD     		pop	{r7, pc}
@@ -989,9 +991,9 @@
  760              		.thumb_func
  762              	AMrPing_init:
  763              	.LFB11:
- 251:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 252:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** void AMrPing_init(AMrPing* self){
- 764              		.loc 1 252 0
+ 253:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 254:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** void AMrPing_init(AMrPing* self){
+ 764              		.loc 1 254 0
  765              		.cfi_startproc
  766              		@ args = 0, pretend = 0, frame = 16
  767              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -1007,49 +1009,49 @@
  777              	.LCFI35:
  778              		.cfi_def_cfa_register 7
  779 0006 7860     		str	r0, [r7, #4]
- 253:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("AMrPing", "init")
- 254:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	self->state = STATE_TOP;
- 780              		.loc 1 254 0
+ 255:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("AMrPing", "init")
+ 256:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	self->state = STATE_TOP;
+ 780              		.loc 1 256 0
  781 0008 7B68     		ldr	r3, [r7, #4]
  782 000a 4FF00102 		mov	r2, #1
  783 000e 9A80     		strh	r2, [r3, #4]	@ movhi
  784              	.LBB4:
- 255:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	{
- 256:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		int i;
- 257:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		for (i=0; i<AMRPING_HISTORY_SIZE; ++i)
- 785              		.loc 1 257 0
+ 257:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	{
+ 258:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		int i;
+ 259:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		for (i=0; i<AMRPING_HISTORY_SIZE; ++i)
+ 785              		.loc 1 259 0
  786 0010 4FF00003 		mov	r3, #0
  787 0014 FB60     		str	r3, [r7, #12]
  788 0016 0BE0     		b	.L49
  789              	.L50:
- 258:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			self->history[i] = NO_STATE;
- 790              		.loc 1 258 0 discriminator 2
+ 260:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 			self->history[i] = NO_STATE;
+ 790              		.loc 1 260 0 discriminator 2
  791 0018 7A68     		ldr	r2, [r7, #4]
  792 001a FB68     		ldr	r3, [r7, #12]
  793 001c 4FEA4303 		lsl	r3, r3, #1
  794 0020 D318     		adds	r3, r2, r3
  795 0022 4FF00002 		mov	r2, #0
  796 0026 DA80     		strh	r2, [r3, #6]	@ movhi
- 257:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		for (i=0; i<AMRPING_HISTORY_SIZE; ++i)
- 797              		.loc 1 257 0 discriminator 2
+ 259:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		for (i=0; i<AMRPING_HISTORY_SIZE; ++i)
+ 797              		.loc 1 259 0 discriminator 2
  798 0028 FB68     		ldr	r3, [r7, #12]
  799 002a 03F10103 		add	r3, r3, #1
  800 002e FB60     		str	r3, [r7, #12]
  801              	.L49:
- 257:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		for (i=0; i<AMRPING_HISTORY_SIZE; ++i)
- 802              		.loc 1 257 0 is_stmt 0 discriminator 1
+ 259:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 		for (i=0; i<AMRPING_HISTORY_SIZE; ++i)
+ 802              		.loc 1 259 0 is_stmt 0 discriminator 1
  803 0030 FB68     		ldr	r3, [r7, #12]
  804 0032 012B     		cmp	r3, #1
  805 0034 F0DD     		ble	.L50
  806              	.LBE4:
- 259:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
- 260:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	AMrPing_executeInitTransition(self);
- 807              		.loc 1 260 0 is_stmt 1
+ 261:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	}
+ 262:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	AMrPing_executeInitTransition(self);
+ 807              		.loc 1 262 0 is_stmt 1
  808 0036 7868     		ldr	r0, [r7, #4]
  809 0038 FFF7FEFF 		bl	AMrPing_executeInitTransition
- 261:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_EXIT
- 262:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 810              		.loc 1 262 0
+ 263:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 264:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 810              		.loc 1 264 0
  811 003c 07F11007 		add	r7, r7, #16
  812 0040 BD46     		mov	sp, r7
  813 0042 80BD     		pop	{r7, pc}
@@ -1062,10 +1064,10 @@
  821              		.thumb_func
  823              	AMrPing_receiveMessage:
  824              	.LFB12:
- 263:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 264:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
- 265:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** void AMrPing_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
- 825              		.loc 1 265 0
+ 265:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 266:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 
+ 267:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** void AMrPing_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
+ 825              		.loc 1 267 0
  826              		.cfi_startproc
  827              		@ args = 0, pretend = 0, frame = 16
  828              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -1083,10 +1085,10 @@
  840 0006 F860     		str	r0, [r7, #12]
  841 0008 B960     		str	r1, [r7, #8]
  842 000a 7A60     		str	r2, [r7, #4]
- 266:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("AMrPing", "_receiveMessage")
- 267:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
- 268:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	AMrPing_receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMes
- 843              		.loc 1 268 0
+ 268:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_ENTRY("AMrPing", "_receiveMessage")
+ 269:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
+ 270:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	AMrPing_receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMes
+ 843              		.loc 1 270 0
  844 000c 7B68     		ldr	r3, [r7, #4]
  845 000e DB88     		ldrh	r3, [r3, #6]
  846 0010 1AB2     		sxth	r2, r3
@@ -1095,17 +1097,17 @@
  849 0018 F868     		ldr	r0, [r7, #12]
  850 001a B968     		ldr	r1, [r7, #8]
  851 001c FFF7FEFF 		bl	AMrPing_receiveEvent
- 269:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
- 270:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_EXIT
- 271:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
- 852              		.loc 1 271 0
+ 271:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	
+ 272:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** 	ET_MSC_LOGGER_SYNC_EXIT
+ 273:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/HexagonCANDemo\AMrPing.c **** }
+ 852              		.loc 1 273 0
  853 0020 07F11007 		add	r7, r7, #16
  854 0024 BD46     		mov	sp, r7
  855 0026 80BD     		pop	{r7, pc}
  856              		.cfi_endproc
  857              	.LFE12:
  859              		.bss
- 860              	counter.5680:
+ 860              	counter.5682:
  861 0000 00       		.space	1
  862              		.text
  863              	.Letext0:
@@ -1129,36 +1131,36 @@
  881              		.file 19 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/
 DEFINED SYMBOLS
                             *ABS*:00000000 AMrPing.c
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:20     .text.setState:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:24     .text.setState:00000000 setState
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:58     .text.getState:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:62     .text.getState:00000000 getState
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:94     .text.action_TRANS_INITIAL_TO__state0:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:98     .text.action_TRANS_INITIAL_TO__state0:00000000 action_TRANS_INITIAL_TO__state0
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:156    .text.action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:160    .text.action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0:00000000 action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:192    .text.action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:196    .text.action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1:00000000 action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:860    .bss:00000000 counter.5680
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:289    .text.action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:293    .text.action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2:00000000 action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:328    .text.exitTo:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:332    .text.exitTo:00000000 exitTo
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:389    .text.executeTransitionChain:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:393    .text.executeTransitionChain:00000000 executeTransitionChain
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:423    .text.executeTransitionChain:00000020 $d
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:429    .text.executeTransitionChain:00000030 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:481    .text.enterHistory:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:485    .text.enterHistory:00000000 enterHistory
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:559    .text.AMrPing_executeInitTransition:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:563    .text.AMrPing_executeInitTransition:00000000 AMrPing_executeInitTransition
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:612    .text.AMrPing_receiveEvent:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:616    .text.AMrPing_receiveEvent:00000000 AMrPing_receiveEvent
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:757    .text.AMrPing_init:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:762    .text.AMrPing_init:00000000 AMrPing_init
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:818    .text.AMrPing_receiveMessage:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:823    .text.AMrPing_receiveMessage:00000000 AMrPing_receiveMessage
-C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:861    .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:20     .text.setState:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:24     .text.setState:00000000 setState
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:58     .text.getState:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:62     .text.getState:00000000 getState
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:94     .text.action_TRANS_INITIAL_TO__state0:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:98     .text.action_TRANS_INITIAL_TO__state0:00000000 action_TRANS_INITIAL_TO__state0
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:156    .text.action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:160    .text.action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0:00000000 action_TRANS_tr0_FROM_state0_TO_state0_BY_timeouttimer_tr0
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:192    .text.action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:196    .text.action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1:00000000 action_TRANS_tr1_FROM_state0_TO_state0_BY_pingp0_tr1
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:860    .bss:00000000 counter.5682
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:289    .text.action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:293    .text.action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2:00000000 action_TRANS_tr2_FROM_state0_TO_state0_BY_msgReceivedcanRx_tr2
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:328    .text.exitTo:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:332    .text.exitTo:00000000 exitTo
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:389    .text.executeTransitionChain:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:393    .text.executeTransitionChain:00000000 executeTransitionChain
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:423    .text.executeTransitionChain:00000020 $d
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:429    .text.executeTransitionChain:00000030 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:481    .text.enterHistory:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:485    .text.enterHistory:00000000 enterHistory
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:559    .text.AMrPing_executeInitTransition:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:563    .text.AMrPing_executeInitTransition:00000000 AMrPing_executeInitTransition
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:612    .text.AMrPing_receiveEvent:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:616    .text.AMrPing_receiveEvent:00000000 AMrPing_receiveEvent
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:757    .text.AMrPing_init:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:762    .text.AMrPing_init:00000000 AMrPing_init
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:818    .text.AMrPing_receiveMessage:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:823    .text.AMrPing_receiveMessage:00000000 AMrPing_receiveMessage
+C:\Users\TJung\AppData\Local\Temp\ccMHtLhM.s:861    .bss:00000000 $d
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
                            .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
@@ -1182,7 +1184,7 @@ C:\Users\TJung\AppData\Local\Temp\ccIefa4a.s:861    .bss:00000000 $d
                            .group:00000000 wm4.etMessageService.h.35.d59d0242cc2158bcaed8acc00ffa8450
                            .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
                            .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
-                           .group:00000000 wm4.pclCANService.h.14.381c25c15f2d4e381783b6816fbce3e8
+                           .group:00000000 wm4.pclCANService.h.18.7886b4c3eb2911e8e504b38398798d1f
                            .group:00000000 wm4.PCANTx.h.9.cbce4a73536b1a35c96ff0ca728bc5b1
                            .group:00000000 wm4.PTimer.h.9.65e88e755dca19735e4c8a0328a94685
                            .group:00000000 wm4.etActor.h.20.45f51564328d7e6c3cd8d6b06a7adf7c

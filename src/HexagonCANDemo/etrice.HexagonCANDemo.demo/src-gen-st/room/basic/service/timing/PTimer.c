@@ -43,9 +43,9 @@ etInt32 PTimerReplPort_getReplication(const PTimerReplPort* self) {
 
 void PTimerConjPort_startTimer(const PTimerConjPort* self, uint32 data__et) {
 	if (status==0){
-					status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
-					etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data__et);
-					}
+		status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
+		etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data__et);
+	}
 }
 
 void PTimerConjReplPort_startTimer_broadcast(const PTimerConjReplPort* self, uint32 data__et) {
@@ -62,9 +62,9 @@ void PTimerConjReplPort_startTimer(const PTimerConjReplPort* self, int idx__et, 
 
 void PTimerConjPort_startTimeout(const PTimerConjPort* self, uint32 data__et) {
 	if (status==0){
-					status = ET_TIMER_RUNNING;
-					etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data__et);
-					}
+		status = ET_TIMER_RUNNING;
+		etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data__et);
+	}
 }
 
 void PTimerConjReplPort_startTimeout_broadcast(const PTimerConjReplPort* self, uint32 data__et) {
@@ -80,11 +80,10 @@ void PTimerConjReplPort_startTimeout(const PTimerConjReplPort* self, int idx__et
 
 
 void PTimerConjPort_kill(const PTimerConjPort* self) {
-	
-				if (status!=0){
-					status=0;
-					etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);
-					}
+	if (status!=0){
+		status=0;
+		etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);
+	}
 }
 
 void PTimerConjReplPort_kill_broadcast(const PTimerConjReplPort* self) {
@@ -110,14 +109,14 @@ etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
 /* receiver handlers */
 void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
 	/* TODO: clear active bit in case of single shot timer */
-				if (status!=0){
-					if (status==ET_TIMER_RUNNING){
-						/* single shot timer */
-						status=0;
-						}
-					/* msg to fsm */
-					(*receiveMessageFunc)(actor, self, msg);
-					}
+	if (status!=0){
+		if (status==ET_TIMER_RUNNING){
+			/* single shot timer */
+			status=0;
+			}
+		/* msg to fsm */
+		(*receiveMessageFunc)(actor, self, msg);
+	}
 	/* hand over the message to the actor:      */
 	/* (*receiveMessageFunc)(actor, self, msg); */
 }

@@ -142,8 +142,8 @@
   <provided xsi:type="ResourceModel:BitField" name="BRP" URI="http://www.infineon.com/0.1.28/peripheral/can/0/node/2/nbtr/brp" maxValue="63" minValue="0" startPos="0" stopPos="5" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.52"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="17"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="17"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="2"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="2"/>
     <toolTipHelpDescription>Baud Rate Prescaler</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="NECNT2" URI="http://www.infineon.com/0.1.28/peripheral/can/0/node/2/necnt" addressOffset="0x0414" resetValue="00600000" resetMask="0xFFFFFFFF">
@@ -772,8 +772,8 @@
   <provided xsi:type="ResourceModel:BitField" name="DIR" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/1/mostat/dir" maxValue="1" minValue="0" startPos="11" stopPos="11">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.78"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <toolTipHelpDescription>Message Direction</toolTipHelpDescription>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Receive Object selected: With TXRQ&#xa0;=&#xa0;1, a Remote Frame with the identifier of message object n is scheduled for transmission. On reception of a Data Frame with matching identifier, the message is stored in message object n."/>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Transmit Object selected: If TXRQ&#xa0;=&#xa0;1, message object n is scheduled for transmission of a Data Frame. On reception of a Remote Frame with matching identifier, bit TXRQ is set."/>
@@ -1252,8 +1252,8 @@
   <provided xsi:type="ResourceModel:BitField" name="ID" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/3/moar/id" maxValue="536870911" minValue="0" startPos="0" stopPos="28" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.99"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="4100000"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="4100000"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="500000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="500000"/>
     <toolTipHelpDescription>CAN Identifier of Message Object n</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="MODATAL3" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/3/modatal" accessPermission="rw" addressOffset="0x1070" resetValue="00000000" resetMask="0xFFFFFFFF">
@@ -1321,8 +1321,8 @@
   <provided xsi:type="ResourceModel:BitField" name="DIR" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/3/mostat/dir" maxValue="1" minValue="0" startPos="11" stopPos="11">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.102"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <toolTipHelpDescription>Message Direction</toolTipHelpDescription>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Receive Object selected: With TXRQ&#xa0;=&#xa0;1, a Remote Frame with the identifier of message object n is scheduled for transmission. On reception of a Data Frame with matching identifier, the message is stored in message object n."/>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Transmit Object selected: If TXRQ&#xa0;=&#xa0;1, message object n is scheduled for transmission of a Data Frame. On reception of a Remote Frame with matching identifier, bit TXRQ is set."/>
@@ -1525,8 +1525,8 @@
   <provided xsi:type="ResourceModel:BitField" name="ID" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/4/moar/id" maxValue="536870911" minValue="0" startPos="0" stopPos="28" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.110"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="4140000"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="4140000"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="4c0000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="4c0000"/>
     <toolTipHelpDescription>CAN Identifier of Message Object n</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="MODATAL4" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/4/modatal" accessPermission="rw" addressOffset="0x1090" resetValue="00000000" resetMask="0xFFFFFFFF">
@@ -1594,8 +1594,8 @@
   <provided xsi:type="ResourceModel:BitField" name="DIR" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/4/mostat/dir" maxValue="1" minValue="0" startPos="11" stopPos="11">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.113"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <toolTipHelpDescription>Message Direction</toolTipHelpDescription>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Receive Object selected: With TXRQ&#xa0;=&#xa0;1, a Remote Frame with the identifier of message object n is scheduled for transmission. On reception of a Data Frame with matching identifier, the message is stored in message object n."/>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Transmit Object selected: If TXRQ&#xa0;=&#xa0;1, message object n is scheduled for transmission of a Data Frame. On reception of a Remote Frame with matching identifier, bit TXRQ is set."/>
@@ -1798,8 +1798,8 @@
   <provided xsi:type="ResourceModel:BitField" name="ID" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/5/moar/id" maxValue="536870911" minValue="0" startPos="0" stopPos="28" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.121"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="4180000"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="4180000"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="480000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="480000"/>
     <toolTipHelpDescription>CAN Identifier of Message Object n</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="MODATAL5" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/5/modatal" accessPermission="rw" addressOffset="0x10B0" resetValue="00000000" resetMask="0xFFFFFFFF">
@@ -2071,8 +2071,8 @@
   <provided xsi:type="ResourceModel:BitField" name="ID" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/6/moar/id" maxValue="536870911" minValue="0" startPos="0" stopPos="28" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.132"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="41c0000"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="41c0000"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="440000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="440000"/>
     <toolTipHelpDescription>CAN Identifier of Message Object n</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="MODATAL6" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/6/modatal" accessPermission="rw" addressOffset="0x10D0" resetValue="00000000" resetMask="0xFFFFFFFF">
@@ -2344,8 +2344,8 @@
   <provided xsi:type="ResourceModel:BitField" name="ID" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/7/moar/id" maxValue="536870911" minValue="0" startPos="0" stopPos="28" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.143"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="4200000"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="4200000"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="500000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="500000"/>
     <toolTipHelpDescription>CAN Identifier of Message Object n</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="MODATAL7" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/7/modatal" accessPermission="rw" addressOffset="0x10F0" resetValue="00000000" resetMask="0xFFFFFFFF">
@@ -2617,8 +2617,8 @@
   <provided xsi:type="ResourceModel:BitField" name="ID" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/8/moar/id" maxValue="536870911" minValue="0" startPos="0" stopPos="28" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.154"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="4240000"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="4240000"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="480000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="480000"/>
     <toolTipHelpDescription>CAN Identifier of Message Object n</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="MODATAL8" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/8/modatal" accessPermission="rw" addressOffset="0x1110" resetValue="00000000" resetMask="0xFFFFFFFF">
@@ -2890,8 +2890,8 @@
   <provided xsi:type="ResourceModel:BitField" name="ID" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/9/moar/id" maxValue="536870911" minValue="0" startPos="0" stopPos="28" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CAN001/1.0.12/can001_0.app#//@consumed.165"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="4280000"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="4280000"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="440000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="440000"/>
     <toolTipHelpDescription>CAN Identifier of Message Object n</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:RegisterParameter" name="MODATAL9" URI="http://www.infineon.com/0.1.28/peripheral/can/0/mo/9/modatal" accessPermission="rw" addressOffset="0x1130" resetValue="00000000" resetMask="0xFFFFFFFF">

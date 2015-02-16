@@ -102,7 +102,7 @@ CAN001_MessageHandleType CAN001_MessageHandle0_2 =
 	.IDExten = 0, /* Message identifier Type */
 	.DataLength = 0,
 	.MsgObjEN = CAN001_ENABLE,
-	.MsgObjType = (CAN_MsgType)1
+	.MsgObjType = (CAN_MsgType)0
 };
 
 /* Node2 LMO3 handle structure */
@@ -123,7 +123,7 @@ CAN001_MessageHandleType CAN001_MessageHandle0_3 =
 /* Node2 LMO4 handle structure */
 CAN001_MessageHandleType CAN001_MessageHandle0_4 =
 {
-  	.Identifier = 0x104,	
+  	.Identifier = 0x14,	
 	
 	
   	.IDMask = 0x7ff,
@@ -132,13 +132,13 @@ CAN001_MessageHandleType CAN001_MessageHandle0_4 =
 	.IDExten = 0, /* Message identifier Type */
 	.DataLength = 0,
 	.MsgObjEN = CAN001_ENABLE,
-	.MsgObjType = (CAN_MsgType)1
+	.MsgObjType = (CAN_MsgType)0
 };
 
 /* Node2 LMO5 handle structure */
 CAN001_MessageHandleType CAN001_MessageHandle0_5 =
 {
-  	.Identifier = 0x105,	
+  	.Identifier = 0x13,	
 	
 	
   	.IDMask = 0x7ff,
@@ -147,13 +147,13 @@ CAN001_MessageHandleType CAN001_MessageHandle0_5 =
 	.IDExten = 0, /* Message identifier Type */
 	.DataLength = 0,
 	.MsgObjEN = CAN001_ENABLE,
-	.MsgObjType = (CAN_MsgType)1
+	.MsgObjType = (CAN_MsgType)0
 };
 
 /* Node2 LMO6 handle structure */
 CAN001_MessageHandleType CAN001_MessageHandle0_6 =
 {
-  	.Identifier = 0x106,	
+  	.Identifier = 0x12,	
 	
 	
   	.IDMask = 0x7ff,
@@ -168,7 +168,7 @@ CAN001_MessageHandleType CAN001_MessageHandle0_6 =
 /* Node2 LMO7 handle structure */
 CAN001_MessageHandleType CAN001_MessageHandle0_7 =
 {
-  	.Identifier = 0x107,	
+  	.Identifier = 0x11,	
 	
 	
   	.IDMask = 0x7ff,
@@ -183,7 +183,7 @@ CAN001_MessageHandleType CAN001_MessageHandle0_7 =
 /* Node2 LMO8 handle structure */
 CAN001_MessageHandleType CAN001_MessageHandle0_8 =
 {
-  	.Identifier = 0x108,	
+  	.Identifier = 0x14,	
 	
 	
   	.IDMask = 0x7ff,
@@ -198,7 +198,7 @@ CAN001_MessageHandleType CAN001_MessageHandle0_8 =
 /* Node2 LMO9 handle structure */
 CAN001_MessageHandleType CAN001_MessageHandle0_9 =
 {
-  	.Identifier = 0x109,	
+  	.Identifier = 0x12,	
 	
 	
   	.IDMask = 0x7ff,
@@ -213,7 +213,7 @@ CAN001_MessageHandleType CAN001_MessageHandle0_9 =
 /* Node2 LMO10 handle structure */
 CAN001_MessageHandleType CAN001_MessageHandle0_10 =
 {
-  	.Identifier = 0x10a,	
+  	.Identifier = 0x11,	
 	
 	
   	.IDMask = 0x7ff,

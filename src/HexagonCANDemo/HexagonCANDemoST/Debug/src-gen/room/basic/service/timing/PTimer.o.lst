@@ -274,13 +274,13 @@
  236 000e 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  237 0010 002B     		cmp	r3, #0
  238 0012 0CD1     		bne	.L9
-  46:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
+  46:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
  239              		.loc 1 46 0
  240 0014 7B68     		ldr	r3, [r7, #4]
  241 0016 1B68     		ldr	r3, [r3, #0]
  242 0018 4FF00302 		mov	r2, #3
  243 001c 1A70     		strb	r2, [r3, #0]
-  47:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data__et);
+  47:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data__et);
  244              		.loc 1 47 0
  245 001e 3B46     		mov	r3, r7
  246 0020 7868     		ldr	r0, [r7, #4]
@@ -288,7 +288,7 @@
  248 0026 4FF00402 		mov	r2, #4
  249 002a FFF7FEFF 		bl	etPort_sendMessage
  250              	.L9:
-  48:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					}
+  48:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	}
   49:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
  251              		.loc 1 49 0
  252 002e 07F10807 		add	r7, r7, #8
@@ -439,13 +439,13 @@
  386 000e 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  387 0010 002B     		cmp	r3, #0
  388 0012 0CD1     		bne	.L15
-  65:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					status = ET_TIMER_RUNNING;
+  65:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		status = ET_TIMER_RUNNING;
  389              		.loc 1 65 0
  390 0014 7B68     		ldr	r3, [r7, #4]
  391 0016 1B68     		ldr	r3, [r3, #0]
  392 0018 4FF00102 		mov	r2, #1
  393 001c 1A70     		strb	r2, [r3, #0]
-  66:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data__et);
+  66:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data__et);
  394              		.loc 1 66 0
  395 001e 3B46     		mov	r3, r7
  396 0020 7868     		ldr	r0, [r7, #4]
@@ -453,7 +453,7 @@
  398 0026 4FF00402 		mov	r2, #4
  399 002a FFF7FEFF 		bl	etPort_sendMessage
  400              	.L15:
-  67:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					}
+  67:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	}
   68:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
  401              		.loc 1 68 0
  402 002e 07F10807 		add	r7, r7, #8
@@ -596,31 +596,30 @@
  529              	.LCFI32:
  530              		.cfi_def_cfa_register 7
  531 0006 7860     		str	r0, [r7, #4]
-  83:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	
-  84:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 				if (status!=0){
- 532              		.loc 1 84 0
+  83:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	if (status!=0){
+ 532              		.loc 1 83 0
  533 0008 7B68     		ldr	r3, [r7, #4]
  534 000a 1B68     		ldr	r3, [r3, #0]
  535 000c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  536 000e 002B     		cmp	r3, #0
  537 0010 0DD0     		beq	.L21
-  85:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					status=0;
- 538              		.loc 1 85 0
+  84:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		status=0;
+ 538              		.loc 1 84 0
  539 0012 7B68     		ldr	r3, [r7, #4]
  540 0014 1B68     		ldr	r3, [r3, #0]
  541 0016 4FF00002 		mov	r2, #0
  542 001a 1A70     		strb	r2, [r3, #0]
-  86:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);
- 543              		.loc 1 86 0
+  85:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);
+ 543              		.loc 1 85 0
  544 001c 7868     		ldr	r0, [r7, #4]
  545 001e 4FF00401 		mov	r1, #4
  546 0022 4FF00002 		mov	r2, #0
  547 0026 4FF00003 		mov	r3, #0
  548 002a FFF7FEFF 		bl	etPort_sendMessage
  549              	.L21:
-  87:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					}
-  88:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
- 550              		.loc 1 88 0
+  86:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	}
+  87:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
+ 550              		.loc 1 87 0
  551 002e 07F10807 		add	r7, r7, #8
  552 0032 BD46     		mov	sp, r7
  553 0034 80BD     		pop	{r7, pc}
@@ -633,9 +632,9 @@
  561              		.thumb_func
  563              	PTimerConjReplPort_kill_broadcast:
  564              	.LFB11:
-  89:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
-  90:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** void PTimerConjReplPort_kill_broadcast(const PTimerConjReplPort* self) {
- 565              		.loc 1 90 0
+  88:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
+  89:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** void PTimerConjReplPort_kill_broadcast(const PTimerConjReplPort* self) {
+ 565              		.loc 1 89 0
  566              		.cfi_startproc
  567              		@ args = 0, pretend = 0, frame = 16
  568              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -651,15 +650,15 @@
  578              	.LCFI35:
  579              		.cfi_def_cfa_register 7
  580 0006 7860     		str	r0, [r7, #4]
-  91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	int i;
-  92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	for (i=0; i<((etReplPort*)self)->size; ++i) {
- 581              		.loc 1 92 0
+  90:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	int i;
+  91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	for (i=0; i<((etReplPort*)self)->size; ++i) {
+ 581              		.loc 1 91 0
  582 0008 4FF00003 		mov	r3, #0
  583 000c FB60     		str	r3, [r7, #12]
  584 000e 0CE0     		b	.L24
  585              	.L25:
-  93:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		PTimerConjPort_kill(&((etReplPort*)self)->ports[i].port);
- 586              		.loc 1 93 0 discriminator 2
+  92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		PTimerConjPort_kill(&((etReplPort*)self)->ports[i].port);
+ 586              		.loc 1 92 0 discriminator 2
  587 0010 7B68     		ldr	r3, [r7, #4]
  588 0012 5A68     		ldr	r2, [r3, #4]
  589 0014 FB68     		ldr	r3, [r7, #12]
@@ -667,23 +666,23 @@
  591 001a D318     		adds	r3, r2, r3
  592 001c 1846     		mov	r0, r3
  593 001e FFF7FEFF 		bl	PTimerConjPort_kill
-  92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	for (i=0; i<((etReplPort*)self)->size; ++i) {
- 594              		.loc 1 92 0 discriminator 2
+  91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	for (i=0; i<((etReplPort*)self)->size; ++i) {
+ 594              		.loc 1 91 0 discriminator 2
  595 0022 FB68     		ldr	r3, [r7, #12]
  596 0024 03F10103 		add	r3, r3, #1
  597 0028 FB60     		str	r3, [r7, #12]
  598              	.L24:
-  92:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	for (i=0; i<((etReplPort*)self)->size; ++i) {
- 599              		.loc 1 92 0 is_stmt 0 discriminator 1
+  91:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	for (i=0; i<((etReplPort*)self)->size; ++i) {
+ 599              		.loc 1 91 0 is_stmt 0 discriminator 1
  600 002a 7B68     		ldr	r3, [r7, #4]
  601 002c 1B88     		ldrh	r3, [r3, #0]
  602 002e 1AB2     		sxth	r2, r3
  603 0030 FB68     		ldr	r3, [r7, #12]
  604 0032 9A42     		cmp	r2, r3
  605 0034 ECDC     		bgt	.L25
-  94:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	}					
-  95:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
- 606              		.loc 1 95 0 is_stmt 1
+  93:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	}					
+  94:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
+ 606              		.loc 1 94 0 is_stmt 1
  607 0036 07F11007 		add	r7, r7, #16
  608 003a BD46     		mov	sp, r7
  609 003c 80BD     		pop	{r7, pc}
@@ -696,9 +695,9 @@
  617              		.thumb_func
  619              	PTimerConjReplPort_kill:
  620              	.LFB12:
-  96:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
-  97:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** void PTimerConjReplPort_kill(const PTimerConjReplPort* self, int idx__et) {
- 621              		.loc 1 97 0
+  95:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
+  96:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** void PTimerConjReplPort_kill(const PTimerConjReplPort* self, int idx__et) {
+ 621              		.loc 1 96 0
  622              		.cfi_startproc
  623              		@ args = 0, pretend = 0, frame = 8
  624              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -715,8 +714,8 @@
  635              		.cfi_def_cfa_register 7
  636 0006 7860     		str	r0, [r7, #4]
  637 0008 3960     		str	r1, [r7, #0]
-  98:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	PTimerConjPort_kill(&((etReplPort*)self)->ports[idx__et].port);
- 638              		.loc 1 98 0
+  97:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	PTimerConjPort_kill(&((etReplPort*)self)->ports[idx__et].port);
+ 638              		.loc 1 97 0
  639 000a 7B68     		ldr	r3, [r7, #4]
  640 000c 5A68     		ldr	r2, [r3, #4]
  641 000e 3B68     		ldr	r3, [r7, #0]
@@ -724,8 +723,8 @@
  643 0014 D318     		adds	r3, r2, r3
  644 0016 1846     		mov	r0, r3
  645 0018 FFF7FEFF 		bl	PTimerConjPort_kill
-  99:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
- 646              		.loc 1 99 0
+  98:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
+ 646              		.loc 1 98 0
  647 001c 07F10807 		add	r7, r7, #8
  648 0020 BD46     		mov	sp, r7
  649 0022 80BD     		pop	{r7, pc}
@@ -738,14 +737,14 @@
  657              		.thumb_func
  659              	PTimerConjReplPort_getReplication:
  660              	.LFB13:
- 100:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
- 101:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /* begin PTimerConjPort specific */
- 102:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
- 103:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /*--------------------- operations ---------------------*/
- 104:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /* end PTimerConjPort specific */
- 105:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
- 106:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
- 661              		.loc 1 106 0
+  99:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
+ 100:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /* begin PTimerConjPort specific */
+ 101:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
+ 102:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /*--------------------- operations ---------------------*/
+ 103:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /* end PTimerConjPort specific */
+ 104:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
+ 105:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** etInt32 PTimerConjReplPort_getReplication(const PTimerConjReplPort* self) {
+ 661              		.loc 1 105 0
  662              		.cfi_startproc
  663              		@ args = 0, pretend = 0, frame = 8
  664              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -761,13 +760,13 @@
  674              	.LCFI41:
  675              		.cfi_def_cfa_register 7
  676 0006 7860     		str	r0, [r7, #4]
- 107:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	return ((etReplPort*)self)->size;
- 677              		.loc 1 107 0
+ 106:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	return ((etReplPort*)self)->size;
+ 677              		.loc 1 106 0
  678 0008 7B68     		ldr	r3, [r7, #4]
  679 000a 1B88     		ldrh	r3, [r3, #0]
  680 000c 1BB2     		sxth	r3, r3
- 108:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
- 681              		.loc 1 108 0
+ 107:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
+ 681              		.loc 1 107 0
  682 000e 1846     		mov	r0, r3
  683 0010 07F10C07 		add	r7, r7, #12
  684 0014 BD46     		mov	sp, r7
@@ -782,10 +781,10 @@
  694              		.thumb_func
  696              	PTimerConjPort_timeout_receiveHandler:
  697              	.LFB14:
- 109:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
- 110:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /* receiver handlers */
- 111:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage* msg, void * actor
- 698              		.loc 1 111 0
+ 108:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 
+ 109:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** /* receiver handlers */
+ 110:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** void PTimerConjPort_timeout_receiveHandler(PTimerConjPort* self, const etMessage* msg, void * actor
+ 698              		.loc 1 110 0
  699              		.cfi_startproc
  700              		@ args = 0, pretend = 0, frame = 16
  701              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -804,44 +803,44 @@
  714 0008 B960     		str	r1, [r7, #8]
  715 000a 7A60     		str	r2, [r7, #4]
  716 000c 3B60     		str	r3, [r7, #0]
- 112:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	/* TODO: clear active bit in case of single shot timer */
- 113:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 				if (status!=0){
- 717              		.loc 1 113 0
+ 111:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	/* TODO: clear active bit in case of single shot timer */
+ 112:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	if (status!=0){
+ 717              		.loc 1 112 0
  718 000e FB68     		ldr	r3, [r7, #12]
  719 0010 1B68     		ldr	r3, [r3, #0]
  720 0012 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  721 0014 002B     		cmp	r3, #0
  722 0016 0ED0     		beq	.L29
- 114:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					if (status==ET_TIMER_RUNNING){
- 723              		.loc 1 114 0
+ 113:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		if (status==ET_TIMER_RUNNING){
+ 723              		.loc 1 113 0
  724 0018 FB68     		ldr	r3, [r7, #12]
  725 001a 1B68     		ldr	r3, [r3, #0]
  726 001c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  727 001e 012B     		cmp	r3, #1
  728 0020 04D1     		bne	.L31
- 115:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 						/* single shot timer */
- 116:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 						status=0;
- 729              		.loc 1 116 0
+ 114:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 			/* single shot timer */
+ 115:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 			status=0;
+ 729              		.loc 1 115 0
  730 0022 FB68     		ldr	r3, [r7, #12]
  731 0024 1B68     		ldr	r3, [r3, #0]
  732 0026 4FF00002 		mov	r2, #0
  733 002a 1A70     		strb	r2, [r3, #0]
  734              	.L31:
- 117:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 						}
- 118:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					/* msg to fsm */
- 119:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					(*receiveMessageFunc)(actor, self, msg);
- 735              		.loc 1 119 0
+ 116:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 			}
+ 117:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		/* msg to fsm */
+ 118:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 		(*receiveMessageFunc)(actor, self, msg);
+ 735              		.loc 1 118 0
  736 002c 3B68     		ldr	r3, [r7, #0]
  737 002e 7868     		ldr	r0, [r7, #4]
  738 0030 F968     		ldr	r1, [r7, #12]
  739 0032 BA68     		ldr	r2, [r7, #8]
  740 0034 9847     		blx	r3
  741              	.L29:
- 120:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 					}
- 121:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	/* hand over the message to the actor:      */
- 122:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	/* (*receiveMessageFunc)(actor, self, msg); */
- 123:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
- 742              		.loc 1 123 0
+ 119:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	}
+ 120:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	/* hand over the message to the actor:      */
+ 121:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** 	/* (*receiveMessageFunc)(actor, self, msg); */
+ 122:C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/src-gen-st/room/basic/service/timing\PTimer.c **** }
+ 742              		.loc 1 122 0
  743 0036 07F11007 		add	r7, r7, #16
  744 003a BD46     		mov	sp, r7
  745 003c 80BD     		pop	{r7, pc}
@@ -863,60 +862,37 @@
  762              		.file 13 "C:/data/workspaces/github/de.protos.demos/src/HexagonCANDemo/etrice.HexagonCANDemo.demo/
 DEFINED SYMBOLS
                             *ABS*:00000000 PTimer.c
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:20     .text.PTimerPort_timeout:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:25     .text.PTimerPort_timeout:00000000 PTimerPort_timeout
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:58     .text.PTimerReplPort_timeout_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:63     .text.PTimerReplPort_timeout_broadcast:00000000 PTimerReplPort_timeout_broadcast
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:117    .text.PTimerReplPort_timeout:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:122    .text.PTimerReplPort_timeout:00000000 PTimerReplPort_timeout
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:172    .text.PTimerReplPort_getReplication:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:177    .text.PTimerReplPort_getReplication:00000000 PTimerReplPort_getReplication
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:209    .text.PTimerConjPort_startTimer:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:214    .text.PTimerConjPort_startTimer:00000000 PTimerConjPort_startTimer
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:259    .text.PTimerConjReplPort_startTimer_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:264    .text.PTimerConjReplPort_startTimer_broadcast:00000000 PTimerConjReplPort_startTimer_broadcast
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:317    .text.PTimerConjReplPort_startTimer:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:322    .text.PTimerConjReplPort_startTimer:00000000 PTimerConjReplPort_startTimer
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:359    .text.PTimerConjPort_startTimeout:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:364    .text.PTimerConjPort_startTimeout:00000000 PTimerConjPort_startTimeout
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:409    .text.PTimerConjReplPort_startTimeout_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:414    .text.PTimerConjReplPort_startTimeout_broadcast:00000000 PTimerConjReplPort_startTimeout_broadcast
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:467    .text.PTimerConjReplPort_startTimeout:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:472    .text.PTimerConjReplPort_startTimeout:00000000 PTimerConjReplPort_startTimeout
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:509    .text.PTimerConjPort_kill:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:514    .text.PTimerConjPort_kill:00000000 PTimerConjPort_kill
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:558    .text.PTimerConjReplPort_kill_broadcast:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:563    .text.PTimerConjReplPort_kill_broadcast:00000000 PTimerConjReplPort_kill_broadcast
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:614    .text.PTimerConjReplPort_kill:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:619    .text.PTimerConjReplPort_kill:00000000 PTimerConjReplPort_kill
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:654    .text.PTimerConjReplPort_getReplication:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:659    .text.PTimerConjReplPort_getReplication:00000000 PTimerConjReplPort_getReplication
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:691    .text.PTimerConjPort_timeout_receiveHandler:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\cc9Pbyan.s:696    .text.PTimerConjPort_timeout_receiveHandler:00000000 PTimerConjPort_timeout_receiveHandler
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:20     .text.PTimerPort_timeout:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:25     .text.PTimerPort_timeout:00000000 PTimerPort_timeout
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:58     .text.PTimerReplPort_timeout_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:63     .text.PTimerReplPort_timeout_broadcast:00000000 PTimerReplPort_timeout_broadcast
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:117    .text.PTimerReplPort_timeout:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:122    .text.PTimerReplPort_timeout:00000000 PTimerReplPort_timeout
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:172    .text.PTimerReplPort_getReplication:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:177    .text.PTimerReplPort_getReplication:00000000 PTimerReplPort_getReplication
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:209    .text.PTimerConjPort_startTimer:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:214    .text.PTimerConjPort_startTimer:00000000 PTimerConjPort_startTimer
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:259    .text.PTimerConjReplPort_startTimer_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:264    .text.PTimerConjReplPort_startTimer_broadcast:00000000 PTimerConjReplPort_startTimer_broadcast
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:317    .text.PTimerConjReplPort_startTimer:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:322    .text.PTimerConjReplPort_startTimer:00000000 PTimerConjReplPort_startTimer
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:359    .text.PTimerConjPort_startTimeout:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:364    .text.PTimerConjPort_startTimeout:00000000 PTimerConjPort_startTimeout
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:409    .text.PTimerConjReplPort_startTimeout_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:414    .text.PTimerConjReplPort_startTimeout_broadcast:00000000 PTimerConjReplPort_startTimeout_broadcast
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:467    .text.PTimerConjReplPort_startTimeout:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:472    .text.PTimerConjReplPort_startTimeout:00000000 PTimerConjReplPort_startTimeout
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:509    .text.PTimerConjPort_kill:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:514    .text.PTimerConjPort_kill:00000000 PTimerConjPort_kill
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:558    .text.PTimerConjReplPort_kill_broadcast:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:563    .text.PTimerConjReplPort_kill_broadcast:00000000 PTimerConjReplPort_kill_broadcast
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:614    .text.PTimerConjReplPort_kill:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:619    .text.PTimerConjReplPort_kill:00000000 PTimerConjReplPort_kill
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:654    .text.PTimerConjReplPort_getReplication:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:659    .text.PTimerConjReplPort_getReplication:00000000 PTimerConjReplPort_getReplication
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:691    .text.PTimerConjPort_timeout_receiveHandler:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc8gjrQH.s:696    .text.PTimerConjPort_timeout_receiveHandler:00000000 PTimerConjPort_timeout_receiveHandler
                      .debug_frame:00000010 $d
-                           .group:00000000 wm4.1.59b7826cf76cfe2eff811cea0f220ee8
-                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
-                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
-                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
-                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
-                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
-                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
-                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
-                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
-                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
-                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
-                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
-                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
-                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
-                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
-                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
-                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
-                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
-                           .group:00000000 wm4.etDatatypes.h.46.d01c3a9ad02b6611beb80ccd6973b180
-                           .group:00000000 wm4.etMessageService.h.35.d59d0242cc2158bcaed8acc00ffa8450
-                           .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970
-                           .group:00000000 wm4.PTimer.h.16.9acb2d47a6f0a03570e9f7dac5fbab36
-                           .group:00000000 wm4.etMSCLogger.h.23.8776f0b4cca7a780673ce7e90ee97990
 
 UNDEFINED SYMBOLS
 etPort_sendMessage

@@ -443,30 +443,30 @@
  390              		.file 7 "C:\\data\\workspaces\\github\\de.protos.demos\\src\\HexagonCANDemo\\etrice.runtime.c\\etR
 DEFINED SYMBOLS
                             *ABS*:00000000 etDataLogger.c
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:20     .bss:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:21     .bss:00000000 etDataLogger_fileHandle
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:24     .bss:00000004 etDataLogger_row
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:27     .rodata:00000000 $d
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:28     .rodata:00000000 .LC0
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:31     .rodata:00000010 .LC1
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:34     .text.etDataLogger_open:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:39     .text.etDataLogger_open:00000000 etDataLogger_open
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:94     .text.etDataLogger_close:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:99     .text.etDataLogger_close:00000000 etDataLogger_close
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:133    .rodata:00000014 .LC2
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:136    .text.etDataLogger_logString:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:141    .text.etDataLogger_logString:00000000 etDataLogger_logString
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:184    .rodata:00000018 .LC3
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:187    .text.etDataLogger_logBool:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:192    .text.etDataLogger_logBool:00000000 etDataLogger_logBool
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:234    .text.etDataLogger_logInt:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:239    .text.etDataLogger_logInt:00000000 etDataLogger_logInt
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:282    .rodata:0000001c .LC4
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:285    .text.etDataLogger_logDouble:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:290    .text.etDataLogger_logDouble:00000000 etDataLogger_logDouble
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:333    .rodata:00000024 .LC5
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:336    .text.etDataLogger_newRow:00000000 $t
-C:\Users\TJung\AppData\Local\Temp\ccQlIfGB.s:341    .text.etDataLogger_newRow:00000000 etDataLogger_newRow
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:20     .bss:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:21     .bss:00000000 etDataLogger_fileHandle
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:24     .bss:00000004 etDataLogger_row
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:27     .rodata:00000000 $d
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:28     .rodata:00000000 .LC0
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:31     .rodata:00000010 .LC1
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:34     .text.etDataLogger_open:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:39     .text.etDataLogger_open:00000000 etDataLogger_open
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:94     .text.etDataLogger_close:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:99     .text.etDataLogger_close:00000000 etDataLogger_close
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:133    .rodata:00000014 .LC2
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:136    .text.etDataLogger_logString:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:141    .text.etDataLogger_logString:00000000 etDataLogger_logString
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:184    .rodata:00000018 .LC3
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:187    .text.etDataLogger_logBool:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:192    .text.etDataLogger_logBool:00000000 etDataLogger_logBool
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:234    .text.etDataLogger_logInt:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:239    .text.etDataLogger_logInt:00000000 etDataLogger_logInt
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:282    .rodata:0000001c .LC4
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:285    .text.etDataLogger_logDouble:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:290    .text.etDataLogger_logDouble:00000000 etDataLogger_logDouble
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:333    .rodata:00000024 .LC5
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:336    .text.etDataLogger_newRow:00000000 $t
+C:\Users\TJung\AppData\Local\Temp\cc7j48v2.s:341    .text.etDataLogger_newRow:00000000 etDataLogger_newRow
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.3ebb63153f4be34d5fff8ba99e32b1ac
                            .group:00000000 wm4.etRuntimeConfig.h.22.f3896c5e01c5c01380e7f5e574077970

@@ -71,8 +71,10 @@ static void action_TRANS_INITIAL_TO__state0(AMrPing* self) {
 	
 	
 	timer_startTimeout(500);
-	canTx_init(0x00000005);
-	canRx_init(0x00000007);
+	canTx_init(ET_CAN_CHANNEL_NOT_DEFINED);
+	canRx_init(ET_CAN_CHANNEL_NOT_DEFINED);
+	//canTx.init(0x00000005);
+	//canRx.init(0x00000007);
 	
 	msg.id = 0x12;
 	canRx_listenOnMsg(&msg);
