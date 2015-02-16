@@ -1,0 +1,310 @@
+RoomModel room.basic.service.gpio {
+
+	import room.basic.types.* from "Types.room"
+	import room.basic.service.timing.* from "TimingService.room"
+
+	ActorClass AIOBitService {
+		Interface {
+			SPP iobitIn: PIOBitInput
+			SPP iobitOut: PIOBitOutput
+		}
+		Structure {
+			usercode1 {
+				"/*uc1*/"
+			}
+			usercode2 {
+				"/*uc2*/"
+			} usercode3 {
+				"/*uc3 */"
+				"#include \"pclGPIOService.h\""
+			}
+			ServiceImplementation of iobitIn
+			ServiceImplementation of iobitOut
+			SAP timer: PTimer
+			Attribute ioData [ 20 ]: DGPIOData
+			Attribute outputChannel [ 20 ]: uint32
+			Attribute pollTime: uint32 = "50"
+		}
+		Behavior {
+			Operation pollAllInputs() {
+				"uint32 i;"
+				"uint8 val;"
+				"uint32 numberOfPorts = PIOBitInputReplPort_getReplication(&(self->constData->iobitIn));"
+				"for(i=0;i<numberOfPorts;i++){"
+				"	/* poll just those ports that are configured as send change message */"
+				"	if (ioData[i].changeMessageEnabled == ET_IOBit_NO_CHANGE_MESSAGE) continue;"
+				"	val=pclGetIOBit(ioData[i].channel);"
+				"	if(val!=ioData[i].lastValue){"
+				"		//sendMessage"
+				"		switch (val){"
+				"			case 0: if(ioData[i].changeMessageEnabled & ET_IOBit_CHANGE_MESSAGE_ON_RESET) iobitIn[i].valueChanged(val);"
+				"				break;"
+				"			case 1: if(ioData[i].changeMessageEnabled & ET_IOBit_CHANGE_MESSAGE_ON_SET) iobitIn[i].valueChanged(val);"
+				"				break;"
+				"			default:break;"
+				"		}"
+				"		ioData[i].lastValue=val;"
+				"	}"
+				"}"
+			}
+			StateMachine {
+				Transition init: initial -> Operational {
+					action {
+						"timer.startTimer(pollTime);"
+					}
+				}
+				Transition tr4: Operational -> Operational {
+					triggers {
+						<init: iobitIn>
+					}
+					action {
+						"ioData[((etReplSubPort*)ifitem)->index].channel = data->channel;\nioData[((etReplSubPort*)ifitem)->index].changeMessageEnabled = data->changeMessageEnabled;\nioData[((etReplSubPort*)ifitem)->index].lastValue = data->lastValue;\npclSetIOBitAsInput(data->channel);\n\n"
+					}
+				}
+				Transition tr0: Operational -> Operational {
+					triggers {
+						<getBit: iobitIn>
+					}
+					action {
+						"uint32 i = ((etReplSubPort*)ifitem)->index;\n\nuint8 val = pclGetIOBit(ioData[i].channel);\n\niobitIn[i].valueChanged(val);"
+					}
+				}
+				Transition tr1: Operational -> Operational {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"pollAllInputs();"
+					}
+				}
+				Transition tr2: Operational -> Operational {
+					triggers {
+						<init: iobitOut>
+					}
+					action {
+						"outputChannel[((etReplSubPort*)ifitem)->index] = data;\npclSetIOBitAsOutput(data);"
+					}
+				}
+				Transition tr3: Operational -> Operational {
+					triggers {
+						<setBit: iobitOut>
+					}
+					action {
+						"pclSetIOBit( outputChannel[((etReplSubPort*)ifitem)->index]);"
+					}
+				}
+				Transition tr5: Operational -> Operational {
+					triggers {
+						<resetBit: iobitOut>
+					}
+					action {
+						"pclResetIOBit( outputChannel[((etReplSubPort*)ifitem)->index]);"
+					}
+				}
+				Transition tr6: Operational -> Operational {
+					triggers {
+						<toggleBit: iobitOut>
+					}
+					action {
+						"pclToggleIOBit( outputChannel[((etReplSubPort*)ifitem)->index]);"
+					}
+				}
+				State Operational
+			}
+		}
+	}
+
+	ProtocolClass PIOBitOutput {
+		usercode1 {
+			"#define ET_IOBit_HW_ID_NOT_DEFINED			0xFFFFFFFF"
+		}
+		incoming {
+			Message init(data: uint32)
+			Message setBit()
+			Message resetBit()
+			Message toggleBit()
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming init {
+				"ET_MSC_LOGGER_SYNC_ENTRY(\"PIOBitOutputConjPort\", \"init\")"
+				"if(data__et != ET_IOBit_HW_ID_NOT_DEFINED) pChannel = data__et;"
+				"etPort_sendMessage(self, PIOBitOutput_IN_init, sizeof(uint32), &data__et);"
+				"ET_MSC_LOGGER_SYNC_EXIT"
+			}
+			Attribute pChannel: uint32 = " ET_IOBit_HW_ID_NOT_DEFINED " [ " must be set by configuration " ]
+		}
+	}
+
+	ProtocolClass PIOBitInput {
+		usercode1 {
+			"#define ET_IOBit_CHANGE_MESSAGE_ON_SET		0x01"
+			"#define ET_IOBit_CHANGE_MESSAGE_ON_RESET	0x02"
+			"#define ET_IOBit_NO_CHANGE_MESSAGE			0xFF"
+			"#define ET_IOBit_HW_ID_NOT_DEFINED			0xFFFFFFFF"
+		}
+		incoming {
+			Message init(data: DGPIOData)
+			Message getBit()
+		}
+		outgoing {
+			Message valueChanged(data: uint8)
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming init {
+				"ET_MSC_LOGGER_SYNC_ENTRY(\"PIOBitInputConjPort\", \"init\")"
+				"if(data__et->channel == ET_IOBit_HW_ID_NOT_DEFINED) data__et->channel = pChannel; else pChannel=data__et->channel;"
+				"etPort_sendMessage(self, PIOBitInput_IN_init, sizeof(DGPIOData), data__et);"
+				"ET_MSC_LOGGER_SYNC_EXIT"
+			}
+			Attribute pChannel: uint32 = " ET_IOBit_HW_ID_NOT_DEFINED " [ " must be set by configuration " ]
+		}
+	}
+
+	DataClass DGPIOData {
+		Attribute channel: uint32 = " ET_IOBit_HW_ID_NOT_DEFINED "
+		Attribute changeMessageEnabled: uint8 = " ET_IOBit_NO_CHANGE_MESSAGE "
+		Attribute lastValue: uint8 = " 0 "
+	}
+
+	ActorClass AIORegister8Service {
+		Interface {
+			SPP ioReg8In: PIORegister8Input
+			SPP ioReg8Out: PIORegister8Output
+		}
+		Structure {
+			usercode1 {
+				"/*uc1*/"
+			}
+			usercode2 {
+				"/*uc2*/"
+			} usercode3 {
+				"/*uc3 */"
+				"#include \"pclGPIOService.h\""
+			}
+			ServiceImplementation of ioReg8In
+			ServiceImplementation of ioReg8Out
+			SAP timer: PTimer
+			Attribute ioData [ 2 ]: DGPIOData
+			Attribute outputChannel [ 10 ]: uint32
+			Attribute pollTime: uint32 = "50"
+		}
+		Behavior {
+			Operation pollAllInputs() {
+				"uint32 i;"
+				"uint8 val;"
+				"uint32 numberOfPorts = PIORegister8InputReplPort_getReplication(&(self->constData->ioReg8In));"
+				"for(i=0;i<numberOfPorts;i++){"
+				"	/* poll just those ports that are configured as send change message */"
+				"	if (ioData[i].changeMessageEnabled == ET_IOReg8_CHANGE_MESSAGE_DISABLED) continue;"
+				"	val=pclGetIORegister8(ioData[i].channel);"
+				"	if(val!=ioData[i].lastValue){"
+				"		//sendMessage"
+				"		ioReg8In[i].valueChanged(val);"
+				"		ioData[i].lastValue=val;"
+				"	}"
+				"}"
+			}
+			StateMachine {
+				Transition init: initial -> Operational {
+					action {
+						"timer.startTimer(pollTime);"
+					}
+				}
+				Transition tr4: Operational -> Operational {
+					triggers {
+						<init: ioReg8In>
+					}
+					action {
+						"ioData[((etReplSubPort*)ifitem)->index].channel = data->channel;\nioData[((etReplSubPort*)ifitem)->index].changeMessageEnabled = data->changeMessageEnabled;\nioData[((etReplSubPort*)ifitem)->index].lastValue = data->lastValue;\npclSetIORegister8AsInput(data->channel);\n\n"
+					}
+				}
+				Transition tr0: Operational -> Operational {
+					triggers {
+						<getRegister8: ioReg8In>
+					}
+					action {
+						"uint32 i = ((etReplSubPort*)ifitem)->index;\n\nuint8 val = pclGetIORegister8(ioData[i].channel);\n\nioReg8In[i].valueChanged(val);"
+					}
+				}
+				Transition tr1: Operational -> Operational {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"pollAllInputs();"
+					}
+				}
+				Transition tr2: Operational -> Operational {
+					triggers {
+						<init: ioReg8Out>
+					}
+					action {
+						"outputChannel[((etReplSubPort*)ifitem)->index] = data;"
+						"pclSetIORegister8AsOutput(data);"
+					}
+				}
+				Transition tr3: Operational -> Operational {
+					triggers {
+						<setRegister8: ioReg8Out>
+					}
+					action {
+						"pclSetIORegister8( outputChannel[((etReplSubPort*)ifitem)->index],data);"
+					}
+				}
+				State Operational
+			}
+		}
+	}
+
+	ProtocolClass PIORegister8Output {
+		usercode1 {
+			"#define ET_IOReg8_HW_ID_NOT_DEFINED			0xFFFFFFFF"
+		}
+		incoming {
+			Message init(data: uint32)
+			Message setRegister8(data: uint8)
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming init {
+				"ET_MSC_LOGGER_SYNC_ENTRY(\"PIOBitConjPort\", \"init\")"
+				"if(data__et != ET_IOReg8_HW_ID_NOT_DEFINED) pChannel = data__et;"
+				"etPort_sendMessage(self, PIORegister8Output_IN_init, sizeof(uint32), &data__et);"
+				"ET_MSC_LOGGER_SYNC_EXIT"
+			}
+			Attribute pChannel: uint32 = " ET_IOReg8_HW_ID_NOT_DEFINED " [ " must be set by configuration " ]
+		}
+	}
+
+	ProtocolClass PIORegister8Input {
+		usercode1 {
+			"#define ET_IOReg8_CHANGE_MESSAGE_ENABLED		0x02"
+			"#define ET_IOReg8_CHANGE_MESSAGE_DISABLED		0xFF"
+			"#define ET_IOReg8_HW_ID_NOT_DEFINED			0xFFFFFFFF"
+		}
+		incoming {
+			Message init(data: DGPIOData)
+			Message getRegister8()
+		}
+		outgoing {
+			Message valueChanged(data: uint8)
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming init {
+				"ET_MSC_LOGGER_SYNC_ENTRY(\"PIOBitConjPort\", \"init\")"
+				"if(data__et->channel == ET_IOReg8_HW_ID_NOT_DEFINED) data__et->channel = pChannel; else pChannel=data__et->channel;"
+				"etPort_sendMessage(self, PIORegister8Input_IN_init, sizeof(DGPIOData), data__et);"
+				"ET_MSC_LOGGER_SYNC_EXIT"
+			}
+			Attribute pChannel: uint32 = " ET_IOReg8_HW_ID_NOT_DEFINED " [ " must be set by configuration " ]
+		}
+	}
+
+}
