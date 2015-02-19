@@ -130,7 +130,7 @@ RoomModel room.basic.service.gpio {
 			incoming init {
 				"ET_MSC_LOGGER_SYNC_ENTRY(\"PIOBitOutputConjPort\", \"init\")"
 				"if(data__et != ET_IOBit_HW_ID_NOT_DEFINED) pChannel = data__et;"
-				"etPort_sendMessage(self, PIOBitOutput_IN_init, sizeof(uint32), &data__et);"
+				"etPort_sendMessage(self, PIOBitOutput_IN_init, sizeof(uint32), &pChannel);"
 				"ET_MSC_LOGGER_SYNC_EXIT"
 			}
 			Attribute pChannel: uint32 = " ET_IOBit_HW_ID_NOT_DEFINED " [ " must be set by configuration " ]
@@ -274,7 +274,7 @@ RoomModel room.basic.service.gpio {
 			incoming init {
 				"ET_MSC_LOGGER_SYNC_ENTRY(\"PIOBitConjPort\", \"init\")"
 				"if(data__et != ET_IOReg8_HW_ID_NOT_DEFINED) pChannel = data__et;"
-				"etPort_sendMessage(self, PIORegister8Output_IN_init, sizeof(uint32), &data__et);"
+				"etPort_sendMessage(self, PIORegister8Output_IN_init, sizeof(uint32), &pChannel);"
 				"ET_MSC_LOGGER_SYNC_EXIT"
 			}
 			Attribute pChannel: uint32 = " ET_IOReg8_HW_ID_NOT_DEFINED " [ " must be set by configuration " ]
