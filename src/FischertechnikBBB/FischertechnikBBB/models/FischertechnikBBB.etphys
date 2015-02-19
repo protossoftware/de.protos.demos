@@ -1,0 +1,34 @@
+PhysicalModel FischertechnikBBB {
+	
+	PhysicalSystem PhysSys1 {
+		NodeRef nodeRef1 : NodeClass1
+	}
+	
+	NodeClass NodeClass1 {
+		runtime = RuntimeClass1
+		priomin = -19
+		priomax = 19
+		
+		DefaultThread PhysicalThread1 {
+			execmode = mixed
+			interval = 15ms
+			prio = -15
+			stacksize = 4024
+			msgblocksize = 64
+			msgpoolsize = 500
+		}
+		Thread TimerThread {
+			execmode = mixed
+			interval = 5ms
+			prio = -16
+			stacksize = 4024
+			msgblocksize = 64
+			msgpoolsize = 500
+		}
+		
+	}
+
+	RuntimeClass RuntimeClass1 {
+		model = multiThreaded
+	} 
+}

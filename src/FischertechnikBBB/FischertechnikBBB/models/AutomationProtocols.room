@@ -1,0 +1,58 @@
+RoomModel AutomationProtocols {
+
+	import room.basic.types.* from "Types.room"
+
+	ProtocolClass PDriveLR {
+		incoming {
+			Message changeDirection (x : boolean)
+			Message start ()
+			Message stop ()
+		}
+	}
+
+	ProtocolClass PInlineElement {
+		incoming {
+			Message getStatus ()
+			Message sendPart ()
+		}
+		outgoing {
+			Message isEmpty ()
+			Message receivedPart ()
+		}
+	}
+
+	ProtocolClass PTransport {
+		incoming {
+			Message getStatus ()
+			Message releasePart ()
+			Message takePart ()
+		}
+		outgoing {
+			Message isFull ()
+			Message isEmpty ()
+			Message releasePartDone ()
+			Message takePartDone ()
+		}
+	}
+
+	ProtocolClass PLinearUnit {
+		incoming {
+			Message moveForward ()
+			Message moveBackward ()
+		}
+		outgoing {
+			Message doneMoveForward ()
+			Message doneMoveBackward ()
+		}
+	}
+
+	ProtocolClass PProcessing {
+		incoming {
+			Message startProcessing ()
+		}
+		outgoing {
+			Message doneProcessing ()
+		}
+	}
+
+}

@@ -1,0 +1,261 @@
+RoomModel FischertechnikBBB {
+	
+	import room.basic.types.* from "Types.room"
+	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.service.gpio.* from "pclGPIOService.room"
+	import model "GenericLineElements.room"
+	
+	
+	LogicalSystem FischertechnikBBB {
+		SubSystemRef main: MainSubSystem
+	}
+	SubSystemClass MainSubSystem {
+		ActorRef timer: ATimingService
+		ActorRef ioService: AIOBitService
+		ActorRef machineControl: MachineControl
+		LayerConnection ref ioService satisfied_by timer.timer
+		LayerConnection ref machineControl satisfied_by ioService.iobitIn
+		LayerConnection ref machineControl satisfied_by ioService.iobitOut
+		LayerConnection ref machineControl satisfied_by timer.timer
+		LogicalThread defaultThread
+		LogicalThread timerThread
+		ActorInstanceMapping timer -> timerThread
+	}
+	ActorClass MachineControl{
+		Structure {
+			ActorRef sourceSensor: GenericLineElements.SourceSensor
+			ActorRef inputStation: GenericLineElements.BeltStation
+			ActorRef pusherStation1: GenericLineElements.PusherStation
+			ActorRef fraese: GenericLineElements.ProductionStation
+//			ActorRef ref0: APingPong
+			ActorRef bohrer: GenericLineElements.ProductionStation
+			ActorRef pusherStation2: GenericLineElements.PusherStation
+			ActorRef endStation: GenericLineElements.BeltStation
+			ActorRef endSensor: GenericLineElements.SinkSensor
+			Binding inputStation.prev and sourceSensor.next
+			Binding pusherStation1.prev and inputStation.next
+			Binding pusherStation1.next and fraese.prev
+			Binding fraese.next and bohrer.prev
+			Binding bohrer.next and pusherStation2.prev
+			Binding pusherStation2.next and endStation.prev
+			Binding endStation.next and endSensor.prev
+		}
+		Behavior { }
+	}
+	
+	
+	ActorClass Tester{
+		Structure{
+			SAP InputStationBandPower:PIOBitOutput
+			SAP InputStationBandDirection:PIOBitOutput
+			SAP OutputStationBandPower:PIOBitOutput
+			SAP InputStationSensor1:PIOBitInput
+			SAP timer:PTimer
+			Attribute ioData:DGPIOData
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"ioData.channel=ET_IOBit_HW_ID_NOT_DEFINED;"
+						"ioData.changeMessageEnabled=ET_IOBit_CHANGE_MESSAGE_ON_SET | ET_IOBit_CHANGE_MESSAGE_ON_RESET;"
+						"ioData.lastValue=0;"
+						""
+						"InputStationBandDirection.init(ET_IOBit_HW_ID_NOT_DEFINED);"
+						"InputStationBandPower.init(ET_IOBit_HW_ID_NOT_DEFINED);"
+						"InputStationSensor1.init(&ioData);"
+						"OutputStationBandPower.init(ET_IOBit_HW_ID_NOT_DEFINED);"
+						""
+						"timer.startTimeout(2000);"
+						""
+						"InputStationBandDirection.resetBit();"
+						"InputStationBandPower.resetBit();"
+					}
+				}
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(2000);"
+						"InputStationBandDirection.setBit();"
+						"InputStationBandPower.setBit();"
+					}
+				}
+				Transition tr1: state1 -> state2 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(2000);"
+						"InputStationBandPower.resetBit();"
+					}
+				}
+				Transition tr2: state2 -> state3 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(2000);"
+						"InputStationBandDirection.resetBit();"
+						"InputStationBandPower.setBit();"
+					}
+				}
+				Transition tr3: state3 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(2000);"
+						"InputStationBandPower.resetBit();"
+					}
+				}
+				Transition tr5: my tp0 -> my tp0 {
+					triggers {
+						<valueChanged: InputStationSensor1>
+					}
+					action {
+						"if(data){"
+						"\tOutputStationBandPower.setBit();"
+						"\t}else{"
+						"\tOutputStationBandPower.resetBit();"
+						"\t}"
+					}
+				}
+				handler TransitionPoint tp0
+				State state0
+				State state1
+				State state2
+				State state3
+			}
+		}
+	}
+
+	ActorClass APong{
+		Interface {
+			Port p0: PPingPong
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<ping: p0>
+					}
+					action {
+						"p0.pong();"
+					}
+				}
+				State state0
+			}
+		}
+	}
+	ActorClass APingPong{
+		Structure {
+			ActorRef ping: APing
+			ActorRef pong: APong
+			Binding ping.p0 and pong.p0
+		}
+		Behavior { }
+	}
+	ActorClass APing{
+		Interface {
+			conjugated Port p0: PPingPong
+		}
+		Structure {
+			external Port p0
+			SAP timer:PTimer
+			SAP digOut:PIOBitOutput
+			SAP digIn0:PIOBitInput
+			SAP digIn1:PIOBitInput
+			SAP digIn2:PIOBitInput
+			SAP digIn3:PIOBitInput
+			SAP digIn4:PIOBitInput
+			Attribute counter:uint32="0"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"DGPIOData ioData;"
+						""
+						"ioData.channel=0;"
+						"ioData.changeMessageEnabled=ET_IOBit_CHANGE_MESSAGE_ON_RESET | ET_IOBit_CHANGE_MESSAGE_ON_SET;"
+						"ioData.lastValue=0;"
+						""
+						"digOut.init(0);"
+						"digIn0.init(&ioData);"
+						"ioData.channel=1;"
+						"digIn1.init(&ioData);"
+						"ioData.channel=2;"
+						"digIn2.init(&ioData);"
+						"ioData.channel=3;"
+						"digIn3.init(&ioData);"
+						"ioData.channel=4;"
+						"digIn4.init(&ioData);"
+						"timer.startTimeout(10);"
+					}
+				}
+				Transition tr1: state0 -> state1 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"digOut.resetBit();"
+						"p0.ping();"
+					}
+				}
+				Transition tr2: state1 -> state0 {
+					triggers {
+						<pong: p0>
+					}
+					action {
+						"printf(\"*%d*\\n\",counter++);"
+						"digOut.setBit();"
+						"timer.startTimeout(50);"
+					}
+				}
+				Transition tr0: my tp0 -> my tp0 {
+					triggers {
+						<valueChanged: digIn0>
+					}
+					action {
+						"printf(\"Input changed  !\\n\");"
+					}
+				}
+				handler TransitionPoint tp0
+				State state0
+				State state1
+			}
+		}
+	}
+	
+	ActorClass Application {
+		Structure {
+			ActorRef tester: Tester
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"puts(\"!!!Hello World!!!\\n\");"
+					}
+				}
+				State state0
+			}
+		}
+	}
+
+	ProtocolClass PPingPong {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}

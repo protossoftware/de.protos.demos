@@ -1,0 +1,59 @@
+RoomModel FischertechnikInterfaceGamma {
+	import room.basic.types.* from "Types.room"
+	import room.basic.service.timing.* from "TimingService.room"
+	
+
+	ActorClass AGammaIntefaceFischertechnik {
+	Structure {
+			usercode3 {
+				"#include \"gacommon/common.h\""
+				"#include \"gaapi/api.h\""
+			}
+			SAP timer:PTimer
+			Attribute toggle:uint8
+		}
+		Behavior {
+			Operation setOutput(channel: string, value: boolean) {
+				"ga_PV pv;"
+				"gc_NumericValue val;"
+				"val.uint8 = value;"
+				"char channelpath[256];"
+				"strcpy(channelpath, \"Node.Memory.InputStation.Band1Power\");"
+				"//strcat(channelpath, channel);"
+				"int32 errorId = ga_pv_open(&pv, channelpath, 0);"
+				"printf(\"setOutput(%s, %d, %d)\\n\", channelpath, value, errorId);"
+				"ga_pv_putValue(pv, &val);"
+				"ga_pv_close(&pv);"
+			}
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"printf(\"Constructor\\n\");"
+						"int32 errorId = gc_attachToService( 0, 0 );"
+						"printf(\"gc_attachToService: ErrorId:%ld\\n\", errorId);"
+						""
+						"setOutput(\"noString\",1);"
+						""
+						"timer.startTimeout(2000);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(2000);"
+						"if (toggle&0x01){"
+						"\ttoggle=0;"
+						"\tsetOutput(\"noString\",1);"
+						"\t}else{"
+						"\ttoggle=1;"
+						"\tsetOutput(\"noString\",0);"
+						"\t}"
+					}
+				}
+				State state0
+			}
+		}
+	}
+}

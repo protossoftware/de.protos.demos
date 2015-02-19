@@ -1,0 +1,10 @@
+MappingModel FischertechnikBBB {
+	import FischertechnikBBB.* from "FischertechnikBBB.room"
+	import FischertechnikBBB.* from "FischertechnikBBB.etphys"
+	Mapping FischertechnikBBB -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+			ThreadMapping timerThread -> PhysicalThread1
+		}
+	}
+}

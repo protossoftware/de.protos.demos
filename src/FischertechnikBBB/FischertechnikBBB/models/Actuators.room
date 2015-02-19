@@ -1,0 +1,390 @@
+RoomModel Actuators {
+
+//	import protos.automation.service.provider.* from "../../../de.protos.automation.io/models/ServiceProvider.room"
+//	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
+	import room.basic.service.gpio.* from "pclGPIOService.room"
+	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.types.* from "Types.room"
+
+	import AutomationProtocols.* from "AutomationProtocols.room"
+
+	ActorClass DriveLR {
+		Interface {
+			Port fct: AutomationProtocols.PDriveLR
+		}
+		Structure {
+			external Port fct
+//			SAP lr: protos.automation.service.io.PDigOut 
+//			SAP start: protos.automation.service.io.PDigOut
+			SAP lr:PIOBitOutput
+			SAP start:PIOBitOutput
+			Attribute lrChannel : int32
+			Attribute startChannel : int32
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: Ready -> Moving {
+					triggers {
+						<start: fct>
+					}
+				}
+				Transition tr1: Moving -> Ready {
+					triggers {
+						<stop: fct>
+					}
+				}
+				Transition tr2: Ready -> Ready {
+					triggers {
+						<changeDirection: fct>
+					}
+					action {
+						"if(x){"
+						"\tlr.setBit();"
+						"\t}else{"
+						"\tlr.resetBit();"
+						"\t}"
+						""
+						"//if(x) lr.setOn();"
+						"//else lr.setOff();"
+					}
+				}
+				Transition tr3: initial -> Ready {
+					action {
+						"lr.init(ET_IOBit_HW_ID_NOT_DEFINED);"
+						"start.init(ET_IOBit_HW_ID_NOT_DEFINED);"
+						""
+						"//lr.registerChannel(getLrChannel());"
+						"//start.registerChannel(getStartChannel());"
+					}
+				}
+				State Ready
+				State Moving {
+					entry {
+						"start.setBit();"
+						"//start.setOn();"
+					}
+					exit {
+						"start.resetBit();"
+						"//start.setOff();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass LinearUnit {
+		Interface {
+			Port fct: AutomationProtocols.PLinearUnit
+		}
+		Structure {
+			external Port fct
+			conjugated Port drive: AutomationProtocols.PDriveLR
+			ActorRef Drive: DriveLR
+//			SAP sensorFront: protos.automation.service.io.PDigIn
+//			SAP sensorBack: protos.automation.service.io.PDigIn
+			SAP sensorFront:PIOBitInput
+			SAP sensorBack:PIOBitInput
+			SAP timeout: PTimer
+			SAP timeout2:PTimer
+			Binding drive and Drive.fct
+			Attribute sensorFrontChannel : int32
+			Attribute sensorBackChannel : int32
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> Undefined {
+					action {
+						"DGPIOData ioData;"
+						""
+						"ioData.channel=ET_IOBit_HW_ID_NOT_DEFINED;"
+						"ioData.changeMessageEnabled=ET_IOBit_CHANGE_MESSAGE_ON_SET | ET_IOBit_CHANGE_MESSAGE_ON_RESET;"
+						"ioData.lastValue=0;"
+						""
+						"sensorFront.init(&ioData);"
+						"sensorBack.init(&ioData);"
+						""
+						"//sensorFront.registerChannel(getSensorFrontChannel());"
+						"//sensorBack.registerChannel(getSensorBackChannel());"
+					}
+				}
+				Transition tr1: LinearUnitBackwards -> LinearUnitInPosBack {
+					triggers {
+						<valueChanged: sensorBack guard {
+							"data==0"
+						}>
+					}
+				}
+				Transition tr2: LinearUnitBackwards -> Error {
+					triggers {
+						<timeout: timeout2>
+					}
+					action {
+						"printf(\"ERROR : timeout sensorBack ! \\n\");"
+					}
+				}
+				Transition tr3: LinearUnitInPosBack -> LinearUnitForwards {
+					triggers {
+						<moveForward: fct>
+					}
+				}
+				Transition tr4: LinearUnitForwards -> LinearUnitInPosFront {
+					triggers {
+						<valueChanged: sensorFront guard {
+							"data==0"
+						}>
+					}
+				}
+				Transition tr5: LinearUnitInPosFront -> LinearUnitBackwards {
+					triggers {
+						<moveBackward: fct>
+					}
+				}
+				Transition tr6: LinearUnitForwards -> Error {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"printf(\"ERROR : timeout sensorFront !\\n\");"
+					}
+				}
+				Transition tr7: Undefined -> LinearUnitBackwards {
+					triggers {
+						<moveBackward: fct>
+					}
+				}
+				Transition tr8: Undefined -> LinearUnitForwards {
+					triggers {
+						<moveForward: fct>
+					}
+				}
+				Transition tr9: my tp0 -> my tp0 {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr10: my tp0 -> my tp0 {
+					triggers {
+						<timeout: timeout2>
+					}
+				}
+				handler TransitionPoint tp0
+				State Undefined
+				State LinearUnitBackwards {
+					entry {
+						"drive.changeDirection(true);"
+						"drive.start();"
+						"timeout2.startTimeout(5000);"
+						"sensorBack.getBit();"
+						"//sensorBack.getStatus();"
+					}
+					exit {
+						"printf(\"Backward Drive Stop !\\n\");"
+						"drive.stop();"
+						"//timeout.kill();"
+						"drive.changeDirection(false);"
+					}
+				}
+				State LinearUnitInPosBack {
+					entry {
+						"fct.doneMoveBackward();"
+					}
+				}
+				State Error
+				State LinearUnitForwards {
+					entry {
+						"drive.changeDirection(false);"
+						"drive.start();"
+						"timeout.startTimeout(5000);"
+						"sensorFront.getBit();"
+						"//sensorFront.getStatus();"
+					}
+					exit {
+						"printf(\"Foreward Drive Stop !\\n\");"
+						"drive.stop();"
+						"//timeout.kill();"
+					}
+				}
+				State LinearUnitInPosFront {
+					entry {
+						"fct.doneMoveForward();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ProcessingStation {
+		Interface {
+			Port fct: AutomationProtocols.PProcessing
+		}
+		Structure {
+			external Port fct
+			conjugated Port drive: AutomationProtocols.PDriveLR
+			ActorRef StationDrive: DriveLR
+			SAP timeout: PTimer
+			Binding drive and StationDrive.fct
+			Attribute processedUnits : int32
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> Idle
+				Transition tr1: Idle -> Working1 {
+					triggers {
+						<startProcessing: fct>
+					}
+				}
+				Transition tr2: Working2 -> Idle {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"fct.doneProcessing();"
+						"//setAndWriteProcessedUnits(getProcessedUnits()+1);"
+					}
+				}
+				Transition tr3: Working1 -> ChangeDirection {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr4: ChangeDirection -> Working2 {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				State Idle
+				State Working1 {
+					entry {
+						"drive.changeDirection(false);"
+						"drive.start();"
+						"timeout.startTimeout(1000);"
+					}
+					exit {
+						"drive.stop();"
+					}
+				}
+				State Working2 {
+					entry {
+						"drive.start();"
+						"timeout.startTimeout(1000);"
+					}
+					exit {
+						"drive.stop();"
+					}
+				}
+				State ChangeDirection {
+					entry {
+						"drive.changeDirection(true);"
+						"timeout.startTimeout(100);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Pusher {
+		Interface {
+			Port fct: AutomationProtocols.PTransport
+		}
+		Structure {
+			external Port fct
+			conjugated Port pusher: AutomationProtocols.PLinearUnit
+			ActorRef PusherHW: LinearUnit
+			Binding pusher and PusherHW.fct
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> init of Initializing
+				Transition tr0: running of Initializing -> enter of Running
+				State Initializing {
+					subgraph {
+						Transition tr5: Forewards -> Backwards {
+							triggers {
+								<doneMoveForward: pusher>
+							}
+						}
+						Transition tr8: Backwards -> my running {
+							triggers {
+								<doneMoveBackward: pusher>
+							}
+						}
+						Transition tr0: my init -> Forewards
+						EntryPoint init
+						ExitPoint running
+						State Forewards {
+							entry {
+								"pusher.moveForward();"
+							}
+						}
+						State Backwards {
+							entry {
+								"pusher.moveBackward();"
+							}
+						}
+					}
+				}
+				State Running {
+					subgraph {
+						Transition tr0: Forewards -> Backwards {
+							triggers {
+								<doneMoveForward: pusher>
+							}
+						}
+						Transition tr1: Backwards -> Empty {
+							triggers {
+								<doneMoveBackward: pusher>
+							}
+						}
+						Transition tr2: Empty -> Full {
+							triggers {
+								<takePart: fct>
+							}
+						}
+						Transition tr3: Full -> Forewards {
+							triggers {
+								<releasePart: fct>
+							}
+							action {
+								"fct.releasePartDone();"
+							}
+						}
+						Transition tr6: Empty -> Empty {
+							triggers {
+								<getStatus: fct>
+							}
+						}
+						Transition tr7: Full -> Full {
+							triggers {
+								<getStatus: fct>
+							}
+						}
+						Transition tr4: my enter -> Empty
+						EntryPoint enter
+						State Empty {
+							entry {
+								"fct.isEmpty();"
+							}
+						}
+						State Forewards {
+							entry {
+								"pusher.moveForward();"
+							}
+						}
+						State Backwards {
+							entry {
+								"pusher.moveBackward();"
+							}
+						}
+						State Full {
+							entry {
+								"fct.takePartDone();"
+								"fct.isFull();"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

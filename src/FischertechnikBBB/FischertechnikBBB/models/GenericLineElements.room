@@ -1,0 +1,471 @@
+RoomModel GenericLineElements {
+
+
+	import room.basic.service.timing.* from "TimingService.room"
+//	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
+	import room.basic.service.gpio.* from "pclGPIOService.room"
+	import room.basic.types.* from "Types.room"
+	
+	import AutomationProtocols.* from "AutomationProtocols.room"
+	import Actuators.* from "Actuators.room"
+
+
+
+	ActorClass GenericInlineStation {
+		Interface {
+			Port prev: AutomationProtocols.PInlineElement
+			conjugated Port next: AutomationProtocols.PInlineElement
+			conjugated Port transport: AutomationProtocols.PTransport
+			conjugated Port job: AutomationProtocols.PProcessing
+		}
+		Structure {
+			external Port prev
+			external Port next
+			external Port transport
+			external Port job
+			Attribute processingActive: boolean = "0"
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> GetStatusTransport
+				Transition tr1: GetStatusTransport -> Empty {
+					triggers {
+						<isEmpty: transport>
+					}
+				}
+				Transition tr2: Empty -> Empty {
+					triggers {
+						<getStatus: prev>
+					}
+				}
+				Transition tr3: FullWaitingForNext -> ReleasePart {
+					triggers {
+						<isEmpty: next>
+					}
+				}
+				Transition tr4: ReleasePart -> SendPartToNext {
+					triggers {
+						<releasePartDone: transport>
+					}
+				}
+				Transition tr6: Empty -> FullWaitingForNext {
+					triggers {
+						<isFull: transport>
+					}
+				}
+				Transition tr7: FullWaitingForNext -> Empty {
+					triggers {
+						<isEmpty: transport>
+					}
+				}
+				Transition tr8: GetStatusTransport -> cp CP1 {
+					triggers {
+						<isFull: transport>
+					}
+				}
+				Transition tr9: cp CP1 -> Processing {
+					cond {
+						"processingActive"
+					}
+				}
+				Transition tr10: cp CP1 -> FullWaitingForNext
+				Transition tr11: Processing -> FullWaitingForNext {
+					triggers {
+						<doneProcessing: job>
+					}
+				}
+				Transition tr12: Empty -> HandOver {
+					triggers {
+						<sendPart: prev>
+					}
+				}
+				Transition tr13: HandOver -> GetStatusTransport {
+					triggers {
+						<takePartDone: transport>
+					}
+					action {
+						"prev.receivedPart();"
+					}
+				}
+				Transition tr5: SendPartToNext -> CheckingTransportForEmpty {
+					triggers {
+						<receivedPart: next>
+					}
+				}
+				Transition tr14: CheckingTransportForEmpty -> Empty {
+					triggers {
+						<isEmpty: transport>
+					}
+				}
+				ChoicePoint CP1
+				State GetStatusTransport {
+					entry {
+						"transport.getStatus();"
+					}
+				}
+				State FullWaitingForNext {
+					entry {
+						"next.getStatus();"
+					}
+				}
+				State Empty {
+					entry {
+						"prev.isEmpty();"
+					}
+				}
+				State ReleasePart {
+					entry {
+						"transport.releasePart();"
+					}
+				}
+				State SendPartToNext {
+					entry {
+						"next.sendPart();"
+					}
+				}
+				State Processing {
+					entry {
+						"job.startProcessing();"
+					}
+				}
+				State HandOver {
+					entry {
+						"transport.takePart();"
+					}
+				}
+				State CheckingTransportForEmpty {
+					entry {
+						"transport.getStatus();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass BeltStation {
+		Interface {
+			Port prev: AutomationProtocols.PInlineElement
+			conjugated Port next: AutomationProtocols.PInlineElement
+		}
+		Structure {
+			ActorRef InlineStation: GenericInlineStation
+			ActorRef Belt: BeltWithEndsensor
+			Binding InlineStation.next and next
+			Binding InlineStation.prev and prev
+			Binding InlineStation.transport and Belt.fkt
+		}
+		Behavior { }
+	}
+
+	ActorClass PusherStation {
+		Interface {
+			Port prev: AutomationProtocols.PInlineElement
+			conjugated Port next: AutomationProtocols.PInlineElement
+		}
+		Structure {
+			ActorRef InlineStation: GenericInlineStation
+			ActorRef Pusher: Actuators.Pusher
+			Binding InlineStation.next and next
+			Binding InlineStation.prev and prev
+			Binding InlineStation.transport and Pusher.fct
+		}
+		Behavior { }
+	}
+
+	ActorClass ProductionStation {
+		Interface {
+			Port prev: AutomationProtocols.PInlineElement
+			conjugated Port next: AutomationProtocols.PInlineElement
+		}
+		Structure {
+			ActorRef InlineStation: GenericInlineStation
+			ActorRef Belt: BeltWithEndsensor
+			ActorRef ProductionUnit: Actuators.ProcessingStation
+			Binding InlineStation.next and next
+			Binding InlineStation.prev and prev
+			Binding InlineStation.transport and Belt.fkt
+			Binding ProductionUnit.fct and InlineStation.job
+		}
+		Behavior { }
+	}
+
+	ActorClass SinkSensor {
+		Interface {
+			Port prev: AutomationProtocols.PInlineElement
+		}
+		Structure {
+			external Port prev
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: Full -> Full {
+					triggers {
+						<getStatus: prev>
+					}
+				}
+				Transition tr1: initial -> Full
+				State Full
+			}
+		}
+	}
+
+	ActorClass BeltWithEndsensor {
+		Interface {
+			Port fkt: AutomationProtocols.PTransport
+		}
+		Structure {
+			external Port fkt
+			conjugated Port motor: AutomationProtocols.PDriveLR
+			ActorRef BeltDrive: Actuators.DriveLR
+			SAP timeout: PTimer
+			SAP timeout2:PTimer
+//			SAP sensor: protos.automation.service.io.PDigIn
+			SAP sensor: PIOBitInput
+			Binding motor and BeltDrive.fct
+			Attribute sensorChannel : int32
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: cp CP1 -> Full {
+					cond {
+						"data==0"
+					}
+				}
+				Transition tr1: cp CP1 -> MoveUntilSensorOrTimeout
+				Transition tr2: MoveUntilSensorOrTimeout -> Full {
+					triggers {
+						<valueChanged: sensor guard {
+							"data==0"
+						}>
+					}
+					action {
+						"fkt.takePartDone();"
+					}
+				}
+				Transition tr3: MoveUntilSensorOrTimeout -> Empty {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr4: GetSensorStatus -> cp CP1 {
+					triggers {
+						<valueChanged: sensor>
+					}
+				}
+				Transition tr5: initial -> GetSensorStatus {
+					action {
+						"DGPIOData ioData;"
+						""
+						"ioData.channel=ET_IOBit_HW_ID_NOT_DEFINED;"
+						"ioData.changeMessageEnabled=ET_IOBit_CHANGE_MESSAGE_ON_SET | ET_IOBit_CHANGE_MESSAGE_ON_RESET;"
+						"ioData.lastValue=0;"
+						""
+						"sensor.init(&ioData);\t\t\t\t\t\t"
+						"\t\t\t\t\t\t"
+						"//sensor.registerChannel(getSensorChannel());\t\t\t\t\t\t"
+					}
+				}
+				Transition tr6: Empty -> Full {
+					triggers {
+						<valueChanged: sensor guard {
+							"data==0"
+						}>
+					}
+				}
+				Transition tr7: Full -> Empty {
+					triggers {
+						<valueChanged: sensor guard {
+							"data==1"
+						}>
+					}
+				}
+				Transition tr8: Full -> Full {
+					triggers {
+						<getStatus: fkt>
+					}
+				}
+				Transition tr9: Empty -> Empty {
+					triggers {
+						<getStatus: fkt>
+					}
+				}
+				Transition tr10: Full -> MoveUntilSensorOff {
+					triggers {
+						<releasePart: fkt>
+					}
+				}
+				Transition tr11: Empty -> MoveUntilSensorOrTimeout {
+					triggers {
+						<takePart: fkt>
+					}
+				}
+				Transition tr12: MoveUntilSensorOff -> ExtendedMove {
+					triggers {
+						<valueChanged: sensor guard {
+							"data==1"
+						}>
+					}
+					action {
+						"fkt.releasePartDone();"
+					}
+				}
+				Transition tr13: ExtendedMove -> Empty {
+					triggers {
+						<timeout: timeout2>
+					}
+				}
+				Transition tr14: my tp0 -> my tp0 {
+					triggers {
+						<timeout: timeout>
+					}
+				}
+				Transition tr15: my tp0 -> my tp0 {
+					triggers {
+						<timeout: timeout2>
+					}
+				}
+				ChoicePoint CP1
+				handler TransitionPoint tp0
+				State Full {
+					entry {
+						"motor.stop();"
+						"fkt.isFull();"
+					}
+				}
+				State MoveUntilSensorOrTimeout {
+					entry {
+						"motor.start();"
+						"timeout.startTimeout(5000);"
+					}
+				}
+				State Empty {
+					entry {
+						"motor.stop();"
+						"fkt.isEmpty();"
+					}
+				}
+				State GetSensorStatus {
+					entry {
+						"//sensor.getStatus();"
+						"sensor.getBit();"
+					}
+				}
+				State MoveUntilSensorOff {
+					entry {
+						"motor.start();"
+						"timeout.startTimeout(3000);"
+					}
+					exit {
+						"//timeout.kill();"
+					}
+				}
+				State ExtendedMove {
+					entry {
+						"timeout2.startTimeout(1000);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass SourceSensor {
+		Interface {
+			conjugated Port next: AutomationProtocols.PInlineElement
+		}
+		Structure {
+			usercode1 {
+			"/*
+				import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+				import org.eclipse.etrice.runtime.java.debugging.MSCFilter;
+			*/
+				"
+			}
+			usercode2 {
+			"/*	
+				@Override
+				public void initUser()
+				{
+					MSCFilter filter = DebuggingService.getInstance().getAsyncLogger().getMSCFilter();
+					filter.addFilter(new MSCFilter.FilterItem(\"/MachineSubSystem/Controller/ProductionStation4\", false));
+				}
+				*/
+				"
+			}
+			external Port next
+//			SAP sensor: protos.automation.service.io.PDigIn
+			SAP sensor:PIOBitInput
+			Attribute sensorChannel : int32
+		}
+		Behavior {
+			StateMachine {
+				Transition tr0: initial -> NotInitialized {
+					action {
+						"DGPIOData ioData;"
+						""
+						"ioData.channel=ET_IOBit_HW_ID_NOT_DEFINED;"
+						"ioData.changeMessageEnabled=ET_IOBit_CHANGE_MESSAGE_ON_SET | ET_IOBit_CHANGE_MESSAGE_ON_RESET;"
+						"ioData.lastValue=0;"
+						""
+						"sensor.init(&ioData);\t\t\t\t\t\t"
+						"\t\t\t\t\t\t\t\t\t\t\t"
+						"//sensor.registerChannel(getSensorChannel());"
+					}
+				}
+				Transition tr1: NotInitialized -> cp CP1 {
+					triggers {
+						<valueChanged: sensor>
+					}
+				}
+				Transition tr2: cp CP1 -> Full {
+					cond {
+						"data==0"
+					}
+				}
+				Transition tr3: cp CP1 -> Empty
+				Transition tr4: Full -> SendingPart {
+					triggers {
+						<isEmpty: next>
+					}
+				}
+				Transition tr5: Full -> Empty {
+					triggers {
+						<valueChanged: sensor guard {
+							"data==1"
+						}>
+					}
+				}
+				Transition tr6: Empty -> Full {
+					triggers {
+						<valueChanged: sensor guard {
+							"data==0"
+						}>
+					}
+				}
+				Transition tr7: SendingPart -> Empty {
+					triggers {
+						<receivedPart: next>
+					}
+				}
+				ChoicePoint CP1
+				State NotInitialized {
+					entry {
+						"//sensor.getStatus();"
+						"sensor.getBit();"
+					}
+				}
+				State Full {
+					entry {
+						"next.getStatus();"
+					}
+				}
+				State Empty
+				State SendingPart {
+					entry {
+						"next.sendPart();"
+					}
+				}
+			}
+		}
+	}
+
+}
