@@ -53,6 +53,8 @@ RoomModel Actuators {
 						"lr.init(ET_IOBit_HW_ID_NOT_DEFINED);"
 						"start.init(ET_IOBit_HW_ID_NOT_DEFINED);"
 						""
+						"lr.resetBit();"
+						""
 						"//lr.registerChannel(getLrChannel());"
 						"//start.registerChannel(getStartChannel());"
 					}

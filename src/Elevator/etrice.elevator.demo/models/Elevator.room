@@ -26,9 +26,9 @@ The instance diagram provides an overview of the generated instances."
 		LayerConnection ref elevator satisfied_by timingService.timer
 		LayerConnection ref elevator satisfied_by ioService.iobitOut
 		LayerConnection ref elevator satisfied_by ioService.iobitIn
-		LayerConnection ref ioService satisfied_by timingService.timer
 		LayerConnection ref elevator satisfied_by ioReg8Service.ioReg8Out
 		LayerConnection ref ioReg8Service satisfied_by timingService.timer
+		LayerConnection ref ioService satisfied_by timingService.timer
 		LogicalThread defaultThread
 		LogicalThread midPrioThread
 		LogicalThread timingThread
