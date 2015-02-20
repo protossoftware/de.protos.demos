@@ -87,7 +87,6 @@ RoomModel Actuators {
 			SAP sensorFront:PIOBitInput
 			SAP sensorBack:PIOBitInput
 			SAP timeout: PTimer
-			SAP timeout2:PTimer
 			Binding drive and Drive.fct
 			Attribute sensorFrontChannel : int32
 			Attribute sensorBackChannel : int32
@@ -118,7 +117,7 @@ RoomModel Actuators {
 				}
 				Transition tr2: LinearUnitBackwards -> Error {
 					triggers {
-						<timeout: timeout2>
+						<timeout: timeout>
 					}
 					action {
 						"printf(\"ERROR : timeout sensorBack ! \\n\");"
@@ -159,30 +158,19 @@ RoomModel Actuators {
 						<moveForward: fct>
 					}
 				}
-				Transition tr9: my tp0 -> my tp0 {
-					triggers {
-						<timeout: timeout>
-					}
-				}
-				Transition tr10: my tp0 -> my tp0 {
-					triggers {
-						<timeout: timeout2>
-					}
-				}
-				handler TransitionPoint tp0
 				State Undefined
 				State LinearUnitBackwards {
 					entry {
 						"drive.changeDirection(true);"
 						"drive.start();"
-						"timeout2.startTimeout(5000);"
+						"timeout.startTimeout(5000);"
 						"sensorBack.getBit();"
 						"//sensorBack.getStatus();"
 					}
 					exit {
 						"printf(\"Backward Drive Stop !\\n\");"
 						"drive.stop();"
-						"//timeout.kill();"
+						"timeout.kill();"
 						"drive.changeDirection(false);"
 					}
 				}
@@ -203,7 +191,7 @@ RoomModel Actuators {
 					exit {
 						"printf(\"Foreward Drive Stop !\\n\");"
 						"drive.stop();"
-						"//timeout.kill();"
+						"timeout.kill();"
 					}
 				}
 				State LinearUnitInPosFront {

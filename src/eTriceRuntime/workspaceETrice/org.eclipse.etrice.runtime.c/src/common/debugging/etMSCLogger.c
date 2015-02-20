@@ -71,3 +71,9 @@ void etMSCLogger_setState(const char* objectName, const char* stateName){
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s >>> %s\n", objectName, stateName);
 	}
 }
+
+void etMSCLogger_comment(const char* comment){
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "#%s\n", comment);
+	}
+}

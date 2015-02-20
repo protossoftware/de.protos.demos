@@ -145,14 +145,14 @@
 								<option id="gnu.c.compiler.option.include.paths.1170053718" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\data\protos\BBB\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GammaTarget/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FischertechnikBBB/src-gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/config}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2008338794" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
-							<tool command="D:\Linaro\gcc-linaro-arm-linux-gnueabihf-4.8-2013.09\bin\arm-linux-gnueabihf-gcc.exe" id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1141084590" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug">
+							<tool command="${LINARO_HOME}\bin\arm-linux-gnueabihf-gcc.exe" id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1141084590" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug">
 								<option id="gnu.c.link.option.libs.731268876" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="gacommon"/>
 									<listOptionValue builtIn="false" value="org.eclipse.etrice.runtime.c"/>
@@ -165,7 +165,7 @@
 									<listOptionValue builtIn="false" value="rt"/>
 								</option>
 								<option id="gnu.c.link.option.paths.339020115" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;d:\data\protos\BBB\lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GammaTarget/lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/LinaroPosixDebug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;d:\data\protos\BBB\lib\arm-linux-gnueabihf_asd&quot;"/>
 								</option>

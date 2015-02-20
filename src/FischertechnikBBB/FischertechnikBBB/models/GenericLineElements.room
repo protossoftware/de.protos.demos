@@ -218,8 +218,6 @@ RoomModel GenericLineElements {
 			conjugated Port motor: AutomationProtocols.PDriveLR
 			ActorRef BeltDrive: Actuators.DriveLR
 			SAP timeout: PTimer
-			SAP timeout2:PTimer
-//			SAP sensor: protos.automation.service.io.PDigIn
 			SAP sensor: PIOBitInput
 			Binding motor and BeltDrive.fct
 			Attribute sensorChannel : int32
@@ -298,6 +296,9 @@ RoomModel GenericLineElements {
 					triggers {
 						<takePart: fkt>
 					}
+					action {
+						"ET_MSC_LOGGER_COMMENT(\"Take Part\");"
+					}
 				}
 				Transition tr12: MoveUntilSensorOff -> ExtendedMove {
 					triggers {
@@ -311,21 +312,10 @@ RoomModel GenericLineElements {
 				}
 				Transition tr13: ExtendedMove -> Empty {
 					triggers {
-						<timeout: timeout2>
-					}
-				}
-				Transition tr14: my tp0 -> my tp0 {
-					triggers {
 						<timeout: timeout>
 					}
 				}
-				Transition tr15: my tp0 -> my tp0 {
-					triggers {
-						<timeout: timeout2>
-					}
-				}
 				ChoicePoint CP1
-				handler TransitionPoint tp0
 				State Full {
 					entry {
 						"motor.stop();"
@@ -353,15 +343,11 @@ RoomModel GenericLineElements {
 				State MoveUntilSensorOff {
 					entry {
 						"motor.start();"
-						"timeout.startTimeout(3000);"
-					}
-					exit {
-						"//timeout.kill();"
 					}
 				}
 				State ExtendedMove {
 					entry {
-						"timeout2.startTimeout(1000);"
+						"timeout.startTimeout(1000);"
 					}
 				}
 			}
