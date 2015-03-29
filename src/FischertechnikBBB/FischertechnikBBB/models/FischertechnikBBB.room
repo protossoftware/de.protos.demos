@@ -5,7 +5,6 @@ RoomModel FischertechnikBBB {
 	import room.basic.service.gpio.* from "pclGPIOService.room"
 	import model "GenericLineElements.room"
 	
-	
 	LogicalSystem FischertechnikBBB {
 		SubSystemRef main: MainSubSystem
 	}
@@ -27,7 +26,6 @@ RoomModel FischertechnikBBB {
 			ActorRef inputStation: GenericLineElements.BeltStation
 			ActorRef pusherStation1: GenericLineElements.PusherStation
 			ActorRef fraese: GenericLineElements.ProductionStation
-//			ActorRef ref0: APingPong
 			ActorRef bohrer: GenericLineElements.ProductionStation
 			ActorRef pusherStation2: GenericLineElements.PusherStation
 			ActorRef endStation: GenericLineElements.BeltStation

@@ -11,7 +11,7 @@ RoomModel GenericLineElements {
 
 
 
-	ActorClass GenericInlineStation {
+	async ActorClass GenericInlineStation {
 		Interface {
 			Port prev: AutomationProtocols.PInlineElement
 			conjugated Port next: AutomationProtocols.PInlineElement
@@ -23,6 +23,7 @@ RoomModel GenericLineElements {
 			external Port next
 			external Port transport
 			external Port job
+			SAP errorTimeout: PTimer
 			Attribute processingActive: boolean = "0"
 		}
 		Behavior {
@@ -136,6 +137,9 @@ RoomModel GenericLineElements {
 				State CheckingTransportForEmpty {
 					entry {
 						"transport.getStatus();"
+					}
+					exit {
+						"position.signal(123);"
 					}
 				}
 			}
@@ -307,12 +311,16 @@ RoomModel GenericLineElements {
 						}>
 					}
 					action {
-						"fkt.releasePartDone();"
+						"printf(\"valueChanged\\n\");"
 					}
 				}
 				Transition tr13: ExtendedMove -> Empty {
 					triggers {
 						<timeout: timeout>
+					}
+					action {
+						"fkt.releasePartDone();"
+						"printf(\"timeout\\n\");"
 					}
 				}
 				ChoicePoint CP1
@@ -343,6 +351,7 @@ RoomModel GenericLineElements {
 				State MoveUntilSensorOff {
 					entry {
 						"motor.start();"
+						"printf(\"MoveUntilSensorOff\\n\");"
 					}
 				}
 				State ExtendedMove {

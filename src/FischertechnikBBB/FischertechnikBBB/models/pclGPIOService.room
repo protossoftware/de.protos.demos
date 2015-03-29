@@ -23,7 +23,7 @@ RoomModel room.basic.service.gpio {
 			SAP timer: PTimer
 			Attribute ioData [ 20 ]: DGPIOData
 			Attribute outputChannel [ 20 ]: uint32
-			Attribute pollTime: uint32 = "50"
+			Attribute pollTime: uint32 = "100"
 		}
 		Behavior {
 			Operation pollAllInputs() {

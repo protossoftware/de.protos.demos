@@ -320,11 +320,6 @@ RoomModel Actuators {
 								<doneMoveForward: pusher>
 							}
 						}
-						Transition tr1: Backwards -> Empty {
-							triggers {
-								<doneMoveBackward: pusher>
-							}
-						}
 						Transition tr2: Empty -> Full {
 							triggers {
 								<takePart: fct>
@@ -349,6 +344,11 @@ RoomModel Actuators {
 							}
 						}
 						Transition tr4: my enter -> Empty
+						Transition tr5: Backwards -> Empty {
+							triggers {
+								<doneMoveBackward: pusher>
+							}
+						}
 						EntryPoint enter
 						State Empty {
 							entry {

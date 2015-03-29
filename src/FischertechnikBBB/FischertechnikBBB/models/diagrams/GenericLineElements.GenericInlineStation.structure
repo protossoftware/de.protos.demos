@@ -81,5 +81,6 @@
   <colors red="227" green="238" blue="249"/>
   <colors red="255" green="255" blue="255"/>
   <colors/>
+  <colors red="200" green="200" blue="200"/>
   <fonts name="Arial" size="8"/>
 </pi:Diagram>
