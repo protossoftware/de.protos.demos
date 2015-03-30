@@ -3,7 +3,6 @@ RoomModel Elevator_Model [
  eTrice provides an implementation of the modelling language ROOM (Realtime Object Oriented Modelling! ROOM is a spezialized language  
 for embedded realtime systems. It provides a run to completion semantics. ETrice provides generators for Java, C and Latex. "
 ] {
-
 	import room.basic.types.* from "Types.room"
 	import room.basic.service.timing.* from "TimingService.room"
 	import room.basic.service.serial.* from "SerialService.room"
@@ -380,6 +379,10 @@ The instance diagram provides an overview of the generated instances."
 							}
 						}
 						State moveToIdleFloor {
+							entry {
+								"CabinePort.set7seg(6);"
+								"CabinePort.openDoor();"
+							}
 							subgraph {
 								Transition tr0: my tp0 -> cp cp0
 								Transition tr1: cp cp0 -> my tp1
@@ -695,14 +698,14 @@ The instance diagram provides an overview of the generated instances."
 		}
 		Behavior {
 			Operation checkFloor(floor: uint8): uint8 {
-			"
-				uint8 mask=1;
-				
-				mask <<= floor;
-				if (validFloors & mask) {
-					return 1;}
-				return 0;
-				"
+			""
+			"uint8 mask=1;"
+			""
+			"mask <<= floor;"
+			"if (validFloors & mask) {"
+			"	return 1;}"
+			"return 0;"
+			""
 			}
 			StateMachine {
 				Transition tr3: my tp2 -> my tp2 {
@@ -2055,7 +2058,6 @@ The instance diagram provides an overview of the generated instances."
 			}
 		}
 	}
-
 	ActorClass AGuDManualCode {
 		Interface {
 			Port p0: PCabineControl
@@ -2068,10 +2070,20 @@ The instance diagram provides an overview of the generated instances."
 		}
 	}
 
-	ActorClass AGuDXYControler {
+	datadriven  ProtocolClass SyncPort {
+		incoming {
+			Message in1(data:  int32)
+			
+		}
+		outgoing {
+		}
+	}
+
+	async ActorClass AGuDXYControler {
 		Interface {
 			conjugated Port x: PGuDTestMotor
 			conjugated Port y: PGuDTestMotor
+			Port z: SyncPort
 		}
 		Structure {
 			external Port x
@@ -2115,11 +2127,6 @@ The instance diagram provides an overview of the generated instances."
 						<fertigPositionierung: x>
 					}
 				}
-				Transition tr6: xFertig -> xFertig {
-					triggers {
-						<error: y>
-					}
-				}
 				Transition tr7: yFertig -> yFertig {
 					triggers {
 						<error: x>
@@ -2145,11 +2152,22 @@ The instance diagram provides an overview of the generated instances."
 						<error: y>
 					}
 				}
+				Transition tr6: xFertig -> xFertig {
+					triggers {
+						<error: y>
+					}
+				}
+				Transition tr12: xFertig -> state1 {
+					triggers {
+						<fertigPositionierung: x>
+					}
+				}
 				State state0
 				State xFertig
 				State fertigPositionierung
 				State yFertig
 				State error
+				State state1
 			}
 		}
 	}
@@ -2205,7 +2223,7 @@ The instance diagram provides an overview of the generated instances."
 			Message done() [ "Indicates that the job (open/close) is finished." ]
 		}
 	}
-
+	
 	ProtocolClass PCabineControl {
 		incoming {
 			Message set7seg(data: uint8) [ "Display the provided number at the 7 Segment display." ]
