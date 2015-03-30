@@ -17,6 +17,8 @@
 #define ON		0x01
 #define OFF		0x02
 
+#define GPIO_DEBUG_LOGGING
+
 uint32_t inputs;
 
 ga_PV pvi[10];
@@ -61,8 +63,7 @@ void setOutput(uint32_t channel, uint8_t value) {
 //	ga_PV pv;
 	gc_NumericValue val;
 	val.uint8 = value;
-//	int32_t errorId = ga_pv_open(&pv, gammaStringsOutputs[channel], 0);
-	printf("setOutput(%s, %d)\n", gammaStringsOutputs[channel], value);
+//	int32_t errorId = ga_pv_open(&pv, gammaStringsOutputs[channel], 0);	printf("setOutput(%s, %d)\n", gammaStringsOutputs[channel], value);
 	ga_pv_putValue(pvo[channel],&val);
 
 	//	ga_pv_putValue(pv, &val);

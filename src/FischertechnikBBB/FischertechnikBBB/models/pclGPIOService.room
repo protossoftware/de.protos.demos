@@ -39,12 +39,12 @@ RoomModel room.basic.service.gpio {
 				"		//sendMessage"
 				"		switch (val){"
 				"			case 0: if(ioData[i].changeMessageEnabled & ET_IOBit_CHANGE_MESSAGE_ON_RESET){"
-										 "printf(\"PollInput: %d Value: %d\\n\",ioData[i].channel,val);"
+//										 "printf(\"PollInput: %d Value: %d\\n\",ioData[i].channel,val);"
 										 "iobitIn[i].valueChanged(val);"
 										 "}"
 				"				break;"
 				"			case 1: if(ioData[i].changeMessageEnabled & ET_IOBit_CHANGE_MESSAGE_ON_SET){"
-										"printf(\"PollInput: %d Value: %d\\n\",ioData[i].channel,val);"
+//										"printf(\"PollInput: %d Value: %d\\n\",ioData[i].channel,val);"
 										"iobitIn[i].valueChanged(val);"
 										"}"
 				"				break;"
@@ -81,7 +81,7 @@ RoomModel room.basic.service.gpio {
 						""
 						"uint8 val = pclGetIOBit(ioData[i].channel);"
 						""
-						"printf(\"GetInput: %d Value: %d\\n\",ioData[i].channel,val); "
+//						"printf(\"GetInput: %d Value: %d\\n\",ioData[i].channel,val); "
 						"iobitIn[i].valueChanged(val);"
 					}
 				}
