@@ -8,8 +8,8 @@ public class FischertechnikConfiguration {
 	protected static final int SETUP_NONE = 0;
 	protected static final int SETUP_CONTROL = 1;
 	protected static final int SETUP_TEST = 2;
-	static int currentSetup = SETUP_NONE; 
-	
+	static int currentSetup = SETUP_NONE;
+
 	public static synchronized FischertechnikConfiguration getInstance(){
 		if (instance==null){
 			instance = new FischertechnikConfiguration();
@@ -18,11 +18,11 @@ public class FischertechnikConfiguration {
 		}
 		return instance;
 	}
-	
+
 	private void setCurrentSetup(int setup){
 		currentSetup = setup;
 	}
-	
+
 	public synchronized int getIntValue(String instance_path, String id){
 		Integer return_value = valueMap.get(instance_path+"->"+id);
 		if (return_value != null){
@@ -44,23 +44,23 @@ public class FischertechnikConfiguration {
 		default:
 			System.out.println("**** error no setup found for currentSetup = " + currentSetup);
 			break;
-			
+
 		}
 	}
 
 	private void initValuesForSetupTest(){
-		
+
 	}
 
-	
+
 	private void initValuesForSetupControl(){
 		valueMap = new HashMap<String, Integer>();
-		
-		final int inputOffset = 2; // offset for additional WAGO Module (750-610) -> 2 additional inputs
-		
+
+		final int inputOffset = 0; // offset for additional WAGO Module (750-610) -> 2 additional inputs
+
 		// LineSource
 		valueMap.put("/MachineSystem/subSystem/Controller/SourceSensor1->sensor", 0+inputOffset);
-		
+
 		//****************
 		//LEBand1
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation2/InlineStation->processingActive", 0);
@@ -80,7 +80,7 @@ public class FischertechnikConfiguration {
 		//Schieber1/PusherHW
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW->sensorFront", 2+inputOffset);
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation3/Pusher/PusherHW->sensorBack", 3+inputOffset);
-		
+
 		//****************
 		// ProductionStation1
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/InlineStation->processingActive", 1);
@@ -93,7 +93,7 @@ public class FischertechnikConfiguration {
 		//ProductionStation1/Drive
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/ProductionUnit/StationDrive->lr", 6);
 		valueMap.put("/MachineSystem/subSystem/Controller/ProductionStation4/ProductionUnit/StationDrive->start", 7);
-		
+
 
 		//****************
 		// ProductionStation1
@@ -117,8 +117,8 @@ public class FischertechnikConfiguration {
 		//Schieber1/PusherHW
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW->sensorFront", 6+inputOffset);
 		valueMap.put("/MachineSystem/subSystem/Controller/PusherStation6/Pusher/PusherHW->sensorBack", 7+inputOffset);
-		
-		
+
+
 		//****************
 		// LEBand4
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation7/InlineStation->processingActive", 0);
@@ -127,11 +127,11 @@ public class FischertechnikConfiguration {
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation7/Belt/BeltDrive->start", 15);
 		//Band4/
 		valueMap.put("/MachineSystem/subSystem/Controller/BeltStation7/Belt->sensor", 8+inputOffset);
-		
-		
+
+
 	}
-	
+
 	private static FischertechnikConfiguration instance = null;
-	
-	private HashMap<String, Integer> valueMap = null; 
+
+	private HashMap<String, Integer> valueMap = null;
 }

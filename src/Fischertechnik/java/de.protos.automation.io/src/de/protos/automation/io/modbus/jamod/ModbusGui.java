@@ -27,10 +27,10 @@ public class ModbusGui extends JFrame implements ActionListener {
 	Timer pollingTimer = null;
 
 	JPanel panel = null;
-	
-	HashMap<JButton, Integer> outputButtons = new HashMap<JButton, Integer>(outputRange); 
-	HashMap<Integer, JTextField> inputTexts = new HashMap<Integer, JTextField>(inputRange); 
-	
+
+	HashMap<JButton, Integer> outputButtons = new HashMap<JButton, Integer>(outputRange);
+	HashMap<Integer, JTextField> inputTexts = new HashMap<Integer, JTextField>(inputRange);
+
 	public ModbusGui() {
 
 		panel = new JPanel();
@@ -42,7 +42,7 @@ public class ModbusGui extends JFrame implements ActionListener {
 		initModbus();
 		initInputList();
 		initOutputList();
-		
+
 		// settings for Main Window
 		setTitle("Modbus GUI");
 		setSize(600, 1000);
@@ -81,7 +81,7 @@ public class ModbusGui extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource().equals(pollingTimer)) {
 			displayInputs();
 		}
@@ -126,10 +126,10 @@ public class ModbusGui extends JFrame implements ActionListener {
 
 	private void initInputList(){
 
-		final int inputOffset = 2; // offset for additional WAGO Module (750-610) -> 2 additional inputs
-		
-		addInputTextField(new String("--- not used ---"),0);
-		addInputTextField(new String("--- not used ---"),1);
+		final int inputOffset = 0; // offset for additional WAGO Module (750-610) -> 2 additional inputs
+
+//		addInputTextField(new String("--- not used ---"),0);
+//		addInputTextField(new String("--- not used ---"),1);
 
 		addInputTextField(new String("SensorEinlegestation"),0+inputOffset);
 		addInputTextField(new String("SensorBand1"),1+inputOffset);
@@ -146,21 +146,21 @@ public class ModbusGui extends JFrame implements ActionListener {
 		}
 		displayInputs();
 	}
-	
+
 	private void addInputTextField(String text, int channel){
 		int startX = 100;
 		int startY = 100;
 		int incY = 20;
-		
+
 		JTextField textField = new JTextField(""+channel+"   :   "+text);
 		textField.setBounds(startX, startY+channel*incY, 200, 20);
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.setBackground(Color.LIGHT_GRAY);
 		inputTexts.put(channel, textField);
 		panel.add(textField);
-		
+
 	}
-	
+
 	private void initOutputList(){
 		addOutputButton("Band1     L/R",0);
 		addOutputButton("Band1     ON/OFF",1);
@@ -182,12 +182,12 @@ public class ModbusGui extends JFrame implements ActionListener {
 			addOutputButton("--- not used ---",i);
 		}
 	}
-	
+
 	private void addOutputButton(String text, int channel){
 		int startX = 300;
 		int startY = 100;
 		int incY = 20;
-		
+
 		JButton button = new JButton(""+channel+"   :   "+text);
 		button.setBounds(startX, startY+channel*incY, 200, 20);
 		button.setHorizontalAlignment(SwingConstants.LEFT);
