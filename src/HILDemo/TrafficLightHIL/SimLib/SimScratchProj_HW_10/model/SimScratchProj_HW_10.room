@@ -331,7 +331,7 @@ RoomModel SimScratchProj_HW_10 {
 	ActorClass AUartAdapter {
 		Interface {
 			conjugated Port uart: PAkkuSim
-			Port ctrl: PUartAdapterCtrl
+			Port ctrl [2]: PUartAdapterCtrl
 		}
 		Structure {
 			usercode3 {
@@ -345,8 +345,7 @@ RoomModel SimScratchProj_HW_10 {
 			StateMachine {
 				State state0
 				Transition init0: initial -> state0 {
-					action 
-				{
+					action {
 						"txData[0] = 0x00;"
 						"txData[1] = 0x00;"
 						"txData[2] = 0x00;"
@@ -361,8 +360,7 @@ RoomModel SimScratchProj_HW_10 {
 					triggers {
 						<received: uart>
 					}
-					action 
-				{
+					action {
 						"uart.receiveFrame();\t"
 						""
 						"switch (data[0]){"
@@ -384,8 +382,7 @@ RoomModel SimScratchProj_HW_10 {
 					triggers {
 						<start: ctrl>
 					}
-					action 
-				{
+					action {
 						"txData[0] = 0x01;"
 						"uart.sendFrame(txData);"
 					}
@@ -394,19 +391,18 @@ RoomModel SimScratchProj_HW_10 {
 					triggers {
 						<stop: ctrl>
 					}
-					action 
-				{
+					action {
 						"txData[0] = 0x02;"
 						"uart.sendFrame(txData);"
 					}
 				}
-			Transition tr3: state0 -> state0 {
+				Transition tr3: state0 -> state0 {
 					triggers {
 						<setTimeWarp: ctrl>
 					}
 					action {
 						"txData[0] = 0x03;"
-						"txData[1] = data; // set factor"
+						"txData[1] = ((uint8)factor); // set factor"
 						"uart.sendFrame(txData);"
 					}
 				}
@@ -595,35 +591,26 @@ RoomModel SimScratchProj_HW_10 {
 		Structure {
 			ActorRef HWer_10: ASimulationPlatformHW_1_0
 			ActorRef blinky: ABlinky
-			
-			Binding ref2.uart and HWer_10.AkkuUart
-			ActorRef ref2: AUartAdapter
-			Binding ref3.targetUartCtrl and ref2.ctrl
-			
-			Binding HWer_10.IC10_P11_In and ref3.pedRedIn
-			Binding HWer_10.IC10_P12_In and ref3.carGreenIn
-			Binding HWer_10.IC10_P13_In and ref3.carYellowIn
-			Binding HWer_10.IC10_P14_In and ref3.carRedIn
-			
-			Binding HWer_10.BlueButtonNucleo and ref3.ctrl
-		
-			
+			Binding uartAdapter.uart and HWer_10.AkkuUart
+			ActorRef uartAdapter: AUartAdapter
 			Binding HWer_10.IC10_P10_In and tester.pedGreenIn
 			ActorRef ref3: AAmpelTester
-			
-			
-			
-			
-			
-			
-			Binding HWer_10.LedRedNucleo and tester.testResult
-		
-			Binding  blinky.^out and HWer_10.LedGreenNucleo
+			Binding blinky.^out and HWer_10.LedGreenNucleo
 			ActorRef tester: TrafficLight.TrafficLight_AAmpelTestInterface
-		Binding   HWer_10.BufferedOut_1 and tester.targetButton
-			Binding HWer_10.LedBlueNucleo and tester.testRunning
-		
+			Binding HWer_10.BufferedOut_1 and tester.targetButton
 			Binding HWer_10.BufferedOut_2 and tester.targetReset
+			Binding HWer_10.IC10_P11_In and tester.pedRedIn
+			Binding HWer_10.IC10_P12_In and tester.carGreenIn
+			Binding HWer_10.IC10_P13_In and tester.carYellowIn
+			Binding HWer_10.IC10_P14_In and tester.carRedIn
+			ActorRef testController: ATestController
+			Binding HWer_10.BlueButtonNucleo and testController.blueButton
+			Binding testController.testControl and tester.control
+			Binding testController.testResult and HWer_10.LedRedNucleo
+			Binding testController.testRunning and HWer_10.LedBlueNucleo
+			
+		Binding  uartAdapter.ctrl and tester.targetUartCtrl
+			Binding uartAdapter.ctrl and testController.targetUartCtrl
 		}
 		Behavior {
 			StateMachine {
@@ -641,12 +628,95 @@ RoomModel SimScratchProj_HW_10 {
 			conjugated Port carYellowIn: POnOff
 			conjugated Port carRedIn: POnOff
 			conjugated Port ctrl: POnOff
-			
 			Port targetReset: POnOffTristate
 			Port targetButton: POnOffTristate
 			Port targetUartCtrl: PUartAdapterCtrl
 			Port testResult: POnOff
 			Port testRunning: POnOff
+		}
+	}
+
+	ActorClass ATestController {
+		Interface {
+			Port blueButton: POnOff
+			conjugated Port testControl: PTestControl
+			conjugated Port testResult: POnOff
+			conjugated Port testRunning: POnOff
+			conjugated Port targetUartCtrl: PUartAdapterCtrl
+		}
+		Structure {
+			external Port blueButton
+			external Port testControl
+			external Port testResult
+			external Port testRunning
+			external Port targetUartCtrl
+			SAP timer: PTimer
+		}
+		Behavior {
+			StateMachine {
+				State Idle
+				Transition init0: initial -> Idle
+				State TestRunning {
+					entry {
+						"testControl.start();"
+						"testRunning.on();"
+						"testResult.off();"
+					}
+					exit {
+						"testRunning.off();"
+					}
+				}
+				Transition tr0: TestRunning -> Idle {
+					triggers {
+						<done: testControl guard {
+							"success==true"
+						}>
+					}
+					action 
+				{
+						"testResult.off();"
+					}
+				}
+				Transition tr1: TestRunning -> Idle {
+					triggers {
+						<done: testControl guard {
+							"success==false"
+						}>
+					}
+					action 
+				{
+						"testResult.on();"
+					}
+				}
+				Transition tr2: Idle -> ButtonDown {
+					triggers {
+						<on: blueButton>
+					}
+				}
+				State ButtonDown {
+					entry {
+						"timer.startTimeout(300);"
+					}
+				}
+				Transition tr3: ButtonDown -> TestRunning {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"// normal click"
+						"targetUartCtrl.setTimeWarp(1);"
+					}
+				}
+				Transition tr4: ButtonDown -> TestRunning {
+					triggers {
+						<on: blueButton>
+					}
+					action {
+						"// double click"
+						"targetUartCtrl.setTimeWarp(5);"
+					}
+				}
+			}
 		}
 	}
 

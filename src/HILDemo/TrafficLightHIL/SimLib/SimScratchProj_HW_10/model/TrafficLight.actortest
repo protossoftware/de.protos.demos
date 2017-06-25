@@ -6,42 +6,118 @@ options:
 	generateControlPort
 ;
 
-//			conjugated Port pedGreenIn: POnOff
-//			conjugated Port pedRedIn: POnOff
-//			conjugated Port carGreenIn: POnOff
-//			conjugated Port carYellowIn: POnOff
-//			conjugated Port carRedIn: POnOff
-//			conjugated Port ctrl: POnOff
+RootSequences:
+	SmokeTest
+;
 
-Step AllRed:
+Step Initialize:
 	action
-		testResult.on
 		targetReset.tristate
 		targetButton.tristate
 		wait 100 ms
+;
+
+Step PedPressButton:
 	action
-		targetButton.off
+		targetButton.off // off=on -> low active
 		wait 100 ms
 	action
-		targetButton.tristate
-	reaction
-		pedGreenIn.on
+		targetButton.tristate // tristate = off
+;
+Step Wait500ms:
 	action
-		testResult.off
+	wait 500 ms
 ;
 
-RootSequences:
-	AllRed
+Step Wait1000ms:
+	action
+	wait 1000 ms
 ;
 
-Step Nothing:
+Step WaitForCarGreen:
+	reaction
+		carGreenIn.on
+;
+
+Step MainSequence:
+	reaction
+		carYellowIn.on
+		carGreenIn.off
+	reaction
+		carRedIn.on
+		carYellowIn.off
+	reaction
+		pedRedIn.off
+		pedGreenIn.on
+	reaction
+		pedRedIn.on
+		pedGreenIn.off
+	reaction
+		carYellowIn.on
+	reaction
+		carRedIn.off
+		carYellowIn.off
+		carGreenIn.on
+;
+
+Sequence ButtonPlusMain:
+	PedPressButton
+	MainSequence
+;
+
+Sequence SmokeTest:
+	//timeout 100 ms
+	Initialize
 	
-;
-
-
-Step NormalCase:
+	StartStop
+	Start
 	
+	WaitForCarGreen // sync to state green before starting next sequences 
+		
+	ButtonPlusMain
+	ButtonPlusMain
+	ButtonPlusMain
+	
+	Stop	
+	StartStop
 ;
+
+Step CheckBlinking:
+	//timeout 2500 ms
+	reaction
+		carYellowIn.on
+		pedRedIn.on
+	reaction
+		carYellowIn.off
+		pedRedIn.off
+	reaction
+		carYellowIn.on
+		pedRedIn.on
+	reaction
+		carYellowIn.off
+		pedRedIn.off
+;
+Sequence  StartStop:
+	CheckBlinking
+	Start
+	Wait1000ms
+	Stop
+	CheckBlinking
+	Start
+	Wait1000ms
+	Stop
+	CheckBlinking
+;
+
+Step Start:
+	action 
+		targetUartCtrl.start
+;
+Step Stop:
+	action 
+		targetUartCtrl.stop
+;
+
 
 //Sequence sequence(par1):
 //	step(parameter)
