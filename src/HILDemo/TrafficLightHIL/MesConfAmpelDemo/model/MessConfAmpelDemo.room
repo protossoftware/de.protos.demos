@@ -340,7 +340,7 @@ RoomModel MessConfAmpelDemo {
 			conjugated Port carGreen: POnOff
 			conjugated Port carYellow: POnOff
 			Port button: POnOff
-			Port ctrl: PUartAdapterCtrl
+			Port controlCenter: PUartAdapterCtrl
 		}
 		Structure {
 			SAP timer: PTimer
@@ -350,15 +350,11 @@ RoomModel MessConfAmpelDemo {
 			external Port carGreen
 			external Port carYellow
 			external Port button
-			external Port ctrl
-			Attribute timeWarpFactor: int32
+			external Port controlCenter
+			Attribute timeWarpFactor: uint32
 		}
 		Behavior {
 			StateMachine {
-				
-				
-				
-				
 				State Standby {
 					subgraph {
 						State On {
@@ -391,12 +387,17 @@ RoomModel MessConfAmpelDemo {
 						}
 					}
 				}
-				State Operational
-			{
+				State Operational {
+					exit {
+						"pedRed.off();"
+						"pedGreen.off();"
+						"carRed.off();"
+						"carGreen.off();"
+						"carYellow.off();"
+					}
 					subgraph {
 						State AllOff {
-							entry 
-						{
+							entry {
 								"pedRed.off();"
 								"pedGreen.off();"
 								"carRed.off();"
@@ -406,8 +407,7 @@ RoomModel MessConfAmpelDemo {
 							}
 						}
 						State AllRed {
-							entry 
-						{
+							entry {
 								"pedRed.on();"
 								"pedGreen.off();"
 								"carRed.on();"
@@ -417,8 +417,7 @@ RoomModel MessConfAmpelDemo {
 							}
 						}
 						State CarRedYellow {
-							entry 
-						{
+							entry {
 								"carRed.on();"
 								"carYellow.on();"
 								"carGreen.off();"
@@ -426,8 +425,7 @@ RoomModel MessConfAmpelDemo {
 							}
 						}
 						State CarGreen_Idle {
-							entry 
-						{
+							entry {
 								"carRed.off();"
 								"carYellow.off();"
 								"carGreen.on();"
@@ -445,7 +443,7 @@ RoomModel MessConfAmpelDemo {
 								<timeout: timer>
 							}
 						}
-					State Request {
+						State Request {
 							entry {
 								"timer.startTimeout(500/timeWarpFactor);"
 							}
@@ -463,14 +461,14 @@ RoomModel MessConfAmpelDemo {
 								"carRed.on();"
 								"carYellow.off();"
 								"carGreen.off();"
-								"timer.startTimeout(2000/timeWarpFactor);"
+								"timer.startTimeout(1000/timeWarpFactor);"
 							}
 						}
 						State PedGreen {
 							entry {
 								"pedRed.off();"
 								"pedGreen.on();"
-								"timer.startTimeout(2000/timeWarpFactor);"
+								"timer.startTimeout(1000/timeWarpFactor);"
 							}
 						}
 						Transition tr4: CarRedYellow -> CarGreen_Idle {
@@ -506,9 +504,7 @@ RoomModel MessConfAmpelDemo {
 					}
 				}
 				Transition init0: initial -> tr0 of Standby {
-					action 
-				
-				{
+					action {
 						"timeWarpFactor=1; // standard: no time warp "
 						""
 						"pedRed.off();"
@@ -518,9 +514,35 @@ RoomModel MessConfAmpelDemo {
 						"carYellow.off();"
 					}
 				}
-			Transition tr0: Standby -> tr0 of Operational {
+				Transition tr0: Standby -> tr0 of Operational {
 					triggers {
 						<off: button>
+					}
+				}
+				handler TransitionPoint tr1
+				Transition tr2: my tr1 -> my tr1 {
+					triggers {
+						<setTimeWarp: controlCenter>
+					}
+					action {
+						"timeWarpFactor = factor;"
+						"controlCenter.doneSetTimewarp();"
+					}
+				}
+				Transition tr3: Standby -> tr0 of Operational {
+					triggers {
+						<start: controlCenter>
+					}
+					action {
+						"controlCenter.started();"
+					}
+				}
+				Transition tr4: Operational -> tr0 of Standby {
+					triggers {
+						<stop: controlCenter>
+					}
+					action {
+						"controlCenter.stopped();"
 					}
 				}
 			}
@@ -590,9 +612,7 @@ RoomModel MessConfAmpelDemo {
 					triggers {
 						<received: uart>
 					}
-					action 
-				
-				{
+					action {
 						"uart.receiveFrame();\t"
 						""
 						"switch (data[0]){"
@@ -614,8 +634,7 @@ RoomModel MessConfAmpelDemo {
 					triggers {
 						<started: ctrl>
 					}
-					action 
-				{
+					action {
 						"txData[0] = 0x02;"
 						"uart.sendFrame(txData);"
 					}
@@ -624,13 +643,12 @@ RoomModel MessConfAmpelDemo {
 					triggers {
 						<stopped: ctrl>
 					}
-					action 
-				{
+					action {
 						"txData[0] = 0x02;"
 						"uart.sendFrame(txData);"
 					}
 				}
-			Transition tr3: state0 -> state0 {
+				Transition tr3: state0 -> state0 {
 					triggers {
 						<doneSetTimewarp: ctrl>
 					}
@@ -657,7 +675,7 @@ RoomModel MessConfAmpelDemo {
 			Binding tlController.pedGreen and hw.pedGreenLed
 			Binding tlController.pedRed and hw.pedRedLed
 			ActorRef tlController: APedLightApplication
-		Binding tlController.ctrl and controlAdapter.ctrl
+			Binding tlController.controlCenter and controlAdapter.ctrl
 		}
 	}
 
