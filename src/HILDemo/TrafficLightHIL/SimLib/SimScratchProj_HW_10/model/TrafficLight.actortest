@@ -1,0 +1,55 @@
+TestSuite TrafficLight
+
+import sut SimScratchProj_HW_10.AAmpelTestInterface from 'SimScratchProj_HW_10.room'
+
+options:
+	//generateControlPort
+;
+
+//			conjugated Port pedGreenIn: POnOff
+//			conjugated Port pedRedIn: POnOff
+//			conjugated Port carGreenIn: POnOff
+//			conjugated Port carYellowIn: POnOff
+//			conjugated Port carRedIn: POnOff
+//			conjugated Port ctrl: POnOff
+
+Step AllRed:
+	action
+		testResult.on
+		targetReset.tristate
+		targetButton.tristate
+		wait 100 ms
+	action
+		targetButton.off
+		wait 100 ms
+	action
+		targetButton.tristate
+	reaction
+		pedGreenIn.on
+	action
+		testResult.off
+;
+
+RootSequences:
+	Nothing
+;
+
+Step Nothing:
+	
+;
+
+
+Step NormalCase:
+	
+;
+
+//Sequence sequence(par1):
+//	step(parameter)
+//;
+//
+//Step step(parameter):
+//	action
+//		// port.message(data)
+//	reaction
+//		// port.message(data)
+//;

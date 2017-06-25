@@ -1,0 +1,51 @@
+\level{2} {PDacIntern}
+\level{3}{Incoming Messages}
+
+\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+\hline
+Message & Data & Type & Description\\
+\hline
+setValue &  data  &  uint32  & % begin text from user Documentation
+Outputvoltage in mV
+% end text from user Documentation
+\\
+\hline
+enabeleSinGen &  &  & % begin text from user Documentation
+enable the generation of a sin wave
+% end text from user Documentation
+\\
+\hline
+disableSinGen &  &  & % begin text from user Documentation
+disable the generation of a sin wave
+% end text from user Documentation
+\\
+\hline
+setSinAmplitude &  amplitude  &  uint32  & % begin text from user Documentation
+amplitude of sin wave in mV. Peak value!
+% end text from user Documentation
+\\
+\hline
+setSinOffset &  offset  &  uint32  & % begin text from user Documentation
+offset of the sin wave in mV.
+% end text from user Documentation
+\\
+\hline
+setSinTrigger &  triggerTicks  &  uint32  & % begin text from user Documentation
+Phase control. The time in 1/200 of the period when the sin wave starts. For 50Hz: steps of 100us.
+% end text from user Documentation
+\\
+\hline
+setSinShift &  shiftTicks  &  uint32  & % begin text from user Documentation
+Phase shift of the sin wave. Time in 1/200 of the period. For 50Hz: steps of 100us.
+% end text from user Documentation
+\\
+\hline
+\end{tabular}
+\level{3}{Outgoing Messages}
+\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+\hline
+Message & Data & Type & Description\\
+\hline
+done &  &  & \\
+\hline
+\end{tabular}

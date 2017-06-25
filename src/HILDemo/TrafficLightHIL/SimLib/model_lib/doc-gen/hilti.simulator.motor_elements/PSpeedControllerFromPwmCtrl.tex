@@ -1,0 +1,45 @@
+\level{2} {PSpeedControllerFromPwmCtrl}
+\level{3}{Incoming Messages}
+
+\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+\hline
+Message & Data & Type & Description\\
+\hline
+start &  &  & \\
+\hline
+stop &  &  & \\
+\hline
+setDirectionLeft &  &  & % begin text from user Documentation
+controller must be in stop state
+% end text from user Documentation
+\\
+\hline
+setDirectionRight &  &  & % begin text from user Documentation
+controller must be in stop state
+% end text from user Documentation
+\\
+\hline
+setCurrent &  data  &  uint32  & % begin text from user Documentation
+motor current in 0..3300mV 
+% end text from user Documentation
+\\
+\hline
+getActualSpeed &  &  & % begin text from user Documentation
+returns the actual motor speed in rpm
+% end text from user Documentation
+\\
+\hline
+setSpeedFactor &  data  &  uint32  & % begin text from user Documentation
+100% => SpeedNom = 25000
+% end text from user Documentation
+\\
+\hline
+\end{tabular}
+\level{3}{Outgoing Messages}
+\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+\hline
+Message & Data & Type & Description\\
+\hline
+actualSpeed &  data  &  uint32  & \\
+\hline
+\end{tabular}

@@ -1,0 +1,182 @@
+RoomModel hilti.simulator.protocolls {
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	ProtocolClass PAdc {
+		incoming {
+			Message start(data: uint8)
+			Message stop()
+		}
+		outgoing {
+			Message newValue(data: uint32) [ "Voltage in mV" ]
+		}
+	}
+
+	ProtocolClass PAkkuSim {
+		incoming {
+			Message setTxLow()
+			Message setTxUart()
+			Message sendByte(data: uint8)
+			Message sendFrame(data: uint8 ref)
+			Message receiveByte()
+			Message receiveFrame()
+			Message init()
+			Message startRxLevelReporting(data: uint8)
+			Message stopRxLevelReporting()
+		}
+		outgoing {
+			Message received(data: uint8 ref)
+			Message error()
+			Message rxLevelHigh()
+			Message rxLevelLow()
+		}
+	}
+
+	ProtocolClass PUART {
+		incoming {
+			Message sendByte(data: uint8)
+			Message sendFrame(data: uint8 ref)
+			Message receiveByte()
+			Message receiveFrame()
+			Message init()
+		}
+		outgoing {
+			Message received(data: uint8 ref)
+			Message error()
+		}
+	}
+
+	ProtocolClass PDac {
+		incoming {
+			Message setValue(data: uint32) [ "Outputvoltage in mV" ]
+		}
+		outgoing {
+			Message done()
+		}
+		conjugated PortClass
+		{
+			handle
+			incoming setValue {
+			"ET_MSC_LOGGER_SYNC_ENTRY(\"PDacConjPort\", \"setValue\")"
+			"actualValue = data__et;"
+			"etPort_sendMessage(self, PDac_IN_setValue, sizeof(uint32), &data__et);"
+			"ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, \"setValue\", self->peerInstName)"
+			"ET_MSC_LOGGER_SYNC_EXIT"
+			}
+			Operation getActualValue(): uint32 {
+				"return (actualValue);"
+			}
+			Attribute actualValue: uint32
+		}
+	}
+
+	ProtocolClass PDacIntern extends PDac {
+		incoming {
+			Message enabeleSinGen() [ "enable the generation of a sin wave" ]
+			Message disableSinGen() [ "disable the generation of a sin wave" ]
+			Message setSinAmplitude(amplitude: uint32) [ "amplitude of sin wave in mV. Peak value!" ]
+			Message setSinOffset(offset: uint32) [ "offset of the sin wave in mV." ]
+			Message setSinTrigger(triggerTicks: uint32) [
+			"Phase control. The time in 1/200 of the period when the sin wave starts. For 50Hz: steps of 100us." ]
+			Message setSinShift(shiftTicks: uint32) [
+			"Phase shift of the sin wave. Time in 1/200 of the period. For 50Hz: steps of 100us." ]
+		}
+	}
+
+	ProtocolClass PNetClockReport {
+		incoming {
+			Message startReporting(time: uint32) [ "start the reporting timer for time and impulses" ]
+			Message stopReporting() [ "stop the reporting timer" ]
+		}
+		outgoing {
+			Message newValue(data: uint32)
+		}
+		conjugated PortClass
+		{
+			usercode {
+				"#include \"base/etMemory.h\""
+			}
+			handle
+			outgoing newValue {
+				"actualValue = *((uint32 *)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));"
+				"(*receiveMessageFunc)(actor, self, msg);"
+			}
+			Operation getActualValue(): uint32 {
+				"return (actualValue);"
+			}
+			Attribute actualValue: uint32
+		}
+	}
+
+	ProtocolClass PNetClockCtrl {
+		incoming {
+			Message start() [ "start the timer interrupt to generate netclock" ]
+			Message stop() [ "stop the timer interrupt" ]
+			Message setFrequency(freq: uint32) [ "set the frequency of netclock and sin wave in Hz." ]
+		}
+	}
+
+	ProtocolClass POnOffTristate extends POnOff {
+		incoming {
+			Message tristate()
+		}
+		outgoing { }
+	}
+
+	ProtocolClass PSerial {
+		incoming {
+			Message send(data: DSerialFrame)
+		}
+		outgoing {
+			Message received(data: DSerialFrame)
+		}
+	}
+
+	ProtocolClass PPwmOutput {
+		incoming {
+			Message setDuty(data: uint8)
+		}
+	}
+
+	ProtocolClass PSpeed {
+		incoming {
+			Message setSpeed(data: uint32) [ "set HALL speed in RPM" ]
+			Message setDirection(data: uint32) [ "set direction 1=>Left; 2=>right" ]
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+	ProtocolClass PPwmPower {
+		incoming {
+			Message start(data: uint8) [ "update rate in ms" ]
+			Message stop()
+		}
+		outgoing {
+			Message newDuty(data: uint32) [ "duty in 1/100 %" ]
+		}
+	}
+
+	ProtocolClass PExtInterrupt {
+		incoming {
+			Message enable()
+			Message disable()
+		}
+		outgoing {
+			Message event()
+		}
+	}
+
+	DataClass DSerialFrame {
+		Attribute d0: uint8
+		Attribute d1: uint8
+		Attribute d2: uint8
+		Attribute d3: uint8
+		Attribute d4: uint8
+		Attribute d5: uint8
+	}
+
+}

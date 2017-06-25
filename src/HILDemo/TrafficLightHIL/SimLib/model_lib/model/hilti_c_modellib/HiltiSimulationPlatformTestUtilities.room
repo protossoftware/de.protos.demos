@@ -1,0 +1,534 @@
+RoomModel hilti.simulator.testutilities {
+
+  import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+  import room.basic.service.timing.* from "../etrice_c_modellib/TimingService.room"
+
+  import room.basic.service.logging.* from "../etrice_c_modellib/LoggingService.room"
+
+  import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+  import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+
+  ProtocolClass PTestCtrl {
+    incoming {
+      Message start()
+      Message stop()
+    }
+    outgoing {
+      Message done(amountOfErrors: uint32)
+    }
+  }
+
+  ActorClass ANetReportingMux {
+    Interface {
+      Port ^in [*]: PNetClockReport
+      conjugated Port ^out: PNetClockReport
+    }
+    Structure {
+      Attribute switchPosition: uint32
+      external Port ^in
+      external Port ^out
+    }
+    Behavior {
+      StateMachine {
+        State state0
+        Transition init0: initial -> state0 {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr0: state0 -> state0 {
+          triggers {
+            <startReporting: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.startReporting(time);"
+          }
+        }
+        Transition tr1: state0 -> state0 {
+          triggers {
+            <stopReporting: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.stopReporting();"
+          }
+        }
+        Transition tr2: state0 -> state0 {
+          triggers {
+            <newValue: ^out>
+          }
+          action {
+            "in[switchPosition].newValue(data);"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass ANetClockCtrlMux {
+    Interface {
+      conjugated Port ^out: PNetClockCtrl
+      Port ^in [*]: PNetClockCtrl
+    }
+    Structure {
+      external Port ^out
+      Attribute switchPosition: uint32
+      external Port ^in
+    }
+    Behavior {
+      StateMachine {
+        State state0
+        Transition init0: initial -> state0 {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr0: state0 -> state0 {
+          triggers {
+            <start: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.start();"
+          }
+        }
+        Transition tr1: state0 -> state0 {
+          triggers {
+            <stop: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.stop();"
+          }
+        }
+        Transition tr2: state0 -> state0 {
+          triggers {
+            <setFrequency: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setFrequency(freq);"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass ADacInternMux {
+    Interface {
+      conjugated Port ^out: PDacIntern
+      Port ^in [*]: PDacIntern
+    }
+    Structure {
+      external Port ^out
+      external Port ^in
+      Attribute switchPosition: uint32
+    }
+    Behavior {
+      StateMachine {
+        State state0
+        Transition init0: initial -> state0 {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr0: state0 -> state0 {
+          triggers {
+            <setValue: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setValue(data);"
+          }
+        }
+        Transition tr1: state0 -> state0 {
+          triggers {
+            <done: ^out>
+          }
+          action {
+            "in[switchPosition].done();"
+          }
+        }
+        Transition tr2: state0 -> state0 {
+          triggers {
+            <enabeleSinGen: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.enabeleSinGen();"
+          }
+        }
+        Transition tr3: state0 -> state0 {
+          triggers {
+            <disableSinGen: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.disableSinGen();"
+          }
+        }
+        Transition tr4: state0 -> state0 {
+          triggers {
+            <setSinAmplitude: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setSinAmplitude(amplitude);"
+          }
+        }
+        Transition tr5: state0 -> state0 {
+          triggers {
+            <setSinOffset: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setSinOffset(offset);"
+          }
+        }
+        Transition tr6: state0 -> state0 {
+          triggers {
+            <setSinTrigger: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setSinTrigger(triggerTicks);"
+          }
+        }
+        Transition tr7: state0 -> state0 {
+          triggers {
+            <setSinShift: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setSinShift(shiftTicks);"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass ADacMux {
+    Interface {
+      Port ^in [*]: PDac
+      conjugated Port ^out: PDac
+    }
+    Structure {
+      external Port ^in
+      external Port ^out
+      Attribute switchPosition: uint32
+    }
+    Behavior {
+      StateMachine {
+        State locked
+        Transition init0: initial -> locked {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr2: locked -> locked {
+          triggers {
+            <setValue: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setValue(data);"
+          }
+        }
+        Transition tr3: locked -> locked {
+          triggers {
+            <done: ^out>
+          }
+          action {
+            "in[switchPosition].done();"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass AOnOffTristateMux {
+    Interface {
+      Port ^in [*]: POnOffTristate
+      conjugated Port ^out: POnOffTristate
+    }
+    Structure {
+      external Port ^in
+      external Port ^out
+      Attribute switchPosition: uint32
+    }
+    Behavior {
+      StateMachine {
+        State locked
+        Transition init0: initial -> locked {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr1: locked -> locked {
+          triggers {
+            <on: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.on();"
+          }
+        }
+        Transition tr2: locked -> locked {
+          triggers {
+            <off: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.off();"
+          }
+        }
+        Transition tr4: locked -> locked {
+          triggers {
+            <done: ^out>
+          }
+          action {
+            "in[switchPosition].done();"
+          }
+        }
+        Transition tr5: locked -> locked {
+          triggers {
+            <tristate: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.tristate();"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass AOnOffMux {
+    Interface {
+      Port ^in [*]: POnOff
+      conjugated Port ^out: POnOff
+    }
+    Structure {
+      external Port ^in
+      external Port ^out
+      Attribute switchPosition: uint32
+    }
+    Behavior {
+      StateMachine {
+        State locked
+        Transition init0: initial -> locked {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr1: locked -> locked {
+          triggers {
+            <on: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.on();"
+          }
+        }
+        Transition tr2: locked -> locked {
+          triggers {
+            <off: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.off();"
+          }
+        }
+        Transition tr4: locked -> locked {
+          triggers {
+            <done: ^out>
+          }
+          action {
+            "in[switchPosition].done();"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass AUartMux {
+    Interface {
+      Port pUartIn [*]: PUART
+      conjugated Port pUartOut [1]: PUART
+    }
+    Structure {
+      Attribute switchPosition: uint32
+      external Port pUartIn
+      external Port pUartOut
+    }
+    Behavior {
+      StateMachine {
+        State locked
+        Transition init0: initial -> locked {
+          action {
+            "switchPosition=0;"
+          }
+        }
+      Transition tr0: locked -> locked {
+          triggers {
+            <sendByte: pUartIn>
+          }
+        action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "pUartOut.sendByte(data);"
+          }
+        }
+        Transition tr1: locked -> locked {
+          triggers {
+            <sendFrame: pUartIn>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "pUartOut.sendFrame(data);"
+          }
+        }
+        Transition tr2: locked -> locked {
+          triggers {
+            <receiveByte: pUartIn>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "pUartOut.receiveByte();"
+          }
+        }
+        Transition tr3: locked -> locked {
+          triggers {
+            <receiveFrame: pUartIn>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "pUartOut.receiveFrame();"
+          }
+        }
+        Transition tr4: locked -> locked {
+          triggers {
+            <init: pUartIn>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "pUartOut.init();"
+          }
+        }
+        Transition tr5: locked -> locked {
+          triggers {
+            <received: pUartOut>
+          }
+          action {
+            "pUartIn[switchPosition].received(data);"
+          }
+        }
+        Transition tr6: locked -> locked {
+          triggers {
+            <error: pUartOut>
+          }
+          action {
+            "pUartIn[switchPosition].error();"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass ASpeedMux {
+    Interface {
+      Port ^in [*]: PSpeed
+      conjugated Port ^out: PSpeed
+    }
+    Structure {
+      external Port ^in
+      external Port ^out
+      Attribute switchPosition: uint32
+    }
+    Behavior {
+      StateMachine {
+        State locked
+        Transition init0: initial -> locked {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr0: locked -> locked {
+          triggers {
+            <setSpeed: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setSpeed(data);"
+          }
+        }
+        Transition tr1: locked -> locked {
+          triggers {
+            <setDirection: ^in>
+          }
+          action 
+        {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setDirection(data);"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass ATestBase {
+    Interface {
+      Port ctrl: PTestCtrl
+      conjugated Port reset: POnOffTristate
+    }
+    Structure {
+      SAP timer: PTimer
+      SAP log: PLog
+      external Port ctrl
+      external Port reset
+    }
+    Behavior {
+      StateMachine {
+        State idle
+        State resetTarget
+        handler TransitionPoint tr0
+        Transition init0: initial -> idle
+        Transition tr1: my tr0 -> idle {
+          triggers {
+            <stop: ctrl>
+          }
+        }
+        Transition tr2: idle -> resetTarget {
+          triggers {
+            <start: ctrl>
+          }
+          action {
+            "log.logStr(\"\\r\\nUser Test: \");"
+            "reset.off();"
+            "timer.startTimeout(50);"
+          }
+        }
+        State userTestsequence {
+          subgraph {
+            EntryPoint tr0
+            ExitPoint tr1
+          }
+        }
+        Transition tr3: resetTarget -> tr0 of userTestsequence {
+          triggers {
+            <timeout: timer>
+          }
+        }
+        State ende {
+          entry {
+            "log.logStr(\"Test Ende!\\r\\n\");"
+          }
+        }
+        Transition tr4: tr1 of userTestsequence -> ende
+      }
+    }
+  }
+
+}

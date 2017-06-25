@@ -1,0 +1,639 @@
+RoomModel SimScratchProj_HW_10 {
+
+	import room.basic.types.* from "../../model_lib/model/etrice_c_modellib/Types.room"
+
+	import room.basic.service.timing.* from "../../model_lib/model/etrice_c_modellib/TimingService.room"
+
+	import room.basic.test.* from "../../model_lib/model/etrice_c_modellib/Tests.room"
+
+	import room.basic.service.ponoff.* from "../../model_lib/model/etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import hilti.simulator.protocolls.* from
+	"../../model_lib/model/hilti_c_modellib/HiltiSimulationPlatformProtocolls.room"
+
+	import room.basic.service.pinterrupt.* from "../../model_lib/model/etrice_c_modellib/PInterrupt.room"
+
+	import room.basic.service.logging.* from "../../model_lib/model/etrice_c_modellib/LoggingService.room"
+
+	import hilti.simulator.akkus.* from "../../model_lib/model/hilti_c_modellib/AkkuSimulation.room"
+
+	import hilti.simulator.HW_1_0.* from "../../model_lib/model/hilti_c_modellib/HiltiSimulationPlatformHW_1_0.room"
+
+	import hilti.simulator.utilities.* from
+	"../../model_lib/model/hilti_c_modellib/HiltiSimulationPlatformUtilities.room"
+
+	import hilti.simulator.machine_elements.* from
+	"../../model_lib/model/hilti_c_modellib/HiltiSimulationPlatformMachineElements.room"
+
+	import hilti.simulator.motor_elements.* from
+	"../../model_lib/model/hilti_c_modellib/HiltiSimulationPlatformMotorElements.room"
+
+	import hilti.simulator.cms_specific.* from
+	"../../model_lib/model/hilti_c_modellib/HiltiSimulationPlatformCMSSpecific.room"
+
+	import model "./TrafficLight.actortest"
+
+	LogicalSystem SimScratchProj_HW_10 {
+		SubSystemRef main: MainSubSystem
+	}
+
+	SubSystemClass MainSubSystem {
+		@TestInstance
+		ActorRef appl: Application
+		//LogicalThread defaultThread
+		LayerConnection ref appl satisfied_by timing.timer
+		LayerConnection ref appl satisfied_by logging.log
+		ActorRef timing: ATimingService
+		ActorRef logging: ALoggingService
+	}
+
+	ProtocolClass PWorkingLightCfg {
+		incoming {
+			Message settime(t: uint32)
+		}
+	}
+
+	ProtocolClass PWorkingLightConfig {
+		incoming {
+			Message settime(t: uint32)
+		}
+	}
+
+	ActorClass AWorkingLightTest {
+		Interface {
+			conjugated Port led: POnOff
+			Port button: POnOff
+			Port ctrl: PWorkingLightConfig
+		}
+		Structure {
+			Attribute delayTime: uint32
+			SAP timer: PTimer
+			external Port led
+			external Port button
+			external Port ctrl
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry {
+						"led.off();"
+					}
+					exit {
+						"led.on();"
+					}
+				}
+				State working { }
+				Transition init0: initial -> idle {
+					action {
+						"delayTime=2000;"
+					}
+				}
+				Transition tr0: idle -> working {
+					triggers {
+						<on: button>
+					}
+				}
+				State delay
+				Transition tr1: working -> delay {
+					triggers {
+						<off: button>
+					}
+					action {
+						"timer.startTimeout(delayTime);"
+					}
+				}
+				Transition tr2: delay -> idle {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr3: delay -> working {
+					triggers {
+						<on: button>
+					}
+					action {
+						"timer.kill();"
+					}
+				}
+				handler TransitionPoint tr4
+				Transition tr5: my tr4 -> my tr4 {
+					triggers {
+						<settime: ctrl>
+					}
+					action {
+						"delayTime=t;"
+					}
+				}
+			}
+		}
+	}
+	//	ProtocolClass PWorkingLightCtrl {
+	//		incoming {
+	//			Message setTime(data: uint32)
+	//		}
+	//	}
+	ActorClass AWorkingLight {
+		Interface {
+			conjugated Port ledOut: POnOff
+			Port button: POnOff
+		}
+		Structure {
+			Attribute delayTime: uint32
+			Attribute secondDelay: uint32
+			SAP timer: PTimer
+			external Port ledOut
+			external Port button
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry {
+						"ledOut.off();"
+					}
+				}
+				State on {
+					entry {
+						"ledOut.on();"
+					}
+				}
+				Transition init0: initial -> idle {
+					action {
+						"delayTime=2000;"
+						"secondDelay=500;"
+					}
+				}
+				Transition tr0: idle -> on {
+					triggers {
+						<on: button>
+					}
+					action {
+						"ledOut.on();"
+					}
+				}
+				Transition tr1: on -> delay {
+					triggers {
+						<off: button>
+					}
+					action {
+						"timer.startTimeout(delayTime);"
+					}
+				}
+				State delay
+				Transition tr2: delay -> idle {
+					triggers {
+						<timeout: timer>
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ANetClockTester {
+		Interface {
+			conjugated Port dac0: PDacIntern
+			conjugated Port dac1: PDacIntern
+			conjugated Port netCtrl: PNetClockCtrl
+			conjugated Port netClockReport: PNetClockReport
+		}
+		Structure {
+			SAP timer: PTimer
+			external Port dac0
+			external Port dac1
+			external Port netCtrl
+			external Port netClockReport
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init0: initial -> state0 {
+					action {
+						"dac0.setSinAmplitude(1400);"
+						"dac0.setSinOffset(1500);"
+						"dac0.setSinTrigger(30);"
+						"dac0.setSinShift(10);"
+						"dac0.enabeleSinGen();"
+						""
+						"dac1.setSinAmplitude(1000);"
+						"dac1.setSinOffset(1500);"
+						"dac1.enabeleSinGen();"
+						""
+						"netCtrl.setFrequency(50);"
+						"netCtrl.startReporting(100);"
+						""
+						"netCtrl.start();"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<newValue: netClockReport>
+					}
+					action {
+						"volatile uint32_t fireTicks = (data >> 16);"
+						"volatile uint32_t fireCounts = (data & 0x0000FFFF);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass A1 {
+		Interface {
+			Port ReplPortTest0 [7]: POnOff
+		}
+		Structure {
+			external Port ReplPortTest0
+		}
+	}
+
+	ActorClass A2 {
+		Interface {
+			conjugated Port p0: POnOff
+		}
+		Structure {
+			external Port p0
+		}
+	}
+
+	ActorClass A3 {
+		Interface {
+			conjugated Port p0 [3]: POnOff
+		}
+		Structure {
+			external Port p0
+		}
+	}
+
+	ActorClass AToolSimTester {
+		Interface {
+			conjugated Port ctrl: PToolUartCtrl
+			conjugated Port digOut: POnOff
+		}
+		Structure {
+			SAP timer: PTimer
+			external Port ctrl
+			external Port digOut
+		}
+		Behavior {
+			StateMachine {
+				State state0 {
+					entry {
+						"digOut.on();"
+						"ctrl.stop();"
+						"timer.startTimeout(1000);"
+					}
+				}
+				State state1 {
+					entry {
+						"digOut.on();"
+						"timer.startTimeout(1000);"
+					}
+				}
+				Transition init0: initial -> state0 { }
+				Transition tr0: state0 -> state2 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr1: state1 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				State state2 {
+					entry {
+						"digOut.off();"
+						"ctrl.start();"
+						"timer.startTimeout(3);"
+					}
+				}
+				Transition tr2: state2 -> state1 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PUartCtrl {
+		incoming {
+			Message send1()
+			Message send2()
+		}
+		outgoing {
+			Message rec1()
+			Message rec2()
+		}
+	}
+
+	ActorClass AUartAdapter {
+		Interface {
+			conjugated Port uart: PAkkuSim
+			Port ctrl: PUartCtrl
+		}
+		Structure {
+			usercode3 {
+				"uint8_t txData[10];"
+				"uint8_t rxData[10];"
+			}
+			external Port uart
+			external Port ctrl
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init0: initial -> state0 {
+					action {
+						"uart.receiveFrame();"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<received: uart>
+					}
+					action {
+						"uart.receiveFrame();\t"
+						""
+						"switch (data[0]){"
+						"\t\tcase 0xF1:"
+						"\t\tctrl.rec1();"
+						"\tbreak;"
+						"\t\tcase 0xF5:"
+						"\t\tctrl.rec2();"
+						"\tbreak;"
+						"\tdefault:;"
+						"\tbreak;"
+						"\t}\t"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<send1: ctrl>
+					}
+					action {
+						"txData[0] = 0xF1;"
+						"txData[1] = 0xF2;"
+						"txData[2] = 0xF3;"
+						"txData[3] = 0xF4;"
+						"txData[4] = 0xF5;"
+						"txData[5] = 0x00;"
+						""
+						"uart.sendFrame(txData);"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<send2: ctrl>
+					}
+					action {
+						"txData[0] = 0xF5;"
+						"txData[1] = 0xF6;"
+						"txData[2] = 0xF7;"
+						"txData[3] = 0xF8;"
+						"txData[4] = 0xF9;"
+						"txData[5] = 0x00;"
+						""
+						"uart.sendFrame(txData);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AUartTester {
+		Interface {
+			conjugated Port uartCtrl: PUartCtrl
+			conjugated Port indicator: POnOff
+		}
+		Structure {
+			usercode3 {
+				"uint8_t txData[10];"
+			}
+			SAP timer: PTimer
+			external Port uartCtrl
+			external Port indicator
+			Attribute SenderState: uint32
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init0: initial -> state0 {
+					action {
+						"timer.startTimer(1000);"
+						"SenderState=0;"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"switch (SenderState){"
+						"\tcase 0:"
+						"\t\tuartCtrl.send1();"
+						"\t\tSenderState++;\t"
+						"\tbreak;"
+						"\tcase 1:"
+						"\t\tuartCtrl.send2();"
+						"\t\tSenderState=0;\t"
+						"\tbreak;"
+						"\tdefault:;"
+						"\tbreak;"
+						"}"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<rec1: uartCtrl>
+					}
+					action {
+						"indicator.on();"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<rec2: uartCtrl>
+					}
+					action {
+						"indicator.off();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AAmpelTester {
+		Interface {
+			Port pedGreenIn: POnOff
+			Port pedRedIn: POnOff
+			Port carGreenIn: POnOff
+			Port carYellowIn: POnOff
+			Port carRedIn: POnOff
+			conjugated Port targetReset: POnOffTristate
+			conjugated Port targetButton: POnOffTristate
+			conjugated Port targetUartCtrl: PUartCtrl
+			conjugated Port testResult: POnOff
+			Port ctrl: POnOff
+			conjugated Port testRunning: POnOff
+		}
+		Structure {
+			SAP timer: PTimer
+			external Port pedGreenIn
+			external Port pedRedIn
+			external Port carGreenIn
+			external Port carYellowIn
+			external Port carRedIn
+			external Port targetReset
+			external Port targetButton
+			external Port targetUartCtrl
+			external Port testResult
+			external Port ctrl
+			external Port testRunning
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry {
+						"targetReset.tristate();"
+						"targetButton.tristate();"
+						"testRunning.off();"
+						"testResult.off();"
+					}
+				}
+				Transition init0: initial -> idle
+				TransitionPoint tr0
+				Transition tr1: my tr0 -> idle {
+					triggers {
+						<on: ctrl>
+					}
+				}
+				State state0 {
+					entry {
+						"//targetUartCtrl.send1();"
+						"// alternativ könnte man auch den Knopf drücken"
+						"// dann wäre auch das Stück SW mit getestet"
+						""
+						"testRunning.on();"
+						"timer.startTimeout(2500);"
+					}
+				}
+				State error {
+					entry {
+						"testResult.on();"
+					}
+				}
+				State ok
+				State state1 {
+					entry {
+						"timer.startTimeout(3000);"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				Transition tr2: idle -> state2 {
+					triggers {
+						<on: ctrl>
+					}
+					action {
+						"timer.startTimeout(100);"
+					}
+				}
+				Transition tr3: state0 -> cp cp0 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr4: cp cp0 -> error
+				Transition tr5: cp cp0 -> state1 {
+					cond {
+						"carRedIn.isPortStateOn()"
+					}
+				}
+				Transition tr6: state1 -> cp cp1 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr7: cp cp1 -> error
+				Transition tr8: cp cp1 -> ok {
+					cond {
+						"carRedIn.isPortStateOff()"
+					}
+				}
+				State state2 {
+					entry {
+						"targetButton.off();"
+					}
+					exit {
+						"targetButton.tristate();"
+					}
+				}
+				Transition tr9: state2 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Application {
+		Structure {
+			ActorRef HWer_10: ASimulationPlatformHW_1_0
+			ActorRef blinky: ABlinky
+			
+			Binding ref2.uart and HWer_10.AkkuUart
+			ActorRef ref2: AUartAdapter
+			Binding ref3.targetUartCtrl and ref2.ctrl
+			
+			Binding HWer_10.IC10_P11_In and ref3.pedRedIn
+			Binding HWer_10.IC10_P12_In and ref3.carGreenIn
+			Binding HWer_10.IC10_P13_In and ref3.carYellowIn
+			Binding HWer_10.IC10_P14_In and ref3.carRedIn
+			
+			Binding HWer_10.BlueButtonNucleo and ref3.ctrl
+		
+			
+			Binding HWer_10.IC10_P10_In and tester.pedGreenIn
+			ActorRef ref3: AAmpelTester
+			
+			
+			
+			
+			
+			
+			Binding HWer_10.LedRedNucleo and tester.testResult
+		
+			Binding  blinky.^out and HWer_10.LedGreenNucleo
+			ActorRef tester: TrafficLight.TrafficLight_AAmpelTestInterface
+		Binding   HWer_10.BufferedOut_1 and tester.targetButton
+			Binding HWer_10.LedBlueNucleo and tester.testRunning
+		
+			Binding HWer_10.BufferedOut_2 and tester.targetReset
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init0: initial -> state0 { }
+			}
+		}
+	}
+
+	ActorClass AAmpelTestInterface {
+		Interface {
+			conjugated Port pedGreenIn: POnOff
+			conjugated Port pedRedIn: POnOff
+			conjugated Port carGreenIn: POnOff
+			conjugated Port carYellowIn: POnOff
+			conjugated Port carRedIn: POnOff
+			conjugated Port ctrl: POnOff
+			
+			Port targetReset: POnOffTristate
+			Port targetButton: POnOffTristate
+			Port targetUartCtrl: PUartCtrl
+			Port testResult: POnOff
+			Port testRunning: POnOff
+		}
+	}
+
+}

@@ -1,0 +1,585 @@
+RoomModel hilti.simulator.mmi {
+
+	import room.basic.service.timing.* from "../etrice_c_modellib/TimingService.room"
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import room.basic.service.pinterrupt.* from "../etrice_c_modellib/PInterrupt.room"
+
+	import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+	
+	import room.basic.service.logging.* from "..//etrice_c_modellib/LoggingService.room"
+	
+
+	ProtocolClass PMmiConfig {
+		incoming {
+			Message setConfig(data: uint32)
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+	ProtocolClass PMmiCtrl {
+		incoming {
+			Message start()
+			Message stop()
+			Message setPowerReductionOn()
+			Message setPowerReductionOff()
+      Message startDiagMode()
+      Message stopDiagMode()
+      Message startTransferMode()
+      Message stopTransferMode()
+      Message resetXMC()
+			Message gotoErrorState()
+		}
+		outgoing {
+			Message done()
+		}
+	}
+	
+	ActorClass AMmiCtrlMux {
+	  Interface {
+      Port ^in [*]: PMmiCtrl
+      conjugated Port ^out: PMmiCtrl
+    }
+    Structure {
+      external Port ^in
+      external Port ^out
+      Attribute switchPosition: uint32
+    }
+  Behavior {
+      StateMachine {
+        State locked
+        Transition init0: initial -> locked {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr0: locked -> locked {
+          triggers {
+            <start: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.start();"
+          }
+        }
+        Transition tr1: locked -> locked {
+          triggers {
+            <stop: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.stop();"
+          }
+        }
+        Transition tr2: locked -> locked {
+          triggers {
+            <setPowerReductionOn: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setPowerReductionOn();"
+          }
+        }
+        Transition tr3: locked -> locked {
+          triggers {
+            <setPowerReductionOff: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setPowerReductionOff();"
+          }
+        }
+        Transition tr4: locked -> locked {
+          triggers {
+            <startDiagMode: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.startDiagMode();"
+          }
+        }
+        Transition tr5: locked -> locked {
+          triggers {
+            <stopDiagMode: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.stopDiagMode();"
+          }
+        }
+        Transition tr6: locked -> locked {
+          triggers {
+            <gotoErrorState: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.gotoErrorState();"
+          }
+        }
+        Transition tr7: locked -> locked {
+          triggers {
+            <done: ^out>
+          }
+          action {
+            "in[switchPosition].done();"
+          }
+        }
+      Transition tr8: locked -> locked {
+          triggers {
+            <resetXMC: ^in>
+          }
+          action 
+        {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.resetXMC();"
+          }
+        }
+      Transition tr9: locked -> locked {
+          triggers {
+            <startTransferMode: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.startTransferMode();"
+          }
+        }
+        Transition tr10: locked -> locked {
+          triggers {
+            <stopTransferMode: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.stopTransferMode();"
+          }
+        }
+      }
+    }
+  }
+	
+	ActorClass AMmiBasicSimu{
+	  Interface{
+	    conjugated Port input: PUART
+      Port ctrl: PMmiCtrl
+	    Port MmiLed: POnOff
+	  }
+    Structure {
+      usercode3 {
+        "uint8_t txData[10];"
+      }
+      SAP timer: PTimer
+      SAP timer2: PTimer
+      external Port input
+      external Port ctrl
+      external Port MmiLed
+    }
+	}
+
+	ActorClass AMmiSimu {
+		Interface {
+			conjugated Port uart: PUART
+			Port ctrl: PMmiCtrl
+			Port config: PMmiConfig
+			conjugated Port pPwrRedLed: POnOff
+		}
+		Structure {
+			usercode3 {
+				"uint8_t txData[10];"
+			}
+			SAP timer: PTimer
+			SAP timer2: PTimer
+			SAP log:PLog
+			external Port uart
+			external Port ctrl
+			external Port config
+			Attribute C1DataLow: uint8
+			external Port pPwrRedLed
+		}
+		Behavior {
+			StateMachine {
+				State idle { entry {
+						"pPwrRedLed.off();"
+					}
+				}
+				State NormalOp {
+					subgraph {
+						State GetDeviceID {
+							subgraph {
+								State state0 {
+									entry {
+										"uart.receiveFrame();"
+									}
+								}
+								ExitPoint tr2
+								EntryPoint Entry1
+								Transition Send56: state0 -> state0 {
+									triggers {
+										<timeout: timer>
+									}
+									action {
+										"txData[0]=0x56; // request firmware version and components"
+										"txData[1]=0x01; // sw boot loader"
+										"txData[2]=0x00;"
+										"txData[3]=0x00;"
+										"txData[4]=0x00;"
+										""
+										"uart.sendFrame(txData);"
+									}
+								}
+								Transition tr3: state0 -> my tr2 {
+									triggers {
+										<received: uart guard {
+											"(data[0] == 0x56)"
+										}>
+									}
+									action {
+										"timer.kill();"
+										"timer2.kill();"
+									}
+								}
+								Transition tr1: state0 -> my tr2 {
+									triggers {
+										<timeout: timer2>
+									}
+									action {
+										"timer.kill();"
+									}
+								}
+								Transition init0: my Entry1 -> state0 {
+									action {
+										"timer.startTimer(100);"
+										"timer2.startTimeout(3000);"
+									}
+								}
+							}
+						}
+						State GetInitialMeData {
+							subgraph {
+								State C1 {
+									entry {
+										"txData[0]=0xC1;"
+										"txData[1]=0x00;"
+										"txData[2]=0x00;"
+										"txData[3]=C1DataLow;"
+										"txData[4]=0x00;"
+										""
+										"uart.sendFrame(txData);"
+										"timer.startTimeout(20);"
+										"uart.receiveFrame();"
+									}
+								}
+								State C3 {
+									entry {
+										"txData[0]=0xC3;"
+										"txData[1]=0x00;"
+										"txData[2]=0x00;"
+										"txData[3]=0x00;"
+										"txData[4]=0x00;"
+										""
+										"uart.sendFrame(txData);"
+										"timer.startTimeout(20);"
+										"uart.receiveFrame();"
+									}
+								}
+								State D2_1 {
+									entry {
+										"txData[0]=0x0E;"
+										"txData[1]=0x00;"
+										"txData[2]=0x00;"
+										"txData[3]=0x00;"
+										"txData[4]=0x00;"
+										""
+										"uart.sendFrame(txData);"
+										"timer.startTimeout(20);"
+										"uart.receiveFrame();"
+									}
+								}
+								ExitPoint tr2
+								ChoicePoint cp0
+								Transition tr0: C1 -> C3 {
+									triggers {
+										<timeout: timer>
+									}
+								}
+								Transition tr1: C3 -> D2_1 {
+									triggers {
+										<timeout: timer>
+									}
+								}
+								Transition tr3: D2_1 -> cp cp0 {
+									triggers {
+										<received: uart>
+									}
+									action {
+										"timer.kill();"
+									}
+								}
+								Transition tr4: cp cp0 -> my tr2
+								Transition tr5: cp cp0 -> my tr2 {
+									cond {
+										"(data[0] == 0x0E) && "
+										"((data[3] != 0x00) || (data[4] != 0x00))"
+									}
+									action {
+										"txData[0]=0x0E;"
+										"txData[1]=0x00;"
+										"txData[2]=0x00;"
+										"txData[3]=0x00;"
+										"txData[4]=0x00;"
+										""
+										"uart.sendFrame(txData);"
+									}
+								}
+								Transition init0: my Entry2 -> C1 { }
+								EntryPoint Entry2
+								Transition tr8: C1 -> C3 {
+									triggers {
+										<received: uart guard {
+											"(data[0] == 0xC1)"
+										}>
+									}
+									action {
+										"timer.kill();"
+									}
+								}
+								Transition tr9: C3 -> D2_1 {
+									triggers {
+										<received: uart guard {
+											"(data[0] == 0xC3)"
+										}>
+									}
+									action {
+										"timer.kill();"
+									}
+								}
+								Transition tr10: D2_1 -> my tr2 {
+									triggers {
+										<timeout: timer>
+									}
+								}
+							}
+						}
+						State Run {
+							subgraph {
+								State Reveice {
+									entry {
+										"uart.receiveFrame();"
+									}
+								}
+								State WaitTimeout
+								EntryPoint Entry3
+								Transition Send_C1: Reveice -> Reveice {
+									triggers {
+										<timeout: timer>
+									}
+									action {
+										"txData[0]=0xC1;"
+										"txData[1]=0x00;"
+										"txData[2]=0x00;"
+										"txData[3]=C1DataLow;"
+										"txData[4]=0x00;"
+										""
+										"uart.sendFrame(txData);"
+									}
+								}
+								Transition Send_C3: WaitTimeout -> Reveice {
+									triggers {
+										<timeout: timer>
+									}
+									action {
+										"txData[0]=0xC3;"
+										"txData[1]=0x00;"
+										"txData[2]=0x00;"
+										"txData[3]=0x00;"
+										"txData[4]=0x00;"
+										""
+										"uart.sendFrame(txData);"
+										"timer.startTimeout(200);"
+									}
+								}
+								Transition init0: my Entry3 -> Reveice {
+									action {
+										"timer.startTimeout(100);"
+									}
+								}
+								Transition Rcv_C1_PowerOk: Reveice -> WaitTimeout {
+									triggers {
+										<received: uart guard {
+											"(data[0] == 0xC1) &&"
+											"((data[3] & 0x04) == 0x00)"
+										}>
+									}
+									action {
+										"timer.startTimeout(200);"
+										""
+										"if ((data[3] & 0x02) == 0x02) // Check Power Reduction state"
+										"{"
+										"\tpPwrRedLed.on();"
+										"}"
+										"else"
+										"{"
+										"\tpPwrRedLed.off();"
+										"}"
+									}
+								}
+								Transition Rcv_C1_PowerLoss: Reveice -> Reveice {
+									triggers {
+										<received: uart guard {
+                      "(data[0] == 0xC1) &&"
+                      "((data[3] & 0x04) == 0x04)"
+                    }>
+									}
+									action {
+										"timer.startTimeout(400);"
+										""
+										"if ((data[3] & 0x02) == 0x02) // Check Power Reduction state"
+										"{"
+										"\tpPwrRedLed.on();"
+										"}"
+										"else"
+										"{"
+										"\tpPwrRedLed.off();"
+										"}"
+									}
+								}
+								Transition Rcv_C3: Reveice -> Reveice {
+									triggers {
+										<received: uart guard {
+											"(data[0] == 0xC3)"
+										}>
+									}
+								}
+              }
+						}
+						Transition commOk2: tr2 of GetInitialMeData -> Entry3 of Run
+						Transition tr0: tr2 of GetDeviceID -> Entry2 of GetInitialMeData
+						Transition init0: my tr1 -> Entry1 of GetDeviceID
+						EntryPoint tr1
+						handler TransitionPoint tr2
+						Transition SetPowerReductionOn: my tr2 -> my tr2 {
+							triggers {
+								<setPowerReductionOn: ctrl>
+							}
+							action {
+								"C1DataLow |= 0x01;"
+							}
+						}
+						Transition SetPowerReductionOff: my tr2 -> my tr2 {
+							triggers {
+								<setPowerReductionOff: ctrl>
+							}
+							action {
+								"C1DataLow &= 0xFE;"
+							}
+						}
+					State TransferMode {
+              entry {
+                "pPwrRedLed.on();"
+              }
+              exit {
+                "pPwrRedLed.off();"
+              }
+            }
+          Transition tr3: Run -> TransferMode {
+              triggers {
+                <startTransferMode: ctrl>
+              }
+            }
+            Transition tr4: TransferMode -> Entry2 of GetInitialMeData {
+              triggers {
+                <stopTransferMode: ctrl>
+              }
+            }
+          }
+				}
+				Transition init: initial -> idle {
+					action {
+						"uart.init();"
+					}
+				}
+				Transition tr0: idle -> tr1 of NormalOp {
+					triggers {
+						<start: ctrl>
+					}
+				}
+				Transition tr1: NormalOp -> idle {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+			State Diagnose {
+          subgraph {
+            State state0 {
+              entry {
+                "uart.receiveFrame();"
+              }
+            }
+            Transition init0: initial -> state0 {
+              action {
+                "timer.startTimer(100);"
+              }
+            }
+            Transition tr0: state0 -> state0 {
+              triggers {
+                <timeout: timer>
+              }
+              action 
+            {
+                "txData[0]=0x00; // request firmware version and components"
+                "txData[1]=0x12; // sw boot loader"
+                "txData[2]=0x34;"
+                "txData[3]=0x00;"
+                "txData[4]=0x00;"
+                ""
+                "uart.sendFrame(txData);"
+              }
+            }
+            Transition tr1: state0 -> state0 {
+              triggers {
+                <received: uart>
+              }
+              action 
+            {
+                "uint8_t str[50];"
+                ""
+                "sprintf(str,\"%x %x %x %x %x\\r\\n\", data[0], data[1], data[2], data[3], data[4]);"
+                ""
+                "log.logStr(str);"
+              }
+            }
+          }
+        }
+      Transition tr2: idle -> Diagnose {
+          triggers {
+            <startDiagMode: ctrl>
+          }
+        }
+      Transition tr3: Diagnose -> idle {
+          triggers {
+            <stopDiagMode: ctrl>
+          }
+        }
+      Transition tr4: idle -> idle {
+          triggers {
+            <resetXMC: ctrl>
+          }
+          action 
+        {
+            "txData[0]=0xF0; // Lifetest"
+            "txData[1]=0x0C; // Reset"
+            "txData[2]=0x00;"
+            "txData[3]=0x00;"
+            "txData[4]=0x00;"
+            ""
+            "uart.sendFrame(txData);"
+          }
+        }
+      }
+		}
+	}
+
+}

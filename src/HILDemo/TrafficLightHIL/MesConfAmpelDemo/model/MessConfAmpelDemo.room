@@ -1,0 +1,541 @@
+RoomModel MessConfAmpelDemo {
+
+	import room.basic.types.* from "etrice_c_modellib/Types.room"
+
+	import room.basic.service.pinterrupt.* from "etrice_c_modellib/PInterrupt.room"
+
+	import room.basic.service.timing.* from "etrice_c_modellib/TimingService.room"
+
+	LogicalSystem MessConfAmpelDemo {
+		SubSystemRef main: MainSubSystem
+	}
+
+	ProtocolClass POnOff {
+		incoming {
+			Message on()
+			Message off()
+		}
+	}
+
+	ProtocolClass PUartCtrl {
+		incoming {
+			Message sendByte(data: uint8)
+			Message sendFrame(data: uint8 ref)
+			Message receiveByte()
+			Message receiveFrame()
+			Message init()
+		}
+		outgoing {
+			Message received(data: uint8 ref)
+			Message error()
+		}
+	}
+
+	ActorClass HWAbstractionAmpelDemo {
+		Interface {
+			Port pedGreenLed: POnOff
+			Port pedRedLed: POnOff
+			Port carGreenLed: POnOff
+			Port carYellowLed: POnOff
+			Port carRedLed: POnOff
+			Port nucleoGreenLed: POnOff
+			conjugated Port button: POnOff
+			Port uart: PUartCtrl
+		}
+		Structure {
+			usercode1 {
+				"#include \"main.h\""
+				"#include \"stm32f0xx_hal.h\""
+			}
+			Attribute RequestButtonState: uint32
+			SAP timer: PTimer
+			external Port pedGreenLed
+			external Port pedRedLed
+			external Port carGreenLed
+			external Port carYellowLed
+			external Port carRedLed
+			external Port nucleoGreenLed
+			external Port button
+			Binding uart1_isr and uart1.isr
+			Binding uart1_error and uart1.errorIsr
+			Binding uart and uart1.ctrl
+			ActorRef uart1: AUart1
+			conjugated Port uart1_isr: PInterrupt
+			conjugated Port uart1_error: PInterrupt
+		}
+		Behavior {
+			StateMachine {
+				State running
+				Transition init0: initial -> running {
+					action {
+						"timer.startTimer(50);"
+						"RequestButtonState=0;"
+						""
+						"UART1_registerUartPort(uart1_isr.export());"
+						"UART1_registerUartErrorPort(uart1_error.export());"
+					}
+				}
+				Transition tr0: running -> running {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"if (RequestButtonState == 0){"
+						"\tif (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == GPIO_PIN_SET){"
+						"\t\tRequestButtonState=1;"
+						"\t\tbutton.on();"
+						"\t\t}\t"
+						"\t}"
+						"\t"
+						"if (RequestButtonState == 1){"
+						"\tif (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == GPIO_PIN_RESET){"
+						"\t\tRequestButtonState=0;"
+						"\t\tbutton.off();"
+						"\t\t}\t"
+						"\t}\t"
+					}
+				}
+				Transition tr1: running -> running {
+					triggers {
+						<on: nucleoGreenLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr2: running -> running {
+					triggers {
+						<off: nucleoGreenLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);"
+					}
+				}
+				Transition tr3: running -> running {
+					triggers {
+						<on: pedGreenLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr4: running -> running {
+					triggers {
+						<off: pedGreenLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET);"
+					}
+				}
+				Transition tr5: running -> running {
+					triggers {
+						<on: pedRedLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr6: running -> running {
+					triggers {
+						<off: pedRedLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_RESET);"
+					}
+				}
+				Transition tr7: running -> running {
+					triggers {
+						<on: carGreenLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr8: running -> running {
+					triggers {
+						<off: carGreenLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);"
+					}
+				}
+				Transition tr9: running -> running {
+					triggers {
+						<on: carYellowLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr10: running -> running {
+					triggers {
+						<off: carYellowLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);"
+					}
+				}
+				Transition tr11: running -> running {
+					triggers {
+						<on: carRedLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr12: running -> running {
+					triggers {
+						<off: carRedLed>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ABlinky {
+		Interface {
+			conjugated Port p0: POnOff
+		}
+		Structure {
+			SAP timer: PTimer
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				State off {
+					entry {
+						"p0.off();"
+					}
+					exit {
+						"p0.on();"
+					}
+				}
+				State on
+				Transition init0: initial -> off {
+					action {
+						"timer.startTimer(400);"
+					}
+				}
+				Transition tr0: off -> on {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr1: on -> off {
+					triggers {
+						<timeout: timer>
+					}
+				}
+			}
+		}
+	}
+
+	SubSystemClass MainSubSystem {
+		ActorRef appl: Application
+		LogicalThread defaultThread
+		LayerConnection ref appl satisfied_by timing.timer
+		ActorRef timing: ATimingService
+	}
+
+	ActorClass AUart1 {
+		Interface {
+			Port isr: PInterrupt
+			Port ctrl: PUartCtrl
+			Port errorIsr: PInterrupt
+		}
+		Structure {
+			usercode1 {
+				"#include \"main.h\""
+			}
+			external Port isr
+			SAP timer: PTimer
+			external Port ctrl
+			external Port errorIsr
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init: initial -> state0 { }
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<event: isr>
+					}
+					action {
+						"ctrl.received(UART1_getRxBuffer());"
+					}
+				}
+				Transition tr3: state0 -> state0 {
+					triggers {
+						<receiveByte: ctrl>
+					}
+					action {
+						"UART1_receiveByte();"
+					}
+				}
+				Transition tr4: state0 -> state0 {
+					triggers {
+						<receiveFrame: ctrl>
+					}
+					action {
+						"UART1_receiveFrame();"
+					}
+				}
+				Transition tr5: state0 -> state0 {
+					triggers {
+						<sendByte: ctrl>
+					}
+					action {
+						"UART1_sendByte(data);"
+					}
+				}
+				Transition tr6: state0 -> state0 {
+					triggers {
+						<sendFrame: ctrl>
+					}
+					action {
+						"UART1_sendFrame(data);"
+					}
+				}
+				Transition tr7: state0 -> state0 {
+					triggers {
+						<init: ctrl>
+					}
+					action {
+						"UART1_initUart();"
+					}
+				}
+				Transition tr8: state0 -> state0 {
+					triggers {
+						<event: errorIsr>
+					}
+					action {
+						"ctrl.error();"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PUartAdapterCtrl {
+		incoming {
+			Message send1()
+			Message send2()
+		}
+		outgoing {
+			Message rec1()
+			Message rec2()
+		}
+	}
+
+	ActorClass APedLightApplication {
+		Interface {
+			conjugated Port pedRed: POnOff
+			conjugated Port pedGreen: POnOff
+			conjugated Port carRed: POnOff
+			conjugated Port carGren: POnOff
+			conjugated Port carYellow: POnOff
+			Port button: POnOff
+		conjugated Port ctrl: PUartAdapterCtrl
+		}
+		Structure {
+			SAP timer: PTimer
+		external Port pedRed
+			external Port pedGreen
+			external Port carRed
+			external Port carGren
+			external Port carYellow
+			external Port button
+		external Port ctrl
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry {
+						"pedRed.on();"
+						"pedGreen.off();"
+						"carRed.off();"
+						"carGren.on();"
+						"carYellow.off();"
+					}
+				}
+				State state0 {
+					entry {
+						"timer.startTimeout(1000);"
+						"carYellow.on();"
+						"carGren.off();"
+					}
+				}
+				State state1
+				State state2
+				Transition init0: initial -> idle
+				Transition tr0: idle -> state0 {
+					triggers {
+						<off: button>
+					}
+					}
+				Transition tr1: state0 -> state1 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(2000);"
+						"carYellow.off();"
+						"carRed.on();"
+						"pedRed.off();"
+						"pedGreen.on();"
+					}
+				}
+				Transition tr2: state1 -> state2 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"timer.startTimeout(1000);"
+						"pedRed.on();"
+						"pedGreen.off();"
+						"carYellow.on();"
+					}
+				}
+				Transition tr3: state2 -> idle {
+					triggers {
+						<timeout: timer>
+					}
+				}
+			Transition tr4: idle -> state0 {
+					triggers {
+						<rec1: ctrl>
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AUartMirror {
+		Interface {
+			conjugated Port p0: PUartAdapterCtrl
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init0: initial -> state0
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<rec1: p0>
+					}
+					action {
+						"p0.send2();"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<rec2: p0>
+					}
+					action {
+						"p0.send1();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AUartAdapter {
+		Interface {
+			conjugated Port uart: PUartCtrl
+			Port ctrl: PUartAdapterCtrl
+		}
+		Structure {
+			usercode3 {
+				"uint8_t txData[10];"
+				"uint8_t rxData[10];"
+			}
+			external Port uart
+			external Port ctrl
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init0: initial -> state0 {
+					action {
+						"uart.receiveFrame();"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<received: uart>
+					}
+					action {
+						"uart.receiveFrame();\t"
+						""
+						"switch (data[0]){"
+						"\t\tcase 0xF1:"
+						"\t\tctrl.rec1();"
+						"\tbreak;"
+						"\t\tcase 0xF5:"
+						"\t\tctrl.rec2();"
+						"\tbreak;"
+						"\tdefault:;"
+						"\tbreak;"
+						"\t}\t"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<send1: ctrl>
+					}
+					action {
+						"txData[0] = 0xF1;"
+						"txData[1] = 0xF2;"
+						"txData[2] = 0xF3;"
+						"txData[3] = 0xF4;"
+						"txData[4] = 0xF5;"
+						"txData[5] = 0x00;"
+						""
+						"uart.sendFrame(txData);"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<send2: ctrl>
+					}
+					action {
+						"txData[0] = 0xF5;"
+						"txData[1] = 0xF6;"
+						"txData[2] = 0xF7;"
+						"txData[3] = 0xF8;"
+						"txData[4] = 0xF9;"
+						"txData[5] = 0x00;"
+						""
+						"uart.sendFrame(txData);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Application {
+		Structure {
+			ActorRef hw: HWAbstractionAmpelDemo
+			Binding blinky.p0 and hw.nucleoGreenLed
+			ActorRef blinky: ABlinky
+			Binding ref0.uart and hw.uart
+			ActorRef ref0: AUartAdapter
+			
+			
+		Binding ref2.button and hw.button
+			Binding ref2.carYellow and hw.carYellowLed
+			Binding ref2.carGren and hw.carGreenLed
+			Binding ref2.carRed and hw.carRedLed
+			Binding ref2.pedGreen and hw.pedGreenLed
+			Binding ref2.pedRed and hw.pedRedLed
+			ActorRef ref2: APedLightApplication
+		Binding ref2.ctrl and ref0.ctrl
+		}
+	}
+
+}

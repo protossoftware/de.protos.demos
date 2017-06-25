@@ -1,0 +1,246 @@
+RoomModel hilti.simulator.machine_elements {
+
+  import room.basic.types.* from "..//etrice_c_modellib/Types.room"
+
+  import room.basic.service.timing.* from "..//etrice_c_modellib/TimingService.room"
+
+  import room.basic.service.ponoff.* from "..//etrice_c_modellib/GenericOnOffProtocoll.room"
+
+  import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+
+  ProtocolClass PPotiSwitchControl {
+    incoming {
+      Message start()
+      Message stop()
+      Message setPotiVal(data: uint32) [ " manual setting of poti output 0..3300 mV" ]
+      Message rampUp(data: uint32) [
+      "automated ramp up. Data = 0xAAAABBBB: AAAA=>stepsize in mV; BBBB=>steptime in ms " ]
+      Message rampDown(data: uint32) [
+      "automated ramp down. Data = 0xAAAABBBB: AAAA=>stepsize in mV; BBBB=>steptime in ms " ]
+    }
+    outgoing {
+      Message done() [ "sent if rampUp/Down is finished" ]
+    }
+  }
+
+  ActorClass APotiSwitchCtrlMux {
+    Interface {
+      conjugated Port ^out: PPotiSwitchControl
+      Port ^in [*]: PPotiSwitchControl
+    }
+    Structure {
+      external Port ^out
+      external Port ^in
+      Attribute switchPosition: uint32
+    }
+    Behavior {
+      StateMachine {
+        State state0
+        Transition init0: initial -> state0 {
+          action {
+            "switchPosition=0;"
+          }
+        }
+        Transition tr0: state0 -> state0 {
+          triggers {
+            <start: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.start();"
+          }
+        }
+        Transition tr1: state0 -> state0 {
+          triggers {
+            <stop: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.stop();"
+          }
+        }
+        Transition tr2: state0 -> state0 {
+          triggers {
+            <setPotiVal: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.setPotiVal(data);"
+          }
+        }
+        Transition tr3: state0 -> state0 {
+          triggers {
+            <rampUp: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.rampUp(data);"
+          }
+        }
+        Transition tr4: state0 -> state0 {
+          triggers {
+            <rampDown: ^in>
+          }
+          action {
+            "switchPosition=((etReplSubPort*)ifitem)->index;"
+            "out.rampDown(data);"
+          }
+        }
+        Transition tr5: state0 -> state0 {
+          triggers {
+            <done: ^out>
+          }
+          action {
+            "in[switchPosition].done();"
+          }
+        }
+      }
+    }
+  }
+
+  ProtocolClass PErrorFlipFlopControl {
+    incoming {
+      Message erroOn()
+      Message erroOnResetOnReset()
+      Message errorOnXms(data: uint32)
+      Message erroOff()
+    }
+  }
+
+  ActorClass AErrorFlipFlop {
+    Interface {
+      conjugated Port resetIn: PExtInterrupt
+      conjugated Port FlipFlopErrorOut: POnOff
+      Port ctrl: PErrorFlipFlopControl
+    }
+    Structure {
+      SAP timer: PTimer
+      external Port resetIn
+      external Port FlipFlopErrorOut
+      external Port ctrl
+    }
+    Behavior {
+      StateMachine {
+        State errorOff {
+          entry {
+            "FlipFlopErrorOut.on();"
+            "resetIn.disable();"
+          }
+        }
+        State errorOnWaitForReset
+        TransitionPoint tp0
+        Transition init: initial -> errorOff
+        Transition tr0: my tp0 -> errorOff {
+          triggers {
+            <erroOff: ctrl>
+          }
+        }
+        Transition tr1: errorOff -> errorOnWaitForReset {
+          triggers {
+            <erroOnResetOnReset: ctrl>
+          }
+          action {
+            "resetIn.enable();"
+            "FlipFlopErrorOut.off();"
+          }
+        }
+        Transition tr2: errorOnWaitForReset -> errorOff {
+          triggers {
+            <event: resetIn>
+          }
+        }
+        State errorOnWaitForOff
+        State errorOnWait10ms
+        Transition tr3: errorOff -> errorOnWaitForOff {
+          triggers {
+            <erroOn: ctrl>
+          }
+          action {
+            "FlipFlopErrorOut.off();"
+          }
+        }
+        Transition tr4: errorOff -> errorOnWait10ms {
+          triggers {
+            <errorOnXms: ctrl>
+          }
+          action {
+            "timer.startTimeout(data);"
+            "FlipFlopErrorOut.off();"
+          }
+        }
+        Transition tr5: errorOnWait10ms -> errorOff {
+          triggers {
+            <timeout: timer>
+          }
+          action {
+            "timer.startTimeout(10);"
+          }
+        }
+      }
+    }
+  }
+
+  ActorClass APotiSwitch {
+    Interface {
+      conjugated Port dacPotiOut: PDac
+      conjugated Port switchOut: POnOff
+      Port ctrl: PPotiSwitchControl
+      conjugated Port switchOutInv: POnOff
+    }
+    Structure {
+      Attribute actualOutVal: uint32
+      SAP timer: PTimer
+      external Port dacPotiOut
+      external Port switchOut
+      external Port ctrl
+      external Port switchOutInv
+    }
+    Behavior {
+      StateMachine {
+        State idle {
+          entry 
+        {
+						"switchOut.off();"
+						"switchOutInv.on();"
+					}
+				}
+        Transition init: initial -> idle { action 
+				{
+						"actualOutVal=500;"
+						"dacPotiOut.setValue(actualOutVal);"
+					}
+				}
+        TransitionPoint tp0
+        State working {
+          }
+        Transition tr0: my tp0 -> idle {
+          triggers {
+            <stop: ctrl>
+          }
+        }
+        Transition tr1: idle -> working {
+          triggers {
+            <start: ctrl>
+          }
+          action 
+        {
+						"switchOut.on();"
+						"switchOutInv.off();"
+					}
+				}
+        Transition tr4: my tr2 -> my tr2 {
+          triggers {
+            <setPotiVal: ctrl>
+          }
+          action 
+        {
+						"actualOutVal=data;"
+						"dacPotiOut.setValue(actualOutVal);"
+					}
+				}
+        TransitionPoint tr2
+      }
+    }
+  }
+
+}

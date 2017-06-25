@@ -1,0 +1,640 @@
+RoomModel hilti.simulator.motor_elements {
+
+	import room.basic.types.* from "..//etrice_c_modellib/Types.room"
+
+	import room.basic.service.timing.* from "..//etrice_c_modellib/TimingService.room"
+
+	import room.basic.service.ponoff.* from "..//etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+
+	import room.basic.service.logging.* from "..//etrice_c_modellib/LoggingService.room"
+
+	ActorClass ASpeedControllerFromPwmCtrlMux {
+		Interface {
+			conjugated Port ^out: PSpeedControllerFromPwmCtrl
+			Port ^in [*]: PSpeedControllerFromPwmCtrl
+		}
+		Structure {
+			external Port ^out
+			external Port ^in
+			Attribute switchPosition: uint32
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init0: initial -> state0 {
+					action {
+						"switchPosition=0;"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<start: ^in>
+					}
+					action {
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.start();"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<stop: ^in>
+					}
+					action {
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.stop();"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<setDirectionLeft: ^in>
+					}
+					action {
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.setDirectionLeft();"
+					}
+				}
+				Transition tr3: state0 -> state0 {
+					triggers {
+						<setDirectionRight: ^in>
+					}
+					action {
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.setDirectionRight();"
+					}
+				}
+				Transition tr4: state0 -> state0 {
+					triggers {
+						<getActualSpeed: ^in>
+					}
+					action {
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.getActualSpeed();"
+					}
+				}
+				Transition tr5: state0 -> state0 {
+					triggers {
+						<actualSpeed: ^out>
+					}
+					action {
+						"in[switchPosition].actualSpeed(data);"
+					}
+				}
+				Transition tr6: state0 -> state0 {
+					triggers {
+						<setCurrent: ^in>
+					}
+					action {
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.setCurrent(data);"
+					}
+				}
+				Transition tr7: state0 -> state0 {
+					triggers {
+						<setSpeedFactor: ^in>
+					}
+					action {
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.setSpeedFactor(data);"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PSpeedControllerFromPwmCtrl {
+		incoming {
+			Message start()
+			Message stop()
+			Message setDirectionLeft() [ "controller must be in stop state" ]
+			Message setDirectionRight() [ "controller must be in stop state" ]
+			Message setCurrent(data: uint32) [ "motor current in 0..3300mV " ]
+			Message getActualSpeed() [ "returns the actual motor speed in rpm" ]
+			Message setSpeedFactor(data: uint32) [ "100% => SpeedNom = 25000" ]
+		}
+		outgoing {
+			Message actualSpeed(data: uint32)
+		}
+	}
+
+	ActorClass ASpeedControllerFromPwm {
+		Interface {
+			conjugated Port PwmIn: PPwmPower
+			conjugated Port HalGenOut: PSpeed
+			conjugated Port indicatorOut: POnOff
+			conjugated Port Current: PDac
+			Port ctrl: PSpeedControllerFromPwmCtrl
+			//			conjugated Port loadFactorPoti[2]: PAdc
+
+		}
+		Structure {
+			Attribute actualSpeed: uint32
+			Attribute oldSpeed: uint32
+			Attribute actualDuty: uint32 [ "0..10000 => 0..100%" ]
+			//			Attribute actualCurrent: uint32 [ "actual average current, not related to the PWM input" ]
+			//			Attribute loadFactor: uint32 [ "0..100%" ]
+			Attribute maxSpeedStep: uint32 = "50"
+			external Port PwmIn
+			external Port HalGenOut
+			external Port indicatorOut
+			external Port Current
+			external Port ctrl
+			//			external Port loadFactorPoti
+
+		}
+		Behavior {
+			Operation calcActualSpeed(): void {
+				"uint32 sollSpeed = (actualDuty * 25)/ 10;"
+				"uint32 lowerSpeedLimit, higherSpeedLimit;"
+				"higherSpeedLimit = actualSpeed + maxSpeedStep;"
+				"if (actualSpeed > maxSpeedStep){"
+				"lowerSpeedLimit = actualSpeed - maxSpeedStep;"
+				"}else{lowerSpeedLimit = 0;}"
+				"if(sollSpeed > higherSpeedLimit){"
+				"actualSpeed = higherSpeedLimit;"
+				"}else{"
+				"if(sollSpeed < lowerSpeedLimit){"
+				"actualSpeed = lowerSpeedLimit;"
+				"}else{"
+				"actualSpeed = sollSpeed;"
+				"}"
+				"}"
+			}
+			StateMachine {
+				State start {
+					entry {
+						"calcActualSpeed();\t"
+						"HalGenOut.setSpeed(actualSpeed);"
+					}
+				}
+				State motorOff {
+					entry {
+						"calcActualSpeed();\t"
+						"HalGenOut.setSpeed(actualSpeed);"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				Transition init: initial -> cp cp2 {
+					action {
+						"HalGenOut.setDirection(2);"
+					}
+				}
+				Transition tr0: start -> cp cp1 {
+					triggers {
+						<newDuty: PwmIn>
+					}
+					action {
+						"actualDuty = data;"
+					}
+				}
+				Transition tr1: motorOff -> cp cp0 {
+					triggers {
+						<newDuty: PwmIn>
+					}
+					action {
+						"actualDuty=data;"
+					}
+				}
+				Transition tr2: cp cp0 -> motorOff
+				Transition tr3: cp cp0 -> start {
+					cond {
+						"actualDuty >= 500"
+					}
+					action {
+						"indicatorOut.on();"
+					}
+				}
+				Transition tr4: cp cp1 -> start
+				Transition tr5: cp cp1 -> motorOff {
+					cond {
+						"actualDuty < 400"
+					}
+					action {
+						"indicatorOut.off();"
+					}
+				}
+				//				handler TransitionPoint tp0
+				//				Transition tr6: my tp0 -> my tp0 {
+				//					triggers {
+				//						<getSpeed: ctrl>
+				//					}
+				//					action {
+				//						"ctrl.speed(actualSpeed);"
+				//					}
+				//				}
+				State stop { }
+				TransitionPoint tr7
+				Transition tr6: stop -> motorOff {
+					triggers {
+						<start: ctrl>
+					}
+					action {
+						"PwmIn.start(1);"
+					}
+				}
+				Transition tr8: my tr7 -> cp cp2 {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+				Transition tr9: stop -> stop {
+					triggers {
+						<setDirectionLeft: ctrl>
+					}
+					action {
+						"HalGenOut.setDirection(1);"
+					}
+				}
+				Transition tr10: stop -> stop {
+					triggers {
+						<setDirectionRight: ctrl>
+					}
+					action {
+						"HalGenOut.setDirection(2);"
+					}
+				}
+				handler TransitionPoint tr11
+				handler TransitionPoint tr13
+				Transition tr14: my tr13 -> my tr13 {
+					triggers {
+						<getActualSpeed: ctrl>
+					}
+					action {
+						"ctrl.actualSpeed(actualSpeed);"
+					}
+				}
+				ChoicePoint cp2
+				Transition tr15: cp cp2 -> stop {
+					action {
+						"indicatorOut.off();"
+						"PwmIn.stop();"
+						"HalGenOut.setSpeed(0);"
+						"actualSpeed = 0;"
+						"oldSpeed = 0;"
+					}
+				}
+				Transition tr16: cp cp2 -> stop {
+					cond {
+						"0"
+					}
+				}
+				Transition tr12: my tr11 -> my tr11 {
+					triggers {
+						<setCurrent: ctrl>
+					}
+					action {
+						"Current.setValue(data);"
+					}
+				}
+			}
+		}
+	}
+
+
+	ActorClass ASpeedControllerFromTriacTrigger {
+		Interface {
+			conjugated Port HalGenOut: PSpeed
+			conjugated Port indicatorOut: POnOff
+			conjugated Port Current: PDacIntern
+			Port ctrl: PSpeedControllerFromPwmCtrl
+			conjugated Port netReporting: PNetClockReport
+		}
+		Structure {
+			SAP log: PLog
+			Attribute actualSpeed: uint32
+			Attribute oldSpeed: uint32
+			Attribute actualDuty: uint32 [ "0..100 => 0..100%" ]
+			Attribute speedFactor: uint32 = "200"
+			Attribute maxSpeedStep: uint32 = "200"
+			external Port HalGenOut
+			external Port indicatorOut
+			external Port Current
+			external Port ctrl
+			external Port netReporting
+		}
+		Behavior {
+			Operation calcActualSpeed(): void {
+				"uint32 sollSpeed = ((actualDuty * 250 * speedFactor) / 100);"
+				"uint32 lowerSpeedLimit, higherSpeedLimit;"
+				"higherSpeedLimit = actualSpeed + maxSpeedStep;"
+				"if (actualSpeed > maxSpeedStep){"
+				"lowerSpeedLimit = actualSpeed - maxSpeedStep;"
+				"}else{lowerSpeedLimit = 0;}"
+				"if(sollSpeed > higherSpeedLimit){"
+				"actualSpeed = higherSpeedLimit;"
+				"}else{"
+				"if(sollSpeed < lowerSpeedLimit){"
+				"actualSpeed = lowerSpeedLimit;"
+				"}else{"
+				"actualSpeed = sollSpeed;"
+				"}"
+				"}"
+			}
+			StateMachine {
+				State start {
+					entry {
+						"calcActualSpeed();\t"
+						"HalGenOut.setSpeed(actualSpeed);"
+					}
+				}
+				State motorOff {
+					entry {
+						"calcActualSpeed();\t"
+						"HalGenOut.setSpeed(actualSpeed);"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				Transition init: initial -> cp cp2 {
+<<<<<<< .mine
+					action {
+=======
+					action 
+				
+				
+				{
+>>>>>>> .r2517
+            "Current.setSinAmplitude(0);"
+            "Current.enabeleSinGen();"
+            ""
+            "HalGenOut.setDirection(2);"
+          }
+        }
+				Transition tr0: start -> cp cp1 {
+					triggers {
+						<newValue: netReporting>
+					}
+					action {
+						"//uint8_t str[50];"
+						"uint16_t fireTime = data >> 16;"
+						"uint16_t fireCount = data & 0x0000FFFF;"
+						""
+						"// fireTime: time between last netclock edge to the first triag trigger in 100us Ticks"
+						"// if no trigger exists trig did not fire"
+						""
+						"//sprintf(str,\"duty_2: %d count_2: %d\\r\\n\",fireTime, fireCount);"
+						""
+						"//log.logStr(str);"
+						""
+						"if (fireCount >= 1){"
+						"\tactualDuty = 100 - fireTime;"
+						"}else{"
+						"\tactualDuty = 0;"
+						"}"
+					}
+				}
+				Transition tr1: motorOff -> cp cp0 {
+					triggers {
+						<newValue: netReporting>
+					}
+					action {
+						"//uint8_t str[50];"
+						"uint16_t fireTime = data >> 16;"
+						"uint16_t fireCount = data & 0x0000FFFF;"
+						""
+						"// fireTime: time between last netclock edge to the first triag trigger in 100us Ticks"
+						"// if no trigger exists trig did not fire"
+						""
+						"//sprintf(str,\"duty_1: %d count_1: %d\\r\\n\",fireTime, fireCount);"
+						""
+						"//log.logStr(str);"
+						""
+						"if (fireCount >= 1){"
+						"\tactualDuty = 100 - fireTime;"
+						"}else{"
+						"\tactualDuty = 0;"
+						"}"
+					}
+				}
+				Transition tr2: cp cp0 -> motorOff
+				Transition tr3: cp cp0 -> start {
+					cond {
+						"actualDuty >= 6"
+					}
+					action {
+						"indicatorOut.on();"
+					}
+				}
+				Transition tr4: cp cp1 -> start
+				Transition tr5: cp cp1 -> motorOff {
+					cond {
+						"actualDuty < 4"
+					}
+					action {
+						"indicatorOut.off();"
+					}
+				}
+				//				handler TransitionPoint tp0
+				//				Transition tr6: my tp0 -> my tp0 {
+				//					triggers {
+				//						<getSpeed: ctrl>
+				//					}
+				//					action {
+				//						"ctrl.speed(actualSpeed);"
+				//					}
+				//				}
+				State stop { }
+				TransitionPoint tr7
+				Transition tr6: stop -> motorOff {
+					triggers {
+						<start: ctrl>
+					}
+					action {
+						"netReporting.startReporting(5);"
+						"Current.setSinTrigger(0);"
+						"Current.setSinShift(0);"
+						"Current.enabeleSinGen();"
+					}
+				}
+				Transition tr8: my tr7 -> cp cp2 {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+				Transition tr9: stop -> stop {
+					triggers {
+						<setDirectionLeft: ctrl>
+					}
+					action {
+						"HalGenOut.setDirection(1);"
+					}
+				}
+				Transition tr10: stop -> stop {
+					triggers {
+						<setDirectionRight: ctrl>
+					}
+					action {
+						"HalGenOut.setDirection(2);"
+					}
+				}
+				handler TransitionPoint tr11
+				handler TransitionPoint tr13
+				Transition tr14: my tr13 -> my tr13 {
+					triggers {
+						<getActualSpeed: ctrl>
+					}
+					action {
+						"ctrl.actualSpeed(actualSpeed);"
+					}
+				}
+				ChoicePoint cp2
+				Transition tr15: cp cp2 -> stop {
+<<<<<<< .mine
+					action {
+						"indicatorOut.off();"
+						"netReporting.stopReporting();"
+						"HalGenOut.setSpeed(0);"
+						""
+						"Current.disableSinGen();"
+						""
+						"actualSpeed = 0;"
+						"oldSpeed = 0;"
+						"actualDuty = 0;"
+					}
+				}
+=======
+					action 
+				
+				
+				
+        {
+            "indicatorOut.off();"
+            "netReporting.stopReporting();"
+            "HalGenOut.setSpeed(0);"
+            ""
+            "Current.setSinAmplitude(0);"
+            "//Current.disableSinGen();"
+            ""
+            "actualSpeed = 0;"
+            "oldSpeed = 0;"
+            "actualDuty = 0;"
+          }
+        }
+>>>>>>> .r2517
+				Transition tr16: cp cp2 -> stop {
+					cond 
+				{
+            "0 /* Die Transition tut nichts, ist aber notwendig um die beiden eingehenden Transitionen zusammenführen zu können. */"
+          }
+        }
+				Transition tr12: my tr11 -> my tr11 {
+					triggers {
+						<setCurrent: ctrl>
+					}
+					action {
+						"Current.setSinAmplitude(data);"
+					}
+				}
+				Transition tr17: my tr11 -> my tr11 {
+					triggers {
+						<setSpeedFactor: ctrl>
+					}
+					action {
+						"speedFactor=data;"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AHalGenRampUpDown {
+		Interface {
+			Port startStop: POnOff
+			conjugated Port speedOut: PSpeed
+			conjugated Port ledOut: POnOff
+		}
+		Structure {
+			Attribute speedStep: uint32
+			Attribute timeStep: uint32
+			Attribute minSpeed: uint32
+			Attribute maxSpeed: uint32
+			Attribute actualSpeed: uint32
+			external Port startStop
+			external Port speedOut
+			SAP timer: PTimer
+			external Port ledOut
+		}
+		Behavior {
+			StateMachine {
+				State off
+				State on {
+					subgraph {
+						State rampUp {
+							entry {
+								"speedOut.setSpeed(actualSpeed);"
+								"actualSpeed+=speedStep;"
+							}
+						}
+						State rampDown {
+							entry {
+								"speedOut.setSpeed(actualSpeed);"
+								"actualSpeed-=speedStep;"
+							}
+						}
+						EntryPoint tp0
+						Transition tr0: my tp0 -> rampUp {
+							action {
+								"timer.startTimer(timeStep);"
+							}
+						}
+						ChoicePoint cp0
+						ChoicePoint cp1
+						Transition tr1: rampUp -> cp cp0 {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr2: cp cp0 -> rampUp
+						Transition tr3: cp cp0 -> rampDown {
+							cond {
+								"actualSpeed >= maxSpeed"
+							}
+						}
+						Transition tr4: rampDown -> cp cp1 {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr5: cp cp1 -> rampDown
+						Transition tr6: cp cp1 -> rampUp {
+							cond {
+								"actualSpeed <= minSpeed"
+							}
+						}
+					}
+				}
+				Transition init: initial -> off {
+					action {
+						"speedStep = 100;"
+						"timeStep = 10;"
+						"minSpeed = 500;"
+						"maxSpeed = 20000;"
+						"actualSpeed = minSpeed;"
+						"speedOut.setSpeed(0);"
+					}
+				}
+				Transition tr1: on -> off {
+					triggers {
+						<off: startStop>
+					}
+					action {
+						"timer.kill();"
+						"ledOut.off();"
+						"speedOut.setSpeed(0);"
+					}
+				}
+				Transition tr0: off -> tp0 of on {
+					triggers {
+						<on: startStop>
+					}
+					action {
+						"ledOut.on();"
+					}
+				}
+			}
+		}
+	}
+
+}

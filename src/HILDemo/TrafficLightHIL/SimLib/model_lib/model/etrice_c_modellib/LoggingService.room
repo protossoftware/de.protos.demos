@@ -1,0 +1,87 @@
+RoomModel room.basic.service.logging {
+
+	import room.basic.types.* from "Types.room"
+
+	ActorClass ALoggingService {
+		Interface {
+			SPP log: PLog
+		Port ctrl: PLogCtrl
+		}
+		Structure {
+			usercode1 {
+				"/*uc1*/"
+				"#include \"HiltiSimulationPlatform_NUCLEOF767ZI_Drivers.h\""			
+			}
+			usercode2 {
+				"/*uc2*/"
+			} usercode3 {
+				"/*uc3*/"
+			}
+			ServiceImplementation of log
+		external Port ctrl
+		}
+		Behavior {
+			StateMachine { State log
+				Transition init: initial -> log {
+					action {
+						"LOGGING_init();"
+					}
+				}
+			Transition tr1: log -> log {
+					triggers {
+						<log: log>
+					}
+					action {
+						"LOGGING_serialOut(data);"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PLog {
+		usercode1 {
+			"/*uc1*/"
+		}
+		usercode2 {
+			"/*uc2*/"
+		}
+		incoming {
+			Message logStr(data: uint8 ref)
+			Message log(data: DSerialBuffer)			
+		}
+
+		conjugated PortClass{
+			handle incoming logStr{
+				"uint16 l;"
+				"DSerialBuffer buf;"
+				"uint8 *p = data__et;"
+				""
+				"l=0;"
+				"while (*p != 0){buf.buffer[l++] = *p++;}"
+				"buf.buffer[l] = 0;"
+				"buf.len = l;"
+				"etPort_sendMessage(self, PLog_IN_log, sizeof(DSerialBuffer), &buf);"
+			}
+		}
+		
+	}
+	
+ProtocolClass PLogCtrl {
+		usercode1 {
+			"/*uc1*/"
+		}
+		usercode2 {
+			"/*uc2*/"
+		}
+		incoming {
+			Message setLogLevel(data: uint8)	
+		}
+	}
+	
+	
+	DataClass DSerialBuffer{		
+		Attribute len :uint16
+		Attribute buffer[100]:uint8
+	}	
+}

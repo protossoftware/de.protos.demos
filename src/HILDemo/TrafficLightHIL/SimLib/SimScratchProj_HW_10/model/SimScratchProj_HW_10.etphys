@@ -1,0 +1,25 @@
+PhysicalModel SimScratchProj_HW_10 {
+	
+	PhysicalSystem PhysSys1 {
+		NodeRef nodeRef1 : NodeClass1
+	}
+	
+	NodeClass NodeClass1 {
+		runtime = RuntimeClass1
+		priomin = -10
+		priomax = 10
+		
+		DefaultThread PhysicalThread1 {
+			execmode = mixed
+			interval = 100us
+			prio = 0
+			stacksize = 2048
+			msgblocksize = 128
+			msgpoolsize = 256
+		}
+	}
+
+	RuntimeClass RuntimeClass1 {
+		model =singleThreaded
+	} 
+}

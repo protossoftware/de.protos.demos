@@ -1,0 +1,109 @@
+RoomModel hilti.simulator.utilities {
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import room.basic.service.timing.* from "..//etrice_c_modellib/TimingService.room"
+
+	import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+	
+	ActorClass AOnOffFlipFlop {
+		Interface {
+			Port ^in: POnOff
+			conjugated Port ^out: POnOff
+		conjugated Port ledOut: POnOff
+		}
+		Structure {
+			external Port ^in
+			external Port ^out
+		external Port ledOut
+		}
+		Behavior {
+			StateMachine {
+				State off {
+					entry {
+						"out.off();"
+						"ledOut.off();"
+					}
+				}
+				State on {
+					entry {
+						"out.on();"
+						"ledOut.on();"
+					}
+				}
+				Transition init: initial -> off
+				Transition tr0: off -> on {
+					triggers {
+						<on: ^in>
+					}
+					}
+				Transition tr1: on -> off {
+					triggers {
+						<on: ^in>
+					}
+					}
+			}
+		}
+	}
+
+	ActorClass ABlinky {
+		Interface {
+			conjugated Port ^out: POnOff
+		Port ctrl: POnOff
+		}
+		Structure {
+			SAP timer: PTimer
+		external Port ^out
+		external Port ctrl
+		}
+		Behavior {
+			StateMachine {
+				State off {
+					entry {
+						"out.off();"
+					}
+				}
+				State on {
+					entry {
+						"out.on();"
+					}
+				}
+				Transition init0: initial -> off {
+					action {
+						"timer.startTimer(400);"
+					}
+				}
+				Transition tr0: off -> on {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr1: on -> off {
+					triggers {
+						<timeout: timer>
+					}
+				}
+			TransitionPoint tr2
+				Transition tr3: my tr2 -> off {
+					triggers {
+						<on: ctrl>
+					}
+					action {
+						"timer.kill();"
+					}
+				}
+				Transition tr4: my tr2 -> off {
+					triggers {
+						<off: ctrl>
+					}
+					action {
+						"timer.startTimer(400);"
+					}
+				}
+			}
+		}
+	}
+
+}

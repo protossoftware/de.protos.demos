@@ -1,0 +1,1482 @@
+RoomModel hilti.simulator.HW_1_0 {
+
+	import hilti.simulator.akkus.* from "..//hilti_c_modellib/AkkuSimulation.room"
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import room.basic.service.timing.* from "..//etrice_c_modellib/TimingService.room"
+
+	import hilti.simulator.protocolls.* from "..//hilti_c_modellib/HiltiSimulationPlatformProtocolls.room"
+
+	import room.basic.service.pinterrupt.* from "..//etrice_c_modellib/PInterrupt.room"
+
+	import room.basic.service.logging.* from "..//etrice_c_modellib/LoggingService.room"
+
+	ActorClass AAkkuSimUart5 {
+		Interface {
+			Port isr: PInterrupt
+			Port ctrl: PAkkuSim
+			Port errorIsr: PInterrupt
+		}
+		Structure {
+			usercode1 {
+				"#include \"HiltiSimulationPlatform_NUCLEOF767ZI_Drivers.h\""
+			}
+			external Port isr
+			SAP timer: PTimer
+			external Port ctrl
+			external Port errorIsr
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init: initial -> state0 { }
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<event: isr>
+					}
+					action {
+						"ctrl.received(AKKU_getRxBuffer());"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<setTxLow: ctrl>
+					}
+					action {
+						"AKKU_setUartTxToLow();"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<setTxUart: ctrl>
+					}
+					action {
+						"AKKU_setUartTxToUart();"
+					}
+				}
+				Transition tr3: state0 -> state0 {
+					triggers {
+						<receiveByte: ctrl>
+					}
+					action {
+						"AKKU_receiveByte();"
+					}
+				}
+				Transition tr4: state0 -> state0 {
+					triggers {
+						<receiveFrame: ctrl>
+					}
+					action {
+						"AKKU_receiveFrame();"
+					}
+				}
+				Transition tr5: state0 -> state0 {
+					triggers {
+						<sendByte: ctrl>
+					}
+					action {
+						"AKKU_sendByte(data);"
+					}
+				}
+				Transition tr6: state0 -> state0 {
+					triggers {
+						<sendFrame: ctrl>
+					}
+					action {
+						"AKKU_sendFrame(data);"
+					}
+				}
+				Transition tr7: state0 -> state0 {
+					triggers {
+						<init: ctrl>
+					}
+					action {
+						"AKKU_initUart();"
+					}
+				}
+				Transition tr8: state0 -> state0 {
+					triggers {
+						<event: errorIsr>
+					}
+					action {
+						"ctrl.error();"
+					}
+				}
+			Transition tr9: state0 -> state0 {
+					triggers {
+						<startRxLevelReporting: ctrl>
+					}
+					action {
+						"if (AKKU_getRxLevel() == 1){"
+						"\tctrl.rxLevelHigh();"
+						"}else{"
+						"\tctrl.rxLevelLow();"
+						"}"
+						""
+						"timer.startTimer(data);"
+					}
+				}
+				Transition tr10: state0 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"if (AKKU_getRxLevel() == 1){"
+						"\tctrl.rxLevelHigh();"
+						"}else{"
+						"\tctrl.rxLevelLow();"
+						"}"
+					}
+				}
+				Transition tr11: state0 -> state0 {
+					triggers {
+						<stopRxLevelReporting: ctrl>
+					}
+					action {
+						"timer.kill();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AUart6 {
+		Interface {
+			Port isr: PInterrupt
+			Port ctrl: PUART
+			Port errorIsr: PInterrupt
+		}
+		Structure {
+			usercode1 {
+				"#include \"HiltiSimulationPlatform_NUCLEOF767ZI_Drivers.h\""
+			}
+			external Port isr
+			SAP timer: PTimer
+			external Port ctrl
+			external Port errorIsr
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init: initial -> state0 { }
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<event: isr>
+					}
+					action 
+				
+				{
+						"ctrl.received(UART6_getRxBuffer());"
+					}
+				}
+				Transition tr3: state0 -> state0 {
+					triggers {
+						<receiveByte: ctrl>
+					}
+					action 
+				
+				{
+						"UART6_receiveByte();"
+					}
+				}
+				Transition tr4: state0 -> state0 {
+					triggers {
+						<receiveFrame: ctrl>
+					}
+					action 
+				
+				{
+						"UART6_receiveFrame();"
+					}
+				}
+				Transition tr5: state0 -> state0 {
+					triggers {
+						<sendByte: ctrl>
+					}
+					action 
+				
+				{
+						"UART6_sendByte(data);"
+					}
+				}
+				Transition tr6: state0 -> state0 {
+					triggers {
+						<sendFrame: ctrl>
+					}
+					action 
+				
+				{
+						"UART6_sendFrame(data);"
+					}
+				}
+				Transition tr7: state0 -> state0 {
+					triggers {
+						<init: ctrl>
+					}
+					action 
+				
+				{
+						"UART6_initUart();"
+					}
+				}
+				Transition tr8: state0 -> state0 {
+					triggers {
+						<event: errorIsr>
+					}
+					action {
+						"ctrl.error();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AUart7 {
+		Interface {
+			Port isr: PInterrupt
+			Port ctrl: PUART
+			Port errorIsr: PInterrupt
+		}
+		Structure {
+			usercode1 {
+				"#include \"HiltiSimulationPlatform_NUCLEOF767ZI_Drivers.h\""
+			}
+			external Port isr
+			SAP timer: PTimer
+			external Port ctrl
+			external Port errorIsr
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init: initial -> state0 { }
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<event: isr>
+					}
+					action {
+						"ctrl.received(UART7_getRxBuffer());"
+					}
+				}
+				Transition tr3: state0 -> state0 {
+					triggers {
+						<receiveByte: ctrl>
+					}
+					action {
+						"UART7_receiveByte();"
+					}
+				}
+				Transition tr4: state0 -> state0 {
+					triggers {
+						<receiveFrame: ctrl>
+					}
+					action {
+						"UART7_receiveFrame();"
+					}
+				}
+				Transition tr5: state0 -> state0 {
+					triggers {
+						<sendByte: ctrl>
+					}
+					action {
+						"UART7_sendByte(data);"
+					}
+				}
+				Transition tr6: state0 -> state0 {
+					triggers {
+						<sendFrame: ctrl>
+					}
+					action {
+						"UART7_sendFrame(data);"
+					}
+				}
+				Transition tr7: state0 -> state0 {
+					triggers {
+						<init: ctrl>
+					}
+					action {
+						"UART7_initUart();"
+					}
+				}
+				Transition tr8: state0 -> state0 {
+					triggers {
+						<event: errorIsr>
+					}
+					action {
+						"ctrl.error();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AExtInt {
+		Interface {
+			Port interrupt: PInterrupt
+			Port extInt: PExtInterrupt
+		}
+		Structure {
+			external Port interrupt
+			external Port extInt
+			Attribute enabled: uint8
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				Transition init: initial -> state0 {
+					action {
+						"enabled=0;"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<enable: extInt>
+					}
+					action {
+						"enabled=1;"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					triggers {
+						<disable: extInt>
+					}
+					action {
+						"enabled=0;"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<event: interrupt>
+					}
+					action {
+						""
+						"if (enabled){"
+						"\textInt.event();"
+						"}"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ASimulationPlatformHW_1_0 {
+		Interface {
+			Port LedGreenNucleo: POnOff
+			Port LedRedNucleo: POnOff
+			Port LedBlueNucleo: POnOff
+			Port DacIntern_0: PDacIntern
+			Port DacIntern_1: PDacIntern
+			Port NetClockCtrl: PNetClockCtrl
+			Port BufferedOut_1: POnOffTristate
+			Port BufferedOut_2: POnOffTristate
+			Port BufferedOut_3: POnOffTristate
+			Port BufferedOut_4: POnOffTristate
+			Port DacExtern_0: PDac
+			Port DacExtern_1: PDac
+			Port DacExtern_2: PDac
+			Port DacExtern_3: PDac
+			Port DacExtern_4: PDac
+			Port DacExtern_5: PDac
+			Port DacExtern_6: PDac
+			Port DacExtern_7: PDac
+			Port DacExtern_8: PDac
+			Port DacExtern_9: PDac
+			Port DacExtern_10: PDac
+			Port DacExtern_11: PDac
+			Port DacExtern_12: PDac
+			Port DacExtern_13: PDac
+			Port DacExtern_14: PDac
+			Port DacExtern_15: PDac
+			Port PwmPower: PPwmPower
+			Port SpeedControl: PSpeed
+			Port PwmControl: PPwmOutput
+			Port ExtInt0: PExtInterrupt
+			Port ExtInt1: PExtInterrupt
+			Port AkkuUart: PAkkuSim
+			Port Uart6: PUART
+			Port Uart7: PUART
+			Port IC9_P14_Out: POnOff
+			Port IC9_P15_Out: POnOff
+			Port Led3Simu: POnOff
+			Port Led4Simu: POnOff
+			Port Led5Simu: POnOff
+			Port Led6Simu: POnOff
+			conjugated Port IC9_P16_In: POnOff
+			conjugated Port IC9_P17_In: POnOff
+			conjugated Port S1Simu_In: POnOff
+			conjugated Port S2Simu_In: POnOff
+			conjugated Port S3Simu_In: POnOff
+			conjugated Port S4Simu_In: POnOff
+			conjugated Port P36Simu_In: POnOff
+			conjugated Port P37Simu_In: POnOff
+			conjugated Port P38Simu_In: POnOff
+			conjugated Port P39Simu_In: POnOff
+			conjugated Port IC10_P17_In: POnOff
+			conjugated Port IC10_P16_In: POnOff
+			conjugated Port IC10_P15_In: POnOff
+			conjugated Port IC10_P14_In: POnOff
+			conjugated Port IC10_P13_In: POnOff
+			conjugated Port IC10_P12_In: POnOff
+			conjugated Port IC10_P11_In: POnOff
+			conjugated Port IC10_P10_In: POnOff
+			Port IC10_P07_Out: POnOff
+			Port IC10_P06_Out: POnOff
+			Port IC10_P05_Out: POnOff
+			Port IC10_P04_Out: POnOff
+			Port IC10_P03_Out: POnOff
+			Port IC10_P02_Out: POnOff
+			Port IC10_P01_Out: POnOff
+			Port IC10_P00_Out: POnOff
+			Port PotiR3: PAdc
+			Port PotiR4: PAdc
+			Port PotiR5: PAdc
+			Port PotiR6: PAdc
+			conjugated Port BlueButtonNucleo: POnOff
+			Port NetClockReporting: PNetClockReport
+		}
+		Structure {
+			usercode1 {
+				"#include \"stm32f7xx_hal.h\""
+				"#include \"HiltiSimulationPlatform_NUCLEOF767ZI_Drivers.h\""
+				"#include \"mxconstants.h\""
+			}
+			SAP gioTimer: PTimer
+			SAP pwmTimer: PTimer
+			SAP poti1Timer: PTimer
+			SAP poti2Timer: PTimer
+			SAP poti3Timer: PTimer
+			SAP poti4Timer: PTimer
+			SAP netClockReportingTimer: PTimer
+			external Port LedGreenNucleo
+			external Port LedRedNucleo
+			external Port LedBlueNucleo
+			external Port DacIntern_0
+			external Port DacIntern_1
+			external Port NetClockCtrl
+			external Port BufferedOut_1
+			external Port BufferedOut_2
+			external Port BufferedOut_3
+			external Port BufferedOut_4
+			external Port DacExtern_0
+			external Port DacExtern_1
+			external Port DacExtern_2
+			external Port DacExtern_3
+			external Port DacExtern_4
+			external Port DacExtern_5
+			external Port DacExtern_6
+			external Port DacExtern_7
+			external Port DacExtern_8
+			external Port DacExtern_9
+			external Port DacExtern_10
+			external Port DacExtern_11
+			external Port DacExtern_12
+			external Port DacExtern_13
+			external Port DacExtern_14
+			external Port DacExtern_15
+			external Port PwmPower
+			external Port SpeedControl
+			external Port PwmControl
+			Binding interrupt0 and exti0.interrupt
+			Binding interrupt1 and exti1.interrupt
+			Binding ExtInt0 and exti0.extInt
+			Binding ExtInt1 and exti1.extInt
+			ActorRef exti0: AExtInt
+			ActorRef exti1: AExtInt
+			conjugated Port interrupt0: PInterrupt
+			conjugated Port interrupt1: PInterrupt
+			Binding uart5Isr and akkuSimUart5.isr
+			Binding uart5ErrorIsr and akkuSimUart5.errorIsr
+			Binding AkkuUart and akkuSimUart5.ctrl
+			ActorRef akkuSimUart5: AAkkuSimUart5
+			conjugated Port uart5Isr: PInterrupt
+			conjugated Port uart5ErrorIsr: PInterrupt
+			Binding uart6Isr and GenericUart6.isr
+			Binding uart6ErrorIsr and GenericUart6.errorIsr
+			Binding Uart6 and GenericUart6.ctrl
+			ActorRef GenericUart6: AUart6
+			conjugated Port uart6Isr: PInterrupt
+			conjugated Port uart6ErrorIsr: PInterrupt
+			Binding uart7Isr and GenericUart7.isr
+			Binding uart7ErrorIsr and GenericUart7.errorIsr
+			Binding Uart7 and GenericUart7.ctrl
+			ActorRef GenericUart7: AUart7
+			conjugated Port uart7Isr: PInterrupt
+			conjugated Port uart7ErrorIsr: PInterrupt
+			external Port IC9_P14_Out
+			external Port IC9_P15_Out
+			external Port Led3Simu
+			external Port Led4Simu
+			external Port Led5Simu
+			external Port Led6Simu
+			external Port IC9_P16_In
+			external Port IC9_P17_In
+			external Port S1Simu_In
+			external Port S2Simu_In
+			external Port S3Simu_In
+			external Port S4Simu_In
+			external Port P36Simu_In
+			external Port P37Simu_In
+			external Port P38Simu_In
+			external Port P39Simu_In
+			external Port IC10_P17_In
+			external Port IC10_P16_In
+			external Port IC10_P15_In
+			external Port IC10_P14_In
+			external Port IC10_P13_In
+			external Port IC10_P12_In
+			external Port IC10_P11_In
+			external Port IC10_P10_In
+			external Port IC10_P07_Out
+			external Port IC10_P06_Out
+			external Port IC10_P05_Out
+			external Port IC10_P04_Out
+			external Port IC10_P03_Out
+			external Port IC10_P02_Out
+			external Port IC10_P01_Out
+			external Port IC10_P00_Out
+			external Port PotiR3
+			external Port PotiR4
+			external Port PotiR5
+			external Port PotiR6
+			Attribute portExtenderInputsOld: uint32
+			Attribute nucleoButtonState: uint8
+			external Port BlueButtonNucleo
+			external Port NetClockReporting
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				handler TransitionPoint LedNucleo
+				Transition init0: initial -> state0 {
+					action {
+						"DAC_start();"
+						"ADC_init();"
+						"I2C4_start();"
+						""
+						"EXTI_registerExti_0_Port(interrupt0.export());"
+						"EXTI_registerExti_1_Port(interrupt1.export());"
+						""
+						"AKKU_registerUartPort(uart5Isr.export());"
+						"AKKU_registerUartErrorPort(uart5ErrorIsr.export());"
+						""
+						"UART6_registerUartPort(uart6Isr.export());"
+						"UART6_registerUartErrorPort(uart6ErrorIsr.export());"
+						""
+						"UART7_registerUartPort(uart7Isr.export());"
+						"UART7_registerUartErrorPort(uart7ErrorIsr.export());"
+						""
+						"nucleoButtonState=0;"
+						"NET_stopNetClockGen();"
+						""
+						"gioTimer.startTimer(50);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<timeout: gioTimer>
+					}
+					action {
+						"uint32_t inputs;"
+						"uint32_t changedInputs;"
+						""
+						""
+						"if (nucleoButtonState==0){"
+						"\tif (HAL_GPIO_ReadPin(User_Blue_Button_GPIO_Port, User_Blue_Button_Pin) == GPIO_PIN_SET){"
+						"\t\tnucleoButtonState=1;"
+						"\t\tBlueButtonNucleo.on();"
+						"\t}"
+						"}else{"
+						"\tif (HAL_GPIO_ReadPin(User_Blue_Button_GPIO_Port, User_Blue_Button_Pin) == GPIO_PIN_RESET){"
+						"\t\tnucleoButtonState=0;"
+						"\t\tBlueButtonNucleo.off();"
+						"\t}"
+						"}"
+						""
+						"inputs = I2C4_getIOBits() & PORTEXTENDER_INPUT_MASK;"
+						""
+						"changedInputs = inputs ^ portExtenderInputsOld;"
+						""
+						"if (changedInputs){"
+						"\tportExtenderInputsOld = inputs;"
+						""
+						"\tif (changedInputs & PE_IC9_P17_MASK){"
+						"\t\tif (inputs & PE_IC9_P17_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC9_P17_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC9_P17_In.off();"
+						"\t\t}"
+						"\t}"
+						""
+						"\tif (changedInputs & PE_IC9_P16_MASK){"
+						"\t\tif (inputs & PE_IC9_P16_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC9_P16_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC9_P16_In.off();"
+						"\t\t}"
+						"\t}"
+						"\t"
+						"\tif (changedInputs & PE_IC9_P13_MASK){"
+						"\t\tif (inputs & PE_IC9_P13_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tP39Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tP39Simu_In.off();"
+						"\t\t}"
+						"\t}"
+						"\t"
+						"\tif (changedInputs & PE_IC9_P12_MASK){"
+						"\t\tif (inputs & PE_IC9_P12_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tP38Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tP38Simu_In.off();"
+						"\t\t}"
+						"\t}"
+						"\t"
+						"\tif (changedInputs & PE_IC9_P11_MASK){"
+						"\t\tif (inputs & PE_IC9_P11_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tP37Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tP37Simu_In.off();"
+						"\t\t}"
+						"\t}"
+						"\t"
+						"\tif (changedInputs & PE_IC9_P10_MASK){"
+						"\t\tif (inputs & PE_IC9_P10_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tP36Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tP36Simu_In.off();"
+						"\t\t}"
+						"\t}"
+						"\t\t"
+						"\tif (changedInputs & PE_IC9_P04_MASK){"
+						"\t\tif (inputs & PE_IC9_P04_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tS1Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tS1Simu_In.off();"
+						"\t\t}"
+						"\t}"
+						""
+						"\tif (changedInputs & PE_IC9_P05_MASK){"
+						"\t\tif (inputs & PE_IC9_P05_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tS2Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tS2Simu_In.off();"
+						"\t\t}"
+						"\t}"
+						""
+						"\tif (changedInputs & PE_IC9_P06_MASK){"
+						"\t\tif (inputs & PE_IC9_P06_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tS3Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tS3Simu_In.off();"
+						"\t\t}"
+						"\t}"
+						""
+						"\tif (changedInputs & PE_IC9_P07_MASK){"
+						"\t\tif (inputs & PE_IC9_P07_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tS4Simu_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tS4Simu_In.off();"
+						"\t\t}"
+						"\t}\t"
+						""
+						"\tif (changedInputs & PE_IC10_P17_MASK){"
+						"\t\tif (inputs & PE_IC10_P17_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P17_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P17_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\tif (changedInputs & PE_IC10_P16_MASK){"
+						"\t\tif (inputs & PE_IC10_P16_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P16_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P16_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\t"
+						"\tif (changedInputs & PE_IC10_P15_MASK){"
+						"\t\tif (inputs & PE_IC10_P15_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P15_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P15_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\t"
+						"\tif (changedInputs & PE_IC10_P14_MASK){"
+						"\t\tif (inputs & PE_IC10_P14_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P14_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P14_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\t"
+						"\tif (changedInputs & PE_IC10_P13_MASK){"
+						"\t\tif (inputs & PE_IC10_P13_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P13_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P13_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\t"
+						"\tif (changedInputs & PE_IC10_P12_MASK){"
+						"\t\tif (inputs & PE_IC10_P12_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P12_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P12_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\t"
+						"\tif (changedInputs & PE_IC10_P11_MASK){"
+						"\t\tif (inputs & PE_IC10_P11_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P11_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P11_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\t"
+						"\tif (changedInputs & PE_IC10_P10_MASK){"
+						"\t\tif (inputs & PE_IC10_P10_MASK){"
+						"\t\t\t// send on"
+						"\t\t\tIC10_P10_In.on();"
+						"\t\t}else{\t\t"
+						"\t\t\t// send off"
+						"\t\t\tIC10_P10_In.off();"
+						"\t\t}"
+						"\t}\t"
+						"\t"
+						"}"
+					}
+				}
+				Transition tr2: my LedNucleo -> my LedNucleo {
+					triggers {
+						<on: LedGreenNucleo>
+					}
+					action {
+						"HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr1: my LedNucleo -> my LedNucleo {
+					triggers {
+						<off: LedGreenNucleo>
+					}
+					action {
+						"HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);"
+					}
+				}
+				Transition tr3: my LedNucleo -> my LedNucleo {
+					triggers {
+						<on: LedRedNucleo>
+					}
+					action {
+						"HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr4: my LedNucleo -> my LedNucleo {
+					triggers {
+						<off: LedRedNucleo>
+					}
+					action {
+						"HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);"
+					}
+				}
+				Transition tr5: my LedNucleo -> my LedNucleo {
+					triggers {
+						<on: LedBlueNucleo>
+					}
+					action {
+						"HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr6: my LedNucleo -> my LedNucleo {
+					triggers {
+						<off: LedBlueNucleo>
+					}
+					action {
+						"HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);"
+					}
+				}
+				handler TransitionPoint DacIntern
+				Transition tr8: my DacIntern -> my DacIntern {
+					triggers {
+						<setValue: DacIntern_1|setValue: DacIntern_0>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacIntern_0:"
+						"\t\tDAC_setValue(0, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacIntern_1:"
+						"\t\tDAC_setValue(1, data);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"\t}"
+					}
+				}
+				handler TransitionPoint BufferdOut_1
+				Transition tr10: my BufferdOut_1 -> my BufferdOut_1 {
+					triggers {
+						<on: BufferedOut_1>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOE, GPIO_PIN_4, GPIO_PIN_SET);"
+						"HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr11: my BufferdOut_1 -> my BufferdOut_1 {
+					triggers {
+						<off: BufferedOut_1>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOE, GPIO_PIN_4, GPIO_PIN_RESET);"
+						"HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr12: my BufferdOut_1 -> my BufferdOut_1 {
+					triggers {
+						<tristate: BufferedOut_1>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, GPIO_PIN_RESET);"
+					}
+				}
+				handler TransitionPoint BufferdOut_2
+				Transition tr13: my BufferdOut_2 -> my BufferdOut_2 {
+					triggers {
+						<on: BufferedOut_2>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);"
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr14: my BufferdOut_2 -> my BufferdOut_2 {
+					triggers {
+						<off: BufferedOut_2>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);"
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr15: my BufferdOut_2 -> my BufferdOut_2 {
+					triggers {
+						<tristate: BufferedOut_2>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_RESET);"
+					}
+				}
+				handler TransitionPoint BufferdOut_3
+				Transition tr16: my BufferdOut_3 -> my BufferdOut_3 {
+					triggers {
+						<on: BufferedOut_3>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_4, GPIO_PIN_SET);"
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_5, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr17: my BufferdOut_3 -> my BufferdOut_3 {
+					triggers {
+						<off: BufferedOut_3>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_4, GPIO_PIN_RESET);"
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_5, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr18: my BufferdOut_3 -> my BufferdOut_3 {
+					triggers {
+						<tristate: BufferedOut_3>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOG, GPIO_PIN_5, GPIO_PIN_RESET);"
+					}
+				}
+				handler TransitionPoint BufferdOut_4
+				Transition tr19: my BufferdOut_4 -> my BufferdOut_4 {
+					triggers {
+						<on: BufferedOut_4>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_SET);"
+						"HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr20: my BufferdOut_4 -> my BufferdOut_4 {
+					triggers {
+						<off: BufferedOut_4>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_RESET);"
+						"HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);"
+					}
+				}
+				Transition tr21: my BufferdOut_4 -> my BufferdOut_4 {
+					triggers {
+						<tristate: BufferedOut_4>
+					}
+					action {
+						"HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_RESET);"
+					}
+				}
+				handler TransitionPoint DacExtern
+				Transition tr9: my DacExtern -> my DacExtern {
+					triggers {
+						<setValue: DacExtern_0|setValue: DacExtern_1|setValue: DacExtern_2|setValue: DacExtern_3|setValue:
+						DacExtern_4|setValue: DacExtern_5|setValue: DacExtern_6|setValue: DacExtern_7|setValue: DacExtern_8|setValue:
+						DacExtern_9|setValue: DacExtern_10|setValue: DacExtern_11|setValue: DacExtern_12|setValue:
+						DacExtern_13|setValue: DacExtern_14|setValue: DacExtern_15>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacExtern_0:"
+						"\t\tDAC_setValue(2, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_1:"
+						"\t\tDAC_setValue(3, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_2:"
+						"\t\tDAC_setValue(4, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_3:"
+						"\t\tDAC_setValue(5, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_4:"
+						"\t\tDAC_setValue(6, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_5:"
+						"\t\tDAC_setValue(7, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_6:"
+						"\t\tDAC_setValue(8, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_7:"
+						"\t\tDAC_setValue(9, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_8:"
+						"\t\tDAC_setValue(10, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_9:"
+						"\t\tDAC_setValue(11, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_10:"
+						"\t\tDAC_setValue(12, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_11:"
+						"\t\tDAC_setValue(13, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_12:"
+						"\t\tDAC_setValue(14, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_13:"
+						"\t\tDAC_setValue(15, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_14:"
+						"\t\tDAC_setValue(16, data);"
+						"\tbreak;"
+						"\tcase IFITEM_DacExtern_15:"
+						"\t\tDAC_setValue(17, data);"
+						"\tbreak;"
+						"\t"
+						"\tdefault: break;"
+						"}"
+					}
+				}
+				Transition tr37: my Power -> my Power {
+					triggers {
+						<start: PwmPower>
+					}
+					action {
+						"pwmTimer.startTimer(data);"
+					}
+				}
+				Transition tr38: my Power -> my Power {
+					triggers {
+						<stop: PwmPower>
+					}
+					action {
+						"pwmTimer.kill();"
+					}
+				}
+				Transition tr39: my Power -> my Power {
+					triggers {
+						<timeout: pwmTimer>
+					}
+					action {
+						"//send new Duty"
+						"PwmPower.newDuty(POWER_getPWMDuty());"
+					}
+				}
+				handler TransitionPoint Power
+				Transition tr40: my HallSpeed -> my HallSpeed {
+					triggers {
+						<setSpeed: SpeedControl>
+					}
+					action {
+						"// set new HALL speed"
+						"HALL_setSpeed(data);"
+					}
+				}
+				handler TransitionPoint HallSpeed
+				Transition tr41: my TestPwm -> my TestPwm {
+					triggers {
+						<setDuty: PwmControl>
+					}
+					action {
+						"PWM_setDuty(data);"
+					}
+				}
+				handler TransitionPoint TestPwm
+				Transition tr42: my PExt9Out -> my PExt9Out {
+					triggers {
+						<on: IC9_P14_Out>
+					}
+					action {
+						"I2C4_changeIOBits(PE_IC9_P14_MASK, 1);"
+					}
+				}
+				Transition tr43: my PExt9Out -> my PExt9Out {
+					triggers {
+						<off: IC9_P14_Out>
+					}
+					action {
+						"I2C4_changeIOBits(PE_IC9_P14_MASK, 0);"
+					}
+				}
+				Transition tr44: my PExt9Out -> my PExt9Out {
+					triggers {
+						<on: IC9_P15_Out>
+					}
+					action {
+						"I2C4_changeIOBits(PE_IC9_P15_MASK, 1);"
+					}
+				}
+				Transition tr45: my PExt9Out -> my PExt9Out {
+					triggers {
+						<off: IC9_P15_Out>
+					}
+					action {
+						"I2C4_changeIOBits(PE_IC9_P15_MASK, 0);"
+					}
+				}
+				handler TransitionPoint PExt9Out
+				Transition tr46: my LedSimu -> my LedSimu {
+					triggers {
+						<on: Led3Simu|on: Led4Simu|on: Led5Simu|on: Led6Simu>
+					}
+					action {
+						"switch (ifitem->localId){"
+						"\tcase IFITEM_Led3Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P00_MASK, 1);"
+						"\tbreak;"
+						"\t"
+						"\tcase IFITEM_Led4Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P01_MASK, 1);"
+						"\tbreak;"
+						"\t"
+						"\tcase IFITEM_Led5Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P02_MASK, 1);"
+						"\tbreak;"
+						"\t"
+						"\tcase IFITEM_Led6Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P03_MASK, 1);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"}"
+					}
+				}
+				Transition tr47: my LedSimu -> my LedSimu {
+					triggers {
+						<off: Led3Simu|off: Led4Simu|off: Led5Simu|off: Led6Simu>
+					}
+					action {
+						"switch (ifitem->localId){"
+						"\tcase IFITEM_Led3Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P00_MASK, 0);"
+						"\tbreak;"
+						"\t"
+						"\tcase IFITEM_Led4Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P01_MASK, 0);"
+						"\tbreak;"
+						"\t"
+						"\tcase IFITEM_Led5Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P02_MASK, 0);"
+						"\tbreak;"
+						"\t"
+						"\tcase IFITEM_Led6Simu:"
+						"\t\tI2C4_changeIOBits(PE_IC9_P03_MASK, 0);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"}"
+					}
+				}
+				Transition tr54: my PExt10Out -> my PExt10Out {
+					triggers {
+						<on: IC10_P07_Out|on: IC10_P06_Out|on: IC10_P05_Out|on: IC10_P04_Out|on: IC10_P03_Out|on: IC10_P02_Out|on:
+						IC10_P01_Out|on: IC10_P00_Out>
+					}
+					action {
+						"switch (ifitem->localId){"
+						"\tcase IFITEM_IC10_P00_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P00_MASK, 1);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P01_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P01_MASK, 1);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P02_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P02_MASK, 1);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P03_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P03_MASK, 1);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P04_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P04_MASK, 1);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P05_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P05_MASK, 1);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P06_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P06_MASK, 1);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P07_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P07_MASK, 1);"
+						"\tbreak;"
+						"\t"
+						"\tdefault: break;"
+						"}"
+						""
+						"I2C4_changeIOBits(PE_IC10_P07_MASK, 1);"
+					}
+				}
+				Transition tr57: my PExt10Out -> my PExt10Out {
+					triggers {
+						<off: IC10_P06_Out|off: IC10_P07_Out|off: IC10_P05_Out|off: IC10_P04_Out|off: IC10_P03_Out|off:
+						IC10_P02_Out|off: IC10_P01_Out|off: IC10_P00_Out>
+					}
+					action {
+						"switch (ifitem->localId){"
+						"\tcase IFITEM_IC10_P00_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P00_MASK, 0);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P01_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P01_MASK, 0);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P02_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P02_MASK, 0);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P03_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P03_MASK, 0);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P04_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P04_MASK, 0);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P05_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P05_MASK, 0);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P06_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P06_MASK, 0);"
+						"\tbreak;"
+						""
+						"\tcase IFITEM_IC10_P07_Out: "
+						"\t\tI2C4_changeIOBits(PE_IC10_P07_MASK, 0);"
+						"\tbreak;"
+						"\t"
+						"\tdefault: break;"
+						"}"
+					}
+				}
+				handler TransitionPoint LedSimu
+				handler TransitionPoint PExt10Out
+				handler TransitionPoint Poti
+				Transition tr22: my Poti -> my Poti {
+					triggers {
+						<start: PotiR3|start: PotiR4|start: PotiR5|start: PotiR6>
+					}
+					action {
+						"switch (ifitem->localId){"
+						"\tcase IFITEM_PotiR3:"
+						"\t\tpoti1Timer.startTimer(data);"
+						"\tbreak;"
+						"\tcase IFITEM_PotiR4:"
+						"\t\tpoti2Timer.startTimer(data);"
+						"\tbreak;"
+						"\tcase IFITEM_PotiR5:"
+						"\t\tpoti3Timer.startTimer(data);"
+						"\tbreak;"
+						"\tcase IFITEM_PotiR6:"
+						"\t\tpoti4Timer.startTimer(data);"
+						"\tbreak;"
+						""
+						"\tdefault: break;"
+						"}"
+					}
+				}
+				Transition tr23: my Poti -> my Poti {
+					triggers {
+						<stop: PotiR3|stop: PotiR4|stop: PotiR5|stop: PotiR6>
+					}
+					action {
+						"switch (ifitem->localId){"
+						"\tcase IFITEM_PotiR3:"
+						"\t\tpoti1Timer.kill();"
+						"\tbreak;"
+						"\tcase IFITEM_PotiR4:"
+						"\t\tpoti2Timer.kill();\t"
+						"\tbreak;"
+						"\tcase IFITEM_PotiR5:"
+						"\t\tpoti3Timer.kill();\t"
+						"\tbreak;"
+						"\tcase IFITEM_PotiR6:"
+						"\t\tpoti4Timer.kill();\t"
+						"\tbreak;"
+						""
+						"\tdefault: break;"
+						"}"
+					}
+				}
+				Transition tr24: my Poti -> my Poti {
+					triggers {
+						<timeout: poti1Timer|timeout: poti2Timer|timeout: poti3Timer|timeout: poti4Timer>
+					}
+					action {
+						"switch (ifitem->localId){"
+						"\tcase IFITEM_poti1Timer:"
+						"\t\tPotiR3.newValue(ADC_getValue(0));"
+						"\tbreak;"
+						"\tcase IFITEM_poti2Timer:"
+						"\t\tPotiR4.newValue(ADC_getValue(1));"
+						"\tbreak;"
+						"\tcase IFITEM_poti3Timer:"
+						"\t\tPotiR5.newValue(ADC_getValue(2));"
+						"\tbreak;"
+						"\tcase IFITEM_poti4Timer:"
+						"\t\tPotiR6.newValue(ADC_getValue(3));"
+						"\tbreak;"
+						""
+						"\tdefault: break;"
+						"}"
+					}
+				}
+				Transition tr25: my HallSpeed -> my HallSpeed {
+					triggers {
+						<setDirection: SpeedControl>
+					}
+					action {
+						"// set new HALL speed"
+						"switch (data){"
+						"case 1: HALL_setDirection(hall_left);"
+						"\tbreak;"
+						"case 2: HALL_setDirection(hall_right);\t"
+						"\tbreak;"
+						"default: break;"
+						"}\t"
+						"\t"
+					}
+				}
+				handler TransitionPoint tr7
+				Transition tr26: my tr7 -> my tr7 {
+					triggers {
+						<start: NetClockCtrl>
+					}
+					action {
+						"NET_startNetClockGen();"
+					}
+				}
+				Transition tr27: my tr7 -> my tr7 {
+					triggers {
+						<stop: NetClockCtrl>
+					}
+					action {
+						"NET_stopNetClockGen();"
+					}
+				}
+				Transition tr28: my tr7 -> my tr7 {
+					triggers {
+						<setFrequency: NetClockCtrl>
+					}
+					action {
+						"NET_setNetFrequency(freq);"
+					}
+				}
+				Transition tr29: my DacIntern -> my DacIntern {
+					triggers {
+						<enabeleSinGen: DacIntern_0|enabeleSinGen: DacIntern_1>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacIntern_0:"
+						"\t\tDAC_enableSinGen(0);"
+						"\tbreak;"
+						"\tcase IFITEM_DacIntern_1:"
+						"\t\tDAC_enableSinGen(1);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"\t}"
+					}
+				}
+				Transition tr30: my DacIntern -> my DacIntern {
+					triggers {
+						<disableSinGen: DacIntern_0|disableSinGen: DacIntern_1>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacIntern_0:"
+						"\t\tDAC_disableSinGen(0);"
+						"\tbreak;"
+						"\tcase IFITEM_DacIntern_1:"
+						"\t\tDAC_disableSinGen(1);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"\t}"
+					}
+				}
+				Transition tr31: my DacIntern -> my DacIntern {
+					triggers {
+						<setSinAmplitude: DacIntern_0|setSinAmplitude: DacIntern_1>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacIntern_0:"
+						"\t\tDAC_setSinAmplitude(0, amplitude);"
+						"\tbreak;"
+						"\tcase IFITEM_DacIntern_1:"
+						"\t\tDAC_setSinAmplitude(1, amplitude);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"\t}"
+					}
+				}
+				Transition tr32: my DacIntern -> my DacIntern {
+					triggers {
+						<setSinOffset: DacIntern_0|setSinOffset: DacIntern_1>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacIntern_0:"
+						"\t\tDAC_setSinOffset(0, offset);"
+						"\tbreak;"
+						"\tcase IFITEM_DacIntern_1:"
+						"\t\tDAC_setSinOffset(1, offset);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"\t}"
+						"\t"
+					}
+				}
+				Transition tr33: my DacIntern -> my DacIntern {
+					triggers {
+						<setSinTrigger: DacIntern_0|setSinTrigger: DacIntern_1>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacIntern_0:"
+						"\t\tDAC_setSinTrigger(0, triggerTicks);"
+						"\tbreak;"
+						"\tcase IFITEM_DacIntern_1:"
+						"\t\tDAC_setSinTrigger(1, triggerTicks);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"\t}"
+					}
+				}
+				Transition tr35: my DacIntern -> my DacIntern {
+					triggers {
+						<setSinShift: DacIntern_0|setSinShift: DacIntern_1>
+					}
+					action {
+						"switch(ifitem->localId){"
+						"\tcase IFITEM_DacIntern_0:"
+						"\t\tDAC_setSinShift(0, shiftTicks);"
+						"\tbreak;"
+						"\tcase IFITEM_DacIntern_1:"
+						"\t\tDAC_setSinShift(1, shiftTicks);"
+						"\tbreak;"
+						"\tdefault: break;"
+						"\t}"
+					}
+				}
+				Transition tr34: my tr7 -> my tr7 {
+					triggers {
+						<startReporting: NetClockReporting>
+					}
+					action {
+						"netClockReportingTimer.startTimer(time);"
+					}
+				}
+				Transition tr36: my tr7 -> my tr7 {
+					triggers {
+						<stopReporting: NetClockReporting>
+					}
+					action {
+						"netClockReportingTimer.kill();"
+					}
+				}
+				Transition tr48: my tr7 -> my tr7 {
+					triggers {
+						<timeout: netClockReportingTimer>
+					}
+					action {
+						"uint32_t val;"
+						""
+						"val = NET_getTriacFireTime() << 16;"
+						"val |= NET_getTriacFireCount();"
+						""
+						"NetClockReporting.newValue(val);"
+					}
+				}
+			}
+		}
+	}
+
+}

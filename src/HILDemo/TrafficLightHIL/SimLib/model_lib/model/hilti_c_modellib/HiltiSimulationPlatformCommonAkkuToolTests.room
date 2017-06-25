@@ -1,0 +1,336 @@
+RoomModel hilti.simulator.common_akku_tool_tests {
+
+	import room.basic.service.timing.* from "../etrice_c_modellib/TimingService.room"
+
+	import room.basic.service.logging.* from "../etrice_c_modellib/LoggingService.room"
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+
+	import hilti.simulator.testutilities.* from "HiltiSimulationPlatformTestUtilities.room"
+
+	import hilti.simulator.motor_elements.* from "HiltiSimulationPlatformMotorElements.room"
+
+	import hilti.simulator.machine_elements.* from "HiltiSimulationPlatformMachineElements.room"
+
+	import hilti.simulator.akkus.* from "AkkuSimulation.room"
+
+	ActorClass ABasicCommunicationTest_ extends ATestBase {
+		Interface {
+			conjugated Port akku: PAkkuCtrl
+		}
+		Structure {
+			external Port akku
+		}
+		Behavior {
+			StateMachine {
+				RefinedState userTestsequence {
+					subgraph {
+						State state0
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AEloTempTest {
+		Interface {
+			conjugated Port reset: POnOffTristate
+			conjugated Port eloTemp: PDac
+			Port ctrl: PTestCtrl
+			conjugated Port motorCtrl: PSpeedControllerFromPwmCtrl
+			conjugated Port akkuCtrl: PAkkuCtrl
+			conjugated Port leftSwitch: POnOff
+			conjugated Port rightSwitch: POnOff
+			conjugated Port potiCtrl: PPotiSwitchControl
+			conjugated Port u5v: PDac
+		}
+		Structure {
+			SAP timer: PTimer
+			SAP log: PLog
+			external Port reset
+			external Port eloTemp
+			external Port ctrl
+			external Port motorCtrl
+			external Port akkuCtrl
+			external Port leftSwitch
+			external Port rightSwitch
+			external Port potiCtrl
+			external Port u5v
+			Attribute errors:uint32
+			Attribute testCaseId:uint16
+		}
+		Behavior {
+			StateMachine {
+				State idle
+				State resetTarget {
+					entry 
+				
+				
+				
+				
+				
+				
+				{
+						"testCaseId = etUnit_openTestCase(\"Elo Temp Test\");"
+						""
+						"errors=0;"
+						""
+						"reset.off();"
+						"eloTemp.setValue(2500);"
+						"motorCtrl.stop();"
+						"akkuCtrl.stop();"
+						"leftSwitch.on();"
+						"rightSwitch.off();"
+						"potiCtrl.stop();"
+						"u5v.setValue(2500);"
+						""
+						"timer.startTimeout(20); "
+					}
+				}
+				handler TransitionPoint tr0
+				Transition init0: initial -> idle
+				Transition tr1: my tr0 -> idle {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+				Transition tr2: idle -> resetTarget {
+					triggers {
+						<start: ctrl>
+					}
+				}
+				State waitForAkkuStartup
+				State waitForMotor
+				State checkSpeed
+				State motorRunning {
+					entry {
+						"eloTemp.setValue(200);"
+						"timer.startTimeout(100);"
+					}
+				}
+				ChoicePoint cp0
+				Transition tr3: resetTarget -> waitForAkkuStartup {
+					triggers {
+						<timeout: timer>
+					}
+					action 
+				{
+						"reset.tristate();"
+						"motorCtrl.start();"
+						"akkuCtrl.start();"
+						"potiCtrl.start();"
+						""
+						"timer.startTimeout(200);"
+					}
+				}
+				Transition tr4: waitForAkkuStartup -> waitForMotor {
+					triggers {
+						<done: akkuCtrl>
+					}
+					action 
+				{
+						"potiCtrl.setPotiVal(2000);"
+						"timer.kill();"
+						"timer.startTimeout(100);"
+					}
+				}
+				Transition tr5: waitForMotor -> checkSpeed {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"motorCtrl.getActualSpeed();"
+					}
+				}
+				Transition tr6: checkSpeed -> cp cp0 {
+					triggers {
+						<actualSpeed: motorCtrl>
+					}
+				}
+				Transition tr7: cp cp0 -> motorRunning {
+					action 
+				
+				
+				
+				
+				{
+						"EXPECT_TRUE(testCaseId, \"Motor not running in normal mode\", ET_FALSE);"
+						""
+						"errors++;"
+					}
+				}
+				Transition tr8: cp cp0 -> motorRunning {
+					cond {
+						"data>200"
+					}
+				}
+				State waitForMotor2 {
+					entry {
+						"motorCtrl.getActualSpeed();"
+					}
+				}
+				State state0 {
+					entry {
+						"eloTemp.setValue(1500);"
+						"timer.startTimeout(100);"
+					}
+				}
+				State state1 {
+					entry {
+						"motorCtrl.getActualSpeed();"
+					}
+				}
+				State ende {
+					entry 
+				
+				
+				
+				
+				{
+						"etUnit_closeTestCase(testCaseId);"
+						"ctrl.done(errors);"
+					}
+				}
+				ChoicePoint cp1
+				ChoicePoint cp2
+				Transition tr9: motorRunning -> waitForMotor2 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr10: waitForMotor2 -> cp cp1 {
+					triggers {
+						<actualSpeed: motorCtrl>
+					}
+				}
+				Transition tr11: cp cp1 -> state0
+				Transition tr12: cp cp1 -> state0 {
+					cond {
+						"data > 100"
+					}
+					action 
+				
+				
+				{
+						"EXPECT_TRUE(testCaseId, \"Motor not stopped during overtemp\", ET_FALSE);"
+						"errors++;"
+					}
+				}
+				Transition tr13: state0 -> state1 {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr14: state1 -> cp cp2 {
+					triggers {
+						<actualSpeed: motorCtrl>
+					}
+				}
+				Transition tr15: cp cp2 -> ende
+				Transition tr16: cp cp2 -> ende {
+					cond {
+						"data > 200"
+					}
+				}
+			Transition tr17: waitForAkkuStartup -> waitForMotor {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"potiCtrl.setPotiVal(2000);"
+						"timer.startTimeout(100);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ABasicCommunicationTest {
+		Interface {
+			Port ctrl: PTestCtrl
+			conjugated Port reset: POnOffTristate
+			conjugated Port akku: PAkkuCtrl
+		}
+		Structure {
+			SAP timer: PTimer
+			SAP log: PLog
+			external Port ctrl
+			external Port reset
+			external Port akku
+			Attribute syncTimeout: uint32 = "100" ["Beschreibung"]
+			Attribute errors: uint32
+			Attribute testCaseId: uint32
+		}
+		Behavior {
+			StateMachine {
+				State idle { }
+				State state0 {
+					entry 
+					
+					{
+						"errors=0;"
+						"reset.off();"
+						"akku.stop();"
+						"timer.startTimeout(10);"
+						"testCaseId = etUnit_openTestCase(\"Basic Communication Test\");"
+					}
+					exit {
+						"reset.tristate();"
+						"akku.start();"
+						"timer.startTimeout(syncTimeout);"
+					}
+				}
+				State finished {
+					entry 
+				
+				{
+						"etUnit_closeTestCase(testCaseId);"
+						"ctrl.done(errors);"
+					}
+				}
+				Transition init0: initial -> idle
+				Transition tr0: idle -> state0 {
+					triggers {
+						<start: ctrl>
+					}
+				}
+				Transition tr1: waitForResponse -> finished {
+					triggers {
+						<done: akku>
+					}
+					action {
+						"timer.kill();"
+					}
+				}
+				Transition tr4: my tr3 -> idle {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+				State waitForResponse
+				TransitionPoint tr3
+				Transition tr5: state0 -> waitForResponse {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr2: waitForResponse -> finished {
+					triggers {
+						<timeout: timer>
+					}
+					action 
+				
+				{
+						"errors++;"
+						"EXPECT_TRUE(testCaseId, \"Akku Communication timeout\", ET_FALSE);"
+					}
+				}
+			}
+		}
+	}
+
+}

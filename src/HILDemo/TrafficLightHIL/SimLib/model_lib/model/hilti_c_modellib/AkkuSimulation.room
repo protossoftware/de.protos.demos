@@ -1,0 +1,783 @@
+RoomModel hilti.simulator.akkus {
+
+	import room.basic.service.timing.* from "../etrice_c_modellib/TimingService.room"
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import room.basic.service.pinterrupt.* from "../etrice_c_modellib/PInterrupt.room"
+
+	import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+
+	ProtocolClass PAkkuConfig {
+		usercode1 {
+			"#include \"MemMapStructure.h\""
+		}
+		incoming {
+			Message setEpromData(data: akkuEpromData ref)
+			Message setRamData(data: akkuRamData ref)
+			Message setLifeData(data: akkuLiveData ref)
+			Message setUBatFullScale(data: uint32)
+			Message setNtcResistor(data: uint32)
+			Message setUNtcFullScale(data: uint32)
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+	ProtocolClass PAkkuCtrl {
+		incoming {
+			Message start()
+			Message stop()
+			Message setNtcResistor(data: uint32)
+			Message setNtcValue(data: uint32)
+			Message restoreNtcValue()
+			Message setUBatValue(data: uint32)
+			Message restoreUBatValue()
+			Message gotoErrorState()
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+//	ProtocolClass PAkkuCtrlMux extends PAkkuCtrl {
+//		incoming {
+//			Message lockSwitch()
+//			Message releaseSwitch()
+//		}
+//	}
+	
+	ActorClass AAkkuCtrlMux{
+		Interface {
+			conjugated Port ^out: PAkkuCtrl
+			Port ^in [*]: PAkkuCtrl
+		}
+		Structure {
+			external Port ^out
+			external Port ^in
+			Attribute switchPosition:uint32
+		}
+	Behavior {
+			StateMachine {
+				
+				State locked
+				Transition init0: initial -> locked {
+					action {
+						"switchPosition=0;"
+					}
+				}
+				
+				
+			Transition tr2: locked -> locked {
+					triggers {
+						<done: ^out>
+					}
+					action {
+						"in[switchPosition].done();"
+					}
+				}
+				Transition tr3: locked -> locked {
+					triggers {
+						<start: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.start();"
+					}
+				}
+				Transition tr4: locked -> locked {
+					triggers {
+						<stop: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.stop();"
+					}
+				}
+				Transition tr5: locked -> locked {
+					triggers {
+						<setNtcResistor: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.setNtcResistor(data);"
+					}
+				}
+				Transition tr6: locked -> locked {
+					triggers {
+						<setNtcValue: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.setNtcValue(data);"
+					}
+				}
+				Transition tr7: locked -> locked {
+					triggers {
+						<restoreNtcValue: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.restoreNtcValue();"
+					}
+				}
+				Transition tr8: locked -> locked {
+					triggers {
+						<setUBatValue: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.setUBatValue(data);"
+					}
+				}
+				Transition tr9: locked -> locked {
+					triggers {
+						<restoreUBatValue: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.restoreUBatValue();"
+					}
+				}
+				Transition tr10: locked -> locked {
+					triggers {
+						<gotoErrorState: ^in>
+					}
+					action 
+				{
+						"switchPosition=((etReplSubPort*)ifitem)->index;"
+						"out.gotoErrorState();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass AAkkuSimu {
+		Interface {
+			conjugated Port uart: PAkkuSim
+			conjugated Port ntc_out: PDac
+			conjugated Port uBat_out: PDac
+			Port ctrl: PAkkuCtrl
+			Port config: PAkkuConfig
+		}
+		Structure {
+			usercode1 {
+				"#include \"MemMapStructure.h\""
+			} usercode3 {
+				"uint8_t txData[10];"
+				"extern tMEMMAPSTRUCTURE_UNION AKKU_defaultEepromData[];"
+				"extern tAKKU_RAMDATASTRUCT_UNION AKKU_defaultRamData[];"
+				"extern tAKKU_LIVEDATASTRUCT AKKU_defaultLiveData[];"
+				"//extern uint32_t NTSE0682_Table[];"
+				"uint32_t NTSE0682_Table[]={"
+				"//-20"
+				"70445,66315,62454,58843,55466,52305,49346,46575,43979,41546,"
+				"//-10"
+				"39264,37123,35114,33227,31454,29788,28222,26748,25360,24054,"
+				"//0"
+				"22823,21662,20568,19536,18562,17642,16774,15953,15177,14443,"
+				"//10"
+				"13749,13092,12471,11882,11324,10796,10295,9821,9371,8944,"
+				"//20"
+				"8538,8154,7789,7442,7113,6800,6503,6220,5952,5696,"
+				"//30"
+				"54535222,5002,4792,4593,4403,4222,4050,3886,3729,"
+				"//40"
+				"3580,3437,3301,3172,3048,2930,2817,2709,2606,2508,"
+				"//50"
+				"2414,2324,2238,2155,2077,2001,1929,1860,1794,1730,"
+				"//60"
+				"1669,1611,1555,1501,1450,1400,1353,1307,1263,1221,"
+				"//70"
+				"1181,1142,1105,1069,1034,1001,969,938,908,880,"
+				"//80"
+				"852,826,800,775,752,729,707,685,665,645,"
+				"//90"
+				"626,607,589,572,555,539,524,509,494,480,"
+				"//100"
+				"467,454,441,429,417,406};"
+			}
+			external Port uart
+			external Port ntc_out
+			external Port uBat_out
+			external Port ctrl
+			SAP timer: PTimer
+			Attribute sData: DSerialFrame
+			Attribute epromData: akkuEpromData ref = "0x00000000"
+			Attribute ramData: akkuRamData ref = "0x00000000"
+			Attribute liveData: akkuLiveData ref = "0x00000000"
+			Attribute uBatFullScale: uint32 = "46305" [ "Fullscale value for UBat in mV for DGate Small" ]
+			Attribute ntcReferenceResistor: uint32 = "1600" [ "Reference resistor in Ohm" ]
+			Attribute ntcFullScale: uint32 = "5000" [ "Fullscale value for UNtc in mV" ]
+			external Port config
+		}
+		Behavior {
+			Operation getNtcDacValFromTemp(temp: int8): uint32 {
+				"uint8_t idx;"
+				"uint32_t Rntc;"
+				"idx = temp + 20;"
+				"if (idx < (sizeof(NTSE0682_Table) / sizeof (uint32_t))){"
+				"	Rntc = NTSE0682_Table[idx];"
+				"	return ((Rntc * 5000) / (ntcReferenceResistor + Rntc) * 3300 / ntcFullScale);"
+				"	}"
+				"return 0;"
+			}
+			Operation getUBatDacValFromVoltage(voltage: int32): uint32 {
+				"return (voltage * 3300/uBatFullScale);"
+			}
+			StateMachine {
+				State idle {
+					entry {
+						"ntc_out.setValue(0);"
+						"uBat_out.setValue(0);"
+						"uart.setTxUart();"
+					}
+				}
+				State receiving55
+				Transition init: initial -> idle {
+					action {
+						"epromData=(tMEMMAPSTRUCTURE_UNION *)AKKU_defaultEepromData;"
+						"ramData=(tAKKU_RAMDATASTRUCT_UNION *)AKKU_defaultRamData;"
+						"liveData=(tAKKU_LIVEDATASTRUCT *)AKKU_defaultLiveData;"
+					}
+				}
+				Transition tr0: state0 -> receiving55 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"uart.receiveByte();"
+						"uart.setTxLow();"
+					}
+				}
+				State receivingAA
+				State receivingCommands {
+					entry {
+						"uart.receiveFrame();"
+					}
+				}
+				ChoicePoint cp0
+				ChoicePoint cp1
+				Transition tr2: receiving55 -> cp cp0 {
+					triggers {
+						<received: uart>
+					}
+				}
+				Transition tr3: cp cp0 -> idle
+				Transition tr1: cp cp0 -> receivingAA {
+					cond {
+						"(data[0] == 0x55)"
+					}
+					action {
+						"// do not change the order !!!"
+						"uart.setTxUart();"
+						"uart.receiveByte();"
+					}
+				}
+				Transition tr4: receivingAA -> cp cp1 {
+					triggers {
+						<received: uart>
+					}
+				}
+				Transition tr5: cp cp1 -> idle
+				Transition tr6: cp cp1 -> receivingCommands {
+					cond {
+						"(data[0] == 0xAA)"
+					}
+					action {
+						"uart.sendByte(0x88);"
+					}
+				}
+				Transition tr7: receivingCommands -> receivingCommands {
+					triggers {
+						<received: uart>
+					}
+					action {
+						"uint8 index;"
+						"uint16 addr;"
+						"uint32 uNtc;"
+						""
+						"switch (data[0]){"
+						"\tcase 0xC1:"
+						"\t\t// Quickstartup C1"
+						"\t\ttxData[0]=0xC1;"
+						"\t\ttxData[1]=0x00;"
+						"\t\ttxData[2]=0x00;"
+						"\t\ttxData[3]=liveData->pCellsK12;"
+						"\t\ttxData[4]=liveData->sCellsK12;"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xC2:"
+						"\t\t// Quickstartup C2"
+						"\t\ttxData[0]=0xC2;"
+						"\t\ttxData[1]=epromData->sMM.ubI_Disc500;"
+						"\t\ttxData[2]=epromData->sMM.ubTmaxDisc;"
+						"\t\ttxData[3]=epromData->sMM.ubCapacityCell;"
+						"\t\ttxData[4]=epromData->sMM.ubRi_DC_Cell;"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\t\tctrl.done();\t\t\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0x10:"
+						"\t\t// read RAM"
+						"\t\ttxData[0]=0x10;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\taddr = data[2] * 256 + data[1];"
+						"\t\ttxData[3]=ramData->ubData[addr];"
+						"\t\ttxData[4]=ramData->ubData[addr+1];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0x06:"
+						"\t\t// read EEPROM"
+						"\t\ttxData[0]=0x06;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\taddr = data[2] * 256 + data[1];"
+						"\t\ttxData[3]=epromData->ubData[addr];"
+						"\t\ttxData[4]=epromData->ubData[addr+1];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0x07:"
+						"\t\t// Write EEPROM"
+						"\t\ttxData[0]=0x07;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\ttxData[3]=data[3];"
+						"\t\ttxData[4]=data[4];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tif (data[1] == 0x50){"
+						"\t\t\tif ((data[4] & 0x80) == 0x00) {"
+						"\t\t\t\t// request NTC down Test"
+						"\t\t\t\tntc_out.setValue(0);"
+						"\t\t\t}else{"
+						"\t\t\t\t// reset NTC voltage"
+						"\t\t\t\tuNtc = getNtcDacValFromTemp(liveData->temperatureAtDiagTime);"
+						"\t\t\t\tntc_out.setValue(uNtc);"
+						"\t\t\t}"
+						"\t\t}"
+						"\t\t"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0x55:"
+						"\t\t// Request Device ID"
+						"\t\ttxData[0]=0x55;"
+						"\t\ttxData[1]=0x00;"
+						"\t\ttxData[2]=0x00;"
+						"\t\ttxData[3]=0x0F;"
+						"\t\ttxData[4]=0x00;"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0x56:"
+						"\t\t// Request FW-Version"
+						"\t\ttxData[0]=0x56;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=0x00;"
+						"\t\ttxData[3]=liveData->fwVersionLow;"
+						"\t\ttxData[4]=liveData->fwVersionHigh;"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xD0:"
+						"\t\t// Request TPS Status"
+						"\t\ttxData[0]=0xD0;"
+						"\t\ttxData[1]=0x00;"
+						"\t\ttxData[2]=0x00;"
+						"\t\ttxData[3]=0x03;"
+						"\t\ttxData[4]=0x00;"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xD1:"
+						"\t\t// Request R"
+						"\t\ttxData[0]=0xD1;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\t// fake the random value"
+						"\t\tif (data[1] == 0x00){"
+						"\t\t\ttxData[3]=0x12;"
+						"\t\t\ttxData[4]=0x34;"
+						"\t\t\t}else{"
+						"\t\t\ttxData[3]=0x56;"
+						"\t\t\ttxData[4]=0x78;"
+						"\t\t\t}\t\t\t"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xD2:"
+						"\t\t// Request F"
+						"\t\ttxData[0]=0xD2;"
+						"\t\ttxData[1]=0x00;"
+						"\t\ttxData[2]=0x00;"
+						"\t\t// fake the security result"
+						"\t\ttxData[3]=0xB8;"
+						"\t\ttxData[4]=0x72;"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xD3:"
+						"\t\t// Send G"
+						"\t\ttxData[0]=0xD3;"
+						"\t\ttxData[1]=0x00;"
+						"\t\ttxData[2]=0x00;"
+						"\t\ttxData[3]=data[3];"
+						"\t\ttxData[4]=data[4];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xD4:"
+						"\t\t// Request SNR"
+						"\t\tindex = data[1];"
+						"\t\ttxData[0]=0xD4;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\ttxData[3]=epromData->sMM.ubBattSec[index];"
+						"\t\ttxData[4]=epromData->sMM.ubBattSec[index+1];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xD5:"
+						"\t\t// Clear SN"
+						"\t\ttxData[0]=0xD5;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\ttxData[3]=data[3];"
+						"\t\ttxData[4]=data[4];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						""
+						"\tcase 0xF0:"
+						"\t\t// Go to Loader mode"
+						"\t\ttxData[0]=0xF0;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\ttxData[3]=data[3];"
+						"\t\ttxData[4]=data[4];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						""
+						"\tcase 0xEF:"
+						"\t\t// Request FW-Version"
+						"\t\ttxData[0]=0xEF;"
+						"\t\ttxData[1]=data[1];"
+						"\t\ttxData[2]=data[2];"
+						"\t\ttxData[3]=data[3];"
+						"\t\ttxData[4]=data[4];"
+						"\t\ttxData[5]=0x00;"
+						"\t\tuart.sendFrame(txData);\t\t"
+						"\tbreak;"
+						"\t"
+						"\tdefault:;"
+						"\tbreak;"
+						"}"
+					}
+				}
+				TransitionPoint tp0
+				Transition tr8: my tp0 -> idle {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+				State wait50ms {
+					entry {
+						"uint32 uBat;"
+						"uint32 uNtc;"
+						""
+						"uNtc = getNtcDacValFromTemp(liveData->temperatureAtDiagTime);"
+						"uBat = liveData->packVoltageAtDiagTimeHigh * 256 + liveData->packVoltageAtDiagTimeLow;"
+						"uBat = getUBatDacValFromVoltage(uBat);"
+						""
+						"ntc_out.setValue(uNtc);"
+						"uBat_out.setValue(uBat);"
+						"timer.startTimeout(50);"
+					}
+				}
+				Transition tr9: idle -> wait50ms {
+					triggers {
+						<start: ctrl>
+					}
+				}
+				State state0
+				Transition tr10: wait50ms -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"uart.init();"
+						"timer.startTimeout(50);"
+					}
+				}
+				Transition tr11: idle -> idle {
+					triggers {
+						<setEpromData: config>
+					}
+					action {
+						"epromData=data;"
+					}
+				}
+				Transition tr12: idle -> idle {
+					triggers {
+						<setRamData: config>
+					}
+					action {
+						"ramData=data;"
+					}
+				}
+				Transition tr13: idle -> idle {
+					triggers {
+						<setLifeData: config>
+					}
+					action {
+						"liveData=data;"
+					}
+				}
+				handler TransitionPoint tp1
+				Transition tr14: my tp1 -> my tp1 {
+					triggers {
+						<setUBatFullScale: config>
+					}
+					action {
+						"uBatFullScale=data;"
+					}
+				}
+				Transition tr15: my tp1 -> my tp1 {
+					triggers {
+						<setUNtcFullScale: config>
+					}
+					action {
+						"ntcFullScale=data;"
+					}
+				}
+				Transition tr16: my tp1 -> my tp1 {
+					triggers {
+						<setNtcResistor: config>
+					}
+					action {
+						"ntcReferenceResistor=data;"
+					}
+				}
+				Transition tr18: my tp2 -> my tp2 {
+					triggers {
+						<setNtcResistor: ctrl>
+					}
+					action {
+						"uint32 uNtc;"
+						""
+						"ntcReferenceResistor=data;"
+						""
+						"uNtc = getNtcDacValFromTemp(liveData->temperatureAtDiagTime);"
+						""
+						"ntc_out.setValue(uNtc);"
+					}
+				}
+				handler TransitionPoint tp2
+				State errorSim
+				Transition tr17: my tp0 -> errorSim {
+					triggers {
+						<gotoErrorState: ctrl>
+					}
+				}
+				Transition tr19: errorSim -> wait50ms {
+					triggers {
+						<start: ctrl>
+					}
+				}
+				State error {
+					subgraph {
+						State error1
+						State error2
+						EntryPoint tp0
+						ExitPoint tp1
+						Transition tr0: my tp0 -> error1 {
+							action {
+								"timer.startTimeout(50);"
+							}
+						}
+						Transition tr1: error1 -> error2 {
+							triggers {
+								<timeout: timer>
+							}
+							action {
+								"uart.init();"
+								"timer.startTimeout(10);"
+							}
+						}
+						Transition tr2: error2 -> my tp1 {
+							triggers {
+								<timeout: timer>
+							}
+						}
+					}
+				}
+				Transition tr20: receivingCommands -> tp0 of error {
+					triggers {
+						<error: uart>
+					}
+				}
+				Transition tr21: tp1 of error -> receivingCommands
+				handler TransitionPoint tr22
+				Transition tr23: my tr22 -> my tr22 {
+					triggers {
+						<setNtcValue: ctrl>
+					}
+					action {
+						"ntc_out.setValue(data);"
+					}
+				}
+				Transition tr24: my tr22 -> my tr22 {
+					triggers {
+						<restoreNtcValue: ctrl>
+					}
+					action {
+						"uint32 uNtc;"
+						""
+						"uNtc = getNtcDacValFromTemp(liveData->temperatureAtDiagTime);"
+						""
+						"ntc_out.setValue(uNtc);"
+					}
+				}
+				Transition tr25: my tr22 -> my tr22 {
+					triggers {
+						<setUBatValue: ctrl>
+					}
+					action {
+						"uBat_out.setValue(data);"
+					}
+				}
+				Transition tr26: my tr22 -> my tr22 {
+					triggers {
+						<restoreUBatValue: ctrl>
+					}
+					action {
+						"uint32 uBat;"
+						""
+						"uBat = liveData->packVoltageAtDiagTimeHigh * 256 + liveData->packVoltageAtDiagTimeLow;"
+						"uBat = getUBatDacValFromVoltage(uBat);"
+						""
+						"uBat_out.setValue(uBat);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ATestAdapterSimu {
+		Interface {
+			Port ctrl: PAkkuCtrl
+			conjugated Port ntc_out: PDac
+			conjugated Port uart_akku: PAkkuSim
+			conjugated Port uBat_out: PDac
+			Port commands: PSerial
+		}
+		Structure {
+			Attribute sData: DSerialFrame
+			SAP timer: PTimer
+			external Port ctrl
+			external Port ntc_out
+			external Port uart_akku
+			external Port uBat_out
+			external Port commands
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry {
+						"ntc_out.setValue(0);"
+						"uBat_out.setValue(0);"
+						"uart_akku.setTxUart();"
+					}
+				}
+				TransitionPoint tp0
+				Transition init: initial -> idle
+				Transition tr0: my tp0 -> idle {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+				State UartTxUart
+				State FactoryMode
+				Transition tr1: idle -> UNtc500mV {
+					triggers {
+						<start: ctrl>
+					}
+					action {
+						"ntc_out.setValue(330);"
+						"uBat_out.setValue(2000);"
+						"uart_akku.setTxLow();"
+						"uart_akku.init();"
+						"timer.startTimeout(800);"
+					}
+				}
+				State UNtc500mV
+				Transition tr9: UartTxUart -> FactoryMode {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"ctrl.done();"
+					}
+				}
+				Transition tr2: UNtc500mV -> UartTxUart {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"uart_akku.setTxUart();"
+						"timer.startTimeout(50);"
+					}
+				}
+				Transition tr3: FactoryMode -> FactoryMode {
+					triggers {
+						<send: commands>
+					}
+					action {
+						"uart_akku.receiveFrame();"
+						"uart_akku.sendFrame(data);"
+					}
+				}
+				Transition tr4: FactoryMode -> FactoryMode {
+					triggers {
+						<received: uart_akku>
+					}
+					action {
+						"commands.received(data);"
+					}
+				}
+			}
+		}
+	}
+
+	ExternalType akkuEpromData -> "tMEMMAPSTRUCTURE_UNION" // default "{{0,0},{0,0},0,NULL}"
+	ExternalType akkuRamData -> "tAKKU_RAMDATASTRUCT_UNION"
+	ExternalType akkuLiveData -> "tAKKU_LIVEDATASTRUCT"
+}

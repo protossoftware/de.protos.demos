@@ -1,0 +1,9 @@
+MappingModel MessConfAmpelDemo {
+	import MessConfAmpelDemo.* from "MessConfAmpelDemo.room"
+	import MessConfAmpelDemo.* from "MessConfAmpelDemo.etphys"
+	Mapping MessConfAmpelDemo -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

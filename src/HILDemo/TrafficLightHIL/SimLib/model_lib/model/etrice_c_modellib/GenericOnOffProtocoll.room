@@ -1,0 +1,40 @@
+RoomModel room.basic.service.ponoff {
+
+	import room.basic.types.* from "Types.room"
+
+	ProtocolClass POnOff {
+		incoming {
+			Message on()
+			Message off()
+		}
+		outgoing {
+			Message done()
+		}
+		regular PortClass
+		{
+			usercode {
+				"#define PORT_STATE_ON 	0x01"
+				"#define PORT_STATE_OFF 0x02"
+			}
+			handle
+			incoming on {
+				"portState = PORT_STATE_ON;"
+				"(*receiveMessageFunc)(actor, self, msg);"
+			}
+			handle
+			incoming off {
+				"portState = PORT_STATE_OFF;"
+				"(*receiveMessageFunc)(actor, self, msg);"
+			}
+			Operation isPortStateOn(): uint8 {
+				"return (portState == PORT_STATE_ON);"
+			}
+			Operation isPortStateOff(): uint8 {
+				"return (portState == PORT_STATE_OFF);"
+			}
+			
+			Attribute portState: uint8 = "0x02"
+		}
+	}
+
+}

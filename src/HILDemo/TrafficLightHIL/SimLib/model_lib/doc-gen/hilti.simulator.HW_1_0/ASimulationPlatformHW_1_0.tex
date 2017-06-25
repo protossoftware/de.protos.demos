@@ -1,0 +1,200 @@
+\level{2}{ASimulationPlatformHW\_1\_0}
+
+\level{3}{Structure}
+{
+\centering{}
+\includegraphics[width=1.0\textwidth]{./images/ASimulationPlatformHW_1_0_structure.jpg}
+\figcaption{ASimulationPlatformHW\_1\_0 Structure}
+}
+
+\level{3}{Ports}
+\begin{tabular}[ht]{|l|l|l|l|l|p{5cm}|}
+\hline
+\textbf{Name} & \textbf{Protocol} & \textbf{Type} & \textbf{Kind} & \textbf{Multiplicity} & \textbf{Description}\\
+\hline
+interrupt0 & PInterrupt & conj. & internal & 1 & \\
+\hline
+interrupt1 & PInterrupt & conj. & internal & 1 & \\
+\hline
+uart5Isr & PInterrupt & conj. & internal & 1 & \\
+\hline
+uart5ErrorIsr & PInterrupt & conj. & internal & 1 & \\
+\hline
+uart6Isr & PInterrupt & conj. & internal & 1 & \\
+\hline
+uart6ErrorIsr & PInterrupt & conj. & internal & 1 & \\
+\hline
+uart7Isr & PInterrupt & conj. & internal & 1 & \\
+\hline
+uart7ErrorIsr & PInterrupt & conj. & internal & 1 & \\
+\hline
+LedGreenNucleo & POnOff & reg. & external & 1 & \\
+\hline
+LedRedNucleo & POnOff & reg. & external & 1 & \\
+\hline
+LedBlueNucleo & POnOff & reg. & external & 1 & \\
+\hline
+DacIntern\_0 & PDacIntern & reg. & external & 1 & \\
+\hline
+DacIntern\_1 & PDacIntern & reg. & external & 1 & \\
+\hline
+NetClockCtrl & PNetClockCtrl & reg. & external & 1 & \\
+\hline
+BufferedOut\_1 & POnOffTristate & reg. & external & 1 & \\
+\hline
+BufferedOut\_2 & POnOffTristate & reg. & external & 1 & \\
+\hline
+BufferedOut\_3 & POnOffTristate & reg. & external & 1 & \\
+\hline
+BufferedOut\_4 & POnOffTristate & reg. & external & 1 & \\
+\hline
+DacExtern\_0 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_1 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_2 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_3 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_4 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_5 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_6 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_7 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_8 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_9 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_10 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_11 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_12 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_13 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_14 & PDac & reg. & external & 1 & \\
+\hline
+DacExtern\_15 & PDac & reg. & external & 1 & \\
+\hline
+PwmPower & PPwmPower & reg. & external & 1 & \\
+\hline
+SpeedControl & PSpeed & reg. & external & 1 & \\
+\hline
+PwmControl & PPwmOutput & reg. & external & 1 & \\
+\hline
+ExtInt0 & PExtInterrupt & reg. & relay & 1 & \\
+\hline
+ExtInt1 & PExtInterrupt & reg. & relay & 1 & \\
+\hline
+AkkuUart & PAkkuSim & reg. & relay & 1 & \\
+\hline
+Uart6 & PUART & reg. & relay & 1 & \\
+\hline
+Uart7 & PUART & reg. & relay & 1 & \\
+\hline
+IC9\_P14\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC9\_P15\_Out & POnOff & reg. & external & 1 & \\
+\hline
+Led3Simu & POnOff & reg. & external & 1 & \\
+\hline
+Led4Simu & POnOff & reg. & external & 1 & \\
+\hline
+Led5Simu & POnOff & reg. & external & 1 & \\
+\hline
+Led6Simu & POnOff & reg. & external & 1 & \\
+\hline
+IC9\_P16\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC9\_P17\_In & POnOff & conj. & external & 1 & \\
+\hline
+S1Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+S2Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+S3Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+S4Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+P36Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+P37Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+P38Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+P39Simu\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P17\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P16\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P15\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P14\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P13\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P12\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P11\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P10\_In & POnOff & conj. & external & 1 & \\
+\hline
+IC10\_P07\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC10\_P06\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC10\_P05\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC10\_P04\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC10\_P03\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC10\_P02\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC10\_P01\_Out & POnOff & reg. & external & 1 & \\
+\hline
+IC10\_P00\_Out & POnOff & reg. & external & 1 & \\
+\hline
+PotiR3 & PAdc & reg. & external & 1 & \\
+\hline
+PotiR4 & PAdc & reg. & external & 1 & \\
+\hline
+PotiR5 & PAdc & reg. & external & 1 & \\
+\hline
+PotiR6 & PAdc & reg. & external & 1 & \\
+\hline
+BlueButtonNucleo & POnOff & conj. & external & 1 & \\
+\hline
+NetClockReporting & PNetClockReport & reg. & external & 1 & \\
+\hline
+\end{tabular}
+
+\level{3}{Behavior}
+\level{4}{Top Level}
+{
+\centering{}
+\includegraphics[width=1.0\textwidth]{./images/ASimulationPlatformHW_1_0_behavior.jpg}
+\figcaption{ASimulationPlatformHW\_1\_0 Top State}
+}
+
+\begin{par}
+
+\end{par}
+
+
+\level{3}{Attributes}
+\begin{tabular}[ht]{|l|l|p{8cm}|}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Description}\\
+\hline
+portExtenderInputsOld & uint32 & \\
+\hline
+nucleoButtonState & uint8 & \\
+\hline
+\end{tabular}
+

@@ -1,0 +1,9 @@
+MappingModel SimScratchProj_HW_10 {
+	import SimScratchProj_HW_10.* from "SimScratchProj_HW_10.room"
+	import SimScratchProj_HW_10.* from "SimScratchProj_HW_10.etphys"
+	Mapping SimScratchProj_HW_10 -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

@@ -1,0 +1,185 @@
+RoomModel room.basic.service.genericButtonController {
+
+	import room.basic.types.* from "Types.room"
+
+	import room.basic.service.timing.* from "TimingService.room"
+
+	import room.basic.service.ponoff.* from "GenericOnOffProtocoll.room"
+
+	ActorClass GenericButtonController {
+		Interface {
+			Port ctrl: PButtonControlProtocoll
+			Port event: PButtonEventProtocoll
+			Port ^in: POnOff
+		}
+		Structure {
+			external Port ctrl
+			external Port event
+			external Port ^in
+			SAP timer: PTimer
+			Attribute longKlickTime: uint16 = "800"
+			Attribute doubleKlickTime: uint16 = "200"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> off_initial
+				Transition tr0: off_initial -> tp0 of on_1 {
+					triggers {
+						<on: ^in>
+					}
+				}
+				Transition tr3: noDoubleKlick -> longKlick {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"event.longKlick();"
+					}
+				}
+				Transition tr4: noDoubleKlick -> off_initial {
+					triggers {
+						<off: ^in>
+					}
+					action {
+						"event.klick();"
+						"timer.kill();"
+					}
+				}
+				Transition tr5: longKlick -> off_initial {
+					triggers {
+						<off: ^in>
+					}
+				}
+				Transition tr6: off_2 -> on_2 {
+					triggers {
+						<on: ^in>
+					}
+					action {
+						"event.doubleKlick();"
+					}
+				}
+				Transition tr7: on_2 -> off_initial {
+					triggers {
+						<off: ^in>
+					}
+					action {
+						"timer.kill();"
+					}
+				}
+				Transition tr8: on_2 -> off_initial {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr9: off_initial -> off_initial {
+					triggers {
+						<off: ^in>
+					}
+				}
+				Transition tr10: off_2 -> off_initial {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"event.klick();"
+					}
+				}
+				Transition tr1: tp1 of on_1 -> off_2
+				Transition tr11: tp3 of on_1 -> off_initial {
+					action {
+						"event.klick();"
+					}
+				}
+				Transition tr2: tp2 of on_1 -> noDoubleKlick
+				Transition tr12: my tp0 -> my tp0 {
+					triggers {
+						<setDoubleKlickTime: ctrl>
+					}
+					action {
+						"doubleKlickTime=data;"
+					}
+				}
+				Transition tr13: my tp0 -> my tp0 {
+					triggers {
+						<setLongKlickTime: ctrl>
+					}
+					action {
+						"longKlickTime=data;"
+					}
+				}
+				handler TransitionPoint tp0
+				State off_initial
+				State on_1 {
+					subgraph {
+						Transition tr0: cp cp0 -> withDoubleKlick {
+							action {
+								"timer.startTimeout(doubleKlickTime);"
+							}
+						}
+						Transition tr1: cp cp0 -> cp cp1 {
+							cond {
+								"doubleKlickTime==0"
+							}
+						}
+						Transition tr2: my tp0 -> cp cp0
+						Transition tr3: withDoubleKlick -> my tp1 {
+							triggers {
+								<off: ^in>
+							}
+						}
+						Transition tr4: withDoubleKlick -> cp cp1 {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr5: cp cp1 -> my tp2 {
+							action {
+								"timer.startTimeout(longKlickTime);"
+							}
+						}
+						Transition tr6: cp cp1 -> my tp3 {
+							cond {
+								"longKlickTime == 0"
+							}
+						}
+						ChoicePoint cp0
+						ChoicePoint cp1
+						EntryPoint tp0
+						ExitPoint tp1
+						ExitPoint tp2
+						ExitPoint tp3
+						State withDoubleKlick
+					}
+				}
+				State off_2
+				State noDoubleKlick
+				State longKlick
+				State on_2
+			}
+		}
+	}
+
+	ProtocolClass PButtonEventProtocoll {
+		outgoing {
+			Message longKlick()
+			Message klick()
+			Message doubleKlick()
+		}
+	}
+
+	ProtocolClass PLeftRight {
+		outgoing {
+			Message left()
+			Message right()
+		}
+	}
+
+	ProtocolClass PButtonControlProtocoll {
+		incoming {
+			Message setDoubleKlickTime(data: uint16) [ "two on events in the given time will be a double click in ms" ]
+			Message setLongKlickTime(data: uint16) [ "on event without off event within this period will be a long klick in ms"
+			]
+		}
+	}
+
+}

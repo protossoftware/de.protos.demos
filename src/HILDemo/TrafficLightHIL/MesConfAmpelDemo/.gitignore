@@ -1,0 +1,15 @@
+Debug
+Release
+
+src-gen/*
+!src-gen/readme.txt
+
+src-gen-info
+
+log/*
+!log/readme.txt
+
+.settings/language.settings.xml
+
+build
+.gradle

@@ -1,0 +1,48 @@
+\level{2}{ATestAdapterSimu}
+
+\level{3}{Structure}
+{
+\centering{}
+\includegraphics[width=1.0\textwidth]{./images/ATestAdapterSimu_structure.jpg}
+\figcaption{ATestAdapterSimu Structure}
+}
+
+\level{3}{Ports}
+\begin{tabular}[ht]{|l|l|l|l|l|p{5cm}|}
+\hline
+\textbf{Name} & \textbf{Protocol} & \textbf{Type} & \textbf{Kind} & \textbf{Multiplicity} & \textbf{Description}\\
+\hline
+ctrl & PAkkuCtrl & reg. & external & 1 & \\
+\hline
+ntc\_out & PDac & conj. & external & 1 & \\
+\hline
+uart\_akku & PAkkuSim & conj. & external & 1 & \\
+\hline
+uBat\_out & PDac & conj. & external & 1 & \\
+\hline
+commands & PSerial & reg. & external & 1 & \\
+\hline
+\end{tabular}
+
+\level{3}{Behavior}
+\level{4}{Top Level}
+{
+\centering{}
+\includegraphics[width=1.0\textwidth]{./images/ATestAdapterSimu_behavior.jpg}
+\figcaption{ATestAdapterSimu Top State}
+}
+
+\begin{par}
+
+\end{par}
+
+
+\level{3}{Attributes}
+\begin{tabular}[ht]{|l|l|p{8cm}|}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Description}\\
+\hline
+sData & DSerialFrame & \\
+\hline
+\end{tabular}
+

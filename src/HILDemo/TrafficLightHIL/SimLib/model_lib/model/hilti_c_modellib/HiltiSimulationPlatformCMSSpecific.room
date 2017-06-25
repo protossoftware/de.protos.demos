@@ -1,0 +1,166 @@
+RoomModel hilti.simulator.cms_specific {
+
+	import room.basic.service.timing.* from "../etrice_c_modellib/TimingService.room"
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import room.basic.service.ponoff.* from "../etrice_c_modellib/GenericOnOffProtocoll.room"
+
+	import room.basic.service.pinterrupt.* from "../etrice_c_modellib/PInterrupt.room"
+
+	import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+
+	import room.basic.service.logging.* from "..//etrice_c_modellib/LoggingService.room"
+
+	ProtocolClass PToolUartCtrl {
+		incoming {
+			Message start()
+			Message stop()
+		}
+	}
+
+	ActorClass AToolUartSim {
+		Interface {
+			Port ctrl: PToolUartCtrl
+			conjugated Port uart: PAkkuSim
+			conjugated Port ntc: PDac
+			conjugated Port uBat: PDac
+		}
+		Structure {
+			usercode3 {
+				"uint8_t toolTxData[10];"
+			}
+			external Port ctrl
+			external Port uart
+			external Port ntc
+			external Port uBat
+			SAP timer: PTimer
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry {
+						"uart.stopRxLevelReporting();"
+						"uart.init();"
+					}
+				}
+				State waitForRxHigh { }
+				TransitionPoint tr0
+				Transition init0: initial -> idle
+				Transition tr1: my tr0 -> idle {
+					triggers {
+						<stop: ctrl>
+					}
+				}
+				Transition tr2: idle -> waitForRxHigh {
+					triggers {
+						<start: ctrl>
+					}
+					action 
+				
+				{
+						"uart.startRxLevelReporting(1);"
+					}
+				}
+				State witForRxLow { }
+				State send55 {
+					}
+				State sendAA {
+					entry 
+				{
+						"uart.init();"
+						"uart.receiveByte();"
+						"uart.sendByte(0xAA);"
+					}
+				}
+				State sendC1 {
+					entry {
+						"toolTxData[0]=0xC1;"
+						"toolTxData[1]=0x50;"
+						"toolTxData[2]=0x00;"
+						"toolTxData[3]=0x02;"
+						"toolTxData[4]=0x01;"
+						"toolTxData[5]=0x00;"
+						""
+						"uart.receiveFrame();"
+						"uart.sendFrame(toolTxData);"
+					}
+				}
+				ChoicePoint cp0
+				Transition tr9: send55 -> sendAA {
+					triggers {
+						<rxLevelHigh: uart>
+					}
+				action {
+						"uart.stopRxLevelReporting();"
+					}
+				}
+				Transition tr10: sendAA -> cp cp0 {
+					triggers {
+						<received: uart>
+					}
+				}
+				Transition tr3: waitForRxHigh -> waitForRxHigh {
+					triggers {
+						<rxLevelLow: uart>
+					}
+				}
+				Transition tr4: waitForRxHigh -> witForRxLow {
+					triggers {
+						<rxLevelHigh: uart>
+					}
+				}
+				Transition tr5: witForRxLow -> witForRxLow {
+					triggers {
+						<rxLevelHigh: uart>
+					}
+				}
+				Transition tr6: witForRxLow -> send55 {
+					triggers {
+						<rxLevelLow: uart>
+					}
+					action 
+				{
+						"uart.sendByte(0x55);"
+					}
+				}
+				Transition tr7: cp cp0 -> idle
+				Transition tr8: cp cp0 -> sendC1 {
+					cond {
+						"data[0] == 0x88"
+					}
+				}
+			State sendC2 {
+					entry {
+						"toolTxData[0]=0xC2;"
+						"toolTxData[1]=0x00;"
+						"toolTxData[2]=0x28;"
+						"toolTxData[3]=0x14;"
+						"toolTxData[4]=0x00;"
+						"toolTxData[5]=0x00;"
+						""
+						"uart.receiveFrame();"
+						"uart.sendFrame(toolTxData);"
+					}
+				}
+				State waitForStop
+				Transition tr11: send55 -> send55 {
+					triggers {
+						<start: ctrl>
+					}
+				}
+				Transition tr12: sendC1 -> sendC2 {
+					triggers {
+						<received: uart>
+					}
+				}
+				Transition tr13: sendC2 -> waitForStop {
+					triggers {
+						<received: uart>
+					}
+				}
+			}
+		}
+	}
+
+}

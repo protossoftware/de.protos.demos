@@ -1,0 +1,84 @@
+RoomModel hilti.simulator.Oda {
+
+	import room.basic.service.timing.* from "../etrice_c_modellib/TimingService.room"
+
+	import room.basic.types.* from "../etrice_c_modellib/Types.room"
+
+	import hilti.simulator.protocolls.* from "HiltiSimulationPlatformProtocolls.room"
+	
+	import room.basic.service.logging.* from "..//etrice_c_modellib/LoggingService.room"
+
+  import hilti.simulator.mmi.* from "../hilti_c_modellib/MmiSimulation.room"
+	
+
+  ActorClass AOdaGateway {
+    Interface {
+      conjugated Port pUartPc: PUART
+      conjugated Port pUartTarget: PUART
+      conjugated Port pCtrlMmi: PMmiCtrl
+    }
+    Structure {
+      external Port pUartPc
+      external Port pUartTarget
+      external Port pCtrlMmi
+    }
+    Behavior {
+      StateMachine {
+        State state0 {
+          entry {
+            "pUartPc.receiveFrame();"
+            "pUartTarget.receiveFrame();"
+          }
+        }
+        Transition init0: initial -> state0 {
+          action {
+            "pUartPc.init();"
+            "pUartTarget.init();"
+          }
+        }
+        Transition tr0: state0 -> state0 {
+          triggers {
+            <received: pUartTarget>
+          }
+          action {
+            "// send received frame to PC"
+            "pUartPc.sendFrame(data);"
+          }
+        }
+        Transition tr1: state0 -> cp cp0 {
+          triggers {
+            <received: pUartPc>
+          }
+        }
+        ChoicePoint cp0
+        Transition tr2: cp cp0 -> state0 {
+          action {
+            "// send received frame to target"
+            "pUartTarget.sendFrame(data);"
+          }
+        }
+        Transition tr3: cp cp0 -> state0 {
+          cond {
+            "data[0]==0xE1"
+          }
+          action {
+            "// Set MMI-Simulation to \"TransferMode\" (be quiet)"
+            "pCtrlMmi.startTransferMode();"
+            "pUartPc.sendFrame(data);"
+          }
+        }
+        Transition tr4: cp cp0 -> state0 {
+          cond {
+            "data[0]==0xE0"
+          }
+          action {
+            "// Stop MMI-Simulation \"TransferMode\" (talk again)"
+            "pCtrlMmi.stopTransferMode();"
+            "pUartPc.sendFrame(data);"
+          }
+        }
+      }
+    }
+  }
+
+}

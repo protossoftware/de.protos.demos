@@ -1,0 +1,38 @@
+\level{2} {PPotiSwitchControl}
+\level{3}{Incoming Messages}
+
+\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+\hline
+Message & Data & Type & Description\\
+\hline
+start &  &  & \\
+\hline
+stop &  &  & \\
+\hline
+setPotiVal &  data  &  uint32  & % begin text from user Documentation
+ manual setting of poti output 0..3300 mV
+% end text from user Documentation
+\\
+\hline
+rampUp &  data  &  uint32  & % begin text from user Documentation
+automated ramp up. Data = 0xAAAABBBB: AAAA=>stepsize in mV; BBBB=>steptime in ms 
+% end text from user Documentation
+\\
+\hline
+rampDown &  data  &  uint32  & % begin text from user Documentation
+automated ramp down. Data = 0xAAAABBBB: AAAA=>stepsize in mV; BBBB=>steptime in ms 
+% end text from user Documentation
+\\
+\hline
+\end{tabular}
+\level{3}{Outgoing Messages}
+\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+\hline
+Message & Data & Type & Description\\
+\hline
+done &  &  & % begin text from user Documentation
+sent if rampUp/Down is finished
+% end text from user Documentation
+\\
+\hline
+\end{tabular}
