@@ -315,21 +315,23 @@ RoomModel SimScratchProj_HW_10 {
 		}
 	}
 
-	ProtocolClass PUartCtrl {
+	ProtocolClass PUartAdapterCtrl {
 		incoming {
-			Message send1()
-			Message send2()
+			Message start()
+			Message stop()
+			Message setTimeWarp(factor: uint8)
 		}
 		outgoing {
-			Message rec1()
-			Message rec2()
+			Message started()
+			Message stopped()
+			Message doneSetTimewarp()
 		}
 	}
 
 	ActorClass AUartAdapter {
 		Interface {
 			conjugated Port uart: PAkkuSim
-			Port ctrl: PUartCtrl
+			Port ctrl: PUartAdapterCtrl
 		}
 		Structure {
 			usercode3 {
@@ -343,7 +345,15 @@ RoomModel SimScratchProj_HW_10 {
 			StateMachine {
 				State state0
 				Transition init0: initial -> state0 {
-					action {
+					action 
+				{
+						"txData[0] = 0x00;"
+						"txData[1] = 0x00;"
+						"txData[2] = 0x00;"
+						"txData[3] = 0x00;"
+						"txData[4] = 0x00;"
+						"txData[5] = 0x00;"
+						""
 						"uart.receiveFrame();"
 					}
 				}
@@ -351,16 +361,20 @@ RoomModel SimScratchProj_HW_10 {
 					triggers {
 						<received: uart>
 					}
-					action {
+					action 
+				{
 						"uart.receiveFrame();\t"
 						""
 						"switch (data[0]){"
-						"\t\tcase 0xF1:"
-						"\t\tctrl.rec1();"
-						"\tbreak;"
-						"\t\tcase 0xF5:"
-						"\t\tctrl.rec2();"
-						"\tbreak;"
+						"\tcase 0x01:"
+						"\t\tctrl.started();"
+						"\t\tbreak;"
+						"\tcase 0x02:"
+						"\t\tctrl.stopped();"
+						"\t\tbreak;"
+						"\tcase 0x03:"
+						"\t\tctrl.doneSetTimewarp();"
+						"\t\tbreak;"
 						"\tdefault:;"
 						"\tbreak;"
 						"\t}\t"
@@ -368,31 +382,31 @@ RoomModel SimScratchProj_HW_10 {
 				}
 				Transition tr1: state0 -> state0 {
 					triggers {
-						<send1: ctrl>
+						<start: ctrl>
 					}
-					action {
-						"txData[0] = 0xF1;"
-						"txData[1] = 0xF2;"
-						"txData[2] = 0xF3;"
-						"txData[3] = 0xF4;"
-						"txData[4] = 0xF5;"
-						"txData[5] = 0x00;"
-						""
+					action 
+				{
+						"txData[0] = 0x01;"
 						"uart.sendFrame(txData);"
 					}
 				}
 				Transition tr2: state0 -> state0 {
 					triggers {
-						<send2: ctrl>
+						<stop: ctrl>
+					}
+					action 
+				{
+						"txData[0] = 0x02;"
+						"uart.sendFrame(txData);"
+					}
+				}
+			Transition tr3: state0 -> state0 {
+					triggers {
+						<setTimeWarp: ctrl>
 					}
 					action {
-						"txData[0] = 0xF5;"
-						"txData[1] = 0xF6;"
-						"txData[2] = 0xF7;"
-						"txData[3] = 0xF8;"
-						"txData[4] = 0xF9;"
-						"txData[5] = 0x00;"
-						""
+						"txData[0] = 0x03;"
+						"txData[1] = data; // set factor"
 						"uart.sendFrame(txData);"
 					}
 				}
@@ -402,7 +416,7 @@ RoomModel SimScratchProj_HW_10 {
 
 	ActorClass AUartTester {
 		Interface {
-			conjugated Port uartCtrl: PUartCtrl
+			conjugated Port uartCtrl: PUartAdapterCtrl
 			conjugated Port indicator: POnOff
 		}
 		Structure {
@@ -444,7 +458,7 @@ RoomModel SimScratchProj_HW_10 {
 				}
 				Transition tr1: state0 -> state0 {
 					triggers {
-						<rec1: uartCtrl>
+						<started: uartCtrl>
 					}
 					action {
 						"indicator.on();"
@@ -452,7 +466,7 @@ RoomModel SimScratchProj_HW_10 {
 				}
 				Transition tr2: state0 -> state0 {
 					triggers {
-						<rec2: uartCtrl>
+						<stopped: uartCtrl>
 					}
 					action {
 						"indicator.off();"
@@ -471,7 +485,7 @@ RoomModel SimScratchProj_HW_10 {
 			Port carRedIn: POnOff
 			conjugated Port targetReset: POnOffTristate
 			conjugated Port targetButton: POnOffTristate
-			conjugated Port targetUartCtrl: PUartCtrl
+			conjugated Port targetUartCtrl: PUartAdapterCtrl
 			conjugated Port testResult: POnOff
 			Port ctrl: POnOff
 			conjugated Port testRunning: POnOff
@@ -630,7 +644,7 @@ RoomModel SimScratchProj_HW_10 {
 			
 			Port targetReset: POnOffTristate
 			Port targetButton: POnOffTristate
-			Port targetUartCtrl: PUartCtrl
+			Port targetUartCtrl: PUartAdapterCtrl
 			Port testResult: POnOff
 			Port testRunning: POnOff
 		}

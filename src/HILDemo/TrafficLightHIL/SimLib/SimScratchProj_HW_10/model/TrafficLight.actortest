@@ -3,7 +3,7 @@ TestSuite TrafficLight
 import sut SimScratchProj_HW_10.AAmpelTestInterface from 'SimScratchProj_HW_10.room'
 
 options:
-	//generateControlPort
+	generateControlPort
 ;
 
 //			conjugated Port pedGreenIn: POnOff
@@ -31,7 +31,7 @@ Step AllRed:
 ;
 
 RootSequences:
-	Nothing
+	AllRed
 ;
 
 Step Nothing:

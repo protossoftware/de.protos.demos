@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of Application" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.2/@children.2/@link //@children.0/@children.2/@children.3/@link //@children.0/@children.3/@link //@children.0/@children.3/@children.2/@link //@children.0/@children.3/@children.3/@link //@children.0/@children.3/@children.4/@link //@children.0/@children.3/@children.5/@link //@children.0/@children.3/@children.6/@link //@children.0/@children.3/@children.7/@link //@children.0/@children.3/@children.8/@link //@children.0/@children.3/@children.9/@link //@children.0/@children.3/@children.10/@link //@connections.0/@link //@children.0/@children.3/@children.11/@link //@children.0/@children.3/@children.12/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.0/@children.3/@link //@children.0/@children.0/@children.4/@link //@children.0/@children.0/@children.5/@link //@children.0/@children.0/@children.6/@link //@children.0/@children.0/@children.7/@link //@children.0/@children.0/@children.8/@link //@children.0/@children.0/@children.9/@link //@children.0/@children.0/@children.10/@link //@children.0/@children.0/@children.11/@link //@children.0/@children.0/@children.12/@link //@children.0/@children.0/@children.13/@link //@children.0/@children.0/@children.14/@link //@children.0/@children.0/@children.15/@link //@children.0/@children.0/@children.16/@link //@children.0/@children.0/@children.17/@link //@children.0/@children.0/@children.18/@link //@children.0/@children.0/@children.19/@link //@children.0/@children.0/@children.20/@link //@children.0/@children.0/@children.21/@link //@children.0/@children.0/@children.22/@link //@children.0/@children.0/@children.23/@link //@children.0/@children.0/@children.24/@link //@children.0/@children.0/@children.25/@link //@children.0/@children.0/@children.26/@link //@children.0/@children.0/@children.27/@link //@children.0/@children.0/@children.28/@link //@children.0/@children.0/@children.29/@link //@children.0/@children.0/@children.30/@link //@children.0/@children.0/@children.31/@link //@children.0/@children.0/@children.32/@link //@children.0/@children.0/@children.33/@link //@children.0/@children.0/@children.34/@link //@children.0/@children.0/@children.35/@link //@children.0/@children.0/@children.36/@link //@children.0/@children.0/@children.37/@link //@children.0/@children.0/@children.38/@link //@children.0/@children.0/@children.39/@link //@children.0/@children.0/@children.40/@link //@children.0/@children.0/@children.41/@link //@children.0/@children.0/@children.42/@link //@children.0/@children.0/@children.43/@link //@children.0/@children.0/@children.44/@link //@children.0/@children.0/@children.45/@link //@children.0/@children.0/@children.46/@link //@children.0/@children.0/@children.47/@link //@children.0/@children.0/@children.48/@link //@children.0/@children.0/@children.49/@link //@children.0/@children.0/@children.50/@link //@children.0/@children.0/@children.51/@link //@children.0/@children.0/@children.52/@link //@children.0/@children.0/@children.53/@link //@children.0/@children.0/@children.54/@link //@children.0/@children.0/@children.55/@link //@children.0/@children.0/@children.56/@link //@children.0/@children.0/@children.57/@link //@children.0/@children.0/@children.58/@link //@children.0/@children.0/@children.59/@link //@children.0/@children.0/@children.60/@link //@children.0/@children.0/@children.61/@link //@children.0/@children.0/@children.62/@link //@children.0/@children.0/@children.63/@link //@children.0/@children.0/@children.64/@link //@children.0/@children.0/@children.65/@link //@children.0/@children.0/@children.66/@link //@children.0/@children.0/@children.67/@link //@children.0/@children.0/@children.68/@link //@children.0/@children.0/@children.69/@link //@children.0/@children.0/@children.70/@link //@children.0/@children.0/@children.71/@link //@children.0/@children.0/@children.72/@link //@children.0/@children.0/@children.73/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.1/@children.3/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@children.0/@children.4/@link //@children.0/@children.4/@children.2/@link //@children.0/@children.4/@children.3/@link //@children.0/@children.4/@children.4/@link //@children.0/@children.4/@children.5/@link //@children.0/@children.4/@children.6/@link //@children.0/@children.4/@children.7/@link //@children.0/@children.4/@children.8/@link //@children.0/@children.4/@children.9/@link //@children.0/@children.4/@children.10/@link //@children.0/@children.4/@children.11/@link //@children.0/@children.4/@children.12/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link" verticalGridUnit="10" version="0.12.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of Application" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.2/@children.2/@link //@children.0/@children.2/@children.3/@link //@children.0/@children.3/@link //@children.0/@children.3/@children.2/@link //@children.0/@children.3/@children.3/@link //@children.0/@children.3/@children.4/@link //@children.0/@children.3/@children.5/@link //@children.0/@children.3/@children.6/@link //@children.0/@children.3/@children.7/@link //@children.0/@children.3/@children.8/@link //@children.0/@children.3/@children.9/@link //@children.0/@children.3/@children.10/@link //@connections.0/@link //@children.0/@children.3/@children.11/@link //@children.0/@children.3/@children.12/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.0/@children.3/@link //@children.0/@children.0/@children.4/@link //@children.0/@children.0/@children.5/@link //@children.0/@children.0/@children.6/@link //@children.0/@children.0/@children.7/@link //@children.0/@children.0/@children.8/@link //@children.0/@children.0/@children.9/@link //@children.0/@children.0/@children.10/@link //@children.0/@children.0/@children.11/@link //@children.0/@children.0/@children.12/@link //@children.0/@children.0/@children.13/@link //@children.0/@children.0/@children.14/@link //@children.0/@children.0/@children.15/@link //@children.0/@children.0/@children.16/@link //@children.0/@children.0/@children.17/@link //@children.0/@children.0/@children.18/@link //@children.0/@children.0/@children.19/@link //@children.0/@children.0/@children.20/@link //@children.0/@children.0/@children.21/@link //@children.0/@children.0/@children.22/@link //@children.0/@children.0/@children.23/@link //@children.0/@children.0/@children.24/@link //@children.0/@children.0/@children.25/@link //@children.0/@children.0/@children.26/@link //@children.0/@children.0/@children.27/@link //@children.0/@children.0/@children.28/@link //@children.0/@children.0/@children.29/@link //@children.0/@children.0/@children.30/@link //@children.0/@children.0/@children.31/@link //@children.0/@children.0/@children.32/@link //@children.0/@children.0/@children.33/@link //@children.0/@children.0/@children.34/@link //@children.0/@children.0/@children.35/@link //@children.0/@children.0/@children.36/@link //@children.0/@children.0/@children.37/@link //@children.0/@children.0/@children.38/@link //@children.0/@children.0/@children.39/@link //@children.0/@children.0/@children.40/@link //@children.0/@children.0/@children.41/@link //@children.0/@children.0/@children.42/@link //@children.0/@children.0/@children.43/@link //@children.0/@children.0/@children.44/@link //@children.0/@children.0/@children.45/@link //@children.0/@children.0/@children.46/@link //@children.0/@children.0/@children.47/@link //@children.0/@children.0/@children.48/@link //@children.0/@children.0/@children.49/@link //@children.0/@children.0/@children.50/@link //@children.0/@children.0/@children.51/@link //@children.0/@children.0/@children.52/@link //@children.0/@children.0/@children.53/@link //@children.0/@children.0/@children.54/@link //@children.0/@children.0/@children.55/@link //@children.0/@children.0/@children.56/@link //@children.0/@children.0/@children.57/@link //@children.0/@children.0/@children.58/@link //@children.0/@children.0/@children.59/@link //@children.0/@children.0/@children.60/@link //@children.0/@children.0/@children.61/@link //@children.0/@children.0/@children.62/@link //@children.0/@children.0/@children.63/@link //@children.0/@children.0/@children.64/@link //@children.0/@children.0/@children.65/@link //@children.0/@children.0/@children.66/@link //@children.0/@children.0/@children.67/@link //@children.0/@children.0/@children.68/@link //@children.0/@children.0/@children.69/@link //@children.0/@children.0/@children.70/@link //@children.0/@children.0/@children.71/@link //@children.0/@children.0/@children.72/@link //@children.0/@children.0/@children.73/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.1/@children.3/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@children.0/@children.4/@link //@children.0/@children.4/@children.2/@link //@children.0/@children.4/@children.3/@link //@children.0/@children.4/@children.4/@link //@children.0/@children.4/@children.5/@link //@children.0/@children.4/@children.6/@link //@children.0/@children.4/@children.7/@link //@children.0/@children.4/@children.8/@link //@children.0/@children.4/@children.9/@link //@children.0/@children.4/@children.10/@link //@children.0/@children.4/@children.11/@link //@children.0/@children.4/@children.12/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@connections.12/@link //@children.0/@children.4/@children.13/@link //@children.0/@children.4/@children.14/@link //@children.0/@children.4/@children.15/@link //@children.0/@children.4/@children.16/@link //@children.0/@children.4/@children.17/@link //@children.0/@children.4/@children.18/@link //@children.0/@children.4/@children.19/@link //@children.0/@children.4/@children.20/@link //@children.0/@children.4/@children.21/@link //@children.0/@children.4/@children.22/@link //@children.0/@children.4/@children.23/@link //@children.0/@children.4/@children.24/@link" verticalGridUnit="10" version="0.12.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
     <businessObjects href="../SimScratchProj_HW_10.room#ActorClass:Application"/>
@@ -3107,10 +3107,10 @@
         </graphicsAlgorithmChildren>
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="690" height="307" x="30" y="30">
           <properties key="actorref_graphic_element" value="mainborder"/>
-          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" width="20" height="10" x="660" y="277">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="660" y="277">
             <properties key="actorref_graphic_element" value="substructure"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" width="20" height="10" x="655" y="292">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="655" y="292">
             <properties key="actorref_graphic_element" value="substructure"/>
           </graphicsAlgorithmChildren>
           <graphicsAlgorithmChildren xsi:type="al:Polyline" foreground="//@colors.2" lineStyle="UNSPECIFIED" lineVisible="false" transparency="0.4">
@@ -3472,7 +3472,7 @@
         <link>
           <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.1/@interfacePorts.9"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.8" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="testResult"/>
         </children>
@@ -3487,7 +3487,7 @@
         <link>
           <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.1/@interfacePorts.7"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.10" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="targetButton"/>
         </children>
@@ -3532,7 +3532,7 @@
         <link>
           <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.1/@interfacePorts.0"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.7" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="pedGreenIn"/>
         </children>
@@ -3562,7 +3562,7 @@
         <link>
           <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.1/@interfacePorts.6"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.12" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.8/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.8/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="targetReset"/>
         </children>
@@ -3622,9 +3622,189 @@
         <link>
           <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.1/@interfacePorts.10"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.11" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="testRunning"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="578">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.10"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.8" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.13/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="testResult"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="210">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.3"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.14/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="carGreenIn"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="105">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.1"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.7" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.15/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="pedGreenIn"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="473">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.8"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.10" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.16/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="targetButton"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="368">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.6"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.17/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="ctrl"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="631">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.11"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.11" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.18/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="testRunning"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="315">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.5"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.19/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="carRedIn"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="526">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.9"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.20/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="targetUartCtrl"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="157">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.2"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.21/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="pedRedIn"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="52">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.0"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.22/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="control"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value="C"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="420">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.7"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.12" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.23/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="targetReset"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
+        <properties key="item-kind" value=""/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="263">
+          <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="../TrafficLight.actortest#/1/@actorClasses.0/@interfacePorts.4"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@children.24/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="carYellowIn"/>
         </children>
       </children>
     </children>
@@ -3679,14 +3859,14 @@
       <businessObjects href="../SimScratchProj_HW_10.room#Binding:Application$IC10_P11_In!HWer_10-pedRedIn!ref3"/>
     </link>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.18/@anchors.0" end="//@children.0/@children.4/@children.6/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.18/@anchors.0" end="//@children.0/@children.4/@children.15/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
       <businessObjects href="../SimScratchProj_HW_10.room#Binding:Application$IC10_P10_In!HWer_10-pedGreenIn!tester"/>
     </link>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.23/@anchors.0" end="//@children.0/@children.4/@children.2/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.23/@anchors.0" end="//@children.0/@children.4/@children.13/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
@@ -3700,21 +3880,21 @@
       <businessObjects href="../SimScratchProj_HW_10.room#Binding:Application$out!blinky-LedGreenNucleo!HWer_10"/>
     </link>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.28/@anchors.0" end="//@children.0/@children.4/@children.3/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.28/@anchors.0" end="//@children.0/@children.4/@children.16/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
       <businessObjects href="../SimScratchProj_HW_10.room#Binding:Application$BufferedOut_1!HWer_10-targetButton!tester"/>
     </link>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.37/@anchors.0" end="//@children.0/@children.4/@children.12/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.37/@anchors.0" end="//@children.0/@children.4/@children.18/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
       <businessObjects href="../SimScratchProj_HW_10.room#Binding:Application$LedBlueNucleo!HWer_10-testRunning!tester"/>
     </link>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.42/@anchors.0" end="//@children.0/@children.4/@children.8/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.42/@anchors.0" end="//@children.0/@children.4/@children.23/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>

@@ -197,24 +197,24 @@ RoomModel MessConfAmpelDemo {
 
 	ActorClass ABlinky {
 		Interface {
-			conjugated Port p0: POnOff
+			conjugated Port led: POnOff
 		}
 		Structure {
 			SAP timer: PTimer
-			external Port p0
+			external Port led
 		}
 		Behavior {
 			StateMachine {
-				State off {
+				State off { }
+				State on {
 					entry {
-						"p0.off();"
+						"led.on();"
 					}
 					exit {
-						"p0.on();"
+						"led.off();"
 					}
 				}
-				State on
-				Transition init0: initial -> off {
+				Transition init0: initial -> on {
 					action {
 						"timer.startTimer(400);"
 					}
@@ -321,12 +321,14 @@ RoomModel MessConfAmpelDemo {
 
 	ProtocolClass PUartAdapterCtrl {
 		incoming {
-			Message send1()
-			Message send2()
+			Message start()
+			Message stop()
+			Message setTimeWarp(factor: uint8)
 		}
 		outgoing {
-			Message rec1()
-			Message rec2()
+			Message started()
+			Message stopped()
+			Message doneSetTimewarp()
 		}
 	}
 
@@ -335,78 +337,190 @@ RoomModel MessConfAmpelDemo {
 			conjugated Port pedRed: POnOff
 			conjugated Port pedGreen: POnOff
 			conjugated Port carRed: POnOff
-			conjugated Port carGren: POnOff
+			conjugated Port carGreen: POnOff
 			conjugated Port carYellow: POnOff
 			Port button: POnOff
-		conjugated Port ctrl: PUartAdapterCtrl
+			Port ctrl: PUartAdapterCtrl
 		}
 		Structure {
 			SAP timer: PTimer
-		external Port pedRed
+			external Port pedRed
 			external Port pedGreen
 			external Port carRed
-			external Port carGren
+			external Port carGreen
 			external Port carYellow
 			external Port button
-		external Port ctrl
+			external Port ctrl
+			Attribute timeWarpFactor: int32
 		}
 		Behavior {
 			StateMachine {
-				State idle {
-					entry {
-						"pedRed.on();"
+				
+				
+				
+				
+				State Standby {
+					subgraph {
+						State On {
+							entry {
+								"timer.startTimeout(500/timeWarpFactor);"
+								"carYellow.on();"
+								"pedRed.on();"
+							}
+							exit {
+								"carYellow.off();"
+								"pedRed.off();"
+							}
+						}
+						State Off {
+							entry {
+								"timer.startTimeout(500/timeWarpFactor);"
+							}
+						}
+						EntryPoint tr0
+						Transition tr1: my tr0 -> On
+						Transition tr2: On -> Off {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr3: Off -> On {
+							triggers {
+								<timeout: timer>
+							}
+						}
+					}
+				}
+				State Operational
+			{
+					subgraph {
+						State AllOff {
+							entry 
+						{
+								"pedRed.off();"
+								"pedGreen.off();"
+								"carRed.off();"
+								"carGreen.off();"
+								"carYellow.off();"
+								"timer.startTimeout(500/timeWarpFactor);"
+							}
+						}
+						State AllRed {
+							entry 
+						{
+								"pedRed.on();"
+								"pedGreen.off();"
+								"carRed.on();"
+								"carYellow.off();"
+								"carGreen.off();"
+								"timer.startTimeout(1000/timeWarpFactor);"
+							}
+						}
+						State CarRedYellow {
+							entry 
+						{
+								"carRed.on();"
+								"carYellow.on();"
+								"carGreen.off();"
+								"timer.startTimeout(1000/timeWarpFactor);"
+							}
+						}
+						State CarGreen_Idle {
+							entry 
+						{
+								"carRed.off();"
+								"carYellow.off();"
+								"carGreen.on();"
+							}
+						}
+						EntryPoint tr0
+						Transition tr1: my tr0 -> AllOff
+						Transition tr2: AllOff -> AllRed {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr3: AllRed -> CarRedYellow {
+							triggers {
+								<timeout: timer>
+							}
+						}
+					State Request {
+							entry {
+								"timer.startTimeout(500/timeWarpFactor);"
+							}
+						}
+						State CarYellow {
+							entry {
+								"carRed.off();"
+								"carYellow.on();"
+								"carGreen.off();"
+								"timer.startTimeout(1000/timeWarpFactor);"
+							}
+						}
+						State CarRed {
+							entry {
+								"carRed.on();"
+								"carYellow.off();"
+								"carGreen.off();"
+								"timer.startTimeout(2000/timeWarpFactor);"
+							}
+						}
+						State PedGreen {
+							entry {
+								"pedRed.off();"
+								"pedGreen.on();"
+								"timer.startTimeout(2000/timeWarpFactor);"
+							}
+						}
+						Transition tr4: CarRedYellow -> CarGreen_Idle {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr5: CarGreen_Idle -> Request {
+							triggers {
+								<off: button>
+							}
+						}
+						Transition tr6: Request -> CarYellow {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr7: CarYellow -> CarRed {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr8: CarRed -> PedGreen {
+							triggers {
+								<timeout: timer>
+							}
+						}
+						Transition tr9: PedGreen -> AllRed {
+							triggers {
+								<timeout: timer>
+							}
+						}
+					}
+				}
+				Transition init0: initial -> tr0 of Standby {
+					action 
+				
+				{
+						"timeWarpFactor=1; // standard: no time warp "
+						""
+						"pedRed.off();"
 						"pedGreen.off();"
 						"carRed.off();"
-						"carGren.on();"
+						"carGreen.off();"
 						"carYellow.off();"
 					}
 				}
-				State state0 {
-					entry {
-						"timer.startTimeout(1000);"
-						"carYellow.on();"
-						"carGren.off();"
-					}
-				}
-				State state1
-				State state2
-				Transition init0: initial -> idle
-				Transition tr0: idle -> state0 {
+			Transition tr0: Standby -> tr0 of Operational {
 					triggers {
 						<off: button>
-					}
-					}
-				Transition tr1: state0 -> state1 {
-					triggers {
-						<timeout: timer>
-					}
-					action {
-						"timer.startTimeout(2000);"
-						"carYellow.off();"
-						"carRed.on();"
-						"pedRed.off();"
-						"pedGreen.on();"
-					}
-				}
-				Transition tr2: state1 -> state2 {
-					triggers {
-						<timeout: timer>
-					}
-					action {
-						"timer.startTimeout(1000);"
-						"pedRed.on();"
-						"pedGreen.off();"
-						"carYellow.on();"
-					}
-				}
-				Transition tr3: state2 -> idle {
-					triggers {
-						<timeout: timer>
-					}
-				}
-			Transition tr4: idle -> state0 {
-					triggers {
-						<rec1: ctrl>
 					}
 				}
 			}
@@ -426,7 +540,7 @@ RoomModel MessConfAmpelDemo {
 				Transition init0: initial -> state0
 				Transition tr0: state0 -> state0 {
 					triggers {
-						<rec1: p0>
+						<started: p0>
 					}
 					action {
 						"p0.send2();"
@@ -434,7 +548,7 @@ RoomModel MessConfAmpelDemo {
 				}
 				Transition tr1: state0 -> state0 {
 					triggers {
-						<rec2: p0>
+						<stopped: p0>
 					}
 					action {
 						"p0.send1();"
@@ -447,7 +561,7 @@ RoomModel MessConfAmpelDemo {
 	ActorClass AUartAdapter {
 		Interface {
 			conjugated Port uart: PUartCtrl
-			Port ctrl: PUartAdapterCtrl
+			conjugated Port ctrl: PUartAdapterCtrl
 		}
 		Structure {
 			usercode3 {
@@ -462,6 +576,13 @@ RoomModel MessConfAmpelDemo {
 				State state0
 				Transition init0: initial -> state0 {
 					action {
+						"txData[0] = 0x00;"
+						"txData[1] = 0x00;"
+						"txData[2] = 0x00;"
+						"txData[3] = 0x00;"
+						"txData[4] = 0x00;"
+						"txData[5] = 0x00;"
+						""
 						"uart.receiveFrame();"
 					}
 				}
@@ -469,16 +590,21 @@ RoomModel MessConfAmpelDemo {
 					triggers {
 						<received: uart>
 					}
-					action {
+					action 
+				
+				{
 						"uart.receiveFrame();\t"
 						""
 						"switch (data[0]){"
-						"\t\tcase 0xF1:"
-						"\t\tctrl.rec1();"
-						"\tbreak;"
-						"\t\tcase 0xF5:"
-						"\t\tctrl.rec2();"
-						"\tbreak;"
+						"\tcase 0x01:"
+						"\t\tctrl.start();"
+						"\t\tbreak;"
+						"\tcase 0x02:"
+						"\t\tctrl.stop();"
+						"\t\tbreak;"
+						"\tcase 0x03:"
+						"\t\tctrl.setTimeWarp(data[1]);"
+						"\t\tbreak;"
 						"\tdefault:;"
 						"\tbreak;"
 						"\t}\t"
@@ -486,31 +612,30 @@ RoomModel MessConfAmpelDemo {
 				}
 				Transition tr1: state0 -> state0 {
 					triggers {
-						<send1: ctrl>
+						<started: ctrl>
 					}
-					action {
-						"txData[0] = 0xF1;"
-						"txData[1] = 0xF2;"
-						"txData[2] = 0xF3;"
-						"txData[3] = 0xF4;"
-						"txData[4] = 0xF5;"
-						"txData[5] = 0x00;"
-						""
+					action 
+				{
+						"txData[0] = 0x02;"
 						"uart.sendFrame(txData);"
 					}
 				}
 				Transition tr2: state0 -> state0 {
 					triggers {
-						<send2: ctrl>
+						<stopped: ctrl>
+					}
+					action 
+				{
+						"txData[0] = 0x02;"
+						"uart.sendFrame(txData);"
+					}
+				}
+			Transition tr3: state0 -> state0 {
+					triggers {
+						<doneSetTimewarp: ctrl>
 					}
 					action {
-						"txData[0] = 0xF5;"
-						"txData[1] = 0xF6;"
-						"txData[2] = 0xF7;"
-						"txData[3] = 0xF8;"
-						"txData[4] = 0xF9;"
-						"txData[5] = 0x00;"
-						""
+						"txData[0] = 0x03;"
 						"uart.sendFrame(txData);"
 					}
 				}
@@ -521,20 +646,18 @@ RoomModel MessConfAmpelDemo {
 	ActorClass Application {
 		Structure {
 			ActorRef hw: HWAbstractionAmpelDemo
-			Binding blinky.p0 and hw.nucleoGreenLed
+			Binding blinky.led and hw.nucleoGreenLed
 			ActorRef blinky: ABlinky
-			Binding ref0.uart and hw.uart
-			ActorRef ref0: AUartAdapter
-			
-			
-		Binding ref2.button and hw.button
-			Binding ref2.carYellow and hw.carYellowLed
-			Binding ref2.carGren and hw.carGreenLed
-			Binding ref2.carRed and hw.carRedLed
-			Binding ref2.pedGreen and hw.pedGreenLed
-			Binding ref2.pedRed and hw.pedRedLed
-			ActorRef ref2: APedLightApplication
-		Binding ref2.ctrl and ref0.ctrl
+			Binding controlAdapter.uart and hw.uart
+			ActorRef controlAdapter: AUartAdapter
+			Binding tlController.button and hw.button
+			Binding tlController.carYellow and hw.carYellowLed
+			Binding tlController.carGreen and hw.carGreenLed
+			Binding tlController.carRed and hw.carRedLed
+			Binding tlController.pedGreen and hw.pedGreenLed
+			Binding tlController.pedRed and hw.pedRedLed
+			ActorRef tlController: APedLightApplication
+		Binding tlController.ctrl and controlAdapter.ctrl
 		}
 	}
 

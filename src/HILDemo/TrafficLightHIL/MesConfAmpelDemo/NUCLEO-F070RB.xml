@@ -3,8 +3,8 @@
   <board id="nucleo-f070rb">
     <name>NUCLEO-F070RB</name>
     <mcuId>stm32f070rbtx</mcuId>
-    <dbgIF>JTAG</dbgIF>
     <dbgIF>SWD</dbgIF>
+    <dbgIF>JTAG</dbgIF>
     <dbgDEV>ST-LinkV2-1</dbgDEV>
   </board>
 </targetDefinitions>
