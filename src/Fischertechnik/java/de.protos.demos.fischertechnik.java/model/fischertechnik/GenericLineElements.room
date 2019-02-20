@@ -1,14 +1,11 @@
 RoomModel GenericLineElements {
 
-
 	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
 	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
 	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
-	
+
 	import AutomationProtocols.* from "AutomationProtocols.room"
 	import Actuators.* from "Actuators.room"
-
-
 
 	ActorClass GenericInlineStation {
 		Interface {
@@ -19,9 +16,7 @@ RoomModel GenericLineElements {
 			Port ctrl: PInlineElementControl
 		}
 		Structure {
-			usercode1 {
-				"import de.protos.automation.demos.fischertechnik.config.*;"
-			}
+			usercode1 '''import de.protos.automation.demos.fischertechnik.config.*;'''
 			external Port prev
 			external Port next
 			external Port transport
@@ -32,10 +27,9 @@ RoomModel GenericLineElements {
 		Behavior {
 			StateMachine {
 				Transition tr0: initial -> GetStatusTransport {
-					action {
-						"FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();"
-						"processingActive = (config.getIntValue(getInstancePath(), \"processingActive\") != 0);"
-					}
+					action '''
+						FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();
+						processingActive = (config.getIntValue(getInstancePath(), "processingActive") != 0);'''
 				}
 				Transition tr1: GetStatusTransport -> Empty {
 					triggers {
@@ -73,9 +67,7 @@ RoomModel GenericLineElements {
 					}
 				}
 				Transition tr9: cp CP1 -> Processing {
-					cond {
-						"processingActive"
-					}
+					cond '''processingActive'''
 				}
 				Transition tr10: cp CP1 -> FullWaitingForNext
 				Transition tr11: Processing -> FullWaitingForNext {
@@ -92,9 +84,7 @@ RoomModel GenericLineElements {
 					triggers {
 						<takePartDone: transport>
 					}
-					action {
-						"prev.receivedPart();"
-					}
+					action '''prev.receivedPart();'''
 				}
 				Transition tr5: SendPartToNext -> CheckingTransportForEmpty {
 					triggers {
@@ -110,51 +100,33 @@ RoomModel GenericLineElements {
 					triggers {
 						<setProcessingActive: ctrl>
 					}
-					action {
-						"processingActive = state;"
-					}
+					action '''processingActive = transitionData;'''
 				}
 				ChoicePoint CP1
 				handler TransitionPoint ctrl
 				State GetStatusTransport {
-					entry {
-						"transport.getStatus();"
-					}
+					entry '''transport.getStatus();'''
 				}
 				State FullWaitingForNext {
-					entry {
-						"next.getStatus();"
-					}
+					entry '''next.getStatus();'''
 				}
 				State Empty {
-					entry {
-						"prev.isEmpty();"
-					}
+					entry '''prev.isEmpty();'''
 				}
 				State ReleasePart {
-					entry {
-						"transport.releasePart();"
-					}
+					entry '''transport.releasePart();'''
 				}
 				State SendPartToNext {
-					entry {
-						"next.sendPart();"
-					}
+					entry '''next.sendPart();'''
 				}
 				State Processing {
-					entry {
-						"job.startProcessing();"
-					}
+					entry '''job.startProcessing();'''
 				}
 				State HandOver {
-					entry {
-						"transport.takePart();"
-					}
+					entry '''transport.takePart();'''
 				}
 				State CheckingTransportForEmpty {
-					entry {
-						"transport.getStatus();"
-					}
+					entry '''transport.getStatus();'''
 				}
 			}
 		}
@@ -172,7 +144,8 @@ RoomModel GenericLineElements {
 			Binding InlineStation.prev and prev
 			Binding InlineStation.transport and Belt.fkt
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass PusherStation {
@@ -187,7 +160,8 @@ RoomModel GenericLineElements {
 			Binding InlineStation.prev and prev
 			Binding InlineStation.transport and Pusher.fct
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass ProductionStation {
@@ -204,7 +178,8 @@ RoomModel GenericLineElements {
 			Binding InlineStation.transport and Belt.fkt
 			Binding ProductionUnit.fct and InlineStation.job
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass SinkSensor {
@@ -232,9 +207,7 @@ RoomModel GenericLineElements {
 			Port fkt: AutomationProtocols.PTransport
 		}
 		Structure {
-			usercode1 {
-				"import de.protos.automation.demos.fischertechnik.config.*;"
-			}
+			usercode1 '''import de.protos.automation.demos.fischertechnik.config.*;'''
 			external Port fkt
 			conjugated Port motor: AutomationProtocols.PDriveLR
 			ActorRef BeltDrive: Actuators.DriveLR
@@ -245,20 +218,14 @@ RoomModel GenericLineElements {
 		Behavior {
 			StateMachine {
 				Transition tr0: cp CP1 -> Full {
-					cond {
-						"x==0"
-					}
+					cond '''transitionData==0'''
 				}
 				Transition tr1: cp CP1 -> MoveUntilSensorOrTimeout
 				Transition tr2: MoveUntilSensorOrTimeout -> Full {
 					triggers {
-						<inputChanged: sensor guard {
-							"x==0"
-						}>
+						<inputChanged: sensor guard '''transitionData==0'''>
 					}
-					action {
-						"fkt.takePartDone();"
-					}
+					action '''fkt.takePartDone();'''
 				}
 				Transition tr3: MoveUntilSensorOrTimeout -> Empty {
 					triggers {
@@ -271,23 +238,18 @@ RoomModel GenericLineElements {
 					}
 				}
 				Transition tr5: initial -> GetSensorStatus {
-					action {
-						"FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();"
-						"sensor.registerChannel(config.getIntValue(getInstancePath(), \"sensor\"));"
-					}
+					action '''
+						FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();
+						sensor.registerChannel(config.getIntValue(getInstancePath(), "sensor"));'''
 				}
 				Transition tr6: Empty -> Full {
 					triggers {
-						<inputChanged: sensor guard {
-							"x==0"
-						}>
+						<inputChanged: sensor guard '''transitionData==0'''>
 					}
 				}
 				Transition tr7: Full -> Empty {
 					triggers {
-						<inputChanged: sensor guard {
-							"x==1"
-						}>
+						<inputChanged: sensor guard '''transitionData==1'''>
 					}
 				}
 				Transition tr8: Full -> Full {
@@ -312,13 +274,9 @@ RoomModel GenericLineElements {
 				}
 				Transition tr12: MoveUntilSensorOff -> ExtendedMove {
 					triggers {
-						<inputChanged: sensor guard {
-							"x==1"
-						}>
+						<inputChanged: sensor guard '''transitionData==1'''>
 					}
-					action {
-						"fkt.releasePartDone();"
-					}
+					action '''fkt.releasePartDone();'''
 				}
 				Transition tr13: ExtendedMove -> Empty {
 					triggers {
@@ -327,41 +285,31 @@ RoomModel GenericLineElements {
 				}
 				ChoicePoint CP1
 				State Full {
-					entry {
-						"motor.stop();"
-						"fkt.isFull();"
-					}
+					entry '''
+						motor.stop();
+						fkt.isFull();'''
 				}
 				State MoveUntilSensorOrTimeout {
-					entry {
-						"motor.start();"
-						"timeout.startTimeout(5000);"
-					}
+					entry '''
+						motor.start();
+						timeout.startTimeout(5000);'''
 				}
 				State Empty {
-					entry {
-						"motor.stop();"
-						"fkt.isEmpty();"
-					}
+					entry '''
+						motor.stop();
+						fkt.isEmpty();'''
 				}
 				State GetSensorStatus {
-					entry {
-						"sensor.getStatus();"
-					}
+					entry '''sensor.getStatus();'''
 				}
 				State MoveUntilSensorOff {
-					entry {
-						"motor.start();"
-						"timeout.startTimeout(3000);"
-					}
-					exit {
-						"timeout.kill();"
-					}
+					entry '''
+						motor.start();
+						timeout.startTimeout(3000);'''
+					exit '''timeout.kill();'''
 				}
 				State ExtendedMove {
-					entry {
-						"timeout.startTimeout(1000);"
-					}
+					entry '''timeout.startTimeout(1000);'''
 				}
 			}
 		}
@@ -372,33 +320,29 @@ RoomModel GenericLineElements {
 			conjugated Port next: AutomationProtocols.PInlineElement
 		}
 		Structure {
-			usercode1 {
-			"
+			usercode1 '''
+				
 				import de.protos.automation.demos.fischertechnik.config.*;
 				import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 				import org.eclipse.etrice.runtime.java.debugging.MSCFilter;
-				"
-			}
-			usercode2 {
-			"	
+			'''
+			usercode2 '''
 				@Override
 				public void initUser()
 				{
 					MSCFilter filter = DebuggingService.getInstance().getAsyncLogger().getMSCFilter();
-					filter.addFilter(new MSCFilter.FilterItem(\"/MachineSubSystem/Controller/ProductionStation4\", false));
+					filter.addFilter(new MSCFilter.FilterItem("/MachineSubSystem/Controller/ProductionStation4", false));
 				}
-				"
-			}
+			'''
 			external Port next
 			SAP sensor: protos.automation.service.io.PDigIn
 		}
 		Behavior {
 			StateMachine {
 				Transition tr0: initial -> NotInitialized {
-					action {
-						"FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();"
-						"sensor.registerChannel(config.getIntValue(getInstancePath(), \"sensor\"));"
-					}
+					action '''
+						FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();
+						sensor.registerChannel(config.getIntValue(getInstancePath(), "sensor"));'''
 				}
 				Transition tr1: NotInitialized -> cp CP1 {
 					triggers {
@@ -406,9 +350,7 @@ RoomModel GenericLineElements {
 					}
 				}
 				Transition tr2: cp CP1 -> Full {
-					cond {
-						"x==0"
-					}
+					cond '''transitionData==0'''
 				}
 				Transition tr3: cp CP1 -> Empty
 				Transition tr4: Full -> SendingPart {
@@ -418,16 +360,12 @@ RoomModel GenericLineElements {
 				}
 				Transition tr5: Full -> Empty {
 					triggers {
-						<inputChanged: sensor guard {
-							"x==1"
-						}>
+						<inputChanged: sensor guard '''transitionData==1'''>
 					}
 				}
 				Transition tr6: Empty -> Full {
 					triggers {
-						<inputChanged: sensor guard {
-							"x==0"
-						}>
+						<inputChanged: sensor guard '''transitionData==0'''>
 					}
 				}
 				Transition tr7: SendingPart -> Empty {
@@ -437,23 +375,16 @@ RoomModel GenericLineElements {
 				}
 				ChoicePoint CP1
 				State NotInitialized {
-					entry {
-						"sensor.getStatus();"
-					}
+					entry '''sensor.getStatus();'''
 				}
 				State Full {
-					entry {
-						"next.getStatus();"
-					}
+					entry '''next.getStatus();'''
 				}
 				State Empty
 				State SendingPart {
-					entry {
-						"next.sendPart();"
-					}
+					entry '''next.sendPart();'''
 				}
 			}
 		}
 	}
-
 }

@@ -4,7 +4,7 @@ RoomModel AutomationProtocols {
 
 	ProtocolClass PDriveLR {
 		incoming {
-			Message changeDirection (x : boolean)
+			Message changeDirection(boolean)
 			Message start ()
 			Message stop ()
 		}
@@ -22,9 +22,10 @@ RoomModel AutomationProtocols {
 			Message receivedPart ()
 		}
 	}
+
 	ProtocolClass PInlineElementControl {
 		incoming {
-			Message setProcessingActive (state: boolean)
+			Message setProcessingActive (boolean)
 		}
 	}
 
@@ -61,5 +62,4 @@ RoomModel AutomationProtocols {
 			Message doneProcessing ()
 		}
 	}
-
 }

@@ -11,9 +11,7 @@ RoomModel Actuators {
 			Port fct: AutomationProtocols.PDriveLR
 		}
 		Structure {
-			usercode1 {
-				"import de.protos.automation.demos.fischertechnik.config.*;"
-			}
+			usercode1 '''import de.protos.automation.demos.fischertechnik.config.*;'''
 			external Port fct
 			SAP lr: protos.automation.service.io.PDigOut
 			SAP start: protos.automation.service.io.PDigOut
@@ -34,26 +32,20 @@ RoomModel Actuators {
 					triggers {
 						<changeDirection: fct>
 					}
-					action {
-						"if(x) lr.setOn();"
-						"else lr.setOff();"
-					}
+					action '''
+						if(transitionData) lr.setOn();
+						else lr.setOff();'''
 				}
 				Transition tr3: initial -> Ready {
-					action {
-						"FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();"
-						"lr.registerChannel(config.getIntValue(getInstancePath(), \"lr\"));"
-						"start.registerChannel(config.getIntValue(getInstancePath(), \"start\"));"
-					}
+					action '''
+						FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();
+						lr.registerChannel(config.getIntValue(getInstancePath(), "lr"));
+						start.registerChannel(config.getIntValue(getInstancePath(), "start"));'''
 				}
 				State Ready
 				State Moving {
-					entry {
-						"start.setOn();"
-					}
-					exit {
-						"start.setOff();"
-					}
+					entry '''start.setOn();'''
+					exit '''start.setOff();'''
 				}
 			}
 		}
@@ -64,9 +56,7 @@ RoomModel Actuators {
 			Port fct: AutomationProtocols.PLinearUnit
 		}
 		Structure {
-			usercode1 {
-				"import de.protos.automation.demos.fischertechnik.config.*;"
-			}
+			usercode1 '''import de.protos.automation.demos.fischertechnik.config.*;'''
 			external Port fct
 			conjugated Port drive: AutomationProtocols.PDriveLR
 			SAP sensorFront: protos.automation.service.io.PDigIn
@@ -78,26 +68,21 @@ RoomModel Actuators {
 		Behavior {
 			StateMachine {
 				Transition tr0: initial -> Undefined {
-					action {
-						"FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();"
-						"sensorFront.registerChannel(config.getIntValue(getInstancePath(), \"sensorFront\"));"
-						"sensorBack.registerChannel(config.getIntValue(getInstancePath(), \"sensorBack\"));"
-					}
+					action '''
+						FischertechnikConfiguration config = FischertechnikConfiguration.getInstance();
+						sensorFront.registerChannel(config.getIntValue(getInstancePath(), "sensorFront"));
+						sensorBack.registerChannel(config.getIntValue(getInstancePath(), "sensorBack"));'''
 				}
 				Transition tr1: LinearUnitBackwards -> LinearUnitInPosBack {
 					triggers {
-						<inputChanged: sensorBack guard {
-							"x==0"
-						}>
+						<inputChanged: sensorBack guard '''transitionData==0'''>
 					}
 				}
 				Transition tr2: LinearUnitBackwards -> Error {
 					triggers {
 						<timeout: timeout>
 					}
-					action {
-						"System.out.println(\"ERROR : timeout sensorBack \");"
-					}
+					action '''System.out.println("ERROR : timeout sensorBack ");'''
 				}
 				Transition tr3: LinearUnitInPosBack -> LinearUnitForwards {
 					triggers {
@@ -106,9 +91,7 @@ RoomModel Actuators {
 				}
 				Transition tr4: LinearUnitForwards -> LinearUnitInPosFront {
 					triggers {
-						<inputChanged: sensorFront guard {
-							"x==0"
-						}>
+						<inputChanged: sensorFront guard '''transitionData==0'''>
 					}
 				}
 				Transition tr5: LinearUnitInPosFront -> LinearUnitBackwards {
@@ -120,9 +103,7 @@ RoomModel Actuators {
 					triggers {
 						<timeout: timeout>
 					}
-					action {
-						"System.out.println(\"ERROR : timeout sensorFront \");"
-					}
+					action '''System.out.println("ERROR : timeout sensorFront ");'''
 				}
 				Transition tr7: Undefined -> LinearUnitBackwards {
 					triggers {
@@ -136,40 +117,32 @@ RoomModel Actuators {
 				}
 				State Undefined
 				State LinearUnitBackwards {
-					entry {
-						"drive.changeDirection(true);"
-						"drive.start();"
-						"timeout.startTimeout(3000);"
-						"sensorBack.getStatus();"
-					}
-					exit {
-						"drive.stop();"
-						"timeout.kill();"
-						"drive.changeDirection(false);"
-					}
+					entry '''
+						drive.changeDirection(true);
+						drive.start();
+						timeout.startTimeout(3000);
+						sensorBack.getStatus();'''
+					exit '''
+						drive.stop();
+						timeout.kill();
+						drive.changeDirection(false);'''
 				}
 				State LinearUnitInPosBack {
-					entry {
-						"fct.doneMoveBackward();"
-					}
+					entry '''fct.doneMoveBackward();'''
 				}
 				State Error
 				State LinearUnitForwards {
-					entry {
-						"drive.changeDirection(false);"
-						"drive.start();"
-						"timeout.startTimeout(3000);"
-						"sensorFront.getStatus();"
-					}
-					exit {
-						"drive.stop();"
-						"timeout.kill();"
-					}
+					entry '''
+						drive.changeDirection(false);
+						drive.start();
+						timeout.startTimeout(3000);
+						sensorFront.getStatus();'''
+					exit '''
+						drive.stop();
+						timeout.kill();'''
 				}
 				State LinearUnitInPosFront {
-					entry {
-						"fct.doneMoveForward();"
-					}
+					entry '''fct.doneMoveForward();'''
 				}
 			}
 		}
@@ -188,7 +161,8 @@ RoomModel Actuators {
 		}
 		Behavior {
 			StateMachine {
-				Transition tr0: initial -> Idle { }
+				Transition tr0: initial -> Idle {
+				}
 				Transition tr1: Idle -> Working1 {
 					triggers {
 						<startProcessing: fct>
@@ -198,9 +172,7 @@ RoomModel Actuators {
 					triggers {
 						<timeout: timeout>
 					}
-					action {
-						"fct.doneProcessing();"
-					}
+					action '''fct.doneProcessing();'''
 				}
 				Transition tr3: Working1 -> ChangeDirection {
 					triggers {
@@ -214,29 +186,22 @@ RoomModel Actuators {
 				}
 				State Idle
 				State Working1 {
-					entry {
-						"drive.changeDirection(false);"
-						"drive.start();"
-						"timeout.startTimeout(1000);"
-					}
-					exit {
-						"drive.stop();"
-					}
+					entry '''
+						drive.changeDirection(false);
+						drive.start();
+						timeout.startTimeout(1000);'''
+					exit '''drive.stop();'''
 				}
 				State Working2 {
-					entry {
-						"drive.start();"
-						"timeout.startTimeout(1000);"
-					}
-					exit {
-						"drive.stop();"
-					}
+					entry '''
+						drive.start();
+						timeout.startTimeout(1000);'''
+					exit '''drive.stop();'''
 				}
 				State ChangeDirection {
-					entry {
-						"drive.changeDirection(true);"
-						"timeout.startTimeout(100);"
-					}
+					entry '''
+						drive.changeDirection(true);
+						timeout.startTimeout(100);'''
 				}
 			}
 		}
@@ -254,7 +219,8 @@ RoomModel Actuators {
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> init of Initializing { }
+				Transition init: initial -> init of Initializing {
+				}
 				Transition tr0: running of Initializing -> enter of Running
 				State Initializing {
 					subgraph {
@@ -272,14 +238,10 @@ RoomModel Actuators {
 						EntryPoint init
 						ExitPoint running
 						State Forewards {
-							entry {
-								"pusher.moveForward();"
-							}
+							entry '''pusher.moveForward();'''
 						}
 						State Backwards {
-							entry {
-								"pusher.moveBackward();"
-							}
+							entry '''pusher.moveBackward();'''
 						}
 					}
 				}
@@ -304,9 +266,7 @@ RoomModel Actuators {
 							triggers {
 								<releasePart: fct>
 							}
-							action {
-								"fct.releasePartDone();"
-							}
+							action '''fct.releasePartDone();'''
 						}
 						Transition tr6: Empty -> Empty {
 							triggers {
@@ -321,30 +281,22 @@ RoomModel Actuators {
 						Transition tr4: my enter -> Empty
 						EntryPoint enter
 						State Empty {
-							entry {
-								"fct.isEmpty();"
-							}
+							entry '''fct.isEmpty();'''
 						}
 						State Forewards {
-							entry {
-								"pusher.moveForward();"
-							}
+							entry '''pusher.moveForward();'''
 						}
 						State Backwards {
-							entry {
-								"pusher.moveBackward();"
-							}
+							entry '''pusher.moveBackward();'''
 						}
 						State Full {
-							entry {
-								"fct.takePartDone();"
-								"fct.isFull();"
-							}
+							entry '''
+								fct.takePartDone();
+								fct.isFull();'''
 						}
 					}
 				}
 			}
 		}
 	}
-
 }
