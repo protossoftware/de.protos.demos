@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.behavior" name="Behavior of AIOService" showGuides="true" pictogramLinks="//@link //@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link" verticalGridUnit="10">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.behavior" name="Behavior of AIOService" showGuides="true" pictogramLinks="//@link //@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@connections.7/@link //@connections.8/@link" verticalGridUnit="10" version="0.14.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
     <businessObjects href="../IOService.room#ActorClass:AIOService"/>
@@ -14,7 +14,7 @@
       <businessObjects href="../IOService.room#StateGraph:AIOService$sg"/>
     </link>
     <children visible="true">
-      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
+      <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="trp"/>
@@ -26,7 +26,7 @@
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="40" height="20" y="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="I"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="40" height="20" y="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="I"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
@@ -57,7 +57,7 @@
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1 //@connections.2 //@connections.3 //@connections.4 //@connections.5 //@connections.6 //@connections.7 //@connections.8" incomingConnections="//@connections.0 //@connections.1 //@connections.2 //@connections.3 //@connections.4 //@connections.5 //@connections.6 //@connections.7 //@connections.8" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="Idle"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="Idle"/>
       </children>
     </children>
   </children>
@@ -75,7 +75,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="init"/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="init"/>
     </connectionDecorators>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.2/@anchors.0" end="//@children.0/@children.2/@anchors.0">
@@ -92,7 +92,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr1: &lt;registerChanne..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr1: &lt;registerChanne..."/>
     </connectionDecorators>
     <bendpoints x="425" y="382"/>
     <bendpoints x="386" y="397"/>
@@ -111,7 +111,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr11: &lt;getStatus:dig..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr11: &lt;getStatus:dig..."/>
     </connectionDecorators>
     <bendpoints x="524" y="348"/>
     <bendpoints x="472" y="348"/>
@@ -130,7 +130,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr2: &lt;registerChanne..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr2: &lt;registerChanne..."/>
     </connectionDecorators>
     <bendpoints x="440" y="113"/>
     <bendpoints x="410" y="113"/>
@@ -149,7 +149,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr3: &lt;ioEvent:io_dri..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr3: &lt;ioEvent:io_dri..."/>
     </connectionDecorators>
     <bendpoints x="556" y="129"/>
     <bendpoints x="583" y="152"/>
@@ -168,7 +168,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr4: &lt;setOn:dig_out>"/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr4: &lt;setOn:dig_out>"/>
     </connectionDecorators>
     <bendpoints x="635" y="241"/>
     <bendpoints x="635" y="205"/>
@@ -187,7 +187,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr5: &lt;setOff:dig_out..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr5: &lt;setOff:dig_out..."/>
     </connectionDecorators>
     <bendpoints x="559" y="320"/>
     <bendpoints x="581" y="301"/>
@@ -206,7 +206,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr6: &lt;set:dig_out>"/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr6: &lt;set:dig_out>"/>
     </connectionDecorators>
     <bendpoints x="297" y="346"/>
     <bendpoints x="275" y="325"/>
@@ -225,7 +225,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" transparency="0.0" x="10" font="//@fonts.0" value="tr7: &lt;timerTick:poll..."/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr7: &lt;timeout:pollin..."/>
     </connectionDecorators>
     <bendpoints x="218" y="283"/>
     <bendpoints x="218" y="259"/>
