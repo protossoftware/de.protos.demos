@@ -1,4 +1,4 @@
 This directory is an eTrice code generation target.
-It contains auxiliary files for the incremental generation feature.
+It will be erased every time the generator is executed.
 
-DO NOT MODIFY THIS PLACE!
+DO NOT PLACE OTHER FILES HERE!

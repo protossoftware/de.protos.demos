@@ -1,9 +1,11 @@
 /*******************************************************************************
  * Copyright (c) 2010 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
  *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
@@ -68,34 +70,33 @@ public class MessageService extends AbstractMessageService {
 	public void run() {
 		running = true;
 
-		if(pollingScheduler != null)
+		if(pollingScheduler != null) {
 			pollingScheduler.scheduleAtFixedRate(new PollingTask(), pollingInterval, pollingInterval, TimeUnit.NANOSECONDS);
+		}
 
-		while (running) {
+		while(true) {
 			Message msg = null;
-
-			// get next Message from Queue
+			
 			synchronized(this) {
-				msg = getMessageQueue().pop();
-			}
-
-			if (msg == null) {
-				// no message in queue -> wait until Thread is notified
-				try {
-					synchronized(this) {
-						if (!running)
-							return;
+				while(getMessageQueue().isEmpty() && running) {
+					// no message in queue -> wait until Thread is notified
+					try {
 						wait();
 					}
+					catch (InterruptedException e) {}
 				}
-				catch (InterruptedException e) {
+				if(!running) {
+					return;
+				}
+				else {
+					// get next Message from Queue
+					msg = getMessageQueue().pop();
 				}
 			}
-			else {
-				// process message
-				lastMessageTimestamp = System.currentTimeMillis();
-				getMessageDispatcher().receive(msg);
-			}
+			
+			// process message
+			lastMessageTimestamp = System.currentTimeMillis();
+			getMessageDispatcher().receive(msg);
 		}
 	}
 

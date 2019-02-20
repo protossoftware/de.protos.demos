@@ -42,7 +42,7 @@ RoomModel room.basic.service.timing {
 						// start timeout
 						taskCount++;
 						if (taskCount>PURGE_LIMIT) timerService.purge();
-						timerService.schedule(((PTimerPort)ifitem).getTask(), ((TimerData)transitionData).getTime());'''
+						timerService.schedule(((PTimerPort)ifitem).getTask(), transitionData.getTime());'''
 				}
 				Transition tr4: Operational -> Operational {
 					triggers {

@@ -35,7 +35,8 @@ RoomModel room.basic.service.tcp {
 								d.setLength(c);
 								port.receive(d);	
 							}
-						}catch (IOException e){
+						}
+						catch (IOException e){
 							System.err.println("ServerRx: " + e.toString());
 						}
 					}
@@ -59,7 +60,8 @@ RoomModel room.basic.service.tcp {
 								(new ServerRxThread(cnt, port, s)).start();
 								cnt++;
 							}
-						}catch (IOException e){
+						}
+						catch (IOException e){
 							System.err.println("Server Accept: " + e.toString());
 						}
 					}
@@ -83,11 +85,13 @@ RoomModel room.basic.service.tcp {
 		Behavior {
 			Operation stopUser() '''
 				try{
-				if(socket != null){
-				socket.close();
+					if (socket != null){
+						socket.close();
+					}
 				}
-				}catch(IOException e){
-				System.err.println(e.toString());}'''
+				catch (IOException e){
+					System.err.println(e.toString());
+				}'''
 			StateMachine {
 				Transition init: initial -> closed {
 				}
@@ -98,11 +102,12 @@ RoomModel room.basic.service.tcp {
 					action '''
 						lastError=0;
 						try{
-						socket = new ServerSocket(transitionData.TcpPort);
-						(new ServerAcceptThread(PayloadPort, socket, this)).start();
-						}catch(IOException e){
-						System.err.println(e.toString());
-						lastError=1;
+							socket = new ServerSocket(transitionData.TcpPort);
+							(new ServerAcceptThread(PayloadPort, socket, this)).start();
+						}
+						catch(IOException e){
+							System.err.println(e.toString());
+							lastError=1;
 						}'''
 				}
 				Transition tr1: opened -> closed {
@@ -113,8 +118,9 @@ RoomModel room.basic.service.tcp {
 						try{
 							if(socket!=null){
 								socket.close();
-								}
-							}catch(IOException e){
+							}
+						}
+						catch(IOException e){
 							System.err.println(e.toString());
 						}'''
 				}
@@ -126,9 +132,10 @@ RoomModel room.basic.service.tcp {
 					action '''
 						ControlPort.error();
 						try{
-						socket.close();
-						} catch(IOException e){
-						System.err.println(e.toString());
+							socket.close();
+						}
+						catch(IOException e){
+							System.err.println(e.toString());
 						}'''
 				}
 				Transition tr3: opened -> opened {
@@ -137,9 +144,10 @@ RoomModel room.basic.service.tcp {
 					}
 					action '''
 						try{
-						outStreams.get(transitionData.getConnectionId()).write(transitionData.getData(),0,transitionData.length);
-						}catch(IOException e){
-						System.err.println(e.toString());
+							outStreams.get(transitionData.getConnectionId()).write(transitionData.getData(),0,transitionData.length);
+						}
+						catch(IOException e){
+							System.err.println(e.toString());
 						}'''
 				}
 				ChoicePoint cp0
@@ -177,7 +185,8 @@ RoomModel room.basic.service.tcp {
 								d.setLength(c);
 								port.receive(d);
 							}
-						}catch (IOException e){
+						}
+						catch (IOException e){
 							System.err.println("ClientRx: " + e.toString());
 						}
 					
@@ -211,12 +220,13 @@ RoomModel room.basic.service.tcp {
 					action '''
 						lastError=0;
 						try{
-						socket = new Socket(transitionData.IPAddr,transitionData.TcpPort);
-						(new ClientRxThread(PayloadPort, socket)).start();
-						out = socket.getOutputStream();
-						}catch(IOException e){
-						System.err.println(e.toString());
-						lastError=1;
+							socket = new Socket(transitionData.IPAddr,transitionData.TcpPort);
+							(new ClientRxThread(PayloadPort, socket)).start();
+							out = socket.getOutputStream();
+						}
+						catch(IOException e){
+							System.err.println(e.toString());
+							lastError=1;
 						}'''
 				}
 				Transition tr1: opened -> closed {
@@ -228,8 +238,9 @@ RoomModel room.basic.service.tcp {
 							if (socket!=null){
 								socket.close();
 							}
-						} catch (IOException e){
-						System.err.println(e.toString());
+						}
+						catch (IOException e){
+							System.err.println(e.toString());
 						}'''
 				}
 				Transition tr2: cp cp0 -> opened {
@@ -240,9 +251,10 @@ RoomModel room.basic.service.tcp {
 					action '''
 						ControlPort.error();
 						try{
-						socket.close();
-						} catch(IOException e){
-						System.err.println(e.toString());
+							socket.close();
+						}
+						catch(IOException e){
+							System.err.println(e.toString());
 						}'''
 				}
 				Transition tr3: opened -> opened {
@@ -252,9 +264,10 @@ RoomModel room.basic.service.tcp {
 					action '''
 						try{
 							out.write(transitionData.getData(),0,transitionData.length);
-							}catch(IOException e){
-								System.err.println(e.toString());
-							}'''
+						}
+						catch(IOException e){
+							System.err.println(e.toString());
+						}'''
 				}
 				ChoicePoint cp0
 				State closed
