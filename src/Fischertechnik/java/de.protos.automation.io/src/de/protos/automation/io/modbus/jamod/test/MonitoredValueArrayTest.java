@@ -1,8 +1,6 @@
 package de.protos.automation.io.modbus.jamod.test;
 
-import static org.junit.Assert.*;
-
-import javax.management.monitor.Monitor;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

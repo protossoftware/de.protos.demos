@@ -1,10 +1,7 @@
 RoomModel Actuators {
 
-	import protos.automation.service.provider.* from "../../../de.protos.automation.io/models/ServiceProvider.room"
-	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import etrice.api.timer.PTimer
 
-	import AutomationProtocols.* from "AutomationProtocols.room"
 
 	ActorClass DriveLR {
 		Interface {

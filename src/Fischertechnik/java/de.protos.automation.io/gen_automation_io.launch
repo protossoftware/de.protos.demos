@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
+<booleanAttribute key="DataObj" value="false"/>
+<booleanAttribute key="Debug" value="false"/>
 <booleanAttribute key="GenInstanceDiagram" value="true"/>
 <stringAttribute key="GenModelPath" value=""/>
+<booleanAttribute key="GenerateDepsWithinProject" value="true"/>
 <booleanAttribute key="Lib" value="true"/>
+<booleanAttribute key="MSC" value="false"/>
+<stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/de.protos.automation.io/models/IOService.room}"/>
-<listEntry value="${workspace_loc:/de.protos.automation.io/models/ServiceProvider.room}"/>
+<listEntry value="${workspace_loc:/de.protos.automation.io/models/protos/automation/service/io.room}"/>
+<listEntry value="${workspace_loc:/de.protos.automation.io/models/protos/automation/service/provider.room}"/>
 </listAttribute>
+<booleanAttribute key="OldStyleTransitionData" value="false"/>
+<booleanAttribute key="OverrideDirectories" value="false"/>
+<booleanAttribute key="Persist" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
+<booleanAttribute key="UseTranslation" value="true"/>
+<booleanAttribute key="Verbose" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>

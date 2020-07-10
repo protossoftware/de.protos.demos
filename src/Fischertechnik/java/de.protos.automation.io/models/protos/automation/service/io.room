@@ -1,7 +1,9 @@
 RoomModel protos.automation.service.io {
 
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/model/TimingService.room"
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import etrice.api.timer.PTimer
+	import etrice.api.types.int32
+	import etrice.api.types.boolean
+
 
 	ActorClass AIOService {
 		Interface {

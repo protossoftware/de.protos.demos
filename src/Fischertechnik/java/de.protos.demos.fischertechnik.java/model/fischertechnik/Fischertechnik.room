@@ -1,12 +1,9 @@
 RoomModel Fischertechnik {
 
-	import protos.automation.service.provider.* from "../../../de.protos.automation.io/models/ServiceProvider.room"
-	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import GenericLineElements.*
+	import protos.automation.service.provider.ServiceProvider
 
-	import AutomationProtocols.* from "AutomationProtocols.room"
-	import Actuators.* from "Actuators.room"
-	import GenericLineElements.* from "GenericLineElements.room"
+
 	LogicalSystem MachineSystem {
 		SubSystemRef subSystem: MachineSubSystem
 	}

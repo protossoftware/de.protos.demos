@@ -1,7 +1,9 @@
 RoomModel Bandsteuerung {
 
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+
+	import etrice.api.timer.PTimer
+	import etrice.api.types.float64
+	import etrice.api.timer.ATimerService
 
 	ProtocolClass PUebergabe {
 		incoming {
@@ -94,7 +96,7 @@ RoomModel Bandsteuerung {
 
 	ProtocolClass PServo {
 		incoming {
-			Message start(x: float64)
+			Message start(float64)
 			Message stop()
 		}
 		outgoing {
@@ -318,14 +320,10 @@ RoomModel Bandsteuerung {
 		Behavior {
 			StateMachine {
 				State Eingefahren {
-					entry {
-						"fkt.eingefahren();"
-					}
+					entry '''fkt.eingefahren();'''
 				}
 				State Ausgefahren {
-					entry {
-						"fkt.ausgefahren();"
-					}
+					entry '''fkt.ausgefahren();'''
 				}
 				Transition tr0: initial -> Eingefahren { }
 				Transition tr1: Eingefahren -> Ausgefahren {
@@ -378,10 +376,9 @@ RoomModel Bandsteuerung {
 				State Betrieb {
 					subgraph {
 						State Bereit {
-							entry {
-								"BandPosition = 437.33;"
-								"BearbeitungsPosition = 1097.54;"
-							}
+							entry '''
+	BandPosition = 437.33;
+	BearbeitungsPosition = 1097.54;'''
 						}
 						State HubzylinderSenken1 { }
 						State Greifen { }
@@ -389,9 +386,7 @@ RoomModel Bandsteuerung {
 						State AchseAufBearbeitungsPos { }
 						State Pruefen { }
 						State AchseAufBandposition {
-							entry {
-								"querachse.start(BandPosition);"
-							}
+							entry '''querachse.start(BandPosition);'''
 						}
 						State HubzylinderSenken2 { }
 						State Loslassen { }
@@ -403,41 +398,31 @@ RoomModel Bandsteuerung {
 							triggers {
 								<voll: band>
 							}
-							action {
-								"hubzylinder.ausfahren();"
-							}
+							action '''hubzylinder.ausfahren();'''
 						}
 						Transition tr2: HubzylinderSenken1 -> Greifen {
 							triggers {
 								<ausgefahren: hubzylinder>
 							}
-							action {
-								"greifer.einfahren();"
-							}
+							action '''greifer.einfahren();'''
 						}
 						Transition tr3: Greifen -> HubzylinderHeben {
 							triggers {
 								<eingefahren: greifer>
 							}
-							action {
-								"hubzylinder.einfahren();"
-							}
+							action '''hubzylinder.einfahren();'''
 						}
 						Transition tr4: HubzylinderHeben -> AchseAufBearbeitungsPos {
 							triggers {
 								<eingefahren: hubzylinder>
 							}
-							action {
-								"querachse.start(BearbeitungsPosition);"
-							}
+							action '''querachse.start(BearbeitungsPosition);'''
 						}
 						Transition tr5: AchseAufBearbeitungsPos -> Pruefen {
 							triggers {
 								<fertig: querachse>
 							}
-							action {
-								"pruefung.startPruefung();"
-							}
+							action '''pruefung.startPruefung();'''
 						}
 						Transition tr6: Pruefen -> AchseAufBandposition {
 							triggers {
@@ -453,33 +438,25 @@ RoomModel Bandsteuerung {
 							triggers {
 								<fertig: querachse>
 							}
-							action {
-								"hubzylinder.ausfahren();"
-							}
+							action '''hubzylinder.ausfahren();'''
 						}
 						Transition tr9: HubzylinderSenken2 -> Loslassen {
 							triggers {
 								<ausgefahren: hubzylinder>
 							}
-							action {
-								"greifer.ausfahren();"
-							}
+							action '''greifer.ausfahren();'''
 						}
 						Transition tr10: Loslassen -> HubzylinderHeben2 {
 							triggers {
 								<ausgefahren: greifer>
 							}
-							action {
-								"hubzylinder.einfahren();"
-							}
+							action '''hubzylinder.einfahren();'''
 						}
 						Transition tr11: HubzylinderHeben2 -> BandFreigeben {
 							triggers {
 								<eingefahren: hubzylinder>
 							}
-							action {
-								"band.freigeben();"
-							}
+							action '''band.freigeben();'''
 						}
 						Transition tr12: BandFreigeben -> Bereit {
 							triggers {
@@ -507,12 +484,8 @@ RoomModel Bandsteuerung {
 			StateMachine {
 				State Bereit { }
 				State MotorLaeuft {
-					entry {
-						"timeout.startTimeout(100);"
-					}
-					exit {
-						"timeout.kill();"
-					}
+					entry '''timeout.startTimeout(100);'''
+					exit '''timeout.kill();'''
 				}
 				Transition tr0: initial -> Bereit { }
 				Transition tr1: Bereit -> MotorLaeuft {
@@ -524,9 +497,7 @@ RoomModel Bandsteuerung {
 					triggers {
 						<timeout: timeout>
 					}
-					action {
-						"fkt.fertig();"
-					}
+					action '''fkt.fertig();'''
 				}
 			}
 		}
@@ -544,9 +515,7 @@ RoomModel Bandsteuerung {
 			StateMachine {
 				State Bereit { }
 				State PruefungLaeuft {
-					entry {
-						"timeout.startTimeout(100);"
-					}
+					entry '''timeout.startTimeout(100);'''
 				}
 				Transition tr0: initial -> Bereit { }
 				Transition tr1: Bereit -> PruefungLaeuft {
@@ -558,9 +527,7 @@ RoomModel Bandsteuerung {
 					triggers {
 						<timeout: timeout>
 					}
-					action {
-						"fkt.pruefungGut();"
-					}
+					action '''fkt.pruefungGut();'''
 				}
 			}
 		}
@@ -572,7 +539,7 @@ RoomModel Bandsteuerung {
 
 	SubSystemClass SubSystemPruefung {
 		ActorRef application: App_SubSystemPruefung
-		ActorRef services: ATimingService
+		ActorRef services: ATimerService
 		LayerConnection ref application satisfied_by services.timer
 	
 		LogicalThread dflt_thread
@@ -581,22 +548,18 @@ RoomModel Bandsteuerung {
 	// automatically inserted App_SubSystemPruefung
 	ActorClass App_SubSystemPruefung {
 		Structure {
-			usercode1 {
-			"	
+			usercode1 '''
 				import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 				import org.eclipse.etrice.runtime.java.debugging.MSCFilter;
-				"
-			}
-			usercode2 {
-			"	
+'''
+			usercode2 '''
 				@Override
 				public void initUser()
 				{
 					MSCFilter filter = DebuggingService.getInstance().getAsyncLogger().getMSCFilter();
-					filter.addFilter(new MSCFilter.FilterItem(\"/SubSystemPruefung/application\", false));
+					filter.addFilter(new MSCFilter.FilterItem("/SubSystemPruefung/application", false));
 				}
-				"
-			}
+'''
 			ActorRef ModulPruefung: ModulPruefung
 		}
 	}
@@ -622,19 +585,13 @@ RoomModel Bandsteuerung {
 		Behavior {
 			StateMachine {
 				State Leer {
-					entry {
-						"fkt.leer();"
-					}
+					entry '''fkt.leer();'''
 				}
 				State Voll {
-					entry {
-						"fkt.voll();"
-					}
+					entry '''fkt.voll();'''
 				}
 				Transition tr0: initial -> Leer {
-					action {
-						"timeout.startTimeout(1000);"
-					}
+					action '''timeout.startTimeout(1000);'''
 				}
 				Transition tr1: Leer -> Voll {
 					triggers {

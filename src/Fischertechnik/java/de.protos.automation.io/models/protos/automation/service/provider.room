@@ -1,7 +1,7 @@
 RoomModel protos.automation.service.provider {
 
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/model/TimingService.room"
-	import protos.automation.service.io.* from "IOService.room"
+	import etrice.api.timer.PTimer
+	import etrice.api.timer.ATimerService
 	
 	// the ServiceProvider is forwarding the SPPs to the corresponding implementations
 	// the IOService is using the TimingService
@@ -10,11 +10,11 @@ RoomModel protos.automation.service.provider {
 			SPP dig_in: protos.automation.service.io.PDigIn
 			SPP dig_out: protos.automation.service.io.PDigOut
 			
-			SPP timer: room.basic.service.timing.PTimer
+			SPP timer: PTimer
 		}
 		
 		Structure{
-			ActorRef timingService : room.basic.service.timing.ATimingService
+			ActorRef timingService : ATimerService
 			ActorRef ioService : protos.automation.service.io.AIOService
 			LayerConnection relay_sap  dig_in satisfied_by ioService.dig_in
 			LayerConnection relay_sap  dig_out satisfied_by ioService.dig_out
@@ -34,7 +34,7 @@ RoomModel protos.automation.service.provider {
 		}
 		
 		Structure{
-			ActorRef timingService : room.basic.service.timing.ATimingService
+			ActorRef timingService : ATimerService
 			ActorRef ioService : protos.automation.service.io.AIOServiceSim
 			LayerConnection relay_sap  dig_in satisfied_by ioService.dig_in
 			LayerConnection relay_sap  dig_out satisfied_by ioService.dig_out

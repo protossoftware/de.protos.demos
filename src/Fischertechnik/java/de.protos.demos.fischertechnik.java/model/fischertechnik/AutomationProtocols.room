@@ -1,6 +1,6 @@
 RoomModel AutomationProtocols {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import etrice.api.types.boolean
 
 	ProtocolClass PDriveLR {
 		incoming {

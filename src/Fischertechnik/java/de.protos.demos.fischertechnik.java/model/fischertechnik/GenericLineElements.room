@@ -1,11 +1,9 @@
 RoomModel GenericLineElements {
 
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
-	import protos.automation.service.io.* from "../../../de.protos.automation.io/models/IOService.room"
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import AutomationProtocols.PInlineElementControl
+	import etrice.api.timer.PTimer
+	import etrice.api.types.boolean
 
-	import AutomationProtocols.* from "AutomationProtocols.room"
-	import Actuators.* from "Actuators.room"
 
 	ActorClass GenericInlineStation {
 		Interface {

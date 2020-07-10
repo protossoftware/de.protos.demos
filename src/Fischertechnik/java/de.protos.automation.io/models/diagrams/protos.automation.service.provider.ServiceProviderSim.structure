@@ -2,7 +2,7 @@
 <pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of ServiceProviderSim" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.1/@children.3/@link //@children.0/@children.1/@children.4/@link //@children.0/@children.1/@children.5/@link //@children.0/@children.1/@children.6/@link //@children.0/@children.2/@link //@children.0/@children.3/@link //@children.0/@children.4/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link" verticalGridUnit="10" version="0.14.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
-    <businessObjects href="../ServiceProvider.room#ActorClass:ServiceProviderSim"/>
+    <businessObjects href="../provider.room#ActorClass:ServiceProviderSim"/>
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="obj-type" value="cls"/>
@@ -11,7 +11,7 @@
       <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40"/>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="../ServiceProvider.room#ActorClass:ServiceProviderSim"/>
+      <businessObjects href="../provider.room#ActorClass:ServiceProviderSim"/>
     </link>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
@@ -119,7 +119,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ServiceProvider.room#ActorRef:ServiceProviderSim$timingService"/>
+        <businessObjects href="../provider.room#ActorRef:ServiceProviderSim$timingService"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -254,7 +254,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ServiceProvider.room#ActorRef:ServiceProviderSim$ioService"/>
+        <businessObjects href="../provider.room#ActorRef:ServiceProviderSim$ioService"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -353,7 +353,7 @@
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ServiceProvider.room#SPP:ServiceProviderSim$dig_out"/>
+        <businessObjects href="../provider.room#SPP:ServiceProviderSim$dig_out"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1"/>
       <children visible="true">
@@ -368,7 +368,7 @@
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ServiceProvider.room#SPP:ServiceProviderSim$dig_in"/>
+        <businessObjects href="../provider.room#SPP:ServiceProviderSim$dig_in"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3"/>
       <children visible="true">
@@ -383,7 +383,7 @@
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../ServiceProvider.room#SPP:ServiceProviderSim$timer"/>
+        <businessObjects href="../provider.room#SPP:ServiceProviderSim$timer"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2"/>
       <children visible="true">
@@ -395,7 +395,7 @@
     <properties key="obj-type" value="conn"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ServiceProvider.room#LayerConnection:ServiceProviderSim$ioService-timingService!timer"/>
+      <businessObjects href="../provider.room#LayerConnection:ServiceProviderSim$ioService-timingService!timer"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
@@ -423,7 +423,7 @@
     <properties key="obj-type" value="conn"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../ServiceProvider.room#LayerConnection:ServiceProviderSim$timer-timingService!timer"/>
+      <businessObjects href="../provider.room#LayerConnection:ServiceProviderSim$timer-timingService!timer"/>
     </link>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">

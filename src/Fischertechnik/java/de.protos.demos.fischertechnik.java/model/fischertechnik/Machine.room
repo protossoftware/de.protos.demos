@@ -1,7 +1,5 @@
-RoomModel MachineModel {
+RoomModel Machine {
 
-	import model "../../../de.protos.automation.io/models/ServiceProvider.room"
-	import model "GenericLineElements.room"
 
 	LogicalSystem MachineSystem {
 		SubSystemRef SubSystem: MachineSubSystem
